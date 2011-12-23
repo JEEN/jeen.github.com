@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Jeen's techlog]]></title>
+  <link href="http://JEEN.github.com/atom.xml" rel="self"/>
+  <link href="http://JEEN.github.com/"/>
+  <updated>2011-12-21T16:50:01+09:00</updated>
+  <id>http://JEEN.github.com/</id>
+  <author>
+    <name><![CDATA[Jeen Lee]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Octopressing]]></title>
+    <link href="http://JEEN.github.com/blog/2011/12/21/Octopress/"/>
+    <updated>2011-12-21T16:47:00+09:00</updated>
+    <id>http://JEEN.github.com/blog/2011/12/21/Octopress</id>
+    <content type="html"><![CDATA[<p>Hello World</p>
+]]></content>
+  </entry>
+  
+</feed>
