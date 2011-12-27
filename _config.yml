@@ -76,7 +76,7 @@ disqus_short_name: jeen
 disqus_show_comment_count: true
 
 # Google Analytics
-google_analytics_tracking_id:
+google_analytics_tracking_id: UA-27958809-1
 
 # Facebook Like
 facebook_like: true
