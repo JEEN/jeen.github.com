@@ -1,0 +1,116 @@
+---
+layout: post
+title: "DBIx::Class - Using GIS Extensions"
+date: 2011-12-26 15:56
+comments: true
+categories: [perl, dbic, gis, mysql] 
+---
+
+### DBIx::Class 에서의 GIS!?
+
+  ORM 을 사용함에 있어서 단순한 SELECT 문은 그렇게 큰 고민없이 사용할 수 있습니다. 하지만 GIS Extension 을 사용한 쿼리들을 ORM 에서 사용한다면 일단 고민이 들어가기 마련입니다.
+  
+### DBIx::Class 로 사용할 GIS 용 Query 확인
+
+  우선 대상으로 할 테이블은 아래와 같습니다.
+  
+``` sql  
+    CREATE TABLE venue (
+      id            INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+      name          VARCHAR(255) NOT NULL,
+      latitude      VARCHAR(64) NOT NULL,
+      longitude     VARCHAR(64) NOT NULL,
+      location      Point NOT NULL,
+      SPATIAL INDEX(location),
+      created_on    DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00'
+    ) ENGINE=MyISAM DEFAULT CHARSET UTF8;
+```
+
+  위의 CREATE TABLE 문에서 알 수 있듯, `location` 이*SPATIAL INDEX* 를 사용하게 됩니다. 이제 이 `location` 컬럼을 대상으로 온갖 GIS 관련 쿼리를 ORM 에서 사용하게끔 합니다.
+
+### INSERT
+
+  우선 DB 스키마는 덤프되어 있다고 가정하며 `Venue` 라는 결과 클래스에 데이터를 등록해보도록 합니다.
+
+``` perl    
+      ....
+      $self->resultset('Venue')->create({
+          name     => 'Silex',
+          latitude => '32.123512',
+          longitude => '127.0123123',
+          location  => \"GeomFromText('POINT(32.123512 127.0123123)')",
+      });
+```
+  
+  위와같은 코드로 `location` 에 대해서 Scalar Reference 를 지정함으로 GIS 관련 `GeomFromText` 라는 Function 을 사용할 수 있게 됩니다.
+
+### SELECT
+
+  일단 위치정보의 등록은 위와같은 코드로 가능했고, 이제 결과값을 찾아보도록 합니다.
+   인자로 사용될 값은 모바일기기의 화면단의 좌상단 Latitude/Longitude 좌표와 우하단 Latitude/Longitude 좌표입니다. 
+
+``` perl    
+    ...
+    $self->resultset('Venue')->search({
+        -and => [
+            \"Intersects(location, Envelope(GeomFromText('LineString(32.0 127.0, 33.0 128.0)')))",
+        ]
+    });
+```
+    
+  위처럼 또다시 Scalar Reference 의 힘을 빌려서 사태를 회피할 수 있습니다. 위의 코드로 좌상단의 점과 우하단의 점을 잇는 사각형의 영역에 대해서 결과를 얻어낼 수 있습니다.
+
+### SELECT + ORDER_BY
+
+  여기까지는 그저 Scalar Reference 의 마법을 이용해서 잘도 헤쳐왔지만 이제부터가 문제입니다. 결과값을 뽑아낼 때에, 중점을 기준으로 결과값을 정렬해서 보여줄 필요가 생겼습니다.
+
+  이제껏 [DBIx::Class][cpan-dbix-class] 를 사용하며 숱하게 회피방법을 연구해봤지만 도저히 답이 나오지 않아서 결국은 GIS 관련 등의 복잡한 쿼리에서 ORM 의 사용을 피하고 쌩 SQL 을 날릴 수 밖에 없었습니다만, 이런저런 시련의 세월 속에서 결국은 방법을 찾아냈습니다.
+  
+  그 방법이란 Dynamic View 를 이용하는 방법입니다. 일반적으로 View 를 만듬에 있어서 컬럼들의 비교나 의미가 정해진 정적인 값을 써서 미리 View 를 만들어서 사용하는 방법을 주로 사용해왔었는데, Dynamic View 를 통해서 해당 위치정보에 해당하는 값들을 바인딩해서 즉석에서 View 를 생성하는 방법입니다.
+
+  우선은 `VenueComplex` 라는 View Table Class 를 작성합니다.
+
+``` perl    
+    package MyApp::Schema::Result::VenueComplex;
+    use strict;
+    use warnings;
+    use base qw/DBIx::Class::Core/;
+    
+    __PACKAGE__->table_class('DBIx::Class::ResultSource::View');
+    __PACKAGE__->table('venue_complex');
+    __PACKAGE__->result_source_instance->is_virtual(1);
+    __PACKAGE__->result_source_instance->view_definition(q{
+      SELECT v.*, SQRT(POW(ABS(X(v.location) - X(GeomFromText(?))), 2) + POW(ABS(Y(v.location) - Y(GeomFromText(?))), 2)) as distance FROM venue v WHERE Intersects(v.location, Envelope(GeomFromText(x))) ORDER BY distance asc
+    })
+    
+    __PACKAGE__->add_columns( ... );
+    ...
+```
+
+  여타 컬럼정보, 릴레이션 설정등은 기존의 `Venue` 결과클래스에서 정의한 것을 그대로 사용하도록 합니다. 위의 view_definition 의 Prepared Statement SQL 에 바인딩 될 값은 3개입니다. 
+
+  자, 준비는 끝났으니, 이제 중점기준으로 값을 구해봅니다.
+
+``` perl
+    my ($nw_lat, $nw_lng) = split ',', $args->{location1};
+    my ($se_lat, $se_lng) = split ',', $args->{location2};
+
+    my $center_point_x = ($se_lat - $nw_lat) / 2 + $nw_lat;
+    my $center_point_y = ($se_lng - $nw_lng) / 2 + $nw_lng;
+
+    my $r = $self->resultset('VenueComplex')->search({}, {
+         bind => [ "POINT($center_point_x $center_point_y)",
+                   "POINT($center_point_x $center_point_y)",
+                   "LineString($nw_lat $nw_lng , $se_lat $se_lng)",
+                 ],
+    });
+```
+
+  기존의 `Venue` 클래스가 아닌 `VenueComplex` 로 대상을 바꾸고, bind 로 세개의 값을 넘겨줍니다. 중점기준으로 정렬은 위의 `VenueComplex` 의 SQL 상에서 처리하고 있습니다.
+
+### Conclusion
+
+  ORM 을 사용할 때에는 수많은 장점에도 불구하고 아직까지 논의되고 있는 수많은 단점들을 명확하게 인지해야 합니다. 상황에 맞게 쓰는 것이 당연히 중요하겠죠.
+  위에서 제가 제시한 코드들이 바른 길이라고는 장담할 수 없겠습니다만, 다양한 요구사항을 수렴할 수 있다면 그걸로 괜찮다고 그냥 생각하고 있습니다.
+
+[cpan-dbix-class]:http://search.cpan.org/perldoc?DBIx::Class
