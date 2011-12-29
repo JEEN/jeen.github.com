@@ -9,7 +9,7 @@
   <meta name="author" content="Jeen Lee">
 
   
-  <meta name="description" content="Before Using Plack::Middleware::OAuth 사실은 Plack::Middleware::OAuth 를 사용하기 이전에는 OAuth 관련 callback 처리등을 직접 파라메터를 확인해가면서 해당 액션을 처리했었습니다. 그게 P::M::OAuth &hellip;">
+  <meta name="description" content="Action Role 오래된 이야기이지만 Catalyst 가 Moose 기반으로 만들어지면서 ActionRole 이라는 개념이 만들어졌었지요. 실제 업무에서 적용해볼 껀덕지가 없어서 만져보지는 못했습니다만, 최근에 업무에서 ActionRole 을 적용해서 간단한 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -30,6 +30,18 @@
 <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
 
   
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-27958809-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
 
 </head>
 
@@ -64,6 +76,160 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2011/12/27/catalyst-actionrole/">Catalyst - ActionRole</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-12-27T21:14:00+09:00" pubdate data-updated="true">Dec 27<span>th</span>, 2011</time>
+        
+         | <a href="/blog/2011/12/27/catalyst-actionrole/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h3>Action Role</h3>
+
+<p>  오래된 이야기이지만 Catalyst 가 Moose 기반으로 만들어지면서 ActionRole 이라는 개념이 만들어졌었지요.
+  실제 업무에서 적용해볼 껀덕지가 없어서 만져보지는 못했습니다만, 최근에 업무에서 ActionRole 을 적용해서 간단한 수정작업을 진행했습니다.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="nb">package</span> <span class="nn">MyApp::Web::ActionRole::</span><span class="n">Logger</span><span class="p">;</span>
+</span><span class='line'><span class="k">use</span> <span class="nn">Moose::</span><span class="n">Role</span><span class="p">;</span>
+</span><span class='line'><span class="k">use</span> <span class="nn">namespace::</span><span class="n">autoclean</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">after</span> <span class="n">execute</span> <span class="o">=&gt;</span> <span class="k">sub </span><span class="p">{</span>
+</span><span class='line'>    <span class="k">my</span> <span class="p">(</span><span class="nv">$self</span><span class="p">,</span> <span class="nv">$controller</span><span class="p">,</span> <span class="nv">$c</span><span class="p">)</span> <span class="o">=</span> <span class="nv">@_</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1"># ...</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="mi">1</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>  일단 업무에서 사용한 ActionRole 의 기본형은 위와 같습니다.</p>
+
+<p>  Catalyst App 을 만들 때 사용한 네임스페이스를 기준으로 <code>ActionRole::[RoleName]</code> 을 사용합니다. 그러니 위에서 봤을 때 Catalyst App 의 이름은 <code>MyApp::Web</code> 이 되겠죠. 당연히 ActionRole 의 이름은 Logger 입니다.</p>
+
+<p>  또한, Logger 라는 ActionRole 을 참조할 때, Catalyst 는 <code>MyApp::Web</code> 뿐만 아니라 <code>Catalyst::ActionRole::Logger</code> 가 있으면 이를 참조할 수 있습니다.
+   <code>MyApp::Web::ActionRole::Logger</code> 와 <code>Catalyst::ActionRole::Logger</code> 두개가 존재할 시에는 앞의 <code>MyApp::Web::ActionRole::Logger</code> 를 우선적으로 사용하게 됩니다.</p>
+
+<h3>주의점</h3>
+
+<p>  위의 코드의 <code>after execute =&gt; sub { ... }</code> 에서 주의할 점이 한가지 있습니다. Catalyst 의 <code>auto</code>, <code>begin</code>, <code>end</code> 등의 Private Action 들 또한 실행이 된다는 점 입니다.
+  예를들어 <code>/user/login</code> 이라는 수행하기 위해서 각 컨트롤러 마다 <code>auto</code>, <code>begin</code> 등의 Private Action 이 정의되어 있다고 하면, 아마 아래와 같이 나올 것입니다.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='perl'><span class='line'>  <span class="o">.------------------------------------------------------------+-----------.</span>
+</span><span class='line'><span class="o">|</span> <span class="n">Action</span>                                                     <span class="o">|</span> <span class="n">Time</span>      <span class="o">|</span>
+</span><span class='line'><span class="o">+------------------------------------------------------------+-----------+</span>
+</span><span class='line'><span class="o">|</span> <span class="o">/</span><span class="n">auto</span>                                                      <span class="o">|</span> <span class="mf">0.000600</span><span class="n">s</span> <span class="o">|</span>
+</span><span class='line'><span class="o">|</span> <span class="sr">/user/</span><span class="n">auto</span>                                                 <span class="o">|</span> <span class="mf">0.000208</span><span class="n">s</span> <span class="o">|</span>
+</span><span class='line'><span class="o">|</span> <span class="sr">/user/</span><span class="n">login</span>                                                <span class="o">|</span> <span class="mf">0.000219</span><span class="n">s</span> <span class="o">|</span>
+</span><span class='line'><span class="o">|</span> <span class="sr">/user/</span><span class="n">end</span>                                                  <span class="o">|</span> <span class="mf">0.009542</span><span class="n">s</span> <span class="o">|</span>
+</span><span class='line'><span class="o">|</span>  <span class="o">-&gt;</span> <span class="nn">MyApp::Web::View::</span><span class="n">Default</span><span class="o">-&gt;</span><span class="n">process</span>                    <span class="o">|</span> <span class="mf">0.008665</span><span class="n">s</span> <span class="o">|</span>
+</span><span class='line'><span class="s">&#39;------------------------------------------------------------+-----------&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>  애시당초 <code>/user/login</code> 가 끝나면 무엇무엇을 한다라고 <code>ActionRole::Logger</code> 에 정의한 마당에서 해당 액션이 2-3회 중복해서 실행되는 경우가 발생하는 것입니다. 바로 <code>auto</code>, <code>end</code> 가 끝난 다음에도 해당 ActionRole 을 참고한다는 것이죠.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="nb">package</span> <span class="nn">MyApp::Web::ActionRole::</span><span class="n">Logger</span><span class="p">;</span>
+</span><span class='line'><span class="k">use</span> <span class="nn">Moose::</span><span class="n">Role</span><span class="p">;</span>
+</span><span class='line'><span class="k">use</span> <span class="nn">namespace::</span><span class="n">autoclean</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">after</span> <span class="n">execute</span> <span class="o">=&gt;</span> <span class="k">sub </span><span class="p">{</span>
+</span><span class='line'>    <span class="k">my</span> <span class="p">(</span><span class="nv">$self</span><span class="p">,</span> <span class="nv">$controller</span><span class="p">,</span> <span class="nv">$c</span><span class="p">)</span> <span class="o">=</span> <span class="nv">@_</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">return</span> <span class="k">if</span> <span class="nv">$self</span> <span class="o">=~</span><span class="sr"> /(?:auto|begin|end)/</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1"># ...</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="mi">1</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>  그래서 적절하게 <code>auto</code>, <code>begin</code>, <code>end</code> 는 필터링해줍니다. <code>$self</code> 변수에 어떤 액션에서 온 것인지 알 수 있습니다. 전 처음에 계속 <code>$c-&gt;action</code> 으로 알고 착각을 했더랬습니다.</p>
+
+<p>  아, 물론 ActionRole 을 추가해줬다고 바로 쓸 수 있는 것은 아닙니다.
+  해당 ActionRole 을 사용할 컨트롤러의 기본 상속 모듈을 <code>Catalyst::Controller</code> 에서 <code>Catalyst::Controller::ActionRole</code> 로 바꾸도록 합니다.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="nb">package</span> <span class="nn">MyApp::Web::Controller::</span><span class="n">Root</span><span class="p">;</span>
+</span><span class='line'><span class="k">use</span> <span class="n">Moose</span><span class="p">;</span>
+</span><span class='line'><span class="k">use</span> <span class="nn">namespace::</span><span class="n">autoclean</span><span class="p">;</span>
+</span><span class='line'><span class="k">BEGIN</span> <span class="p">{</span> <span class="n">extends</span> <span class="err">&#39;</span><span class="nn">Catalyst::Controller::</span><span class="n">ActionRole</span><span class="err">`</span> <span class="p">}</span>
+</span><span class='line'><span class="o">...</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Conclusion</h3>
+
+<p>  위의 예제에서는 그냥 단순히 <code>Root</code> 에서만 사용하고 있는 것 처럼 보이지만, 업무상에서는  특정 컨트롤러 몇개를 제외한 나머지 모든 컨트롤러에서 공통으로 사용하고 있습니다.</p>
+
+<p>  거의 모든 컨트롤러 상의 액션이 끝날 때, 시작될 때, 혹은 양쪽 모두에서 공통적으로 특정 행동을 정의할 때 ActionRole 과 함께하면 좀 더 유연하고 아름다운 코드작성에 도움이 되지 않을까 생각하고 있습니다.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -497,6 +663,10 @@
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2011/12/27/catalyst-actionrole/">Catalyst - ActionRole</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2011/12/27/using-plack-middleware-oauth/">Using Plack::Middleware::OAuth</a>
