@@ -123,7 +123,9 @@ __PACKAGE__->meta->make_immutable;
 ```
 
   파일첨부를 위한 `attachments` 접근자를 추가로 지정합니다. 첨부파일은 하나가 아닌 여러개가 가능하기에 `ArrayRef` 를 기본형식으로 합니다. 각 요소는 반드시 `Path::Class::File` 로 받도록 했습니다.
+  
   `MIME::Types` 로 첨부파일의 확장자를 통해서 MIME-TYPE 을 뽑아내도록 하고, 알 수 없다면 `multipart/mixed` 로 지정했습니다.
+  
   `transport` 레이어를 별도로 지정할 수 있으며, `transport` 의 지정이 없을 경우는 당연히 로컬호스트의 `smtp` 를 이용하도록 합니다.
 
 ### Using MyApp::Mail
