@@ -4,7 +4,7 @@
   <title><![CDATA[Jeen's techlog]]></title>
   <link href="http://JEEN.github.com/atom.xml" rel="self"/>
   <link href="http://JEEN.github.com/"/>
-  <updated>2011-12-29T18:36:46+09:00</updated>
+  <updated>2012-01-03T13:23:22+09:00</updated>
   <id>http://JEEN.github.com/</id>
   <author>
     <name><![CDATA[Jeen Lee]]></name>
@@ -12,6 +12,89 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Perl and Continuous Integration with Jenkins - I]]></title>
+    <link href="http://JEEN.github.com/blog/2012/01/03/perl-and-continuous-integration-with-jenkins-1/"/>
+    <updated>2012-01-03T11:45:00+09:00</updated>
+    <id>http://JEEN.github.com/blog/2012/01/03/perl-and-continuous-integration-with-jenkins-1</id>
+    <content type="html"><![CDATA[<h3>Jenkins 를 사용하기 까지</h3>
+
+<p>  사실 지난주에 NHN 에서 주최하는 공개개발자 교육에  갔다왔었습니다. 평소 Jenkins 에 대해서 약간 환상 같은 게 있다고 할까, 필요성이 있다고 할까요. 좀 더 프로젝트의 품질이 나아지고 있다는 환상, 그런 걸 보면서 나름 보람을 느끼고 싶다라는 생각도 있었습니다.</p>
+
+<p>  아무튼 Jenkins 교육은 Java 위주의 프로젝트에 적용하는 얘기였지만, 다른 언어에서도 충분히 지원된다라는 얘기를 익히들어왔기에 대강 실습을 따라하면서 감을 익히고 회사에 와서 본격적으로 Jenkins 를 만지기 시작했습니다.</p>
+
+<h3>Perl and Jenkins</h3>
+
+<p>  Jenkins 교육에서는 Maven 을 위주로 여러가지 옵션(?) 을 추가하는 것으로 간단하게 각종 Report 를 뽑아내기 위한 xml 들을 생성할 수 있었습니다. 아쉽게도 Perl 로는 Maven 만큼 쉽게 그렇게 만들기는 어려웠지요.</p>
+
+<p>  일단 Perl 에는 기본적으로 TAP 형식을 따르고 있기 때문에 Java 류의 JUnit 으로 결과를 뽑아낼 필요가 있었습니다. 그래서 TAP 를 JUnit 으로 쉽게 바꿔줄 수 있는 방법이 필요했죠.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>prove --formatter --timer TAP::Formatter::JUnit t
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>  위와 같은 형식으로 <code>t</code> 디렉토리 아래의 테스트파일들을 테스트하며 결과는 <code>TAP::Formatter::JUnit</code> 에 의해서 xml 파일로 나오게 됩니다.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="nt">&lt;testsuites&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;testsuite</span> <span class="na">failures=</span><span class="s">&quot;0&quot;</span>
+</span><span class='line'>             <span class="na">errors=</span><span class="s">&quot;0&quot;</span>
+</span><span class='line'>             <span class="na">time=</span><span class="s">&quot;25.6525909900665&quot;</span>
+</span><span class='line'>             <span class="na">tests=</span><span class="s">&quot;1&quot;</span>
+</span><span class='line'>             <span class="na">name=</span><span class="s">&quot;Catalyst_controller_Admin-Activity_t&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;testcase</span> <span class="na">time=</span><span class="s">&quot;0&quot;</span>
+</span><span class='line'>              <span class="na">name=</span><span class="s">&quot;1 - Request should succeed&quot;</span><span class="nt">&gt;&lt;/testcase&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;system-out&gt;</span><span class="cp">&lt;![CDATA[ok 1 - Request should succeed</span>
+</span><span class='line'><span class="cp">1..1</span>
+</span><span class='line'><span class="cp">]]&gt;</span><span class="nt">&lt;/system-out&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;system-err&gt;&lt;/system-err&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;/testsuite&gt;</span>
+</span><span class='line'><span class="nt">&lt;/testsuites&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Task::Jenkins</h3>
+
+<p>  사실은 Jenkins 에서 Perl 프로젝트를 올릴 때의 주요한 모듈의 묶음은 <a href="http://search.cpan.org/perldoc?Task::Jenkins">Task::Jenkins</a> 모듈로 제공되고 있습니다. Task::Jenkins 에 있는 모듈들은,</p>
+
+<ul>
+<li><a href="http://search.cpan.org/perldoc?TAP::Formatter::JUnit">TAP::Formatter::JUnit</a></li>
+<li><a href="http://search.cpan.org/perldoc?App::Prove">App::Prove</a></li>
+<li><p><a href="http://search.cpan.org/perldoc?Devel::Cover">Devel::Cover</a></p>
+
+<p>입니다.</p>
+
+<p><code>TAP::Formatter::JUnit</code> 의 경우는 위에서 설명했고, <code>App::Prove</code> 는 위의 테스트코드를 실행하는 커맨드인 <code>prove</code> 를 사용하기 위한 모듈입니다. <code>Devel::Cover</code> 는 Code Coverage 를 확인할 수 있는 모듈이구요.</p>
+
+<p>일단 Jenkins 에서 Perl 프로젝트를 적용하는 준비는 기본적으로 위의 <code>Task::Jenkins</code> 를 설치함으로 어느 정도 끝났다고 볼 수 있습니다.</p></li>
+</ul>
+
+
+<h3>Jenkins 설치</h3>
+
+<p>  회사내의 서버에 Jenkins 를 설치했습니다. Ubuntu 10.10 Server 버젼이며, Jenkins 의 설치는 그렇게 어렵지 않습니다.</p>
+
+<blockquote class="twitter-tweet" lang="ko"><p>Jenkins 얘기를 듣고 Perl 에서 어떻게 쓸까하다가 좀 마지니 몇가지 Metrics 결과라든가 Code Coverage 라든가 뭐 여러가지 쏟아내는 방법을 알게 되었다랄까</p>&mdash; JEEN (@JEEN_LEE) <a href="https://twitter.com/JEEN_LEE/status/151644576246018048" data-datetime="2011-12-27T12:44:19+00:00">12월 27, 2011</a></blockquote>
+
+
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Perl - Email Send]]></title>
@@ -241,9 +324,11 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>  파일첨부를 위한 <code>attachments</code> 접근자를 추가로 지정합니다. 첨부파일은 하나가 아닌 여러개가 가능하기에 <code>ArrayRef</code> 를 기본형식으로 합니다. 각 요소는 반드시 <code>Path::Class::File</code> 로 받도록 했습니다.
-  <code>MIME::Types</code> 로 첨부파일의 확장자를 통해서 MIME-TYPE 을 뽑아내도록 하고, 알 수 없다면 <code>multipart/mixed</code> 로 지정했습니다.
-  <code>transport</code> 레이어를 별도로 지정할 수 있으며, <code>transport</code> 의 지정이 없을 경우는 당연히 로컬호스트의 <code>smtp</code> 를 이용하도록 합니다.</p>
+<p>  파일첨부를 위한 <code>attachments</code> 접근자를 추가로 지정합니다. 첨부파일은 하나가 아닌 여러개가 가능하기에 <code>ArrayRef</code> 를 기본형식으로 합니다. 각 요소는 반드시 <code>Path::Class::File</code> 로 받도록 했습니다.</p>
+
+<p>  <code>MIME::Types</code> 로 첨부파일의 확장자를 통해서 MIME-TYPE 을 뽑아내도록 하고, 알 수 없다면 <code>multipart/mixed</code> 로 지정했습니다.</p>
+
+<p>  <code>transport</code> 레이어를 별도로 지정할 수 있으며, <code>transport</code> 의 지정이 없을 경우는 당연히 로컬호스트의 <code>smtp</code> 를 이용하도록 합니다.</p>
 
 <h3>Using MyApp::Mail</h3>
 
@@ -312,7 +397,7 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>  위에서 언급한 <code>transport</code> 레이어를 정의해서 지메일의 <code>smtp</code> 를 사용하도록 합니다. 이를 위해서 물론 Google 계정정보를 입력할 필요가 있습니다.</p>
+<p>  위에서 언급한 <code>transport</code> 레이어에 지메일의 <code>smtp</code> 를 사용하도록 합니다. 이를 위해서 물론 Google 계정정보를 입력할 필요가 있습니다.</p>
 
 <h3>How to Test?</h3>
 
@@ -349,8 +434,9 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>  에서 그동안 송신한 메일건수당 성공실패를 판별할 수 있고, 작성된 메일 내용또한 확인이 가능합니다. 테스트코드를 작성함에 있어서 위의 두 부분이 절대적으로 필요합니다.
-  위처럼 테스트 코드를 작성할 시에는 실제로 메일 송신을 하지 않았기에 <code>transport</code> 레이어의 발생하는 어떤 불상사는 감지할 수 없습니다.</p>
+<p>  에서 그동안 송신한 메일건수당 성공실패를 판별할 수 있고, 작성된 메일 내용 또한 확인이 가능합니다. 테스트코드를 작성함에 있어서 위의 두 부분이 절대적으로 필요합니다.</p>
+
+<p>  위처럼 테스트 코드를 작성할 시에는 실제로 메일 송신을 하지 않았기에 <code>transport</code> 레이어에서 발생하는 어떤 불상사는 감지할 수 없습니다.</p>
 
 <h3>Conclusion</h3>
 
@@ -359,7 +445,7 @@
 </ul>
 
 
-<p>  이전에 메일보내기 관련해서 <code>SSMTP</code> + <code>MIME::Lite</code> 를 사용하는 그런 코드를 2008년쯤에 썼었네요. 부끄럽습니다. 2009년부터는 아마 <code>MIME::Lite</code> 를 안썼던 것 같네요.</p>
+<p>  이전에 메일보내기 관련해서 <code>SSMTP</code> + <code>MIME::Lite</code> 를 사용하는 그런 코드를 2008년쯤에 썼었네요. 부끄럽습니다. 2009년부터는 아마 <code>MIME::Lite</code> 를 안 썼던 것 같네요.</p>
 
 <p>  뭐 당장 필요로 하는 부분만 구현을 한 것일 뿐인지라, 차후에 다른 어떤 요구사항이 있다면 그에 맞춰서 다시 한번 소개를 해볼까 합니다.</p>
 ]]></content>

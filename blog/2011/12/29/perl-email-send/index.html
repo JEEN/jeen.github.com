@@ -24,6 +24,7 @@
   <script src="/javascripts/modernizr-2.0.js"></script>
   <script src="/javascripts/ender.js"></script>
   <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <script src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
   <link href="/atom.xml" rel="alternate" title="Jeen's techlog" type="application/atom+xml">
   <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
 <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
@@ -327,9 +328,11 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>  파일첨부를 위한 <code>attachments</code> 접근자를 추가로 지정합니다. 첨부파일은 하나가 아닌 여러개가 가능하기에 <code>ArrayRef</code> 를 기본형식으로 합니다. 각 요소는 반드시 <code>Path::Class::File</code> 로 받도록 했습니다.
-  <code>MIME::Types</code> 로 첨부파일의 확장자를 통해서 MIME-TYPE 을 뽑아내도록 하고, 알 수 없다면 <code>multipart/mixed</code> 로 지정했습니다.
-  <code>transport</code> 레이어를 별도로 지정할 수 있으며, <code>transport</code> 의 지정이 없을 경우는 당연히 로컬호스트의 <code>smtp</code> 를 이용하도록 합니다.</p>
+<p>  파일첨부를 위한 <code>attachments</code> 접근자를 추가로 지정합니다. 첨부파일은 하나가 아닌 여러개가 가능하기에 <code>ArrayRef</code> 를 기본형식으로 합니다. 각 요소는 반드시 <code>Path::Class::File</code> 로 받도록 했습니다.</p>
+
+<p>  <code>MIME::Types</code> 로 첨부파일의 확장자를 통해서 MIME-TYPE 을 뽑아내도록 하고, 알 수 없다면 <code>multipart/mixed</code> 로 지정했습니다.</p>
+
+<p>  <code>transport</code> 레이어를 별도로 지정할 수 있으며, <code>transport</code> 의 지정이 없을 경우는 당연히 로컬호스트의 <code>smtp</code> 를 이용하도록 합니다.</p>
 
 <h3>Using MyApp::Mail</h3>
 
@@ -398,7 +401,7 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>  위에서 언급한 <code>transport</code> 레이어를 정의해서 지메일의 <code>smtp</code> 를 사용하도록 합니다. 이를 위해서 물론 Google 계정정보를 입력할 필요가 있습니다.</p>
+<p>  위에서 언급한 <code>transport</code> 레이어에 지메일의 <code>smtp</code> 를 사용하도록 합니다. 이를 위해서 물론 Google 계정정보를 입력할 필요가 있습니다.</p>
 
 <h3>How to Test?</h3>
 
@@ -435,8 +438,9 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>  에서 그동안 송신한 메일건수당 성공실패를 판별할 수 있고, 작성된 메일 내용또한 확인이 가능합니다. 테스트코드를 작성함에 있어서 위의 두 부분이 절대적으로 필요합니다.
-  위처럼 테스트 코드를 작성할 시에는 실제로 메일 송신을 하지 않았기에 <code>transport</code> 레이어의 발생하는 어떤 불상사는 감지할 수 없습니다.</p>
+<p>  에서 그동안 송신한 메일건수당 성공실패를 판별할 수 있고, 작성된 메일 내용 또한 확인이 가능합니다. 테스트코드를 작성함에 있어서 위의 두 부분이 절대적으로 필요합니다.</p>
+
+<p>  위처럼 테스트 코드를 작성할 시에는 실제로 메일 송신을 하지 않았기에 <code>transport</code> 레이어에서 발생하는 어떤 불상사는 감지할 수 없습니다.</p>
 
 <h3>Conclusion</h3>
 
@@ -445,7 +449,7 @@
 </ul>
 
 
-<p>  이전에 메일보내기 관련해서 <code>SSMTP</code> + <code>MIME::Lite</code> 를 사용하는 그런 코드를 2008년쯤에 썼었네요. 부끄럽습니다. 2009년부터는 아마 <code>MIME::Lite</code> 를 안썼던 것 같네요.</p>
+<p>  이전에 메일보내기 관련해서 <code>SSMTP</code> + <code>MIME::Lite</code> 를 사용하는 그런 코드를 2008년쯤에 썼었네요. 부끄럽습니다. 2009년부터는 아마 <code>MIME::Lite</code> 를 안 썼던 것 같네요.</p>
 
 <p>  뭐 당장 필요로 하는 부분만 구현을 한 것일 뿐인지라, 차후에 다른 어떤 요구사항이 있다면 그에 맞춰서 다시 한번 소개를 해볼까 합니다.</p>
 </div>
@@ -498,6 +502,8 @@
         <a class="basic-alignment left" href="/blog/2011/12/27/catalyst-actionrole/" title="Previous Post: Catalyst - ActionRole">&laquo; Catalyst - ActionRole</a>
       
       
+        <a class="basic-alignment right" href="/blog/2012/01/03/perl-and-continuous-integration-with-jenkins-1/" title="next Post: Perl and Continuous Integration with Jenkins - I">Perl and Continuous Integration with Jenkins - I &raquo;</a>
+      
     </p>
   </footer>
 </article>
@@ -515,6 +521,10 @@
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2012/01/03/perl-and-continuous-integration-with-jenkins-1/">Perl and Continuous Integration with Jenkins - I</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2011/12/29/perl-email-send/">Perl - Email Send</a>
@@ -592,7 +602,7 @@
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2011 - Jeen Lee -
+  Copyright &copy; 2012 - Jeen Lee -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 
