@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "About Tim Sort"
+title: "[번역] About Tim Sort"
 date: 2012-01-03 19:44
 comments: true
 categories: [translation,algorithm]
