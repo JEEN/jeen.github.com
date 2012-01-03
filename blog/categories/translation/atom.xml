@@ -4,7 +4,7 @@
   <title><![CDATA[Category: translation | Jeen's techlog]]></title>
   <link href="http://JEEN.github.com/blog/categories/translation/atom.xml" rel="self"/>
   <link href="http://JEEN.github.com/"/>
-  <updated>2012-01-03T20:46:31+09:00</updated>
+  <updated>2012-01-03T21:10:36+09:00</updated>
   <id>http://JEEN.github.com/</id>
   <author>
     <name><![CDATA[Jeen Lee]]></name>
@@ -12,6 +12,34 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[[번역] PM's Task Management @ EA]]></title>
+    <link href="http://JEEN.github.com/blog/2012/01/03/ea-pms-task-management/"/>
+    <updated>2012-01-03T20:53:00+09:00</updated>
+    <id>http://JEEN.github.com/blog/2012/01/03/ea-pms-task-management</id>
+    <content type="html"><![CDATA[<ul>
+<li><p>프로젝트의 두목은 두명으로 나뉜다. 한명은 Creative Director, 다른 한명은 Project Manager. PM 은 예산/외주관리/리소스 관리의 모든 권한을 가지고, CD 가 그 이외의 권한을 가진다.</p></li>
+<li><p>권력의 관계는 CD>PM. CD 가 "좀 늦어도 되니까 이것을 한다" 라고 정하면 PM 은 그에 따라, 프로젝트를 짜맞춰야 한다. 단, CD 가 최종책임은 전부 덮어쓰는 것이 룰.</p></li>
+<li><p>PM 이 실제로 스케쥴을 진행하는 방법은 리소스 관리를 하면서, 2두 단위로 마일스톤을 내놓는다. 마일스톤에는 반드시 목적이 있고, 그의 진척도에 맞춰서 최종 스케쥬쥴은 항상 바뀐다.</p></li>
+<li><p>마일스톤 6개에 하나 정도는 빅 마일스톤, 프로젝트의 진척 상황을 외부(상층부)에 대해 나타내는 [알파] 를 내놓는다.</p></li>
+<li><p>최종 스케쥴은 필요한 리소스를 전부 나열해서 ,그것을 자기가 골라서 만든다. 다음은 PM 이 팀의 실적을 보고 속도를 CD 와 상층부에 알리고, 어디가 병목이 되는 지 등을 관리한다.</p></li>
+<li><p>프로젝트 팀원은 항상 마일스톤에서 당면한 목표를 알고 있어서 정말로 프로세스를 가지고 생각할 수 있으며, PM 이 항상 스케쥴을 쌓고, 속도를 계산해서 무엇이 늦어지고 있는 지 알려줄 수 있기 때문에 편하다</p></li>
+<li><p>내용과 진행 관리를 완전히 나눠서 최종적으로 내용관리로 정리한다. 처음은 내용을 전부 리스트로 만든다. 어떻게든 모든 요소라고 생각되는 것을 가시화 해서 리스트로 만들고 "어느 정도의 작업이 있는가"를 계산해낸다.</p></li>
+<li><p>그리고 그 내용중에 "절대로 fun factor 에 빠질 수 없는 것" 등을 CD 가 가르쳐 준다. 그 다음은 마일스톤에서 쌓아가면서 스케쥴을 보고, 일정 실적을 쌓을 즘에 실제로 가능한 것인지 전부 리스트로 만든다.</p></li>
+<li><p>그래서 PM 에게 질문하면 "이 추가예산이 있다면 아웃소싱이 있다면 여기에 이것을 투입하면 이렇게 단축할 수 있다" 라는 매우 구체적인 스케쥴을 항상 가질 수 있다.</p></li>
+<li><p>덧붙여 CD>PM 이라는 권력관계가 되어 있는 것은 EA 의 게임 크리에이티브와 재미를 담보로 하는 것은 결국은 게임 디자이너가 아니면 안된다라는 생각을 가지고 있기 때문이다.</p></li>
+</ul>
+
+
+<h3>원문</h3>
+
+<ul>
+<li><a href="http://togetter.com/li/198059">EA流のPMのタスク管理の仕方 - Togetter</a></li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[[번역] About Tim Sort]]></title>
