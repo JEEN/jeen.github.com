@@ -114,7 +114,7 @@
 
 <p>  아무튼 Jenkins 교육은 Java 위주의 프로젝트에 적용하는 얘기였지만, 다른 언어에서도 충분히 지원된다라는 얘기를 익히들어왔기에 대강 실습을 따라하면서 감을 익히고 회사에 와서 본격적으로 Jenkins 를 만지기 시작했습니다.</p>
 
-<h3>Perl and Jenkins</h3>
+<h3>Perl &amp; Jenkins</h3>
 
 <p>  Jenkins 교육에서는 Maven 을 위주로 여러가지 옵션(?) 을 추가하는 것으로 간단하게 각종 Report 를 뽑아내기 위한 xml 들을 생성할 수 있었습니다. 아쉽게도 Perl 로는 Maven 만큼 쉽게 그렇게 만들기는 어려웠지요.</p>
 
@@ -179,10 +179,22 @@
 
 <p>  회사내의 서버에 Jenkins 를 설치했습니다. Ubuntu 10.10 Server 버젼이며, Jenkins 의 설치는 그렇게 어렵지 않습니다.</p>
 
-<blockquote class="twitter-tweet" lang="ko"><p>Jenkins 얘기를 듣고 Perl 에서 어떻게 쓸까하다가 좀 마지니 몇가지 Metrics 결과라든가 Code Coverage 라든가 뭐 여러가지 쏟아내는 방법을 알게 되었다랄까</p>&mdash; JEEN (@JEEN_LEE) <a href="https://twitter.com/JEEN_LEE/status/151644576246018048" data-datetime="2011-12-27T12:44:19+00:00">12월 27, 2011</a></blockquote>
+<p>  쉽게 Google 에서 <em>Jenkins Ubuntu</em> 로 검색해서 나온 것들 중 첫번째를 골라봤습니다.</p>
+
+<ul>
+<li><a href="https://wiki.jenkins-ci.org/display/JENKINS/Installing+Jenkins+on+Ubuntu">Installing Jenkins on Ubuntu</a></li>
+</ul>
 
 
+<p>  <code>apt</code> source 추가하고 <code>aptitude</code> 로 설치하고, Apache 에서 Proxy 설정해주고, 이에 대한 자세한 이야기는 위의 링크에 자세히 나와 있으니 참고하시길 바랍니다.</p>
 
+<p>  NHN 공개개발자 교육에서는 보안상의 문제로 Tomcat 위에다가 얹어놓기를 권하셨지만, Jenkins 자체의 Standalone Server 로 충분하지 않나 생각됩니다. 뭐 어차피 사내 네트워크 안에서 사용할 것인데&#8230; 라며&#8230; =3</p>
+
+<p>  아무튼 이렇게 띄워서 실제로 사내에서 사용하고 있는 Jenkins Top Page 는 아래와 같습니다.</p>
+
+<p><img src="http://lh6.googleusercontent.com/--lGDWehSz5k/TwKGZAtvsUI/AAAAAAAAA9w/tRFttK10-wg/jenkins-top-page.png" alt="Jenkins Top" /></p>
+
+<p>  한번에 적으려니 좀 길고 해서, 일단 밑밥깔기부터 하고 다음 글부터는 좀 더 자세한 Jenkins 에서 Perl 프로젝트 적용에 대해서 상세한 캡쳐와 함께 설명하고자 합니다.</p>
 </div>
   
   
