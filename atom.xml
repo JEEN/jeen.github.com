@@ -4,7 +4,7 @@
   <title><![CDATA[Jeen's techlog]]></title>
   <link href="http://JEEN.github.com/atom.xml" rel="self"/>
   <link href="http://JEEN.github.com/"/>
-  <updated>2012-01-04T18:50:42+09:00</updated>
+  <updated>2012-01-04T18:52:59+09:00</updated>
   <id>http://JEEN.github.com/</id>
   <author>
     <name><![CDATA[Jeen Lee]]></name>
@@ -312,7 +312,7 @@
 </span><span class='line'><span class="gi">+</span>
 </span><span class='line'>has to =&gt; (
 </span><span class='line'>    is      =&gt; &#39;ro&#39;,
-</span><span class='line'> -    isa     =&gt; &#39;Str&#39;,
+</span><span class='line'><span class="gd">-    isa     =&gt; &#39;Str&#39;,</span>
 </span><span class='line'><span class="gi">+    isa     =&gt; &#39;MailAddresses&#39;,</span>
 </span><span class='line'>    default =&gt; sub {
 </span><span class='line'>        Encode::encode( &quot;MIME-Header&quot;, $_[0] );

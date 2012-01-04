@@ -4,7 +4,7 @@
   <title><![CDATA[Category: mail | Jeen's techlog]]></title>
   <link href="http://JEEN.github.com/blog/categories/mail/atom.xml" rel="self"/>
   <link href="http://JEEN.github.com/"/>
-  <updated>2012-01-04T18:50:42+09:00</updated>
+  <updated>2012-01-04T18:52:59+09:00</updated>
   <id>http://JEEN.github.com/</id>
   <author>
     <name><![CDATA[Jeen Lee]]></name>
@@ -201,7 +201,7 @@ has to => (</p>
 </code></pre>
 
 <ul>
-<li>  isa     => 'Str',</li>
+<li> isa     => 'Str',</li>
 <li> isa     => 'MailAddresses',
 default => sub {
 
