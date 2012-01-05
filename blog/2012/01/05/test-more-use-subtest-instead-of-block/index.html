@@ -9,7 +9,7 @@
   <meta name="author" content="Jeen Lee">
 
   
-  <meta name="description" content="여태껏 테스트코드를 써나가면서 Flat 하게 {} 블록안에 일정한 흐름의 테스트 코드를 적곤 했었습니다. 1
+  <meta name="description" content="여태껏 테스트코드를 써나가면서 그냥 {} 블록안에 일정한 흐름의 테스트 코드를 적곤 했었습니다. 1
 2
 3
 4
@@ -130,7 +130,7 @@ use HTTP:: &hellip;">
   </header>
 
 
-<div class="entry-content"><p>  여태껏 테스트코드를 써나가면서 Flat 하게 {} 블록안에 일정한 흐름의 테스트 코드를 적곤 했었습니다.</p>
+<div class="entry-content"><p>  여태껏 테스트코드를 써나가면서 그냥 {} 블록안에 일정한 흐름의 테스트 코드를 적곤 했었습니다.</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -187,7 +187,7 @@ use HTTP:: &hellip;">
 
 <h3>그냥 <code>subtest</code> 를 사용하면 어떨까?</h3>
 
-<p>  그러는 도중에 <a href="http://search.cpan.org/perldoc?Test::More">Test::More 매뉴얼</a>을 읽어보다가 &#8216;subtest&#8217; 를 사용할 수 있다는 것을 알게 되었습니다.</p>
+<p>  그러는 도중에 <a href="http://search.cpan.org/perldoc?Test::More">Test::More 매뉴얼</a>을 읽어보다가 <code>subtest</code> 를 사용할 수 있다는 것을 알게 되었습니다.</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -286,9 +286,13 @@ use HTTP:: &hellip;">
 
 <p>  테스트 항목 1,4 번의 메시지가 같기 때문에 매번 달리 지정해줘야 되는 수고가 발생하죠. 그리고 각각의 테스트 항목 하나하나가 테스트 갯수가 되는 것입니다.</p>
 
-<p>  사실은 위의 Jenkins 상의 <code>Test Result Trend</code> 의 차트가 어느 순간 갑자기 뚝 떨어지길래, 어라 이상하다 싶어서 살펴본 결과, <code>subtest</code> 기준으로 카운트되어있는 것을 확인했습니다.</p>
+<p>  사실은 위의 Jenkins 상의 <code>Test Result Trend</code> 의 그래프가 어느 순간 갑자기 뚝 떨어지길래, 어라 이상하다 싶어서 살펴본 결과, <code>subtest</code> 기준으로 카운트되어있는 것을 확인했습니다.</p>
 
 <p><img src="https://lh5.googleusercontent.com/-TSX-Kd5-fX4/TwWRjvHx2LI/AAAAAAAAA94/pYrEEgHBZic/test-result-trend.png" alt="Jenkins Test Result Trend 의 낙폭" /></p>
+
+<p>  대충 위의 <code>#58</code> 번 빌드가 그 쯤이 되겠네요.</p>
+
+<p>  아무튼 Jenkins 도입이후에 좀 더 테스트코드에 더 신경을 쓰고 있는 요즘입니다.</p>
 </div>
 
 
@@ -313,6 +317,12 @@ use HTTP:: &hellip;">
 
 <time datetime="2012-01-05T20:33:00+09:00" pubdate data-updated="true">Jan 5<span>th</span>, 2012</time>
       
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/jenkins/'>jenkins</a>, <a class='category' href='/blog/categories/perl/'>perl</a>, <a class='category' href='/blog/categories/test/'>test</a>
+  
+</span>
 
 
     </p>

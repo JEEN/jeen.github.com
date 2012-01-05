@@ -4,7 +4,7 @@
   <title><![CDATA[Category: perl | Jeen's techlog]]></title>
   <link href="http://JEEN.github.com/blog/categories/perl/atom.xml" rel="self"/>
   <link href="http://JEEN.github.com/"/>
-  <updated>2012-01-05T21:05:22+09:00</updated>
+  <updated>2012-01-05T22:20:16+09:00</updated>
   <id>http://JEEN.github.com/</id>
   <author>
     <name><![CDATA[Jeen Lee]]></name>
@@ -12,6 +12,138 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Test::More - use 'subtest' instead of {} block]]></title>
+    <link href="http://JEEN.github.com/blog/2012/01/05/test-more-use-subtest-instead-of-block/"/>
+    <updated>2012-01-05T20:33:00+09:00</updated>
+    <id>http://JEEN.github.com/blog/2012/01/05/test-more-use-subtest-instead-of-block</id>
+    <content type="html"><![CDATA[<p>  여태껏 테스트코드를 써나가면서 그냥 {} 블록안에 일정한 흐름의 테스트 코드를 적곤 했었습니다.</p>
+
+<p>``` perl
+use Test::More;
+use HTTP::Request::Common;
+use Catalyst::Test 'MyApp::Web';</p>
+
+<h1>Access /</h1>
+
+<p>{</p>
+
+<pre><code>my $res = request('/');
+ok($res-&gt;is_success, "Request should be succeed");
+ok($res-&gt;header('.......'), 'Header xxxxx exist');
+like($res-&gt;content, qr|some sentences|, "Found some sentences")
+</code></pre>
+
+<p>}</p>
+
+<h1>Login</h1>
+
+<p>{</p>
+
+<pre><code>my $req = POST('/login', [ 'username' =&gt; 'blahblah', 'password' =&gt; 'blahblah' ]);
+my $res = request($req);
+ok($res-&gt;is_success, "Request should be suceed");
+....
+</code></pre>
+
+<p>}</p>
+
+<h1>some action</h1>
+
+<p>{</p>
+
+<pre><code>...;
+</code></pre>
+
+<p>}
+```</p>
+
+<p>  일단 뭐 {} 블록으로 각 action 에 대한 접근결과를 테스트하고, <code>#</code> 로 주석표시를 하면서 하나둘 하나둘 각 블록에 <code>$req</code>, <code>$res</code> 를 추가했었습니다. 일단 뭐 {} 블록으로 묶으면서 <code>$req</code>, <code>$res</code> 따위의 변수의 재정의 등에 관한 경고같은 것이 안나와서 좋고, 제대로 분류가 되는 느낌이기도 했습니다.</p>
+
+<h3>그냥 <code>subtest</code> 를 사용하면 어떨까?</h3>
+
+<p>  그러는 도중에 <a href="http://search.cpan.org/perldoc?Test::More">Test::More 매뉴얼</a>을 읽어보다가 <code>subtest</code> 를 사용할 수 있다는 것을 알게 되었습니다.</p>
+
+<p>``` perl
+use HTTP::Request::Common;
+use Catalyst::Test 'MyApp::Web';
+use Test::More;</p>
+
+<p>subtest 'access to /' => sub {</p>
+
+<pre><code>my $res = request('/');
+ok($res-&gt;is_success, "Request should be succeed");
+ok($res-&gt;header('.......'), 'Header xxxxx exist');
+like($res-&gt;content, qr|some sentences|, "Found some sentences")
+</code></pre>
+
+<p>};</p>
+
+<p>subtest 'Login' => sub {</p>
+
+<pre><code>my $req = POST('/login', [ 'username' =&gt; 'blahblah', 'password' =&gt; 'blahblah' ]);
+my $res = request($req);
+ok($res-&gt;is_success, "Request should be suceed");
+....
+</code></pre>
+
+<p>};
+```</p>
+
+<p>  <code>subtest</code> 를 사용하면서 코드는 위처럼 바뀌었습니다. <code>#</code> 로 주석처리를 할 필요도 없고, 해당 <code>subtest</code> 마다 명확하게 무엇을 하는 지 확실하게 의미있는 <code>subtest</code> 의 이름으로 정해줄 수 있었습니다.</p>
+
+<p>  <code>subtest</code> 로 테스트를 썼을 경우는 TAP 결과는 다음과 같습니다.</p>
+
+<p>``` bash
+$ prove t/myapp.t
+ok 1 - access to /</p>
+
+<pre><code>ok 1 - Request should be succeed
+ok 2 - Header xxxxx exist
+ok 3 - Found some sentences
+1..3
+</code></pre>
+
+<p>ok 2 - Login</p>
+
+<pre><code>ok 1 - Request should be suceed
+...
+1..3
+</code></pre>
+
+<p>....
+1..3
+ok
+All tests successful.
+Files=1, Tests=3, 10 wallclock secs ( 0.07 usr  0.01 sys +  6.16 cusr  0.61 csys =  6.85 CPU)
+Result: PASS
+```</p>
+
+<p>  전체 테스트 횟수는 <code>subtest</code> 안의 테스트 항목이 아니라, <code>subtest</code> 의 갯수가 되는 것입니다.</p>
+
+<p>  그리고 <code>subtest</code> 를 사용하지 않고 {} 블록을 이용해서 flat 하게 정의했을 때는 아래와 같습니다.</p>
+
+<p><code>bash
+...
+ok 1 - Request should be succeed
+ok 2 - Header xxxxx exist
+ok 3 - Found some sentences
+ok 4 - Request should be suceed
+ ...
+</code></p>
+
+<p>  테스트 항목 1,4 번의 메시지가 같기 때문에 매번 달리 지정해줘야 되는 수고가 발생하죠. 그리고 각각의 테스트 항목 하나하나가 테스트 갯수가 되는 것입니다.</p>
+
+<p>  사실은 위의 Jenkins 상의 <code>Test Result Trend</code> 의 그래프가 어느 순간 갑자기 뚝 떨어지길래, 어라 이상하다 싶어서 살펴본 결과, <code>subtest</code> 기준으로 카운트되어있는 것을 확인했습니다.</p>
+
+<p><img src="https://lh5.googleusercontent.com/-TSX-Kd5-fX4/TwWRjvHx2LI/AAAAAAAAA94/pYrEEgHBZic/test-result-trend.png" alt="Jenkins Test Result Trend 의 낙폭" /></p>
+
+<p>  대충 위의 <code>#58</code> 번 빌드가 그 쯤이 되겠네요.</p>
+
+<p>  아무튼 Jenkins 도입이후에 좀 더 테스트코드에 더 신경을 쓰고 있는 요즘입니다.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Perl - Mail Send II]]></title>
@@ -703,147 +835,6 @@ BEGIN { extends 'Catalyst::Controller::ActionRole` }
 <p>  위의 예제에서는 그냥 단순히 <code>Root</code> 에서만 사용하고 있는 것 처럼 보이지만, 업무상에서는  특정 컨트롤러 몇개를 제외한 나머지 모든 컨트롤러에서 공통으로 사용하고 있습니다.</p>
 
 <p>  거의 모든 컨트롤러 상의 액션이 끝날 때, 시작될 때, 혹은 양쪽 모두에서 공통적으로 특정 행동을 정의할 때 ActionRole 과 함께하면 좀 더 유연하고 아름다운 코드작성에 도움이 되지 않을까 생각하고 있습니다.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Using Plack::Middleware::OAuth]]></title>
-    <link href="http://JEEN.github.com/blog/2011/12/27/using-plack-middleware-oauth/"/>
-    <updated>2011-12-27T13:24:00+09:00</updated>
-    <id>http://JEEN.github.com/blog/2011/12/27/using-plack-middleware-oauth</id>
-    <content type="html"><![CDATA[<h3>Before Using Plack::Middleware::OAuth</h3>
-
-<p>  사실은 <a href="http://search.cpan.org/perldoc?Plack::Middleware::OAuth">Plack::Middleware::OAuth</a> 를 사용하기 이전에는 OAuth 관련 callback 처리등을 직접 파라메터를 확인해가면서 해당 액션을 처리했었습니다. 그게 P::M::OAuth 를 사용해서 각 OAuth Provider 들을 좀 더 유연하게 다룰 수 있게 되지 않았나 합니다.</p>
-
-<p>``` perl</p>
-
-<pre><code>sub redirect_to_foursquare {
-    my $self = shift;
-
-    # redirect to foursquare authentication url
-    $self-&gt;response-&gt;redirect("https://foursquare.com/oauth2/authenticate?client_id=$client_id&amp;response_type=code&amp;redirect_uri=$callback_url");
-}
-</code></pre>
-
-<p>  sub receive_token_foursquare {</p>
-
-<pre><code>  my $self = shift;
-
-  my $res = Furl-&gt;new-&gt;get("https://foursquare.com/oauth2/access_token?client_id=$client_id&amp;client_secret=$client_secret&amp;grant_type=authorization_code&amp;redirect_uri=$redirect_url&amp;code=".$self-&gt;request-&gt;param('code'));
-  ...
-</code></pre>
-
-<p>  }
-```</p>
-
-<p>  예, 뭐 위처럼 OAuth 인증시에 <code>client_id</code> 랑 <code>client_secret</code> 그리고 <code>grant_type</code> 등 여러가지 파라메터의 지정이나 인증 URL 등등이 Provider 마다 다르고 이러니 뭐 일일이 Provider 마다 매번 어플리케이션 단에서 코드를 써나가는 것이 참 불쾌하기 마련이었습니다.
-  나름 플러거블하게 만든다고 해봤지만 역시 이런 부분은 Middleware 단에서 처리하는 게 좋지 않을까 생각하고 있었지요.
-  그런의미에서 P::M::OAuth 를 사용하게 되었습니다.</p>
-
-<h3>Custom Provider</h3>
-
-<p>  P::M::OAuth 는 OAuth v1/v2 를 지원합니다. OAuth 버젼마다 파라메터가 바뀌기 때문에 사용하고자 하는 OAuth Provider 가 어떤 버젼을 지원하는 지 확인해봐야 합니다.
-   P::M::OAuth 는 기본적으로 <em>Github</em>, <em>Twitter</em>, <em>Facebook</em>, <em>Live</em>, <em>Google</em> 의 다섯가지 OAuth Provider 를 지원합니다.</p>
-
-<p>  저는 <em>FourSquare</em> 의 OAuth 를 사용하려고 하는 데, 기본적으로 제공해주지 않으니, 약간 손질을 해줘야 되겠죠.</p>
-
-<p>``` perl
-package Plack::Middleware::OAuth::Foursquare;
-use strict;
-use warnings;</p>
-
-<p>sub config {</p>
-
-<pre><code>+{
-    version          =&gt; 2,
-    authorize_url    =&gt; 'https://foursquare.com/oauth2/authenticate',
-    access_token_url =&gt; 'https://foursquare.com/oauth2/access_token',
-    response_type    =&gt; 'code',
-    grant_type       =&gt; 'authorization_code',
-};
-</code></pre>
-
-<p>}</p>
-
-<p>1;
-```</p>
-
-<p>  위처럼 <code>Plack::Middleware::OAuth::Foursquare</code> 와,</p>
-
-<p>``` perl
-package Plack::Middleware::OAuth::UserInfo::Foursquare;
-use strict;
-use warnings;
-use parent qw(Plack::Middleware::OAuth::UserInfo);
-use LWP::UserAgent;
-use JSON;</p>
-
-<p>sub create_handle {}</p>
-
-<p>sub query {</p>
-
-<pre><code>my $self = shift;
-
-my $uri = URI-&gt;new('https://api.foursquare.com/v2/users/self');
-$uri-&gt;query_form( oauth_token =&gt; $self-&gt;token-&gt;access_token );
-my $res = LWP::UserAgent-&gt;new-&gt;get($uri);
-my $body = $res-&gt;decoded_content;
-return unless $body;
-
-my $obj = decode_json($body) || {};
-return $obj-&gt;{response}-&gt;{user};
-</code></pre>
-
-<p>}</p>
-
-<p>1;
-```</p>
-
-<p>  <code>Plack::Middleware::OAuth::UserInfo::Foursquare</code> 를 추가합니다.</p>
-
-<p>  이렇게 쉽게 OAuth Provider 마다 해당 네임스페이스 맞는 모듈을 추가해줍니다.</p>
-
-<h3>MyApp</h3>
-
-<p>``` perl</p>
-
-<h1>...</h1>
-
-<p>my $app = MyApp->psgi_app;
-builder {</p>
-
-<pre><code>mount '/oauth' =&gt; builder {
-    enable 'OAuth',
-        on_success =&gt; sub {
-            my ($mw, $token) = @_;
-
-            # get Foursquare's UserInfo
-            my $info = Plack::Middleware::OAuth::UserInfo-&gt;new( config =&gt; $mw-&gt;config, token =&gt; $token );
-
-            if ($token-&gt;is_provider('Foursquare')) {
-            return $mw-&gt;redirect('/');  
-          }
-          on_error =&gt; sub { #... },
-          providers =&gt; {
-              'Foursquare' =&gt; {
-                  client_id =&gt; 'YOUR CLIENT_ID',
-                  client_secret =&gt; 'YOUR CLIENT_SECRET',
-              },
-          };
-        }
-};
-mount '/' =&gt; $app;
-</code></pre>
-
-<p>};
-```</p>
-
-<p>  대충 위처럼 사용을 합니다.
-  좀 더 자세한 예제는 <a href="https://github.com/c9s/Plack-Middleware-OAuth/blob/develop/eg/app.psgi">P::M::OAuth 모듈의 예제 psgi 파일</a> 또는 , 이 모듈을 사용한 제 프로젝트 <a href="https://github.com/JEEN/Bobby-Akawa/blob/develop/lib/Bobby.pm#L46">Bobby-Akawa 의 특정 모듈</a>에서 찾아볼 수 있습니다.</p>
-
-<h3>Conclusion</h3>
-
-<p>  이로써 간략하게나마 Plack::Middleware::OAuth 를 이용해서 OAuth 인증을 Plack Middleware 단에서 구현할 수 있게 되었습니다. 조금 설명이 빈약해서 차후에 좀 더 구현단으로 들어가서 좀 더 깊게 파고들어가 볼까 합니다.</p>
 ]]></content>
   </entry>
   
