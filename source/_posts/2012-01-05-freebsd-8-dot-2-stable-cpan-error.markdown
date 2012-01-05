@@ -48,7 +48,7 @@ Summary of my perl5 (revision 5 version 14 subversion 2) configuration:
    
   Platform:
     osname=freebsd, osvers=8.2-stable, archname=amd64-freebsd
-    uname='freebsd julia.silex.kr 8.2-stable freebsd 8.2-stable #1: wed apr 13 13:10:49 kst 2011 root@xxx.xxxx.kr:usrobjusrsrcsysgeneric amd64 '
+    uname='freebsd xxx.xxxxx.kr 8.2-stable freebsd 8.2-stable #1: wed apr 13 13:10:49 kst 2011 root@xxx.xxxx.kr:usrobjusrsrcsysgeneric amd64 '
     config_args='-de -Dprefix=/home/jeen/perl5/perlbrew/perls/perl-5.14.2'
     hint=recommended, useposix=true, d_sigaction=define
     useithreads=undef, usemultiplicity=undef
@@ -106,3 +106,24 @@ Filesystem   Type    Size    Used   Avail Capacity  Mounted on
 
   일단 사건해결에 도움이 될 만한 정보들은 모조리 뽑아봤습니다.
   천천히 살펴보며 구원을 요청해야 되겠네요.
+
+### Conclusion
+
+  [#perl-kr][irc-perl-kr] 에서 위에 정리한 내용들로 [@aer0][twitter-aer0] 님께 질문을 날렸습니다. @aer0 님께서 제안하신 방법으로
+
+* `Bundle::CPAN` 을 설치
+* `~/.cpan` 디렉토리를 삭제 후 다시 `cpan` 실행
+
+  이었습니다.
+
+  `Bundle::CPAN` 을 설치해도 사태가 해결되지 않아서, 결국은 `~/.cpan` 디렉토리를 삭제한 후 다시 `cpan` 을 실행했습니다.
+
+* ~/.cpan/sources/modules/02packages.details.txt.gz
+* ~/.cpan/sources/modules/03modlist.data.gz
+
+  같은 CPAN 미러에서 가져오는 인덱스 파일이 이상해서 꼬인 것 같다라는 @aer0 님의 총평이었습니다.
+
+  역시 이런 사건이 발생할 때는 `#perl-kr` 에 들러야 됩니다. :-)
+
+[irc-perl-kr]:http://webchat.freenode.net?channels=perl-kr
+[twitter-aer0]:http://twitter.com/aer0
