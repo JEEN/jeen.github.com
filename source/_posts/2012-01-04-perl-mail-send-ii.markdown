@@ -156,7 +156,7 @@ use MIME::Types ();
 +
 has to => (
     is      => 'ro',
- -    isa     => 'Str',
+-    isa     => 'Str',
 +    isa     => 'MailAddresses',
     default => sub {
         Encode::encode( "MIME-Header", $_[0] );
