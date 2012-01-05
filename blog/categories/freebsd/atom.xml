@@ -4,7 +4,7 @@
   <title><![CDATA[Category: freebsd | Jeen's techlog]]></title>
   <link href="http://JEEN.github.com/blog/categories/freebsd/atom.xml" rel="self"/>
   <link href="http://JEEN.github.com/"/>
-  <updated>2012-01-05T23:22:04+09:00</updated>
+  <updated>2012-01-05T23:24:07+09:00</updated>
   <id>http://JEEN.github.com/</id>
   <author>
     <name><![CDATA[Jeen Lee]]></name>
@@ -159,6 +159,11 @@ Filesystem   Type    Size    Used   Avail Capacity  Mounted on
 
 <p>역시 이런 사건이 발생할 때는 <code>#perl-kr</code> 에 들러야 됩니다. :-)</p></li>
 </ul>
+
+
+<blockquote class="twitter-tweet" data-in-reply-to="154824190581678081" lang="ko"><p>@<a href="https://twitter.com/JEEN_LEE">JEEN_LEE</a> 자문자답 <a href="http://t.co/hSGdHz9i" title="http://jeen.github.com/blog/2012/01/05/freebsd-8-dot-2-stable-cpan-error/">jeen.github.com/blog/2012/01/0…</a></p>&mdash; JEEN (@JEEN_LEE) <a href="https://twitter.com/JEEN_LEE/status/154930926294536192" data-datetime="2012-01-05T14:23:05+00:00">1월 5, 2012</a></blockquote>
+
+
 
 ]]></content>
   </entry>
