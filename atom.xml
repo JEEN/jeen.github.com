@@ -4,7 +4,7 @@
   <title><![CDATA[Jeen's techlog]]></title>
   <link href="http://JEEN.github.com/atom.xml" rel="self"/>
   <link href="http://JEEN.github.com/"/>
-  <updated>2012-01-05T09:52:34+09:00</updated>
+  <updated>2012-01-05T21:05:22+09:00</updated>
   <id>http://JEEN.github.com/</id>
   <author>
     <name><![CDATA[Jeen Lee]]></name>
@@ -12,6 +12,173 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Test::More - use 'subtest' instead of {} block]]></title>
+    <link href="http://JEEN.github.com/blog/2012/01/05/test-more-use-subtest-instead-of-block/"/>
+    <updated>2012-01-05T20:33:00+09:00</updated>
+    <id>http://JEEN.github.com/blog/2012/01/05/test-more-use-subtest-instead-of-block</id>
+    <content type="html"><![CDATA[<p>  여태껏 테스트코드를 써나가면서 Flat 하게 {} 블록안에 일정한 흐름의 테스트 코드를 적곤 했었습니다.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="k">use</span> <span class="nn">Test::</span><span class="n">More</span><span class="p">;</span>
+</span><span class='line'><span class="k">use</span> <span class="nn">HTTP::Request::</span><span class="n">Common</span><span class="p">;</span>
+</span><span class='line'><span class="k">use</span> <span class="nn">Catalyst::</span><span class="n">Test</span> <span class="s">&#39;MyApp::Web&#39;</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1"># Access /</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="k">my</span> <span class="nv">$res</span> <span class="o">=</span> <span class="n">request</span><span class="p">(</span><span class="s">&#39;/&#39;</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">ok</span><span class="p">(</span><span class="nv">$res</span><span class="o">-&gt;</span><span class="n">is_success</span><span class="p">,</span> <span class="s">&quot;Request should be succeed&quot;</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">ok</span><span class="p">(</span><span class="nv">$res</span><span class="o">-&gt;</span><span class="n">header</span><span class="p">(</span><span class="s">&#39;.......&#39;</span><span class="p">),</span> <span class="s">&#39;Header xxxxx exist&#39;</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">like</span><span class="p">(</span><span class="nv">$res</span><span class="o">-&gt;</span><span class="n">content</span><span class="p">,</span> <span class="sx">qr|some sentences|</span><span class="p">,</span> <span class="s">&quot;Found some sentences&quot;</span><span class="p">)</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1"># Login</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="k">my</span> <span class="nv">$req</span> <span class="o">=</span> <span class="n">POST</span><span class="p">(</span><span class="s">&#39;/login&#39;</span><span class="p">,</span> <span class="p">[</span> <span class="s">&#39;username&#39;</span> <span class="o">=&gt;</span> <span class="s">&#39;blahblah&#39;</span><span class="p">,</span> <span class="s">&#39;password&#39;</span> <span class="o">=&gt;</span> <span class="s">&#39;blahblah&#39;</span> <span class="p">]);</span>
+</span><span class='line'>    <span class="k">my</span> <span class="nv">$res</span> <span class="o">=</span> <span class="n">request</span><span class="p">(</span><span class="nv">$req</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">ok</span><span class="p">(</span><span class="nv">$res</span><span class="o">-&gt;</span><span class="n">is_success</span><span class="p">,</span> <span class="s">&quot;Request should be suceed&quot;</span><span class="p">);</span>
+</span><span class='line'>    <span class="o">....</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1"># some action</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="o">...</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>  일단 뭐 {} 블록으로 각 action 에 대한 접근결과를 테스트하고, <code>#</code> 로 주석표시를 하면서 하나둘 하나둘 각 블록에 <code>$req</code>, <code>$res</code> 를 추가했었습니다. 일단 뭐 {} 블록으로 묶으면서 <code>$req</code>, <code>$res</code> 따위의 변수의 재정의 등에 관한 경고같은 것이 안나와서 좋고, 제대로 분류가 되는 느낌이기도 했습니다.</p>
+
+<h3>그냥 <code>subtest</code> 를 사용하면 어떨까?</h3>
+
+<p>  그러는 도중에 <a href="http://search.cpan.org/perldoc?Test::More">Test::More 매뉴얼</a>을 읽어보다가 &#8216;subtest&#8217; 를 사용할 수 있다는 것을 알게 되었습니다.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="k">use</span> <span class="nn">HTTP::Request::</span><span class="n">Common</span><span class="p">;</span>
+</span><span class='line'><span class="k">use</span> <span class="nn">Catalyst::</span><span class="n">Test</span> <span class="s">&#39;MyApp::Web&#39;</span><span class="p">;</span>
+</span><span class='line'><span class="k">use</span> <span class="nn">Test::</span><span class="n">More</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">subtest</span> <span class="s">&#39;access to /&#39;</span> <span class="o">=&gt;</span> <span class="k">sub </span><span class="p">{</span>
+</span><span class='line'>    <span class="k">my</span> <span class="nv">$res</span> <span class="o">=</span> <span class="n">request</span><span class="p">(</span><span class="s">&#39;/&#39;</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">ok</span><span class="p">(</span><span class="nv">$res</span><span class="o">-&gt;</span><span class="n">is_success</span><span class="p">,</span> <span class="s">&quot;Request should be succeed&quot;</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">ok</span><span class="p">(</span><span class="nv">$res</span><span class="o">-&gt;</span><span class="n">header</span><span class="p">(</span><span class="s">&#39;.......&#39;</span><span class="p">),</span> <span class="s">&#39;Header xxxxx exist&#39;</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">like</span><span class="p">(</span><span class="nv">$res</span><span class="o">-&gt;</span><span class="n">content</span><span class="p">,</span> <span class="sx">qr|some sentences|</span><span class="p">,</span> <span class="s">&quot;Found some sentences&quot;</span><span class="p">)</span>
+</span><span class='line'><span class="p">};</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">subtest</span> <span class="s">&#39;Login&#39;</span> <span class="o">=&gt;</span> <span class="k">sub </span><span class="p">{</span>
+</span><span class='line'>    <span class="k">my</span> <span class="nv">$req</span> <span class="o">=</span> <span class="n">POST</span><span class="p">(</span><span class="s">&#39;/login&#39;</span><span class="p">,</span> <span class="p">[</span> <span class="s">&#39;username&#39;</span> <span class="o">=&gt;</span> <span class="s">&#39;blahblah&#39;</span><span class="p">,</span> <span class="s">&#39;password&#39;</span> <span class="o">=&gt;</span> <span class="s">&#39;blahblah&#39;</span> <span class="p">]);</span>
+</span><span class='line'>    <span class="k">my</span> <span class="nv">$res</span> <span class="o">=</span> <span class="n">request</span><span class="p">(</span><span class="nv">$req</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">ok</span><span class="p">(</span><span class="nv">$res</span><span class="o">-&gt;</span><span class="n">is_success</span><span class="p">,</span> <span class="s">&quot;Request should be suceed&quot;</span><span class="p">);</span>
+</span><span class='line'>    <span class="o">....</span>
+</span><span class='line'><span class="p">};</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>  <code>subtest</code> 를 사용하면서 코드는 위처럼 바뀌었습니다. <code>#</code> 로 주석처리를 할 필요도 없고, 해당 <code>subtest</code> 마다 명확하게 무엇을 하는 지 확실하게 의미있는 <code>subtest</code> 의 이름으로 정해줄 수 있었습니다.</p>
+
+<p>  <code>subtest</code> 로 테스트를 썼을 경우는 TAP 결과는 다음과 같습니다.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>prove t/myapp.t
+</span><span class='line'>ok 1 - access to /
+</span><span class='line'>    ok 1 - Request should be succeed
+</span><span class='line'>    ok 2 - Header xxxxx exist
+</span><span class='line'>    ok 3 - Found some sentences
+</span><span class='line'>    1..3
+</span><span class='line'>ok 2 - Login
+</span><span class='line'>    ok 1 - Request should be suceed
+</span><span class='line'>    ...
+</span><span class='line'>    1..3
+</span><span class='line'>....
+</span><span class='line'>1..3
+</span><span class='line'>ok
+</span><span class='line'>All tests successful.
+</span><span class='line'><span class="nv">Files</span><span class="o">=</span>1, <span class="nv">Tests</span><span class="o">=</span>3, 10 wallclock secs <span class="o">(</span> 0.07 usr  0.01 sys +  6.16 cusr  0.61 <span class="nv">csys</span> <span class="o">=</span>  6.85 CPU<span class="o">)</span>
+</span><span class='line'>Result: PASS
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>  전체 테스트 횟수는 <code>subtest</code> 안의 테스트 항목이 아니라, <code>subtest</code> 의 갯수가 되는 것입니다.</p>
+
+<p>  그리고 <code>subtest</code> 를 사용하지 않고 {} 블록을 이용해서 flat 하게 정의했을 때는 아래와 같습니다.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>...
+</span><span class='line'>ok 1 - Request should be succeed
+</span><span class='line'>ok 2 - Header xxxxx exist
+</span><span class='line'>ok 3 - Found some sentences
+</span><span class='line'>ok 4 - Request should be suceed
+</span><span class='line'> ...
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>  테스트 항목 1,4 번의 메시지가 같기 때문에 매번 달리 지정해줘야 되는 수고가 발생하죠. 그리고 각각의 테스트 항목 하나하나가 테스트 갯수가 되는 것입니다.</p>
+
+<p>  사실은 위의 Jenkins 상의 <code>Test Result Trend</code> 의 차트가 어느 순간 갑자기 뚝 떨어지길래, 어라 이상하다 싶어서 살펴본 결과, <code>subtest</code> 기준으로 카운트되어있는 것을 확인했습니다.</p>
+
+<p><img src="https://lh5.googleusercontent.com/-TSX-Kd5-fX4/TwWRjvHx2LI/AAAAAAAAA94/pYrEEgHBZic/test-result-trend.png" alt="Jenkins Test Result Trend 의 낙폭" /></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Perl - Mail Send II]]></title>
