@@ -4,7 +4,7 @@
   <title><![CDATA[Category: cpan | Jeen's techlog]]></title>
   <link href="http://JEEN.github.com/blog/categories/cpan/atom.xml" rel="self"/>
   <link href="http://JEEN.github.com/"/>
-  <updated>2012-01-05T22:45:11+09:00</updated>
+  <updated>2012-01-05T22:48:29+09:00</updated>
   <id>http://JEEN.github.com/</id>
   <author>
     <name><![CDATA[Jeen Lee]]></name>
@@ -64,7 +64,7 @@ Summary of my perl5 (revision 5 version 14 subversion 2) configuration:</p>
 <p>  Platform:</p>
 
 <pre><code>osname=freebsd, osvers=8.2-stable, archname=amd64-freebsd
-uname='freebsd julia.silex.kr 8.2-stable freebsd 8.2-stable #1: wed apr 13 13:10:49 kst 2011 root@xxx.xxxx.kr:usrobjusrsrcsysgeneric amd64 '
+uname='freebsd xxx.xxxxx.kr 8.2-stable freebsd 8.2-stable #1: wed apr 13 13:10:49 kst 2011 root@xxx.xxxx.kr:usrobjusrsrcsysgeneric amd64 '
 config_args='-de -Dprefix=/home/jeen/perl5/perlbrew/perls/perl-5.14.2'
 hint=recommended, useposix=true, d_sigaction=define
 useithreads=undef, usemultiplicity=undef
