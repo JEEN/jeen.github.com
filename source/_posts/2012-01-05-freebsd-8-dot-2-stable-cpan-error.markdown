@@ -1,0 +1,108 @@
+---
+layout: post
+title: "FreeBSD 8.2 STABLE - CPAN Error"
+date: 2012-01-05 22:32
+comments: true
+categories: [freebsd, cpan, error]
+---
+
+  회사업무차 `FreeBSD 8.2 STABLE` OS 를 사용하는 서버에서 CPAN 사용시 에러가 발생했습니다.
+
+``` bash
+$ cpan Module::Install
+Reading '/home/jeen/.cpan/sources/authors/01mailrc.txt.gz'
+............................................................................DONE
+Reading '/home/jeen/.cpan/sources/modules/02packages.details.txt.gz'
+  Database was generated on Thu, 05 Jan 2012 05:12:02 GMT
+............................................................................DONE
+Reading '/home/jeen/.cpan/sources/modules/03modlist.data.gz'
+Can't locate object method "data" via package "CPAN::Modulelist" (perhaps you forgot to load "CPAN::Modulelist"?) at (eval 24) line 1.
+ at /home/jeen/perl5/perlbrew/perls/perl-5.14.2/lib/5.14.2/CPAN/Index.pm line 524
+	CPAN::Index::rd_modlist('CPAN::Index', '/home/jeen/.cpan/sources/modules/03modlist.data.gz') called at /home/jeen/perl5/perlbrew/perls/perl-5.14.2/lib/5.14.2/CPAN/Index.pm line 85
+	CPAN::Index::reload('CPAN::Index') called at /home/jeen/perl5/perlbrew/perls/perl-5.14.2/lib/5.14.2/CPAN.pm line 976
+	CPAN::exists('CPAN=HASH(0x801fe27f8)', 'CPAN::Module', 'Module::Install') called at /home/jeen/perl5/perlbrew/perls/perl-5.14.2/lib/5.14.2/CPAN/Shell.pm line 1256
+	CPAN::Shell::expandany('CPAN::Shell', 'Module::Install') called at /home/jeen/perl5/perlbrew/perls/perl-5.14.2/lib/5.14.2/CPAN/Shell.pm line 1681
+	CPAN::Shell::rematein('CPAN::Shell', 'install', 'Module::Install') called at /home/jeen/perl5/perlbrew/perls/perl-5.14.2/lib/5.14.2/CPAN/Shell.pm line 1977
+	CPAN::Shell::__ANON__('CPAN::Shell', 'Module::Install') called at /home/jeen/perl5/perlbrew/perls/perl-5.14.2/lib/5.14.2/App/Cpan.pm line 459
+	App::Cpan::__ANON__('Module::Install') called at /home/jeen/perl5/perlbrew/perls/perl-5.14.2/lib/5.14.2/App/Cpan.pm line 468
+	App::Cpan::_default('ARRAY(0x800e92780)', 'HASH(0x801fe7d38)') called at /home/jeen/perl5/perlbrew/perls/perl-5.14.2/lib/5.14.2/App/Cpan.pm line 386
+	App::Cpan::run('App::Cpan', 'Module::Install') called at /home/jeen/perl5/perlbrew/perls/perl-5.14.2/bin/cpan line 11
+```
+
+  마땅히 어떻게 `cpan` 자체가 안되니, 다른 CPAN 모듈 설치도 안되고...
+
+``` bash
+$ curl -L http://cpanmin.us | perl - --self-upgrade
+```
+
+  그래서 일단은 그냥 `cpanm` 을 설치하고 필요한 모듈들을 설치했습니다. 하지만 여전히 `cpan` 으로 모듈을 설치하려면 위처럼 에러가 뜨니 아직도 찜찜하기 그지 없네요.
+
+``` bash
+$ uname -a
+FreeBSD xxx.xxxxx.kr 8.2-STABLE FreeBSD 8.2-STABLE #1: Wed Apr 13 13:10:49 KST 2011     root@xxx.xxxx.kr:/usr/obj/usr/src/sys/GENERIC  amd64
+``` 
+
+``` bash
+$ perl -V
+Summary of my perl5 (revision 5 version 14 subversion 2) configuration:
+   
+  Platform:
+    osname=freebsd, osvers=8.2-stable, archname=amd64-freebsd
+    uname='freebsd julia.silex.kr 8.2-stable freebsd 8.2-stable #1: wed apr 13 13:10:49 kst 2011 root@xxx.xxxx.kr:usrobjusrsrcsysgeneric amd64 '
+    config_args='-de -Dprefix=/home/jeen/perl5/perlbrew/perls/perl-5.14.2'
+    hint=recommended, useposix=true, d_sigaction=define
+    useithreads=undef, usemultiplicity=undef
+    useperlio=define, d_sfio=undef, uselargefiles=define, usesocks=undef
+    use64bitint=define, use64bitall=define, uselongdouble=undef
+    usemymalloc=n, bincompat5005=undef
+  Compiler:
+    cc='cc', ccflags ='-DHAS_FPSETMASK -DHAS_FLOATINGPOINT_H -fno-strict-aliasing -pipe -fstack-protector -I/usr/local/include',
+    optimize='-O',
+    cppflags='-DHAS_FPSETMASK -DHAS_FLOATINGPOINT_H -fno-strict-aliasing -pipe -fstack-protector -I/usr/local/include'
+    ccversion='', gccversion='4.2.1 20070719  [FreeBSD]', gccosandvers=''
+    intsize=4, longsize=8, ptrsize=8, doublesize=8, byteorder=12345678
+    d_longlong=define, longlongsize=8, d_longdbl=define, longdblsize=16
+    ivtype='long', ivsize=8, nvtype='double', nvsize=8, Off_t='off_t', lseeksize=8
+    alignbytes=8, prototype=define
+  Linker and Libraries:
+    ld='cc', ldflags ='-Wl,-E  -fstack-protector -L/usr/local/lib'
+    libpth=/usr/lib /usr/local/lib
+    libs=-lm -lcrypt -lutil -lc
+    perllibs=-lm -lcrypt -lutil -lc
+    libc=, so=so, useshrplib=false, libperl=libperl.a
+    gnulibc_version=''
+  Dynamic Linking:
+    dlsrc=dl_dlopen.xs, dlext=so, d_dlsymun=undef, ccdlflags=' '
+    cccdlflags='-DPIC -fPIC', lddlflags='-shared  -L/usr/local/lib -fstack-protector'
+
+
+Characteristics of this binary (from libperl): 
+  Compile-time options: PERL_DONT_CREATE_GVSV PERL_MALLOC_WRAP
+                        PERL_PRESERVE_IVUV USE_64_BIT_ALL USE_64_BIT_INT
+                        USE_LARGE_FILES USE_PERLIO USE_PERL_ATOF
+  Built under freebsd
+  Compiled at Jan  5 2012 15:51:41
+  %ENV:
+    PERLBREW_BASHRC_VERSION="0.39"
+    PERLBREW_HOME="/home/jeen/.perlbrew"
+    PERLBREW_MANPATH="/home/jeen/perl5/perlbrew/perls/perl-5.14.2/man"
+    PERLBREW_PATH="/home/jeen/perl5/perlbrew/bin:/home/jeen/perl5/perlbrew/perls/perl-5.14.2/bin"
+    PERLBREW_PERL="perl-5.14.2"
+    PERLBREW_ROOT="/home/jeen/perl5/perlbrew"
+    PERLBREW_VERSION="0.39"
+  @INC:
+    /home/jeen/perl5/perlbrew/perls/perl-5.14.2/lib/site_perl/5.14.2/amd64-freebsd
+    /home/jeen/perl5/perlbrew/perls/perl-5.14.2/lib/site_perl/5.14.2
+    /home/jeen/perl5/perlbrew/perls/perl-5.14.2/lib/5.14.2/amd64-freebsd
+    /home/jeen/perl5/perlbrew/perls/perl-5.14.2/lib/5.14.2
+    .
+```
+
+``` bash
+$ df -Th .
+Filesystem   Type    Size    Used   Avail Capacity  Mounted on
+/dev/ar0s1f  ufs      43G    5.1G     35G    13%    /usr
+```
+
+  일단 사건해결에 도움이 될 만한 정보들은 모조리 뽑아봤습니다.
+  천천히 살펴보며 구원을 요청해야 되겠네요.
