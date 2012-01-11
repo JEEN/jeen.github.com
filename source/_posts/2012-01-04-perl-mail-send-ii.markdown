@@ -18,7 +18,6 @@ use Moose;
 use Moose::Util::TypeConstraints;
 use namespace::autoclean;
 use Email::MIME;
-use Email::MIME::Creator;
 use Email::Sender::Simple 'sendmail';
 use Email::Sender::Transport::SMTP;
 use Encode;
@@ -212,6 +211,14 @@ my $mailer3 = MyApp::Mail->new(
 
 $mailer3->send;
 
+# Just string
+my $mailer4 = MyApp::Mail->new(
+  %data_set,
+  to => 'mail-1@mail.com, mail-2@mail.com, mail-3@mail.com',
+);
+
+$mailer4->send;
+
 my $deliveries = Email::Sender::Simple->default_transport->deliveries;
 for my $deliv (@{ $deliveries }) {
   my $sent_addresses = join ", ", @{ $deliv->{successes} };
@@ -222,4 +229,6 @@ done_testing();
 
   물론 `$deliveries` 변수를 덤프해보면 각각의 메일헤더들이 존재하고 좀 더 항목당 세밀하게 테스트를  수행할 수 있겠지만, 여기서는 단순하게 이정도로 그치도록 합니다.
  
+  사실은 뭐 `To` 안에 여러개의 메일이 들어간다는 전제로 ArrayRef 를 넣었지만, 사실 Str 을 받기에 `To` 에 대해서는 그냥 문자열로 `mail-1@mail.com, mail-2@mail.com, mail-3@mail.com` 으로 해도 가능합니다. 하지만 그냥 제 고집상 복수의 데이터셋이 들어갈 때는 왠지 ArrayRef 로 넣고 싶어졌을 뿐입니다. 존중받고 싶은 취향같은 것이죠.
+
 [myentry-mail]:http://jeen.github.com/blog/2011/12/29/perl-email-send/

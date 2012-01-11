@@ -17,7 +17,6 @@ package MyApp::Mail;
 use Moose;
 use namespace::autoclean;
 use Email::MIME;
-use Email::MIME::Creator;
 use Email::Sender::Simple 'sendmail';
 use Email::Sender::Transport::SMTP;
 use Encode;
