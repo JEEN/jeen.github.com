@@ -4,7 +4,7 @@
   <title><![CDATA[Category: perl | Jeen's techlog]]></title>
   <link href="http://JEEN.github.com/blog/categories/perl/atom.xml" rel="self"/>
   <link href="http://JEEN.github.com/"/>
-  <updated>2012-01-11T12:43:26+09:00</updated>
+  <updated>2012-01-11T16:22:37+09:00</updated>
   <id>http://JEEN.github.com/</id>
   <author>
     <name><![CDATA[Jeen Lee]]></name>
@@ -165,7 +165,6 @@ use Moose;
 use Moose::Util::TypeConstraints;
 use namespace::autoclean;
 use Email::MIME;
-use Email::MIME::Creator;
 use Email::Sender::Simple 'sendmail';
 use Email::Sender::Transport::SMTP;
 use Encode;
@@ -409,6 +408,15 @@ to =&gt; [ 'your2@email.com', 'anotheremail@gmail.com' ],
 
 <p>$mailer3->send;</p>
 
+<h1>Just string</h1>
+
+<p>my $mailer4 = MyApp::Mail->new(
+  %data_set,
+  to => 'mail-1@mail.com, mail-2@mail.com, mail-3@mail.com',
+);</p>
+
+<p>$mailer4->send;</p>
+
 <p>my $deliveries = Email::Sender::Simple->default_transport->deliveries;
 for my $deliv (@{ $deliveries }) {
   my $sent_addresses = join ", ", @{ $deliv->{successes} };
@@ -418,6 +426,8 @@ done_testing();
 ```</p>
 
 <p>  물론 <code>$deliveries</code> 변수를 덤프해보면 각각의 메일헤더들이 존재하고 좀 더 항목당 세밀하게 테스트를  수행할 수 있겠지만, 여기서는 단순하게 이정도로 그치도록 합니다.</p>
+
+<p>  사실은 뭐 <code>To</code> 안에 여러개의 메일이 들어간다는 전제로 ArrayRef 를 넣었지만, 사실 Str 을 받기에 <code>To</code> 에 대해서는 그냥 문자열로 <code>mail-1@mail.com, mail-2@mail.com, mail-3@mail.com</code> 으로 해도 가능합니다. 하지만 그냥 제 고집상 복수의 데이터셋이 들어갈 때는 왠지 ArrayRef 로 넣고 싶어졌을 뿐입니다. 존중받고 싶은 취향같은 것이죠.</p>
 ]]></content>
   </entry>
   
@@ -523,7 +533,6 @@ package MyApp::Mail;
 use Moose;
 use namespace::autoclean;
 use Email::MIME;
-use Email::MIME::Creator;
 use Email::Sender::Simple 'sendmail';
 use Email::Sender::Transport::SMTP;
 use Encode;

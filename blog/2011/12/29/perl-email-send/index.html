@@ -217,12 +217,10 @@
 <span class='line-number'>104</span>
 <span class='line-number'>105</span>
 <span class='line-number'>106</span>
-<span class='line-number'>107</span>
 </pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="nb">package</span> <span class="nn">MyApp::</span><span class="n">Mail</span><span class="p">;</span>
 </span><span class='line'><span class="k">use</span> <span class="n">Moose</span><span class="p">;</span>
 </span><span class='line'><span class="k">use</span> <span class="nn">namespace::</span><span class="n">autoclean</span><span class="p">;</span>
 </span><span class='line'><span class="k">use</span> <span class="nn">Email::</span><span class="n">MIME</span><span class="p">;</span>
-</span><span class='line'><span class="k">use</span> <span class="nn">Email::MIME::</span><span class="n">Creator</span><span class="p">;</span>
 </span><span class='line'><span class="k">use</span> <span class="nn">Email::Sender::</span><span class="n">Simple</span> <span class="s">&#39;sendmail&#39;</span><span class="p">;</span>
 </span><span class='line'><span class="k">use</span> <span class="nn">Email::Sender::Transport::</span><span class="n">SMTP</span><span class="p">;</span>
 </span><span class='line'><span class="k">use</span> <span class="n">Encode</span><span class="p">;</span>
