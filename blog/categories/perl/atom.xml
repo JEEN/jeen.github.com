@@ -4,7 +4,7 @@
   <title><![CDATA[Category: perl | Jeen's techlog]]></title>
   <link href="http://JEEN.github.com/blog/categories/perl/atom.xml" rel="self"/>
   <link href="http://JEEN.github.com/"/>
-  <updated>2012-01-13T19:13:26+09:00</updated>
+  <updated>2012-01-16T23:41:21+09:00</updated>
   <id>http://JEEN.github.com/</id>
   <author>
     <name><![CDATA[Jeen Lee]]></name>
@@ -12,6 +12,170 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Carton - CPAN dependencies manager]]></title>
+    <link href="http://JEEN.github.com/blog/2012/01/16/carton-cpan-dependencies-manager/"/>
+    <updated>2012-01-16T22:49:00+09:00</updated>
+    <id>http://JEEN.github.com/blog/2012/01/16/carton-cpan-dependencies-manager</id>
+    <content type="html"><![CDATA[<p>  Jenkins 이야기를 마저 쓸려고 했는 데, 그 사이사이에 사용된 것들부터 정리하고자 우선은 Carton 이야기 부터 먼저하고자 합니다.</p>
+
+<p>  잘은 모르지만 Carton 은 Ruby 의 Bundler 에 영감을 받아서 만들어 진 것입니다. 어떤 Perl 로 만든 소프트웨어의 의존모듈의 관리가 편해집니다. :-) 일례로, 노트북에서 개발을 하고 이것을 서버에 올릴려고 할 때, 일일이 의존모듈 체크를 해야할 필요성이 있습니다. 그때마다 <code>cpan MODULE</code> 등으로 설치를 해나가야 한다면 여간 힘든 일이 아니죠.</p>
+
+<p>  그런 상황에서 쉽게 문제를 해결할 수 있는 것이 <code>Carton</code> 이 아닐까 생각합니다.</p>
+
+<h3>Carton 설치</h3>
+
+<p>  <code>Carton</code> 은 간단하게 <code>cpan</code> 으로 설치할 수 있습니다.</p>
+
+<p><code>bash
+$ cpanm carton
+</code></p>
+
+<p>  위의 커맨드로 <code>Carton</code> 을 설치하면 <code>carton</code> 이라는 커맨드가 생깁니다.</p>
+
+<h3>Carton 이용</h3>
+
+<p>  <code>Carton</code> 을 제대로 이용하려면, 해당 Perl App 의 의존모듈이 <code>Makefile.PL</code> 안에서 잘 관리되고 있어야 합니다.</p>
+
+<p>``` perl Makefile.PL
+use ExtUtils::MakeMaker;
+WriteMakefile(</p>
+
+<pre><code>'NAME'      =&gt; 'WebService::Aladdin',
+'AUTHOR'    =&gt; 'JEEN &lt;jeen@perl.kr&gt;',
+'VERSION_FROM' =&gt; 'lib/WebService/Aladdin.pm', # finds $VERSION
+'PREREQ_PM' =&gt; {
+    Test::Base =&gt; 0,
+    version    =&gt; 0,
+    Class::Accessor::Fast =&gt; 0,
+    LWP::UserAgent =&gt; 0,
+    URI            =&gt; 0,
+    Carp           =&gt; 0,
+    XML::FeedPP    =&gt; 0
+},
+</code></pre>
+
+<p>);
+```</p>
+
+<p>  우선 예제로 제가 만든 <code>WebService::Aladdin</code> 모듈의 <code>Makefile.PL</code> 이 위와 같습니다. 이는 <code>WebService::Aladdin</code> 모듈에서 필요로 하는 의존모듈 등의 정보들을 나타내고 있습니다.</p>
+
+<p><code>bash
+$ carton install
+</code></p>
+
+<p>  <code>carton install</code> 을 통해서 <code>Makefile.PL</code> 에 정의된 의존모듈을 설치합니다. 이때 <code>Carton</code> 은 의존모듈의 의존트리까지도 설치해버립니다. 그러니 실제 의존모듈이 10개라도, 그 10개의 각각의 모듈의 의존모듈까지도 설치하기 때문에 실제로 설치되는 것은 10개 이상의 모듈들이 될 것입니다.</p>
+
+<p>  아무튼 <code>carton install</code> 이 끝났다면 <code>carton.lock</code> 파일이 생성됩니다. 그리고 <code>local</code> 이라는 디렉토리의 아래에 의존모듈들이 설치됩니다.</p>
+
+<p>``` json carton.lock
+{
+   "modules" : {</p>
+
+<pre><code>  "Algorithm::Diff" : {
+     "dist" : "Algorithm-Diff-1.1902",
+     "module" : "Algorithm::Diff",
+     "mymeta" : {
+        "abstract" : "unknown",
+        "author" : [
+           "unknown"
+        ],
+        "dynamic_config" : 0,
+        "generated_by" : "ExtUtils::MakeMaker version 6.62, CPAN::Meta::Converter version 2.112621, CPAN::Meta::Converter version 2.112150",
+        "license" : [
+           "unknown"
+        ],
+        "meta-spec" : {
+           "url" : "http://search.cpan.org/perldoc?CPAN::Meta::Spec",
+           "version" : "2"
+        },
+        "name" : "Algorithm-Diff",
+        "no_index" : {
+           "directory" : [
+              "t",
+              "inc"
+           ]
+        },
+        "prereqs" : {
+           "build" : {
+              "requires" : {
+                 "ExtUtils::MakeMaker" : 0
+              }
+           },
+           "configure" : {
+              "requires" : {
+                 "ExtUtils::MakeMaker" : 0
+              }
+           },
+           "runtime" : {
+              "requires" : {}
+           }
+        },
+        "release_status" : "stable",
+        "version" : "1.1902"
+     },
+     "name" : "Algorithm::Diff",
+     "pathname" : "T/TY/TYEMQ/Algorithm-Diff-1.1902.tar.gz",
+     "provides" : {
+        "Algorithm::Diff" : {
+           "file" : "Algorithm/Diff.pm",
+           "version" : "1.1902"
+        },
+        "Algorithm::DiffOld" : {
+           "file" : "Algorithm/DiffOld.pm",
+           "version" : "1.1"
+        }
+     },
+     "version" : "1.1902"
+  },
+  ...
+</code></pre>
+
+<p>   }
+}
+```</p>
+
+<p>  이후 <code>Makefile.PL</code> 에서 또다른 의존모듈이 추가되었을 시에, 또다시</p>
+
+<p><code>bash
+$ carton install
+</code></p>
+
+<p>을 통해서 추가의존모듈을 설치할 수 있습니다. 이렇게 <code>carton install</code> 로 설치된 로컬 모듈들은</p>
+
+<p><code>bash
+$ carton list
+IO-stringy-2.110
+File-Listing-6.03
+XML-FeedPP-0.43
+CPAN-Meta-2.112621
+...
+</code></p>
+
+<p>  <code>carton list</code> 로 확인할 수 있습니다.</p>
+
+<p>  그리고 <code>carton exec</code> 를 통해서 로컬모듈에 설치된 의존모듈을 참조해서 실행할 수 있습니다. 일례로 <code>Catalyst</code> 나 <code>Dancer</code> 로 만든 WebApp 들을 위에서 설명한 대로 <code>carton install</code> 한다음,</p>
+
+<p><code>bash
+$ carton exec -- plackup -a app.psgi -p 3000 --mode production
+</code></p>
+
+<p>  이처럼 <code>carton exec</code> 를 통해서 실행할 수 있지요.</p>
+
+<h3>Carton 을 이용하고서...</h3>
+
+<p>  우선은 Carton 을 이용함으로, 한 어플리케이션 당 하나의 모듈참조장소를 가지게해서 여러 어플리케이션이 혼잡한 경우에 발생할 수 있는 부작용을 예방할 수 있습니다. <code>Makefile.PL</code> 에서 해당 모듈의 버젼을 지정함으로 특정 버젼에 대해서만 의존을 가질 수 있기 때문에 더더욱 이런 면에서는 효과적입니다.</p>
+
+<p>  그래서 저같은 경우는 오히려 서비스마다 그 서비스용 계정을 만들고 <code>perlbrew</code> 환경을 갖추는 것보다 가볍게 서비스용 계정은 하나만 가지며 각 서비스디렉토리마다 <code>Carton</code> 을 올리는 쪽으로 움직이고 있습니다. 그러니 굳이 시스템 펄을 사용하는 것이 큰 거부감을 느끼지 않게 되었네요.</p>
+
+<h3>Conclusion</h3>
+
+<p>  물론 Carton 은 현재 ALPHA 퀄리티라고 합니다. 버젼도 현재(2012-01-16) 로는 0.9.3 이고, 1.0 정식 릴리즈까지는 아직 시간이 남아있습니다. 몇몇 기능이 바뀔거라는 주의사항이 <a href="http://metacan.org/module/Carton">Carton 모듈페이지</a> 에서 확인할 수 있습니다.</p>
+
+<p>  좀 더 다양한 <code>Carton</code> 에 대한 이야기는 작년 <a href="http://yapcasia.org/2011/talk/91">YAPC::Asia2011 의 Carton Talk Page</a> 에서도 확인하실 수 있습니다.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Picasa Upload Script II]]></title>
@@ -670,243 +834,6 @@ $ prove --formatter --timer TAP::Formatter::JUnit t
 <p><img src="http://lh6.googleusercontent.com/--lGDWehSz5k/TwKGZAtvsUI/AAAAAAAAA9w/tRFttK10-wg/jenkins-top-page.png" alt="Jenkins Top" /></p>
 
 <p>  한번에 적으려니 좀 길고 해서, 일단 밑밥깔기부터 하고 다음 글부터는 좀 더 자세한 Jenkins 에서 Perl 프로젝트 적용에 대해서 상세한 캡쳐와 함께 설명하고자 합니다.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Perl - Email Send]]></title>
-    <link href="http://JEEN.github.com/blog/2011/12/29/perl-email-send/"/>
-    <updated>2011-12-29T17:45:00+09:00</updated>
-    <id>http://JEEN.github.com/blog/2011/12/29/perl-email-send</id>
-    <content type="html"><![CDATA[<p>  회사 선배이신 <a href="http://twitter.com/mintegrals">@mintegrals</a> 께서 최근에 사내 버그질라에 올려놓은 내용을 보고 약간 코드를 수정해봤습니다.
-  내용인즉슨, 파일 첨부한 메일을 어떻게 보낼 수 있냐라는 것이었지요.
-  기존에 써놨던 메일송신을 하는 모듈이 파일첨부를 고려하지 않았던 것이었는데, 그런 상황등을 고려해서 좀 더 수정해봤습니다.</p>
-
-<h3>MyApp::Mail</h3>
-
-<p>``` perl
-package MyApp::Mail;
-use Moose;
-use namespace::autoclean;
-use Email::MIME;
-use Email::Sender::Simple 'sendmail';
-use Email::Sender::Transport::SMTP;
-use Encode;
-use MIME::Types ();</p>
-
-<p>has to => (</p>
-
-<pre><code>is      =&gt; 'ro',
-isa     =&gt; 'Str',
-default =&gt; sub {
-    Encode::encode( "MIME-Header", $_[0] );
-},
-required =&gt; 1,
-</code></pre>
-
-<p>);</p>
-
-<p>has from => (</p>
-
-<pre><code>is      =&gt; 'ro',
-isa     =&gt; 'Str',
-default =&gt; sub {
-    Encode::encode( "MIME-Header", $_[0] );
-},
-required =&gt; 1,
-</code></pre>
-
-<p>);</p>
-
-<p>has subject => (</p>
-
-<pre><code>is      =&gt; 'ro',
-isa     =&gt; 'Str',
-default =&gt; sub {
-    Encode::encode( "MIME-Header", $_[0] );
-},
-required =&gt; 1,
-</code></pre>
-
-<p>);</p>
-
-<p>has body => (</p>
-
-<pre><code>is  =&gt; 'ro',
-isa =&gt; 'Str',
-</code></pre>
-
-<p>);</p>
-
-<p>has transport => (</p>
-
-<pre><code>is  =&gt; 'ro',
-isa =&gt; 'HashRef'
-</code></pre>
-
-<p>);</p>
-
-<p>has attachments => (</p>
-
-<pre><code>is =&gt; 'ro',
-isa =&gt; 'ArrayRef[Path::Class::File]',
-default =&gt; sub { [] },
-</code></pre>
-
-<p>);</p>
-
-<p>sub _get_parts {</p>
-
-<pre><code>my $self = shift;
-
-my @parts;
-push @parts, 
-    Email::MIME-&gt;create(
-        attributes =&gt; {
-            content_type =&gt; 'text/plain',
-            charset      =&gt; 'utf8',
-        },
-        body =&gt; Encode::encode_utf8($self-&gt;body),
-    );
-
-for my $attachment (@{ $self-&gt;attachments }) {
-    confess "File Not Found : $attachment" unless -f $attachment;
-    my ($mime_type, $encoding) = MIME::Types::by_suffix($attachment-&gt;basename);
-    $mime_type ||= 'multipart/mixed';
-    my $file_body = $attachment-&gt;slurp;
-    push @parts, Email::MIME-&gt;create(
-        attributes =&gt; {
-            content_type =&gt; $mime_type,
-            name         =&gt; $attachment-&gt;basename,
-            filename     =&gt; $attachment-&gt;basename,
-            encoding     =&gt; 'base64',
-            disposition  =&gt; 'attachment',
-        },
-        body =&gt; $file_body,
-    );
-}
-\@parts;
-</code></pre>
-
-<p>}</p>
-
-<p>sub send {</p>
-
-<pre><code>my $self = shift;
-
-my $opt = {};
-if ($self-&gt;transport) {
-    $opt-&gt;{transport} = Email::Sender::Transport::SMTP-&gt;new( $self-&gt;transport );
-}
-
-my $email = Email::MIME-&gt;create(
-    header =&gt; [
-        From    =&gt; $self-&gt;from,
-        To      =&gt; $self-&gt;to,
-        Subject =&gt; $self-&gt;subject
-    ],
-    parts =&gt; $self-&gt;_get_parts, 
-);
-sendmail($email, $opt);
-</code></pre>
-
-<p>}</p>
-
-<p><strong>PACKAGE</strong>->meta->make_immutable;</p>
-
-<p>1;
-```</p>
-
-<p>  파일첨부를 위한 <code>attachments</code> 접근자를 추가로 지정합니다. 첨부파일은 하나가 아닌 여러개가 가능하기에 <code>ArrayRef</code> 를 기본형식으로 합니다. 각 요소는 반드시 <code>Path::Class::File</code> 로 받도록 했습니다.</p>
-
-<p>  <code>MIME::Types</code> 로 첨부파일의 확장자를 통해서 MIME-TYPE 을 뽑아내도록 하고, 알 수 없다면 <code>multipart/mixed</code> 로 지정했습니다.</p>
-
-<p>  <code>transport</code> 레이어를 별도로 지정할 수 있으며, <code>transport</code> 의 지정이 없을 경우는 당연히 로컬호스트의 <code>smtp</code> 를 이용하도록 합니다.</p>
-
-<h3>Using MyApp::Mail</h3>
-
-<p>  위의 <code>MyApp::Mail</code> 을 이용하기 위해서 아래와 같이 <code>sendmail.pl</code> 이라는 스크립트를 준비했습니다.</p>
-
-<p>``` perl</p>
-
-<h1>sendmail.pl</h1>
-
-<p>use strict;
-use warnings;
-use MyApp::Mail;
-use Path::Class::File;</p>
-
-<p>my $to    = 'your@email.com';
-my $from  = 'my@email.com';
-my $subject = 'MailSender Test Subject';
-my $body    = 'MailSender Test Body';</p>
-
-<p>my $mailer = MyApp::Mail->new(</p>
-
-<pre><code>to =&gt; $to,
-from =&gt; $from,
-subject =&gt; $subject,
-body    =&gt; $body,
-attachments =&gt; [
-  Path::Class::File-&gt;new('test.doc'),
-  Path::Class::File-&gt;new('text.pdf')
-],
-transport =&gt; {
-    host =&gt; 'smtp.gmail.com',
-    port =&gt; 465,
-    sasl_username =&gt; 'YOUR_GOOGLE EMAIL',
-    sasl_password =&gt; 'YOUR_GOOGLE_PASS',
-    ssl  =&gt; 1,
-},
-</code></pre>
-
-<p>);</p>
-
-<p>$mailer->send;
-```</p>
-
-<p>  위에서 언급한 <code>transport</code> 레이어에 지메일의 <code>smtp</code> 를 사용하도록 합니다. 이를 위해서 물론 Google 계정정보를 입력할 필요가 있습니다.</p>
-
-<h3>How to Test?</h3>
-
-<p>  <a href="http://search.cpan.org/~rjbs/Email-Sender-0.110001/lib/Email/Sender/Manual/QuickStart.pm#Testing">Email::Sender::Manual::QuickStart</a> 문서를 확인 해보면 Testing 관련 내용이 나옵니다.</p>
-
-<p>``` perl
-  use Test::More;
-  BEGIN { $ENV{EMAIL_SENDER_TRANSPORT} = 'Test' }
-  use YourCode;</p>
-
-<p>  YourCode->run;</p>
-
-<p>  my @deliveries = Email::Sender::Simple->default_transport->deliveries;
-```</p>
-
-<p>  위와같은 샘플코드가 제시되어 있는데,</p>
-
-<p><code>perl
-BEGIN { $ENV{EMAIL_SENDER_TRANSPORT} = 'Test' }
-</code></p>
-
-<p> 가 지정되면, 실제로 메일 송신이 이뤄지지 않습니다.</p>
-
-<p><code>perl
-  my @deliveries = Email::Sender::Simple-&gt;default_transport-&gt;deliveries;
-</code></p>
-
-<p>  에서 그동안 송신한 메일건수당 성공실패를 판별할 수 있고, 작성된 메일 내용 또한 확인이 가능합니다. 테스트코드를 작성함에 있어서 위의 두 부분이 절대적으로 필요합니다.</p>
-
-<p>  위처럼 테스트 코드를 작성할 시에는 실제로 메일 송신을 하지 않았기에 <code>transport</code> 레이어에서 발생하는 어떤 불상사는 감지할 수 없습니다.</p>
-
-<h3>Conclusion</h3>
-
-<ul>
-<li><a href="http://jeen.tistory.com/entry/Perl-Perl-%EB%A1%9C-%EB%A9%94%EC%9D%BC%EB%B3%B4%EB%82%B4%EA%B8%B0-SSMTP-%EC%99%80-MIMELite-%EB%A5%BC-%EC%82%AC%EC%9A%A9%ED%95%B4%EC%84%9C">Perl 로 메일보내기 ... SSMTP 와 MIME::Lite 를 사용해서!</a></li>
-</ul>
-
-
-<p>  이전에 메일보내기 관련해서 <code>SSMTP</code> + <code>MIME::Lite</code> 를 사용하는 그런 코드를 2008년쯤에 썼었네요. 부끄럽습니다. 2009년부터는 아마 <code>MIME::Lite</code> 를 안 썼던 것 같네요.</p>
-
-<p>  뭐 당장 필요로 하는 부분만 구현을 한 것일 뿐인지라, 차후에 다른 어떤 요구사항이 있다면 그에 맞춰서 다시 한번 소개를 해볼까 합니다.</p>
 ]]></content>
   </entry>
   
