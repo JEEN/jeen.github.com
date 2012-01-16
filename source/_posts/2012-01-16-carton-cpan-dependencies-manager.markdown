@@ -54,7 +54,7 @@ $ carton install
 
   아무튼 `carton install` 이 끝났다면 `carton.lock` 파일이 생성됩니다. 그리고 `local` 이라는 디렉토리의 아래에 의존모듈들이 설치됩니다.
 
-``` json carton.lock
+``` text carton.lock
 {
    "modules" : {
       "Algorithm::Diff" : {
@@ -150,6 +150,10 @@ $ carton exec -- plackup -a app.psgi -p 3000 --mode production
   우선은 Carton 을 이용함으로, 한 어플리케이션 당 하나의 모듈참조장소를 가지게해서 여러 어플리케이션이 혼잡한 경우에 발생할 수 있는 부작용을 예방할 수 있습니다. `Makefile.PL` 에서 해당 모듈의 버젼을 지정함으로 특정 버젼에 대해서만 의존을 가질 수 있기 때문에 더더욱 이런 면에서는 효과적입니다.
 
   그래서 저같은 경우는 오히려 서비스마다 그 서비스용 계정을 만들고 `perlbrew` 환경을 갖추는 것보다 가볍게 서비스용 계정은 하나만 가지며 각 서비스디렉토리마다 `Carton` 을 올리는 쪽으로 움직이고 있습니다. 그러니 굳이 시스템 펄을 사용하는 것이 큰 거부감을 느끼지 않게 되었네요.
+
+### 그 외
+
+  일단 `carton.lock` 에 기재된 의존모듈 정보가 많으면 많을수록 `carton install` 에 걸리는 시간은 더 오래걸리게 됩니다. 물론 Carton 이 기본적으로 외부미러(http://cpan.metacpan.org) 를 사용하고 있기에, 그럴 수도 있겠다 싶어서 코드를 한번 훑어봤는데, 마침 `PERL_CARTON_MIRROR` 라는 환경변수를 통해서 가까운 혹은 로컬 네트워크 안의 CPAN 미러를 지정해줌으로 많은 시간을 단축할 수 있지 않을까 생각해봅니다.
 
 ### Conclusion
 
