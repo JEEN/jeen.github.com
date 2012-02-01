@@ -4,7 +4,7 @@
   <title><![CDATA[Category: java | Jeen's techlog]]></title>
   <link href="http://JEEN.github.com/blog/categories/java/atom.xml" rel="self"/>
   <link href="http://JEEN.github.com/"/>
-  <updated>2012-01-16T23:57:47+09:00</updated>
+  <updated>2012-02-01T22:49:28+09:00</updated>
   <id>http://JEEN.github.com/</id>
   <author>
     <name><![CDATA[Jeen Lee]]></name>
@@ -12,6 +12,20 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Perl and Continuous Integration with Jenkins - II]]></title>
+    <link href="http://JEEN.github.com/blog/2012/02/02/perl-and-continuous-integration-with-jenkins-2/"/>
+    <updated>2012-02-02T07:00:00+09:00</updated>
+    <id>http://JEEN.github.com/blog/2012/02/02/perl-and-continuous-integration-with-jenkins-2</id>
+    <content type="html"><![CDATA[<p>  애시당초 블로깅하려던 내용을 발표자료로 엮었습니다.</p>
+
+<script src="http://storify.com/jeen_lee/perl-and-continuous-integration-w-jenkins.js"></script>
+
+
+<p><noscript>[<a href="http://storify.com/jeen_lee/perl-and-continuous-integration-w-jenkins" target="_blank">View the story "Perl and Continuous Integration w/ Jenkins" on Storify</a>]</noscript></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Perl and Continuous Integration with Jenkins - I]]></title>
