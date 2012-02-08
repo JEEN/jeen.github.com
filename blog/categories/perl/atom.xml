@@ -4,7 +4,7 @@
   <title><![CDATA[Category: perl | Jeen's techlog]]></title>
   <link href="http://JEEN.github.com/blog/categories/perl/atom.xml" rel="self"/>
   <link href="http://JEEN.github.com/"/>
-  <updated>2012-02-08T11:16:56+09:00</updated>
+  <updated>2012-02-08T16:37:01+09:00</updated>
   <id>http://JEEN.github.com/</id>
   <author>
     <name><![CDATA[Jeen Lee]]></name>
@@ -12,6 +12,33 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[CPANRatings - WebService::Aladdin]]></title>
+    <link href="http://JEEN.github.com/blog/2012/02/08/cpanratings-webservice-aladdin/"/>
+    <updated>2012-02-08T16:27:00+09:00</updated>
+    <id>http://JEEN.github.com/blog/2012/02/08/cpanratings-webservice-aladdin</id>
+    <content type="html"><![CDATA[<blockquote class="twitter-tweet" data-in-reply-to="166961671741521922"><p>@<a href="https://twitter.com/keedi">keedi</a> @<a href="https://twitter.com/gypark">gypark</a> 오오오... 가문의 영광!!!</p>&mdash; JEEN (@JEEN_LEE) <a href="https://twitter.com/JEEN_LEE/status/167063345000755200" data-datetime="2012-02-08T01:52:59+00:00">February 8, 2012</a></blockquote>
+
+
+<p> 새벽에 @keedi 님으로부터 트윗을 받고 알게되었습니다. 인생 처음으로 <a href="http://cpanratings.perl.org/">CPANRatings</a> 에서 Rating 을 받아보는 군요. 그것도 별 다섯개.</p>
+
+<ul>
+<li><p><a href="http://cpanratings.perl.org/dist/WebService-Aladdin">http://cpanratings.perl.org/dist/WebService-Aladdin</a></p>
+
+<p>아, CPANRatings 는 CPAN 에 올라온 모듈들에 평가를 남길 수 있는 곳입니다.</p>
+
+<p>Rating 은 @gypark 님으로부터 였습니다. 제가 얼기설기 CPAN 에 모듈 올려보겠답시고 2007년쯤에 올린 모듈이고, 저 조차도 잠깐 쓰다가 뭐 당장 쓸일이 없어서 내팽개쳐뒀지만 말이죠.. =3</p>
+
+<p>아무튼 의욕이 새록새록 돋습니다.</p>
+
+<p>오늘은 @keedi 님께 어제 올린 <a href="http://metacpan.org/module/Date::Holidays::KR">Date::Holidays::KR</a> 에 Repository 정보가 없다는 말을 듣고, 흡... 해서 나머지 모듈들도 전부 Repository 정보를 추가해보려고 합니다.</p>
+
+<p>Date::Holidays::KR 에 Repository 가 없는 이유는 META.yml 이 없어서 였던 듯...</p></li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Date::Holidays::KR Released]]></title>
@@ -392,138 +419,6 @@ $uploader->upload_files;
 <p>  <a href="http://aanoaa.github.com/blog/2012/01/03/picasa-upload-script/">@aanoaa 님의 글</a>에서 Picasa Uploader 스크립트를 소개했었는데요. <code>PicasaUploader</code> 라고 package 로 정의해서 쓰도록 했습니다.
   거기에 <a href="https://metacpan.org/module/Config::Pit">Config::Pit</a> 을 써서 계정정보를 다루도록 했구요.
   심심해서 그냥 약간 개량해봤습니다.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Test::More - use 'subtest' instead of {} block]]></title>
-    <link href="http://JEEN.github.com/blog/2012/01/05/test-more-use-subtest-instead-of-block/"/>
-    <updated>2012-01-05T20:33:00+09:00</updated>
-    <id>http://JEEN.github.com/blog/2012/01/05/test-more-use-subtest-instead-of-block</id>
-    <content type="html"><![CDATA[<p>  여태껏 테스트코드를 써나가면서 그냥 {} 블록안에 일정한 흐름의 테스트 코드를 적곤 했었습니다.</p>
-
-<p>``` perl
-use Test::More;
-use HTTP::Request::Common;
-use Catalyst::Test 'MyApp::Web';</p>
-
-<h1>Access /</h1>
-
-<p>{</p>
-
-<pre><code>my $res = request('/');
-ok($res-&gt;is_success, "Request should be succeed");
-ok($res-&gt;header('.......'), 'Header xxxxx exist');
-like($res-&gt;content, qr|some sentences|, "Found some sentences")
-</code></pre>
-
-<p>}</p>
-
-<h1>Login</h1>
-
-<p>{</p>
-
-<pre><code>my $req = POST('/login', [ 'username' =&gt; 'blahblah', 'password' =&gt; 'blahblah' ]);
-my $res = request($req);
-ok($res-&gt;is_success, "Request should be suceed");
-....
-</code></pre>
-
-<p>}</p>
-
-<h1>some action</h1>
-
-<p>{</p>
-
-<pre><code>...;
-</code></pre>
-
-<p>}
-```</p>
-
-<p>  일단 뭐 {} 블록으로 각 action 에 대한 접근결과를 테스트하고, <code>#</code> 로 주석표시를 하면서 하나둘 하나둘 각 블록에 <code>$req</code>, <code>$res</code> 를 추가했었습니다. 일단 뭐 {} 블록으로 묶으면서 <code>$req</code>, <code>$res</code> 따위의 변수의 재정의 등에 관한 경고같은 것이 안나와서 좋고, 제대로 분류가 되는 느낌이기도 했습니다.</p>
-
-<h3>그냥 <code>subtest</code> 를 사용하면 어떨까?</h3>
-
-<p>  그러는 도중에 <a href="http://search.cpan.org/perldoc?Test::More">Test::More 매뉴얼</a>을 읽어보다가 <code>subtest</code> 를 사용할 수 있다는 것을 알게 되었습니다.</p>
-
-<p>``` perl
-use HTTP::Request::Common;
-use Catalyst::Test 'MyApp::Web';
-use Test::More;</p>
-
-<p>subtest 'access to /' => sub {</p>
-
-<pre><code>my $res = request('/');
-ok($res-&gt;is_success, "Request should be succeed");
-ok($res-&gt;header('.......'), 'Header xxxxx exist');
-like($res-&gt;content, qr|some sentences|, "Found some sentences")
-</code></pre>
-
-<p>};</p>
-
-<p>subtest 'Login' => sub {</p>
-
-<pre><code>my $req = POST('/login', [ 'username' =&gt; 'blahblah', 'password' =&gt; 'blahblah' ]);
-my $res = request($req);
-ok($res-&gt;is_success, "Request should be suceed");
-....
-</code></pre>
-
-<p>};
-```</p>
-
-<p>  <code>subtest</code> 를 사용하면서 코드는 위처럼 바뀌었습니다. <code>#</code> 로 주석처리를 할 필요도 없고, 해당 <code>subtest</code> 마다 명확하게 무엇을 하는 지 확실하게 의미있는 <code>subtest</code> 의 이름으로 정해줄 수 있었습니다.</p>
-
-<p>  <code>subtest</code> 로 테스트를 썼을 경우는 TAP 결과는 다음과 같습니다.</p>
-
-<p>``` bash
-$ prove t/myapp.t
-ok 1 - access to /</p>
-
-<pre><code>ok 1 - Request should be succeed
-ok 2 - Header xxxxx exist
-ok 3 - Found some sentences
-1..3
-</code></pre>
-
-<p>ok 2 - Login</p>
-
-<pre><code>ok 1 - Request should be suceed
-...
-1..3
-</code></pre>
-
-<p>....
-1..3
-ok
-All tests successful.
-Files=1, Tests=3, 10 wallclock secs ( 0.07 usr  0.01 sys +  6.16 cusr  0.61 csys =  6.85 CPU)
-Result: PASS
-```</p>
-
-<p>  전체 테스트 횟수는 <code>subtest</code> 안의 테스트 항목이 아니라, <code>subtest</code> 의 갯수가 되는 것입니다.</p>
-
-<p>  그리고 <code>subtest</code> 를 사용하지 않고 {} 블록을 이용해서 flat 하게 정의했을 때는 아래와 같습니다.</p>
-
-<p><code>bash
-...
-ok 1 - Request should be succeed
-ok 2 - Header xxxxx exist
-ok 3 - Found some sentences
-ok 4 - Request should be suceed
- ...
-</code></p>
-
-<p>  테스트 항목 1,4 번의 메시지가 같기 때문에 매번 달리 지정해줘야 되는 수고가 발생하죠. 그리고 각각의 테스트 항목 하나하나가 테스트 갯수가 되는 것입니다.</p>
-
-<p>  사실은 위의 Jenkins 상의 <code>Test Result Trend</code> 의 그래프가 어느 순간 갑자기 뚝 떨어지길래, 어라 이상하다 싶어서 살펴본 결과, <code>subtest</code> 기준으로 카운트되어있는 것을 확인했습니다.</p>
-
-<p><img src="https://lh5.googleusercontent.com/-TSX-Kd5-fX4/TwWRjvHx2LI/AAAAAAAAA94/pYrEEgHBZic/test-result-trend.png" alt="Jenkins Test Result Trend 의 낙폭" /></p>
-
-<p>  대충 위의 <code>#58</code> 번 빌드가 그 쯤이 되겠네요.</p>
-
-<p>  아무튼 Jenkins 도입이후에 좀 더 테스트코드에 더 신경을 쓰고 있는 요즘입니다.</p>
 ]]></content>
   </entry>
   
