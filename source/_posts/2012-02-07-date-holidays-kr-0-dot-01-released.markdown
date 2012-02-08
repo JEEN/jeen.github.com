@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Date::Holidays::KR 0.01 Released"
+title: "Date::Holidays::KR Released"
 date: 2012-02-07 20:28
 comments: true
 categories: [perl,cpan]
@@ -18,6 +18,26 @@ categories: [perl,cpan]
   아무튼 같은 음력을 사용하는 중국, 그 중국용으로 만든 [Date::Holidays::CN][cpan-date-holidays-cn] 을 참고해서 `Date::Holidays::KR` 을 만들었습니다. 음력도 미묘하게 중국과는 다르다고 하는데, 이 부분은 @aer0 님께서 만드신 [Date::Korean][cpan-date-korean] 모듈을 사용해서 음력/양력 변환을 이용했구요. (설날,추석,석가탄신일의 경우는 음력)
 
 <blockquote class="twitter-tweet"><p>Date-Holidays-KR 0.01 by JEEN - <a href="http://t.co/pHQVHLaJ" title="http://metacpan.org/release/JEEN/Date-Holidays-KR-0.01/">metacpan.org/release/JEEN/D…</a></p>&mdash; CPAN New Modules (@cpan_new) <a href="https://twitter.com/cpan_new/status/166840689223675904" data-datetime="2012-02-07T11:08:14+00:00">February 7, 2012</a></blockquote>
+
+<blockquote class="twitter-tweet"><p>Date-Holidays-KR 0.02 by JEEN - <a href="http://t.co/mgouifly" title="http://metacpan.org/release/JEEN/Date-Holidays-KR-0.02/">metacpan.org/release/JEEN/D…</a></p>&mdash; CPAN New Modules (@cpan_new) <a href="https://twitter.com/cpan_new/status/167066106622771200" data-datetime="2012-02-08T02:03:58+00:00">February 8, 2012</a></blockquote>
+
+  어제 0.01 올리다가 `Makefile.PL` 에 의존모듈을 안정해놨구나 해서 추가해서 다시 올려놨습니다. 
+
+``` diff
+diff --git a/Makefile.PL b/Makefile.PL
+index 7b27280..fef5219 100644
+--- a/Makefile.PL
++++ b/Makefile.PL
+@@ -2,7 +2,7 @@ use inc::Module::Install;
+ name 'Date-Holidays-KR';
+ all_from 'lib/Date/Holidays/KR.pm';
+
+-# requires '';
++requires 'Date::Korean';
+
+ tests 't/*.t';
+ author_tests 'xt';
+ ```
 
 [cpan-date-holidays-kr]:http://metacpan.org/module/Date::Holidays::KR
 [cpan-date-holidays-cn]:http://metacpan.org/module/Date::Holidays::CN
