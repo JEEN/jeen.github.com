@@ -4,7 +4,7 @@
   <title><![CDATA[Jeen's techlog]]></title>
   <link href="http://JEEN.github.com/atom.xml" rel="self"/>
   <link href="http://JEEN.github.com/"/>
-  <updated>2012-02-08T16:37:01+09:00</updated>
+  <updated>2012-02-08T16:39:29+09:00</updated>
   <id>http://JEEN.github.com/</id>
   <author>
     <name><![CDATA[Jeen Lee]]></name>
@@ -66,21 +66,36 @@
 
 <p>  어제 0.01 올리다가 <code>Makefile.PL</code> 에 의존모듈을 안정해놨구나 해서 추가해서 다시 올려놨습니다.</p>
 
-<p>&#8220;` diff
-diff &#8211;git a/Makefile.PL b/Makefile.PL
-index 7b27280..fef5219 100644
-&#8212; a/Makefile.PL
-+++ b/Makefile.PL
-@@ -2,7 +2,7 @@ use inc::Module::Install;
- name &#8216;Date-Holidays-KR&#8217;;
- all_from &#8216;lib/Date/Holidays/KR.pm&#8217;;</p>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='diff'><span class='line'><span class="gh">diff --git a/Makefile.PL b/Makefile.PL</span>
+</span><span class='line'><span class="gh">index 7b27280..fef5219 100644</span>
+</span><span class='line'><span class="gd">--- a/Makefile.PL</span>
+</span><span class='line'><span class="gi">+++ b/Makefile.PL</span>
+</span><span class='line'><span class="gu">@@ -2,7 +2,7 @@ use inc::Module::Install;</span>
+</span><span class='line'> name &#39;Date-Holidays-KR&#39;;
+</span><span class='line'> all_from &#39;lib/Date/Holidays/KR.pm&#39;;
+</span><span class='line'>
+</span><span class='line'><span class="gd">-# requires &#39;&#39;;</span>
+</span><span class='line'><span class="gi">+requires &#39;Date::Korean&#39;;</span>
+</span><span class='line'>
+</span><span class='line'> tests &#39;t/*.t&#39;;
+</span><span class='line'> author_tests &#39;xt&#39;;
+</span></code></pre></td></tr></table></div></figure>
 
-<p>-# requires &#8221;;
-+requires &#8216;Date::Korean&#8217;;</p>
 
-<p> tests &#8216;t/*.t&#8217;;
- author_tests &#8216;xt&#8217;;
- &#8220;`</p>
+
 ]]></content>
   </entry>
   
