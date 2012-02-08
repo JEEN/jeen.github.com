@@ -4,7 +4,7 @@
   <title><![CDATA[Jeen's techlog]]></title>
   <link href="http://JEEN.github.com/atom.xml" rel="self"/>
   <link href="http://JEEN.github.com/"/>
-  <updated>2012-02-07T20:50:01+09:00</updated>
+  <updated>2012-02-08T11:16:56+09:00</updated>
   <id>http://JEEN.github.com/</id>
   <author>
     <name><![CDATA[Jeen Lee]]></name>
@@ -14,7 +14,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Date::Holidays::KR 0.01 Released]]></title>
+    <title type="html"><![CDATA[Date::Holidays::KR Released]]></title>
     <link href="http://JEEN.github.com/blog/2012/02/07/date-holidays-kr-0-dot-01-released/"/>
     <updated>2012-02-07T20:28:00+09:00</updated>
     <id>http://JEEN.github.com/blog/2012/02/07/date-holidays-kr-0-dot-01-released</id>
@@ -33,6 +33,27 @@
 
 
 
+
+<blockquote class="twitter-tweet"><p>Date-Holidays-KR 0.02 by JEEN - <a href="http://t.co/mgouifly" title="http://metacpan.org/release/JEEN/Date-Holidays-KR-0.02/">metacpan.org/release/JEEN/D…</a></p>&mdash; CPAN New Modules (@cpan_new) <a href="https://twitter.com/cpan_new/status/167066106622771200" data-datetime="2012-02-08T02:03:58+00:00">February 8, 2012</a></blockquote>
+
+
+<p>  어제 0.01 올리다가 <code>Makefile.PL</code> 에 의존모듈을 안정해놨구나 해서 추가해서 다시 올려놨습니다.</p>
+
+<p>&#8220;` diff
+diff &#8211;git a/Makefile.PL b/Makefile.PL
+index 7b27280..fef5219 100644
+&#8212; a/Makefile.PL
++++ b/Makefile.PL
+@@ -2,7 +2,7 @@ use inc::Module::Install;
+ name &#8216;Date-Holidays-KR&#8217;;
+ all_from &#8216;lib/Date/Holidays/KR.pm&#8217;;</p>
+
+<p>-# requires &#8221;;
++requires &#8216;Date::Korean&#8217;;</p>
+
+<p> tests &#8216;t/*.t&#8217;;
+ author_tests &#8216;xt&#8217;;
+ &#8220;`</p>
 ]]></content>
   </entry>
   
