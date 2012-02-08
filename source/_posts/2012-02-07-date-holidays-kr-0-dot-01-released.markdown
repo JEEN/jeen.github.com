@@ -37,7 +37,7 @@ index 7b27280..fef5219 100644
 
  tests 't/*.t';
  author_tests 'xt';
- ```
+```
 
 [cpan-date-holidays-kr]:http://metacpan.org/module/Date::Holidays::KR
 [cpan-date-holidays-cn]:http://metacpan.org/module/Date::Holidays::CN
