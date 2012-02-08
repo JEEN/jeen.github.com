@@ -4,7 +4,7 @@
   <title><![CDATA[Category: perl | Jeen's techlog]]></title>
   <link href="http://JEEN.github.com/blog/categories/perl/atom.xml" rel="self"/>
   <link href="http://JEEN.github.com/"/>
-  <updated>2012-02-08T16:39:29+09:00</updated>
+  <updated>2012-02-09T01:19:21+09:00</updated>
   <id>http://JEEN.github.com/</id>
   <author>
     <name><![CDATA[Jeen Lee]]></name>
@@ -14,30 +14,60 @@
 
   
   <entry>
+    <title type="html"><![CDATA[CPAN Module Update]]></title>
+    <link href="http://JEEN.github.com/blog/2012/02/09/cpan-module-update/"/>
+    <updated>2012-02-09T01:06:00+09:00</updated>
+    <id>http://JEEN.github.com/blog/2012/02/09/cpan-module-update</id>
+    <content type="html"><![CDATA[<blockquote class="twitter-tweet" lang="ko"><p>Acme-CPANAuthors-Korean 0.08 by JEEN - <a href="http://t.co/CjlRnKEO" title="http://metacpan.org/release/JEEN/Acme-CPANAuthors-Korean-0.08/">metacpan.org/release/JEEN/A…</a></p>&mdash; CPAN New Modules (@cpan_new) <a href="https://twitter.com/cpan_new/status/167271503061200896" data-datetime="2012-02-08T15:40:08+00:00">2월 8, 2012</a></blockquote>
+
+
+
+
+<blockquote class="twitter-tweet" lang="ko"><p>Lingua-KO-TypoCorrector 0.03 by JEEN - <a href="http://t.co/b1Lp98PW" title="http://metacpan.org/release/JEEN/Lingua-KO-TypoCorrector-0.03/">metacpan.org/release/JEEN/L…</a></p>&mdash; CPAN New Modules (@cpan_new) <a href="https://twitter.com/cpan_new/status/167273895550922753" data-datetime="2012-02-08T15:49:39+00:00">2월 8, 2012</a></blockquote>
+
+
+
+
+<blockquote class="twitter-tweet" lang="ko"><p>Date-Holidays-KR 0.03 by JEEN - <a href="http://t.co/qAXrPO6f" title="http://metacpan.org/release/JEEN/Date-Holidays-KR-0.03/">metacpan.org/release/JEEN/D…</a></p>&mdash; CPAN New Modules (@cpan_new) <a href="https://twitter.com/cpan_new/status/167275532466143232" data-datetime="2012-02-08T15:56:09+00:00">2월 8, 2012</a></blockquote>
+
+
+
+
+<blockquote class="twitter-tweet" lang="ko"><p>WebService-Aladdin 0.0706 by JEEN - <a href="http://t.co/lyGpgk6W" title="http://metacpan.org/release/JEEN/WebService-Aladdin-0.0706/">metacpan.org/release/JEEN/W…</a></p>&mdash; CPAN New Modules (@cpan_new) <a href="https://twitter.com/cpan_new/status/167276286962704385" data-datetime="2012-02-08T15:59:09+00:00">2월 8, 2012</a></blockquote>
+
+
+
+
+<blockquote class="twitter-tweet" lang="ko"><p>WWW-Shorten-Durl 0.05 by JEEN - <a href="http://t.co/mtnX4oEn" title="http://metacpan.org/release/JEEN/WWW-Shorten-Durl-0.05/">metacpan.org/release/JEEN/W…</a></p>&mdash; CPAN New Modules (@cpan_new) <a href="https://twitter.com/cpan_new/status/167277296259055616" data-datetime="2012-02-08T16:03:09+00:00">2월 8, 2012</a></blockquote>
+
+
+<p>  이전 글에서 언급했듯, 제가 만든 CPAN Module 들의 Meta 정보중에 repository 가 누락된 것도 있었고, 이 중 몇몇은 Github Project 이름까지 p5-* 형식으로 바꿔놓아서 전부 일일이 바꿔둘 필요가 있었습니다.</p>
+
+<p>``` perl
+use inc::Module::Install;
+name 'Date-Holidays-KR';
+all_from 'lib/Date/Holidays/KR.pm';
+requires 'Date::Korean' => 0;</p>
+
+<p>tests 't/*.t';
+test_requires 'Test::More';
+resources repository => 'git://github.com/JEEN/p5-Date-Holidays-KR.git';
+auto_include;
+WriteAll;
+```</p>
+
+<p>  위는 <a href="http://metacpan.org/module/Date::Holidays::KR">Date::Holidays::KR</a> 의 <code>Makefile.PL</code> 입니다. 몇몇 모듈은 <a href="http://metacpan.org/module/ExtUtils::MakeMaker">ExtUtils::MakeMaker</a> 를 사용하고 있었는데, 모두 <a href="http://metacpan.org/module/Module::Install">Module::Install</a> 을 사용하도록 교체하고, repository 를 각각의 github repository 를 지정한 것뿐입니다.</p>
+
+<p>  마음먹은 김에 이슈처리하고 저녁시간을 빌어서 CPAN 에 일괄 업로드했습니다. 완전 스팸이네요.</p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[CPANRatings - WebService::Aladdin]]></title>
     <link href="http://JEEN.github.com/blog/2012/02/08/cpanratings-webservice-aladdin/"/>
     <updated>2012-02-08T16:27:00+09:00</updated>
     <id>http://JEEN.github.com/blog/2012/02/08/cpanratings-webservice-aladdin</id>
-    <content type="html"><![CDATA[<blockquote class="twitter-tweet" data-in-reply-to="166961671741521922"><p>@<a href="https://twitter.com/keedi">keedi</a> @<a href="https://twitter.com/gypark">gypark</a> 오오오... 가문의 영광!!!</p>&mdash; JEEN (@JEEN_LEE) <a href="https://twitter.com/JEEN_LEE/status/167063345000755200" data-datetime="2012-02-08T01:52:59+00:00">February 8, 2012</a></blockquote>
-
-
-<p> 새벽에 @keedi 님으로부터 트윗을 받고 알게되었습니다. 인생 처음으로 <a href="http://cpanratings.perl.org/">CPANRatings</a> 에서 Rating 을 받아보는 군요. 그것도 별 다섯개.</p>
-
-<ul>
-<li><p><a href="http://cpanratings.perl.org/dist/WebService-Aladdin">http://cpanratings.perl.org/dist/WebService-Aladdin</a></p>
-
-<p>아, CPANRatings 는 CPAN 에 올라온 모듈들에 평가를 남길 수 있는 곳입니다.</p>
-
-<p>Rating 은 @gypark 님으로부터 였습니다. 제가 얼기설기 CPAN 에 모듈 올려보겠답시고 2007년쯤에 올린 모듈이고, 저 조차도 잠깐 쓰다가 뭐 당장 쓸일이 없어서 내팽개쳐뒀지만 말이죠.. =3</p>
-
-<p>아무튼 의욕이 새록새록 돋습니다.</p>
-
-<p>오늘은 @keedi 님께 어제 올린 <a href="http://metacpan.org/module/Date::Holidays::KR">Date::Holidays::KR</a> 에 Repository 정보가 없다는 말을 듣고, 흡... 해서 나머지 모듈들도 전부 Repository 정보를 추가해보려고 합니다.</p>
-
-<p>Date::Holidays::KR 에 Repository 가 없는 이유는 META.yml 이 없어서 였던 듯...</p></li>
-</ul>
-
-]]></content>
+    <content type="html"><![CDATA[Liquid error: invalid byte sequence in UTF-8]]></content>
   </entry>
   
   <entry>
@@ -263,162 +293,6 @@ $ carton exec -- plackup -a app.psgi -p 3000 --mode production
 <p>  물론 Carton 은 현재 ALPHA 퀄리티라고 합니다. 버젼도 현재(2012-01-16) 로는 0.9.3 이고, 1.0 정식 릴리즈까지는 아직 시간이 남아있습니다. 몇몇 기능이 바뀔거라는 주의사항이 <a href="http://metacan.org/module/Carton">Carton 모듈페이지</a> 에서 확인할 수 있습니다.</p>
 
 <p>  좀 더 다양한 <code>Carton</code> 에 대한 이야기는 작년 <a href="http://yapcasia.org/2011/talk/91">YAPC::Asia2011 의 Carton Talk Page</a> 에서도 확인하실 수 있습니다.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Picasa Upload Script II]]></title>
-    <link href="http://JEEN.github.com/blog/2012/01/13/picasa-upload-script-ii/"/>
-    <updated>2012-01-13T18:36:00+09:00</updated>
-    <id>http://JEEN.github.com/blog/2012/01/13/picasa-upload-script-ii</id>
-    <content type="html"><![CDATA[<p>``` perl picasa-uploader.pl</p>
-
-<h1>!/usr/bin/env perl</h1>
-
-<p>package PicasaUploader;
-use Any::Moose;
-use namespace::autoclean;
-use Config::Pit;
-use LWP::UserAgent;
-use Net::Google::AuthSub;
-use MIME::Types ();</p>
-
-<p>has user_id => (</p>
-
-<pre><code>is      =&gt; 'ro',
-default =&gt; 'default',
-</code></pre>
-
-<p>);</p>
-
-<p>has album_id => (</p>
-
-<pre><code>is      =&gt; 'ro',
-default =&gt; 'default',
-</code></pre>
-
-<p>);</p>
-
-<p>has files => (</p>
-
-<pre><code>is      =&gt; 'ro',
-isa     =&gt; 'ArrayRef',
-default =&gt; sub { [] }
-</code></pre>
-
-<p>);</p>
-
-<p>has google_auth => (</p>
-
-<pre><code>is      =&gt; 'rw',
-isa     =&gt; 'Net::Google::AuthSub',
-default =&gt; sub {
-    Net::Google::AuthSub-&gt;new(
-        service =&gt; 'lh2',
-        source  =&gt; 'my-picasauploader-0.1'
-    );
-}
-</code></pre>
-
-<p>);</p>
-
-<p>has '_ua' => (</p>
-
-<pre><code>is      =&gt; 'rw',
-isa     =&gt; 'LWP::UserAgent',
-default =&gt; sub {
-    LWP::UserAgent-&gt;new( cookie_jar =&gt; {} ); 
-}
-</code></pre>
-
-<p>);</p>
-
-<p>has 'config' => (</p>
-
-<pre><code>is          =&gt; 'ro',
-isa         =&gt; 'HashRef',
-lazy_build  =&gt; 1,
-</code></pre>
-
-<p>);</p>
-
-<p>sub BUILD {</p>
-
-<pre><code>my $self = shift;
-$self-&gt;auth;
-return 1;
-</code></pre>
-
-<p>}</p>
-
-<p>sub _build_config {</p>
-
-<pre><code>Config::Pit::pit_get('google.com', require =&gt; {
-   username =&gt; 'your username on google.com',
-   password =&gt; 'your password on google.com' 
-});    
-</code></pre>
-
-<p>}</p>
-
-<p>sub auth {</p>
-
-<pre><code>my $self = shift;
-
-my $res = $self-&gt;google_auth-&gt;login($self-&gt;config-&gt;{username}, $self-&gt;config-&gt;{password});
-die "Login Failed: ". $res-&gt;error unless $res-&gt;is_success;
-</code></pre>
-
-<p>}</p>
-
-<p>sub upload_files {</p>
-
-<pre><code>my $self = shift;
-
-for my $file_path (@{ $self-&gt;files }) {
-    my $link = $self-&gt;upload_file($file_path);
-    print $link."\n";
-}
-</code></pre>
-
-<p>}</p>
-
-<p>sub upload_file {</p>
-
-<pre><code>my ($self, $file_path) = @_;
-
-my $file = Path::Class::File-&gt;new($file_path);
-die "File Not Found : $file" unless -f $file;
-
-my $post_url = sprintf 'https://picasaweb.google.com/data/feed/api/user/%s/albumid/%s', $self-&gt;user_id, $self-&gt;album_id;
-
-my ($mime_type, $encoding) = MIME::Types::by_suffix($file-&gt;basename);
-my $content = $file-&gt;slurp;
-my $res = $self-&gt;_ua-&gt;post($post_url,
-    %{ $self-&gt;google_auth-&gt;auth_params },
-    Content_Type   =&gt; $mime_type,
-    Slug           =&gt; $file-&gt;basename,
-    Content        =&gt; $content,  
-);
-
-die 'UPLOAD Failed : '.$res-&gt;status_line unless $res-&gt;is_success;
-my ($link) = ($res-&gt;decoded_content=~/content type.*?src='(.*?)'/gsm);
-$link;
-</code></pre>
-
-<p>}</p>
-
-<p><strong>PACKAGE</strong>->meta->make_immutable;</p>
-
-<p>package main;</p>
-
-<p>my $uploader = PicasaUploader->new( files => \@ARGV );
-$uploader->upload_files;
-```</p>
-
-<p>  <a href="http://aanoaa.github.com/blog/2012/01/03/picasa-upload-script/">@aanoaa 님의 글</a>에서 Picasa Uploader 스크립트를 소개했었는데요. <code>PicasaUploader</code> 라고 package 로 정의해서 쓰도록 했습니다.
-  거기에 <a href="https://metacpan.org/module/Config::Pit">Config::Pit</a> 을 써서 계정정보를 다루도록 했구요.
-  심심해서 그냥 약간 개량해봤습니다.</p>
 ]]></content>
   </entry>
   
