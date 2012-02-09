@@ -28,7 +28,7 @@ categories: [perl,cpan]
 
   Date::Holidays::KR 에 Repository 가 없는 이유는 META.yml 이 없어서 였던 듯...
  
-[blog-jof]:http://jof4002.net/조프일기/2012-01-17
+[blog-jof]:http://jof4002.net/%EC%A1%B0%ED%94%84%EC%9D%BC%EA%B8%B0/2012-01-17
 [cpan-date-holidays-kr]:http://metacpan.org/module/Date::Holidays::KR 
 [ws-rated]:http://cpanratings.perl.org/dist/WebService-Aladdin
 [cpanratings]:http://cpanratings.perl.org/

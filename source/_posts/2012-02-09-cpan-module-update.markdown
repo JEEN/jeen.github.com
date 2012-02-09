@@ -3,7 +3,7 @@ layout: post
 title: "CPAN Module Update"
 date: 2012-02-09 01:06
 comments: true
-categories: [perl,cpan]
+categories: [perl, cpan]
 ---
 
 <blockquote class="twitter-tweet" lang="ko"><p>Acme-CPANAuthors-Korean 0.08 by JEEN - <a href="http://t.co/CjlRnKEO" title="http://metacpan.org/release/JEEN/Acme-CPANAuthors-Korean-0.08/">metacpan.org/release/JEEN/A…</a></p>&mdash; CPAN New Modules (@cpan_new) <a href="https://twitter.com/cpan_new/status/167271503061200896" data-datetime="2012-02-08T15:40:08+00:00">2월 8, 2012</a></blockquote>
@@ -16,7 +16,7 @@ categories: [perl,cpan]
 
 <blockquote class="twitter-tweet" lang="ko"><p>WWW-Shorten-Durl 0.05 by JEEN - <a href="http://t.co/mtnX4oEn" title="http://metacpan.org/release/JEEN/WWW-Shorten-Durl-0.05/">metacpan.org/release/JEEN/W…</a></p>&mdash; CPAN New Modules (@cpan_new) <a href="https://twitter.com/cpan_new/status/167277296259055616" data-datetime="2012-02-08T16:03:09+00:00">2월 8, 2012</a></blockquote>
 
-  이전 글에서 언급했듯, 제가 만든 CPAN Module 들의 Meta 정보중에 repository 가 누락된 것도 있었고, 이 중 몇몇은 Github Project 이름까지 p5-* 형식으로 바꿔놓아서 전부 일일이 바꿔둘 필요가 있었습니다.
+  이전 글에서 언급했듯, 제가 만든 CPAN Module 들의 Meta 정보중에 repository 가 누락된 것도 있었고, 이 중 몇몇은 Github Project 이름까지 p5-* 형식으로 바꿔놓아서 이왕 이렇게 된 거 전부 바꿔보자는 생각이 들어서 작업을 했습니다.
 
 ``` perl
 use inc::Module::Install;
@@ -38,4 +38,3 @@ WriteAll;
 [cpan-date-holidays-kr]:http://metacpan.org/module/Date::Holidays::KR
 [cpan-extutils-makemaker]:http://metacpan.org/module/ExtUtils::MakeMaker
 [cpan-module-install]:http://metacpan.org/module/Module::Install
-
