@@ -4,7 +4,7 @@
   <title><![CDATA[Jeen's techlog]]></title>
   <link href="http://JEEN.github.com/atom.xml" rel="self"/>
   <link href="http://JEEN.github.com/"/>
-  <updated>2012-02-15T23:45:19+09:00</updated>
+  <updated>2012-02-16T00:03:44+09:00</updated>
   <id>http://JEEN.github.com/</id>
   <author>
     <name><![CDATA[Jeen Lee]]></name>
@@ -12,6 +12,46 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Date::Holidays::KR Pull Requested]]></title>
+    <link href="http://JEEN.github.com/blog/2012/02/15/date-holidays-kr-pull-requested/"/>
+    <updated>2012-02-15T23:48:00+09:00</updated>
+    <id>http://JEEN.github.com/blog/2012/02/15/date-holidays-kr-pull-requested</id>
+    <content type="html"><![CDATA[<ul>
+<li><a href="http://jeen.github.com/blog/2012/02/07/date-holidays-kr-0-dot-01-released/">http://jeen.github.com/blog/2012/02/07/date-holidays-kr-0-dot-01-released/</a></li>
+<li><p><a href="http://jeen.github.com/blog/2012/02/09/cpan-module-update/">CPAN Module Update</a></p>
+
+<p>  지난번 야매로 간만에 CPAN 에 올린 <a href="http://metacpan.org/module/Date::Holidays::KR">Date::Holidays::KR</a> 에 버그가 발견되었습니다. 음력을 만만하게 본 탓이 컸습니다.</p>
+
+<p>거기에 더해서 <code>holidays()</code> 함수도 동작을 안하는 것을 모르고 올려버렸었네요.</p>
+
+<p>이런 상황에 있어서 @keedi 님께서 Pull Request 를 보내주셨습니다.</p>
+
+<ul>
+<li><a href="https://github.com/JEEN/p5-Date-Holidays-KR/pull/1">https://github.com/JEEN/p5-Date-Holidays-KR/pull/1</a></li>
+</ul>
+
+
+<p>아주 풍성한 Pull Request 입니다. 거기에 번듯한 테스트코드까지&#8230;</p>
+
+<p>모듈의 성격 탓인지, Pull Request 를 보내시면서</p></li>
+</ul>
+
+
+<blockquote><p>keedi : 휴일이 너무 적어요 ㅡㅜ
+keedi : 모듈 보면서 더 느끼는거지만 휴일이 겨우 저거뿐 ;ㅁ;</p></blockquote>
+
+<p>  라는 현 세태에 대한 푸념을 &#8230; ㅡㅜ</p>
+
+<blockquote class="twitter-tweet"><p>Date-Holidays-KR 0.04 by JEEN - <a href="http://t.co/9Jcv6nws" title="http://metacpan.org/release/JEEN/Date-Holidays-KR-0.04/">metacpan.org/release/JEEN/D…</a></p>&mdash; CPAN New Modules (@cpan_new) <a href="https://twitter.com/cpan_new/status/169756771706089472" data-datetime="2012-02-15T12:15:42+00:00">February 15, 2012</a></blockquote>
+
+
+<p> 재빨리 Merge 해서 다시 CPAN 에 올렸습니다.  앞으로는 좀 더 신중하게 CPAN 에 올려야 되겠구나 하고 결심을 해봅니다.</p>
+
+<p>  @keedi++</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Rex Pull Request]]></title>
@@ -134,11 +174,12 @@
 
 <p>  그리고,</p>
 
-<p> <code>bash
- $ rex 'Init:add_yum_repo' 'Init:install_opsview_agent'
-</code></p>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>rex <span class="s1">&#39;Init:add_yum_repo&#39;</span> <span class="s1">&#39;Init:install_opsview_agent&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<p>   이런식으로 동작할 작업들을 지정해줌으로, 위의 <code>sweet-vms</code> 그룹의 vm01 부터 vm10 의 의 열대의 서버에 대해서 <code>RPMForge</code> 와 <code>OpsView</code> <code>yum repo</code> 를 추가하고, <code>opsview-agent</code> 를 설치합니다. <code>opsview-agent</code> 자체는 기본적인 yum package 에 없는 라이브러리를 참조하기에 <code>RPMForge</code> 를 우선 등록한 것입니다.</p>
+
+<p>  이런식으로 동작할 작업들을 지정해줌으로, 위의 <code>sweet-vms</code> 그룹의 vm01 부터 vm10 의 의 열대의 서버에 대해서 <code>RPMForge</code> 와 <code>OpsView</code> <code>yum repo</code> 를 추가하고, <code>opsview-agent</code> 를 설치합니다. <code>opsview-agent</code> 자체는 기본적인 yum package 에 없는 라이브러리를 참조하기에 <code>RPMForge</code> 를 우선 등록한 것입니다.</p>
 
 <p>  예, 뭐 아무튼 이런 식입니다. 아직 뭐 본격적으로 이런저런 상황에 부딪히면서 검증하고 있고, Rex 자체에서 어떻게 할 수 없으면 직접 패치를 써나가 볼 까합니다.</p>
 

@@ -227,11 +227,12 @@
 
 <p>  그리고,</p>
 
-<p> <code>bash
- $ rex 'Init:add_yum_repo' 'Init:install_opsview_agent'
-</code></p>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>rex <span class="s1">&#39;Init:add_yum_repo&#39;</span> <span class="s1">&#39;Init:install_opsview_agent&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<p>   이런식으로 동작할 작업들을 지정해줌으로, 위의 <code>sweet-vms</code> 그룹의 vm01 부터 vm10 의 의 열대의 서버에 대해서 <code>RPMForge</code> 와 <code>OpsView</code> <code>yum repo</code> 를 추가하고, <code>opsview-agent</code> 를 설치합니다. <code>opsview-agent</code> 자체는 기본적인 yum package 에 없는 라이브러리를 참조하기에 <code>RPMForge</code> 를 우선 등록한 것입니다.</p>
+
+<p>  이런식으로 동작할 작업들을 지정해줌으로, 위의 <code>sweet-vms</code> 그룹의 vm01 부터 vm10 의 의 열대의 서버에 대해서 <code>RPMForge</code> 와 <code>OpsView</code> <code>yum repo</code> 를 추가하고, <code>opsview-agent</code> 를 설치합니다. <code>opsview-agent</code> 자체는 기본적인 yum package 에 없는 라이브러리를 참조하기에 <code>RPMForge</code> 를 우선 등록한 것입니다.</p>
 
 <p>  예, 뭐 아무튼 이런 식입니다. 아직 뭐 본격적으로 이런저런 상황에 부딪히면서 검증하고 있고, Rex 자체에서 어떻게 할 수 없으면 직접 패치를 써나가 볼 까합니다.</p>
 
@@ -299,6 +300,8 @@
         <a class="basic-alignment left" href="/blog/2012/02/09/cpan-module-update/" title="Previous Post: CPAN Module Update">&laquo; CPAN Module Update</a>
       
       
+        <a class="basic-alignment right" href="/blog/2012/02/15/date-holidays-kr-pull-requested/" title="next Post: Date::Holidays::KR Pull Requested">Date::Holidays::KR Pull Requested &raquo;</a>
+      
     </p>
   </footer>
 </article>
@@ -318,6 +321,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2012/02/15/date-holidays-kr-pull-requested/">Date::Holidays::KR Pull Requested</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2012/02/15/rex-pull-request/">Rex Pull Request</a>
       </li>
     
@@ -331,10 +338,6 @@
     
       <li class="post">
         <a href="/blog/2012/02/07/date-holidays-kr-0-dot-01-released/">Date::Holidays::KR Released</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/02/02/perl-and-continuous-integration-with-jenkins-2/">Perl and Continuous Integration with Jenkins - II</a>
       </li>
     
   </ul>

@@ -5,11 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Category: error - Jeen's techlog</title>
+  <title>Date::Holidays::KR Pull Requested - Jeen's techlog</title>
   <meta name="author" content="Jeen Lee">
 
   
-  <meta name="description" content="Category: error">
+  <meta name="description" content="http://jeen.github.com/blog/2012/02/07/date-holidays-kr-0-dot-01-released/
+CPAN Module Update 지난번 야매로 간만에 CPAN 에 올린 Date::Holidays::KR 에 버그가 발견되었습니다 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +19,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://JEEN.github.comblog/categories/error">
+  <link rel="canonical" href="http://JEEN.github.com/blog/2012/02/15/date-holidays-kr-pull-requested">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -82,36 +83,126 @@
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
   <header>
-    <h1 class="entry-title">Category: Error</h1>
+    
+      <h1 class="entry-title">Date::Holidays::KR Pull Requested</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-02-15T23:48:00+09:00" pubdate data-updated="true">Feb 15<span>th</span>, 2012</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
     
   </header>
-  
-  <div id="blog-archives" class="category">
 
 
+<div class="entry-content"><ul>
+<li><a href="http://jeen.github.com/blog/2012/02/07/date-holidays-kr-0-dot-01-released/">http://jeen.github.com/blog/2012/02/07/date-holidays-kr-0-dot-01-released/</a></li>
+<li><p><a href="http://jeen.github.com/blog/2012/02/09/cpan-module-update/">CPAN Module Update</a></p>
 
-  
-  <h2>2012</h2>
+<p>  지난번 야매로 간만에 CPAN 에 올린 <a href="http://metacpan.org/module/Date::Holidays::KR">Date::Holidays::KR</a> 에 버그가 발견되었습니다. 음력을 만만하게 본 탓이 컸습니다.</p>
 
-<article>
-  
-<h1><a href="/blog/2012/01/05/freebsd-8-dot-2-stable-cpan-error/">FreeBSD 8.2 STABLE - CPAN Error</a></h1>
-<time datetime="2012-01-05T22:32:00+09:00" pubdate><span class='month'>Jan</span> <span class='day'>05</span> <span class='year'>2012</span></time>
+<p>거기에 더해서 <code>holidays()</code> 함수도 동작을 안하는 것을 모르고 올려버렸었네요.</p>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/cpan/'>cpan</a>, <a class='category' href='/blog/categories/error/'>error</a>, <a class='category' href='/blog/categories/freebsd/'>freebsd</a></span>
-</footer>
+<p>이런 상황에 있어서 @keedi 님께서 Pull Request 를 보내주셨습니다.</p>
+
+<ul>
+<li><a href="https://github.com/JEEN/p5-Date-Holidays-KR/pull/1">https://github.com/JEEN/p5-Date-Holidays-KR/pull/1</a></li>
+</ul>
 
 
-</article>
+<p>아주 풍성한 Pull Request 입니다. 거기에 번듯한 테스트코드까지&#8230;</p>
 
+<p>모듈의 성격 탓인지, Pull Request 를 보내시면서</p></li>
+</ul>
+
+
+<blockquote><p>keedi : 휴일이 너무 적어요 ㅡㅜ
+keedi : 모듈 보면서 더 느끼는거지만 휴일이 겨우 저거뿐 ;ㅁ;</p></blockquote>
+
+<p>  라는 현 세태에 대한 푸념을 &#8230; ㅡㅜ</p>
+
+<blockquote class="twitter-tweet"><p>Date-Holidays-KR 0.04 by JEEN - <a href="http://t.co/9Jcv6nws" title="http://metacpan.org/release/JEEN/Date-Holidays-KR-0.04/">metacpan.org/release/JEEN/D…</a></p>&mdash; CPAN New Modules (@cpan_new) <a href="https://twitter.com/cpan_new/status/169756771706089472" data-datetime="2012-02-15T12:15:42+00:00">February 15, 2012</a></blockquote>
+
+
+<p> 재빨리 Merge 해서 다시 CPAN 에 올렸습니다.  앞으로는 좀 더 신중하게 CPAN 에 올려야 되겠구나 하고 결심을 해봅니다.</p>
+
+<p>  @keedi++</p>
 </div>
 
+
+  <footer>
+    <p class="meta">
+      
   
+
+<span class="byline author vcard">Posted by <span class="fn">Jeen Lee</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-02-15T23:48:00+09:00" pubdate data-updated="true">Feb 15<span>th</span>, 2012</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/cpan/'>cpan</a>, <a class='category' href='/blog/categories/keedi/'>keedi</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://JEEN.github.com/blog/2012/02/15/date-holidays-kr-pull-requested/" data-via="JEEN_LEE" data-counturl="http://JEEN.github.com/blog/2012/02/15/date-holidays-kr-pull-requested/" >Tweet</a>
+  
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2012/02/15/rex-pull-request/" title="Previous Post: Rex Pull Request">&laquo; Rex Pull Request</a>
+      
+      
+    </p>
+  </footer>
 </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
 
 </div>
 
@@ -212,7 +303,10 @@
       var disqus_shortname = 'jeen';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://JEEN.github.com/blog/2012/02/15/date-holidays-kr-pull-requested/';
+        var disqus_url = 'http://JEEN.github.com/blog/2012/02/15/date-holidays-kr-pull-requested/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

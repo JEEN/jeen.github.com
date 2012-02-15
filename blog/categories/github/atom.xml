@@ -4,7 +4,7 @@
   <title><![CDATA[Category: github | Jeen's techlog]]></title>
   <link href="http://JEEN.github.com/blog/categories/github/atom.xml" rel="self"/>
   <link href="http://JEEN.github.com/"/>
-  <updated>2012-02-15T23:45:19+09:00</updated>
+  <updated>2012-02-16T00:03:44+09:00</updated>
   <id>http://JEEN.github.com/</id>
   <author>
     <name><![CDATA[Jeen Lee]]></name>
@@ -99,11 +99,11 @@ Batches
 
 <p>  그리고,</p>
 
-<p> <code>bash
- $ rex 'Init:add_yum_repo' 'Init:install_opsview_agent'
+<p><code>bash
+$ rex 'Init:add_yum_repo' 'Init:install_opsview_agent'
 </code></p>
 
-<p>   이런식으로 동작할 작업들을 지정해줌으로, 위의 <code>sweet-vms</code> 그룹의 vm01 부터 vm10 의 의 열대의 서버에 대해서 <code>RPMForge</code> 와 <code>OpsView</code> <code>yum repo</code> 를 추가하고, <code>opsview-agent</code> 를 설치합니다. <code>opsview-agent</code> 자체는 기본적인 yum package 에 없는 라이브러리를 참조하기에 <code>RPMForge</code> 를 우선 등록한 것입니다.</p>
+<p>  이런식으로 동작할 작업들을 지정해줌으로, 위의 <code>sweet-vms</code> 그룹의 vm01 부터 vm10 의 의 열대의 서버에 대해서 <code>RPMForge</code> 와 <code>OpsView</code> <code>yum repo</code> 를 추가하고, <code>opsview-agent</code> 를 설치합니다. <code>opsview-agent</code> 자체는 기본적인 yum package 에 없는 라이브러리를 참조하기에 <code>RPMForge</code> 를 우선 등록한 것입니다.</p>
 
 <p>  예, 뭐 아무튼 이런 식입니다. 아직 뭐 본격적으로 이런저런 상황에 부딪히면서 검증하고 있고, Rex 자체에서 어떻게 할 수 없으면 직접 패치를 써나가 볼 까합니다.</p>
 
