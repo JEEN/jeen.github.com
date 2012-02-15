@@ -4,7 +4,7 @@
   <title><![CDATA[Category: keedi | Jeen's techlog]]></title>
   <link href="http://JEEN.github.com/blog/categories/keedi/atom.xml" rel="self"/>
   <link href="http://JEEN.github.com/"/>
-  <updated>2012-02-16T00:03:44+09:00</updated>
+  <updated>2012-02-16T00:08:34+09:00</updated>
   <id>http://JEEN.github.com/</id>
   <author>
     <name><![CDATA[Jeen Lee]]></name>
@@ -19,19 +19,15 @@
     <updated>2012-02-15T23:48:00+09:00</updated>
     <id>http://JEEN.github.com/blog/2012/02/15/date-holidays-kr-pull-requested</id>
     <content type="html"><![CDATA[<ul>
-<li><a href="http://jeen.github.com/blog/2012/02/07/date-holidays-kr-0-dot-01-released/">http://jeen.github.com/blog/2012/02/07/date-holidays-kr-0-dot-01-released/</a></li>
+<li><p><a href="http://jeen.github.com/blog/2012/02/07/date-holidays-kr-0-dot-01-released/">Date::Holidays::KR Released</a></p></li>
 <li><p><a href="http://jeen.github.com/blog/2012/02/09/cpan-module-update/">CPAN Module Update</a></p>
 
 <p>  지난번 야매로 간만에 CPAN 에 올린 <a href="http://metacpan.org/module/Date::Holidays::KR">Date::Holidays::KR</a> 에 버그가 발견되었습니다. 음력을 만만하게 본 탓이 컸습니다.</p>
 
 <p>거기에 더해서 <code>holidays()</code> 함수도 동작을 안하는 것을 모르고 올려버렸었네요.</p>
 
-<p>이런 상황에 있어서 @keedi 님께서 Pull Request 를 보내주셨습니다.</p>
-
-<ul>
-<li><a href="https://github.com/JEEN/p5-Date-Holidays-KR/pull/1">https://github.com/JEEN/p5-Date-Holidays-KR/pull/1</a></li>
-</ul>
-
+<p>이런 상황에 있어서 @keedi 님께서 Pull Request 를 보내주셨습니다.</p></li>
+<li><p><a href="https://github.com/JEEN/p5-Date-Holidays-KR/pull/1">https://github.com/JEEN/p5-Date-Holidays-KR/pull/1</a></p>
 
 <p>아주 풍성한 Pull Request 입니다. 거기에 번듯한 테스트코드까지...</p>
 
@@ -39,8 +35,9 @@
 </ul>
 
 
-<blockquote><p>keedi : 휴일이 너무 적어요 ㅡㅜ
-keedi : 모듈 보면서 더 느끼는거지만 휴일이 겨우 저거뿐 ;ㅁ;</p></blockquote>
+<blockquote><p>keedi : 휴일이 너무 적어요 ㅡㅜ</p>
+
+<p>keedi : 모듈 보면서 더 느끼는거지만 휴일이 겨우 저거뿐 ;ㅁ;</p></blockquote>
 
 <p>  라는 현 세태에 대한 푸념을 ... ㅡㅜ</p>
 
