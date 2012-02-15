@@ -76,11 +76,11 @@ Batches
 
   그리고, 
   
- ``` bash
- $ rex 'Init:add_yum_repo' 'Init:install_opsview_agent'
- ```
+``` bash
+$ rex 'Init:add_yum_repo' 'Init:install_opsview_agent'
+```
  
-   이런식으로 동작할 작업들을 지정해줌으로, 위의 `sweet-vms` 그룹의 vm01 부터 vm10 의 의 열대의 서버에 대해서 `RPMForge` 와 `OpsView` `yum repo` 를 추가하고, `opsview-agent` 를 설치합니다. `opsview-agent` 자체는 기본적인 yum package 에 없는 라이브러리를 참조하기에 `RPMForge` 를 우선 등록한 것입니다.
+  이런식으로 동작할 작업들을 지정해줌으로, 위의 `sweet-vms` 그룹의 vm01 부터 vm10 의 의 열대의 서버에 대해서 `RPMForge` 와 `OpsView` `yum repo` 를 추가하고, `opsview-agent` 를 설치합니다. `opsview-agent` 자체는 기본적인 yum package 에 없는 라이브러리를 참조하기에 `RPMForge` 를 우선 등록한 것입니다.
 
   예, 뭐 아무튼 이런 식입니다. 아직 뭐 본격적으로 이런저런 상황에 부딪히면서 검증하고 있고, Rex 자체에서 어떻게 할 수 없으면 직접 패치를 써나가 볼 까합니다.
 
