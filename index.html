@@ -9,7 +9,7 @@
   <meta name="author" content="Jeen Lee">
 
   
-  <meta name="description" content="Acme-CPANAuthors-Korean 0.08 by JEEN - metacpan.org/release/JEEN/A…&mdash; CPAN New Modules (@cpan_new) 2월 8, 2012 Lingua-KO-TypoCorrector 0.03 by &hellip;">
+  <meta name="description" content="(R)?ex - A simple framework to simplify systemadministration 최근에 여러 서버 일괄 작업을 위해서 Rex 로 이것저것 해보고 있는 중입니다. Rex 는 Ruby 쪽에서 많이 쓰인다는 Chef 같은 부류의 툴이랄까요, &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -83,6 +83,181 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/02/15/rex-pull-request/">Rex Pull Request</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-02-15T23:21:00+09:00" pubdate data-updated="true">Feb 15<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/02/15/rex-pull-request/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><ul>
+<li><p><a href="http://rexify.org/">(R)?ex - A simple framework to simplify systemadministration</a></p>
+
+<p>최근에 여러 서버 일괄 작업을 위해서 <a href="http://metacpan.org/module/Rex">Rex</a> 로 이것저것 해보고 있는 중입니다. Rex 는 Ruby 쪽에서 많이 쓰인다는 Chef 같은 부류의 툴이랄까요, 아무튼 그런 류의 일을 Perl 로 할 수 있게 하는 툴입니다.</p>
+
+<p>Rex 에 속한 네임스페이스를 살펴보면 다양한 OS 의 경우에 상응하는 다양한  케이스를 고려하고 있는 것 같습니다.</p>
+
+<p>오늘 제가 쓴 Rex 의 가벼운 예제로는 다음과 같습니다.</p></li>
+</ul>
+
+
+<figure class='code'><figcaption><span>Rexfile</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="n">user</span> <span class="s">&#39;user&#39;</span><span class="p">;</span>
+</span><span class='line'><span class="n">password</span> <span class="s">&#39;password&#39;</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">pass_auth</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">group</span> <span class="o">=&gt;</span> <span class="s">&quot;sweet-vms&quot;</span> <span class="o">=&gt;</span> <span class="s">&quot;vm[01..10]&quot;</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nb">require</span> <span class="nn">Rex::</span><span class="n">Init</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span>Rex::Init</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="nb">package</span> <span class="nn">Rex::</span><span class="n">Init</span><span class="p">;</span>
+</span><span class='line'><span class="k">use</span> <span class="nn">Rex::</span><span class="n">Commands</span><span class="p">;</span>
+</span><span class='line'><span class="k">use</span> <span class="nn">Rex::Commands::</span><span class="n">Run</span><span class="p">;</span>
+</span><span class='line'><span class="k">use</span> <span class="nn">Rex::Commands::</span><span class="n">Pkg</span><span class="p">;</span>
+</span><span class='line'><span class="k">use</span> <span class="nn">Rex::Commands::</span><span class="n">Iptables</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">desc</span> <span class="s">&#39;Add yum repo&#39;</span><span class="p">;</span>
+</span><span class='line'><span class="n">task</span> <span class="s">&quot;add_yum_repo&quot;</span><span class="p">,</span> <span class="n">group</span> <span class="o">=&gt;</span> <span class="s">&quot;sweet-vms&quot;</span><span class="p">,</span> <span class="k">sub </span><span class="p">{</span>
+</span><span class='line'>    <span class="n">run</span><span class="p">(</span><span class="s">&quot;yum -y install http://pkgs.repoforge.org/rpmforge-release/rpmforge-release-0.5.2-2.el5.rf.x86_64.rpm&quot;</span><span class="p">);</span>
+</span><span class='line'>    <span class="k">print</span> <span class="s">&quot;Added RPMForge Repo on /etc/yum.repos.d/\n&quot;</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">repository</span> <span class="n">add</span> <span class="o">=&gt;</span> <span class="s">&quot;Opsview&quot;</span><span class="p">,</span>
+</span><span class='line'>        <span class="n">url</span> <span class="o">=&gt;</span> <span class="s">&#39;http://downloads.opsera.com/opsview-community/latest/yum/centos/$releasever/$basearch&#39;</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">print</span> <span class="s">&quot;Added OpsView Repo on /etc/yum.repos.d/\n&quot;</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">update_package_db</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">print</span> <span class="s">&quot;Updated yum package DB\n&quot;</span><span class="p">;</span>
+</span><span class='line'><span class="p">};</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">desc</span> <span class="s">&#39;Install OpsView-Agent&#39;</span><span class="p">;</span>
+</span><span class='line'><span class="n">task</span> <span class="s">&quot;install_opsview_agent&quot;</span><span class="p">,</span> <span class="n">group</span> <span class="o">=&gt;</span> <span class="s">&quot;sweet-vms&quot;</span><span class="p">,</span> <span class="k">sub </span><span class="p">{</span>
+</span><span class='line'>    <span class="n">install</span> <span class="nb">package</span> <span class="o">=&gt;</span> <span class="s">&#39;opsview-agent&#39;</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">print</span> <span class="s">&quot;Installed [opsview-agent]\n&quot;</span><span class="p">;</span>
+</span><span class='line'><span class="p">};</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">desc</span> <span class="s">&#39;Open NRPE(5666) Port&#39;</span><span class="p">;</span>
+</span><span class='line'><span class="n">task</span> <span class="s">&#39;open_nrpe_port&#39;</span><span class="p">,</span> <span class="n">group</span> <span class="o">=&gt;</span> <span class="s">&quot;sweet-vms&quot;</span><span class="p">,</span> <span class="k">sub </span><span class="p">{</span>
+</span><span class='line'>    <span class="n">open_port</span> <span class="mi">5666</span><span class="p">;</span>
+</span><span class='line'><span class="p">};</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>이렇게 <code>Rexfile</code> 에 각 서버 그룹과 SSH 접속 계정, 그리고 <code>Rex::Init</code> 에 그 그룹에 대한 작업(Task) 를 정의합니다.</p>
+
+<p>  위처럼 정의한 작업에 대해서,</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>rex -T
+</span><span class='line'>Tasks
+</span><span class='line'>  Init:add_yum_repo              Add yum repo
+</span><span class='line'>  Init:install_opsview_agent     Install OpsView-Agent
+</span><span class='line'>  Init:open_nrpe_port            Open NRPE<span class="o">(</span>5666<span class="o">)</span> Port
+</span><span class='line'>Batches
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>  <code>rex -T</code> 를 통해서 작동할 수 있는 Task 의 리스트를 받을 수 있습니다.</p>
+
+<p>  그리고,</p>
+
+<p> <code>bash
+ $ rex 'Init:add_yum_repo' 'Init:install_opsview_agent'
+</code></p>
+
+<p>   이런식으로 동작할 작업들을 지정해줌으로, 위의 <code>sweet-vms</code> 그룹의 vm01 부터 vm10 의 의 열대의 서버에 대해서 <code>RPMForge</code> 와 <code>OpsView</code> <code>yum repo</code> 를 추가하고, <code>opsview-agent</code> 를 설치합니다. <code>opsview-agent</code> 자체는 기본적인 yum package 에 없는 라이브러리를 참조하기에 <code>RPMForge</code> 를 우선 등록한 것입니다.</p>
+
+<p>  예, 뭐 아무튼 이런 식입니다. 아직 뭐 본격적으로 이런저런 상황에 부딪히면서 검증하고 있고, Rex 자체에서 어떻게 할 수 없으면 직접 패치를 써나가 볼 까합니다.</p>
+
+<p>  그런 의미에서, 오늘 Rex 에 Pull Request 를 하나 보내서 0.25 에 Merge 되었습니다. :-)</p>
+
+<ul>
+<li><a href="https://github.com/JEEN/Rex/commit/1d69a96ba4371dc9e030fab494c887b9126a2c9d">https://github.com/JEEN/Rex/commit/1d69a96ba4371dc9e030fab494c887b9126a2c9d</a></li>
+<li><p><a href="http://github.com/krimdomu/Rex/pull/12">http://github.com/krimdomu/Rex/pull/12</a></p>
+
+<p>사실 위에서 <code>opsview-agent</code> 는 제대로 설치되지 않습니다. 이유는 Pull Request 를 보내면서 봉착한 상황과 대처로 적어놨습니다.</p></li>
+</ul>
+
+
+<blockquote class="twitter-tweet"><p>Rex 무려 GPL v3 였구나&#8230;</p>&mdash; JEEN (@JEEN_LEE) <a href="https://twitter.com/JEEN_LEE/status/169724680612216832" data-datetime="2012-02-15T10:08:11+00:00">February 15, 2012</a></blockquote>
+
+
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1801,63 +1976,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/01/03/ea-pms-task-management/">[번역] PM&#8217;s Task Management @ EA</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-01-03T20:53:00+09:00" pubdate data-updated="true">Jan 3<span>rd</span>, 2012</time>
-        
-         | <a href="/blog/2012/01/03/ea-pms-task-management/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><ul>
-<li><p>프로젝트의 두목은 두명으로 나뉜다. 한명은 Creative Director, 다른 한명은 Project Manager. PM 은 예산/외주관리/리소스 관리의 모든 권한을 가지고, CD 가 그 이외의 권한을 가진다.</p></li>
-<li><p>권력의 관계는 CD>PM. CD 가 &#8220;좀 늦어도 되니까 이것을 한다&#8221; 라고 정하면 PM 은 그에 따라, 프로젝트를 짜맞춰야 한다. 단, CD 가 최종책임은 전부 덮어쓰는 것이 룰.</p></li>
-<li><p>PM 이 실제로 스케쥴을 진행하는 방법은 리소스 관리를 하면서, 2두 단위로 마일스톤을 내놓는다. 마일스톤에는 반드시 목적이 있고, 상황에 맞춰서 최종 스케쥴은 항상 바뀐다.</p></li>
-<li><p>마일스톤 6개에 하나 정도는 빅 마일스톤, 프로젝트의 진행상황을 외부(상층부)에 대해 나타내는 [알파] 를 내놓는다.</p></li>
-<li><p>최종 스케쥴은 필요한 리소스를 전부 나열해서, 팀원 스스로 골라서 맡게 된다. 다음은 PM 이 팀의 실적을 보고 속도를 CD 와 상층부에 알리고, 어디가 병목이 되는 지 등을 관리한다.</p></li>
-<li><p>프로젝트 팀원은 항상 마일스톤에서 당면한 목표를 알고 있어서 정말로 프로세스를 가지고 생각할 수 있으며, PM 이 항상 스케쥴을 쌓고, 속도를 계산해서 무엇이 늦어지고 있는 지 알려줄 수 있기 때문에 편하다</p></li>
-<li><p>내용과 진행 관리를 완전히 나눠서 최종적으로 내용관리로 정리한다. 처음은 내용을 전부 리스트로 만든다. 어떻게든 모든 요소라고 생각되는 것을 가시화 해서 리스트로 만들고 &#8220;어느 정도의 작업이 있는가&#8221;를 계산해낸다.</p></li>
-<li><p>그리고 그 내용중에 &#8220;절대로 fun factor 에 빠질 수 없는 것&#8221; 등을 CD 가 가르쳐 준다. 그 다음은 마일스톤에서 쌓아가면서 스케쥴을 보고, 일정 실적을 쌓을 즘에 실제로 가능한 것인지 전부 리스트로 만든다.</p></li>
-<li><p>그래서 PM 에게 질문하면 &#8220;이 추가예산이 있다면 아웃소싱이 있다면 여기에 이것을 투입하면 이렇게 단축할 수 있다&#8221; 라는 매우 구체적인 스케쥴을 항상 가질 수 있다.</p></li>
-<li><p>덧붙여 CD>PM 이라는 권력관계가 되어 있는 것은 EA 의 게임 크리에이티브와 재미를 담보로 하는 것은 결국은 게임 디자이너가 아니면 안된다라는 생각을 가지고 있기 때문이다.</p></li>
-</ul>
-
-
-<h3>원문</h3>
-
-<ul>
-<li><a href="http://togetter.com/li/198059">EA流のPMのタスク管理の仕方 - Togetter</a></li>
-</ul>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -1873,6 +1991,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2012/02/15/rex-pull-request/">Rex Pull Request</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2012/02/09/cpan-module-update/">CPAN Module Update</a>
       </li>
     
@@ -1886,10 +2008,6 @@
     
       <li class="post">
         <a href="/blog/2012/02/02/perl-and-continuous-integration-with-jenkins-2/">Perl and Continuous Integration with Jenkins - II</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/01/16/carton-cpan-dependencies-manager/">Carton - CPAN dependencies manager</a>
       </li>
     
   </ul>

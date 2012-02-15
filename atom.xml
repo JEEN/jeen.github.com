@@ -4,7 +4,7 @@
   <title><![CDATA[Jeen's techlog]]></title>
   <link href="http://JEEN.github.com/atom.xml" rel="self"/>
   <link href="http://JEEN.github.com/"/>
-  <updated>2012-02-14T11:47:51+09:00</updated>
+  <updated>2012-02-15T23:45:19+09:00</updated>
   <id>http://JEEN.github.com/</id>
   <author>
     <name><![CDATA[Jeen Lee]]></name>
@@ -12,6 +12,152 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Rex Pull Request]]></title>
+    <link href="http://JEEN.github.com/blog/2012/02/15/rex-pull-request/"/>
+    <updated>2012-02-15T23:21:00+09:00</updated>
+    <id>http://JEEN.github.com/blog/2012/02/15/rex-pull-request</id>
+    <content type="html"><![CDATA[<ul>
+<li><p><a href="http://rexify.org/">(R)?ex - A simple framework to simplify systemadministration</a></p>
+
+<p>최근에 여러 서버 일괄 작업을 위해서 <a href="http://metacpan.org/module/Rex">Rex</a> 로 이것저것 해보고 있는 중입니다. Rex 는 Ruby 쪽에서 많이 쓰인다는 Chef 같은 부류의 툴이랄까요, 아무튼 그런 류의 일을 Perl 로 할 수 있게 하는 툴입니다.</p>
+
+<p>Rex 에 속한 네임스페이스를 살펴보면 다양한 OS 의 경우에 상응하는 다양한  케이스를 고려하고 있는 것 같습니다.</p>
+
+<p>오늘 제가 쓴 Rex 의 가벼운 예제로는 다음과 같습니다.</p></li>
+</ul>
+
+
+<figure class='code'><figcaption><span>Rexfile</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="n">user</span> <span class="s">&#39;user&#39;</span><span class="p">;</span>
+</span><span class='line'><span class="n">password</span> <span class="s">&#39;password&#39;</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">pass_auth</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">group</span> <span class="o">=&gt;</span> <span class="s">&quot;sweet-vms&quot;</span> <span class="o">=&gt;</span> <span class="s">&quot;vm[01..10]&quot;</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nb">require</span> <span class="nn">Rex::</span><span class="n">Init</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span>Rex::Init</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="nb">package</span> <span class="nn">Rex::</span><span class="n">Init</span><span class="p">;</span>
+</span><span class='line'><span class="k">use</span> <span class="nn">Rex::</span><span class="n">Commands</span><span class="p">;</span>
+</span><span class='line'><span class="k">use</span> <span class="nn">Rex::Commands::</span><span class="n">Run</span><span class="p">;</span>
+</span><span class='line'><span class="k">use</span> <span class="nn">Rex::Commands::</span><span class="n">Pkg</span><span class="p">;</span>
+</span><span class='line'><span class="k">use</span> <span class="nn">Rex::Commands::</span><span class="n">Iptables</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">desc</span> <span class="s">&#39;Add yum repo&#39;</span><span class="p">;</span>
+</span><span class='line'><span class="n">task</span> <span class="s">&quot;add_yum_repo&quot;</span><span class="p">,</span> <span class="n">group</span> <span class="o">=&gt;</span> <span class="s">&quot;sweet-vms&quot;</span><span class="p">,</span> <span class="k">sub </span><span class="p">{</span>
+</span><span class='line'>    <span class="n">run</span><span class="p">(</span><span class="s">&quot;yum -y install http://pkgs.repoforge.org/rpmforge-release/rpmforge-release-0.5.2-2.el5.rf.x86_64.rpm&quot;</span><span class="p">);</span>
+</span><span class='line'>    <span class="k">print</span> <span class="s">&quot;Added RPMForge Repo on /etc/yum.repos.d/\n&quot;</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">repository</span> <span class="n">add</span> <span class="o">=&gt;</span> <span class="s">&quot;Opsview&quot;</span><span class="p">,</span>
+</span><span class='line'>        <span class="n">url</span> <span class="o">=&gt;</span> <span class="s">&#39;http://downloads.opsera.com/opsview-community/latest/yum/centos/$releasever/$basearch&#39;</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">print</span> <span class="s">&quot;Added OpsView Repo on /etc/yum.repos.d/\n&quot;</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">update_package_db</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">print</span> <span class="s">&quot;Updated yum package DB\n&quot;</span><span class="p">;</span>
+</span><span class='line'><span class="p">};</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">desc</span> <span class="s">&#39;Install OpsView-Agent&#39;</span><span class="p">;</span>
+</span><span class='line'><span class="n">task</span> <span class="s">&quot;install_opsview_agent&quot;</span><span class="p">,</span> <span class="n">group</span> <span class="o">=&gt;</span> <span class="s">&quot;sweet-vms&quot;</span><span class="p">,</span> <span class="k">sub </span><span class="p">{</span>
+</span><span class='line'>    <span class="n">install</span> <span class="nb">package</span> <span class="o">=&gt;</span> <span class="s">&#39;opsview-agent&#39;</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">print</span> <span class="s">&quot;Installed [opsview-agent]\n&quot;</span><span class="p">;</span>
+</span><span class='line'><span class="p">};</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">desc</span> <span class="s">&#39;Open NRPE(5666) Port&#39;</span><span class="p">;</span>
+</span><span class='line'><span class="n">task</span> <span class="s">&#39;open_nrpe_port&#39;</span><span class="p">,</span> <span class="n">group</span> <span class="o">=&gt;</span> <span class="s">&quot;sweet-vms&quot;</span><span class="p">,</span> <span class="k">sub </span><span class="p">{</span>
+</span><span class='line'>    <span class="n">open_port</span> <span class="mi">5666</span><span class="p">;</span>
+</span><span class='line'><span class="p">};</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>이렇게 <code>Rexfile</code> 에 각 서버 그룹과 SSH 접속 계정, 그리고 <code>Rex::Init</code> 에 그 그룹에 대한 작업(Task) 를 정의합니다.</p>
+
+<p>  위처럼 정의한 작업에 대해서,</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>rex -T
+</span><span class='line'>Tasks
+</span><span class='line'>  Init:add_yum_repo              Add yum repo
+</span><span class='line'>  Init:install_opsview_agent     Install OpsView-Agent
+</span><span class='line'>  Init:open_nrpe_port            Open NRPE<span class="o">(</span>5666<span class="o">)</span> Port
+</span><span class='line'>Batches
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>  <code>rex -T</code> 를 통해서 작동할 수 있는 Task 의 리스트를 받을 수 있습니다.</p>
+
+<p>  그리고,</p>
+
+<p> <code>bash
+ $ rex 'Init:add_yum_repo' 'Init:install_opsview_agent'
+</code></p>
+
+<p>   이런식으로 동작할 작업들을 지정해줌으로, 위의 <code>sweet-vms</code> 그룹의 vm01 부터 vm10 의 의 열대의 서버에 대해서 <code>RPMForge</code> 와 <code>OpsView</code> <code>yum repo</code> 를 추가하고, <code>opsview-agent</code> 를 설치합니다. <code>opsview-agent</code> 자체는 기본적인 yum package 에 없는 라이브러리를 참조하기에 <code>RPMForge</code> 를 우선 등록한 것입니다.</p>
+
+<p>  예, 뭐 아무튼 이런 식입니다. 아직 뭐 본격적으로 이런저런 상황에 부딪히면서 검증하고 있고, Rex 자체에서 어떻게 할 수 없으면 직접 패치를 써나가 볼 까합니다.</p>
+
+<p>  그런 의미에서, 오늘 Rex 에 Pull Request 를 하나 보내서 0.25 에 Merge 되었습니다. :-)</p>
+
+<ul>
+<li><a href="https://github.com/JEEN/Rex/commit/1d69a96ba4371dc9e030fab494c887b9126a2c9d">https://github.com/JEEN/Rex/commit/1d69a96ba4371dc9e030fab494c887b9126a2c9d</a></li>
+<li><p><a href="http://github.com/krimdomu/Rex/pull/12">http://github.com/krimdomu/Rex/pull/12</a></p>
+
+<p>사실 위에서 <code>opsview-agent</code> 는 제대로 설치되지 않습니다. 이유는 Pull Request 를 보내면서 봉착한 상황과 대처로 적어놨습니다.</p></li>
+</ul>
+
+
+<blockquote class="twitter-tweet"><p>Rex 무려 GPL v3 였구나&#8230;</p>&mdash; JEEN (@JEEN_LEE) <a href="https://twitter.com/JEEN_LEE/status/169724680612216832" data-datetime="2012-02-15T10:08:11+00:00">February 15, 2012</a></blockquote>
+
+
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[CPAN Module Update]]></title>
