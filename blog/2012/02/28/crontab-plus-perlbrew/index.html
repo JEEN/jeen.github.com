@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>CPANRatings - WebService::Aladdin - Jeen's techlog</title>
+  <title>crontab + perlbrew - Jeen's techlog</title>
   <meta name="author" content="Jeen Lee">
 
   
-  <meta name="description" content="@keedi @gypark 오오오&#8230; 가문의 영광!!!&mdash; JEEN (@JEEN_LEE) February 8, 2012 새벽에 @keedi 님으로부터 트윗을 받고 알게되었습니다. 인생 처음으로 CPANRatings 에서 Rating 을 받아보는 군요 &hellip;">
+  <meta name="description" content="이번 글은 성의가 매우 부족하게 트윗의 열거로 끝낼까 합니다. 질문. perlbrew 설정이 crontab에서도 적용되게 하려면 어떻게 적어줘야 할까요..? .bashrc 에서 perlbrew의 설정파일을 부르게 해 둔 상태인데 crontab으로 실행하는 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://JEEN.github.com/blog/2012/02/08/cpanratings-webservice-aladdin">
+  <link rel="canonical" href="http://JEEN.github.com/blog/2012/02/28/crontab-plus-perlbrew">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -86,7 +86,7 @@
   
   <header>
     
-      <h1 class="entry-title">CPANRatings - WebService::Aladdin</h1>
+      <h1 class="entry-title">Crontab + Perlbrew</h1>
     
     
       <p class="meta">
@@ -102,7 +102,7 @@
   
 
 
-<time datetime="2012-02-08T16:27:00+09:00" pubdate data-updated="true">Feb 8<span>th</span>, 2012</time>
+<time datetime="2012-02-28T21:03:00+09:00" pubdate data-updated="true">Feb 28<span>th</span>, 2012</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -111,30 +111,47 @@
   </header>
 
 
-<div class="entry-content"><blockquote class="twitter-tweet" data-in-reply-to="166961671741521922"><p>@<a href="https://twitter.com/keedi">keedi</a> @<a href="https://twitter.com/gypark">gypark</a> 오오오&#8230; 가문의 영광!!!</p>&mdash; JEEN (@JEEN_LEE) <a href="https://twitter.com/JEEN_LEE/status/167063345000755200" data-datetime="2012-02-08T01:52:59+00:00">February 8, 2012</a></blockquote>
+<div class="entry-content"><p>  이번 글은 성의가 매우 부족하게 트윗의 열거로 끝낼까 합니다.</p>
+
+<blockquote class="twitter-tweet"><p>질문. perlbrew 설정이 crontab에서도 적용되게 하려면 어떻게 적어줘야 할까요..? .bashrc 에서 perlbrew의 설정파일을 부르게 해 둔 상태인데 crontab으로 실행하는 스크립트에는 적용이 안 되어 시스템 펄을 부르네요.</p>&mdash; Raymundo (@gypark) <a href="https://twitter.com/gypark/status/172218904352010240" data-datetime="2012-02-22T07:19:21+00:00">February 22, 2012</a></blockquote>
 
 
-<p> 새벽에 @keedi 님으로부터 트윗을 받고 알게되었습니다. 인생 처음으로 <a href="http://cpanratings.perl.org/">CPANRatings</a> 에서 Rating 을 받아보는 군요. 그것도 별 다섯개.</p>
 
-<ul>
-<li><p><a href="http://cpanratings.perl.org/dist/WebService-Aladdin">http://cpanratings.perl.org/dist/WebService-Aladdin</a></p>
 
-<p>아, CPANRatings 는 CPAN 에 올라온 모듈들에 평가를 남길 수 있는 곳입니다.</p>
+<blockquote class="twitter-tweet" data-in-reply-to="172218904352010240"><p>@<a href="https://twitter.com/gypark">gypark</a> <a href="https://t.co/Q0yfoquc" title="https://gist.github.com/1882996">gist.github.com/1882996</a> 이런 식으로 하면 됩니다.</p>&mdash; envi (@nving) <a href="https://twitter.com/nving/status/172219600216399872" data-datetime="2012-02-22T07:22:07+00:00">February 22, 2012</a></blockquote>
 
-<p>Rating 은 @gypark 님으로부터 였습니다. 제가 얼기설기 CPAN 에 모듈 올려보겠답시고 2007년쯤에 올린 모듈이고, 저 조차도 잠깐 쓰다가 뭐 당장 쓸일이 없어서 내팽개쳐뒀지만 말이죠.. =3</p>
 
-<p>아무튼 의욕이 새록새록 돋습니다.</p>
+<p>{% gist 1882996 example %}</p>
 
-<p> <blockquote class="twitter-tweet" data-in-reply-to="167064715812552705" lang="ko"><p>@<a href="https://twitter.com/gypark">gypark</a> @<a href="https://twitter.com/JEEN_LEE">JEEN_LEE</a> @<a href="https://twitter.com/keedi">keedi</a> <a href="http://t.co/7v2VeWFW" title="http://jof4002.net/%EC%A1%B0%ED%94%84%EC%9D%BC%EA%B8%B0/2012-01-17">jof4002.net/%EC%A1%B0%ED%9…</a> 저 Rating 뒤에는 이런 슬픈 사연이 있습니다.</p>&mdash; SangYeon Jeon (@jof4002) <a href="https://twitter.com/jof4002/status/167174435084828672" data-datetime="2012-02-08T09:14:25+00:00">2월 8, 2012</a></blockquote></p>
+<blockquote class="twitter-tweet" data-in-reply-to="172219600216399872"><p>@<a href="https://twitter.com/nving">nving</a> 어&#8230; 그러면 다른 버전으로 switch 할 때마다 저 변수값을 바꿔줘야 해서&#8230;</p>&mdash; Raymundo (@gypark) <a href="https://twitter.com/gypark/status/172220146138611713" data-datetime="2012-02-22T07:24:17+00:00">February 22, 2012</a></blockquote>
 
-<p>사실 이 Rating 뒤에는 @jof4002 님의 어떤 사연이 있었다고 합니다. 도움이 되었다니 다행입니다.</p></li>
-<li><p><a href="http://jof4002.net/%EC%A1%B0%ED%94%84%EC%9D%BC%EA%B8%B0/2012-01-17">http://jof4002.net/조프일기/2012-01-17</a></p>
 
-<p>오늘은 @keedi 님께 어제 올린 <a href="http://metacpan.org/module/Date::Holidays::KR">Date::Holidays::KR</a> 에 Repository 정보가 없다는 말을 듣고, 흡&#8230; 해서 나머지 모듈들도 전부 Repository 정보를 추가해보려고 합니다.</p>
 
-<p>Date::Holidays::KR 에 Repository 가 없는 이유는 META.yml 이 없어서 였던 듯&#8230;</p></li>
-</ul>
 
+<blockquote class="twitter-tweet" data-in-reply-to="172221017534631936"><p>@<a href="https://twitter.com/nving">nving</a>perlbrew깔린디렉토리/perlbrew/bin/perlbrew exec 스크립트.pl이런 식으로 하니까 되네요~</p>&mdash; Raymundo (@gypark) <a href="https://twitter.com/gypark/status/172224703652564992" data-datetime="2012-02-22T07:42:23+00:00">February 22, 2012</a></blockquote>
+
+
+
+
+<blockquote class="twitter-tweet" data-in-reply-to="172220146138611713"><p>@<a href="https://twitter.com/gypark">gypark</a> @<a href="https://twitter.com/nving">nving</a>님께서 알려주신 방법이 정석(perlbrew와 동일한 방식)이라고 보여집니다. 다만 저라면 환경 변수 설정 없이 명시적으로 실행할 펄 바이너리를 명시하고 실행할 스크립트를 적어줄 것 같습니다.</p>&mdash; keedi (@keedi) <a href="https://twitter.com/keedi/status/172228561166536704" data-datetime="2012-02-22T07:57:43+00:00">February 22, 2012</a></blockquote>
+
+
+
+
+<blockquote class="twitter-tweet"><p>@<a href="https://twitter.com/gypark">gypark</a> @<a href="https://twitter.com/nving">nving</a> 크론에서 돌린다면 사실 어떤 버전이든지 알아서(환경 변수에 따라) 실행되게 하는 것은 위험한 것 같습니다. 더불어 크론으로 돌릴 스크립트라면 환경 변수를 믿지 않도록 작성할 필요도 있을테구요.</p>&mdash; keedi (@keedi) <a href="https://twitter.com/keedi/status/172228854906228737" data-datetime="2012-02-22T07:58:53+00:00">February 22, 2012</a></blockquote>
+
+
+
+
+<blockquote class="twitter-tweet" data-in-reply-to="172227703838220289"><p>@<a href="https://twitter.com/nving">nving</a> @<a href="https://twitter.com/gypark">gypark</a> 그렇게 실행할 경우 지금 현재 자신이 switch 하는 perl 버전에 따라 cronᅟ으로 돌릴 스크립트가 영향을 받지 않나요? 그렇다면 어떤 버전에는 설치된 모듈이 있고 어떤 버전에는 없다면 문제가 생길 것 같아요.</p>&mdash; keedi (@keedi) <a href="https://twitter.com/keedi/status/172229942577336320" data-datetime="2012-02-22T08:03:12+00:00">February 22, 2012</a></blockquote>
+
+
+
+
+<blockquote class="twitter-tweet" data-in-reply-to="172234678059794432"><p>@<a href="https://twitter.com/keedi">keedi</a> @<a href="https://twitter.com/nving">nving</a> RSS만드는 스크립트들을, 5.14에서 테스트했더니 와장창 망가지더라고요. Mechanize쪽이 어느 순간부터 반환값을 디코드해서 반환하는 터라. 그래서 거기에 맞춰 고쳤더니 정작 크론에서는 5.8 상에서 도는 바람에 OTL</p>&mdash; Raymundo (@gypark) <a href="https://twitter.com/gypark/status/172237570988703745" data-datetime="2012-02-22T08:33:31+00:00">February 22, 2012</a></blockquote>
+
+
+<p> 이상 날로먹는 crontab + perlbrew 끝.</p>
 </div>
 
 
@@ -157,12 +174,12 @@
   
 
 
-<time datetime="2012-02-08T16:27:00+09:00" pubdate data-updated="true">Feb 8<span>th</span>, 2012</time>
+<time datetime="2012-02-28T21:03:00+09:00" pubdate data-updated="true">Feb 28<span>th</span>, 2012</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/cpan/'>cpan</a>, <a class='category' href='/blog/categories/perl/'>perl</a>
+    <a class='category' href='/blog/categories/crontab/'>crontab</a>, <a class='category' href='/blog/categories/perl/'>perl</a>
   
 </span>
 
@@ -171,7 +188,7 @@
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://JEEN.github.com/blog/2012/02/08/cpanratings-webservice-aladdin/" data-via="JEEN_LEE" data-counturl="http://JEEN.github.com/blog/2012/02/08/cpanratings-webservice-aladdin/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://JEEN.github.com/blog/2012/02/28/crontab-plus-perlbrew/" data-via="JEEN_LEE" data-counturl="http://JEEN.github.com/blog/2012/02/28/crontab-plus-perlbrew/" >Tweet</a>
   
   
   
@@ -182,10 +199,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2012/02/07/date-holidays-kr-0-dot-01-released/" title="Previous Post: Date::Holidays::KR Released">&laquo; Date::Holidays::KR Released</a>
+        <a class="basic-alignment left" href="/blog/2012/02/15/date-holidays-kr-pull-requested/" title="Previous Post: Date::Holidays::KR Pull Requested">&laquo; Date::Holidays::KR Pull Requested</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2012/02/09/cpan-module-update/" title="next Post: CPAN Module Update">CPAN Module Update &raquo;</a>
       
     </p>
   </footer>
@@ -297,8 +312,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://JEEN.github.com/blog/2012/02/08/cpanratings-webservice-aladdin/';
-        var disqus_url = 'http://JEEN.github.com/blog/2012/02/08/cpanratings-webservice-aladdin/';
+        var disqus_identifier = 'http://JEEN.github.com/blog/2012/02/28/crontab-plus-perlbrew/';
+        var disqus_url = 'http://JEEN.github.com/blog/2012/02/28/crontab-plus-perlbrew/';
         var disqus_script = 'embed.js';
       
     (function () {

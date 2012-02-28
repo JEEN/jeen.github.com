@@ -9,8 +9,7 @@
   <meta name="author" content="Jeen Lee">
 
   
-  <meta name="description" content="Date::Holidays::KR Released
-CPAN Module Update 지난번 야매로 간만에 CPAN 에 올린 Date::Holidays::KR 에 버그가 발견되었습니다. 음력을 만만하게 본 탓이 컸습니다. 거기에 더해서 holidays() 함수도 &hellip;">
+  <meta name="description" content="이번 글은 성의가 매우 부족하게 트윗의 열거로 끝낼까 합니다. 질문. perlbrew 설정이 crontab에서도 적용되게 하려면 어떻게 적어줘야 할까요..? .bashrc 에서 perlbrew의 설정파일을 부르게 해 둔 상태인데 crontab으로 실행하는 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -84,6 +83,84 @@ CPAN Module Update 지난번 야매로 간만에 CPAN 에 올린 Date::Holidays:
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/02/28/crontab-plus-perlbrew/">Crontab + Perlbrew</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-02-28T21:03:00+09:00" pubdate data-updated="true">Feb 28<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/02/28/crontab-plus-perlbrew/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>  이번 글은 성의가 매우 부족하게 트윗의 열거로 끝낼까 합니다.</p>
+
+<blockquote class="twitter-tweet"><p>질문. perlbrew 설정이 crontab에서도 적용되게 하려면 어떻게 적어줘야 할까요..? .bashrc 에서 perlbrew의 설정파일을 부르게 해 둔 상태인데 crontab으로 실행하는 스크립트에는 적용이 안 되어 시스템 펄을 부르네요.</p>&mdash; Raymundo (@gypark) <a href="https://twitter.com/gypark/status/172218904352010240" data-datetime="2012-02-22T07:19:21+00:00">February 22, 2012</a></blockquote>
+
+
+
+
+<blockquote class="twitter-tweet" data-in-reply-to="172218904352010240"><p>@<a href="https://twitter.com/gypark">gypark</a> <a href="https://t.co/Q0yfoquc" title="https://gist.github.com/1882996">gist.github.com/1882996</a> 이런 식으로 하면 됩니다.</p>&mdash; envi (@nving) <a href="https://twitter.com/nving/status/172219600216399872" data-datetime="2012-02-22T07:22:07+00:00">February 22, 2012</a></blockquote>
+
+
+<p>{% gist 1882996 example %}</p>
+
+<blockquote class="twitter-tweet" data-in-reply-to="172219600216399872"><p>@<a href="https://twitter.com/nving">nving</a> 어&#8230; 그러면 다른 버전으로 switch 할 때마다 저 변수값을 바꿔줘야 해서&#8230;</p>&mdash; Raymundo (@gypark) <a href="https://twitter.com/gypark/status/172220146138611713" data-datetime="2012-02-22T07:24:17+00:00">February 22, 2012</a></blockquote>
+
+
+
+
+<blockquote class="twitter-tweet" data-in-reply-to="172221017534631936"><p>@<a href="https://twitter.com/nving">nving</a>perlbrew깔린디렉토리/perlbrew/bin/perlbrew exec 스크립트.pl이런 식으로 하니까 되네요~</p>&mdash; Raymundo (@gypark) <a href="https://twitter.com/gypark/status/172224703652564992" data-datetime="2012-02-22T07:42:23+00:00">February 22, 2012</a></blockquote>
+
+
+
+
+<blockquote class="twitter-tweet" data-in-reply-to="172220146138611713"><p>@<a href="https://twitter.com/gypark">gypark</a> @<a href="https://twitter.com/nving">nving</a>님께서 알려주신 방법이 정석(perlbrew와 동일한 방식)이라고 보여집니다. 다만 저라면 환경 변수 설정 없이 명시적으로 실행할 펄 바이너리를 명시하고 실행할 스크립트를 적어줄 것 같습니다.</p>&mdash; keedi (@keedi) <a href="https://twitter.com/keedi/status/172228561166536704" data-datetime="2012-02-22T07:57:43+00:00">February 22, 2012</a></blockquote>
+
+
+
+
+<blockquote class="twitter-tweet"><p>@<a href="https://twitter.com/gypark">gypark</a> @<a href="https://twitter.com/nving">nving</a> 크론에서 돌린다면 사실 어떤 버전이든지 알아서(환경 변수에 따라) 실행되게 하는 것은 위험한 것 같습니다. 더불어 크론으로 돌릴 스크립트라면 환경 변수를 믿지 않도록 작성할 필요도 있을테구요.</p>&mdash; keedi (@keedi) <a href="https://twitter.com/keedi/status/172228854906228737" data-datetime="2012-02-22T07:58:53+00:00">February 22, 2012</a></blockquote>
+
+
+
+
+<blockquote class="twitter-tweet" data-in-reply-to="172227703838220289"><p>@<a href="https://twitter.com/nving">nving</a> @<a href="https://twitter.com/gypark">gypark</a> 그렇게 실행할 경우 지금 현재 자신이 switch 하는 perl 버전에 따라 cronᅟ으로 돌릴 스크립트가 영향을 받지 않나요? 그렇다면 어떤 버전에는 설치된 모듈이 있고 어떤 버전에는 없다면 문제가 생길 것 같아요.</p>&mdash; keedi (@keedi) <a href="https://twitter.com/keedi/status/172229942577336320" data-datetime="2012-02-22T08:03:12+00:00">February 22, 2012</a></blockquote>
+
+
+
+
+<blockquote class="twitter-tweet" data-in-reply-to="172234678059794432"><p>@<a href="https://twitter.com/keedi">keedi</a> @<a href="https://twitter.com/nving">nving</a> RSS만드는 스크립트들을, 5.14에서 테스트했더니 와장창 망가지더라고요. Mechanize쪽이 어느 순간부터 반환값을 디코드해서 반환하는 터라. 그래서 거기에 맞춰 고쳤더니 정작 크론에서는 5.8 상에서 도는 바람에 OTL</p>&mdash; Raymundo (@gypark) <a href="https://twitter.com/gypark/status/172237570988703745" data-datetime="2012-02-22T08:33:31+00:00">February 22, 2012</a></blockquote>
+
+
+<p> 이상 날로먹는 crontab + perlbrew 끝.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1384,206 +1461,6 @@ CPAN Module Update 지난번 야매로 간만에 CPAN 에 올린 Date::Holidays:
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/01/05/test-more-use-subtest-instead-of-block/">Test::More - Use &#8216;Subtest&#8217; Instead of {} Block</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-01-05T20:33:00+09:00" pubdate data-updated="true">Jan 5<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/01/05/test-more-use-subtest-instead-of-block/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>  여태껏 테스트코드를 써나가면서 그냥 {} 블록안에 일정한 흐름의 테스트 코드를 적곤 했었습니다.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="k">use</span> <span class="nn">Test::</span><span class="n">More</span><span class="p">;</span>
-</span><span class='line'><span class="k">use</span> <span class="nn">HTTP::Request::</span><span class="n">Common</span><span class="p">;</span>
-</span><span class='line'><span class="k">use</span> <span class="nn">Catalyst::</span><span class="n">Test</span> <span class="s">&#39;MyApp::Web&#39;</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'><span class="c1"># Access /</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>    <span class="k">my</span> <span class="nv">$res</span> <span class="o">=</span> <span class="n">request</span><span class="p">(</span><span class="s">&#39;/&#39;</span><span class="p">);</span>
-</span><span class='line'>    <span class="n">ok</span><span class="p">(</span><span class="nv">$res</span><span class="o">-&gt;</span><span class="n">is_success</span><span class="p">,</span> <span class="s">&quot;Request should be succeed&quot;</span><span class="p">);</span>
-</span><span class='line'>    <span class="n">ok</span><span class="p">(</span><span class="nv">$res</span><span class="o">-&gt;</span><span class="n">header</span><span class="p">(</span><span class="s">&#39;.......&#39;</span><span class="p">),</span> <span class="s">&#39;Header xxxxx exist&#39;</span><span class="p">);</span>
-</span><span class='line'>    <span class="n">like</span><span class="p">(</span><span class="nv">$res</span><span class="o">-&gt;</span><span class="n">content</span><span class="p">,</span> <span class="sx">qr|some sentences|</span><span class="p">,</span> <span class="s">&quot;Found some sentences&quot;</span><span class="p">)</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="c1"># Login</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>    <span class="k">my</span> <span class="nv">$req</span> <span class="o">=</span> <span class="n">POST</span><span class="p">(</span><span class="s">&#39;/login&#39;</span><span class="p">,</span> <span class="p">[</span> <span class="s">&#39;username&#39;</span> <span class="o">=&gt;</span> <span class="s">&#39;blahblah&#39;</span><span class="p">,</span> <span class="s">&#39;password&#39;</span> <span class="o">=&gt;</span> <span class="s">&#39;blahblah&#39;</span> <span class="p">]);</span>
-</span><span class='line'>    <span class="k">my</span> <span class="nv">$res</span> <span class="o">=</span> <span class="n">request</span><span class="p">(</span><span class="nv">$req</span><span class="p">);</span>
-</span><span class='line'>    <span class="n">ok</span><span class="p">(</span><span class="nv">$res</span><span class="o">-&gt;</span><span class="n">is_success</span><span class="p">,</span> <span class="s">&quot;Request should be suceed&quot;</span><span class="p">);</span>
-</span><span class='line'>    <span class="o">....</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="c1"># some action</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>    <span class="o">...</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>  일단 뭐 {} 블록으로 각 action 에 대한 접근결과를 테스트하고, <code>#</code> 로 주석표시를 하면서 하나둘 하나둘 각 블록에 <code>$req</code>, <code>$res</code> 를 추가했었습니다. 일단 뭐 {} 블록으로 묶으면서 <code>$req</code>, <code>$res</code> 따위의 변수의 재정의 등에 관한 경고같은 것이 안나와서 좋고, 제대로 분류가 되는 느낌이기도 했습니다.</p>
-
-<h3>그냥 <code>subtest</code> 를 사용하면 어떨까?</h3>
-
-<p>  그러는 도중에 <a href="http://search.cpan.org/perldoc?Test::More">Test::More 매뉴얼</a>을 읽어보다가 <code>subtest</code> 를 사용할 수 있다는 것을 알게 되었습니다.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="k">use</span> <span class="nn">HTTP::Request::</span><span class="n">Common</span><span class="p">;</span>
-</span><span class='line'><span class="k">use</span> <span class="nn">Catalyst::</span><span class="n">Test</span> <span class="s">&#39;MyApp::Web&#39;</span><span class="p">;</span>
-</span><span class='line'><span class="k">use</span> <span class="nn">Test::</span><span class="n">More</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">subtest</span> <span class="s">&#39;access to /&#39;</span> <span class="o">=&gt;</span> <span class="k">sub </span><span class="p">{</span>
-</span><span class='line'>    <span class="k">my</span> <span class="nv">$res</span> <span class="o">=</span> <span class="n">request</span><span class="p">(</span><span class="s">&#39;/&#39;</span><span class="p">);</span>
-</span><span class='line'>    <span class="n">ok</span><span class="p">(</span><span class="nv">$res</span><span class="o">-&gt;</span><span class="n">is_success</span><span class="p">,</span> <span class="s">&quot;Request should be succeed&quot;</span><span class="p">);</span>
-</span><span class='line'>    <span class="n">ok</span><span class="p">(</span><span class="nv">$res</span><span class="o">-&gt;</span><span class="n">header</span><span class="p">(</span><span class="s">&#39;.......&#39;</span><span class="p">),</span> <span class="s">&#39;Header xxxxx exist&#39;</span><span class="p">);</span>
-</span><span class='line'>    <span class="n">like</span><span class="p">(</span><span class="nv">$res</span><span class="o">-&gt;</span><span class="n">content</span><span class="p">,</span> <span class="sx">qr|some sentences|</span><span class="p">,</span> <span class="s">&quot;Found some sentences&quot;</span><span class="p">)</span>
-</span><span class='line'><span class="p">};</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">subtest</span> <span class="s">&#39;Login&#39;</span> <span class="o">=&gt;</span> <span class="k">sub </span><span class="p">{</span>
-</span><span class='line'>    <span class="k">my</span> <span class="nv">$req</span> <span class="o">=</span> <span class="n">POST</span><span class="p">(</span><span class="s">&#39;/login&#39;</span><span class="p">,</span> <span class="p">[</span> <span class="s">&#39;username&#39;</span> <span class="o">=&gt;</span> <span class="s">&#39;blahblah&#39;</span><span class="p">,</span> <span class="s">&#39;password&#39;</span> <span class="o">=&gt;</span> <span class="s">&#39;blahblah&#39;</span> <span class="p">]);</span>
-</span><span class='line'>    <span class="k">my</span> <span class="nv">$res</span> <span class="o">=</span> <span class="n">request</span><span class="p">(</span><span class="nv">$req</span><span class="p">);</span>
-</span><span class='line'>    <span class="n">ok</span><span class="p">(</span><span class="nv">$res</span><span class="o">-&gt;</span><span class="n">is_success</span><span class="p">,</span> <span class="s">&quot;Request should be suceed&quot;</span><span class="p">);</span>
-</span><span class='line'>    <span class="o">....</span>
-</span><span class='line'><span class="p">};</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>  <code>subtest</code> 를 사용하면서 코드는 위처럼 바뀌었습니다. <code>#</code> 로 주석처리를 할 필요도 없고, 해당 <code>subtest</code> 마다 명확하게 무엇을 하는 지 확실하게 의미있는 <code>subtest</code> 의 이름으로 정해줄 수 있었습니다.</p>
-
-<p>  <code>subtest</code> 로 테스트를 썼을 경우는 TAP 결과는 다음과 같습니다.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>prove t/myapp.t
-</span><span class='line'>ok 1 - access to /
-</span><span class='line'>    ok 1 - Request should be succeed
-</span><span class='line'>    ok 2 - Header xxxxx exist
-</span><span class='line'>    ok 3 - Found some sentences
-</span><span class='line'>    1..3
-</span><span class='line'>ok 2 - Login
-</span><span class='line'>    ok 1 - Request should be suceed
-</span><span class='line'>    ...
-</span><span class='line'>    1..3
-</span><span class='line'>....
-</span><span class='line'>1..3
-</span><span class='line'>ok
-</span><span class='line'>All tests successful.
-</span><span class='line'><span class="nv">Files</span><span class="o">=</span>1, <span class="nv">Tests</span><span class="o">=</span>3, 10 wallclock secs <span class="o">(</span> 0.07 usr  0.01 sys +  6.16 cusr  0.61 <span class="nv">csys</span> <span class="o">=</span>  6.85 CPU<span class="o">)</span>
-</span><span class='line'>Result: PASS
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>  전체 테스트 횟수는 <code>subtest</code> 안의 테스트 항목이 아니라, <code>subtest</code> 의 갯수가 되는 것입니다.</p>
-
-<p>  그리고 <code>subtest</code> 를 사용하지 않고 {} 블록을 이용해서 flat 하게 정의했을 때는 아래와 같습니다.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>...
-</span><span class='line'>ok 1 - Request should be succeed
-</span><span class='line'>ok 2 - Header xxxxx exist
-</span><span class='line'>ok 3 - Found some sentences
-</span><span class='line'>ok 4 - Request should be suceed
-</span><span class='line'> ...
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>  테스트 항목 1,4 번의 메시지가 같기 때문에 매번 달리 지정해줘야 되는 수고가 발생하죠. 그리고 각각의 테스트 항목 하나하나가 테스트 갯수가 되는 것입니다.</p>
-
-<p>  사실은 위의 Jenkins 상의 <code>Test Result Trend</code> 의 그래프가 어느 순간 갑자기 뚝 떨어지길래, 어라 이상하다 싶어서 살펴본 결과, <code>subtest</code> 기준으로 카운트되어있는 것을 확인했습니다.</p>
-
-<p><img src="https://lh5.googleusercontent.com/-TSX-Kd5-fX4/TwWRjvHx2LI/AAAAAAAAA94/pYrEEgHBZic/test-result-trend.png" alt="Jenkins Test Result Trend 의 낙폭" /></p>
-
-<p>  대충 위의 <code>#58</code> 번 빌드가 그 쯤이 되겠네요.</p>
-
-<p>  아무튼 Jenkins 도입이후에 좀 더 테스트코드에 더 신경을 쓰고 있는 요즘입니다.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -1599,6 +1476,10 @@ CPAN Module Update 지난번 야매로 간만에 CPAN 에 올린 Date::Holidays:
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2012/02/28/crontab-plus-perlbrew/">crontab + perlbrew</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2012/02/15/date-holidays-kr-pull-requested/">Date::Holidays::KR Pull Requested</a>
       </li>
     
@@ -1612,10 +1493,6 @@ CPAN Module Update 지난번 야매로 간만에 CPAN 에 올린 Date::Holidays:
     
       <li class="post">
         <a href="/blog/2012/02/08/cpanratings-webservice-aladdin/">CPANRatings - WebService::Aladdin</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/02/07/date-holidays-kr-0-dot-01-released/">Date::Holidays::KR Released</a>
       </li>
     
   </ul>
