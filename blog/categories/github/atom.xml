@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: github | Jeen's techlog]]></title>
+  <link href="http://JEEN.github.com/blog/categories/github/atom.xml" rel="self"/>
+  <link href="http://JEEN.github.com/"/>
+  <updated>2012-02-28T21:11:32+09:00</updated>
+  <id>http://JEEN.github.com/</id>
+  <author>
+    <name><![CDATA[Jeen Lee]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Rex Pull Request]]></title>
+    <link href="http://JEEN.github.com/blog/2012/02/15/rex-pull-request/"/>
+    <updated>2012-02-15T23:21:00+09:00</updated>
+    <id>http://JEEN.github.com/blog/2012/02/15/rex-pull-request</id>
+    <content type="html"><![CDATA[<ul>
+<li><p><a href="http://rexify.org/">(R)?ex - A simple framework to simplify systemadministration</a></p>
+
+<p>최근에 여러 서버 일괄 작업을 위해서 <a href="http://metacpan.org/module/Rex">Rex</a> 로 이것저것 해보고 있는 중입니다. Rex 는 Ruby 쪽에서 많이 쓰인다는 Chef 같은 부류의 툴이랄까요, 아무튼 그런 류의 일을 Perl 로 할 수 있게 하는 툴입니다.</p>
+
+<p>Rex 에 속한 네임스페이스를 살펴보면 다양한 OS 의 경우에 상응하는 다양한  케이스를 고려하고 있는 것 같습니다.</p>
+
+<p>오늘 제가 쓴 Rex 의 가벼운 예제로는 다음과 같습니다.</p></li>
+</ul>
+
+
+<p>``` perl Rexfile
+user 'user';
+password 'password';</p>
+
+<p>pass_auth;</p>
+
+<p>group => "sweet-vms" => "vm[01..10]";</p>
+
+<p>require Rex::Init;</p>
+
+<p>```</p>
+
+<p>``` perl Rex::Init
+package Rex::Init;
+use Rex::Commands;
+use Rex::Commands::Run;
+use Rex::Commands::Pkg;
+use Rex::Commands::Iptables;</p>
+
+<p>desc 'Add yum repo';
+task "add_yum_repo", group => "sweet-vms", sub {</p>
+
+<pre><code>run("yum -y install http://pkgs.repoforge.org/rpmforge-release/rpmforge-release-0.5.2-2.el5.rf.x86_64.rpm");
+print "Added RPMForge Repo on /etc/yum.repos.d/\n";
+
+repository add =&gt; "Opsview",
+    url =&gt; 'http://downloads.opsera.com/opsview-community/latest/yum/centos/$releasever/$basearch';
+print "Added OpsView Repo on /etc/yum.repos.d/\n";
+
+update_package_db;
+print "Updated yum package DB\n";
+</code></pre>
+
+<p>};</p>
+
+<p>desc 'Install OpsView-Agent';
+task "install_opsview_agent", group => "sweet-vms", sub {</p>
+
+<pre><code>install package =&gt; 'opsview-agent';
+print "Installed [opsview-agent]\n";
+</code></pre>
+
+<p>};</p>
+
+<p>desc 'Open NRPE(5666) Port';
+task 'open_nrpe_port', group => "sweet-vms", sub {</p>
+
+<pre><code>open_port 5666;
+</code></pre>
+
+<p>};
+```</p>
+
+<p>이렇게 <code>Rexfile</code> 에 각 서버 그룹과 SSH 접속 계정, 그리고 <code>Rex::Init</code> 에 그 그룹에 대한 작업(Task) 를 정의합니다.</p>
+
+<p>  위처럼 정의한 작업에 대해서,</p>
+
+<p><code>bash
+$ rex -T
+Tasks
+  Init:add_yum_repo              Add yum repo
+  Init:install_opsview_agent     Install OpsView-Agent
+  Init:open_nrpe_port            Open NRPE(5666) Port
+Batches
+</code></p>
+
+<p>  <code>rex -T</code> 를 통해서 작동할 수 있는 Task 의 리스트를 받을 수 있습니다.</p>
+
+<p>  그리고,</p>
+
+<p><code>bash
+$ rex 'Init:add_yum_repo' 'Init:install_opsview_agent'
+</code></p>
+
+<p>  이런식으로 동작할 작업들을 지정해줌으로, 위의 <code>sweet-vms</code> 그룹의 vm01 부터 vm10 의 의 열대의 서버에 대해서 <code>RPMForge</code> 와 <code>OpsView</code> <code>yum repo</code> 를 추가하고, <code>opsview-agent</code> 를 설치합니다. <code>opsview-agent</code> 자체는 기본적인 yum package 에 없는 라이브러리를 참조하기에 <code>RPMForge</code> 를 우선 등록한 것입니다.</p>
+
+<p>  예, 뭐 아무튼 이런 식입니다. 아직 뭐 본격적으로 이런저런 상황에 부딪히면서 검증하고 있고, Rex 자체에서 어떻게 할 수 없으면 직접 패치를 써나가 볼 까합니다.</p>
+
+<p>  그런 의미에서, 오늘 Rex 에 Pull Request 를 하나 보내서 0.25 에 Merge 되었습니다. :-)</p>
+
+<ul>
+<li><a href="https://github.com/JEEN/Rex/commit/1d69a96ba4371dc9e030fab494c887b9126a2c9d">https://github.com/JEEN/Rex/commit/1d69a96ba4371dc9e030fab494c887b9126a2c9d</a></li>
+<li><p><a href="http://github.com/krimdomu/Rex/pull/12">http://github.com/krimdomu/Rex/pull/12</a></p>
+
+<p>사실 위에서 <code>opsview-agent</code> 는 제대로 설치되지 않습니다. 이유는 Pull Request 를 보내면서 봉착한 상황과 대처로 적어놨습니다.</p></li>
+</ul>
+
+
+<blockquote class="twitter-tweet"><p>Rex 무려 GPL v3 였구나...</p>&mdash; JEEN (@JEEN_LEE) <a href="https://twitter.com/JEEN_LEE/status/169724680612216832" data-datetime="2012-02-15T10:08:11+00:00">February 15, 2012</a></blockquote>
+
+
+
+]]></content>
+  </entry>
+  
+</feed>
