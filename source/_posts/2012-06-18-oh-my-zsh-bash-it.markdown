@@ -1,0 +1,17 @@
+---
+layout: post
+title: "oh-my-zsh → bash-it"
+date: 2012-06-18 17:42
+comments: true
+categories: [ bash, zsh ]
+---
+
+ 한동안 zsh 을 사용하면서 oh-my-zsh 로 화려한 셸환경을 이용하고 있었는데요, 언제부턴가 grep warning 이 뜨기도 하고, bash 위주의 작업환경에 맞춘 기사들이 소개되기에 이르러 결국 zsh 을 버리고 다시 bash 로 돌아오게 되었습니다.
+
+- [robbyrussell/oh-my-zsh•GitHub](https://github.com/robbyrussell/oh-my-zsh)
+
+ 하지만 그래도 역시 oh-my-zsh 을 사용하면서 접한 경험들을 버릴 수가 없기에 bash 에서 그런 류의 확장이 없을까 검색해본 결과 bash-it 이라는 것이 있다는 것을 확인했습니다.
+
+- [revans/bash-it•GitHub](https://github.com/revans/bash-it)
+
+ 솔직히 oh-my-zsh 에 비해서는 그렇게 만족스럽지는 못합니다. :-(

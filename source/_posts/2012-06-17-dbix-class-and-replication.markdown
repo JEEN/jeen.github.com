@@ -49,11 +49,6 @@ categories: [ perl,dbix-class ]
             dsn      => "dbi:mysql:myapp:192.168.0.51",
             user     => "user",
             password => "whatthehell",
-            RaiseError        => 1,
-            AutoCommit        => 1,
-            mysql_enable_utf8 => 1,
-            on_connect_do     => ["SET NAMES utf8"],
-            quote_char        => q{`},
         },
         ....
     ]);
@@ -73,7 +68,7 @@ categories: [ perl,dbix-class ]
         return ($status->{Slave_IO_Running} eq 'Yes') && ($status->{Slave_SQL_Running} eq 'Yes');
     }
 
- `DBIx::Class::Storage::DBI::mysql` 에서 확인할 수 있스비다만, `show slave status` 를 날려서 Slave_IO_Running, Slave_SQL_Running 값을 보고 Replication 체크를 수행하고 있는 것이죠.  뭐 물론 mysql 의 경우입니다만, 다른 경우에는 어떻게 하는 지 확인을 못해봤습니다.
+ `DBIx::Class::Storage::DBI::mysql` 에서 확인할 수 있습니다만, `show slave status` 를 날려서 Slave_IO_Running, Slave_SQL_Running 값을 보고 Replication 체크를 수행하고 있는 것이죠.  뭐 물론 mysql 의 경우입니다만, 만약 DBD::* 에서 is_replicating 이 정의가 되어 있지 않다면 master 로의 fail-over 같은 건 동작하지 않습니다.
 
  화면상에서 이뤄지는 각각의 쿼리들이 정말로 제대로 가고 있을까 확인해보고 싶을 경우도 있을 겁니다. 그때는...
 
