@@ -76,12 +76,13 @@ if (scalar grep { $user_ip =~ $_ }
            map { $rw->convert($_) } qw{ 211.123.128.* 211.123.121.10* }) {
     print "OK";
 }
+```
 
  뭐 사실 이런 코드를 적당한 메소드로 만들어서 사용하고 있습니다. IP제한같은 시나리오에는 사실 Net::IPAddrRanges 를 사용하는 게 좋아보이기는 합니다만... 최근에 `Regexp::Wildcards` 를 사용하는 경우가 있었는데...
 
  유저의 권한별로 페이지의 접근을 제어하고 싶다라는 것이었죠.
 
-``` YAML
+``` yaml
   ROLE1: [ /admin/user/list, /admin/user/*/download ]
   ROLE2: [ /admin/user/* ]
 ```
