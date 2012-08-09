@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Facebook | Jeen's techlog]]></title>
+  <link href="http://JEEN.github.com/blog/categories/facebook/atom.xml" rel="self"/>
+  <link href="http://JEEN.github.com/"/>
+  <updated>2012-08-09T16:45:34+09:00</updated>
+  <id>http://JEEN.github.com/</id>
+  <author>
+    <name><![CDATA[Jeen Lee]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Export Facebook Event Attending List - perl-kr TeaTime]]></title>
+    <link href="http://JEEN.github.com/blog/2012/07/26/export-facebook-event-attending-list-perl-kr-teatime/"/>
+    <updated>2012-07-26T14:22:00+09:00</updated>
+    <id>http://JEEN.github.com/blog/2012/07/26/export-facebook-event-attending-list-perl-kr-teatime</id>
+    <content type="html"><![CDATA[<p> 지난번 1회 티타임때의 문제가 제대로 참가비 징수를 못해서 비용정산에 어려움이 있었는데,
+이 문제를 해결하기 위해서 간단하게 참가자 리스트를 A4 용지로 뽑아내서 체크하도록 하는 건 어떨까 하는 생각이 있었습니다.</p>
+
+<p> <a href="http://jeen.tistory.com/entry/perlkr-%ED%8B%B0%ED%83%80%EC%9E%84-2-%EC%84%B1%ED%99%A9%EB%A6%AC%EC%97%90-%EB%81%9D%EB%82%AC%EC%8A%B5%EB%8B%88%EB%8B%A4">#perl-kr 티타임 Vol.2</a></p>
+
+<p> 아무튼 그런 생각을 잠깐 했다가 해볼까 해서 아래처럼 코드를 써넣었습니다.</p>
+
+<p>``` perl
+use strict;
+use warnings;
+use Text::Xslate;
+use Data::Section::Simple;
+use Facebook::Graph;</p>
+
+<p>my $fb = Facebook::Graph->new;
+$fb->access_token("YOUR ACCESS TOKEN");
+my $r = $fb->fetch('466164950078338/attending');
+my @attendees;
+for my $person (@{ $r->{data} }) {</p>
+
+<pre><code>my $f = $fb-&gt;fetch($person-&gt;{id});
+$f-&gt;{profile_image} = $fb-&gt;picture($person-&gt;{id})-&gt;get_large-&gt;uri_as_string;  
+push @attendees, $f;
+</code></pre>
+
+<p>}
+push @attendees, {} for (1..3);</p>
+
+<p>my $tx  = Text::Xslate->new(</p>
+
+<pre><code>syntax =&gt; 'TTerse',
+module =&gt; [ 'Text::Xslate::Bridge::TT2Like' ],
+path =&gt; [
+    Data::Section::Simple-&gt;new()-&gt;get_data_section()
+],
+</code></pre>
+
+<p>);</p>
+
+<p>print $tx->render('template.tx', { attendees => \@attendees });</p>
+
+<p><strong>DATA</strong></p>
+
+<p>@@ template.tx
+<html>
+ <head>
+   <title>#perl-kr 티타임 #2</title>
+   <style></p>
+
+<pre><code> [% INCLUDE "css.tx" %]
+</code></pre>
+
+<p>   </style>
+ </head>
+ <body>
+   <h1>※ #perl-kr 티타임 #2</h1>
+   <table class="table table-striped table-bordered" style="width:50%"></p>
+
+<pre><code> &lt;thead&gt;
+   &lt;tr&gt;
+     &lt;th class="span1"&gt;&amp;nbsp;&lt;/th&gt;
+     &lt;th class="span1"&gt;&amp;nbsp;&lt;/th&gt;
+     &lt;th class="span2"&gt;Name&lt;/th&gt; 
+     &lt;th class="span1"&gt;Attend?&lt;/th&gt;
+   &lt;/tr&gt;
+ &lt;/thead&gt;
+ &lt;tbody&gt;
+   [% FOREACH p IN attendees %]
+   &lt;tr&gt;
+     &lt;td&gt;[% loop.count %]&lt;/td&gt;
+     &lt;td&gt;&lt;img src="[% p.profile_image %]" width="30" height="30" /&gt;&lt;/td&gt;
+     &lt;td&gt;[% p.name %][% IF p.username %]([% p.username %])[% END %]&lt;/td&gt; 
+     &lt;td&gt;&lt;/td&gt;
+   &lt;/tr&gt;
+   [% END %] 
+ &lt;/tbody&gt;
+</code></pre>
+
+<p>   </table>
+ </body>
+</html></p>
+
+<p>@@ css.tx
+table {
+  max-width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+}</p>
+
+<p>.table {
+  width: 100%;
+  margin-bottom: 18px;
+}
+.table th, .table td {
+  padding: 8px;
+  line-height: 18px;
+  text-align: left;
+  vertical-align: top;
+  border-top: 1px solid #ddd;
+}
+.table th {
+  font-weight: bold;
+}
+.table thead th {
+  vertical-align: bottom;
+}
+.table thead:first-child tr th, .table thead:first-child tr td {
+  border-top: 0;
+}
+.table tbody + tbody {
+  border-top: 2px solid #ddd;
+}
+.table-condensed th, .table-condensed td {
+  padding: 4px 5px;
+}</p>
+
+<p>.table-bordered {
+  border: 1px solid #ddd;
+  border-collapse: separate;
+  <em>border-collapse: collapsed;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+}
+.table-bordered th + th, .table-bordered td + td, .table-bordered th + td, .table-bordered td + th {
+  border-left: 1px solid #ddd;
+}
+.table-bordered thead:first-child tr:first-child th, .table-bordered tbody:first-child tr:first-child th, .table-bordered tbody:first-child tr:first-child td {
+  border-top: 0;
+}
+/</em> line 75, ../../../../../../.rvm/gems/ruby-1.9.2-p290/gems/bootstrap-sass-2.0.1/vendor/assets/stylesheets/bootstrap/_tables.scss */
+.table-bordered thead:first-child tr:first-child th:first-child, .table-bordered tbody:first-child tr:first-child td:first-child {
+  -webkit-border-radius: 4px 0 0 0;
+  -moz-border-radius: 4px 0 0 0;
+  border-radius: 4px 0 0 0;
+}
+.table-bordered thead:first-child tr:first-child th:last-child, .table-bordered tbody:first-child tr:first-child td:last-child {
+  -webkit-border-radius: 0 4px 0 0;
+  -moz-border-radius: 0 4px 0 0;
+  border-radius: 0 4px 0 0;
+}
+.table-bordered thead:last-child tr:last-child th:first-child, .table-bordered tbody:last-child tr:last-child td:first-child {
+  -webkit-border-radius: 0 0 0 4px;
+  -moz-border-radius: 0 0 0 4px;
+  border-radius: 0 0 0 4px;
+}
+.table-bordered thead:last-child tr:last-child th:last-child, .table-bordered tbody:last-child tr:last-child td:last-child {
+  -webkit-border-radius: 0 0 4px 0;
+  -moz-border-radius: 0 0 4px 0;
+  border-radius: 0 0 4px 0;
+}
+.table-striped tbody tr:nth-child(odd) td, .table-striped tbody tr:nth-child(odd) th {
+  background-color: #f9f9f9;
+}</p>
+
+<p>.table tbody tr:hover td, .table tbody tr:hover th {
+  background-color: #f5f5f5;
+}</p>
+
+<p>table .span1 {
+  float: none;
+  width: 44px;
+  margin-left: 0;
+}
+table .span2 {
+  float: none;
+  width: 124px;
+  margin-left: 0;
+}
+table .span3 {
+  float: none;
+  width: 204px;
+  margin-left: 0;
+}
+table .span4 {
+  float: none;
+  width: 284px;
+  margin-left: 0;
+}
+table .span5 {
+  float: none;
+  width: 364px;
+  margin-left: 0;
+}
+table .span6 {
+  float: none;
+  width: 444px;
+  margin-left: 0;
+}
+table .span7 {
+  float: none;
+  width: 524px;
+  margin-left: 0;
+}
+table .span8 {
+  float: none;
+  width: 604px;
+  margin-left: 0;
+}
+table .span9 {
+  float: none;
+  width: 684px;
+  margin-left: 0;
+}
+table .span10 {
+  float: none;
+  width: 764px;
+  margin-left: 0;
+}
+table .span11 {
+  float: none;
+  width: 844px;
+  margin-left: 0;
+}</p>
+
+<p>table .span12 {
+  float: none;
+  width: 924px;
+  margin-left: 0;
+}</p>
+
+<p>```</p>
+
+<p> 급작스레 한 작업이라 그냥 간단히 HTML 로 뽑아버렸지만... 사실 꿈은 좀 더 아름다운 레이아웃으로 뙇하고 나와줬으면                                                                 했었지요.</p>
+
+<p> 일단 예정 참가자 이외에 예상치못한 참가자가 있을 것을 염두해서 3개정도의 행을 더 추가해주었구요;;</p>
+
+<p> <code>Text::Xslate</code> + <code>Data::Section::Simple</code> 의 조합은 파일하나에 우걱우걱 템플릿까지 끼워넣고 이럴 경우에는 아주 좋았습니다.</p>
+
+<p> CSS 도 그냥 별도의 섹션으로 나눠서 <code>INCLUDE</code> 해버릴 수도 있으니 :-)</p>
+
+<p> <code>Facebook::Graph</code> 모듈은 생각보다 좀 변태같습니다. 그 이유는 Facebook Graph API 도 변태같다는 근본적인 .... 그리고 Access Token 은 뭐 적당하게 Developer 페이지 가서 줏어서 넣었습니다. :-)</p>
+
+<p><img src="https://lh6.googleusercontent.com/-GrgEvhNP0d0/UBDW9W-YzLI/AAAAAAAACAQ/5G48cMzvryY/w389-h521-k/list.jpg" alt="" /></p>
+]]></content>
+  </entry>
+  
+</feed>
