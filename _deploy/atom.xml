@@ -1,0 +1,2852 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Jeen's techlog]]></title>
+  <link href="http://jeen.github.com/atom.xml" rel="self"/>
+  <link href="http://jeen.github.com/"/>
+  <updated>2012-08-09T16:41:03+09:00</updated>
+  <id>http://jeen.github.com/</id>
+  <author>
+    <name><![CDATA[Jeen Lee]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Moving from bash to zsh again]]></title>
+    <link href="http://jeen.github.com/blog/2012/08/09/moving-from-bash-to-zsh-again/"/>
+    <updated>2012-08-09T16:30:00+09:00</updated>
+    <id>http://jeen.github.com/blog/2012/08/09/moving-from-bash-to-zsh-again</id>
+    <content type="html"><![CDATA[<p> 밥벌이도구가 바뀌고 해서 다시 ZSH 로 돌아갔습니다.</p>
+
+<blockquote class="twitter-tweet" lang="ko"><p>레티나 맥북프로를 오늘 받은 게 자랑.txt <a href="http://t.co/38oGVx7W" title="http://jeen.tistory.com/560">jeen.tistory.com/560</a></p>&mdash; JEEN (@JEEN_LEE) <a href="https://twitter.com/JEEN_LEE/status/232821768325300225" data-datetime="2012-08-07T12:53:29+00:00">8월 7, 2012</a></blockquote>
+
+
+<ul>
+<li><a href="https://github.com/skwp/dotfiles">https://github.com/skwp/dotfiles</a></li>
+</ul>
+
+
+<p>지난번에 MacBook Air 에 올리다가 뭐가 꼬인 <code>YADR</code> 을 썼습니다. <code>grep</code> 경고메시지가 없이 깔끔하게 돌아가는 군요.</p>
+
+<p> 이래저래 개발환경도 맞추고 그러다가 지난달에 zsh 5.0 이 릴리즈 된 것을 보고 Mt.LION 에 깔린 zsh 버젼을 확인하니..</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>zsh --version
+</span><span class='line'>zsh 4.3.11 <span class="o">(</span>i386-apple-darwin12.0<span class="o">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>4.3.11</code> 이었습니다. 그래서 zsh 5.0 으로 올려보려고 brew 로 일단 깔았죠.</p>
+
+<p>그리고 <code>chsh</code> 로 셸을 바꾸려고 하는 데…</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>chsh -s /usr/local/bin/zsh
+</span><span class='line'>Changing shell <span class="k">for </span>jeen.
+</span><span class='line'>Password <span class="k">for </span>jeen:
+</span><span class='line'>chsh: /usr/local/Cellar/zsh/5.0.0/bin/zsh: non-standard shell
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>이라고 뜨는 것이었지요.</p>
+
+<p>구글검색결과 <code>/etc/shells</code> 에 해당 셸의 패스를 추가하는 것으로 이 난관을 헤쳐나갈 수 있다고 합니다.</p>
+
+<p>그래서 네. zsh 5.0 쓰고 있는데 뭐가 좋은지는 써보면서 느끼게 되려나요.</p>
+
+<ul>
+<li><a href="https://github.com/zsh-users/zsh/blob/master/NEWS">https://github.com/zsh-users/zsh/blob/master/NEWS</a></li>
+</ul>
+
+
+<p>이런 CHANGELOG 도 일단 보고 있지만요&#8230;</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[App::Zamakist...]]></title>
+    <link href="http://jeen.github.com/blog/2012/08/09/app-zamakist-dot-dot-dot/"/>
+    <updated>2012-08-09T13:33:00+09:00</updated>
+    <id>http://jeen.github.com/blog/2012/08/09/app-zamakist-dot-dot-dot</id>
+    <content type="html"><![CDATA[<p>취미라고 할 것이 있다면 잠, 책, 드라마감상 정도라고 할까요.</p>
+
+<p>걔중에 몇몇 미드들을 아직까지 꾸준하게 시간을 내면서 보고 있습니다.</p>
+
+<p>걔중에는 가끔보면 자막이 없어서 일일이 자막찾으러 들어가고 받고 해야하는 지루한 클릭이 필요한 경우도 있습니다.</p>
+
+<p>윈도라면 <code>곰플레이어</code> 로 이런 부분의 수고가 조금 줄어들기는 하지만 Mac 에서 <code>Movist</code> 를 통해서 주로 영상을 감상하려면 심히 신경쓰이지 않을리 없습니다.</p>
+
+<blockquote class="twitter-tweet" lang="ko"><p>멘탈리스트 4기를 볼려고 했는데, 자막이 없네&#8230; 그래서 자막을 세팅하는 스크립트를 깨작거려서 만들어봤다. 좀 더 브러쉬 업해야 되지만서도&#8230; <a href="https://t.co/jeXVNTnI" title="https://gist.github.com/3150026">gist.github.com/3150026</a></p>&mdash; JEEN (@JEEN_LEE) <a href="https://twitter.com/JEEN_LEE/status/226260944597180417" data-datetime="2012-07-20T10:23:07+00:00">7월 20, 2012</a></blockquote>
+
+
+<p>그러니까 7월 20일경에 일단 이런 문제를 겪어서 잠깐 깨작거려서 만들어보기는 했지만 대놓고 앞에 내놓기도 그렇고해서 그냥 보류했었는데요. 뭐 물론 여전히 앞에 내놓는 게 좀 그렇기는 합니다.</p>
+
+<ul>
+<li><a href="https://github.com/JEEN/p5-App-Zamakist">https://github.com/JEEN/p5-App-Zamakist</a></li>
+</ul>
+
+
+<p>일련의 과정을 말하자면…</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>ls -la
+</span><span class='line'>total 0
+</span><span class='line'>drwxr-xr-x  12 jeen  staff   408  8  9 13:45 .
+</span><span class='line'>drwxr-xr-x+ 52 jeen  staff  1768  8  9 13:45 ..
+</span><span class='line'>-rw-r--r--   1 jeen  staff     0  8  9 13:45 NCIS.Los.Angeles.S03E01.720p.HDTV.X264-DIMENSION.avi
+</span><span class='line'>-rw-r--r--   1 jeen  staff     0  8  9 13:45 NCIS.Los.Angeles.S03E02.720p.HDTV.X264-DIMENSION.avi
+</span><span class='line'>-rw-r--r--   1 jeen  staff     0  8  9 13:45 NCIS.Los.Angeles.S03E03.720p.HDTV.X264-DIMENSION.avi
+</span><span class='line'>-rw-r--r--   1 jeen  staff     0  8  9 13:45 NCIS.Los.Angeles.S03E04.720p.HDTV.X264-DIMENSION.avi
+</span><span class='line'>-rw-r--r--   1 jeen  staff     0  8  9 13:45 NCIS.Los.Angeles.S03E05.720p.HDTV.X264-DIMENSION.avi
+</span><span class='line'>-rw-r--r--   1 jeen  staff     0  8  9 13:45 NCIS.Los.Angeles.S03E06.720p.HDTV.X264-DIMENSION.avi
+</span><span class='line'>-rw-r--r--   1 jeen  staff     0  8  9 13:45 NCIS.Los.Angeles.S03E07.720p.HDTV.X264-DIMENSION.avi
+</span><span class='line'>-rw-r--r--   1 jeen  staff     0  8  9 13:45 NCIS.Los.Angeles.S03E08.720p.HDTV.X264-DIMENSION.avi
+</span><span class='line'>-rw-r--r--   1 jeen  staff     0  8  9 11:44 NCIS.Los.Angeles.S03E09.720p.HDTV.X264-DIMENSION.avi
+</span><span class='line'>-rw-r--r--   1 jeen  staff     0  8  9 09:29 NCIS.Los.Angeles.S03E10.720p.HDTV.X264-DIMENSION.avi
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>이렇게 뭐 디렉토리에 영상자료들이 널부러져 있습니다. 하지만 자막은 없죠.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>zamakist --dir .
+</span><span class='line'>Found 10 subscriptions
+</span><span class='line'>┌────┬──────────────────────────────────────────────────────┐
+</span><span class='line'>│ id │ filename                                             │
+</span><span class='line'>├────┼──────────────────────────────────────────────────────┤
+</span><span class='line'>│  1 │ NCIS.Los.Angeles.S03E01.720p.HDTV.X264-DIMENSION.avi │
+</span><span class='line'>│  2 │ NCIS.Los.Angeles.S03E02.720p.HDTV.X264-DIMENSION.avi │
+</span><span class='line'>│  3 │ NCIS.Los.Angeles.S03E03.720p.HDTV.X264-DIMENSION.avi │
+</span><span class='line'>│  4 │ NCIS.Los.Angeles.S03E04.720p.HDTV.X264-DIMENSION.avi │
+</span><span class='line'>│  5 │ NCIS.Los.Angeles.S03E05.720p.HDTV.X264-DIMENSION.avi │
+</span><span class='line'>│  6 │ NCIS.Los.Angeles.S03E06.720p.HDTV.X264-DIMENSION.avi │
+</span><span class='line'>│  7 │ NCIS.Los.Angeles.S03E07.720p.HDTV.X264-DIMENSION.avi │
+</span><span class='line'>│  8 │ NCIS.Los.Angeles.S03E08.720p.HDTV.X264-DIMENSION.avi │
+</span><span class='line'>│  9 │ NCIS.Los.Angeles.S03E09.720p.HDTV.X264-DIMENSION.avi │
+</span><span class='line'>│ 10 │ NCIS.Los.Angeles.S03E10.720p.HDTV.X264-DIMENSION.avi │
+</span><span class='line'>└────┴──────────────────────────────────────────────────────┘
+</span><span class='line'>Continue to download? <span class="o">[</span>y/n<span class="o">]</span> y
+</span><span class='line'>Downloaded 10 subscriptions
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>그래서 뭐 <code>App::Zamakist</code> 라는 모듈을 사용하면 뭐 이렇게 자막을 한꺼번에 다운받을 수 있다 뭐 이런 거죠.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>ls -la
+</span><span class='line'>total 1592
+</span><span class='line'>drwxr-xr-x  22 jeen  staff    748  8  9 13:46 .
+</span><span class='line'>drwxr-xr-x+ 52 jeen  staff   1768  8  9 13:46 ..
+</span><span class='line'>-rw-r--r--   1 jeen  staff      0  8  9 13:45 NCIS.Los.Angeles.S03E01.720p.HDTV.X264-DIMENSION.avi
+</span><span class='line'>-rw-r--r--   1 jeen  staff  63779  8  9 13:46 NCIS.Los.Angeles.S03E01.720p.HDTV.X264-DIMENSION.smi
+</span><span class='line'>-rw-r--r--   1 jeen  staff      0  8  9 13:45 NCIS.Los.Angeles.S03E02.720p.HDTV.X264-DIMENSION.avi
+</span><span class='line'>-rw-r--r--   1 jeen  staff  75041  8  9 13:46 NCIS.Los.Angeles.S03E02.720p.HDTV.X264-DIMENSION.smi
+</span><span class='line'>-rw-r--r--   1 jeen  staff      0  8  9 13:45 NCIS.Los.Angeles.S03E03.720p.HDTV.X264-DIMENSION.avi
+</span><span class='line'>-rw-r--r--   1 jeen  staff  84915  8  9 13:46 NCIS.Los.Angeles.S03E03.720p.HDTV.X264-DIMENSION.smi
+</span><span class='line'>-rw-r--r--   1 jeen  staff      0  8  9 13:45 NCIS.Los.Angeles.S03E04.720p.HDTV.X264-DIMENSION.avi
+</span><span class='line'>-rw-r--r--   1 jeen  staff  78550  8  9 13:46 NCIS.Los.Angeles.S03E04.720p.HDTV.X264-DIMENSION.smi
+</span><span class='line'>-rw-r--r--   1 jeen  staff      0  8  9 13:45 NCIS.Los.Angeles.S03E05.720p.HDTV.X264-DIMENSION.avi
+</span><span class='line'>-rw-r--r--   1 jeen  staff  94809  8  9 13:46 NCIS.Los.Angeles.S03E05.720p.HDTV.X264-DIMENSION.smi
+</span><span class='line'>-rw-r--r--   1 jeen  staff      0  8  9 13:45 NCIS.Los.Angeles.S03E06.720p.HDTV.X264-DIMENSION.avi
+</span><span class='line'>-rw-r--r--   1 jeen  staff  98759  8  9 13:46 NCIS.Los.Angeles.S03E06.720p.HDTV.X264-DIMENSION.smi
+</span><span class='line'>-rw-r--r--   1 jeen  staff      0  8  9 13:45 NCIS.Los.Angeles.S03E07.720p.HDTV.X264-DIMENSION.avi
+</span><span class='line'>-rw-r--r--   1 jeen  staff  76016  8  9 13:46 NCIS.Los.Angeles.S03E07.720p.HDTV.X264-DIMENSION.smi
+</span><span class='line'>-rw-r--r--   1 jeen  staff      0  8  9 13:45 NCIS.Los.Angeles.S03E08.720p.HDTV.X264-DIMENSION.avi
+</span><span class='line'>-rw-r--r--   1 jeen  staff  94320  8  9 13:46 NCIS.Los.Angeles.S03E08.720p.HDTV.X264-DIMENSION.smi
+</span><span class='line'>-rw-r--r--   1 jeen  staff      0  8  9 11:44 NCIS.Los.Angeles.S03E09.720p.HDTV.X264-DIMENSION.avi
+</span><span class='line'>-rw-r--r--   1 jeen  staff  69537  8  9 13:46 NCIS.Los.Angeles.S03E09.720p.HDTV.X264-DIMENSION.smi
+</span><span class='line'>-rw-r--r--   1 jeen  staff      0  8  9 09:29 NCIS.Los.Angeles.S03E10.720p.HDTV.X264-DIMENSION.avi
+</span><span class='line'>-rw-r--r--   1 jeen  staff  55905  8  9 13:46 NCIS.Los.Angeles.S03E10.720p.HDTV.X264-DIMENSION.smi
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>뭐 일단 CPAN 에 올릴 생각도 없는 토이모듈 겸 생활용품 모듈이라서…</p>
+
+<p>아 물론 자막검색은 GOM 자막을 애용하고 있습니다.</p>
+
+<p>검색방식은 뭐 파일이름에서 확장자만 떼서 검색날려서 뭐 여차저차해서 파일다운로드 하는 링크 빼서 일괄 다운로드 하는 것이죠.</p>
+
+<p>이제 시작하려는 미드가 있는데 자막이 없다면 이거 한번만 돌려주면 앞으로 자막찾는 수고없어지겠습니다. :-)</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Export Facebook Event Attending List - perl-kr TeaTime]]></title>
+    <link href="http://jeen.github.com/blog/2012/07/26/export-facebook-event-attending-list-perl-kr-teatime/"/>
+    <updated>2012-07-26T14:22:00+09:00</updated>
+    <id>http://jeen.github.com/blog/2012/07/26/export-facebook-event-attending-list-perl-kr-teatime</id>
+    <content type="html"><![CDATA[<p> 지난번 1회 티타임때의 문제가 제대로 참가비 징수를 못해서 비용정산에 어려움이 있었는데,
+이 문제를 해결하기 위해서 간단하게 참가자 리스트를 A4 용지로 뽑아내서 체크하도록 하는 건 어떨까 하는 생각이 있었습니다.</p>
+
+<p> <a href="http://jeen.tistory.com/entry/perlkr-%ED%8B%B0%ED%83%80%EC%9E%84-2-%EC%84%B1%ED%99%A9%EB%A6%AC%EC%97%90-%EB%81%9D%EB%82%AC%EC%8A%B5%EB%8B%88%EB%8B%A4">#perl-kr 티타임 Vol.2</a></p>
+
+<p> 아무튼 그런 생각을 잠깐 했다가 해볼까 해서 아래처럼 코드를 써넣었습니다.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+<span class='line-number'>71</span>
+<span class='line-number'>72</span>
+<span class='line-number'>73</span>
+<span class='line-number'>74</span>
+<span class='line-number'>75</span>
+<span class='line-number'>76</span>
+<span class='line-number'>77</span>
+<span class='line-number'>78</span>
+<span class='line-number'>79</span>
+<span class='line-number'>80</span>
+<span class='line-number'>81</span>
+<span class='line-number'>82</span>
+<span class='line-number'>83</span>
+<span class='line-number'>84</span>
+<span class='line-number'>85</span>
+<span class='line-number'>86</span>
+<span class='line-number'>87</span>
+<span class='line-number'>88</span>
+<span class='line-number'>89</span>
+<span class='line-number'>90</span>
+<span class='line-number'>91</span>
+<span class='line-number'>92</span>
+<span class='line-number'>93</span>
+<span class='line-number'>94</span>
+<span class='line-number'>95</span>
+<span class='line-number'>96</span>
+<span class='line-number'>97</span>
+<span class='line-number'>98</span>
+<span class='line-number'>99</span>
+<span class='line-number'>100</span>
+<span class='line-number'>101</span>
+<span class='line-number'>102</span>
+<span class='line-number'>103</span>
+<span class='line-number'>104</span>
+<span class='line-number'>105</span>
+<span class='line-number'>106</span>
+<span class='line-number'>107</span>
+<span class='line-number'>108</span>
+<span class='line-number'>109</span>
+<span class='line-number'>110</span>
+<span class='line-number'>111</span>
+<span class='line-number'>112</span>
+<span class='line-number'>113</span>
+<span class='line-number'>114</span>
+<span class='line-number'>115</span>
+<span class='line-number'>116</span>
+<span class='line-number'>117</span>
+<span class='line-number'>118</span>
+<span class='line-number'>119</span>
+<span class='line-number'>120</span>
+<span class='line-number'>121</span>
+<span class='line-number'>122</span>
+<span class='line-number'>123</span>
+<span class='line-number'>124</span>
+<span class='line-number'>125</span>
+<span class='line-number'>126</span>
+<span class='line-number'>127</span>
+<span class='line-number'>128</span>
+<span class='line-number'>129</span>
+<span class='line-number'>130</span>
+<span class='line-number'>131</span>
+<span class='line-number'>132</span>
+<span class='line-number'>133</span>
+<span class='line-number'>134</span>
+<span class='line-number'>135</span>
+<span class='line-number'>136</span>
+<span class='line-number'>137</span>
+<span class='line-number'>138</span>
+<span class='line-number'>139</span>
+<span class='line-number'>140</span>
+<span class='line-number'>141</span>
+<span class='line-number'>142</span>
+<span class='line-number'>143</span>
+<span class='line-number'>144</span>
+<span class='line-number'>145</span>
+<span class='line-number'>146</span>
+<span class='line-number'>147</span>
+<span class='line-number'>148</span>
+<span class='line-number'>149</span>
+<span class='line-number'>150</span>
+<span class='line-number'>151</span>
+<span class='line-number'>152</span>
+<span class='line-number'>153</span>
+<span class='line-number'>154</span>
+<span class='line-number'>155</span>
+<span class='line-number'>156</span>
+<span class='line-number'>157</span>
+<span class='line-number'>158</span>
+<span class='line-number'>159</span>
+<span class='line-number'>160</span>
+<span class='line-number'>161</span>
+<span class='line-number'>162</span>
+<span class='line-number'>163</span>
+<span class='line-number'>164</span>
+<span class='line-number'>165</span>
+<span class='line-number'>166</span>
+<span class='line-number'>167</span>
+<span class='line-number'>168</span>
+<span class='line-number'>169</span>
+<span class='line-number'>170</span>
+<span class='line-number'>171</span>
+<span class='line-number'>172</span>
+<span class='line-number'>173</span>
+<span class='line-number'>174</span>
+<span class='line-number'>175</span>
+<span class='line-number'>176</span>
+<span class='line-number'>177</span>
+<span class='line-number'>178</span>
+<span class='line-number'>179</span>
+<span class='line-number'>180</span>
+<span class='line-number'>181</span>
+<span class='line-number'>182</span>
+<span class='line-number'>183</span>
+<span class='line-number'>184</span>
+<span class='line-number'>185</span>
+<span class='line-number'>186</span>
+<span class='line-number'>187</span>
+<span class='line-number'>188</span>
+<span class='line-number'>189</span>
+<span class='line-number'>190</span>
+<span class='line-number'>191</span>
+<span class='line-number'>192</span>
+<span class='line-number'>193</span>
+<span class='line-number'>194</span>
+<span class='line-number'>195</span>
+<span class='line-number'>196</span>
+<span class='line-number'>197</span>
+<span class='line-number'>198</span>
+<span class='line-number'>199</span>
+<span class='line-number'>200</span>
+</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="k">use</span> <span class="n">strict</span><span class="p">;</span>
+</span><span class='line'><span class="k">use</span> <span class="n">warnings</span><span class="p">;</span>
+</span><span class='line'><span class="k">use</span> <span class="nn">Text::</span><span class="n">Xslate</span><span class="p">;</span>
+</span><span class='line'><span class="k">use</span> <span class="nn">Data::Section::</span><span class="n">Simple</span><span class="p">;</span>
+</span><span class='line'><span class="k">use</span> <span class="nn">Facebook::</span><span class="n">Graph</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">my</span> <span class="nv">$fb</span> <span class="o">=</span> <span class="nn">Facebook::</span><span class="n">Graph</span><span class="o">-&gt;</span><span class="k">new</span><span class="p">;</span>
+</span><span class='line'><span class="nv">$fb</span><span class="o">-&gt;</span><span class="n">access_token</span><span class="p">(</span><span class="s">&quot;YOUR ACCESS TOKEN&quot;</span><span class="p">);</span>
+</span><span class='line'><span class="k">my</span> <span class="nv">$r</span> <span class="o">=</span> <span class="nv">$fb</span><span class="o">-&gt;</span><span class="n">fetch</span><span class="p">(</span><span class="s">&#39;466164950078338/attending&#39;</span><span class="p">);</span>
+</span><span class='line'><span class="k">my</span> <span class="nv">@attendees</span><span class="p">;</span>
+</span><span class='line'><span class="k">for</span> <span class="k">my</span> <span class="nv">$person</span> <span class="p">(</span><span class="nv">@</span><span class="p">{</span> <span class="nv">$r</span><span class="o">-&gt;</span><span class="p">{</span><span class="n">data</span><span class="p">}</span> <span class="p">})</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">my</span> <span class="nv">$f</span> <span class="o">=</span> <span class="nv">$fb</span><span class="o">-&gt;</span><span class="n">fetch</span><span class="p">(</span><span class="nv">$person</span><span class="o">-&gt;</span><span class="p">{</span><span class="n">id</span><span class="p">});</span>
+</span><span class='line'>    <span class="nv">$f</span><span class="o">-&gt;</span><span class="p">{</span><span class="n">profile_image</span><span class="p">}</span> <span class="o">=</span> <span class="nv">$fb</span><span class="o">-&gt;</span><span class="n">picture</span><span class="p">(</span><span class="nv">$person</span><span class="o">-&gt;</span><span class="p">{</span><span class="n">id</span><span class="p">})</span><span class="o">-&gt;</span><span class="n">get_large</span><span class="o">-&gt;</span><span class="n">uri_as_string</span><span class="p">;</span>
+</span><span class='line'>    <span class="nb">push</span> <span class="nv">@attendees</span><span class="p">,</span> <span class="nv">$f</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="nb">push</span> <span class="nv">@attendees</span><span class="p">,</span> <span class="p">{}</span> <span class="k">for</span> <span class="p">(</span><span class="mi">1</span><span class="o">..</span><span class="mi">3</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">my</span> <span class="nv">$tx</span>  <span class="o">=</span> <span class="nn">Text::</span><span class="n">Xslate</span><span class="o">-&gt;</span><span class="k">new</span><span class="p">(</span>
+</span><span class='line'>    <span class="n">syntax</span> <span class="o">=&gt;</span> <span class="s">&#39;TTerse&#39;</span><span class="p">,</span>
+</span><span class='line'>    <span class="n">module</span> <span class="o">=&gt;</span> <span class="p">[</span> <span class="s">&#39;Text::Xslate::Bridge::TT2Like&#39;</span> <span class="p">],</span>
+</span><span class='line'>    <span class="n">path</span> <span class="o">=&gt;</span> <span class="p">[</span>
+</span><span class='line'>        <span class="nn">Data::Section::</span><span class="n">Simple</span><span class="o">-&gt;</span><span class="k">new</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">get_data_section</span><span class="p">()</span>
+</span><span class='line'>    <span class="p">],</span>
+</span><span class='line'><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">print</span> <span class="nv">$tx</span><span class="o">-&gt;</span><span class="n">render</span><span class="p">(</span><span class="s">&#39;template.tx&#39;</span><span class="p">,</span> <span class="p">{</span> <span class="n">attendees</span> <span class="o">=&gt;</span> <span class="o">\</span><span class="nv">@attendees</span> <span class="p">});</span>
+</span><span class='line'>
+</span><span class='line'><span class="bp">__DATA__</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">@@</span> <span class="nv">template</span><span class="o">.</span><span class="n">tx</span>
+</span><span class='line'><span class="sr">&lt;html&gt;</span>
+</span><span class='line'> <span class="sr">&lt;head&gt;</span>
+</span><span class='line'>   <span class="sr">&lt;title&gt;</span><span class="c1">#perl-kr 티타임 #2&lt;/title&gt;</span>
+</span><span class='line'>   <span class="sr">&lt;style&gt;</span>
+</span><span class='line'>     <span class="p">[</span><span class="nv">%</span> <span class="nv">INCLUDE</span> <span class="s">&quot;css.tx&quot;</span> <span class="nv">%</span><span class="err">]</span>
+</span><span class='line'>   <span class="err">&lt;/</span><span class="nv">style</span><span class="o">&gt;</span>
+</span><span class='line'> <span class="sr">&lt;/head&gt;</span>
+</span><span class='line'> <span class="sr">&lt;body&gt;</span>
+</span><span class='line'>   <span class="sr">&lt;h1&gt;</span><span class="err">※</span> <span class="c1">#perl-kr 티타임 #2&lt;/h1&gt;</span>
+</span><span class='line'>   <span class="o">&lt;</span><span class="n">table</span> <span class="n">class</span><span class="o">=</span><span class="s">&quot;table table-striped table-bordered&quot;</span> <span class="n">style</span><span class="o">=</span><span class="s">&quot;width:50%&quot;</span><span class="o">&gt;</span>
+</span><span class='line'>     <span class="sr">&lt;thead&gt;</span>
+</span><span class='line'>       <span class="sr">&lt;tr&gt;</span>
+</span><span class='line'>         <span class="o">&lt;</span><span class="n">th</span> <span class="n">class</span><span class="o">=</span><span class="s">&quot;span1&quot;</span><span class="o">&gt;&amp;</span><span class="n">nbsp</span><span class="p">;</span><span class="sr">&lt;/th&gt;</span>
+</span><span class='line'>         <span class="o">&lt;</span><span class="n">th</span> <span class="n">class</span><span class="o">=</span><span class="s">&quot;span1&quot;</span><span class="o">&gt;&amp;</span><span class="n">nbsp</span><span class="p">;</span><span class="sr">&lt;/th&gt;</span>
+</span><span class='line'>         <span class="o">&lt;</span><span class="n">th</span> <span class="n">class</span><span class="o">=</span><span class="s">&quot;span2&quot;</span><span class="o">&gt;</span><span class="n">Name</span><span class="sr">&lt;/th&gt;</span>
+</span><span class='line'>         <span class="o">&lt;</span><span class="n">th</span> <span class="n">class</span><span class="o">=</span><span class="s">&quot;span1&quot;</span><span class="o">&gt;</span><span class="n">Attend</span><span class="p">?</span><span class="sr">&lt;/th&gt;</span>
+</span><span class='line'>       <span class="sr">&lt;/tr&gt;</span>
+</span><span class='line'>     <span class="sr">&lt;/thead&gt;</span>
+</span><span class='line'>     <span class="sr">&lt;tbody&gt;</span>
+</span><span class='line'>       <span class="p">[</span><span class="nv">%</span> <span class="nv">FOREACH</span> <span class="n">p</span> <span class="n">IN</span> <span class="n">attendees</span> <span class="nv">%</span><span class="err">]</span>
+</span><span class='line'>       <span class="err">&lt;</span><span class="nv">tr</span><span class="o">&gt;</span>
+</span><span class='line'>         <span class="sr">&lt;td&gt;</span><span class="p">[</span><span class="nv">%</span> <span class="nv">loop</span><span class="o">.</span><span class="n">count</span> <span class="nv">%</span><span class="err">]&lt;/</span><span class="nv">td</span><span class="o">&gt;</span>
+</span><span class='line'>         <span class="sr">&lt;td&gt;</span><span class="o">&lt;</span><span class="n">img</span> <span class="n">src</span><span class="o">=</span><span class="s">&quot;[% p.profile_image %]&quot;</span> <span class="n">width</span><span class="o">=</span><span class="s">&quot;30&quot;</span> <span class="n">height</span><span class="o">=</span><span class="s">&quot;30&quot;</span> <span class="sr">/&gt;&lt;/</span><span class="n">td</span><span class="o">&gt;</span>
+</span><span class='line'>         <span class="sr">&lt;td&gt;</span><span class="p">[</span><span class="nv">%</span> <span class="nv">p</span><span class="o">.</span><span class="n">name</span> <span class="nv">%</span><span class="err">][%</span> <span class="nv">IF</span> <span class="n">p</span><span class="o">.</span><span class="n">username</span> <span class="nv">%</span><span class="err">]([%</span> <span class="nv">p</span><span class="o">.</span><span class="n">username</span> <span class="nv">%</span><span class="err">]</span><span class="p">)[</span><span class="nv">%</span> <span class="nv">END</span> <span class="nv">%</span><span class="err">]&lt;/</span><span class="nv">td</span><span class="o">&gt;</span>
+</span><span class='line'>         <span class="sr">&lt;td&gt;&lt;/td&gt;</span>
+</span><span class='line'>       <span class="sr">&lt;/tr&gt;</span>
+</span><span class='line'>       <span class="p">[</span><span class="nv">%</span> <span class="nv">END</span> <span class="nv">%</span><span class="err">]</span>
+</span><span class='line'>     <span class="err">&lt;/</span><span class="nv">tbody</span><span class="o">&gt;</span>
+</span><span class='line'>   <span class="sr">&lt;/table&gt;</span>
+</span><span class='line'> <span class="sr">&lt;/body&gt;</span>
+</span><span class='line'><span class="sr">&lt;/html&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">@@</span> <span class="nv">css</span><span class="o">.</span><span class="n">tx</span>
+</span><span class='line'><span class="n">table</span> <span class="p">{</span>
+</span><span class='line'>  <span class="n">max</span><span class="o">-</span><span class="n">width:</span> <span class="mi">100</span><span class="nv">%</span><span class="err">;</span>
+</span><span class='line'>  <span class="nv">border</span><span class="o">-</span><span class="n">collapse:</span> <span class="n">collapse</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">border</span><span class="o">-</span><span class="n">spacing:</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">.</span><span class="n">table</span> <span class="p">{</span>
+</span><span class='line'>  <span class="n">width:</span> <span class="mi">100</span><span class="nv">%</span><span class="err">;</span>
+</span><span class='line'>  <span class="nv">margin</span><span class="o">-</span><span class="n">bottom:</span> <span class="mi">18</span><span class="n">px</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="o">.</span><span class="n">table</span> <span class="n">th</span><span class="p">,</span> <span class="o">.</span><span class="n">table</span> <span class="n">td</span> <span class="p">{</span>
+</span><span class='line'>  <span class="n">padding:</span> <span class="mi">8</span><span class="n">px</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">line</span><span class="o">-</span><span class="n">height:</span> <span class="mi">18</span><span class="n">px</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">text</span><span class="o">-</span><span class="n">align:</span> <span class="n">left</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">vertical</span><span class="o">-</span><span class="n">align:</span> <span class="n">top</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">border</span><span class="o">-</span><span class="n">top:</span> <span class="mi">1</span><span class="n">px</span> <span class="n">solid</span> <span class="c1">#ddd;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="o">.</span><span class="n">table</span> <span class="n">th</span> <span class="p">{</span>
+</span><span class='line'>  <span class="n">font</span><span class="o">-</span><span class="n">weight:</span> <span class="n">bold</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="o">.</span><span class="n">table</span> <span class="n">thead</span> <span class="n">th</span> <span class="p">{</span>
+</span><span class='line'>  <span class="n">vertical</span><span class="o">-</span><span class="n">align:</span> <span class="n">bottom</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="o">.</span><span class="n">table</span> <span class="n">thead:first</span><span class="o">-</span><span class="n">child</span> <span class="nb">tr</span> <span class="n">th</span><span class="p">,</span> <span class="o">.</span><span class="n">table</span> <span class="n">thead:first</span><span class="o">-</span><span class="n">child</span> <span class="nb">tr</span> <span class="n">td</span> <span class="p">{</span>
+</span><span class='line'>  <span class="n">border</span><span class="o">-</span><span class="n">top:</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="o">.</span><span class="n">table</span> <span class="n">tbody</span> <span class="o">+</span> <span class="n">tbody</span> <span class="p">{</span>
+</span><span class='line'>  <span class="n">border</span><span class="o">-</span><span class="n">top:</span> <span class="mi">2</span><span class="n">px</span> <span class="n">solid</span> <span class="c1">#ddd;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="o">.</span><span class="n">table</span><span class="o">-</span><span class="n">condensed</span> <span class="n">th</span><span class="p">,</span> <span class="o">.</span><span class="n">table</span><span class="o">-</span><span class="n">condensed</span> <span class="n">td</span> <span class="p">{</span>
+</span><span class='line'>  <span class="n">padding:</span> <span class="mi">4</span><span class="n">px</span> <span class="mi">5</span><span class="n">px</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">.</span><span class="n">table</span><span class="o">-</span><span class="n">bordered</span> <span class="p">{</span>
+</span><span class='line'>  <span class="n">border:</span> <span class="mi">1</span><span class="n">px</span> <span class="n">solid</span> <span class="c1">#ddd;</span>
+</span><span class='line'>  <span class="n">border</span><span class="o">-</span><span class="n">collapse:</span> <span class="n">separate</span><span class="p">;</span>
+</span><span class='line'>  <span class="o">*</span><span class="n">border</span><span class="o">-</span><span class="n">collapse:</span> <span class="n">collapsed</span><span class="p">;</span>
+</span><span class='line'>  <span class="o">-</span><span class="n">webkit</span><span class="o">-</span><span class="n">border</span><span class="o">-</span><span class="n">radius:</span> <span class="mi">4</span><span class="n">px</span><span class="p">;</span>
+</span><span class='line'>  <span class="o">-</span><span class="n">moz</span><span class="o">-</span><span class="n">border</span><span class="o">-</span><span class="n">radius:</span> <span class="mi">4</span><span class="n">px</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">border</span><span class="o">-</span><span class="n">radius:</span> <span class="mi">4</span><span class="n">px</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="o">.</span><span class="n">table</span><span class="o">-</span><span class="n">bordered</span> <span class="n">th</span> <span class="o">+</span> <span class="n">th</span><span class="p">,</span> <span class="o">.</span><span class="n">table</span><span class="o">-</span><span class="n">bordered</span> <span class="n">td</span> <span class="o">+</span> <span class="n">td</span><span class="p">,</span> <span class="o">.</span><span class="n">table</span><span class="o">-</span><span class="n">bordered</span> <span class="n">th</span> <span class="o">+</span> <span class="n">td</span><span class="p">,</span> <span class="o">.</span><span class="n">table</span><span class="o">-</span><span class="n">bordered</span> <span class="n">td</span> <span class="o">+</span> <span class="n">th</span> <span class="p">{</span>
+</span><span class='line'>  <span class="n">border</span><span class="o">-</span><span class="n">left:</span> <span class="mi">1</span><span class="n">px</span> <span class="n">solid</span> <span class="c1">#ddd;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="o">.</span><span class="n">table</span><span class="o">-</span><span class="n">bordered</span> <span class="n">thead:first</span><span class="o">-</span><span class="n">child</span> <span class="nb">tr</span><span class="p">:</span><span class="n">first</span><span class="o">-</span><span class="n">child</span> <span class="n">th</span><span class="p">,</span> <span class="o">.</span><span class="n">table</span><span class="o">-</span><span class="n">bordered</span> <span class="n">tbody:first</span><span class="o">-</span><span class="n">child</span> <span class="nb">tr</span><span class="p">:</span><span class="n">first</span><span class="o">-</span><span class="n">child</span> <span class="n">th</span><span class="p">,</span> <span class="o">.</span><span class="n">table</span><span class="o">-</span><span class="n">bordered</span> <span class="n">tbody:first</span><span class="o">-</span><span class="n">child</span> <span class="nb">tr</span><span class="p">:</span><span class="n">first</span><span class="o">-</span><span class="n">child</span> <span class="n">td</span> <span class="p">{</span>
+</span><span class='line'>  <span class="n">border</span><span class="o">-</span><span class="n">top:</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="sr">/* line 75, ../</span><span class="o">..</span><span class="sr">/../</span><span class="o">..</span><span class="sr">/../</span><span class="o">..</span><span class="sr">/.rvm/g</span><span class="n">ems</span><span class="sr">/ruby-1.9.2-p290/g</span><span class="n">ems</span><span class="sr">/bootstrap-sass-2.0.1/</span><span class="n">vendor</span><span class="sr">/assets/s</span><span class="n">tylesheets</span><span class="sr">/bootstrap/</span><span class="n">_tables</span><span class="o">.</span><span class="n">scss</span> <span class="o">*/</span>
+</span><span class='line'><span class="o">.</span><span class="n">table</span><span class="o">-</span><span class="n">bordered</span> <span class="n">thead:first</span><span class="o">-</span><span class="n">child</span> <span class="nb">tr</span><span class="p">:</span><span class="n">first</span><span class="o">-</span><span class="n">child</span> <span class="n">th:first</span><span class="o">-</span><span class="n">child</span><span class="p">,</span> <span class="o">.</span><span class="n">table</span><span class="o">-</span><span class="n">bordered</span> <span class="n">tbody:first</span><span class="o">-</span><span class="n">child</span> <span class="nb">tr</span><span class="p">:</span><span class="n">first</span><span class="o">-</span><span class="n">child</span> <span class="n">td:first</span><span class="o">-</span><span class="n">child</span> <span class="p">{</span>
+</span><span class='line'>  <span class="o">-</span><span class="n">webkit</span><span class="o">-</span><span class="n">border</span><span class="o">-</span><span class="n">radius:</span> <span class="mi">4</span><span class="n">px</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'>  <span class="o">-</span><span class="n">moz</span><span class="o">-</span><span class="n">border</span><span class="o">-</span><span class="n">radius:</span> <span class="mi">4</span><span class="n">px</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">border</span><span class="o">-</span><span class="n">radius:</span> <span class="mi">4</span><span class="n">px</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="o">.</span><span class="n">table</span><span class="o">-</span><span class="n">bordered</span> <span class="n">thead:first</span><span class="o">-</span><span class="n">child</span> <span class="nb">tr</span><span class="p">:</span><span class="n">first</span><span class="o">-</span><span class="n">child</span> <span class="n">th:last</span><span class="o">-</span><span class="n">child</span><span class="p">,</span> <span class="o">.</span><span class="n">table</span><span class="o">-</span><span class="n">bordered</span> <span class="n">tbody:first</span><span class="o">-</span><span class="n">child</span> <span class="nb">tr</span><span class="p">:</span><span class="n">first</span><span class="o">-</span><span class="n">child</span> <span class="n">td:last</span><span class="o">-</span><span class="n">child</span> <span class="p">{</span>
+</span><span class='line'>  <span class="o">-</span><span class="n">webkit</span><span class="o">-</span><span class="n">border</span><span class="o">-</span><span class="n">radius:</span> <span class="mi">0</span> <span class="mi">4</span><span class="n">px</span> <span class="mi">0</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'>  <span class="o">-</span><span class="n">moz</span><span class="o">-</span><span class="n">border</span><span class="o">-</span><span class="n">radius:</span> <span class="mi">0</span> <span class="mi">4</span><span class="n">px</span> <span class="mi">0</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">border</span><span class="o">-</span><span class="n">radius:</span> <span class="mi">0</span> <span class="mi">4</span><span class="n">px</span> <span class="mi">0</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="o">.</span><span class="n">table</span><span class="o">-</span><span class="n">bordered</span> <span class="n">thead:last</span><span class="o">-</span><span class="n">child</span> <span class="nb">tr</span><span class="p">:</span><span class="k">last</span><span class="o">-</span><span class="n">child</span> <span class="n">th:first</span><span class="o">-</span><span class="n">child</span><span class="p">,</span> <span class="o">.</span><span class="n">table</span><span class="o">-</span><span class="n">bordered</span> <span class="n">tbody:last</span><span class="o">-</span><span class="n">child</span> <span class="nb">tr</span><span class="p">:</span><span class="k">last</span><span class="o">-</span><span class="n">child</span> <span class="n">td:first</span><span class="o">-</span><span class="n">child</span> <span class="p">{</span>
+</span><span class='line'>  <span class="o">-</span><span class="n">webkit</span><span class="o">-</span><span class="n">border</span><span class="o">-</span><span class="n">radius:</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">4</span><span class="n">px</span><span class="p">;</span>
+</span><span class='line'>  <span class="o">-</span><span class="n">moz</span><span class="o">-</span><span class="n">border</span><span class="o">-</span><span class="n">radius:</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">4</span><span class="n">px</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">border</span><span class="o">-</span><span class="n">radius:</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">4</span><span class="n">px</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="o">.</span><span class="n">table</span><span class="o">-</span><span class="n">bordered</span> <span class="n">thead:last</span><span class="o">-</span><span class="n">child</span> <span class="nb">tr</span><span class="p">:</span><span class="k">last</span><span class="o">-</span><span class="n">child</span> <span class="n">th:last</span><span class="o">-</span><span class="n">child</span><span class="p">,</span> <span class="o">.</span><span class="n">table</span><span class="o">-</span><span class="n">bordered</span> <span class="n">tbody:last</span><span class="o">-</span><span class="n">child</span> <span class="nb">tr</span><span class="p">:</span><span class="k">last</span><span class="o">-</span><span class="n">child</span> <span class="n">td:last</span><span class="o">-</span><span class="n">child</span> <span class="p">{</span>
+</span><span class='line'>  <span class="o">-</span><span class="n">webkit</span><span class="o">-</span><span class="n">border</span><span class="o">-</span><span class="n">radius:</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">4</span><span class="n">px</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'>  <span class="o">-</span><span class="n">moz</span><span class="o">-</span><span class="n">border</span><span class="o">-</span><span class="n">radius:</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">4</span><span class="n">px</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">border</span><span class="o">-</span><span class="n">radius:</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">4</span><span class="n">px</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="o">.</span><span class="n">table</span><span class="o">-</span><span class="n">striped</span> <span class="n">tbody</span> <span class="nb">tr</span><span class="p">:</span><span class="n">nth</span><span class="o">-</span><span class="n">child</span><span class="p">(</span><span class="n">odd</span><span class="p">)</span> <span class="n">td</span><span class="p">,</span> <span class="o">.</span><span class="n">table</span><span class="o">-</span><span class="n">striped</span> <span class="n">tbody</span> <span class="nb">tr</span><span class="p">:</span><span class="n">nth</span><span class="o">-</span><span class="n">child</span><span class="p">(</span><span class="n">odd</span><span class="p">)</span> <span class="n">th</span> <span class="p">{</span>
+</span><span class='line'>  <span class="n">background</span><span class="o">-</span><span class="n">color:</span> <span class="c1">#f9f9f9;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">.</span><span class="n">table</span> <span class="n">tbody</span> <span class="nb">tr</span><span class="p">:</span><span class="n">hover</span> <span class="n">td</span><span class="p">,</span> <span class="o">.</span><span class="n">table</span> <span class="n">tbody</span> <span class="nb">tr</span><span class="p">:</span><span class="n">hover</span> <span class="n">th</span> <span class="p">{</span>
+</span><span class='line'>  <span class="n">background</span><span class="o">-</span><span class="n">color:</span> <span class="c1">#f5f5f5;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">table</span> <span class="o">.</span><span class="n">span1</span> <span class="p">{</span>
+</span><span class='line'>  <span class="n">float:</span> <span class="n">none</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">width:</span> <span class="mi">44</span><span class="n">px</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">margin</span><span class="o">-</span><span class="n">left:</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="n">table</span> <span class="o">.</span><span class="n">span2</span> <span class="p">{</span>
+</span><span class='line'>  <span class="n">float:</span> <span class="n">none</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">width:</span> <span class="mi">124</span><span class="n">px</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">margin</span><span class="o">-</span><span class="n">left:</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="n">table</span> <span class="o">.</span><span class="n">span3</span> <span class="p">{</span>
+</span><span class='line'>  <span class="n">float:</span> <span class="n">none</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">width:</span> <span class="mi">204</span><span class="n">px</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">margin</span><span class="o">-</span><span class="n">left:</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="n">table</span> <span class="o">.</span><span class="n">span4</span> <span class="p">{</span>
+</span><span class='line'>  <span class="n">float:</span> <span class="n">none</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">width:</span> <span class="mi">284</span><span class="n">px</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">margin</span><span class="o">-</span><span class="n">left:</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="n">table</span> <span class="o">.</span><span class="n">span5</span> <span class="p">{</span>
+</span><span class='line'>  <span class="n">float:</span> <span class="n">none</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">width:</span> <span class="mi">364</span><span class="n">px</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">margin</span><span class="o">-</span><span class="n">left:</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="n">table</span> <span class="o">.</span><span class="n">span6</span> <span class="p">{</span>
+</span><span class='line'>  <span class="n">float:</span> <span class="n">none</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">width:</span> <span class="mi">444</span><span class="n">px</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">margin</span><span class="o">-</span><span class="n">left:</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="n">table</span> <span class="o">.</span><span class="n">span7</span> <span class="p">{</span>
+</span><span class='line'>  <span class="n">float:</span> <span class="n">none</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">width:</span> <span class="mi">524</span><span class="n">px</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">margin</span><span class="o">-</span><span class="n">left:</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="n">table</span> <span class="o">.</span><span class="n">span8</span> <span class="p">{</span>
+</span><span class='line'>  <span class="n">float:</span> <span class="n">none</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">width:</span> <span class="mi">604</span><span class="n">px</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">margin</span><span class="o">-</span><span class="n">left:</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="n">table</span> <span class="o">.</span><span class="n">span9</span> <span class="p">{</span>
+</span><span class='line'>  <span class="n">float:</span> <span class="n">none</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">width:</span> <span class="mi">684</span><span class="n">px</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">margin</span><span class="o">-</span><span class="n">left:</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="n">table</span> <span class="o">.</span><span class="n">span10</span> <span class="p">{</span>
+</span><span class='line'>  <span class="n">float:</span> <span class="n">none</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">width:</span> <span class="mi">764</span><span class="n">px</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">margin</span><span class="o">-</span><span class="n">left:</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="n">table</span> <span class="o">.</span><span class="n">span11</span> <span class="p">{</span>
+</span><span class='line'>  <span class="n">float:</span> <span class="n">none</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">width:</span> <span class="mi">844</span><span class="n">px</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">margin</span><span class="o">-</span><span class="n">left:</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">table</span> <span class="o">.</span><span class="n">span12</span> <span class="p">{</span>
+</span><span class='line'>  <span class="n">float:</span> <span class="n">none</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">width:</span> <span class="mi">924</span><span class="n">px</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">margin</span><span class="o">-</span><span class="n">left:</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p> 급작스레 한 작업이라 그냥 간단히 HTML 로 뽑아버렸지만&#8230; 사실 꿈은 좀 더 아름다운 레이아웃으로 뙇하고 나와줬으면                                                                 했었지요.</p>
+
+<p> 일단 예정 참가자 이외에 예상치못한 참가자가 있을 것을 염두해서 3개정도의 행을 더 추가해주었구요;;</p>
+
+<p> <code>Text::Xslate</code> + <code>Data::Section::Simple</code> 의 조합은 파일하나에 우걱우걱 템플릿까지 끼워넣고 이럴 경우에는 아주 좋았습니다.</p>
+
+<p> CSS 도 그냥 별도의 섹션으로 나눠서 <code>INCLUDE</code> 해버릴 수도 있으니 :-)</p>
+
+<p> <code>Facebook::Graph</code> 모듈은 생각보다 좀 변태같습니다. 그 이유는 Facebook Graph API 도 변태같다는 근본적인 &#8230;. 그리고 Access Token 은 뭐 적당하게 Developer 페이지 가서 줏어서 넣었습니다. :-)</p>
+
+<p><img src="https://lh6.googleusercontent.com/-GrgEvhNP0d0/UBDW9W-YzLI/AAAAAAAACAQ/5G48cMzvryY/w389-h521-k/list.jpg" alt="" /></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[MySQL::Diff - A vs B]]></title>
+    <link href="http://jeen.github.com/blog/2012/07/18/mysql-diff-a-vs-b/"/>
+    <updated>2012-07-18T18:30:00+09:00</updated>
+    <id>http://jeen.github.com/blog/2012/07/18/mysql-diff-a-vs-b</id>
+    <content type="html"><![CDATA[<p> 최근에 유지보수 관련 일로 골머리를 싸고 있다가 겨우겨우 마무리하고 있는 일이 하나 있었습니다.</p>
+
+<p> PHP 프로젝트였는데, 유지보수 관련해서 여러가지 이슈들이 나오기 마련이고, 그 때문에 잘 움직이던 기존의 DB구조를
+변경해줄 필요가 있었습니다.</p>
+
+<p> 뭐 테이블을 추가하거나, 어떤 컬럼의 형식을 변경하거나, 혹은 인덱스를 추가하거나 하는 뭐 이런 경우 말이죠.</p>
+
+<p> 처음에는 개발환경아래에서 기존의 product 환경에서 운용중인 DB를 dump 떠와서 진행하고, 프로젝트를 진행하면서
+변경되는 SQL 내용들을 일일이 적어주었습니다. 그러다가 뭐 이사람 저사람 손을 옮겨타다가 결국 최종 마무리단계에서
+어떤 컬럼이 변경되었는지, 어떤 테이블이 추가되었는지에 대한 확신을 할 수 없었습니다.</p>
+
+<p> 그래서 기록된 SQL 을 기반으로 눈과 손으로 검수를 해야하는 지경에서 결국 실수가 생기기 마련이죠. 그리고 클레임이 발생했습니다.</p>
+
+<p> 자, 그럼 어떻게 하면 이런 상황에서 사태를 수습하느냐&#8230; 고심했습니다.</p>
+
+<p> 그 결과 혹시 이거라면 해서 찔러본 것이 빙고 였던 것이 <a href="http://metacpan.org/module/MySQL::Diff">MySQL::Diff</a> 였습니다.</p>
+
+<p> 맨처음 덤프떠온 DB 를 <code>DB_A</code> 로 지정하고, 최종적으로 개발이 종료된 DB 를 <code>DB_B</code> 라고 놓습니다.</p>
+
+<p> 이 <code>DB_A</code> 와 <code>DB_B</code> 를 서로 비교하는 것이죠. 그걸을 위해서 <code>MySQL::Diff</code> 모듈이 사용됩니다.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>mysqldiff --host1 localhost --user1 root --password1 whatthehell --host2 localhost --user2 root --password2 whatthehell bto bto_test
+</span><span class='line'><span class="c">## mysqldiff 0.43</span>
+</span><span class='line'><span class="c">## </span>
+</span><span class='line'><span class="c">## Run on Wed Jul 18 18:26:39 2012</span>
+</span><span class='line'><span class="c">## Options: password2=whatthehell, password1=whatthehell, user1=root, host2=localhost, debug=0, host1=localhost, user2=root</span>
+</span><span class='line'><span class="c">##</span>
+</span><span class='line'><span class="c">## ---   db: bto (host=localhost user=root)</span>
+</span><span class='line'><span class="c">## +++   db: bto_test (host=localhost user=root)</span>
+</span><span class='line'>
+</span><span class='line'>ALTER TABLE auth DROP COLUMN updated_on; <span class="c"># was datetime NOT NULL DEFAULT &#39;0000-00-00 00:00:00&#39;</span>
+</span><span class='line'>ALTER TABLE auth DROP COLUMN created_on; <span class="c"># was datetime NOT NULL DEFAULT &#39;0000-00-00 00:00:00&#39;</span>
+</span><span class='line'>ALTER TABLE auth ADD UNIQUE passwd <span class="o">(</span>passwd<span class="o">)</span>;
+</span><span class='line'>CREATE TABLE test1 <span class="o">(</span>
+</span><span class='line'>  test1 int<span class="o">(</span>11<span class="o">)</span> NOT NULL
+</span><span class='line'><span class="o">)</span> <span class="nv">ENGINE</span><span class="o">=</span>MyISAM DEFAULT <span class="nv">CHARSET</span><span class="o">=</span>utf8;
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>위처럼 컬럼의 삭제, 인덱스의 추가, 테이블의 추가 등 모든 변경 내역들이 나오게 됩니다.</p>
+
+<p>다음부터는 이처럼 좀 더 간단하고 확실하게 할 수 있는 방법을 취해야 되겠습니다.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Export Github Issues]]></title>
+    <link href="http://jeen.github.com/blog/2012/07/18/export-github-issues/"/>
+    <updated>2012-07-18T15:44:00+09:00</updated>
+    <id>http://jeen.github.com/blog/2012/07/18/export-github-issues</id>
+    <content type="html"><![CDATA[<p> 회사에서는 한달에 $20 인가 지불하면서 Github 을 쓰고 있습니다.
+ $20 플랜에서는 한정적인 Private Repo 밖에 만들지 못합니다. 그래서 완료가 된 프로젝트에 대해서는
+Github Repo 를 닫고 사내 Git Repo 로 옮기는 방식으로 사용하고 있습니다.</p>
+
+<p> 그럴거면 그냥 사내 Git Repo 를 사용할 것이지 왜 돈내가면서 Github 를 쓰느냐고 물으신다면,
+Github 에서 제공해주는 Issue 관리라든가, Wiki 라든가 여러모로 통합이 잘되어 있고 깔끔해서
+사용하기 편하다고 그냥 그렇게 말하렵니다.</p>
+
+<p> 아무튼 그러면서, 프로젝트 뿐 아니라 회사내에 발생하는 다양한 이슈들은 Bugzilla 에 기록해놓습니다.</p>
+
+<p> 다 끝나서 닫아야할 프로젝트들을 사내 Repo 로 옮기는 것은 좋지만, Issues 안에 적어둔 깨알같은 내용들과 코멘트들 등등을 고스란히 다 허공으로 날려버려야 된다는 것은 뼈아픈 일입니다.</p>
+
+<p> 그래서 잠깐 시간을 내서 Issues 에 있는 내용(이슈타이틀,내용,코멘트, Git commit, 이슈 참조 등등)을 뽑아서 Bugzilla 에 담아놓기 좋게 코드를 써봤습니다.</p>
+
+<figure class='code'><figcaption><span>export-github-issues.pl</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="k">use</span> <span class="n">strict</span><span class="p">;</span>
+</span><span class='line'><span class="k">use</span> <span class="n">warnings</span><span class="p">;</span>
+</span><span class='line'><span class="k">use</span> <span class="nn">Text::</span><span class="n">Xslate</span><span class="p">;</span>
+</span><span class='line'><span class="k">use</span> <span class="nn">Data::Section::</span><span class="n">Simple</span><span class="p">;</span>
+</span><span class='line'><span class="k">use</span> <span class="nn">Net::GitHub::</span><span class="n">V3</span><span class="p">;</span>
+</span><span class='line'><span class="k">use</span> <span class="nn">Config::</span><span class="n">Pit</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">my</span> <span class="nv">$pit</span> <span class="o">=</span> <span class="n">pit_get</span><span class="p">(</span><span class="s">&#39;github.com&#39;</span><span class="p">,</span> <span class="nb">require</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span><span class='line'>    <span class="n">login</span> <span class="o">=&gt;</span> <span class="s">&quot;Your login&quot;</span><span class="p">,</span>
+</span><span class='line'>    <span class="n">pass</span>  <span class="o">=&gt;</span> <span class="s">&quot;Your pass&quot;</span><span class="p">,</span>
+</span><span class='line'><span class="p">});</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">my</span> <span class="nv">$github</span> <span class="o">=</span> <span class="nn">Net::GitHub::</span><span class="n">V3</span><span class="o">-&gt;</span><span class="k">new</span><span class="p">(</span>
+</span><span class='line'>    <span class="n">login</span> <span class="o">=&gt;</span> <span class="nv">$pit</span><span class="o">-&gt;</span><span class="p">{</span><span class="n">login</span><span class="p">},</span>
+</span><span class='line'>    <span class="n">pass</span>  <span class="o">=&gt;</span> <span class="nv">$pit</span><span class="o">-&gt;</span><span class="p">{</span><span class="n">pass</span><span class="p">},</span>
+</span><span class='line'><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">my</span> <span class="p">(</span><span class="nv">$user</span><span class="p">,</span> <span class="nv">$repo</span><span class="p">)</span> <span class="o">=</span> <span class="nv">@ARGV</span><span class="p">;</span>
+</span><span class='line'><span class="k">unless</span> <span class="p">(</span><span class="nv">$user</span> <span class="o">&amp;&amp;</span> <span class="nv">$repo</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">print</span> <span class="s">&quot;Usage: perl p.pl silexkr Donnenwa\n&quot;</span><span class="p">;</span>
+</span><span class='line'>    <span class="nb">exit</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">my</span> <span class="nv">$tx</span>  <span class="o">=</span> <span class="nn">Text::</span><span class="n">Xslate</span><span class="o">-&gt;</span><span class="k">new</span><span class="p">(</span>
+</span><span class='line'>    <span class="n">syntax</span> <span class="o">=&gt;</span> <span class="s">&#39;TTerse&#39;</span><span class="p">,</span>
+</span><span class='line'>    <span class="n">module</span> <span class="o">=&gt;</span> <span class="p">[</span> <span class="s">&#39;Text::Xslate::Bridge::TT2Like&#39;</span> <span class="p">],</span>
+</span><span class='line'>    <span class="n">path</span> <span class="o">=&gt;</span> <span class="p">[</span>
+</span><span class='line'>        <span class="nn">Data::Section::</span><span class="n">Simple</span><span class="o">-&gt;</span><span class="k">new</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">get_data_section</span><span class="p">()</span>
+</span><span class='line'>    <span class="p">],</span>
+</span><span class='line'><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">my</span> <span class="nv">$issue</span> <span class="o">=</span> <span class="nv">$github</span><span class="o">-&gt;</span><span class="n">issue</span><span class="p">;</span>
+</span><span class='line'><span class="k">my</span> <span class="nv">@issues</span> <span class="o">=</span> <span class="nv">$issue</span><span class="o">-&gt;</span><span class="n">repos_issues</span><span class="p">(</span><span class="nv">$user</span><span class="p">,</span> <span class="nv">$repo</span><span class="p">,</span> <span class="p">{</span> <span class="n">state</span> <span class="o">=&gt;</span> <span class="s">&#39;closed&#39;</span> <span class="p">});</span>
+</span><span class='line'><span class="k">while</span><span class="p">(</span><span class="nv">$issue</span><span class="o">-&gt;</span><span class="n">has_next_page</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nb">push</span> <span class="nv">@issues</span><span class="p">,</span> <span class="nv">$issue</span><span class="o">-&gt;</span><span class="n">next_page</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">for</span> <span class="k">my</span> <span class="nv">$iss</span> <span class="p">(</span><span class="nv">@issues</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">my</span> <span class="nv">@comments</span> <span class="o">=</span> <span class="p">();</span>
+</span><span class='line'>    <span class="k">my</span> <span class="nv">@events</span>   <span class="o">=</span> <span class="p">();</span>
+</span><span class='line'>    <span class="nb">eval</span> <span class="p">{</span> <span class="nv">@comments</span> <span class="o">=</span> <span class="nv">$issue</span><span class="o">-&gt;</span><span class="n">comments</span><span class="p">(</span><span class="s">&#39;silexkr&#39;</span><span class="p">,</span> <span class="nv">$repo</span><span class="p">,</span> <span class="nv">$iss</span><span class="o">-&gt;</span><span class="p">{</span><span class="n">number</span><span class="p">})</span> <span class="p">};</span>
+</span><span class='line'>    <span class="nb">eval</span> <span class="p">{</span> <span class="nv">@events</span>   <span class="o">=</span> <span class="nv">$issue</span><span class="o">-&gt;</span><span class="n">events</span><span class="p">(</span><span class="s">&#39;silexkr&#39;</span><span class="p">,</span> <span class="nv">$repo</span><span class="p">,</span> <span class="nv">$iss</span><span class="o">-&gt;</span><span class="p">{</span><span class="n">number</span><span class="p">})</span> <span class="p">};</span>
+</span><span class='line'>    <span class="k">print</span> <span class="nv">$tx</span><span class="o">-&gt;</span><span class="n">render</span><span class="p">(</span><span class="s">&#39;text.tx&#39;</span><span class="p">,</span> <span class="p">{</span> <span class="nv">%</span><span class="p">{</span> <span class="nv">$iss</span> <span class="p">},</span> <span class="n">comments</span> <span class="o">=&gt;</span> <span class="o">\</span><span class="nv">@comments</span><span class="p">,</span> <span class="n">events</span> <span class="o">=&gt;</span> <span class="o">\</span><span class="nv">@events</span> <span class="p">});</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="bp">__DATA__</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">@@</span> <span class="nv">text</span><span class="o">.</span><span class="n">tx</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">[</span><span class="nv">%</span> <span class="nv">number</span> <span class="nv">%</span><span class="err">].[%</span> <span class="nv">title</span> <span class="nv">%</span><span class="err">]</span> <span class="err">[%</span> <span class="nv">FOREACH</span> <span class="n">label</span> <span class="n">IN</span> <span class="n">labels</span> <span class="nv">%</span><span class="err">][%</span> <span class="nv">label</span><span class="o">.</span><span class="n">name</span> <span class="nv">%</span><span class="err">]</span> <span class="err">[%</span> <span class="nv">END</span> <span class="nv">%</span><span class="err">]</span>
+</span><span class='line'>  <span class="err">-</span> <span class="err">[%</span> <span class="nv">user</span><span class="o">.</span><span class="n">login</span> <span class="nv">%</span><span class="err">]</span>
+</span><span class='line'>  <span class="err">-</span> <span class="err">[%</span> <span class="nv">created_at</span> <span class="nv">%</span><span class="err">]</span> <span class="err">~</span> <span class="err">[%</span> <span class="nv">closed_at</span> <span class="nv">%</span><span class="err">]</span>
+</span><span class='line'><span class="err">[%</span> <span class="nv">IF</span> <span class="n">body</span> <span class="nv">%</span><span class="err">]</span>
+</span><span class='line'><span class="err">//</span> <span class="err">[%</span> <span class="nv">body</span> <span class="nv">%</span><span class="err">]</span>
+</span><span class='line'><span class="err">[%</span> <span class="nv">END</span> <span class="nv">%</span><span class="err">]</span>
+</span><span class='line'><span class="err">[%</span> <span class="nv">FOREACH</span> <span class="n">comment</span> <span class="n">IN</span> <span class="n">comments</span> <span class="nv">%</span><span class="err">]</span>
+</span><span class='line'><span class="err">=</span> <span class="err">[%</span> <span class="nv">comment</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">login</span> <span class="nv">%</span><span class="err">]</span> <span class="err">@</span> <span class="err">[%</span> <span class="nv">comment</span><span class="o">.</span><span class="n">updated_at</span> <span class="nv">%</span><span class="err">]</span>
+</span><span class='line'><span class="err">--</span> <span class="err">[%</span> <span class="nv">comment</span><span class="o">.</span><span class="n">body</span> <span class="nv">%</span><span class="err">]</span>
+</span><span class='line'><span class="err">[%</span> <span class="nv">END</span> <span class="nv">%</span><span class="err">]</span>
+</span><span class='line'><span class="err">[%</span> <span class="nv">FOREACH</span> <span class="n">event</span> <span class="n">IN</span> <span class="n">events</span> <span class="nv">%</span><span class="err">][%</span> <span class="nv">NEXT</span> <span class="n">UNLESS</span> <span class="n">event</span><span class="o">.</span><span class="n">commit_id</span> <span class="nv">%</span><span class="err">]</span>
+</span><span class='line'><span class="err">=</span> <span class="err">[%</span> <span class="nv">event</span><span class="o">.</span><span class="n">commit_id</span> <span class="nv">%</span><span class="err">][%</span> <span class="nv">END</span> <span class="nv">%</span><span class="err">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>  <a href="http://metacpan.org/module/Net::GitHub">Net::GitHub</a> 모듈에서 뭔가 코멘트를 뽑아내려는 데 없으면 계속 죽어버리는 문제 등등이 있어서 뭐 그냥 <code>eval {}</code> 로 묶어버렸구요.</p>
+
+<p>  <a href="http://metacpan.org/module/Text::Xslate">Text::Xslate</a> 에서 <code>path</code> 를</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="nn">Data::Section::</span><span class="n">Simple</span><span class="o">-&gt;</span><span class="k">new</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">get_data_section</span><span class="p">();</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p></p>
+
+<p> 으로 해서 쉽게 <code>-&gt;render()</code> 의 첫번째 인수를 템플릿이름으로 지정할 수 있더군요.</p>
+
+<p> <code>Net::GitHub</code> 의 <code>-&gt;next_page</code> 가 최근 최근에 사용된 API 기준으로 동작을 하다보니, <code>while()</code> 안에서 <code>events</code>, <code>comments</code> 를 혼용해서 사용해버리면 의도한 대로 동작을 하지 않아서, <code>@issues</code> 안에 일단 전체 이슈를 뽑고서 시작을 했습니다.</p>
+
+<p> 아무튼 뭐 얼기설기 그냥 놔두기도 그렇고 혹여나 해서 일단 올려봅니다.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[HTTPS-SSL-LWP-SOAP and Perl]]></title>
+    <link href="http://jeen.github.com/blog/2012/07/02/https-ssl-lwp-soap-and-perl/"/>
+    <updated>2012-07-02T15:23:00+09:00</updated>
+    <id>http://jeen.github.com/blog/2012/07/02/https-ssl-lwp-soap-and-perl</id>
+    <content type="html"><![CDATA[<blockquote><p>tl;dr: I hate Java and SOAP, use Perl</p></blockquote>
+
+<p> 지난 주에 고객으로부터 요구를 받았는데, DB특정 항목에 대치되는 어떤 값을 가지고 모 API를 통해서 결과를 받아서 뿌려주는 간단한 것이었습니다.</p>
+
+<p> 그 API 제공회사에서 날라온 API 명세서는 뭘 해도 자바였었죠. 샘플이라고 널려놓은 두세네개 코드도 전부 자바였습니다. 해야하는 건 결국 뭐 SOAP 정도였죠.</p>
+
+<p> 명세서에는 Axis 라는 것을 깔아서 뭐 붙여서 어떻게 뭐 wsdl 붙이고 어쩌고 복잡하게 써놨는데&#8230;</p>
+
+<p> 결론부터 말하면 endpoint 와 보낼 값들만 필요하면 자바가 무슨 소용이냐 싶어서 집어냈습니다.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="k">use</span> <span class="n">strict</span><span class="p">;</span>
+</span><span class='line'><span class="k">use</span> <span class="n">warnings</span><span class="p">;</span>
+</span><span class='line'><span class="k">use</span> <span class="nn">LWP::</span><span class="n">UserAgent</span><span class="p">;</span>
+</span><span class='line'><span class="k">use</span> <span class="nn">Data::</span><span class="n">Dumper</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">my</span> <span class="nv">$q</span> <span class="o">=</span> <span class="p">{</span>
+</span><span class='line'><span class="o">&lt;</span><span class="p">?</span><span class="n">xml</span> <span class="n">version</span><span class="o">=</span><span class="s">&quot;1.0&quot;</span> <span class="n">encoding</span><span class="o">=</span><span class="s">&quot;UTF-8&quot;</span><span class="p">?</span><span class="o">&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="n">soapenv:Envelope</span> <span class="n">xmlns:soapenv</span><span class="o">=</span><span class="s">&quot;http://schemas.xmlsoap.org/soap/envelope/&quot;</span> <span class="n">xmlns:xsd</span><span class="o">=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema&quot;</span> <span class="n">xmlns:xsi</span><span class="o">=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span><span class="o">&gt;</span>
+</span><span class='line'> <span class="sr">&lt;soapenv:Body&gt;</span>
+</span><span class='line'> <span class="o">.........</span>
+</span><span class='line'> <span class="sr">&lt;/soapenv:Body&gt;</span>
+</span><span class='line'><span class="p">};</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">my</span> <span class="nv">$ua</span> <span class="o">=</span> <span class="nn">LWP::</span><span class="n">UserAgent</span><span class="o">-&gt;</span><span class="k">new</span><span class="p">;</span>
+</span><span class='line'><span class="k">my</span> <span class="nv">$res</span> <span class="o">=</span> <span class="nv">$ua</span><span class="o">-&gt;</span><span class="n">post</span><span class="p">(</span><span class="s">&#39;https://........&#39;</span><span class="p">,</span>
+</span><span class='line'>  <span class="s">&#39;Content-Type&#39;</span> <span class="o">=&gt;</span> <span class="s">&#39;text/xml; charset=utf-8&#39;</span><span class="p">,</span>
+</span><span class='line'>  <span class="n">Content</span> <span class="o">=&gt;</span> <span class="nv">$q</span><span class="p">,</span>
+</span><span class='line'><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">print</span> <span class="n">Dumper</span> <span class="nv">$res</span><span class="o">-&gt;</span><span class="n">content</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p> 우선 SOAP XML 내용 및 endpoint 는 해당업체 비밀자료이기에 표시하지 않습니다.</p>
+
+<p> 위의 코드의 결과는</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>Can<span class="se">\&#39;</span>t connect to demo-asp.ysdasp-service.ne.jp:443 <span class="o">(</span>certificate verify failed<span class="o">)</span>
+</span><span class='line'>
+</span><span class='line'>LWP::Protocol::https::Socket: SSL connect attempt failed with unknown error error:14090086:SSL routines:SSL3_GET_SERVER_CERTIFICATE:certificate verify failed at .../perl-5.14.2-llvm/lib/site_perl/5.14.2/LWP/Protocol/http.pm line 51.
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>이라고 나온 것이었습니다. 유효하지 않은 인증서라는 데, 브라우저에서는 그냥 무시하고 지나가버리면 되는 데, Perl 의 경우에서는 어떻게 할까&#8230; 결론은 구글해봤습니다.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="nv">$ENV</span><span class="p">{</span><span class="s">&#39;PERL_LWP_SSL_VERIFY_HOSTNAME&#39;</span><span class="p">}</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p> <code>PERL_LWP_SSL_VERIFY_HOSTNAME</code> 이라는 환경변수의 값을 0으로 지정함으로써 LWP 가 인증서의 유효성 체크를 생략시켜버립니다.</p>
+
+<p> 이제는 되겠지 하고 실행을 시켜보니&#8230;</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+</span><span class='line'><span class="nt">&lt;soapenv:Envelope</span> <span class="na">xmlns:soapenv=</span><span class="s">&quot;http://schemas.xmlsoap.org/soap/envelope/&quot;</span> <span class="na">xmlns:xsd=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema&quot;</span> <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'> <span class="nt">&lt;soapenv:Body&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;soapenv:Fault&gt;</span>
+</span><span class='line'>   <span class="nt">&lt;faultcode</span> <span class="na">xmlns:ns1=</span><span class="s">&quot;http://xml.apache.org/axis/&quot;</span><span class="nt">&gt;</span>ns1:Client.NoSOAPAction<span class="nt">&lt;/faultcode&gt;</span>
+</span><span class='line'>   <span class="nt">&lt;faultstring&gt;</span>no SOAPAction header!<span class="nt">&lt;/faultstring&gt;</span>
+</span><span class='line'>   <span class="nt">&lt;detail/&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;/soapenv:Fault&gt;</span>
+</span><span class='line'> <span class="nt">&lt;/soapenv:Body&gt;</span>
+</span><span class='line'><span class="nt">&lt;/soapenv:Envelope&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p> 이라는 결과가 나옵니다. <code>SOAPAction</code> 이라는 헤더가 없다고 하는데&#8230; SOAP 통신에는 SOAPAction 이라는 헤더를 넣는다고&#8230; 그냥 해보니 <code>SOAPAction</code> 에 그냥 빈값이라도 헤더이름만 넣고 돌려보면 되겠구나 라는 생각이 들었습니다.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="k">my</span> <span class="nv">$res</span> <span class="o">=</span> <span class="nv">$ua</span><span class="o">-&gt;</span><span class="n">post</span><span class="p">(</span><span class="s">&#39;https://........&#39;</span><span class="p">,</span>
+</span><span class='line'>  <span class="s">&#39;Content-Type&#39;</span> <span class="o">=&gt;</span> <span class="s">&#39;text/xml; charset=utf-8&#39;</span><span class="p">,</span>
+</span><span class='line'>  <span class="n">SOAPAction</span> <span class="o">=&gt;</span> <span class="s">&#39;&quot;&quot;&#39;</span><span class="p">,</span>
+</span><span class='line'>  <span class="n">Content</span> <span class="o">=&gt;</span> <span class="nv">$q</span><span class="p">,</span>
+</span><span class='line'><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p> POST 시에 <code>SOAPAction</code> 헤더를 넣어주고 다시 돌려보았습니다.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+</span><span class='line'><span class="nt">&lt;soapenv:Envelope</span> <span class="na">xmlns:soapenv=</span><span class="s">&quot;http://schemas.xmlsoap.org/soap/envelope/&quot;</span> <span class="na">xmlns:xsd=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema&quot;</span> <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'> <span class="nt">&lt;soapenv:Body&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;soapenv:Fault&gt;</span>
+</span><span class='line'>   <span class="nt">&lt;faultcode&gt;</span>soapenv:Server.userException<span class="nt">&lt;/faultcode&gt;</span>
+</span><span class='line'>   <span class="nt">&lt;faultstring&gt;</span>org.xml.sax.SAXParseException: The processing instruction target matching <span class="ni">&amp;quot;</span>[xX][mM][lL]<span class="ni">&amp;quot;</span> is not allowed.<span class="nt">&lt;/faultstring&gt;</span>
+</span><span class='line'>   <span class="nt">&lt;detail/&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;/soapenv:Fault&gt;</span>
+</span><span class='line'> <span class="nt">&lt;/soapenv:Body&gt;</span>
+</span><span class='line'><span class="nt">&lt;/soapenv:Envelope&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p> 다시 해당 <code>faultstring</code> 으로 검색을 해본 결과, 이유는 &lt;?xml &#8230;?> 앞에 빈 공백값이 있으면 안된다는 것이었습니다.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="k">my</span> <span class="nv">$q</span> <span class="o">=</span> <span class="sx">q{&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+</span><span class='line'><span class="sx">&lt;soapenv:Envelope xmlns:soapenv=&quot;http://schemas.xmlsoap.org/soap/envelope/&quot; xmlns:xsd=&quot;http://www.w3.org/2001/XMLSchema&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;&gt;</span>
+</span><span class='line'><span class="sx"> &lt;soapenv:Body&gt;</span>
+</span><span class='line'><span class="sx"> .........</span>
+</span><span class='line'><span class="sx"> &lt;/soapenv:Body&gt;</span>
+</span><span class='line'><span class="sx">}</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p> 맨 위의 코드에서 <code>q{</code> 다음에 개행을 넣은 게 문제가 되어서 다시 지우고 돌려본 결과 좌르르르륵 펴쳐져 나오는 기나긴 XML의 향연&#8230;</p>
+
+<p> 아무튼 이걸로 API 제공업체에서 JAVA 를 기준으로 작성된 길고 긴 명세서들과 설치요령 등등의 문서들을 제쳐두고 해야할 일에만 집중할 수 있게 되었습니다.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Regexp::Wildcards]]></title>
+    <link href="http://jeen.github.com/blog/2012/07/01/regexp-wildcards/"/>
+    <updated>2012-07-01T00:46:00+09:00</updated>
+    <id>http://jeen.github.com/blog/2012/07/01/regexp-wildcards</id>
+    <content type="html"><![CDATA[<p> 저같은 평범한 개발자야 어떤 패턴을 확인하고 정규표현식을 쓰면 되는데, 사실 일반 사용자들에게
+정규표현식을 어떤 설정의 입력값으로 밀어넣는 것은 일반 사용자에게 배려가 부족하지 않나 하고 생각했었습니다.</p>
+
+<ul>
+<li><code>/path/a/b</code></li>
+<li><code>/path/a/c</code></li>
+<li><code>/path/a/d</code></li>
+</ul>
+
+
+<p><code>/path/a/</code> 디렉토리 아래의 b,c,d 파일들을 삭제한다고 합니다. 물론 b,c,d 밖에 없다고 합니다. 이럴때
+보통 모두가 대개 와일드카드를 사용하죠.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>rm -rf /path/a/*
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>라고 말이죠.</p>
+
+<p> 예를들어서 어떤 관리자페이지 아래에서 특정 유저그룹의 접속권한에 대해서 다룬다고 해봅니다. 특정그룹은 고정IP를 통해서 접근해올 수 있고, 또 다른 그룹은 특정 IP대역에서 찾아온다고 합니다. 이런 것들을 복잡한 설정파일을 통해서가 아니라 유저가 관리하기 쉬운 인터페이스를 제공해야 할 필요도 있죠.</p>
+
+<p> 일반적인 입력예는 아래와 같습니다.</p>
+
+<ul>
+<li><code>211.123.123.1-211.123.123.254</code></li>
+<li><code>211.123.122.5</code></li>
+<li><code>211.123.121.4, 211.123.121.8</code></li>
+</ul>
+
+
+<p> 적당한 IP대역이거나, 혹은 단일 IP라거나, 혹은 몇몇 패턴을 알 수 없는 복수개의 IP라거나&#8230;</p>
+
+<ul>
+<li><code>211.123.126.0/24</code></li>
+</ul>
+
+
+<p> 혹은 네트워크 관리자라면 CIDR 스타일을 사용할지도 모르겠습니다.</p>
+
+<ul>
+<li><code>211.123.128.*</code></li>
+<li><code>211.123.121.10*</code></li>
+</ul>
+
+
+<p> 아니면 위에서 말한 대로 와일드카드를 사용할 수 있겠죠.</p>
+
+<p> 우선 위의 네개째까지는 <code>Net::IPAddrRanges</code> 라는 모듈을 사용하면 편하게 이용할 수 있습니다.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="k">use</span> <span class="n">strict</span><span class="p">;</span>
+</span><span class='line'><span class="k">use</span> <span class="n">warnings</span><span class="p">;</span>
+</span><span class='line'><span class="k">use</span> <span class="nn">Net::</span><span class="n">IPAddrRanges</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">my</span> <span class="nv">$ranges</span> <span class="o">=</span> <span class="nn">Net::</span><span class="n">IPAddrRanges</span><span class="o">-&gt;</span><span class="k">new</span><span class="p">;</span>
+</span><span class='line'><span class="nv">$ranges</span><span class="o">-&gt;</span><span class="n">add</span><span class="p">(</span><span class="sx">qw{</span>
+</span><span class='line'><span class="sx">    211.123.123.1-211.123.254</span>
+</span><span class='line'><span class="sx">    211.123.122.5</span>
+</span><span class='line'><span class="sx">    211.123.121.4 211.123.121.8</span>
+</span><span class='line'><span class="sx">    211.123.126.0/24</span>
+</span><span class='line'><span class="sx">}</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">$ranges</span><span class="o">-&gt;</span><span class="n">find</span><span class="p">(</span><span class="s">&#39;211.123.123.5&#39;</span><span class="p">);</span> <span class="c1"># OK;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p> 이런저런 다양한 입력값들을 받아서 <code>Net::IPAddrRanges</code> 모듈에 넘겨주고 <code>-&gt;find</code> 메소드를 통해서 접속해온 IP(211.123.123.5)가 접속가능한 IP인지를 위처럼 간단하게 확인할 수 있죠.</p>
+
+<p> 와일드카드 사용시에는 이와는 좀 다릅니다.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="k">use</span> <span class="n">strict</span><span class="p">;</span>
+</span><span class='line'><span class="k">use</span> <span class="n">warnings</span><span class="p">;</span>
+</span><span class='line'><span class="k">use</span> <span class="nn">Regexp::</span><span class="n">Wildcards</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">my</span> <span class="nv">$rw</span> <span class="o">=</span> <span class="nn">Regexp::</span><span class="n">Wildcards</span><span class="o">-&gt;</span><span class="k">new</span><span class="p">(</span> <span class="n">type</span> <span class="o">=&gt;</span> <span class="s">&#39;unix&#39;</span> <span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">my</span> <span class="nv">$user_ip</span> <span class="o">=</span> <span class="s">&#39;211.123.121.108&#39;</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">if</span> <span class="p">(</span><span class="nb">scalar</span> <span class="nb">grep</span> <span class="p">{</span> <span class="nv">$user_ip</span> <span class="o">=~</span> <span class="nv">$_</span> <span class="p">}</span>
+</span><span class='line'>           <span class="nb">map</span> <span class="p">{</span> <span class="nv">$rw</span><span class="o">-&gt;</span><span class="n">convert</span><span class="p">(</span><span class="nv">$_</span><span class="p">)</span> <span class="p">}</span> <span class="sx">qw{ 211.123.128.* 211.123.121.10* }</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">print</span> <span class="s">&quot;OK&quot;</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p> 뭐 사실 이런 코드를 적당한 메소드로 만들어서 사용하고 있습니다. IP제한같은 시나리오에는 사실 Net::IPAddrRanges 를 사용하는 게 좋아보이기는 합니다만&#8230; 최근에 <code>Regexp::Wildcards</code> 를 사용하는 경우가 있었는데&#8230;</p>
+
+<p> 유저의 권한별로 페이지의 접근을 제어하고 싶다라는 것이었죠.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='yaml'><span class='line'>  <span class="l-Scalar-Plain">ROLE1</span><span class="p-Indicator">:</span> <span class="p-Indicator">[</span> <span class="nv">/admin/user/list</span><span class="p-Indicator">,</span> <span class="nv">/admin/user/*/download</span> <span class="p-Indicator">]</span>
+</span><span class='line'>  <span class="l-Scalar-Plain">ROLE2</span><span class="p-Indicator">:</span> <span class="p-Indicator">[</span> <span class="nv">/admin/user/*</span> <span class="p-Indicator">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p> ROLE1 의 경우에는 admin/user 라는 컨트롤러중에 유저 리스트(/admin/user/list) 와 각 유저별로 관련정보를 다운로드를 할 수 있습니다. 그 이외에는 전부 접근을 차단한다는 것이구요.</p>
+
+<p> ROLE2 의 경우에는 admin/user 의 모든 액션에 접근을 가능하게 합니다.</p>
+
+<p> 이때는 카탈리스트를 사용하고 있다는 전제아래, Admin.pm 이라는 컨드롤러파일의 <code>auto</code> 아래 다음과 같은 코드를 추가했습니다.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="k">sub </span><span class="nf">auto</span> <span class="p">:Private {</span>
+</span><span class='line'><span class="o">....</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">my</span> <span class="nv">$rw</span> <span class="o">=</span> <span class="nn">Regexp::</span><span class="n">Wildcards</span><span class="o">-&gt;</span><span class="k">new</span><span class="p">(</span> <span class="n">type</span> <span class="o">=&gt;</span> <span class="s">&#39;unix&#39;</span> <span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">my</span> <span class="nv">$ACL</span> <span class="o">=</span> <span class="o">...</span><span class="p">;</span> <span class="c1"># 어떻게 샤바샤바해서 유저권한에 따른 접근가능 목록을 뽑아옵니다</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">unless</span> <span class="p">(</span><span class="nb">scalar</span> <span class="nb">grep</span> <span class="p">{</span> <span class="nv">$c</span><span class="o">-&gt;</span><span class="n">action</span> <span class="o">=~</span> <span class="nv">$_</span> <span class="p">}</span> <span class="nb">map</span> <span class="p">{</span> <span class="nv">$rw</span><span class="o">-&gt;</span><span class="n">convert</span><span class="p">(</span><span class="nv">$_</span><span class="p">);</span> <span class="p">}</span> <span class="nv">@</span><span class="p">{</span> <span class="nv">$ACL</span> <span class="p">})</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nv">$c</span><span class="o">-&gt;</span><span class="n">flash</span><span class="p">(</span> <span class="n">warn_messages</span> <span class="o">=&gt;</span> <span class="p">[</span> <span class="s">&#39;접속할 수 없어요.&#39;</span> <span class="p">]</span> <span class="p">);</span>
+</span><span class='line'>        <span class="nv">$c</span><span class="o">-&gt;</span><span class="n">res</span><span class="o">-&gt;</span><span class="n">redirect</span><span class="p">(</span><span class="nv">$c</span><span class="o">-&gt;</span><span class="n">uri_for</span><span class="p">(</span><span class="s">&quot;/admin&quot;</span><span class="p">));</span>
+</span><span class='line'>        <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="o">....</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p> 네 아무튼 뭐 사실 결론은 굳이 할 수 있다면 간단하게 설정할 수 있는데, 왜 설정파일에까지 정규표현식이 끼어들어야 하느냐 라는 생각아래에서 시작했었지요. 정규표현식으로 난무할 이런저런 상황들을 적당하게 와일드카드로 커버할 수 있다면 더 직관적으로 이해하고 사용할 수 있지 않을까 하는 생각이 듭니다.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[DBIx::Class and Replication - II]]></title>
+    <link href="http://jeen.github.com/blog/2012/06/19/dbix-class-and-replication-ii/"/>
+    <updated>2012-06-19T15:35:00+09:00</updated>
+    <id>http://jeen.github.com/blog/2012/06/19/dbix-class-and-replication-ii</id>
+    <content type="html"><![CDATA[<ul>
+<li><a href="http://jeen.github.com/blog/2012/06/17/dbix-class-and-replication/">DBIx::Class + Replication</a></li>
+</ul>
+
+
+<p>그러니까 17일이죠.</p>
+
+<blockquote><p>이렇게 몇줄만의 설정으로 간단하게 어플리케이션단에서 Replication 설정을 수행할 수 있습니다…만, 여러가지 운용이슈가 발생할 테고 그에 맞춰서 적당하게 답을 내야할 경우가 생기겠죠. 네, 뭐 그건 그때 가서…</p></blockquote>
+
+<p>라고 지난 글의 말미에서 얘기했습니다만, 네 금방 운용이슈가 발생했습니다.</p>
+
+<p> 넘겨준대로 설정해서 돌리려고 하는 데 이런 에러가 떴다는 것입니다.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>Class::MOP::Class:::around<span class="o">()</span>: DBI Exception: DBD::mysql::db selectrow_hashref failed: Access denied; you need the SUPER,REPLICATION CLIENT privilege <span class="k">for </span>this operation <span class="o">[</span><span class="k">for </span>Statement <span class="s2">&quot;show slave status&quot;</span><span class="o">]</span> at /home/*/perl5/perlbrew/perls/perl-5.14.2/lib/site_perl/5.14.2/i686-linux/Class/MOP/Method/Wrapped.pm line 162
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p> 딱 봐도 DB 접속계정의 권한문제인데, 가장 간단한 답은 접속계정에 해당 권한을 부여하면 되는 것이었는데요.
+ 하지만 접속 계정을 추가해서 어떻게 하기에는 다른 운용이슈가 발생할 여지가 있다고 생각하기에(그럴리가&#8230;) 수정을 요구받았습니다.</p>
+
+<p> 결국 DBIx::Class::Storage::DBI::Replicated::* 아래의 소스를 파보도록 했습니다. 관련 동작은 <code>connect_replicants</code> 시에 <code>validate_replicants</code> 에서 각 Replicant 마다 <code>is_replicating</code> 체크를 하게 되는 것입니다.</p>
+
+<p> 일단 뭐 예, DBI::Replicated 시에는 기본적으로 그냥 뭐 자동 fail-over 까지 슥샥슥샥 해줄 수 있는데&#8230; 그냥 이런 거 다 필요없다라는 합의점에 이르러 결국은 해당부분을 회피하도록 했습니다.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="k">BEGIN</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">use</span> <span class="nn">DBIx::Class::Storage::DBI::Replicated::</span><span class="n">Pool</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="nb">no</span> <span class="n">warnings</span> <span class="s">&#39;redefine&#39;</span><span class="p">;</span>
+</span><span class='line'>    <span class="o">*</span><span class="nn">DBIx::Class::Storage::DBI::Replicated::Pool::</span><span class="n">validate_replicants</span> <span class="o">=</span> <span class="k">sub </span><span class="p">{</span>
+</span><span class='line'>        <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">};</span>
+</span><span class='line'><span class="p">};</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p> 추가한 부분은 위와 같습니다. 컴파일시에 미리 <code>validate_replicants</code> 를 재정의해버리는 것이었습니다.</p>
+
+<p> 전체 소스는 아래와 같습니다.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="k">BEGIN</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">use</span> <span class="nn">DBIx::Class::Storage::DBI::Replicated::</span><span class="n">Pool</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="nb">no</span> <span class="n">warnings</span> <span class="s">&#39;redefine&#39;</span><span class="p">;</span>
+</span><span class='line'>    <span class="o">*</span><span class="nn">DBIx::Class::Storage::DBI::Replicated::Pool::</span><span class="n">validate_replicants</span> <span class="o">=</span> <span class="k">sub </span><span class="p">{</span>
+</span><span class='line'>        <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">};</span>
+</span><span class='line'><span class="p">};</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">my</span> <span class="nv">$schema</span> <span class="o">=</span> <span class="nn">MyApp::</span><span class="n">Schema</span><span class="o">-&gt;</span><span class="n">clone</span><span class="p">;</span>
+</span><span class='line'><span class="nv">$schema</span><span class="o">-&gt;</span><span class="n">storage_type</span><span class="p">([</span>
+</span><span class='line'>    <span class="s">&#39;::DBI::Replicated&#39;</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span><span class='line'>        <span class="n">balancer_type</span> <span class="o">=&gt;</span> <span class="s">&#39;::Random&#39;</span><span class="p">,</span>
+</span><span class='line'>        <span class="n">balancer_args</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span><span class='line'>            <span class="n">auto_validate_every</span> <span class="o">=&gt;</span> <span class="mi">10</span><span class="p">,</span>
+</span><span class='line'>            <span class="n">master_read_weight</span>  <span class="o">=&gt;</span> <span class="mi">0</span><span class="p">,</span>
+</span><span class='line'>        <span class="p">},</span>
+</span><span class='line'>        <span class="n">pool_args</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span><span class='line'>            <span class="n">maximum_lag</span> <span class="o">=&gt;</span> <span class="mi">2</span><span class="p">,</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">]);</span>
+</span><span class='line'><span class="nv">$schema</span><span class="o">-&gt;</span><span class="n">connection</span><span class="p">({</span>
+</span><span class='line'>    <span class="n">dsn</span>      <span class="o">=&gt;</span> <span class="s">&quot;dbi:mysql:myapp:127.0.0.50&quot;</span><span class="p">,</span>
+</span><span class='line'>    <span class="n">user</span>     <span class="o">=&gt;</span> <span class="s">&quot;user&quot;</span><span class="p">,</span>
+</span><span class='line'>    <span class="n">password</span> <span class="o">=&gt;</span> <span class="s">&quot;whatthehell&quot;</span><span class="p">,</span>
+</span><span class='line'>    <span class="n">RaiseError</span>        <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">,</span>
+</span><span class='line'>    <span class="n">AutoCommit</span>        <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">,</span>
+</span><span class='line'>    <span class="n">mysql_enable_utf8</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">,</span>
+</span><span class='line'>    <span class="n">on_connect_do</span>     <span class="o">=&gt;</span> <span class="p">[</span><span class="s">&quot;SET NAMES utf8&quot;</span><span class="p">],</span>
+</span><span class='line'>    <span class="n">quote_char</span>        <span class="o">=&gt;</span> <span class="sx">q{`}</span><span class="p">,</span>
+</span><span class='line'><span class="p">});</span>
+</span><span class='line'><span class="nv">$schema</span><span class="o">-&gt;</span><span class="n">storage</span><span class="o">-&gt;</span><span class="n">connect_replicants</span><span class="p">([</span>
+</span><span class='line'>    <span class="p">{</span>
+</span><span class='line'>        <span class="n">dsn</span>      <span class="o">=&gt;</span> <span class="s">&quot;dbi:mysql:myapp:192.168.0.51&quot;</span><span class="p">,</span>
+</span><span class='line'>        <span class="n">user</span>     <span class="o">=&gt;</span> <span class="s">&quot;user&quot;</span><span class="p">,</span>
+</span><span class='line'>        <span class="n">password</span> <span class="o">=&gt;</span> <span class="s">&quot;whatthehell&quot;</span><span class="p">,</span>
+</span><span class='line'>    <span class="p">},</span>
+</span><span class='line'>    <span class="o">....</span>
+</span><span class='line'><span class="p">]);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p> 그리고 그들은 행복하게 오래오래 살았답니다~. 끝.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[oh-my-zsh → bash-it]]></title>
+    <link href="http://jeen.github.com/blog/2012/06/18/oh-my-zsh-bash-it/"/>
+    <updated>2012-06-18T17:42:00+09:00</updated>
+    <id>http://jeen.github.com/blog/2012/06/18/oh-my-zsh-bash-it</id>
+    <content type="html"><![CDATA[<p> 한동안 zsh 을 사용하면서 oh-my-zsh 로 화려한 셸환경을 이용하고 있었는데요, 언제부턴가 grep warning 이 뜨기도 하고, bash 위주의 작업환경에 맞춘 기사들이 소개되기에 이르러 결국 zsh 을 버리고 다시 bash 로 돌아오게 되었습니다.</p>
+
+<ul>
+<li><a href="https://github.com/robbyrussell/oh-my-zsh">robbyrussell/oh-my-zsh•GitHub</a></li>
+</ul>
+
+
+<p> 하지만 그래도 역시 oh-my-zsh 을 사용하면서 접한 경험들을 버릴 수가 없기에 bash 에서 그런 류의 확장이 없을까 검색해본 결과 bash-it 이라는 것이 있다는 것을 확인했습니다.</p>
+
+<ul>
+<li><a href="https://github.com/revans/bash-it">revans/bash-it•GitHub</a></li>
+</ul>
+
+
+<p> 솔직히 oh-my-zsh 에 비해서는 그렇게 만족스럽지는 못합니다. :-(</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[DBIx::Class + Replication]]></title>
+    <link href="http://jeen.github.com/blog/2012/06/17/dbix-class-and-replication/"/>
+    <updated>2012-06-17T19:05:00+09:00</updated>
+    <id>http://jeen.github.com/blog/2012/06/17/dbix-class-and-replication</id>
+    <content type="html"><![CDATA[<p> 일반적으로 회사에서 개발하는 규모에서는 Replication 을 크게 고려하지 않았었는데, 이번에 수주받은 프로젝트에서 DBIx::Class 사용시에 Replication 에 대해서 고려해야 할 부분이 있었습니다.</p>
+
+<p> 이전 회사에서 MySQL Replication 을 설정할 때 slave 서버들의 앞단에 keepalived 를 놓아서 로드 밸런서 역할로 사용했던 적이 있습니다. 말그대로 부하분산의 목적도 있고, 많은 slave 서버들의 커넥션정보를 일일이 웹 어플리케이션에서 설정할 필요도 없었죠. 하지만 IDC 에 로드밸런서 서버 한대를 더 우겨넣어야 했었죠.</p>
+
+<p> 뭐 그리고 어플리케이션 로직에서도 master, slave 를 명시적으로 지정해야할 필요도 있었습니다.</p>
+
+<p> 최근에는 HAProxy 를 사용해서 이런 저런 구성을 하고 있다는 얘기를 들었지만 마땅히 실제업무에서는 사용해보지 못해서 뭐라 말도 못하겠군요.</p>
+
+<p> 그나저나 DBIx::Class 에서는 0.081x 버젼부터 자체적으로 Replication 설정을 할 수 있게 되었습니다. 위에서 로드밸런서를 사용하는 것과는 달리 slave 서버들의 접속정보를 모두 적어야할 필요가 있습니다. 하지만 설정만으로 갱신/참조용 쿼리를 어플리케이션 로직에 상관없이 분리시킬 수 있습니다.</p>
+
+<ul>
+<li><a href="https://metacpan.org/module/DBIx::Class::Storage::DBI::Replicated">DBIx:Class::Storage::DBI::Replicated - metacpan.org</a></li>
+</ul>
+
+
+<p> DBIx::Class::Storage::DBI::Replicated 의 SYNOPSIS 에 나와있는 대로 하면 됩니다.</p>
+
+<pre><code>....
+my $schema = MyApp::Schema-&gt;clone;
+$schema-&gt;storage_type([
+    '::DBI::Replicated' =&gt; {
+        balancer_type =&gt; '::Random',
+        balancer_args =&gt; {
+            auto_validate_every =&gt; 10,
+            master_read_weight  =&gt; 0,
+        },  
+        pool_args =&gt; {
+            maximum_lag =&gt; 2,
+        }   
+    }   
+]);
+$schema-&gt;connection({
+    dsn      =&gt; "dbi:mysql:myapp:127.0.0.50",
+    user     =&gt; "user",
+    password =&gt; "whatthehell",
+    RaiseError        =&gt; 1,
+    AutoCommit        =&gt; 1,
+    mysql_enable_utf8 =&gt; 1,
+    on_connect_do     =&gt; ["SET NAMES utf8"],
+    quote_char        =&gt; q{`},
+});
+$schema-&gt;storage-&gt;connect_replicants([
+    {
+        dsn      =&gt; "dbi:mysql:myapp:192.168.0.51",
+        user     =&gt; "user",
+        password =&gt; "whatthehell",
+    },
+    ....
+]);
+</code></pre>
+
+<p> DBIx::Class 에서 위처럼, ->storage_type 에 DBI::Replicated 를 지정하고 그에 적합한 인수를 넘겨주면 됩니다. <code>balancer_type</code> 은 기본적으로 <code>First</code>, <code>Random</code> 이 있습니다. 일단 저는 <code>Random</code>을 사용하구요.</p>
+
+<p> balancer_args에서 <code>auto_validate_every</code> 를 통해서 매초당 Replication 의 유효성을 확인합니다. 0으로 지정되어 있을 경우에는 뭐 안하겠다고 생각할 수 있지만&#8230; 그게 아니라 매번 쿼리를 날릴때마다 체크를 하게 됩니다.</p>
+
+<p> pool_args 의 <code>maximum_lags</code> 는 Replication 서버에 대한 유효성 체크에서 해당 수치를 초과하면 자동으로 Replication Pool 에서 해당 서버에 대한 접속을 빼버리게 됩니다.</p>
+
+<p> ->connection 에서 지정한 것은 master 서버, ->storage->connect_replicants 에서 복수의 slave 서버들을 지정합니다.</p>
+
+<p> 그럼 Replication 체크는 어떻게 하고 있을까요?</p>
+
+<pre><code>sub is_replicating {
+    my $status = shift-&gt;_get_dbh-&gt;selectrow_hashref('show slave status');
+    return ($status-&gt;{Slave_IO_Running} eq 'Yes') &amp;&amp; ($status-&gt;{Slave_SQL_Running} eq 'Yes');
+}
+</code></pre>
+
+<p> <code>DBIx::Class::Storage::DBI::mysql</code> 에서 확인할 수 있습니다만, <code>show slave status</code> 를 날려서 Slave_IO_Running, Slave_SQL_Running 값을 보고 Replication 체크를 수행하고 있는 것이죠.  뭐 물론 mysql 의 경우입니다만, 만약 DBD::* 에서 is_replicating 이 정의가 되어 있지 않다면 master 로의 fail-over 같은 건 동작하지 않습니다.</p>
+
+<p> 화면상에서 이뤄지는 각각의 쿼리들이 정말로 제대로 가고 있을까 확인해보고 싶을 경우도 있을 겁니다. 그때는&#8230;</p>
+
+<pre><code>$schema-&gt;storage-&gt;debug(1);
+</code></pre>
+
+<p>  을 지정함으로, 어떤 쿼리가 어느 DB 서버로 향하는 지에 대한 정보가 화면에 뿌려지기에 눈으로 확인하기 좋겠죠.</p>
+
+<p> 만약 Replication 이 제대로 설정되지 않으면 자동으로 모든 쿼리는 master 서버로 향하게 됩니다.</p>
+
+<pre><code>Exception trying to -&gt;ensure_connected for replicant dbi:mysql:bto:localhost, error is Class::MOP::Class:::around(): DBI Connection failed: DBI connect('my app:localhost','user',...) failed: Access denied for user 'user'@'localhost' (using password: YES) at /Users/jeen/perl5/perlbrew/perls/perl-5.14.2-llvm/lib/site_perl/5.14.2/DBIx/Class/Storage/DBI.pm line 1249. at /Users/jeen/perl5/perlbrew/perls/perl-5.14.2-llvm/lib/site_perl/5.14.2/darwin-2level/Class/MOP/Method/Wrapped.pm line 162
+No Replicants validate, falling back to master reads.
+</code></pre>
+
+<p> 이렇게 몇줄만의 설정으로 간단하게 어플리케이션단에서 Replication 설정을 수행할 수 있습니다&#8230;만, 여러가지 운용이슈가 발생할 테고 그에 맞춰서 적당하게 답을 내야할 경우가 생기겠죠. 네, 뭐 그건 그때 가서&#8230;</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Beginning Perl]]></title>
+    <link href="http://jeen.github.com/blog/2012/06/14/beginning-perl/"/>
+    <updated>2012-06-14T22:42:00+09:00</updated>
+    <id>http://jeen.github.com/blog/2012/06/14/beginning-perl</id>
+    <content type="html"><![CDATA[<ul>
+<li><a href="http://blogs.perl.org/users/ovid/2012/06/read-my-book-online-for-free.html">Read my book online for free | Ovid [blogs.perl.org]</a></li>
+</ul>
+
+
+<p>Curtis Ovid Poe 가 쓰고 Wrox 에서 올해 9월 출판 예정인 Beginning Perl 신판이 전체 19장중 16장의 분량이 HTML 로 일시적으로 공개되었습니다. HTML 로 공개된 책의 내용은 아래의 링크를 참고하세요.</p>
+
+<ul>
+<li><a href="http://ofps.oreilly.com/titles/9781118013847/">Beginning Perl (Wrox) - OFPS - O&#8217;Reilly Media</a></li>
+</ul>
+
+
+<p>책으로 나올 때는 19장까지 전부 포함해서 696페이지나 되는 분량이 될 것이라고 합니다. 상당히 방대하군요!</p>
+
+<p>공개된 목차는 아래와 같습니다.</p>
+
+<ol>
+<li>What’s Perl?</li>
+<li>Understanding the CPAN</li>
+<li>Variables</li>
+<li>Working With data</li>
+<li>Control flow</li>
+<li>References</li>
+<li>Subroutines</li>
+<li>Regular Expressions</li>
+<li>Files and Directories</li>
+<li>Sort, map and grep</li>
+<li>Packages and Modules</li>
+<li>Object Oriented Perl</li>
+<li>Moose</li>
+<li>Testing</li>
+<li>The Interwebs</li>
+<li>Databases</li>
+</ol>
+
+
+<p>&#8220;Beginning&#8221; 이라고 해놓고 할 건 거의 다 하는 군요 :-)</p>
+
+<p>Moose, Testing, PSGI, DBI 까지&#8230;</p>
+
+<p>sort, map, grep 관련해서 잠깐 봤는 데, Cookbook 보다 훨씬 내용이 알차고 좋습니다. 이거 한권으로 입문에서 중급까지 퉁칠 수 있을 것 같네요.</p>
+
+<p>물론 이렇게 공개된 목적은 펄 커뮤니티의 피드백을 받겠다는 것이구요.</p>
+
+<p>내용을 보면 각 단락마다 오른쪽에보면 &#8220;Add Comment&#8221; 라고 나와있군요. 확실한 교정지원시스템인 것 같습니다.</p>
+
+<p>이렇게 공개된 HTML 은 언제 닫힐 지 알 수 없는 상황입니다. 아마 충분한 피드백을 받았다고 생각되면 없어지겠지요.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Rex - Contributor 가 되어 있었습니다]]></title>
+    <link href="http://jeen.github.com/blog/2012/06/14/rex-im-a-contributor/"/>
+    <updated>2012-06-14T17:28:00+09:00</updated>
+    <id>http://jeen.github.com/blog/2012/06/14/rex-im-a-contributor</id>
+    <content type="html"><![CDATA[<p><a href="http://jeen.github.com/blog/2012/02/15/rex-pull-request/">http://jeen.github.com/blog/2012/02/15/rex-pull-request/</a></p>
+
+<p> 이전에 이렇게 Rex 에 Pull Request 를 날린 적이 있었는데,</p>
+
+<p><a href="https://metacpan.org/module/Rex">https://metacpan.org/module/Rex</a></p>
+
+<p>의 Contributors 를 확인하니 &#8220;Jeen Lee&#8221; 라고 딱 박혀있네요 :-)</p>
+
+<p>아쉽게도 그 뒤로 Rex 를 사용하고 있지는 않습니다만&#8230;</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[crontab + perlbrew]]></title>
+    <link href="http://jeen.github.com/blog/2012/02/28/crontab-plus-perlbrew/"/>
+    <updated>2012-02-28T21:03:00+09:00</updated>
+    <id>http://jeen.github.com/blog/2012/02/28/crontab-plus-perlbrew</id>
+    <content type="html"><![CDATA[<p>  이번 글은 성의가 매우 부족하게 트윗의 열거로 끝낼까 합니다.</p>
+
+<blockquote class="twitter-tweet"><p>질문. perlbrew 설정이 crontab에서도 적용되게 하려면 어떻게 적어줘야 할까요..? .bashrc 에서 perlbrew의 설정파일을 부르게 해 둔 상태인데 crontab으로 실행하는 스크립트에는 적용이 안 되어 시스템 펄을 부르네요.</p>&mdash; Raymundo (@gypark) <a href="https://twitter.com/gypark/status/172218904352010240" data-datetime="2012-02-22T07:19:21+00:00">February 22, 2012</a></blockquote>
+
+
+
+
+<blockquote class="twitter-tweet" data-in-reply-to="172218904352010240"><p>@<a href="https://twitter.com/gypark">gypark</a> <a href="https://t.co/Q0yfoquc" title="https://gist.github.com/1882996">gist.github.com/1882996</a> 이런 식으로 하면 됩니다.</p>&mdash; envi (@nving) <a href="https://twitter.com/nving/status/172219600216399872" data-datetime="2012-02-22T07:22:07+00:00">February 22, 2012</a></blockquote>
+
+
+
+
+<div><script src='https://gist.github.com/1882996.js?file=example'></script>
+<noscript><pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head prefix=&quot;og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# githubog: http://ogp.me/ns/fb/githubog#&quot;&gt;
+    &lt;meta charset='utf-8'&gt;
+    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot;&gt;
+        &lt;title&gt;404 · GitHub&lt;/title&gt;
+    &lt;link rel=&quot;search&quot; type=&quot;application/opensearchdescription+xml&quot; href=&quot;/opensearch.xml&quot; title=&quot;GitHub&quot; /&gt;
+    &lt;link rel=&quot;fluid-icon&quot; href=&quot;https://raw.github.com/fluidicon.png&quot; title=&quot;GitHub&quot; /&gt;
+    &lt;link rel=&quot;apple-touch-icon-precomposed&quot; sizes=&quot;57x57&quot; href=&quot;apple-touch-icon-114.png&quot; /&gt;
+    &lt;link rel=&quot;apple-touch-icon-precomposed&quot; sizes=&quot;114x114&quot; href=&quot;apple-touch-icon-114.png&quot; /&gt;
+    &lt;link rel=&quot;apple-touch-icon-precomposed&quot; sizes=&quot;72x72&quot; href=&quot;apple-touch-icon-144.png&quot; /&gt;
+    &lt;link rel=&quot;apple-touch-icon-precomposed&quot; sizes=&quot;144x144&quot; href=&quot;apple-touch-icon-144.png&quot; /&gt;
+
+    
+    
+    &lt;link rel=&quot;icon&quot; type=&quot;image/x-icon&quot; href=&quot;/favicon.png&quot; /&gt;
+
+    
+
+    &lt;link href=&quot;https://a248.e.akamai.net/assets.github.com/assets/github-0ff4f619538a4e68a663b95f805b7fa67bb991d9.css&quot; media=&quot;screen&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+    &lt;link href=&quot;https://a248.e.akamai.net/assets.github.com/assets/github2-94604aad42bf761644e4ac0a21311a818a11e823.css&quot; media=&quot;screen&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+    
+
+
+    &lt;script src=&quot;https://a248.e.akamai.net/assets.github.com/assets/frameworks-7da234ba631572242cc5bbbf13bc0802fe0d9169.js&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;
+    
+    &lt;script defer=&quot;defer&quot; src=&quot;https://a248.e.akamai.net/assets.github.com/assets/github-f80d28eacc41fa1e794e1e92d37296a6a9e19e72.js&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;
+    
+    
+
+    
+  &lt;/head&gt;
+
+
+  &lt;body class=&quot;logged_out    env-production &quot;&gt;
+    &lt;div id=&quot;wrapper&quot;&gt;
+
+    
+    
+
+      &lt;div id=&quot;header&quot; class=&quot;true clearfix&quot;&gt;
+        &lt;div class=&quot;container clearfix&quot;&gt;
+          &lt;a class=&quot;site-logo&quot; href=&quot;https://raw.github.com/&quot;&gt;
+            &lt;img alt=&quot;GitHub&quot; class=&quot;github-logo-4x&quot; height=&quot;30&quot; src=&quot;https://a248.e.akamai.net/assets.github.com/images/modules/header/logov7@4x.png?1337118070&quot; /&gt;
+            &lt;img alt=&quot;GitHub&quot; class=&quot;github-logo-4x-hover&quot; height=&quot;30&quot; src=&quot;https://a248.e.akamai.net/assets.github.com/images/modules/header/logov7@4x-hover.png?1337118070&quot; /&gt;
+          &lt;/a&gt;
+
+
+                  &lt;!--
+      make sure to use fully qualified URLs here since this nav
+      is used on error pages on other domains
+    --&gt;
+    &lt;ul class=&quot;top-nav logged_out&quot;&gt;
+        &lt;li class=&quot;pricing&quot;&gt;&lt;a href=&quot;https://github.com/plans&quot;&gt;Signup and Pricing&lt;/a&gt;&lt;/li&gt;
+        &lt;li class=&quot;explore&quot;&gt;&lt;a href=&quot;https://github.com/explore&quot;&gt;Explore GitHub&lt;/a&gt;&lt;/li&gt;
+      &lt;li class=&quot;features&quot;&gt;&lt;a href=&quot;https://github.com/features&quot;&gt;Features&lt;/a&gt;&lt;/li&gt;
+        &lt;li class=&quot;blog&quot;&gt;&lt;a href=&quot;https://github.com/blog&quot;&gt;Blog&lt;/a&gt;&lt;/li&gt;
+      &lt;li class=&quot;login&quot;&gt;&lt;a href=&quot;https://github.com/login?return_to=%2Fgist%2F1882996%2Fexample&quot;&gt;Sign in&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+
+
+
+          
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      
+
+      
+
+        &lt;div class=&quot;site clearfix&quot;&gt;
+          &lt;div id=&quot;site-container&quot; class=&quot;container&quot; data-pjax-container&gt;
+            
+
+&lt;style type=&quot;text/css&quot;&gt;
+    #header{
+        border-bottom: 0;
+    }
+    .site {
+        padding: 0;
+    }
+    #site-container {
+        width: 100%;
+    }
+    * {
+        margin: 0px;
+        padding: 0px;
+    }
+    #parallax_wrapper {
+      position: relative;
+      z-index: 0;
+      margin-bottom: 50px;
+    }
+    #parallax_field{
+        overflow: hidden;
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 370px;
+        width: 100%;
+    }
+    #parallax_field #parallax_bg {
+        position: absolute;
+        top: -20px;
+        left: -20px;
+        width: 110%;
+        height: 425px;
+        z-index: 1;
+    }
+    #parallax_illustration {
+        display: block;
+        margin: 0 auto;
+        width: 940px;
+        height: 370px;
+        position: relative;
+        overflow: hidden;
+        clear: both;
+    }
+    #parallax_illustration #parallax_error_text {
+        position: absolute;
+        top: 72px;
+        left: 72px;
+        z-index: 10;
+    }
+    #parallax_illustration #parallax_octocat {
+        position: absolute;
+        top: 94px;
+        left: 356px;
+        z-index: 9;
+    }
+    #parallax_illustration #parallax_speeder {
+        position: absolute;
+        top: 150px;
+        left: 432px;
+        z-index: 8;
+    }
+    #parallax_illustration #parallax_octocatshadow {
+        position: absolute;
+        top: 297px;
+        left: 371px;
+        z-index: 7;
+    }
+    #parallax_illustration #parallax_speedershadow {
+        position: absolute;
+        top: 263px;
+        left: 442px;
+        z-index: 6;
+    }
+    #parallax_illustration #parallax_building_1 {
+        position: absolute;
+        top: 73px;
+        left: 467px;
+        z-index: 5;
+    }
+    #parallax_illustration #parallax_building_2 {
+        position: absolute;
+        top: 113px;
+        left: 762px;
+        z-index: 4;
+    }
+    #footer-push {
+      height: 280px;
+    }
+    #footer {
+        margin-top: 0px;
+        z-index: 12;
+    }
+&lt;/style&gt;
+
+&lt;div id=&quot;parallax_wrapper&quot;&gt;
+
+&lt;div id=&quot;parallax_field&quot;&gt;
+    &lt;img alt=&quot;building&quot; class=&quot;js-plaxify&quot; data-invert=&quot;true&quot; data-xrange=&quot;0&quot; data-yrange=&quot;20&quot; height=&quot;415&quot; id=&quot;parallax_bg&quot; src=&quot;https://a248.e.akamai.net/assets.github.com/images/modules/404/parallax_bg.jpg?1293753715&quot; width=&quot;940&quot; /&gt;
+&lt;/div&gt;
+&lt;div id=&quot;parallax_illustration&quot;&gt;
+  &lt;img alt=&quot;404 | &amp;ldquo;This is not the web page you are looking for&amp;rdquo;&quot; class=&quot;js-plaxify&quot; data-xrange=&quot;20&quot; data-yrange=&quot;10&quot; height=&quot;249&quot; id=&quot;parallax_error_text&quot; src=&quot;https://a248.e.akamai.net/assets.github.com/images/modules/404/parallax_errortext.png?1293753715&quot; width=&quot;271&quot; /&gt;
+  &lt;img alt=&quot;Octobi Wan Catnobi&quot; class=&quot;js-plaxify&quot; data-xrange=&quot;10&quot; data-yrange=&quot;10&quot; height=&quot;230&quot; id=&quot;parallax_octocat&quot; src=&quot;https://a248.e.akamai.net/assets.github.com/images/modules/404/parallax_octocat.png?1293753715&quot; width=&quot;188&quot; /&gt;
+  &lt;img alt=&quot;land speeder&quot; class=&quot;js-plaxify&quot; data-xrange=&quot;10&quot; data-yrange=&quot;10&quot; height=&quot;156&quot; id=&quot;parallax_speeder&quot; src=&quot;https://a248.e.akamai.net/assets.github.com/images/modules/404/parallax_speeder.png?1293753715&quot; width=&quot;440&quot; /&gt;
+  &lt;img alt=&quot;Octobi Wan Catnobi's shadow&quot; class=&quot;js-plaxify&quot; data-xrange=&quot;10&quot; data-yrange=&quot;10&quot; height=&quot;49&quot; id=&quot;parallax_octocatshadow&quot; src=&quot;https://a248.e.akamai.net/assets.github.com/images/modules/404/parallax_octocatshadow.png?1293753715&quot; width=&quot;166&quot; /&gt;
+  &lt;img alt=&quot;land speeder's shadow&quot; class=&quot;js-plaxify&quot; data-xrange=&quot;10&quot; data-yrange=&quot;10&quot; height=&quot;75&quot; id=&quot;parallax_speedershadow&quot; src=&quot;https://a248.e.akamai.net/assets.github.com/images/modules/404/parallax_speedershadow.png?1293753715&quot; width=&quot;430&quot; /&gt;
+  &lt;img alt=&quot;building&quot; class=&quot;js-plaxify&quot; data-invert=&quot;true&quot; data-xrange=&quot;50&quot; data-yrange=&quot;20&quot; height=&quot;123&quot; id=&quot;parallax_building_1&quot; src=&quot;https://a248.e.akamai.net/assets.github.com/images/modules/404/parallax_building_1.png?1293753715&quot; width=&quot;304&quot; /&gt;
+  &lt;img alt=&quot;building&quot; class=&quot;js-plaxify&quot; data-invert=&quot;true&quot; data-xrange=&quot;75&quot; data-yrange=&quot;30&quot; height=&quot;50&quot; id=&quot;parallax_building_2&quot; src=&quot;https://a248.e.akamai.net/assets.github.com/images/modules/404/parallax_building_2.png?1293753715&quot; width=&quot;116&quot; /&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+          &lt;/div&gt;
+          &lt;div class=&quot;context-overlay&quot;&gt;&lt;/div&gt;
+        &lt;/div&gt;
+      &lt;div id=&quot;footer-push&quot;&gt;&lt;/div&gt;&lt;!-- hack for sticky footer --&gt;
+    &lt;/div&gt;&lt;!-- end of wrapper - hack for sticky footer --&gt;
+
+      &lt;!-- footer --&gt;
+      &lt;div id=&quot;footer&quot; &gt;
+        
+  &lt;div class=&quot;upper_footer&quot;&gt;
+     &lt;div class=&quot;container clearfix&quot;&gt;
+
+       &lt;!--[if IE]&gt;&lt;h4 id=&quot;blacktocat_ie&quot;&gt;GitHub Links&lt;/h4&gt;&lt;![endif]--&gt;
+       &lt;![if !IE]&gt;&lt;h4 id=&quot;blacktocat&quot;&gt;GitHub Links&lt;/h4&gt;&lt;![endif]&gt;
+
+       &lt;ul class=&quot;footer_nav&quot;&gt;
+         &lt;h4&gt;GitHub&lt;/h4&gt;
+         &lt;li&gt;&lt;a href=&quot;https://github.com/about&quot;&gt;About&lt;/a&gt;&lt;/li&gt;
+         &lt;li&gt;&lt;a href=&quot;https://github.com/blog&quot;&gt;Blog&lt;/a&gt;&lt;/li&gt;
+         &lt;li&gt;&lt;a href=&quot;https://github.com/features&quot;&gt;Features&lt;/a&gt;&lt;/li&gt;
+         &lt;li&gt;&lt;a href=&quot;https://github.com/contact&quot;&gt;Contact &amp;amp; Support&lt;/a&gt;&lt;/li&gt;
+         &lt;li&gt;&lt;a href=&quot;https://github.com/training&quot;&gt;Training&lt;/a&gt;&lt;/li&gt;
+         &lt;li&gt;&lt;a href=&quot;http://enterprise.github.com/&quot;&gt;GitHub Enterprise&lt;/a&gt;&lt;/li&gt;
+         &lt;li&gt;&lt;a href=&quot;http://status.github.com/&quot;&gt;Site Status&lt;/a&gt;&lt;/li&gt;
+       &lt;/ul&gt;
+
+       &lt;ul class=&quot;footer_nav&quot;&gt;
+         &lt;h4&gt;Clients&lt;/h4&gt;
+         &lt;li&gt;&lt;a href=&quot;http://mac.github.com/&quot;&gt;GitHub for Mac&lt;/a&gt;&lt;/li&gt;
+         &lt;li&gt;&lt;a href=&quot;http://windows.github.com/&quot;&gt;GitHub for Windows&lt;/a&gt;&lt;/li&gt;
+         &lt;li&gt;&lt;a href=&quot;http://eclipse.github.com/&quot;&gt;GitHub for Eclipse&lt;/a&gt;&lt;/li&gt;
+         &lt;li&gt;&lt;a href=&quot;http://mobile.github.com/&quot;&gt;GitHub Mobile Apps&lt;/a&gt;&lt;/li&gt;
+       &lt;/ul&gt;
+
+       &lt;ul class=&quot;footer_nav&quot;&gt;
+         &lt;h4&gt;Tools&lt;/h4&gt;
+         &lt;li&gt;&lt;a href=&quot;http://get.gaug.es/&quot;&gt;Gauges: Web analytics&lt;/a&gt;&lt;/li&gt;
+         &lt;li&gt;&lt;a href=&quot;http://speakerdeck.com&quot;&gt;Speaker Deck: Presentations&lt;/a&gt;&lt;/li&gt;
+         &lt;li&gt;&lt;a href=&quot;https://gist.github.com&quot;&gt;Gist: Code snippets&lt;/a&gt;&lt;/li&gt;
+
+         &lt;h4 class=&quot;second&quot;&gt;Extras&lt;/h4&gt;
+         &lt;li&gt;&lt;a href=&quot;http://jobs.github.com/&quot;&gt;Job Board&lt;/a&gt;&lt;/li&gt;
+         &lt;li&gt;&lt;a href=&quot;http://shop.github.com/&quot;&gt;GitHub Shop&lt;/a&gt;&lt;/li&gt;
+         &lt;li&gt;&lt;a href=&quot;http://octodex.github.com/&quot;&gt;The Octodex&lt;/a&gt;&lt;/li&gt;
+       &lt;/ul&gt;
+
+       &lt;ul class=&quot;footer_nav&quot;&gt;
+         &lt;h4&gt;Documentation&lt;/h4&gt;
+         &lt;li&gt;&lt;a href=&quot;http://help.github.com/&quot;&gt;GitHub Help&lt;/a&gt;&lt;/li&gt;
+         &lt;li&gt;&lt;a href=&quot;http://developer.github.com/&quot;&gt;Developer API&lt;/a&gt;&lt;/li&gt;
+         &lt;li&gt;&lt;a href=&quot;http://github.github.com/github-flavored-markdown/&quot;&gt;GitHub Flavored Markdown&lt;/a&gt;&lt;/li&gt;
+         &lt;li&gt;&lt;a href=&quot;http://pages.github.com/&quot;&gt;GitHub Pages&lt;/a&gt;&lt;/li&gt;
+       &lt;/ul&gt;
+
+     &lt;/div&gt;&lt;!-- /.site --&gt;
+  &lt;/div&gt;&lt;!-- /.upper_footer --&gt;
+
+&lt;div class=&quot;lower_footer&quot;&gt;
+  &lt;div class=&quot;container clearfix&quot;&gt;
+    &lt;!--[if IE]&gt;&lt;div id=&quot;legal_ie&quot;&gt;&lt;![endif]--&gt;
+    &lt;![if !IE]&gt;&lt;div id=&quot;legal&quot;&gt;&lt;![endif]&gt;
+      &lt;ul&gt;
+          &lt;li&gt;&lt;a href=&quot;https://github.com/site/terms&quot;&gt;Terms of Service&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href=&quot;https://github.com/site/privacy&quot;&gt;Privacy&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href=&quot;https://github.com/security&quot;&gt;Security&lt;/a&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+
+      &lt;p&gt;&amp;copy; 2012 &lt;span title=&quot;0.08195s from fe6.rs.github.com&quot;&gt;GitHub&lt;/span&gt; Inc. All rights reserved.&lt;/p&gt;
+    &lt;/div&gt;&lt;!-- /#legal or /#legal_ie--&gt;
+
+  &lt;/div&gt;&lt;!-- /.site --&gt;
+&lt;/div&gt;&lt;!-- /.lower_footer --&gt;
+
+      &lt;/div&gt;&lt;!-- /#footer --&gt;
+
+    
+
+&lt;div id=&quot;keyboard_shortcuts_pane&quot; class=&quot;instapaper_ignore readability-extra&quot; style=&quot;display:none&quot;&gt;
+  &lt;h2&gt;Keyboard Shortcuts &lt;small&gt;&lt;a href=&quot;#&quot; class=&quot;js-see-all-keyboard-shortcuts&quot;&gt;(see all)&lt;/a&gt;&lt;/small&gt;&lt;/h2&gt;
+
+  &lt;div class=&quot;columns threecols&quot;&gt;
+    &lt;div class=&quot;column first&quot;&gt;
+      &lt;h3&gt;Site wide shortcuts&lt;/h3&gt;
+      &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+        &lt;dt&gt;s&lt;/dt&gt;
+        &lt;dd&gt;Focus site search&lt;/dd&gt;
+      &lt;/dl&gt;
+      &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+        &lt;dt&gt;?&lt;/dt&gt;
+        &lt;dd&gt;Bring up this help dialog&lt;/dd&gt;
+      &lt;/dl&gt;
+    &lt;/div&gt;&lt;!-- /.column.first --&gt;
+
+    &lt;div class=&quot;column middle&quot; style='display:none'&gt;
+      &lt;h3&gt;Commit list&lt;/h3&gt;
+      &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+        &lt;dt&gt;j&lt;/dt&gt;
+        &lt;dd&gt;Move selection down&lt;/dd&gt;
+      &lt;/dl&gt;
+      &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+        &lt;dt&gt;k&lt;/dt&gt;
+        &lt;dd&gt;Move selection up&lt;/dd&gt;
+      &lt;/dl&gt;
+      &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+        &lt;dt&gt;c &lt;em&gt;or&lt;/em&gt; o &lt;em&gt;or&lt;/em&gt; enter&lt;/dt&gt;
+        &lt;dd&gt;Open commit&lt;/dd&gt;
+      &lt;/dl&gt;
+      &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+        &lt;dt&gt;y&lt;/dt&gt;
+        &lt;dd&gt;Expand URL to its canonical form&lt;/dd&gt;
+      &lt;/dl&gt;
+    &lt;/div&gt;&lt;!-- /.column.first --&gt;
+
+    &lt;div class=&quot;column last js-hidden-pane&quot; style='display:none'&gt;
+      &lt;h3&gt;Pull request list&lt;/h3&gt;
+      &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+        &lt;dt&gt;j&lt;/dt&gt;
+        &lt;dd&gt;Move selection down&lt;/dd&gt;
+      &lt;/dl&gt;
+      &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+        &lt;dt&gt;k&lt;/dt&gt;
+        &lt;dd&gt;Move selection up&lt;/dd&gt;
+      &lt;/dl&gt;
+      &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+        &lt;dt&gt;o &lt;em&gt;or&lt;/em&gt; enter&lt;/dt&gt;
+        &lt;dd&gt;Open issue&lt;/dd&gt;
+      &lt;/dl&gt;
+      &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+        &lt;dt&gt;&lt;span class=&quot;platform-mac&quot;&gt;⌘&lt;/span&gt;&lt;span class=&quot;platform-other&quot;&gt;ctrl&lt;/span&gt; &lt;em&gt;+&lt;/em&gt; enter&lt;/dt&gt;
+        &lt;dd&gt;Submit comment&lt;/dd&gt;
+      &lt;/dl&gt;
+    &lt;/div&gt;&lt;!-- /.columns.last --&gt;
+
+  &lt;/div&gt;&lt;!-- /.columns.equacols --&gt;
+
+  &lt;div class=&quot;js-hidden-pane&quot; style='display:none'&gt;
+    &lt;div class=&quot;rule&quot;&gt;&lt;/div&gt;
+
+    &lt;h3&gt;Issues&lt;/h3&gt;
+
+    &lt;div class=&quot;columns threecols&quot;&gt;
+      &lt;div class=&quot;column first&quot;&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;j&lt;/dt&gt;
+          &lt;dd&gt;Move selection down&lt;/dd&gt;
+        &lt;/dl&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;k&lt;/dt&gt;
+          &lt;dd&gt;Move selection up&lt;/dd&gt;
+        &lt;/dl&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;x&lt;/dt&gt;
+          &lt;dd&gt;Toggle selection&lt;/dd&gt;
+        &lt;/dl&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;o &lt;em&gt;or&lt;/em&gt; enter&lt;/dt&gt;
+          &lt;dd&gt;Open issue&lt;/dd&gt;
+        &lt;/dl&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;&lt;span class=&quot;platform-mac&quot;&gt;⌘&lt;/span&gt;&lt;span class=&quot;platform-other&quot;&gt;ctrl&lt;/span&gt; &lt;em&gt;+&lt;/em&gt; enter&lt;/dt&gt;
+          &lt;dd&gt;Submit comment&lt;/dd&gt;
+        &lt;/dl&gt;
+      &lt;/div&gt;&lt;!-- /.column.first --&gt;
+      &lt;div class=&quot;column last&quot;&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;c&lt;/dt&gt;
+          &lt;dd&gt;Create issue&lt;/dd&gt;
+        &lt;/dl&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;l&lt;/dt&gt;
+          &lt;dd&gt;Create label&lt;/dd&gt;
+        &lt;/dl&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;i&lt;/dt&gt;
+          &lt;dd&gt;Back to inbox&lt;/dd&gt;
+        &lt;/dl&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;u&lt;/dt&gt;
+          &lt;dd&gt;Back to issues&lt;/dd&gt;
+        &lt;/dl&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;/&lt;/dt&gt;
+          &lt;dd&gt;Focus issues search&lt;/dd&gt;
+        &lt;/dl&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class=&quot;js-hidden-pane&quot; style='display:none'&gt;
+    &lt;div class=&quot;rule&quot;&gt;&lt;/div&gt;
+
+    &lt;h3&gt;Issues Dashboard&lt;/h3&gt;
+
+    &lt;div class=&quot;columns threecols&quot;&gt;
+      &lt;div class=&quot;column first&quot;&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;j&lt;/dt&gt;
+          &lt;dd&gt;Move selection down&lt;/dd&gt;
+        &lt;/dl&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;k&lt;/dt&gt;
+          &lt;dd&gt;Move selection up&lt;/dd&gt;
+        &lt;/dl&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;o &lt;em&gt;or&lt;/em&gt; enter&lt;/dt&gt;
+          &lt;dd&gt;Open issue&lt;/dd&gt;
+        &lt;/dl&gt;
+      &lt;/div&gt;&lt;!-- /.column.first --&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class=&quot;js-hidden-pane&quot; style='display:none'&gt;
+    &lt;div class=&quot;rule&quot;&gt;&lt;/div&gt;
+
+    &lt;h3&gt;Network Graph&lt;/h3&gt;
+    &lt;div class=&quot;columns equacols&quot;&gt;
+      &lt;div class=&quot;column first&quot;&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;&lt;span class=&quot;badmono&quot;&gt;←&lt;/span&gt; &lt;em&gt;or&lt;/em&gt; h&lt;/dt&gt;
+          &lt;dd&gt;Scroll left&lt;/dd&gt;
+        &lt;/dl&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;&lt;span class=&quot;badmono&quot;&gt;→&lt;/span&gt; &lt;em&gt;or&lt;/em&gt; l&lt;/dt&gt;
+          &lt;dd&gt;Scroll right&lt;/dd&gt;
+        &lt;/dl&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;&lt;span class=&quot;badmono&quot;&gt;↑&lt;/span&gt; &lt;em&gt;or&lt;/em&gt; k&lt;/dt&gt;
+          &lt;dd&gt;Scroll up&lt;/dd&gt;
+        &lt;/dl&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;&lt;span class=&quot;badmono&quot;&gt;↓&lt;/span&gt; &lt;em&gt;or&lt;/em&gt; j&lt;/dt&gt;
+          &lt;dd&gt;Scroll down&lt;/dd&gt;
+        &lt;/dl&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;t&lt;/dt&gt;
+          &lt;dd&gt;Toggle visibility of head labels&lt;/dd&gt;
+        &lt;/dl&gt;
+      &lt;/div&gt;&lt;!-- /.column.first --&gt;
+      &lt;div class=&quot;column last&quot;&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;shift &lt;span class=&quot;badmono&quot;&gt;←&lt;/span&gt; &lt;em&gt;or&lt;/em&gt; shift h&lt;/dt&gt;
+          &lt;dd&gt;Scroll all the way left&lt;/dd&gt;
+        &lt;/dl&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;shift &lt;span class=&quot;badmono&quot;&gt;→&lt;/span&gt; &lt;em&gt;or&lt;/em&gt; shift l&lt;/dt&gt;
+          &lt;dd&gt;Scroll all the way right&lt;/dd&gt;
+        &lt;/dl&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;shift &lt;span class=&quot;badmono&quot;&gt;↑&lt;/span&gt; &lt;em&gt;or&lt;/em&gt; shift k&lt;/dt&gt;
+          &lt;dd&gt;Scroll all the way up&lt;/dd&gt;
+        &lt;/dl&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;shift &lt;span class=&quot;badmono&quot;&gt;↓&lt;/span&gt; &lt;em&gt;or&lt;/em&gt; shift j&lt;/dt&gt;
+          &lt;dd&gt;Scroll all the way down&lt;/dd&gt;
+        &lt;/dl&gt;
+      &lt;/div&gt;&lt;!-- /.column.last --&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class=&quot;js-hidden-pane&quot; style='display:none'&gt;
+    &lt;div class=&quot;rule&quot;&gt;&lt;/div&gt;
+    &lt;div class=&quot;columns threecols&quot;&gt;
+      &lt;div class=&quot;column first js-hidden-pane&quot; style='display:none'&gt;
+        &lt;h3&gt;Source Code Browsing&lt;/h3&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;t&lt;/dt&gt;
+          &lt;dd&gt;Activates the file finder&lt;/dd&gt;
+        &lt;/dl&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;l&lt;/dt&gt;
+          &lt;dd&gt;Jump to line&lt;/dd&gt;
+        &lt;/dl&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;w&lt;/dt&gt;
+          &lt;dd&gt;Switch branch/tag&lt;/dd&gt;
+        &lt;/dl&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;y&lt;/dt&gt;
+          &lt;dd&gt;Expand URL to its canonical form&lt;/dd&gt;
+        &lt;/dl&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class=&quot;js-hidden-pane&quot; style='display:none'&gt;
+    &lt;div class=&quot;rule&quot;&gt;&lt;/div&gt;
+    &lt;div class=&quot;columns threecols&quot;&gt;
+      &lt;div class=&quot;column first&quot;&gt;
+        &lt;h3&gt;Browsing Commits&lt;/h3&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;&lt;span class=&quot;platform-mac&quot;&gt;⌘&lt;/span&gt;&lt;span class=&quot;platform-other&quot;&gt;ctrl&lt;/span&gt; &lt;em&gt;+&lt;/em&gt; enter&lt;/dt&gt;
+          &lt;dd&gt;Submit comment&lt;/dd&gt;
+        &lt;/dl&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;escape&lt;/dt&gt;
+          &lt;dd&gt;Close form&lt;/dd&gt;
+        &lt;/dl&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;p&lt;/dt&gt;
+          &lt;dd&gt;Parent commit&lt;/dd&gt;
+        &lt;/dl&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;o&lt;/dt&gt;
+          &lt;dd&gt;Other parent commit&lt;/dd&gt;
+        &lt;/dl&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class=&quot;js-hidden-pane&quot; style='display:none'&gt;
+    &lt;div class=&quot;rule&quot;&gt;&lt;/div&gt;
+    &lt;h3&gt;Notifications&lt;/h3&gt;
+
+    &lt;div class=&quot;columns threecols&quot;&gt;
+      &lt;div class=&quot;column first&quot;&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;j&lt;/dt&gt;
+          &lt;dd&gt;Move selection down&lt;/dd&gt;
+        &lt;/dl&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;k&lt;/dt&gt;
+          &lt;dd&gt;Move selection up&lt;/dd&gt;
+        &lt;/dl&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;o &lt;em&gt;or&lt;/em&gt; enter&lt;/dt&gt;
+          &lt;dd&gt;Open notification&lt;/dd&gt;
+        &lt;/dl&gt;
+      &lt;/div&gt;&lt;!-- /.column.first --&gt;
+
+      &lt;div class=&quot;column second&quot;&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;e &lt;em&gt;or&lt;/em&gt; shift i &lt;em&gt;or&lt;/em&gt; y&lt;/dt&gt;
+          &lt;dd&gt;Mark as read&lt;/dd&gt;
+        &lt;/dl&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;shift m&lt;/dt&gt;
+          &lt;dd&gt;Mute thread&lt;/dd&gt;
+        &lt;/dl&gt;
+      &lt;/div&gt;&lt;!-- /.column.first --&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+&lt;/div&gt;
+
+    &lt;div id=&quot;markdown-help&quot; class=&quot;instapaper_ignore readability-extra&quot;&gt;
+  &lt;h2&gt;Markdown Cheat Sheet&lt;/h2&gt;
+
+  &lt;div class=&quot;cheatsheet-content&quot;&gt;
+
+  &lt;div class=&quot;mod&quot;&gt;
+    &lt;div class=&quot;col&quot;&gt;
+      &lt;h3&gt;Format Text&lt;/h3&gt;
+      &lt;p&gt;Headers&lt;/p&gt;
+      &lt;pre&gt;
+# This is an &amp;lt;h1&amp;gt; tag
+## This is an &amp;lt;h2&amp;gt; tag
+###### This is an &amp;lt;h6&amp;gt; tag&lt;/pre&gt;
+     &lt;p&gt;Text styles&lt;/p&gt;
+     &lt;pre&gt;
+*This text will be italic*
+_This will also be italic_
+**This text will be bold**
+__This will also be bold__
+
+*You **can** combine them*
+&lt;/pre&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;col&quot;&gt;
+      &lt;h3&gt;Lists&lt;/h3&gt;
+      &lt;p&gt;Unordered&lt;/p&gt;
+      &lt;pre&gt;
+* Item 1
+* Item 2
+  * Item 2a
+  * Item 2b&lt;/pre&gt;
+     &lt;p&gt;Ordered&lt;/p&gt;
+     &lt;pre&gt;
+1. Item 1
+2. Item 2
+3. Item 3
+   * Item 3a
+   * Item 3b&lt;/pre&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;col&quot;&gt;
+      &lt;h3&gt;Miscellaneous&lt;/h3&gt;
+      &lt;p&gt;Images&lt;/p&gt;
+      &lt;pre&gt;
+![GitHub Logo](/images/logo.png)
+Format: ![Alt Text](url)
+&lt;/pre&gt;
+     &lt;p&gt;Links&lt;/p&gt;
+     &lt;pre&gt;
+http://github.com - automatic!
+[GitHub](http://github.com)&lt;/pre&gt;
+&lt;p&gt;Blockquotes&lt;/p&gt;
+     &lt;pre&gt;
+As Kanye West said:
+
+&gt; We're living the future so
+&gt; the present is our past.
+&lt;/pre&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;rule&quot;&gt;&lt;/div&gt;
+
+  &lt;h3&gt;Code Examples in Markdown&lt;/h3&gt;
+  &lt;div class=&quot;col&quot;&gt;
+      &lt;p&gt;Syntax highlighting with &lt;a href=&quot;http://github.github.com/github-flavored-markdown/&quot; title=&quot;GitHub Flavored Markdown&quot; target=&quot;_blank&quot;&gt;GFM&lt;/a&gt;&lt;/p&gt;
+      &lt;pre&gt;
+```javascript
+function fancyAlert(arg) {
+  if(arg) {
+    $.facebox({div:'#foo'})
+  }
+}
+```&lt;/pre&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;col&quot;&gt;
+      &lt;p&gt;Or, indent your code 4 spaces&lt;/p&gt;
+      &lt;pre&gt;
+Here is a Python code example
+without syntax highlighting:
+
+    def foo:
+      if not bar:
+        return true&lt;/pre&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;col&quot;&gt;
+      &lt;p&gt;Inline code for comments&lt;/p&gt;
+      &lt;pre&gt;
+I think you should use an
+`&amp;lt;addr&amp;gt;` element here instead.&lt;/pre&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;/div&gt;
+&lt;/div&gt;
+
+
+    &lt;div id=&quot;ajax-error-message&quot;&gt;
+      &lt;span class=&quot;mini-icon mini-icon-exclamation&quot;&gt;&lt;/span&gt;
+      Something went wrong with that request. Please try again.
+      &lt;a href=&quot;#&quot; class=&quot;ajax-error-dismiss&quot;&gt;Dismiss&lt;/a&gt;
+    &lt;/div&gt;
+
+    &lt;div id=&quot;logo-popup&quot;&gt;
+      &lt;h2&gt;Looking for the GitHub logo?&lt;/h2&gt;
+      &lt;ul&gt;
+        &lt;li&gt;
+          &lt;h4&gt;GitHub Logo&lt;/h4&gt;
+          &lt;a href=&quot;http://github-media-downloads.s3.amazonaws.com/GitHub_Logos.zip&quot;&gt;&lt;img alt=&quot;Github_logo&quot; src=&quot;https://a248.e.akamai.net/assets.github.com/images/modules/about_page/github_logo.png?1306884371&quot; /&gt;&lt;/a&gt;
+          &lt;a href=&quot;http://github-media-downloads.s3.amazonaws.com/GitHub_Logos.zip&quot; class=&quot;minibutton btn-download download&quot;&gt;Download&lt;/a&gt;
+        &lt;/li&gt;
+        &lt;li&gt;
+          &lt;h4&gt;The Octocat&lt;/h4&gt;
+          &lt;a href=&quot;http://github-media-downloads.s3.amazonaws.com/Octocats.zip&quot;&gt;&lt;img alt=&quot;Octocat&quot; src=&quot;https://a248.e.akamai.net/assets.github.com/images/modules/about_page/octocat.png?1306884371&quot; /&gt;&lt;/a&gt;
+          &lt;a href=&quot;http://github-media-downloads.s3.amazonaws.com/Octocats.zip&quot; class=&quot;minibutton btn-download download&quot;&gt;Download&lt;/a&gt;
+        &lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/div&gt;
+
+    
+    &lt;span id='server_response_time' data-time='0.08792' data-host='fe6'&gt;&lt;/span&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre></noscript></div>
+
+
+
+
+<blockquote class="twitter-tweet" data-in-reply-to="172219600216399872"><p>@<a href="https://twitter.com/nving">nving</a> 어&#8230; 그러면 다른 버전으로 switch 할 때마다 저 변수값을 바꿔줘야 해서&#8230;</p>&mdash; Raymundo (@gypark) <a href="https://twitter.com/gypark/status/172220146138611713" data-datetime="2012-02-22T07:24:17+00:00">February 22, 2012</a></blockquote>
+
+
+
+
+<blockquote class="twitter-tweet" data-in-reply-to="172221017534631936"><p>@<a href="https://twitter.com/nving">nving</a>perlbrew깔린디렉토리/perlbrew/bin/perlbrew exec 스크립트.pl이런 식으로 하니까 되네요~</p>&mdash; Raymundo (@gypark) <a href="https://twitter.com/gypark/status/172224703652564992" data-datetime="2012-02-22T07:42:23+00:00">February 22, 2012</a></blockquote>
+
+
+
+
+<blockquote class="twitter-tweet" data-in-reply-to="172220146138611713"><p>@<a href="https://twitter.com/gypark">gypark</a> @<a href="https://twitter.com/nving">nving</a>님께서 알려주신 방법이 정석(perlbrew와 동일한 방식)이라고 보여집니다. 다만 저라면 환경 변수 설정 없이 명시적으로 실행할 펄 바이너리를 명시하고 실행할 스크립트를 적어줄 것 같습니다.</p>&mdash; keedi (@keedi) <a href="https://twitter.com/keedi/status/172228561166536704" data-datetime="2012-02-22T07:57:43+00:00">February 22, 2012</a></blockquote>
+
+
+
+
+<blockquote class="twitter-tweet"><p>@<a href="https://twitter.com/gypark">gypark</a> @<a href="https://twitter.com/nving">nving</a> 크론에서 돌린다면 사실 어떤 버전이든지 알아서(환경 변수에 따라) 실행되게 하는 것은 위험한 것 같습니다. 더불어 크론으로 돌릴 스크립트라면 환경 변수를 믿지 않도록 작성할 필요도 있을테구요.</p>&mdash; keedi (@keedi) <a href="https://twitter.com/keedi/status/172228854906228737" data-datetime="2012-02-22T07:58:53+00:00">February 22, 2012</a></blockquote>
+
+
+
+
+<blockquote class="twitter-tweet" data-in-reply-to="172227703838220289"><p>@<a href="https://twitter.com/nving">nving</a> @<a href="https://twitter.com/gypark">gypark</a> 그렇게 실행할 경우 지금 현재 자신이 switch 하는 perl 버전에 따라 cronᅟ으로 돌릴 스크립트가 영향을 받지 않나요? 그렇다면 어떤 버전에는 설치된 모듈이 있고 어떤 버전에는 없다면 문제가 생길 것 같아요.</p>&mdash; keedi (@keedi) <a href="https://twitter.com/keedi/status/172229942577336320" data-datetime="2012-02-22T08:03:12+00:00">February 22, 2012</a></blockquote>
+
+
+
+
+<blockquote class="twitter-tweet" data-in-reply-to="172234678059794432"><p>@<a href="https://twitter.com/keedi">keedi</a> @<a href="https://twitter.com/nving">nving</a> RSS만드는 스크립트들을, 5.14에서 테스트했더니 와장창 망가지더라고요. Mechanize쪽이 어느 순간부터 반환값을 디코드해서 반환하는 터라. 그래서 거기에 맞춰 고쳤더니 정작 크론에서는 5.8 상에서 도는 바람에 OTL</p>&mdash; Raymundo (@gypark) <a href="https://twitter.com/gypark/status/172237570988703745" data-datetime="2012-02-22T08:33:31+00:00">February 22, 2012</a></blockquote>
+
+
+<p> 이상 날로먹는 crontab + perlbrew 끝.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Date::Holidays::KR Pull Requested]]></title>
+    <link href="http://jeen.github.com/blog/2012/02/15/date-holidays-kr-pull-requested/"/>
+    <updated>2012-02-15T23:48:00+09:00</updated>
+    <id>http://jeen.github.com/blog/2012/02/15/date-holidays-kr-pull-requested</id>
+    <content type="html"><![CDATA[<ul>
+<li><p><a href="http://jeen.github.com/blog/2012/02/07/date-holidays-kr-0-dot-01-released/">Date::Holidays::KR Released</a></p></li>
+<li><p><a href="http://jeen.github.com/blog/2012/02/09/cpan-module-update/">CPAN Module Update</a></p>
+
+<p>  지난번 야매로 간만에 CPAN 에 올린 <a href="http://metacpan.org/module/Date::Holidays::KR">Date::Holidays::KR</a> 에 버그가 발견되었습니다. 음력을 만만하게 본 탓이 컸습니다.</p>
+
+<p>거기에 더해서 <code>holidays()</code> 함수도 동작을 안하는 것을 모르고 올려버렸었네요.</p>
+
+<p>이런 상황에 있어서 @keedi 님께서 Pull Request 를 보내주셨습니다.</p></li>
+<li><p><a href="https://github.com/JEEN/p5-Date-Holidays-KR/pull/1">https://github.com/JEEN/p5-Date-Holidays-KR/pull/1</a></p>
+
+<p>아주 풍성한 Pull Request 입니다. 거기에 번듯한 테스트코드까지&#8230;</p>
+
+<p>모듈의 성격 탓인지, Pull Request 를 보내시면서</p></li>
+</ul>
+
+
+<blockquote><p>keedi : 휴일이 너무 적어요 ㅡㅜ</p>
+
+<p>keedi : 모듈 보면서 더 느끼는거지만 휴일이 겨우 저거뿐 ;ㅁ;</p></blockquote>
+
+<p>  라는 현 세태에 대한 푸념을 &#8230; ㅡㅜ</p>
+
+<blockquote class="twitter-tweet"><p>Date-Holidays-KR 0.04 by JEEN - <a href="http://t.co/9Jcv6nws" title="http://metacpan.org/release/JEEN/Date-Holidays-KR-0.04/">metacpan.org/release/JEEN/D…</a></p>&mdash; CPAN New Modules (@cpan_new) <a href="https://twitter.com/cpan_new/status/169756771706089472" data-datetime="2012-02-15T12:15:42+00:00">February 15, 2012</a></blockquote>
+
+
+<p> 재빨리 Merge 해서 다시 CPAN 에 올렸습니다.  앞으로는 좀 더 신중하게 CPAN 에 올려야 되겠구나 하고 결심을 해봅니다.</p>
+
+<p>  @keedi++</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Rex Pull Request]]></title>
+    <link href="http://jeen.github.com/blog/2012/02/15/rex-pull-request/"/>
+    <updated>2012-02-15T23:21:00+09:00</updated>
+    <id>http://jeen.github.com/blog/2012/02/15/rex-pull-request</id>
+    <content type="html"><![CDATA[<ul>
+<li><p><a href="http://rexify.org/">(R)?ex - A simple framework to simplify systemadministration</a></p>
+
+<p>최근에 여러 서버 일괄 작업을 위해서 <a href="http://metacpan.org/module/Rex">Rex</a> 로 이것저것 해보고 있는 중입니다. Rex 는 Ruby 쪽에서 많이 쓰인다는 Chef 같은 부류의 툴이랄까요, 아무튼 그런 류의 일을 Perl 로 할 수 있게 하는 툴입니다.</p>
+
+<p>Rex 에 속한 네임스페이스를 살펴보면 다양한 OS 의 경우에 상응하는 다양한  케이스를 고려하고 있는 것 같습니다.</p>
+
+<p>오늘 제가 쓴 Rex 의 가벼운 예제로는 다음과 같습니다.</p></li>
+</ul>
+
+
+<figure class='code'><figcaption><span>Rexfile</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="n">user</span> <span class="s">&#39;user&#39;</span><span class="p">;</span>
+</span><span class='line'><span class="n">password</span> <span class="s">&#39;password&#39;</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">pass_auth</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">group</span> <span class="o">=&gt;</span> <span class="s">&quot;sweet-vms&quot;</span> <span class="o">=&gt;</span> <span class="s">&quot;vm[01..10]&quot;</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nb">require</span> <span class="nn">Rex::</span><span class="n">Init</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span>Rex::Init</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="nb">package</span> <span class="nn">Rex::</span><span class="n">Init</span><span class="p">;</span>
+</span><span class='line'><span class="k">use</span> <span class="nn">Rex::</span><span class="n">Commands</span><span class="p">;</span>
+</span><span class='line'><span class="k">use</span> <span class="nn">Rex::Commands::</span><span class="n">Run</span><span class="p">;</span>
+</span><span class='line'><span class="k">use</span> <span class="nn">Rex::Commands::</span><span class="n">Pkg</span><span class="p">;</span>
+</span><span class='line'><span class="k">use</span> <span class="nn">Rex::Commands::</span><span class="n">Iptables</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">desc</span> <span class="s">&#39;Add yum repo&#39;</span><span class="p">;</span>
+</span><span class='line'><span class="n">task</span> <span class="s">&quot;add_yum_repo&quot;</span><span class="p">,</span> <span class="n">group</span> <span class="o">=&gt;</span> <span class="s">&quot;sweet-vms&quot;</span><span class="p">,</span> <span class="k">sub </span><span class="p">{</span>
+</span><span class='line'>    <span class="n">run</span><span class="p">(</span><span class="s">&quot;yum -y install http://pkgs.repoforge.org/rpmforge-release/rpmforge-release-0.5.2-2.el5.rf.x86_64.rpm&quot;</span><span class="p">);</span>
+</span><span class='line'>    <span class="k">print</span> <span class="s">&quot;Added RPMForge Repo on /etc/yum.repos.d/\n&quot;</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">repository</span> <span class="n">add</span> <span class="o">=&gt;</span> <span class="s">&quot;Opsview&quot;</span><span class="p">,</span>
+</span><span class='line'>        <span class="n">url</span> <span class="o">=&gt;</span> <span class="s">&#39;http://downloads.opsera.com/opsview-community/latest/yum/centos/$releasever/$basearch&#39;</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">print</span> <span class="s">&quot;Added OpsView Repo on /etc/yum.repos.d/\n&quot;</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">update_package_db</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">print</span> <span class="s">&quot;Updated yum package DB\n&quot;</span><span class="p">;</span>
+</span><span class='line'><span class="p">};</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">desc</span> <span class="s">&#39;Install OpsView-Agent&#39;</span><span class="p">;</span>
+</span><span class='line'><span class="n">task</span> <span class="s">&quot;install_opsview_agent&quot;</span><span class="p">,</span> <span class="n">group</span> <span class="o">=&gt;</span> <span class="s">&quot;sweet-vms&quot;</span><span class="p">,</span> <span class="k">sub </span><span class="p">{</span>
+</span><span class='line'>    <span class="n">install</span> <span class="nb">package</span> <span class="o">=&gt;</span> <span class="s">&#39;opsview-agent&#39;</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">print</span> <span class="s">&quot;Installed [opsview-agent]\n&quot;</span><span class="p">;</span>
+</span><span class='line'><span class="p">};</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">desc</span> <span class="s">&#39;Open NRPE(5666) Port&#39;</span><span class="p">;</span>
+</span><span class='line'><span class="n">task</span> <span class="s">&#39;open_nrpe_port&#39;</span><span class="p">,</span> <span class="n">group</span> <span class="o">=&gt;</span> <span class="s">&quot;sweet-vms&quot;</span><span class="p">,</span> <span class="k">sub </span><span class="p">{</span>
+</span><span class='line'>    <span class="n">open_port</span> <span class="mi">5666</span><span class="p">;</span>
+</span><span class='line'><span class="p">};</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>이렇게 <code>Rexfile</code> 에 각 서버 그룹과 SSH 접속 계정, 그리고 <code>Rex::Init</code> 에 그 그룹에 대한 작업(Task) 를 정의합니다.</p>
+
+<p>  위처럼 정의한 작업에 대해서,</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>rex -T
+</span><span class='line'>Tasks
+</span><span class='line'>  Init:add_yum_repo              Add yum repo
+</span><span class='line'>  Init:install_opsview_agent     Install OpsView-Agent
+</span><span class='line'>  Init:open_nrpe_port            Open NRPE<span class="o">(</span>5666<span class="o">)</span> Port
+</span><span class='line'>Batches
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>  <code>rex -T</code> 를 통해서 작동할 수 있는 Task 의 리스트를 받을 수 있습니다.</p>
+
+<p>  그리고,</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>rex <span class="s1">&#39;Init:add_yum_repo&#39;</span> <span class="s1">&#39;Init:install_opsview_agent&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>  이런식으로 동작할 작업들을 지정해줌으로, 위의 <code>sweet-vms</code> 그룹의 vm01 부터 vm10 의 의 열대의 서버에 대해서 <code>RPMForge</code> 와 <code>OpsView</code> <code>yum repo</code> 를 추가하고, <code>opsview-agent</code> 를 설치합니다. <code>opsview-agent</code> 자체는 기본적인 yum package 에 없는 라이브러리를 참조하기에 <code>RPMForge</code> 를 우선 등록한 것입니다.</p>
+
+<p>  예, 뭐 아무튼 이런 식입니다. 아직 뭐 본격적으로 이런저런 상황에 부딪히면서 검증하고 있고, Rex 자체에서 어떻게 할 수 없으면 직접 패치를 써나가 볼 까합니다.</p>
+
+<p>  그런 의미에서, 오늘 Rex 에 Pull Request 를 하나 보내서 0.25 에 Merge 되었습니다. :-)</p>
+
+<ul>
+<li><a href="https://github.com/JEEN/Rex/commit/1d69a96ba4371dc9e030fab494c887b9126a2c9d">https://github.com/JEEN/Rex/commit/1d69a96ba4371dc9e030fab494c887b9126a2c9d</a></li>
+<li><p><a href="http://github.com/krimdomu/Rex/pull/12">http://github.com/krimdomu/Rex/pull/12</a></p>
+
+<p>사실 위에서 <code>opsview-agent</code> 는 제대로 설치되지 않습니다. 이유는 Pull Request 를 보내면서 봉착한 상황과 대처로 적어놨습니다.</p></li>
+</ul>
+
+
+<blockquote class="twitter-tweet"><p>Rex 무려 GPL v3 였구나&#8230;</p>&mdash; JEEN (@JEEN_LEE) <a href="https://twitter.com/JEEN_LEE/status/169724680612216832" data-datetime="2012-02-15T10:08:11+00:00">February 15, 2012</a></blockquote>
+
+
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[CPAN Module Update]]></title>
+    <link href="http://jeen.github.com/blog/2012/02/09/cpan-module-update/"/>
+    <updated>2012-02-09T01:06:00+09:00</updated>
+    <id>http://jeen.github.com/blog/2012/02/09/cpan-module-update</id>
+    <content type="html"><![CDATA[<blockquote class="twitter-tweet" lang="ko"><p>Acme-CPANAuthors-Korean 0.08 by JEEN - <a href="http://t.co/CjlRnKEO" title="http://metacpan.org/release/JEEN/Acme-CPANAuthors-Korean-0.08/">metacpan.org/release/JEEN/A…</a></p>&mdash; CPAN New Modules (@cpan_new) <a href="https://twitter.com/cpan_new/status/167271503061200896" data-datetime="2012-02-08T15:40:08+00:00">2월 8, 2012</a></blockquote>
+
+
+
+
+<blockquote class="twitter-tweet" lang="ko"><p>Lingua-KO-TypoCorrector 0.03 by JEEN - <a href="http://t.co/b1Lp98PW" title="http://metacpan.org/release/JEEN/Lingua-KO-TypoCorrector-0.03/">metacpan.org/release/JEEN/L…</a></p>&mdash; CPAN New Modules (@cpan_new) <a href="https://twitter.com/cpan_new/status/167273895550922753" data-datetime="2012-02-08T15:49:39+00:00">2월 8, 2012</a></blockquote>
+
+
+
+
+<blockquote class="twitter-tweet" lang="ko"><p>Date-Holidays-KR 0.03 by JEEN - <a href="http://t.co/qAXrPO6f" title="http://metacpan.org/release/JEEN/Date-Holidays-KR-0.03/">metacpan.org/release/JEEN/D…</a></p>&mdash; CPAN New Modules (@cpan_new) <a href="https://twitter.com/cpan_new/status/167275532466143232" data-datetime="2012-02-08T15:56:09+00:00">2월 8, 2012</a></blockquote>
+
+
+
+
+<blockquote class="twitter-tweet" lang="ko"><p>WebService-Aladdin 0.0706 by JEEN - <a href="http://t.co/lyGpgk6W" title="http://metacpan.org/release/JEEN/WebService-Aladdin-0.0706/">metacpan.org/release/JEEN/W…</a></p>&mdash; CPAN New Modules (@cpan_new) <a href="https://twitter.com/cpan_new/status/167276286962704385" data-datetime="2012-02-08T15:59:09+00:00">2월 8, 2012</a></blockquote>
+
+
+
+
+<blockquote class="twitter-tweet" lang="ko"><p>WWW-Shorten-Durl 0.05 by JEEN - <a href="http://t.co/mtnX4oEn" title="http://metacpan.org/release/JEEN/WWW-Shorten-Durl-0.05/">metacpan.org/release/JEEN/W…</a></p>&mdash; CPAN New Modules (@cpan_new) <a href="https://twitter.com/cpan_new/status/167277296259055616" data-datetime="2012-02-08T16:03:09+00:00">2월 8, 2012</a></blockquote>
+
+
+<p>  이전 글에서 언급했듯, 제가 만든 CPAN Module 들의 Meta 정보중에 repository 가 누락된 것도 있었고, 이 중 몇몇은 Github Project 이름까지 p5-* 형식으로 바꿔놓아서 이왕 이렇게 된 거 전부 바꿔보자는 생각이 들어서 작업을 했습니다.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="k">use</span> <span class="nn">inc::Module::</span><span class="n">Install</span><span class="p">;</span>
+</span><span class='line'><span class="n">name</span> <span class="s">&#39;Date-Holidays-KR&#39;</span><span class="p">;</span>
+</span><span class='line'><span class="n">all_from</span> <span class="s">&#39;lib/Date/Holidays/KR.pm&#39;</span><span class="p">;</span>
+</span><span class='line'><span class="n">requires</span> <span class="s">&#39;Date::Korean&#39;</span> <span class="o">=&gt;</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">tests</span> <span class="s">&#39;t/*.t&#39;</span><span class="p">;</span>
+</span><span class='line'><span class="n">test_requires</span> <span class="s">&#39;Test::More&#39;</span><span class="p">;</span>
+</span><span class='line'><span class="n">resources</span> <span class="n">repository</span> <span class="o">=&gt;</span> <span class="s">&#39;git://github.com/JEEN/p5-Date-Holidays-KR.git&#39;</span><span class="p">;</span>
+</span><span class='line'><span class="n">auto_include</span><span class="p">;</span>
+</span><span class='line'><span class="n">WriteAll</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>  위는 <a href="http://metacpan.org/module/Date::Holidays::KR">Date::Holidays::KR</a> 의 <code>Makefile.PL</code> 입니다. 몇몇 모듈은 <a href="http://metacpan.org/module/ExtUtils::MakeMaker">ExtUtils::MakeMaker</a> 를 사용하고 있었는데, 모두 <a href="http://metacpan.org/module/Module::Install">Module::Install</a> 을 사용하도록 교체하고, repository 를 각각의 github repository 를 지정한 것뿐입니다.</p>
+
+<p>  마음먹은 김에 이슈처리하고 저녁시간을 빌어서 CPAN 에 일괄 업로드했습니다. 완전 스팸이네요.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[CPANRatings - WebService::Aladdin]]></title>
+    <link href="http://jeen.github.com/blog/2012/02/08/cpanratings-webservice-aladdin/"/>
+    <updated>2012-02-08T16:27:00+09:00</updated>
+    <id>http://jeen.github.com/blog/2012/02/08/cpanratings-webservice-aladdin</id>
+    <content type="html"><![CDATA[<blockquote class="twitter-tweet" data-in-reply-to="166961671741521922"><p>@<a href="https://twitter.com/keedi">keedi</a> @<a href="https://twitter.com/gypark">gypark</a> 오오오&#8230; 가문의 영광!!!</p>&mdash; JEEN (@JEEN_LEE) <a href="https://twitter.com/JEEN_LEE/status/167063345000755200" data-datetime="2012-02-08T01:52:59+00:00">February 8, 2012</a></blockquote>
+
+
+<p> 새벽에 @keedi 님으로부터 트윗을 받고 알게되었습니다. 인생 처음으로 <a href="http://cpanratings.perl.org/">CPANRatings</a> 에서 Rating 을 받아보는 군요. 그것도 별 다섯개.</p>
+
+<ul>
+<li><p><a href="http://cpanratings.perl.org/dist/WebService-Aladdin">http://cpanratings.perl.org/dist/WebService-Aladdin</a></p>
+
+<p>아, CPANRatings 는 CPAN 에 올라온 모듈들에 평가를 남길 수 있는 곳입니다.</p>
+
+<p>Rating 은 @gypark 님으로부터 였습니다. 제가 얼기설기 CPAN 에 모듈 올려보겠답시고 2007년쯤에 올린 모듈이고, 저 조차도 잠깐 쓰다가 뭐 당장 쓸일이 없어서 내팽개쳐뒀지만 말이죠.. =3</p>
+
+<p>아무튼 의욕이 새록새록 돋습니다.</p>
+
+<p> <blockquote class="twitter-tweet" data-in-reply-to="167064715812552705" lang="ko"><p>@<a href="https://twitter.com/gypark">gypark</a> @<a href="https://twitter.com/JEEN_LEE">JEEN_LEE</a> @<a href="https://twitter.com/keedi">keedi</a> <a href="http://t.co/7v2VeWFW" title="http://jof4002.net/%EC%A1%B0%ED%94%84%EC%9D%BC%EA%B8%B0/2012-01-17">jof4002.net/%EC%A1%B0%ED%9…</a> 저 Rating 뒤에는 이런 슬픈 사연이 있습니다.</p>&mdash; SangYeon Jeon (@jof4002) <a href="https://twitter.com/jof4002/status/167174435084828672" data-datetime="2012-02-08T09:14:25+00:00">2월 8, 2012</a></blockquote></p>
+
+<p>사실 이 Rating 뒤에는 @jof4002 님의 어떤 사연이 있었다고 합니다. 도움이 되었다니 다행입니다.</p></li>
+<li><p><a href="http://jof4002.net/%EC%A1%B0%ED%94%84%EC%9D%BC%EA%B8%B0/2012-01-17">http://jof4002.net/조프일기/2012-01-17</a></p>
+
+<p>오늘은 @keedi 님께 어제 올린 <a href="http://metacpan.org/module/Date::Holidays::KR">Date::Holidays::KR</a> 에 Repository 정보가 없다는 말을 듣고, 흡&#8230; 해서 나머지 모듈들도 전부 Repository 정보를 추가해보려고 합니다.</p>
+
+<p>Date::Holidays::KR 에 Repository 가 없는 이유는 META.yml 이 없어서 였던 듯&#8230;</p></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Date::Holidays::KR Released]]></title>
+    <link href="http://jeen.github.com/blog/2012/02/07/date-holidays-kr-0-dot-01-released/"/>
+    <updated>2012-02-07T20:28:00+09:00</updated>
+    <id>http://jeen.github.com/blog/2012/02/07/date-holidays-kr-0-dot-01-released</id>
+    <content type="html"><![CDATA[<p>  회사의 경영자 @y0ngbin 께서 <code>is_bizday</code> 라는 스크립트를 만들어서 쓰는 것을 보고 호오 했었는데&#8230;</p>
+
+<p>  <script src="https://gist.github.com/1646007.js?file=is_bizday.pl"></script></p>
+
+<p>  알고보니 내용인즉슨 HTTP Request 를 날리고 그 결과를 파싱하는 일을 하고 있다는 것을 알고, 급히 <a href="http://metacpan.org/module/Date::Holidays::KR">Date::Holidays::KR</a> 이라는 모듈을 만들기로 했습니다&#8230; 랄까 사실은 작년부터 떠밀려온 <code>Things</code> 의 이슈 중 하나였습니다.</p>
+
+<p>  사실 일본같은 경우에는 음력이 옛날에 없어져버렸고, 지금은 양력만으로 돌고 있고, 중국은 한국과 마찬가지로 음력을 사용하고 있습니다. 재미삼아서 여러나라의 공휴일을 살펴봤는데, 대개 정해진 날, 또는 몇 월의 몇번째 주의 월요일이라든가 하는 식으로 공휴일이 지정되어 있는 것을 봤습니다.
+  캐나다의 경우는 주마다 휴일이 다르더군요. :-)</p>
+
+<p>  아무튼 같은 음력을 사용하는 중국, 그 중국용으로 만든 <a href="http://metacpan.org/module/Date::Holidays::CN">Date::Holidays::CN</a> 을 참고해서 <code>Date::Holidays::KR</code> 을 만들었습니다. 음력도 미묘하게 중국과는 다르다고 하는데, 이 부분은 @aer0 님께서 만드신 <a href="http://metacpan.org/module/Date::Korean">Date::Korean</a> 모듈을 사용해서 음력/양력 변환을 이용했구요. (설날,추석,석가탄신일의 경우는 음력)</p>
+
+<blockquote class="twitter-tweet"><p>Date-Holidays-KR 0.01 by JEEN - <a href="http://t.co/pHQVHLaJ" title="http://metacpan.org/release/JEEN/Date-Holidays-KR-0.01/">metacpan.org/release/JEEN/D…</a></p>&mdash; CPAN New Modules (@cpan_new) <a href="https://twitter.com/cpan_new/status/166840689223675904" data-datetime="2012-02-07T11:08:14+00:00">February 7, 2012</a></blockquote>
+
+
+
+
+<blockquote class="twitter-tweet"><p>Date-Holidays-KR 0.02 by JEEN - <a href="http://t.co/mgouifly" title="http://metacpan.org/release/JEEN/Date-Holidays-KR-0.02/">metacpan.org/release/JEEN/D…</a></p>&mdash; CPAN New Modules (@cpan_new) <a href="https://twitter.com/cpan_new/status/167066106622771200" data-datetime="2012-02-08T02:03:58+00:00">February 8, 2012</a></blockquote>
+
+
+<p>  어제 0.01 올리다가 <code>Makefile.PL</code> 에 의존모듈을 안정해놨구나 해서 추가해서 다시 올려놨습니다.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='diff'><span class='line'><span class="gh">diff --git a/Makefile.PL b/Makefile.PL</span>
+</span><span class='line'><span class="gh">index 7b27280..fef5219 100644</span>
+</span><span class='line'><span class="gd">--- a/Makefile.PL</span>
+</span><span class='line'><span class="gi">+++ b/Makefile.PL</span>
+</span><span class='line'><span class="gu">@@ -2,7 +2,7 @@ use inc::Module::Install;</span>
+</span><span class='line'> name &#39;Date-Holidays-KR&#39;;
+</span><span class='line'> all_from &#39;lib/Date/Holidays/KR.pm&#39;;
+</span><span class='line'>
+</span><span class='line'><span class="gd">-# requires &#39;&#39;;</span>
+</span><span class='line'><span class="gi">+requires &#39;Date::Korean&#39;;</span>
+</span><span class='line'>
+</span><span class='line'> tests &#39;t/*.t&#39;;
+</span><span class='line'> author_tests &#39;xt&#39;;
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Perl and Continuous Integration with Jenkins - II]]></title>
+    <link href="http://jeen.github.com/blog/2012/02/02/perl-and-continuous-integration-with-jenkins-2/"/>
+    <updated>2012-02-02T07:00:00+09:00</updated>
+    <id>http://jeen.github.com/blog/2012/02/02/perl-and-continuous-integration-with-jenkins-2</id>
+    <content type="html"><![CDATA[<p>  애시당초 블로깅하려던 내용을 발표자료로 엮었습니다.</p>
+
+<script src="http://storify.com/jeen_lee/perl-and-continuous-integration-w-jenkins.js"></script>
+
+
+<p><noscript>[<a href="http://storify.com/jeen_lee/perl-and-continuous-integration-w-jenkins" target="_blank">View the story &#8220;Perl and Continuous Integration w/ Jenkins&#8221; on Storify</a>]</noscript></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Carton - CPAN dependencies manager]]></title>
+    <link href="http://jeen.github.com/blog/2012/01/16/carton-cpan-dependencies-manager/"/>
+    <updated>2012-01-16T22:49:00+09:00</updated>
+    <id>http://jeen.github.com/blog/2012/01/16/carton-cpan-dependencies-manager</id>
+    <content type="html"><![CDATA[<p>  Jenkins 이야기를 마저 쓸려고 했는 데, 그 사이사이에 사용된 것들부터 정리하고자 우선은 Carton 이야기 부터 먼저하고자 합니다.</p>
+
+<p>  잘은 모르지만 Carton 은 Ruby 의 Bundler 에 영감을 받아서 만들어 진 것입니다. 어떤 Perl 로 만든 소프트웨어의 의존모듈의 관리가 편해집니다. :-) 일례로, 노트북에서 개발을 하고 이것을 서버에 올릴려고 할 때, 일일이 의존모듈 체크를 해야할 필요성이 있습니다. 그때마다 <code>cpan MODULE</code> 등으로 설치를 해나가야 한다면 여간 힘든 일이 아니죠.</p>
+
+<p>  그런 상황에서 쉽게 문제를 해결할 수 있는 것이 <code>Carton</code> 이 아닐까 생각합니다.</p>
+
+<h3>Carton 설치</h3>
+
+<p>  <code>Carton</code> 은 간단하게 <code>cpan</code> 으로 설치할 수 있습니다.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>cpanm carton
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>  위의 커맨드로 <code>Carton</code> 을 설치하면 <code>carton</code> 이라는 커맨드가 생깁니다.</p>
+
+<h3>Carton 이용</h3>
+
+<p>  <code>Carton</code> 을 제대로 이용하려면, 해당 Perl App 의 의존모듈이 <code>Makefile.PL</code> 안에서 잘 관리되고 있어야 합니다.</p>
+
+<figure class='code'><figcaption><span>Makefile.PL</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="k">use</span> <span class="nn">ExtUtils::</span><span class="n">MakeMaker</span><span class="p">;</span>
+</span><span class='line'><span class="n">WriteMakefile</span><span class="p">(</span>
+</span><span class='line'>    <span class="s">&#39;NAME&#39;</span>      <span class="o">=&gt;</span> <span class="s">&#39;WebService::Aladdin&#39;</span><span class="p">,</span>
+</span><span class='line'>    <span class="s">&#39;AUTHOR&#39;</span>    <span class="o">=&gt;</span> <span class="s">&#39;JEEN &lt;jeen@perl.kr&gt;&#39;</span><span class="p">,</span>
+</span><span class='line'>    <span class="s">&#39;VERSION_FROM&#39;</span> <span class="o">=&gt;</span> <span class="s">&#39;lib/WebService/Aladdin.pm&#39;</span><span class="p">,</span> <span class="c1"># finds $VERSION</span>
+</span><span class='line'>    <span class="s">&#39;PREREQ_PM&#39;</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nn">Test::</span><span class="n">Base</span> <span class="o">=&gt;</span> <span class="mi">0</span><span class="p">,</span>
+</span><span class='line'>        <span class="n">version</span>    <span class="o">=&gt;</span> <span class="mi">0</span><span class="p">,</span>
+</span><span class='line'>        <span class="nn">Class::Accessor::</span><span class="n">Fast</span> <span class="o">=&gt;</span> <span class="mi">0</span><span class="p">,</span>
+</span><span class='line'>        <span class="nn">LWP::</span><span class="n">UserAgent</span> <span class="o">=&gt;</span> <span class="mi">0</span><span class="p">,</span>
+</span><span class='line'>        <span class="n">URI</span>            <span class="o">=&gt;</span> <span class="mi">0</span><span class="p">,</span>
+</span><span class='line'>        <span class="n">Carp</span>           <span class="o">=&gt;</span> <span class="mi">0</span><span class="p">,</span>
+</span><span class='line'>        <span class="nn">XML::</span><span class="n">FeedPP</span>    <span class="o">=&gt;</span> <span class="mi">0</span>
+</span><span class='line'>    <span class="p">},</span>
+</span><span class='line'><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>  우선 예제로 제가 만든 <code>WebService::Aladdin</code> 모듈의 <code>Makefile.PL</code> 이 위와 같습니다. 이는 <code>WebService::Aladdin</code> 모듈에서 필요로 하는 의존모듈 등의 정보들을 나타내고 있습니다.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>carton install
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>  <code>carton install</code> 을 통해서 <code>Makefile.PL</code> 에 정의된 의존모듈을 설치합니다. 이때 <code>Carton</code> 은 의존모듈의 의존트리까지도 설치해버립니다. 그러니 실제 의존모듈이 10개라도, 그 10개의 각각의 모듈의 의존모듈까지도 설치하기 때문에 실제로 설치되는 것은 10개 이상의 모듈들이 될 것입니다.</p>
+
+<p>  아무튼 <code>carton install</code> 이 끝났다면 <code>carton.lock</code> 파일이 생성됩니다. 그리고 <code>local</code> 이라는 디렉토리의 아래에 의존모듈들이 설치됩니다.</p>
+
+<figure class='code'><figcaption><span>carton.lock</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+</pre></td><td class='code'><pre><code class='text'><span class='line'>{
+</span><span class='line'>   &quot;modules&quot; : {
+</span><span class='line'>      &quot;Algorithm::Diff&quot; : {
+</span><span class='line'>         &quot;dist&quot; : &quot;Algorithm-Diff-1.1902&quot;,
+</span><span class='line'>         &quot;module&quot; : &quot;Algorithm::Diff&quot;,
+</span><span class='line'>         &quot;mymeta&quot; : {
+</span><span class='line'>            &quot;abstract&quot; : &quot;unknown&quot;,
+</span><span class='line'>            &quot;author&quot; : [
+</span><span class='line'>               &quot;unknown&quot;
+</span><span class='line'>            ],
+</span><span class='line'>            &quot;dynamic_config&quot; : 0,
+</span><span class='line'>            &quot;generated_by&quot; : &quot;ExtUtils::MakeMaker version 6.62, CPAN::Meta::Converter version 2.112621, CPAN::Meta::Converter version 2.112150&quot;,
+</span><span class='line'>            &quot;license&quot; : [
+</span><span class='line'>               &quot;unknown&quot;
+</span><span class='line'>            ],
+</span><span class='line'>            &quot;meta-spec&quot; : {
+</span><span class='line'>               &quot;url&quot; : &quot;http://search.cpan.org/perldoc?CPAN::Meta::Spec&quot;,
+</span><span class='line'>               &quot;version&quot; : &quot;2&quot;
+</span><span class='line'>            },
+</span><span class='line'>            &quot;name&quot; : &quot;Algorithm-Diff&quot;,
+</span><span class='line'>            &quot;no_index&quot; : {
+</span><span class='line'>               &quot;directory&quot; : [
+</span><span class='line'>                  &quot;t&quot;,
+</span><span class='line'>                  &quot;inc&quot;
+</span><span class='line'>               ]
+</span><span class='line'>            },
+</span><span class='line'>            &quot;prereqs&quot; : {
+</span><span class='line'>               &quot;build&quot; : {
+</span><span class='line'>                  &quot;requires&quot; : {
+</span><span class='line'>                     &quot;ExtUtils::MakeMaker&quot; : 0
+</span><span class='line'>                  }
+</span><span class='line'>               },
+</span><span class='line'>               &quot;configure&quot; : {
+</span><span class='line'>                  &quot;requires&quot; : {
+</span><span class='line'>                     &quot;ExtUtils::MakeMaker&quot; : 0
+</span><span class='line'>                  }
+</span><span class='line'>               },
+</span><span class='line'>               &quot;runtime&quot; : {
+</span><span class='line'>                  &quot;requires&quot; : {}
+</span><span class='line'>               }
+</span><span class='line'>            },
+</span><span class='line'>            &quot;release_status&quot; : &quot;stable&quot;,
+</span><span class='line'>            &quot;version&quot; : &quot;1.1902&quot;
+</span><span class='line'>         },
+</span><span class='line'>         &quot;name&quot; : &quot;Algorithm::Diff&quot;,
+</span><span class='line'>         &quot;pathname&quot; : &quot;T/TY/TYEMQ/Algorithm-Diff-1.1902.tar.gz&quot;,
+</span><span class='line'>         &quot;provides&quot; : {
+</span><span class='line'>            &quot;Algorithm::Diff&quot; : {
+</span><span class='line'>               &quot;file&quot; : &quot;Algorithm/Diff.pm&quot;,
+</span><span class='line'>               &quot;version&quot; : &quot;1.1902&quot;
+</span><span class='line'>            },
+</span><span class='line'>            &quot;Algorithm::DiffOld&quot; : {
+</span><span class='line'>               &quot;file&quot; : &quot;Algorithm/DiffOld.pm&quot;,
+</span><span class='line'>               &quot;version&quot; : &quot;1.1&quot;
+</span><span class='line'>            }
+</span><span class='line'>         },
+</span><span class='line'>         &quot;version&quot; : &quot;1.1902&quot;
+</span><span class='line'>      },
+</span><span class='line'>      ...
+</span><span class='line'>   }
+</span><span class='line'>}
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>  이후 <code>Makefile.PL</code> 에서 또다른 의존모듈이 추가되었을 시에, 또다시</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>carton install
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>을 통해서 추가의존모듈을 설치할 수 있습니다. 이렇게 <code>carton install</code> 로 설치된 로컬 모듈들은</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>carton list
+</span><span class='line'>IO-stringy-2.110
+</span><span class='line'>File-Listing-6.03
+</span><span class='line'>XML-FeedPP-0.43
+</span><span class='line'>CPAN-Meta-2.112621
+</span><span class='line'>...
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>  <code>carton list</code> 로 확인할 수 있습니다.</p>
+
+<p>  그리고 <code>carton exec</code> 를 통해서 로컬모듈에 설치된 의존모듈을 참조해서 실행할 수 있습니다. 일례로 <code>Catalyst</code> 나 <code>Dancer</code> 로 만든 WebApp 들을 위에서 설명한 대로 <code>carton install</code> 한다음,</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>carton <span class="nb">exec</span> -- plackup -a app.psgi -p 3000 --mode production
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>  이처럼 <code>carton exec</code> 를 통해서 실행할 수 있지요.</p>
+
+<h3>Carton 을 이용하고서&#8230;</h3>
+
+<p>  우선은 Carton 을 이용함으로, 한 어플리케이션 당 하나의 모듈참조장소를 가지게해서 여러 어플리케이션이 혼잡한 경우에 발생할 수 있는 부작용을 예방할 수 있습니다. <code>Makefile.PL</code> 에서 해당 모듈의 버젼을 지정함으로 특정 버젼에 대해서만 의존을 가질 수 있기 때문에 더더욱 이런 면에서는 효과적입니다.</p>
+
+<p>  그래서 저같은 경우는 오히려 서비스마다 그 서비스용 계정을 만들고 <code>perlbrew</code> 환경을 갖추는 것보다 가볍게 서비스용 계정은 하나만 가지며 각 서비스디렉토리마다 <code>Carton</code> 을 올리는 쪽으로 움직이고 있습니다. 그러니 굳이 시스템 펄을 사용하는 것이 큰 거부감을 느끼지 않게 되었네요.</p>
+
+<h3>그 외</h3>
+
+<p>  일단 <code>carton.lock</code> 에 기재된 의존모듈 정보가 많으면 많을수록 <code>carton install</code> 에 걸리는 시간은 더 오래걸리게 됩니다. 물론 Carton 이 기본적으로 외부미러(http://cpan.metacpan.org) 를 사용하고 있기에, 그럴 수도 있겠다 싶어서 코드를 한번 훑어봤는데, 마침 <code>PERL_CARTON_MIRROR</code> 라는 환경변수를 통해서 가까운 혹은 로컬 네트워크 안의 CPAN 미러를 지정해줌으로 많은 시간을 단축할 수 있지 않을까 생각해봅니다.</p>
+
+<h3>Conclusion</h3>
+
+<p>  물론 Carton 은 현재 ALPHA 퀄리티라고 합니다. 버젼도 현재(2012-01-16) 로는 0.9.3 이고, 1.0 정식 릴리즈까지는 아직 시간이 남아있습니다. 몇몇 기능이 바뀔거라는 주의사항이 <a href="http://metacan.org/module/Carton">Carton 모듈페이지</a> 에서 확인할 수 있습니다.</p>
+
+<p>  좀 더 다양한 <code>Carton</code> 에 대한 이야기는 작년 <a href="http://yapcasia.org/2011/talk/91">YAPC::Asia2011 의 Carton Talk Page</a> 에서도 확인하실 수 있습니다.</p>
+]]></content>
+  </entry>
+  
+</feed>

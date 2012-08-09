@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: picasa | Jeen's techlog]]></title>
+  <link href="http://jeen.github.com/blog/categories/picasa/atom.xml" rel="self"/>
+  <link href="http://jeen.github.com/"/>
+  <updated>2012-08-09T16:41:03+09:00</updated>
+  <id>http://jeen.github.com/</id>
+  <author>
+    <name><![CDATA[Jeen Lee]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Picasa Upload Script II]]></title>
+    <link href="http://jeen.github.com/blog/2012/01/13/picasa-upload-script-ii/"/>
+    <updated>2012-01-13T18:36:00+09:00</updated>
+    <id>http://jeen.github.com/blog/2012/01/13/picasa-upload-script-ii</id>
+    <content type="html"><![CDATA[<p>``` perl picasa-uploader.pl</p>
+
+<h1>!/usr/bin/env perl</h1>
+
+<p>package PicasaUploader;
+use Any::Moose;
+use namespace::autoclean;
+use Config::Pit;
+use LWP::UserAgent;
+use Net::Google::AuthSub;
+use MIME::Types ();</p>
+
+<p>has user_id => (</p>
+
+<pre><code>is      =&gt; 'ro',
+default =&gt; 'default',
+</code></pre>
+
+<p>);</p>
+
+<p>has album_id => (</p>
+
+<pre><code>is      =&gt; 'ro',
+default =&gt; 'default',
+</code></pre>
+
+<p>);</p>
+
+<p>has files => (</p>
+
+<pre><code>is      =&gt; 'ro',
+isa     =&gt; 'ArrayRef',
+default =&gt; sub { [] }
+</code></pre>
+
+<p>);</p>
+
+<p>has google_auth => (</p>
+
+<pre><code>is      =&gt; 'rw',
+isa     =&gt; 'Net::Google::AuthSub',
+default =&gt; sub {
+    Net::Google::AuthSub-&gt;new(
+        service =&gt; 'lh2',
+        source  =&gt; 'my-picasauploader-0.1'
+    );
+}
+</code></pre>
+
+<p>);</p>
+
+<p>has '_ua' => (</p>
+
+<pre><code>is      =&gt; 'rw',
+isa     =&gt; 'LWP::UserAgent',
+default =&gt; sub {
+    LWP::UserAgent-&gt;new( cookie_jar =&gt; {} ); 
+}
+</code></pre>
+
+<p>);</p>
+
+<p>has 'config' => (</p>
+
+<pre><code>is          =&gt; 'ro',
+isa         =&gt; 'HashRef',
+lazy_build  =&gt; 1,
+</code></pre>
+
+<p>);</p>
+
+<p>sub BUILD {</p>
+
+<pre><code>my $self = shift;
+$self-&gt;auth;
+return 1;
+</code></pre>
+
+<p>}</p>
+
+<p>sub _build_config {</p>
+
+<pre><code>Config::Pit::pit_get('google.com', require =&gt; {
+   username =&gt; 'your username on google.com',
+   password =&gt; 'your password on google.com' 
+});    
+</code></pre>
+
+<p>}</p>
+
+<p>sub auth {</p>
+
+<pre><code>my $self = shift;
+
+my $res = $self-&gt;google_auth-&gt;login($self-&gt;config-&gt;{username}, $self-&gt;config-&gt;{password});
+die "Login Failed: ". $res-&gt;error unless $res-&gt;is_success;
+</code></pre>
+
+<p>}</p>
+
+<p>sub upload_files {</p>
+
+<pre><code>my $self = shift;
+
+for my $file_path (@{ $self-&gt;files }) {
+    my $link = $self-&gt;upload_file($file_path);
+    print $link."\n";
+}
+</code></pre>
+
+<p>}</p>
+
+<p>sub upload_file {</p>
+
+<pre><code>my ($self, $file_path) = @_;
+
+my $file = Path::Class::File-&gt;new($file_path);
+die "File Not Found : $file" unless -f $file;
+
+my $post_url = sprintf 'https://picasaweb.google.com/data/feed/api/user/%s/albumid/%s', $self-&gt;user_id, $self-&gt;album_id;
+
+my ($mime_type, $encoding) = MIME::Types::by_suffix($file-&gt;basename);
+my $content = $file-&gt;slurp;
+my $res = $self-&gt;_ua-&gt;post($post_url,
+    %{ $self-&gt;google_auth-&gt;auth_params },
+    Content_Type   =&gt; $mime_type,
+    Slug           =&gt; $file-&gt;basename,
+    Content        =&gt; $content,  
+);
+
+die 'UPLOAD Failed : '.$res-&gt;status_line unless $res-&gt;is_success;
+my ($link) = ($res-&gt;decoded_content=~/content type.*?src='(.*?)'/gsm);
+$link;
+</code></pre>
+
+<p>}</p>
+
+<p><strong>PACKAGE</strong>->meta->make_immutable;</p>
+
+<p>package main;</p>
+
+<p>my $uploader = PicasaUploader->new( files => \@ARGV );
+$uploader->upload_files;
+```</p>
+
+<p>  <a href="http://aanoaa.github.com/blog/2012/01/03/picasa-upload-script/">@aanoaa 님의 글</a>에서 Picasa Uploader 스크립트를 소개했었는데요. <code>PicasaUploader</code> 라고 package 로 정의해서 쓰도록 했습니다.
+  거기에 <a href="https://metacpan.org/module/Config::Pit">Config::Pit</a> 을 써서 계정정보를 다루도록 했구요.
+  심심해서 그냥 약간 개량해봤습니다.</p>
+]]></content>
+  </entry>
+  
+</feed>

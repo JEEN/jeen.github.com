@@ -1,0 +1,550 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Carton - CPAN dependencies manager - Jeen's techlog</title>
+  <meta name="author" content="Jeen Lee">
+
+  
+  <meta name="description" content="Jenkins 이야기를 마저 쓸려고 했는 데, 그 사이사이에 사용된 것들부터 정리하고자 우선은 Carton 이야기 부터 먼저하고자 합니다. 잘은 모르지만 Carton 은 Ruby 의 Bundler 에 영감을 받아서 만들어 진 것입니다. 어떤 Perl 로 만든 &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://jeen.github.com/blog/2012/01/16/carton-cpan-dependencies-manager/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Jeen's techlog" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-27958809-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Jeen's techlog</a></h1>
+  
+    <h2>Yet Another Jeen's Blog</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:jeen.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Carton - CPAN Dependencies Manager</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-01-16T22:49:00+09:00" pubdate data-updated="true">Jan 16<span>th</span>, 2012</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>  Jenkins 이야기를 마저 쓸려고 했는 데, 그 사이사이에 사용된 것들부터 정리하고자 우선은 Carton 이야기 부터 먼저하고자 합니다.</p>
+
+<p>  잘은 모르지만 Carton 은 Ruby 의 Bundler 에 영감을 받아서 만들어 진 것입니다. 어떤 Perl 로 만든 소프트웨어의 의존모듈의 관리가 편해집니다. :-) 일례로, 노트북에서 개발을 하고 이것을 서버에 올릴려고 할 때, 일일이 의존모듈 체크를 해야할 필요성이 있습니다. 그때마다 <code>cpan MODULE</code> 등으로 설치를 해나가야 한다면 여간 힘든 일이 아니죠.</p>
+
+<p>  그런 상황에서 쉽게 문제를 해결할 수 있는 것이 <code>Carton</code> 이 아닐까 생각합니다.</p>
+
+<h3>Carton 설치</h3>
+
+<p>  <code>Carton</code> 은 간단하게 <code>cpan</code> 으로 설치할 수 있습니다.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>cpanm carton
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>  위의 커맨드로 <code>Carton</code> 을 설치하면 <code>carton</code> 이라는 커맨드가 생깁니다.</p>
+
+<h3>Carton 이용</h3>
+
+<p>  <code>Carton</code> 을 제대로 이용하려면, 해당 Perl App 의 의존모듈이 <code>Makefile.PL</code> 안에서 잘 관리되고 있어야 합니다.</p>
+
+<figure class='code'><figcaption><span>Makefile.PL</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="k">use</span> <span class="nn">ExtUtils::</span><span class="n">MakeMaker</span><span class="p">;</span>
+</span><span class='line'><span class="n">WriteMakefile</span><span class="p">(</span>
+</span><span class='line'>    <span class="s">&#39;NAME&#39;</span>      <span class="o">=&gt;</span> <span class="s">&#39;WebService::Aladdin&#39;</span><span class="p">,</span>
+</span><span class='line'>    <span class="s">&#39;AUTHOR&#39;</span>    <span class="o">=&gt;</span> <span class="s">&#39;JEEN &lt;jeen@perl.kr&gt;&#39;</span><span class="p">,</span>
+</span><span class='line'>    <span class="s">&#39;VERSION_FROM&#39;</span> <span class="o">=&gt;</span> <span class="s">&#39;lib/WebService/Aladdin.pm&#39;</span><span class="p">,</span> <span class="c1"># finds $VERSION</span>
+</span><span class='line'>    <span class="s">&#39;PREREQ_PM&#39;</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nn">Test::</span><span class="n">Base</span> <span class="o">=&gt;</span> <span class="mi">0</span><span class="p">,</span>
+</span><span class='line'>        <span class="n">version</span>    <span class="o">=&gt;</span> <span class="mi">0</span><span class="p">,</span>
+</span><span class='line'>        <span class="nn">Class::Accessor::</span><span class="n">Fast</span> <span class="o">=&gt;</span> <span class="mi">0</span><span class="p">,</span>
+</span><span class='line'>        <span class="nn">LWP::</span><span class="n">UserAgent</span> <span class="o">=&gt;</span> <span class="mi">0</span><span class="p">,</span>
+</span><span class='line'>        <span class="n">URI</span>            <span class="o">=&gt;</span> <span class="mi">0</span><span class="p">,</span>
+</span><span class='line'>        <span class="n">Carp</span>           <span class="o">=&gt;</span> <span class="mi">0</span><span class="p">,</span>
+</span><span class='line'>        <span class="nn">XML::</span><span class="n">FeedPP</span>    <span class="o">=&gt;</span> <span class="mi">0</span>
+</span><span class='line'>    <span class="p">},</span>
+</span><span class='line'><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>  우선 예제로 제가 만든 <code>WebService::Aladdin</code> 모듈의 <code>Makefile.PL</code> 이 위와 같습니다. 이는 <code>WebService::Aladdin</code> 모듈에서 필요로 하는 의존모듈 등의 정보들을 나타내고 있습니다.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>carton install
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>  <code>carton install</code> 을 통해서 <code>Makefile.PL</code> 에 정의된 의존모듈을 설치합니다. 이때 <code>Carton</code> 은 의존모듈의 의존트리까지도 설치해버립니다. 그러니 실제 의존모듈이 10개라도, 그 10개의 각각의 모듈의 의존모듈까지도 설치하기 때문에 실제로 설치되는 것은 10개 이상의 모듈들이 될 것입니다.</p>
+
+<p>  아무튼 <code>carton install</code> 이 끝났다면 <code>carton.lock</code> 파일이 생성됩니다. 그리고 <code>local</code> 이라는 디렉토리의 아래에 의존모듈들이 설치됩니다.</p>
+
+<figure class='code'><figcaption><span>carton.lock</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+</pre></td><td class='code'><pre><code class='text'><span class='line'>{
+</span><span class='line'>   &quot;modules&quot; : {
+</span><span class='line'>      &quot;Algorithm::Diff&quot; : {
+</span><span class='line'>         &quot;dist&quot; : &quot;Algorithm-Diff-1.1902&quot;,
+</span><span class='line'>         &quot;module&quot; : &quot;Algorithm::Diff&quot;,
+</span><span class='line'>         &quot;mymeta&quot; : {
+</span><span class='line'>            &quot;abstract&quot; : &quot;unknown&quot;,
+</span><span class='line'>            &quot;author&quot; : [
+</span><span class='line'>               &quot;unknown&quot;
+</span><span class='line'>            ],
+</span><span class='line'>            &quot;dynamic_config&quot; : 0,
+</span><span class='line'>            &quot;generated_by&quot; : &quot;ExtUtils::MakeMaker version 6.62, CPAN::Meta::Converter version 2.112621, CPAN::Meta::Converter version 2.112150&quot;,
+</span><span class='line'>            &quot;license&quot; : [
+</span><span class='line'>               &quot;unknown&quot;
+</span><span class='line'>            ],
+</span><span class='line'>            &quot;meta-spec&quot; : {
+</span><span class='line'>               &quot;url&quot; : &quot;http://search.cpan.org/perldoc?CPAN::Meta::Spec&quot;,
+</span><span class='line'>               &quot;version&quot; : &quot;2&quot;
+</span><span class='line'>            },
+</span><span class='line'>            &quot;name&quot; : &quot;Algorithm-Diff&quot;,
+</span><span class='line'>            &quot;no_index&quot; : {
+</span><span class='line'>               &quot;directory&quot; : [
+</span><span class='line'>                  &quot;t&quot;,
+</span><span class='line'>                  &quot;inc&quot;
+</span><span class='line'>               ]
+</span><span class='line'>            },
+</span><span class='line'>            &quot;prereqs&quot; : {
+</span><span class='line'>               &quot;build&quot; : {
+</span><span class='line'>                  &quot;requires&quot; : {
+</span><span class='line'>                     &quot;ExtUtils::MakeMaker&quot; : 0
+</span><span class='line'>                  }
+</span><span class='line'>               },
+</span><span class='line'>               &quot;configure&quot; : {
+</span><span class='line'>                  &quot;requires&quot; : {
+</span><span class='line'>                     &quot;ExtUtils::MakeMaker&quot; : 0
+</span><span class='line'>                  }
+</span><span class='line'>               },
+</span><span class='line'>               &quot;runtime&quot; : {
+</span><span class='line'>                  &quot;requires&quot; : {}
+</span><span class='line'>               }
+</span><span class='line'>            },
+</span><span class='line'>            &quot;release_status&quot; : &quot;stable&quot;,
+</span><span class='line'>            &quot;version&quot; : &quot;1.1902&quot;
+</span><span class='line'>         },
+</span><span class='line'>         &quot;name&quot; : &quot;Algorithm::Diff&quot;,
+</span><span class='line'>         &quot;pathname&quot; : &quot;T/TY/TYEMQ/Algorithm-Diff-1.1902.tar.gz&quot;,
+</span><span class='line'>         &quot;provides&quot; : {
+</span><span class='line'>            &quot;Algorithm::Diff&quot; : {
+</span><span class='line'>               &quot;file&quot; : &quot;Algorithm/Diff.pm&quot;,
+</span><span class='line'>               &quot;version&quot; : &quot;1.1902&quot;
+</span><span class='line'>            },
+</span><span class='line'>            &quot;Algorithm::DiffOld&quot; : {
+</span><span class='line'>               &quot;file&quot; : &quot;Algorithm/DiffOld.pm&quot;,
+</span><span class='line'>               &quot;version&quot; : &quot;1.1&quot;
+</span><span class='line'>            }
+</span><span class='line'>         },
+</span><span class='line'>         &quot;version&quot; : &quot;1.1902&quot;
+</span><span class='line'>      },
+</span><span class='line'>      ...
+</span><span class='line'>   }
+</span><span class='line'>}
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>  이후 <code>Makefile.PL</code> 에서 또다른 의존모듈이 추가되었을 시에, 또다시</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>carton install
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>을 통해서 추가의존모듈을 설치할 수 있습니다. 이렇게 <code>carton install</code> 로 설치된 로컬 모듈들은</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>carton list
+</span><span class='line'>IO-stringy-2.110
+</span><span class='line'>File-Listing-6.03
+</span><span class='line'>XML-FeedPP-0.43
+</span><span class='line'>CPAN-Meta-2.112621
+</span><span class='line'>...
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>  <code>carton list</code> 로 확인할 수 있습니다.</p>
+
+<p>  그리고 <code>carton exec</code> 를 통해서 로컬모듈에 설치된 의존모듈을 참조해서 실행할 수 있습니다. 일례로 <code>Catalyst</code> 나 <code>Dancer</code> 로 만든 WebApp 들을 위에서 설명한 대로 <code>carton install</code> 한다음,</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>carton <span class="nb">exec</span> -- plackup -a app.psgi -p 3000 --mode production
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>  이처럼 <code>carton exec</code> 를 통해서 실행할 수 있지요.</p>
+
+<h3>Carton 을 이용하고서&#8230;</h3>
+
+<p>  우선은 Carton 을 이용함으로, 한 어플리케이션 당 하나의 모듈참조장소를 가지게해서 여러 어플리케이션이 혼잡한 경우에 발생할 수 있는 부작용을 예방할 수 있습니다. <code>Makefile.PL</code> 에서 해당 모듈의 버젼을 지정함으로 특정 버젼에 대해서만 의존을 가질 수 있기 때문에 더더욱 이런 면에서는 효과적입니다.</p>
+
+<p>  그래서 저같은 경우는 오히려 서비스마다 그 서비스용 계정을 만들고 <code>perlbrew</code> 환경을 갖추는 것보다 가볍게 서비스용 계정은 하나만 가지며 각 서비스디렉토리마다 <code>Carton</code> 을 올리는 쪽으로 움직이고 있습니다. 그러니 굳이 시스템 펄을 사용하는 것이 큰 거부감을 느끼지 않게 되었네요.</p>
+
+<h3>그 외</h3>
+
+<p>  일단 <code>carton.lock</code> 에 기재된 의존모듈 정보가 많으면 많을수록 <code>carton install</code> 에 걸리는 시간은 더 오래걸리게 됩니다. 물론 Carton 이 기본적으로 외부미러(http://cpan.metacpan.org) 를 사용하고 있기에, 그럴 수도 있겠다 싶어서 코드를 한번 훑어봤는데, 마침 <code>PERL_CARTON_MIRROR</code> 라는 환경변수를 통해서 가까운 혹은 로컬 네트워크 안의 CPAN 미러를 지정해줌으로 많은 시간을 단축할 수 있지 않을까 생각해봅니다.</p>
+
+<h3>Conclusion</h3>
+
+<p>  물론 Carton 은 현재 ALPHA 퀄리티라고 합니다. 버젼도 현재(2012-01-16) 로는 0.9.3 이고, 1.0 정식 릴리즈까지는 아직 시간이 남아있습니다. 몇몇 기능이 바뀔거라는 주의사항이 <a href="http://metacan.org/module/Carton">Carton 모듈페이지</a> 에서 확인할 수 있습니다.</p>
+
+<p>  좀 더 다양한 <code>Carton</code> 에 대한 이야기는 작년 <a href="http://yapcasia.org/2011/talk/91">YAPC::Asia2011 의 Carton Talk Page</a> 에서도 확인하실 수 있습니다.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Jeen Lee</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-01-16T22:49:00+09:00" pubdate data-updated="true">Jan 16<span>th</span>, 2012</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/cpan/'>cpan</a>, <a class='category' href='/blog/categories/perl/'>perl</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://jeen.github.com/blog/2012/01/16/carton-cpan-dependencies-manager/" data-via="JEEN_LEE" data-counturl="http://jeen.github.com/blog/2012/01/16/carton-cpan-dependencies-manager/" >Tweet</a>
+  
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2012/01/13/picasa-upload-script-ii/" title="Previous Post: Picasa Upload Script II">&laquo; Picasa Upload Script II</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2012/02/02/perl-and-continuous-integration-with-jenkins-2/" title="Next Post: Perl and Continuous Integration with Jenkins - II">Perl and Continuous Integration with Jenkins - II &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2012/08/09/moving-from-bash-to-zsh-again/">Moving from bash to zsh again</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/08/09/app-zamakist-dot-dot-dot/">App::Zamakist...</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/07/26/export-facebook-event-attending-list-perl-kr-teatime/">Export Facebook Event Attending List - perl-kr TeaTime</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/07/18/mysql-diff-a-vs-b/">MySQL::Diff - A vs B</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/07/18/export-github-issues/">Export Github Issues</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/jeen">@jeen</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'jeen',
+            count: 3,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating...</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("JEEN_LEE", 4, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/JEEN_LEE" class="twitter-follow-button" data-show-count="false">Follow @JEEN_LEE</a>
+  
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2012 - Jeen Lee -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'jeen';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://jeen.github.com/blog/2012/01/16/carton-cpan-dependencies-manager/';
+        var disqus_url = 'http://jeen.github.com/blog/2012/01/16/carton-cpan-dependencies-manager/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

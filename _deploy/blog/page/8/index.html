@@ -1,0 +1,489 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Jeen's techlog</title>
+  <meta name="author" content="Jeen Lee">
+
+  
+  <meta name="description" content="(R)?ex - A simple framework to simplify systemadministration 최근에 여러 서버 일괄 작업을 위해서 Rex 로 이것저것 해보고 있는 중입니다. Rex 는 Ruby 쪽에서 많이 쓰인다는 Chef 같은 부류의 툴이랄까요, &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://jeen.github.com/blog/page/8/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Jeen's techlog" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-27958809-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Jeen's techlog</a></h1>
+  
+    <h2>Yet Another Jeen's Blog</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:jeen.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/02/15/rex-pull-request/">Rex Pull Request</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-02-15T23:21:00+09:00" pubdate data-updated="true">Feb 15<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/02/15/rex-pull-request/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><ul>
+<li><p><a href="http://rexify.org/">(R)?ex - A simple framework to simplify systemadministration</a></p>
+
+<p>최근에 여러 서버 일괄 작업을 위해서 <a href="http://metacpan.org/module/Rex">Rex</a> 로 이것저것 해보고 있는 중입니다. Rex 는 Ruby 쪽에서 많이 쓰인다는 Chef 같은 부류의 툴이랄까요, 아무튼 그런 류의 일을 Perl 로 할 수 있게 하는 툴입니다.</p>
+
+<p>Rex 에 속한 네임스페이스를 살펴보면 다양한 OS 의 경우에 상응하는 다양한  케이스를 고려하고 있는 것 같습니다.</p>
+
+<p>오늘 제가 쓴 Rex 의 가벼운 예제로는 다음과 같습니다.</p></li>
+</ul>
+
+
+<figure class='code'><figcaption><span>Rexfile</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="n">user</span> <span class="s">&#39;user&#39;</span><span class="p">;</span>
+</span><span class='line'><span class="n">password</span> <span class="s">&#39;password&#39;</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">pass_auth</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">group</span> <span class="o">=&gt;</span> <span class="s">&quot;sweet-vms&quot;</span> <span class="o">=&gt;</span> <span class="s">&quot;vm[01..10]&quot;</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nb">require</span> <span class="nn">Rex::</span><span class="n">Init</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span>Rex::Init</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="nb">package</span> <span class="nn">Rex::</span><span class="n">Init</span><span class="p">;</span>
+</span><span class='line'><span class="k">use</span> <span class="nn">Rex::</span><span class="n">Commands</span><span class="p">;</span>
+</span><span class='line'><span class="k">use</span> <span class="nn">Rex::Commands::</span><span class="n">Run</span><span class="p">;</span>
+</span><span class='line'><span class="k">use</span> <span class="nn">Rex::Commands::</span><span class="n">Pkg</span><span class="p">;</span>
+</span><span class='line'><span class="k">use</span> <span class="nn">Rex::Commands::</span><span class="n">Iptables</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">desc</span> <span class="s">&#39;Add yum repo&#39;</span><span class="p">;</span>
+</span><span class='line'><span class="n">task</span> <span class="s">&quot;add_yum_repo&quot;</span><span class="p">,</span> <span class="n">group</span> <span class="o">=&gt;</span> <span class="s">&quot;sweet-vms&quot;</span><span class="p">,</span> <span class="k">sub </span><span class="p">{</span>
+</span><span class='line'>    <span class="n">run</span><span class="p">(</span><span class="s">&quot;yum -y install http://pkgs.repoforge.org/rpmforge-release/rpmforge-release-0.5.2-2.el5.rf.x86_64.rpm&quot;</span><span class="p">);</span>
+</span><span class='line'>    <span class="k">print</span> <span class="s">&quot;Added RPMForge Repo on /etc/yum.repos.d/\n&quot;</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">repository</span> <span class="n">add</span> <span class="o">=&gt;</span> <span class="s">&quot;Opsview&quot;</span><span class="p">,</span>
+</span><span class='line'>        <span class="n">url</span> <span class="o">=&gt;</span> <span class="s">&#39;http://downloads.opsera.com/opsview-community/latest/yum/centos/$releasever/$basearch&#39;</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">print</span> <span class="s">&quot;Added OpsView Repo on /etc/yum.repos.d/\n&quot;</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">update_package_db</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">print</span> <span class="s">&quot;Updated yum package DB\n&quot;</span><span class="p">;</span>
+</span><span class='line'><span class="p">};</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">desc</span> <span class="s">&#39;Install OpsView-Agent&#39;</span><span class="p">;</span>
+</span><span class='line'><span class="n">task</span> <span class="s">&quot;install_opsview_agent&quot;</span><span class="p">,</span> <span class="n">group</span> <span class="o">=&gt;</span> <span class="s">&quot;sweet-vms&quot;</span><span class="p">,</span> <span class="k">sub </span><span class="p">{</span>
+</span><span class='line'>    <span class="n">install</span> <span class="nb">package</span> <span class="o">=&gt;</span> <span class="s">&#39;opsview-agent&#39;</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">print</span> <span class="s">&quot;Installed [opsview-agent]\n&quot;</span><span class="p">;</span>
+</span><span class='line'><span class="p">};</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">desc</span> <span class="s">&#39;Open NRPE(5666) Port&#39;</span><span class="p">;</span>
+</span><span class='line'><span class="n">task</span> <span class="s">&#39;open_nrpe_port&#39;</span><span class="p">,</span> <span class="n">group</span> <span class="o">=&gt;</span> <span class="s">&quot;sweet-vms&quot;</span><span class="p">,</span> <span class="k">sub </span><span class="p">{</span>
+</span><span class='line'>    <span class="n">open_port</span> <span class="mi">5666</span><span class="p">;</span>
+</span><span class='line'><span class="p">};</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>이렇게 <code>Rexfile</code> 에 각 서버 그룹과 SSH 접속 계정, 그리고 <code>Rex::Init</code> 에 그 그룹에 대한 작업(Task) 를 정의합니다.</p>
+
+<p>  위처럼 정의한 작업에 대해서,</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>rex -T
+</span><span class='line'>Tasks
+</span><span class='line'>  Init:add_yum_repo              Add yum repo
+</span><span class='line'>  Init:install_opsview_agent     Install OpsView-Agent
+</span><span class='line'>  Init:open_nrpe_port            Open NRPE<span class="o">(</span>5666<span class="o">)</span> Port
+</span><span class='line'>Batches
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>  <code>rex -T</code> 를 통해서 작동할 수 있는 Task 의 리스트를 받을 수 있습니다.</p>
+
+<p>  그리고,</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>rex <span class="s1">&#39;Init:add_yum_repo&#39;</span> <span class="s1">&#39;Init:install_opsview_agent&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>  이런식으로 동작할 작업들을 지정해줌으로, 위의 <code>sweet-vms</code> 그룹의 vm01 부터 vm10 의 의 열대의 서버에 대해서 <code>RPMForge</code> 와 <code>OpsView</code> <code>yum repo</code> 를 추가하고, <code>opsview-agent</code> 를 설치합니다. <code>opsview-agent</code> 자체는 기본적인 yum package 에 없는 라이브러리를 참조하기에 <code>RPMForge</code> 를 우선 등록한 것입니다.</p>
+
+<p>  예, 뭐 아무튼 이런 식입니다. 아직 뭐 본격적으로 이런저런 상황에 부딪히면서 검증하고 있고, Rex 자체에서 어떻게 할 수 없으면 직접 패치를 써나가 볼 까합니다.</p>
+
+<p>  그런 의미에서, 오늘 Rex 에 Pull Request 를 하나 보내서 0.25 에 Merge 되었습니다. :-)</p>
+
+<ul>
+<li><a href="https://github.com/JEEN/Rex/commit/1d69a96ba4371dc9e030fab494c887b9126a2c9d">https://github.com/JEEN/Rex/commit/1d69a96ba4371dc9e030fab494c887b9126a2c9d</a></li>
+<li><p><a href="http://github.com/krimdomu/Rex/pull/12">http://github.com/krimdomu/Rex/pull/12</a></p>
+
+<p>사실 위에서 <code>opsview-agent</code> 는 제대로 설치되지 않습니다. 이유는 Pull Request 를 보내면서 봉착한 상황과 대처로 적어놨습니다.</p></li>
+</ul>
+
+
+<blockquote class="twitter-tweet"><p>Rex 무려 GPL v3 였구나&#8230;</p>&mdash; JEEN (@JEEN_LEE) <a href="https://twitter.com/JEEN_LEE/status/169724680612216832" data-datetime="2012-02-15T10:08:11+00:00">February 15, 2012</a></blockquote>
+
+
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/02/09/cpan-module-update/">CPAN Module Update</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-02-09T01:06:00+09:00" pubdate data-updated="true">Feb 9<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/02/09/cpan-module-update/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><blockquote class="twitter-tweet" lang="ko"><p>Acme-CPANAuthors-Korean 0.08 by JEEN - <a href="http://t.co/CjlRnKEO" title="http://metacpan.org/release/JEEN/Acme-CPANAuthors-Korean-0.08/">metacpan.org/release/JEEN/A…</a></p>&mdash; CPAN New Modules (@cpan_new) <a href="https://twitter.com/cpan_new/status/167271503061200896" data-datetime="2012-02-08T15:40:08+00:00">2월 8, 2012</a></blockquote>
+
+
+
+
+<blockquote class="twitter-tweet" lang="ko"><p>Lingua-KO-TypoCorrector 0.03 by JEEN - <a href="http://t.co/b1Lp98PW" title="http://metacpan.org/release/JEEN/Lingua-KO-TypoCorrector-0.03/">metacpan.org/release/JEEN/L…</a></p>&mdash; CPAN New Modules (@cpan_new) <a href="https://twitter.com/cpan_new/status/167273895550922753" data-datetime="2012-02-08T15:49:39+00:00">2월 8, 2012</a></blockquote>
+
+
+
+
+<blockquote class="twitter-tweet" lang="ko"><p>Date-Holidays-KR 0.03 by JEEN - <a href="http://t.co/qAXrPO6f" title="http://metacpan.org/release/JEEN/Date-Holidays-KR-0.03/">metacpan.org/release/JEEN/D…</a></p>&mdash; CPAN New Modules (@cpan_new) <a href="https://twitter.com/cpan_new/status/167275532466143232" data-datetime="2012-02-08T15:56:09+00:00">2월 8, 2012</a></blockquote>
+
+
+
+
+<blockquote class="twitter-tweet" lang="ko"><p>WebService-Aladdin 0.0706 by JEEN - <a href="http://t.co/lyGpgk6W" title="http://metacpan.org/release/JEEN/WebService-Aladdin-0.0706/">metacpan.org/release/JEEN/W…</a></p>&mdash; CPAN New Modules (@cpan_new) <a href="https://twitter.com/cpan_new/status/167276286962704385" data-datetime="2012-02-08T15:59:09+00:00">2월 8, 2012</a></blockquote>
+
+
+
+
+<blockquote class="twitter-tweet" lang="ko"><p>WWW-Shorten-Durl 0.05 by JEEN - <a href="http://t.co/mtnX4oEn" title="http://metacpan.org/release/JEEN/WWW-Shorten-Durl-0.05/">metacpan.org/release/JEEN/W…</a></p>&mdash; CPAN New Modules (@cpan_new) <a href="https://twitter.com/cpan_new/status/167277296259055616" data-datetime="2012-02-08T16:03:09+00:00">2월 8, 2012</a></blockquote>
+
+
+<p>  이전 글에서 언급했듯, 제가 만든 CPAN Module 들의 Meta 정보중에 repository 가 누락된 것도 있었고, 이 중 몇몇은 Github Project 이름까지 p5-* 형식으로 바꿔놓아서 이왕 이렇게 된 거 전부 바꿔보자는 생각이 들어서 작업을 했습니다.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="k">use</span> <span class="nn">inc::Module::</span><span class="n">Install</span><span class="p">;</span>
+</span><span class='line'><span class="n">name</span> <span class="s">&#39;Date-Holidays-KR&#39;</span><span class="p">;</span>
+</span><span class='line'><span class="n">all_from</span> <span class="s">&#39;lib/Date/Holidays/KR.pm&#39;</span><span class="p">;</span>
+</span><span class='line'><span class="n">requires</span> <span class="s">&#39;Date::Korean&#39;</span> <span class="o">=&gt;</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">tests</span> <span class="s">&#39;t/*.t&#39;</span><span class="p">;</span>
+</span><span class='line'><span class="n">test_requires</span> <span class="s">&#39;Test::More&#39;</span><span class="p">;</span>
+</span><span class='line'><span class="n">resources</span> <span class="n">repository</span> <span class="o">=&gt;</span> <span class="s">&#39;git://github.com/JEEN/p5-Date-Holidays-KR.git&#39;</span><span class="p">;</span>
+</span><span class='line'><span class="n">auto_include</span><span class="p">;</span>
+</span><span class='line'><span class="n">WriteAll</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>  위는 <a href="http://metacpan.org/module/Date::Holidays::KR">Date::Holidays::KR</a> 의 <code>Makefile.PL</code> 입니다. 몇몇 모듈은 <a href="http://metacpan.org/module/ExtUtils::MakeMaker">ExtUtils::MakeMaker</a> 를 사용하고 있었는데, 모두 <a href="http://metacpan.org/module/Module::Install">Module::Install</a> 을 사용하도록 교체하고, repository 를 각각의 github repository 를 지정한 것뿐입니다.</p>
+
+<p>  마음먹은 김에 이슈처리하고 저녁시간을 빌어서 CPAN 에 일괄 업로드했습니다. 완전 스팸이네요.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  <div class="pagination">
+    
+      <a class="prev" href="/blog/page/9/">&larr; Older</a>
+    
+    <a href="/blog/archives">Blog Archives</a>
+    
+    <a class="next" href="/blog/page/7/">Newer &rarr;</a>
+    
+  </div>
+</div>
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2012/08/09/moving-from-bash-to-zsh-again/">Moving from bash to zsh again</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/08/09/app-zamakist-dot-dot-dot/">App::Zamakist&#8230;</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/07/26/export-facebook-event-attending-list-perl-kr-teatime/">Export Facebook Event Attending List - perl-kr TeaTime</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/07/18/mysql-diff-a-vs-b/">MySQL::Diff - A vs B</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/07/18/export-github-issues/">Export Github Issues</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating&#8230;</li>
+  </ul>
+  
+  <a href="https://github.com/jeen">@jeen</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'jeen',
+            count: 3,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating&#8230;</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("JEEN_LEE", 4, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/JEEN_LEE" class="twitter-follow-button" data-show-count="false">Follow @JEEN_LEE</a>
+  
+</section>
+
+
+
+
+
+  
+</aside>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2012 - Jeen Lee -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'jeen';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,346 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: cpan | Jeen's techlog]]></title>
+  <link href="http://jeen.github.com/blog/categories/cpan/atom.xml" rel="self"/>
+  <link href="http://jeen.github.com/"/>
+  <updated>2012-08-09T16:41:03+09:00</updated>
+  <id>http://jeen.github.com/</id>
+  <author>
+    <name><![CDATA[Jeen Lee]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Date::Holidays::KR Pull Requested]]></title>
+    <link href="http://jeen.github.com/blog/2012/02/15/date-holidays-kr-pull-requested/"/>
+    <updated>2012-02-15T23:48:00+09:00</updated>
+    <id>http://jeen.github.com/blog/2012/02/15/date-holidays-kr-pull-requested</id>
+    <content type="html"><![CDATA[<ul>
+<li><p><a href="http://jeen.github.com/blog/2012/02/07/date-holidays-kr-0-dot-01-released/">Date::Holidays::KR Released</a></p></li>
+<li><p><a href="http://jeen.github.com/blog/2012/02/09/cpan-module-update/">CPAN Module Update</a></p>
+
+<p>  지난번 야매로 간만에 CPAN 에 올린 <a href="http://metacpan.org/module/Date::Holidays::KR">Date::Holidays::KR</a> 에 버그가 발견되었습니다. 음력을 만만하게 본 탓이 컸습니다.</p>
+
+<p>거기에 더해서 <code>holidays()</code> 함수도 동작을 안하는 것을 모르고 올려버렸었네요.</p>
+
+<p>이런 상황에 있어서 @keedi 님께서 Pull Request 를 보내주셨습니다.</p></li>
+<li><p><a href="https://github.com/JEEN/p5-Date-Holidays-KR/pull/1">https://github.com/JEEN/p5-Date-Holidays-KR/pull/1</a></p>
+
+<p>아주 풍성한 Pull Request 입니다. 거기에 번듯한 테스트코드까지...</p>
+
+<p>모듈의 성격 탓인지, Pull Request 를 보내시면서</p></li>
+</ul>
+
+
+<blockquote><p>keedi : 휴일이 너무 적어요 ㅡㅜ</p>
+
+<p>keedi : 모듈 보면서 더 느끼는거지만 휴일이 겨우 저거뿐 ;ㅁ;</p></blockquote>
+
+<p>  라는 현 세태에 대한 푸념을 ... ㅡㅜ</p>
+
+<blockquote class="twitter-tweet"><p>Date-Holidays-KR 0.04 by JEEN - <a href="http://t.co/9Jcv6nws" title="http://metacpan.org/release/JEEN/Date-Holidays-KR-0.04/">metacpan.org/release/JEEN/D…</a></p>&mdash; CPAN New Modules (@cpan_new) <a href="https://twitter.com/cpan_new/status/169756771706089472" data-datetime="2012-02-15T12:15:42+00:00">February 15, 2012</a></blockquote>
+
+
+<p> 재빨리 Merge 해서 다시 CPAN 에 올렸습니다.  앞으로는 좀 더 신중하게 CPAN 에 올려야 되겠구나 하고 결심을 해봅니다.</p>
+
+<p>  @keedi++</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[CPAN Module Update]]></title>
+    <link href="http://jeen.github.com/blog/2012/02/09/cpan-module-update/"/>
+    <updated>2012-02-09T01:06:00+09:00</updated>
+    <id>http://jeen.github.com/blog/2012/02/09/cpan-module-update</id>
+    <content type="html"><![CDATA[<blockquote class="twitter-tweet" lang="ko"><p>Acme-CPANAuthors-Korean 0.08 by JEEN - <a href="http://t.co/CjlRnKEO" title="http://metacpan.org/release/JEEN/Acme-CPANAuthors-Korean-0.08/">metacpan.org/release/JEEN/A…</a></p>&mdash; CPAN New Modules (@cpan_new) <a href="https://twitter.com/cpan_new/status/167271503061200896" data-datetime="2012-02-08T15:40:08+00:00">2월 8, 2012</a></blockquote>
+
+
+
+
+<blockquote class="twitter-tweet" lang="ko"><p>Lingua-KO-TypoCorrector 0.03 by JEEN - <a href="http://t.co/b1Lp98PW" title="http://metacpan.org/release/JEEN/Lingua-KO-TypoCorrector-0.03/">metacpan.org/release/JEEN/L…</a></p>&mdash; CPAN New Modules (@cpan_new) <a href="https://twitter.com/cpan_new/status/167273895550922753" data-datetime="2012-02-08T15:49:39+00:00">2월 8, 2012</a></blockquote>
+
+
+
+
+<blockquote class="twitter-tweet" lang="ko"><p>Date-Holidays-KR 0.03 by JEEN - <a href="http://t.co/qAXrPO6f" title="http://metacpan.org/release/JEEN/Date-Holidays-KR-0.03/">metacpan.org/release/JEEN/D…</a></p>&mdash; CPAN New Modules (@cpan_new) <a href="https://twitter.com/cpan_new/status/167275532466143232" data-datetime="2012-02-08T15:56:09+00:00">2월 8, 2012</a></blockquote>
+
+
+
+
+<blockquote class="twitter-tweet" lang="ko"><p>WebService-Aladdin 0.0706 by JEEN - <a href="http://t.co/lyGpgk6W" title="http://metacpan.org/release/JEEN/WebService-Aladdin-0.0706/">metacpan.org/release/JEEN/W…</a></p>&mdash; CPAN New Modules (@cpan_new) <a href="https://twitter.com/cpan_new/status/167276286962704385" data-datetime="2012-02-08T15:59:09+00:00">2월 8, 2012</a></blockquote>
+
+
+
+
+<blockquote class="twitter-tweet" lang="ko"><p>WWW-Shorten-Durl 0.05 by JEEN - <a href="http://t.co/mtnX4oEn" title="http://metacpan.org/release/JEEN/WWW-Shorten-Durl-0.05/">metacpan.org/release/JEEN/W…</a></p>&mdash; CPAN New Modules (@cpan_new) <a href="https://twitter.com/cpan_new/status/167277296259055616" data-datetime="2012-02-08T16:03:09+00:00">2월 8, 2012</a></blockquote>
+
+
+<p>  이전 글에서 언급했듯, 제가 만든 CPAN Module 들의 Meta 정보중에 repository 가 누락된 것도 있었고, 이 중 몇몇은 Github Project 이름까지 p5-* 형식으로 바꿔놓아서 이왕 이렇게 된 거 전부 바꿔보자는 생각이 들어서 작업을 했습니다.</p>
+
+<p>``` perl
+use inc::Module::Install;
+name 'Date-Holidays-KR';
+all_from 'lib/Date/Holidays/KR.pm';
+requires 'Date::Korean' => 0;</p>
+
+<p>tests 't/*.t';
+test_requires 'Test::More';
+resources repository => 'git://github.com/JEEN/p5-Date-Holidays-KR.git';
+auto_include;
+WriteAll;
+```</p>
+
+<p>  위는 <a href="http://metacpan.org/module/Date::Holidays::KR">Date::Holidays::KR</a> 의 <code>Makefile.PL</code> 입니다. 몇몇 모듈은 <a href="http://metacpan.org/module/ExtUtils::MakeMaker">ExtUtils::MakeMaker</a> 를 사용하고 있었는데, 모두 <a href="http://metacpan.org/module/Module::Install">Module::Install</a> 을 사용하도록 교체하고, repository 를 각각의 github repository 를 지정한 것뿐입니다.</p>
+
+<p>  마음먹은 김에 이슈처리하고 저녁시간을 빌어서 CPAN 에 일괄 업로드했습니다. 완전 스팸이네요.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[CPANRatings - WebService::Aladdin]]></title>
+    <link href="http://jeen.github.com/blog/2012/02/08/cpanratings-webservice-aladdin/"/>
+    <updated>2012-02-08T16:27:00+09:00</updated>
+    <id>http://jeen.github.com/blog/2012/02/08/cpanratings-webservice-aladdin</id>
+    <content type="html"><![CDATA[<blockquote class="twitter-tweet" data-in-reply-to="166961671741521922"><p>@<a href="https://twitter.com/keedi">keedi</a> @<a href="https://twitter.com/gypark">gypark</a> 오오오... 가문의 영광!!!</p>&mdash; JEEN (@JEEN_LEE) <a href="https://twitter.com/JEEN_LEE/status/167063345000755200" data-datetime="2012-02-08T01:52:59+00:00">February 8, 2012</a></blockquote>
+
+
+<p> 새벽에 @keedi 님으로부터 트윗을 받고 알게되었습니다. 인생 처음으로 <a href="http://cpanratings.perl.org/">CPANRatings</a> 에서 Rating 을 받아보는 군요. 그것도 별 다섯개.</p>
+
+<ul>
+<li><p><a href="http://cpanratings.perl.org/dist/WebService-Aladdin">http://cpanratings.perl.org/dist/WebService-Aladdin</a></p>
+
+<p>아, CPANRatings 는 CPAN 에 올라온 모듈들에 평가를 남길 수 있는 곳입니다.</p>
+
+<p>Rating 은 @gypark 님으로부터 였습니다. 제가 얼기설기 CPAN 에 모듈 올려보겠답시고 2007년쯤에 올린 모듈이고, 저 조차도 잠깐 쓰다가 뭐 당장 쓸일이 없어서 내팽개쳐뒀지만 말이죠.. =3</p>
+
+<p>아무튼 의욕이 새록새록 돋습니다.</p>
+
+<p> <blockquote class="twitter-tweet" data-in-reply-to="167064715812552705" lang="ko"><p>@<a href="https://twitter.com/gypark">gypark</a> @<a href="https://twitter.com/JEEN_LEE">JEEN_LEE</a> @<a href="https://twitter.com/keedi">keedi</a> <a href="http://t.co/7v2VeWFW" title="http://jof4002.net/%EC%A1%B0%ED%94%84%EC%9D%BC%EA%B8%B0/2012-01-17">jof4002.net/%EC%A1%B0%ED%9…</a> 저 Rating 뒤에는 이런 슬픈 사연이 있습니다.</p>&mdash; SangYeon Jeon (@jof4002) <a href="https://twitter.com/jof4002/status/167174435084828672" data-datetime="2012-02-08T09:14:25+00:00">2월 8, 2012</a></blockquote></p>
+
+<p>사실 이 Rating 뒤에는 @jof4002 님의 어떤 사연이 있었다고 합니다. 도움이 되었다니 다행입니다.</p></li>
+<li><p><a href="http://jof4002.net/%EC%A1%B0%ED%94%84%EC%9D%BC%EA%B8%B0/2012-01-17">http://jof4002.net/조프일기/2012-01-17</a></p>
+
+<p>오늘은 @keedi 님께 어제 올린 <a href="http://metacpan.org/module/Date::Holidays::KR">Date::Holidays::KR</a> 에 Repository 정보가 없다는 말을 듣고, 흡... 해서 나머지 모듈들도 전부 Repository 정보를 추가해보려고 합니다.</p>
+
+<p>Date::Holidays::KR 에 Repository 가 없는 이유는 META.yml 이 없어서 였던 듯...</p></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Date::Holidays::KR Released]]></title>
+    <link href="http://jeen.github.com/blog/2012/02/07/date-holidays-kr-0-dot-01-released/"/>
+    <updated>2012-02-07T20:28:00+09:00</updated>
+    <id>http://jeen.github.com/blog/2012/02/07/date-holidays-kr-0-dot-01-released</id>
+    <content type="html"><![CDATA[<p>  회사의 경영자 @y0ngbin 께서 <code>is_bizday</code> 라는 스크립트를 만들어서 쓰는 것을 보고 호오 했었는데...</p>
+
+<p>  <script src="https://gist.github.com/1646007.js?file=is_bizday.pl"></script></p>
+
+<p>  알고보니 내용인즉슨 HTTP Request 를 날리고 그 결과를 파싱하는 일을 하고 있다는 것을 알고, 급히 <a href="http://metacpan.org/module/Date::Holidays::KR">Date::Holidays::KR</a> 이라는 모듈을 만들기로 했습니다... 랄까 사실은 작년부터 떠밀려온 <code>Things</code> 의 이슈 중 하나였습니다.</p>
+
+<p>  사실 일본같은 경우에는 음력이 옛날에 없어져버렸고, 지금은 양력만으로 돌고 있고, 중국은 한국과 마찬가지로 음력을 사용하고 있습니다. 재미삼아서 여러나라의 공휴일을 살펴봤는데, 대개 정해진 날, 또는 몇 월의 몇번째 주의 월요일이라든가 하는 식으로 공휴일이 지정되어 있는 것을 봤습니다.
+  캐나다의 경우는 주마다 휴일이 다르더군요. :-)</p>
+
+<p>  아무튼 같은 음력을 사용하는 중국, 그 중국용으로 만든 <a href="http://metacpan.org/module/Date::Holidays::CN">Date::Holidays::CN</a> 을 참고해서 <code>Date::Holidays::KR</code> 을 만들었습니다. 음력도 미묘하게 중국과는 다르다고 하는데, 이 부분은 @aer0 님께서 만드신 <a href="http://metacpan.org/module/Date::Korean">Date::Korean</a> 모듈을 사용해서 음력/양력 변환을 이용했구요. (설날,추석,석가탄신일의 경우는 음력)</p>
+
+<blockquote class="twitter-tweet"><p>Date-Holidays-KR 0.01 by JEEN - <a href="http://t.co/pHQVHLaJ" title="http://metacpan.org/release/JEEN/Date-Holidays-KR-0.01/">metacpan.org/release/JEEN/D…</a></p>&mdash; CPAN New Modules (@cpan_new) <a href="https://twitter.com/cpan_new/status/166840689223675904" data-datetime="2012-02-07T11:08:14+00:00">February 7, 2012</a></blockquote>
+
+
+
+
+<blockquote class="twitter-tweet"><p>Date-Holidays-KR 0.02 by JEEN - <a href="http://t.co/mgouifly" title="http://metacpan.org/release/JEEN/Date-Holidays-KR-0.02/">metacpan.org/release/JEEN/D…</a></p>&mdash; CPAN New Modules (@cpan_new) <a href="https://twitter.com/cpan_new/status/167066106622771200" data-datetime="2012-02-08T02:03:58+00:00">February 8, 2012</a></blockquote>
+
+
+<p>  어제 0.01 올리다가 <code>Makefile.PL</code> 에 의존모듈을 안정해놨구나 해서 추가해서 다시 올려놨습니다.</p>
+
+<p>``` diff
+diff --git a/Makefile.PL b/Makefile.PL
+index 7b27280..fef5219 100644
+--- a/Makefile.PL
++++ b/Makefile.PL
+@@ -2,7 +2,7 @@ use inc::Module::Install;
+ name 'Date-Holidays-KR';
+ all_from 'lib/Date/Holidays/KR.pm';</p>
+
+<p>-# requires '';
++requires 'Date::Korean';</p>
+
+<p> tests 't/*.t';
+ author_tests 'xt';
+```</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Carton - CPAN dependencies manager]]></title>
+    <link href="http://jeen.github.com/blog/2012/01/16/carton-cpan-dependencies-manager/"/>
+    <updated>2012-01-16T22:49:00+09:00</updated>
+    <id>http://jeen.github.com/blog/2012/01/16/carton-cpan-dependencies-manager</id>
+    <content type="html"><![CDATA[<p>  Jenkins 이야기를 마저 쓸려고 했는 데, 그 사이사이에 사용된 것들부터 정리하고자 우선은 Carton 이야기 부터 먼저하고자 합니다.</p>
+
+<p>  잘은 모르지만 Carton 은 Ruby 의 Bundler 에 영감을 받아서 만들어 진 것입니다. 어떤 Perl 로 만든 소프트웨어의 의존모듈의 관리가 편해집니다. :-) 일례로, 노트북에서 개발을 하고 이것을 서버에 올릴려고 할 때, 일일이 의존모듈 체크를 해야할 필요성이 있습니다. 그때마다 <code>cpan MODULE</code> 등으로 설치를 해나가야 한다면 여간 힘든 일이 아니죠.</p>
+
+<p>  그런 상황에서 쉽게 문제를 해결할 수 있는 것이 <code>Carton</code> 이 아닐까 생각합니다.</p>
+
+<h3>Carton 설치</h3>
+
+<p>  <code>Carton</code> 은 간단하게 <code>cpan</code> 으로 설치할 수 있습니다.</p>
+
+<p><code>bash
+$ cpanm carton
+</code></p>
+
+<p>  위의 커맨드로 <code>Carton</code> 을 설치하면 <code>carton</code> 이라는 커맨드가 생깁니다.</p>
+
+<h3>Carton 이용</h3>
+
+<p>  <code>Carton</code> 을 제대로 이용하려면, 해당 Perl App 의 의존모듈이 <code>Makefile.PL</code> 안에서 잘 관리되고 있어야 합니다.</p>
+
+<p>``` perl Makefile.PL
+use ExtUtils::MakeMaker;
+WriteMakefile(</p>
+
+<pre><code>'NAME'      =&gt; 'WebService::Aladdin',
+'AUTHOR'    =&gt; 'JEEN &lt;jeen@perl.kr&gt;',
+'VERSION_FROM' =&gt; 'lib/WebService/Aladdin.pm', # finds $VERSION
+'PREREQ_PM' =&gt; {
+    Test::Base =&gt; 0,
+    version    =&gt; 0,
+    Class::Accessor::Fast =&gt; 0,
+    LWP::UserAgent =&gt; 0,
+    URI            =&gt; 0,
+    Carp           =&gt; 0,
+    XML::FeedPP    =&gt; 0
+},
+</code></pre>
+
+<p>);
+```</p>
+
+<p>  우선 예제로 제가 만든 <code>WebService::Aladdin</code> 모듈의 <code>Makefile.PL</code> 이 위와 같습니다. 이는 <code>WebService::Aladdin</code> 모듈에서 필요로 하는 의존모듈 등의 정보들을 나타내고 있습니다.</p>
+
+<p><code>bash
+$ carton install
+</code></p>
+
+<p>  <code>carton install</code> 을 통해서 <code>Makefile.PL</code> 에 정의된 의존모듈을 설치합니다. 이때 <code>Carton</code> 은 의존모듈의 의존트리까지도 설치해버립니다. 그러니 실제 의존모듈이 10개라도, 그 10개의 각각의 모듈의 의존모듈까지도 설치하기 때문에 실제로 설치되는 것은 10개 이상의 모듈들이 될 것입니다.</p>
+
+<p>  아무튼 <code>carton install</code> 이 끝났다면 <code>carton.lock</code> 파일이 생성됩니다. 그리고 <code>local</code> 이라는 디렉토리의 아래에 의존모듈들이 설치됩니다.</p>
+
+<p>``` text carton.lock
+{
+   "modules" : {</p>
+
+<pre><code>  "Algorithm::Diff" : {
+     "dist" : "Algorithm-Diff-1.1902",
+     "module" : "Algorithm::Diff",
+     "mymeta" : {
+        "abstract" : "unknown",
+        "author" : [
+           "unknown"
+        ],
+        "dynamic_config" : 0,
+        "generated_by" : "ExtUtils::MakeMaker version 6.62, CPAN::Meta::Converter version 2.112621, CPAN::Meta::Converter version 2.112150",
+        "license" : [
+           "unknown"
+        ],
+        "meta-spec" : {
+           "url" : "http://search.cpan.org/perldoc?CPAN::Meta::Spec",
+           "version" : "2"
+        },
+        "name" : "Algorithm-Diff",
+        "no_index" : {
+           "directory" : [
+              "t",
+              "inc"
+           ]
+        },
+        "prereqs" : {
+           "build" : {
+              "requires" : {
+                 "ExtUtils::MakeMaker" : 0
+              }
+           },
+           "configure" : {
+              "requires" : {
+                 "ExtUtils::MakeMaker" : 0
+              }
+           },
+           "runtime" : {
+              "requires" : {}
+           }
+        },
+        "release_status" : "stable",
+        "version" : "1.1902"
+     },
+     "name" : "Algorithm::Diff",
+     "pathname" : "T/TY/TYEMQ/Algorithm-Diff-1.1902.tar.gz",
+     "provides" : {
+        "Algorithm::Diff" : {
+           "file" : "Algorithm/Diff.pm",
+           "version" : "1.1902"
+        },
+        "Algorithm::DiffOld" : {
+           "file" : "Algorithm/DiffOld.pm",
+           "version" : "1.1"
+        }
+     },
+     "version" : "1.1902"
+  },
+  ...
+</code></pre>
+
+<p>   }
+}
+```</p>
+
+<p>  이후 <code>Makefile.PL</code> 에서 또다른 의존모듈이 추가되었을 시에, 또다시</p>
+
+<p><code>bash
+$ carton install
+</code></p>
+
+<p>을 통해서 추가의존모듈을 설치할 수 있습니다. 이렇게 <code>carton install</code> 로 설치된 로컬 모듈들은</p>
+
+<p><code>bash
+$ carton list
+IO-stringy-2.110
+File-Listing-6.03
+XML-FeedPP-0.43
+CPAN-Meta-2.112621
+...
+</code></p>
+
+<p>  <code>carton list</code> 로 확인할 수 있습니다.</p>
+
+<p>  그리고 <code>carton exec</code> 를 통해서 로컬모듈에 설치된 의존모듈을 참조해서 실행할 수 있습니다. 일례로 <code>Catalyst</code> 나 <code>Dancer</code> 로 만든 WebApp 들을 위에서 설명한 대로 <code>carton install</code> 한다음,</p>
+
+<p><code>bash
+$ carton exec -- plackup -a app.psgi -p 3000 --mode production
+</code></p>
+
+<p>  이처럼 <code>carton exec</code> 를 통해서 실행할 수 있지요.</p>
+
+<h3>Carton 을 이용하고서...</h3>
+
+<p>  우선은 Carton 을 이용함으로, 한 어플리케이션 당 하나의 모듈참조장소를 가지게해서 여러 어플리케이션이 혼잡한 경우에 발생할 수 있는 부작용을 예방할 수 있습니다. <code>Makefile.PL</code> 에서 해당 모듈의 버젼을 지정함으로 특정 버젼에 대해서만 의존을 가질 수 있기 때문에 더더욱 이런 면에서는 효과적입니다.</p>
+
+<p>  그래서 저같은 경우는 오히려 서비스마다 그 서비스용 계정을 만들고 <code>perlbrew</code> 환경을 갖추는 것보다 가볍게 서비스용 계정은 하나만 가지며 각 서비스디렉토리마다 <code>Carton</code> 을 올리는 쪽으로 움직이고 있습니다. 그러니 굳이 시스템 펄을 사용하는 것이 큰 거부감을 느끼지 않게 되었네요.</p>
+
+<h3>그 외</h3>
+
+<p>  일단 <code>carton.lock</code> 에 기재된 의존모듈 정보가 많으면 많을수록 <code>carton install</code> 에 걸리는 시간은 더 오래걸리게 됩니다. 물론 Carton 이 기본적으로 외부미러(http://cpan.metacpan.org) 를 사용하고 있기에, 그럴 수도 있겠다 싶어서 코드를 한번 훑어봤는데, 마침 <code>PERL_CARTON_MIRROR</code> 라는 환경변수를 통해서 가까운 혹은 로컬 네트워크 안의 CPAN 미러를 지정해줌으로 많은 시간을 단축할 수 있지 않을까 생각해봅니다.</p>
+
+<h3>Conclusion</h3>
+
+<p>  물론 Carton 은 현재 ALPHA 퀄리티라고 합니다. 버젼도 현재(2012-01-16) 로는 0.9.3 이고, 1.0 정식 릴리즈까지는 아직 시간이 남아있습니다. 몇몇 기능이 바뀔거라는 주의사항이 <a href="http://metacan.org/module/Carton">Carton 모듈페이지</a> 에서 확인할 수 있습니다.</p>
+
+<p>  좀 더 다양한 <code>Carton</code> 에 대한 이야기는 작년 <a href="http://yapcasia.org/2011/talk/91">YAPC::Asia2011 의 Carton Talk Page</a> 에서도 확인하실 수 있습니다.</p>
+]]></content>
+  </entry>
+  
+</feed>
