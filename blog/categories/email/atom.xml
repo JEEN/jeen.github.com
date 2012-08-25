@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: email | Jeen's techlog]]></title>
-  <link href="http://JEEN.github.com/blog/categories/email/atom.xml" rel="self"/>
-  <link href="http://JEEN.github.com/"/>
-  <updated>2012-08-09T16:45:34+09:00</updated>
-  <id>http://JEEN.github.com/</id>
+  <link href="http://jeen.github.com/blog/categories/email/atom.xml" rel="self"/>
+  <link href="http://jeen.github.com/"/>
+  <updated>2012-08-25T13:45:37+09:00</updated>
+  <id>http://jeen.github.com/</id>
   <author>
     <name><![CDATA[Jeen Lee]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Perl - Email Send]]></title>
-    <link href="http://JEEN.github.com/blog/2011/12/29/perl-email-send/"/>
+    <link href="http://jeen.github.com/blog/2011/12/29/perl-email-send/"/>
     <updated>2011-12-29T17:45:00+09:00</updated>
-    <id>http://JEEN.github.com/blog/2011/12/29/perl-email-send</id>
+    <id>http://jeen.github.com/blog/2011/12/29/perl-email-send</id>
     <content type="html"><![CDATA[<p>  회사 선배이신 <a href="http://twitter.com/mintegrals">@mintegrals</a> 께서 최근에 사내 버그질라에 올려놓은 내용을 보고 약간 코드를 수정해봤습니다.
   내용인즉슨, 파일 첨부한 메일을 어떻게 보낼 수 있냐라는 것이었지요.
   기존에 써놨던 메일송신을 하는 모듈이 파일첨부를 고려하지 않았던 것이었는데, 그런 상황등을 고려해서 좀 더 수정해봤습니다.</p>

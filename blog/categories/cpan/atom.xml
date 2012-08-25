@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: cpan | Jeen's techlog]]></title>
-  <link href="http://JEEN.github.com/blog/categories/cpan/atom.xml" rel="self"/>
-  <link href="http://JEEN.github.com/"/>
-  <updated>2012-08-09T16:45:34+09:00</updated>
-  <id>http://JEEN.github.com/</id>
+  <link href="http://jeen.github.com/blog/categories/cpan/atom.xml" rel="self"/>
+  <link href="http://jeen.github.com/"/>
+  <updated>2012-08-25T13:45:37+09:00</updated>
+  <id>http://jeen.github.com/</id>
   <author>
     <name><![CDATA[Jeen Lee]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Date::Holidays::KR Pull Requested]]></title>
-    <link href="http://JEEN.github.com/blog/2012/02/15/date-holidays-kr-pull-requested/"/>
+    <link href="http://jeen.github.com/blog/2012/02/15/date-holidays-kr-pull-requested/"/>
     <updated>2012-02-15T23:48:00+09:00</updated>
-    <id>http://JEEN.github.com/blog/2012/02/15/date-holidays-kr-pull-requested</id>
+    <id>http://jeen.github.com/blog/2012/02/15/date-holidays-kr-pull-requested</id>
     <content type="html"><![CDATA[<ul>
 <li><p><a href="http://jeen.github.com/blog/2012/02/07/date-holidays-kr-0-dot-01-released/">Date::Holidays::KR Released</a></p></li>
 <li><p><a href="http://jeen.github.com/blog/2012/02/09/cpan-module-update/">CPAN Module Update</a></p>
@@ -52,9 +52,9 @@
   
   <entry>
     <title type="html"><![CDATA[CPAN Module Update]]></title>
-    <link href="http://JEEN.github.com/blog/2012/02/09/cpan-module-update/"/>
+    <link href="http://jeen.github.com/blog/2012/02/09/cpan-module-update/"/>
     <updated>2012-02-09T01:06:00+09:00</updated>
-    <id>http://JEEN.github.com/blog/2012/02/09/cpan-module-update</id>
+    <id>http://jeen.github.com/blog/2012/02/09/cpan-module-update</id>
     <content type="html"><![CDATA[<blockquote class="twitter-tweet" lang="ko"><p>Acme-CPANAuthors-Korean 0.08 by JEEN - <a href="http://t.co/CjlRnKEO" title="http://metacpan.org/release/JEEN/Acme-CPANAuthors-Korean-0.08/">metacpan.org/release/JEEN/A…</a></p>&mdash; CPAN New Modules (@cpan_new) <a href="https://twitter.com/cpan_new/status/167271503061200896" data-datetime="2012-02-08T15:40:08+00:00">2월 8, 2012</a></blockquote>
 
 
@@ -101,9 +101,9 @@ WriteAll;
   
   <entry>
     <title type="html"><![CDATA[CPANRatings - WebService::Aladdin]]></title>
-    <link href="http://JEEN.github.com/blog/2012/02/08/cpanratings-webservice-aladdin/"/>
+    <link href="http://jeen.github.com/blog/2012/02/08/cpanratings-webservice-aladdin/"/>
     <updated>2012-02-08T16:27:00+09:00</updated>
-    <id>http://JEEN.github.com/blog/2012/02/08/cpanratings-webservice-aladdin</id>
+    <id>http://jeen.github.com/blog/2012/02/08/cpanratings-webservice-aladdin</id>
     <content type="html"><![CDATA[<blockquote class="twitter-tweet" data-in-reply-to="166961671741521922"><p>@<a href="https://twitter.com/keedi">keedi</a> @<a href="https://twitter.com/gypark">gypark</a> 오오오... 가문의 영광!!!</p>&mdash; JEEN (@JEEN_LEE) <a href="https://twitter.com/JEEN_LEE/status/167063345000755200" data-datetime="2012-02-08T01:52:59+00:00">February 8, 2012</a></blockquote>
 
 
@@ -133,9 +133,9 @@ WriteAll;
   
   <entry>
     <title type="html"><![CDATA[Date::Holidays::KR Released]]></title>
-    <link href="http://JEEN.github.com/blog/2012/02/07/date-holidays-kr-0-dot-01-released/"/>
+    <link href="http://jeen.github.com/blog/2012/02/07/date-holidays-kr-0-dot-01-released/"/>
     <updated>2012-02-07T20:28:00+09:00</updated>
-    <id>http://JEEN.github.com/blog/2012/02/07/date-holidays-kr-0-dot-01-released</id>
+    <id>http://jeen.github.com/blog/2012/02/07/date-holidays-kr-0-dot-01-released</id>
     <content type="html"><![CDATA[<p>  회사의 경영자 @y0ngbin 께서 <code>is_bizday</code> 라는 스크립트를 만들어서 쓰는 것을 보고 호오 했었는데...</p>
 
 <p>  <script src="https://gist.github.com/1646007.js?file=is_bizday.pl"></script></p>
@@ -177,9 +177,9 @@ index 7b27280..fef5219 100644
   
   <entry>
     <title type="html"><![CDATA[Carton - CPAN dependencies manager]]></title>
-    <link href="http://JEEN.github.com/blog/2012/01/16/carton-cpan-dependencies-manager/"/>
+    <link href="http://jeen.github.com/blog/2012/01/16/carton-cpan-dependencies-manager/"/>
     <updated>2012-01-16T22:49:00+09:00</updated>
-    <id>http://JEEN.github.com/blog/2012/01/16/carton-cpan-dependencies-manager</id>
+    <id>http://jeen.github.com/blog/2012/01/16/carton-cpan-dependencies-manager</id>
     <content type="html"><![CDATA[<p>  Jenkins 이야기를 마저 쓸려고 했는 데, 그 사이사이에 사용된 것들부터 정리하고자 우선은 Carton 이야기 부터 먼저하고자 합니다.</p>
 
 <p>  잘은 모르지만 Carton 은 Ruby 의 Bundler 에 영감을 받아서 만들어 진 것입니다. 어떤 Perl 로 만든 소프트웨어의 의존모듈의 관리가 편해집니다. :-) 일례로, 노트북에서 개발을 하고 이것을 서버에 올릴려고 할 때, 일일이 의존모듈 체크를 해야할 필요성이 있습니다. 그때마다 <code>cpan MODULE</code> 등으로 설치를 해나가야 한다면 여간 힘든 일이 아니죠.</p>

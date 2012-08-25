@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: dbix-class | Jeen's techlog]]></title>
-  <link href="http://JEEN.github.com/blog/categories/dbix-class/atom.xml" rel="self"/>
-  <link href="http://JEEN.github.com/"/>
-  <updated>2012-08-09T16:45:34+09:00</updated>
-  <id>http://JEEN.github.com/</id>
+  <link href="http://jeen.github.com/blog/categories/dbix-class/atom.xml" rel="self"/>
+  <link href="http://jeen.github.com/"/>
+  <updated>2012-08-25T13:45:37+09:00</updated>
+  <id>http://jeen.github.com/</id>
   <author>
     <name><![CDATA[Jeen Lee]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[DBIx::Class and Replication - II]]></title>
-    <link href="http://JEEN.github.com/blog/2012/06/19/dbix-class-and-replication-ii/"/>
+    <link href="http://jeen.github.com/blog/2012/06/19/dbix-class-and-replication-ii/"/>
     <updated>2012-06-19T15:35:00+09:00</updated>
-    <id>http://JEEN.github.com/blog/2012/06/19/dbix-class-and-replication-ii</id>
+    <id>http://jeen.github.com/blog/2012/06/19/dbix-class-and-replication-ii</id>
     <content type="html"><![CDATA[<ul>
 <li><a href="http://jeen.github.com/blog/2012/06/17/dbix-class-and-replication/">DBIx::Class + Replication</a></li>
 </ul>
@@ -115,9 +115,9 @@ $schema-&gt;storage-&gt;connect_replicants([
   
   <entry>
     <title type="html"><![CDATA[DBIx::Class + Replication]]></title>
-    <link href="http://JEEN.github.com/blog/2012/06/17/dbix-class-and-replication/"/>
+    <link href="http://jeen.github.com/blog/2012/06/17/dbix-class-and-replication/"/>
     <updated>2012-06-17T19:05:00+09:00</updated>
-    <id>http://JEEN.github.com/blog/2012/06/17/dbix-class-and-replication</id>
+    <id>http://jeen.github.com/blog/2012/06/17/dbix-class-and-replication</id>
     <content type="html"><![CDATA[<p> 일반적으로 회사에서 개발하는 규모에서는 Replication 을 크게 고려하지 않았었는데, 이번에 수주받은 프로젝트에서 DBIx::Class 사용시에 Replication 에 대해서 고려해야 할 부분이 있었습니다.</p>
 
 <p> 이전 회사에서 MySQL Replication 을 설정할 때 slave 서버들의 앞단에 keepalived 를 놓아서 로드 밸런서 역할로 사용했던 적이 있습니다. 말그대로 부하분산의 목적도 있고, 많은 slave 서버들의 커넥션정보를 일일이 웹 어플리케이션에서 설정할 필요도 없었죠. 하지만 IDC 에 로드밸런서 서버 한대를 더 우겨넣어야 했었죠.</p>

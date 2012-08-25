@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: rex | Jeen's techlog]]></title>
-  <link href="http://JEEN.github.com/blog/categories/rex/atom.xml" rel="self"/>
-  <link href="http://JEEN.github.com/"/>
-  <updated>2012-08-09T16:45:34+09:00</updated>
-  <id>http://JEEN.github.com/</id>
+  <link href="http://jeen.github.com/blog/categories/rex/atom.xml" rel="self"/>
+  <link href="http://jeen.github.com/"/>
+  <updated>2012-08-25T13:45:37+09:00</updated>
+  <id>http://jeen.github.com/</id>
   <author>
     <name><![CDATA[Jeen Lee]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Rex - Contributor 가 되어 있었습니다]]></title>
-    <link href="http://JEEN.github.com/blog/2012/06/14/rex-im-a-contributor/"/>
+    <link href="http://jeen.github.com/blog/2012/06/14/rex-im-a-contributor/"/>
     <updated>2012-06-14T17:28:00+09:00</updated>
-    <id>http://JEEN.github.com/blog/2012/06/14/rex-im-a-contributor</id>
+    <id>http://jeen.github.com/blog/2012/06/14/rex-im-a-contributor</id>
     <content type="html"><![CDATA[<p><a href="http://jeen.github.com/blog/2012/02/15/rex-pull-request/">http://jeen.github.com/blog/2012/02/15/rex-pull-request/</a></p>
 
 <p> 이전에 이렇게 Rex 에 Pull Request 를 날린 적이 있었는데,</p>
@@ -32,9 +32,9 @@
   
   <entry>
     <title type="html"><![CDATA[Rex Pull Request]]></title>
-    <link href="http://JEEN.github.com/blog/2012/02/15/rex-pull-request/"/>
+    <link href="http://jeen.github.com/blog/2012/02/15/rex-pull-request/"/>
     <updated>2012-02-15T23:21:00+09:00</updated>
-    <id>http://JEEN.github.com/blog/2012/02/15/rex-pull-request</id>
+    <id>http://jeen.github.com/blog/2012/02/15/rex-pull-request</id>
     <content type="html"><![CDATA[<ul>
 <li><p><a href="http://rexify.org/">(R)?ex - A simple framework to simplify systemadministration</a></p>
 

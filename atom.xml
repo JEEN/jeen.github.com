@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Jeen's techlog]]></title>
-  <link href="http://JEEN.github.com/atom.xml" rel="self"/>
-  <link href="http://JEEN.github.com/"/>
-  <updated>2012-08-09T16:45:34+09:00</updated>
-  <id>http://JEEN.github.com/</id>
+  <link href="http://jeen.github.com/atom.xml" rel="self"/>
+  <link href="http://jeen.github.com/"/>
+  <updated>2012-08-25T13:45:37+09:00</updated>
+  <id>http://jeen.github.com/</id>
   <author>
     <name><![CDATA[Jeen Lee]]></name>
     
@@ -14,10 +14,179 @@
 
   
   <entry>
+    <title type="html"><![CDATA[DBIx::Class and JSON]]></title>
+    <link href="http://jeen.github.com/blog/2012/08/25/dbix-class-and-json/"/>
+    <updated>2012-08-25T12:44:00+09:00</updated>
+    <id>http://jeen.github.com/blog/2012/08/25/dbix-class-and-json</id>
+    <content type="html"><![CDATA[<p> 흔한 웹서비스의 흔한 AJAX 나 흔한 RESTful API 를 제공하기 위해서, 대개 JSON 포맷의 데이터를 서버에서 뿜어내고는 합니다.</p>
+
+<p> 하지만 누구나가 Catalyst + DBIx::Class 조합에서 이렇게 하면 되는 게 아닐까 하고 접근했다가…</p>
+
+<blockquote><p>… encountered object &#8216;..&#8217;, but neither allow_blessed nor convert_blessed settings are enabled …</p></blockquote>
+
+<p> 라는 에러를 접하게 됩니다. bless 된 오브젝트를 어떻게든 JSON 인코딩을 시도하려고 했을 때는 위와 같은 에러를 쉬이 접할 수 있습니다.</p>
+
+<p> 이것을 푸는 방법은 사실 여러가지가 있습니다.</p>
+
+<p> 이것저것 신경쓰지 말고 한번에 가자고 할 때는 Catalyst::View::JSON 에서 인코딩하게 되는 stash 된 값들을 전부 ArrayRef 나 HashRef 로 변환해서 넘기는 방법입니다.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='perl'><span class='line'>   <span class="k">my</span> <span class="nv">@data</span><span class="p">;</span>
+</span><span class='line'>   <span class="k">my</span> <span class="nv">$rs</span> <span class="o">=</span> <span class="nv">$c</span><span class="o">-&gt;</span><span class="n">model</span><span class="p">(</span><span class="s">&#39;DB&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">resultset</span><span class="p">(</span><span class="s">&#39;User&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">search</span><span class="p">();</span>
+</span><span class='line'>   <span class="k">while</span><span class="p">(</span><span class="k">my</span> <span class="nv">$row</span> <span class="o">=</span> <span class="nv">$rs</span><span class="o">-&gt;</span><span class="k">next</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>       <span class="nb">push</span> <span class="nv">@data</span><span class="p">,</span> <span class="p">{</span>
+</span><span class='line'>           <span class="n">id</span> <span class="o">=&gt;</span> <span class="nv">$row</span><span class="o">-&gt;</span><span class="n">id</span><span class="p">,</span>
+</span><span class='line'>           <span class="n">name</span> <span class="o">=&gt;</span> <span class="nv">$row</span><span class="o">-&gt;</span><span class="n">name</span><span class="p">,</span>
+</span><span class='line'>           <span class="n">created_at</span> <span class="o">=&gt;</span> <span class="nv">$row</span><span class="o">-&gt;</span><span class="n">created_at</span><span class="p">,</span>
+</span><span class='line'>       <span class="p">};</span>
+</span><span class='line'>   <span class="p">}</span>
+</span><span class='line'>   <span class="nv">$c</span><span class="o">-&gt;</span><span class="n">stash</span><span class="o">-&gt;</span><span class="p">{</span><span class="n">people</span><span class="p">}</span> <span class="o">=</span> <span class="o">\</span><span class="nv">@data</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p> 위처럼 특정컬럼을 선별해서 넣어주는 방법이 있겠지요. 좀 더 단순화한다면, 각  스키마테이블 별로 HashRef 를 반환하는 메소드를 넣어두는 것도 좋습니다.</p>
+
+<p> &#8220;` perl</p>
+
+<h1>lib/MyApp/Schema/Result/User.pm</h1>
+
+<p>sub to_hashref {</p>
+
+<pre><code>my $self = shift;
+return {
+    id =&gt; $self-&gt;id,
+    name =&gt; $self-&gt;name,
+    created_at =&gt; $self-&gt;created_at,
+};
+</code></pre>
+
+<p>}</p>
+
+<h1>Controller</h1>
+
+<p>   my @data;
+   my $rs = $c->model(&#8216;DB&#8217;)->resultset(&#8216;User&#8217;)->search();
+   while(my $row = $rs->next) {</p>
+
+<pre><code>   push @data, $row-&gt;to_hashref;
+</code></pre>
+
+<p>   }
+   $c->stash->{people} = \@data;</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="sb">``</span><span class="err">`</span> <span class="n">perl</span>
+</span><span class='line'>  <span class="k">my</span> <span class="nv">$person</span> <span class="o">=</span> <span class="nv">$c</span><span class="o">-&gt;</span><span class="n">model</span><span class="p">(</span><span class="s">&#39;DB&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">resultset</span><span class="p">(</span><span class="s">&#39;User&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">search</span><span class="p">(</span><span class="nv">$cond</span><span class="p">,</span> <span class="p">{</span>
+</span><span class='line'>      <span class="n">result_class</span> <span class="o">=&gt;</span> <span class="s">&#39;DBIx::Class::ResultClass::HashRefInflator&#39;</span><span class="p">,</span>
+</span><span class='line'>  <span class="p">})</span><span class="o">-&gt;</span><span class="n">first</span><span class="p">;</span>
+</span><span class='line'>  <span class="nv">$c</span><span class="o">-&gt;</span><span class="n">stash</span><span class="o">-&gt;</span><span class="p">{</span><span class="n">person</span><span class="p">}</span> <span class="o">=</span> <span class="nv">$person</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p> 그럴 필요가 없다면 위처럼 <code>result_class</code> 를 지정해줌으로써 결과를 무조건 HashRef 로 반환하게끔 합니다.</p>
+
+<p> 사실 <code>DBIx::Class::ResultClass::HashRefInflator</code> 를 적용하면 일일이 오브젝트를 만들어내지 않기 때문에 퍼포먼스 측면에서 매우 좋습니다만, 그냥 HashRef 일 따름인지라Resultset 에서 정의한 각종 메소드를 참조할 수 없습니다.
+ 그러니 이런저런 경우에는 가려서 사용하는 것이 좋습니다.</p>
+
+<p> 이제 본질적으로 좀 더 접근해보면…
+ JSON::XS 는 인코딩할 시에, 오브젝트가 대상인 경우에는 해당 오브젝트의 TO_JSON 메소드를 참조하여 결과를 뽑아낼 수 있습니다. 물론 <code>allow_blessed</code>, <code>convert_blessed</code> 플래그를 지정할 필요가 있지요.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="c1"># lib/MyApp/View/JSON.pm</span>
+</span><span class='line'><span class="nb">package</span> <span class="nn">MyApp::View::</span><span class="n">JSON</span><span class="p">;</span>
+</span><span class='line'><span class="k">use</span> <span class="nn">JSON::</span><span class="n">XS</span> <span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">use</span> <span class="n">parent</span> <span class="sx">qw(Catalyst::View::JSON)</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">my</span> <span class="nv">$encoder</span> <span class="o">=</span> <span class="nn">JSON::</span><span class="n">XS</span><span class="o">-&gt;</span><span class="k">new</span>
+</span><span class='line'>              <span class="o">-&gt;</span><span class="n">utf8</span>
+</span><span class='line'>                          <span class="o">-&gt;</span><span class="n">pretty</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</span><span class='line'>                          <span class="o">-&gt;</span><span class="n">indent</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</span><span class='line'>                          <span class="o">-&gt;</span><span class="n">allow_blessed</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</span><span class='line'>                          <span class="o">-&gt;</span><span class="n">convert_blessed</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">sub </span><span class="nf">encode_json</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">my</span> <span class="p">(</span><span class="nv">$self</span><span class="p">,</span> <span class="nv">$c</span><span class="p">,</span> <span class="nv">$data</span><span class="p">)</span> <span class="o">=</span> <span class="nv">@_</span><span class="p">;</span>
+</span><span class='line'>    <span class="nv">$encoder</span><span class="o">-&gt;</span><span class="n">encode</span><span class="p">(</span><span class="nv">$data</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="mi">1</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p> 그러면 위처럼 <code>encode_json</code> 을 오버라이드 합니다. <code>allow_blessed</code> 와 <code>convert_blessed</code>  플래그를 켜주는 것이죠.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="c1"># lib/MyApp/Schema/Result/User.pm</span>
+</span><span class='line'><span class="o">..</span>
+</span><span class='line'><span class="k">sub </span><span class="nf">TO_JSON</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">return</span> <span class="p">{</span> <span class="nv">$_</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">get_inflated_columns</span> <span class="p">};</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="o">..</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>그리고 위처럼 User Result 에 대해서 TO_JSON 를 지정합니다.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='perl'><span class='line'>   <span class="nv">$c</span><span class="o">-&gt;</span><span class="n">stash</span><span class="o">-&gt;</span><span class="p">{</span><span class="n">people</span><span class="p">}</span> <span class="o">=</span> <span class="p">[</span>  <span class="nv">$c</span><span class="o">-&gt;</span><span class="n">model</span><span class="p">(</span><span class="s">&#39;DB&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">resultset</span><span class="p">(</span><span class="s">&#39;User&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">search</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">all</span> <span class="p">];</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>그러면 이제는 아무런 걱정없이 그냥 생짜 DBIC Resultset 을 날려버려도 이제는 알아서 문제해결이 됩니다. :-)</p>
+
+<p> 각 Resultset 마다 <code>TO_JSON</code> 을 지정하기가 벅차다면…</p>
+
+<ul>
+<li>(Seoul.pm Advent Calendar 2011 - 열일곱번째 날 : DBIx::Class로 스키마 관리하기)[http://advent.perl.kr/2011/2011-12-17.html]</li>
+</ul>
+
+
+<p>위의 글에서 <code>ResultBase</code> 를 참고해주세요.</p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[Moving from bash to zsh again]]></title>
-    <link href="http://JEEN.github.com/blog/2012/08/09/moving-from-bash-to-zsh-again/"/>
+    <link href="http://jeen.github.com/blog/2012/08/09/moving-from-bash-to-zsh-again/"/>
     <updated>2012-08-09T16:30:00+09:00</updated>
-    <id>http://JEEN.github.com/blog/2012/08/09/moving-from-bash-to-zsh-again</id>
+    <id>http://jeen.github.com/blog/2012/08/09/moving-from-bash-to-zsh-again</id>
     <content type="html"><![CDATA[<p> 밥벌이도구가 바뀌고 해서 다시 ZSH 로 돌아갔습니다.</p>
 
 <blockquote class="twitter-tweet" lang="ko"><p>레티나 맥북프로를 오늘 받은 게 자랑.txt <a href="http://t.co/38oGVx7W" title="http://jeen.tistory.com/560">jeen.tistory.com/560</a></p>&mdash; JEEN (@JEEN_LEE) <a href="https://twitter.com/JEEN_LEE/status/232821768325300225" data-datetime="2012-08-07T12:53:29+00:00">8월 7, 2012</a></blockquote>
@@ -71,9 +240,9 @@
   
   <entry>
     <title type="html"><![CDATA[App::Zamakist...]]></title>
-    <link href="http://JEEN.github.com/blog/2012/08/09/app-zamakist-dot-dot-dot/"/>
+    <link href="http://jeen.github.com/blog/2012/08/09/app-zamakist-dot-dot-dot/"/>
     <updated>2012-08-09T13:33:00+09:00</updated>
-    <id>http://JEEN.github.com/blog/2012/08/09/app-zamakist-dot-dot-dot</id>
+    <id>http://jeen.github.com/blog/2012/08/09/app-zamakist-dot-dot-dot</id>
     <content type="html"><![CDATA[<p>취미라고 할 것이 있다면 잠, 책, 드라마감상 정도라고 할까요.</p>
 
 <p>걔중에 몇몇 미드들을 아직까지 꾸준하게 시간을 내면서 보고 있습니다.</p>
@@ -231,9 +400,9 @@
   
   <entry>
     <title type="html"><![CDATA[Export Facebook Event Attending List - perl-kr TeaTime]]></title>
-    <link href="http://JEEN.github.com/blog/2012/07/26/export-facebook-event-attending-list-perl-kr-teatime/"/>
+    <link href="http://jeen.github.com/blog/2012/07/26/export-facebook-event-attending-list-perl-kr-teatime/"/>
     <updated>2012-07-26T14:22:00+09:00</updated>
-    <id>http://JEEN.github.com/blog/2012/07/26/export-facebook-event-attending-list-perl-kr-teatime</id>
+    <id>http://jeen.github.com/blog/2012/07/26/export-facebook-event-attending-list-perl-kr-teatime</id>
     <content type="html"><![CDATA[<p> 지난번 1회 티타임때의 문제가 제대로 참가비 징수를 못해서 비용정산에 어려움이 있었는데,
 이 문제를 해결하기 위해서 간단하게 참가자 리스트를 A4 용지로 뽑아내서 체크하도록 하는 건 어떨까 하는 생각이 있었습니다.</p>
 
@@ -660,9 +829,9 @@
   
   <entry>
     <title type="html"><![CDATA[MySQL::Diff - A vs B]]></title>
-    <link href="http://JEEN.github.com/blog/2012/07/18/mysql-diff-a-vs-b/"/>
+    <link href="http://jeen.github.com/blog/2012/07/18/mysql-diff-a-vs-b/"/>
     <updated>2012-07-18T18:30:00+09:00</updated>
-    <id>http://JEEN.github.com/blog/2012/07/18/mysql-diff-a-vs-b</id>
+    <id>http://jeen.github.com/blog/2012/07/18/mysql-diff-a-vs-b</id>
     <content type="html"><![CDATA[<p> 최근에 유지보수 관련 일로 골머리를 싸고 있다가 겨우겨우 마무리하고 있는 일이 하나 있었습니다.</p>
 
 <p> PHP 프로젝트였는데, 유지보수 관련해서 여러가지 이슈들이 나오기 마련이고, 그 때문에 잘 움직이던 기존의 DB구조를
@@ -725,9 +894,9 @@
   
   <entry>
     <title type="html"><![CDATA[Export Github Issues]]></title>
-    <link href="http://JEEN.github.com/blog/2012/07/18/export-github-issues/"/>
+    <link href="http://jeen.github.com/blog/2012/07/18/export-github-issues/"/>
     <updated>2012-07-18T15:44:00+09:00</updated>
-    <id>http://JEEN.github.com/blog/2012/07/18/export-github-issues</id>
+    <id>http://jeen.github.com/blog/2012/07/18/export-github-issues</id>
     <content type="html"><![CDATA[<p> 회사에서는 한달에 $20 인가 지불하면서 Github 을 쓰고 있습니다.
  $20 플랜에서는 한정적인 Private Repo 밖에 만들지 못합니다. 그래서 완료가 된 프로젝트에 대해서는
 Github Repo 를 닫고 사내 Git Repo 로 옮기는 방식으로 사용하고 있습니다.</p>
@@ -888,9 +1057,9 @@ Github 에서 제공해주는 Issue 관리라든가, Wiki 라든가 여러모로
   
   <entry>
     <title type="html"><![CDATA[HTTPS-SSL-LWP-SOAP and Perl]]></title>
-    <link href="http://JEEN.github.com/blog/2012/07/02/https-ssl-lwp-soap-and-perl/"/>
+    <link href="http://jeen.github.com/blog/2012/07/02/https-ssl-lwp-soap-and-perl/"/>
     <updated>2012-07-02T15:23:00+09:00</updated>
-    <id>http://JEEN.github.com/blog/2012/07/02/https-ssl-lwp-soap-and-perl</id>
+    <id>http://jeen.github.com/blog/2012/07/02/https-ssl-lwp-soap-and-perl</id>
     <content type="html"><![CDATA[<blockquote><p>tl;dr: I hate Java and SOAP, use Perl</p></blockquote>
 
 <p> 지난 주에 고객으로부터 요구를 받았는데, DB특정 항목에 대치되는 어떤 값을 가지고 모 API를 통해서 결과를 받아서 뿌려주는 간단한 것이었습니다.</p>
@@ -1056,9 +1225,9 @@ Github 에서 제공해주는 Issue 관리라든가, Wiki 라든가 여러모로
   
   <entry>
     <title type="html"><![CDATA[Regexp::Wildcards]]></title>
-    <link href="http://JEEN.github.com/blog/2012/07/01/regexp-wildcards/"/>
+    <link href="http://jeen.github.com/blog/2012/07/01/regexp-wildcards/"/>
     <updated>2012-07-01T00:46:00+09:00</updated>
-    <id>http://JEEN.github.com/blog/2012/07/01/regexp-wildcards</id>
+    <id>http://jeen.github.com/blog/2012/07/01/regexp-wildcards</id>
     <content type="html"><![CDATA[<p> 저같은 평범한 개발자야 어떤 패턴을 확인하고 정규표현식을 쓰면 되는데, 사실 일반 사용자들에게
 정규표현식을 어떤 설정의 입력값으로 밀어넣는 것은 일반 사용자에게 배려가 부족하지 않나 하고 생각했었습니다.</p>
 
@@ -1223,9 +1392,9 @@ Github 에서 제공해주는 Issue 관리라든가, Wiki 라든가 여러모로
   
   <entry>
     <title type="html"><![CDATA[DBIx::Class and Replication - II]]></title>
-    <link href="http://JEEN.github.com/blog/2012/06/19/dbix-class-and-replication-ii/"/>
+    <link href="http://jeen.github.com/blog/2012/06/19/dbix-class-and-replication-ii/"/>
     <updated>2012-06-19T15:35:00+09:00</updated>
-    <id>http://JEEN.github.com/blog/2012/06/19/dbix-class-and-replication-ii</id>
+    <id>http://jeen.github.com/blog/2012/06/19/dbix-class-and-replication-ii</id>
     <content type="html"><![CDATA[<ul>
 <li><a href="http://jeen.github.com/blog/2012/06/17/dbix-class-and-replication/">DBIx::Class + Replication</a></li>
 </ul>
@@ -1363,9 +1532,9 @@ Github 에서 제공해주는 Issue 관리라든가, Wiki 라든가 여러모로
   
   <entry>
     <title type="html"><![CDATA[oh-my-zsh → bash-it]]></title>
-    <link href="http://JEEN.github.com/blog/2012/06/18/oh-my-zsh-bash-it/"/>
+    <link href="http://jeen.github.com/blog/2012/06/18/oh-my-zsh-bash-it/"/>
     <updated>2012-06-18T17:42:00+09:00</updated>
-    <id>http://JEEN.github.com/blog/2012/06/18/oh-my-zsh-bash-it</id>
+    <id>http://jeen.github.com/blog/2012/06/18/oh-my-zsh-bash-it</id>
     <content type="html"><![CDATA[<p> 한동안 zsh 을 사용하면서 oh-my-zsh 로 화려한 셸환경을 이용하고 있었는데요, 언제부턴가 grep warning 이 뜨기도 하고, bash 위주의 작업환경에 맞춘 기사들이 소개되기에 이르러 결국 zsh 을 버리고 다시 bash 로 돌아오게 되었습니다.</p>
 
 <ul>
@@ -1386,9 +1555,9 @@ Github 에서 제공해주는 Issue 관리라든가, Wiki 라든가 여러모로
   
   <entry>
     <title type="html"><![CDATA[DBIx::Class + Replication]]></title>
-    <link href="http://JEEN.github.com/blog/2012/06/17/dbix-class-and-replication/"/>
+    <link href="http://jeen.github.com/blog/2012/06/17/dbix-class-and-replication/"/>
     <updated>2012-06-17T19:05:00+09:00</updated>
-    <id>http://JEEN.github.com/blog/2012/06/17/dbix-class-and-replication</id>
+    <id>http://jeen.github.com/blog/2012/06/17/dbix-class-and-replication</id>
     <content type="html"><![CDATA[<p> 일반적으로 회사에서 개발하는 규모에서는 Replication 을 크게 고려하지 않았었는데, 이번에 수주받은 프로젝트에서 DBIx::Class 사용시에 Replication 에 대해서 고려해야 할 부분이 있었습니다.</p>
 
 <p> 이전 회사에서 MySQL Replication 을 설정할 때 slave 서버들의 앞단에 keepalived 를 놓아서 로드 밸런서 역할로 사용했던 적이 있습니다. 말그대로 부하분산의 목적도 있고, 많은 slave 서버들의 커넥션정보를 일일이 웹 어플리케이션에서 설정할 필요도 없었죠. 하지만 IDC 에 로드밸런서 서버 한대를 더 우겨넣어야 했었죠.</p>
@@ -1477,9 +1646,9 @@ No Replicants validate, falling back to master reads.
   
   <entry>
     <title type="html"><![CDATA[Beginning Perl]]></title>
-    <link href="http://JEEN.github.com/blog/2012/06/14/beginning-perl/"/>
+    <link href="http://jeen.github.com/blog/2012/06/14/beginning-perl/"/>
     <updated>2012-06-14T22:42:00+09:00</updated>
-    <id>http://JEEN.github.com/blog/2012/06/14/beginning-perl</id>
+    <id>http://jeen.github.com/blog/2012/06/14/beginning-perl</id>
     <content type="html"><![CDATA[<ul>
 <li><a href="http://blogs.perl.org/users/ovid/2012/06/read-my-book-online-for-free.html">Read my book online for free | Ovid [blogs.perl.org]</a></li>
 </ul>
@@ -1532,9 +1701,9 @@ No Replicants validate, falling back to master reads.
   
   <entry>
     <title type="html"><![CDATA[Rex - Contributor 가 되어 있었습니다]]></title>
-    <link href="http://JEEN.github.com/blog/2012/06/14/rex-im-a-contributor/"/>
+    <link href="http://jeen.github.com/blog/2012/06/14/rex-im-a-contributor/"/>
     <updated>2012-06-14T17:28:00+09:00</updated>
-    <id>http://JEEN.github.com/blog/2012/06/14/rex-im-a-contributor</id>
+    <id>http://jeen.github.com/blog/2012/06/14/rex-im-a-contributor</id>
     <content type="html"><![CDATA[<p><a href="http://jeen.github.com/blog/2012/02/15/rex-pull-request/">http://jeen.github.com/blog/2012/02/15/rex-pull-request/</a></p>
 
 <p> 이전에 이렇게 Rex 에 Pull Request 를 날린 적이 있었는데,</p>
@@ -1549,9 +1718,9 @@ No Replicants validate, falling back to master reads.
   
   <entry>
     <title type="html"><![CDATA[crontab + perlbrew]]></title>
-    <link href="http://JEEN.github.com/blog/2012/02/28/crontab-plus-perlbrew/"/>
+    <link href="http://jeen.github.com/blog/2012/02/28/crontab-plus-perlbrew/"/>
     <updated>2012-02-28T21:03:00+09:00</updated>
-    <id>http://JEEN.github.com/blog/2012/02/28/crontab-plus-perlbrew</id>
+    <id>http://jeen.github.com/blog/2012/02/28/crontab-plus-perlbrew</id>
     <content type="html"><![CDATA[<p>  이번 글은 성의가 매우 부족하게 트윗의 열거로 끝낼까 합니다.</p>
 
 <blockquote class="twitter-tweet"><p>질문. perlbrew 설정이 crontab에서도 적용되게 하려면 어떻게 적어줘야 할까요..? .bashrc 에서 perlbrew의 설정파일을 부르게 해 둔 상태인데 crontab으로 실행하는 스크립트에는 적용이 안 되어 시스템 펄을 부르네요.</p>&mdash; Raymundo (@gypark) <a href="https://twitter.com/gypark/status/172218904352010240" data-datetime="2012-02-22T07:19:21+00:00">February 22, 2012</a></blockquote>
@@ -2255,9 +2424,9 @@ I think you should use an
   
   <entry>
     <title type="html"><![CDATA[Date::Holidays::KR Pull Requested]]></title>
-    <link href="http://JEEN.github.com/blog/2012/02/15/date-holidays-kr-pull-requested/"/>
+    <link href="http://jeen.github.com/blog/2012/02/15/date-holidays-kr-pull-requested/"/>
     <updated>2012-02-15T23:48:00+09:00</updated>
-    <id>http://JEEN.github.com/blog/2012/02/15/date-holidays-kr-pull-requested</id>
+    <id>http://jeen.github.com/blog/2012/02/15/date-holidays-kr-pull-requested</id>
     <content type="html"><![CDATA[<ul>
 <li><p><a href="http://jeen.github.com/blog/2012/02/07/date-holidays-kr-0-dot-01-released/">Date::Holidays::KR Released</a></p></li>
 <li><p><a href="http://jeen.github.com/blog/2012/02/09/cpan-module-update/">CPAN Module Update</a></p>
@@ -2292,9 +2461,9 @@ I think you should use an
   
   <entry>
     <title type="html"><![CDATA[Rex Pull Request]]></title>
-    <link href="http://JEEN.github.com/blog/2012/02/15/rex-pull-request/"/>
+    <link href="http://jeen.github.com/blog/2012/02/15/rex-pull-request/"/>
     <updated>2012-02-15T23:21:00+09:00</updated>
-    <id>http://JEEN.github.com/blog/2012/02/15/rex-pull-request</id>
+    <id>http://jeen.github.com/blog/2012/02/15/rex-pull-request</id>
     <content type="html"><![CDATA[<ul>
 <li><p><a href="http://rexify.org/">(R)?ex - A simple framework to simplify systemadministration</a></p>
 
@@ -2439,9 +2608,9 @@ I think you should use an
   
   <entry>
     <title type="html"><![CDATA[CPAN Module Update]]></title>
-    <link href="http://JEEN.github.com/blog/2012/02/09/cpan-module-update/"/>
+    <link href="http://jeen.github.com/blog/2012/02/09/cpan-module-update/"/>
     <updated>2012-02-09T01:06:00+09:00</updated>
-    <id>http://JEEN.github.com/blog/2012/02/09/cpan-module-update</id>
+    <id>http://jeen.github.com/blog/2012/02/09/cpan-module-update</id>
     <content type="html"><![CDATA[<blockquote class="twitter-tweet" lang="ko"><p>Acme-CPANAuthors-Korean 0.08 by JEEN - <a href="http://t.co/CjlRnKEO" title="http://metacpan.org/release/JEEN/Acme-CPANAuthors-Korean-0.08/">metacpan.org/release/JEEN/A…</a></p>&mdash; CPAN New Modules (@cpan_new) <a href="https://twitter.com/cpan_new/status/167271503061200896" data-datetime="2012-02-08T15:40:08+00:00">2월 8, 2012</a></blockquote>
 
 
@@ -2498,9 +2667,9 @@ I think you should use an
   
   <entry>
     <title type="html"><![CDATA[CPANRatings - WebService::Aladdin]]></title>
-    <link href="http://JEEN.github.com/blog/2012/02/08/cpanratings-webservice-aladdin/"/>
+    <link href="http://jeen.github.com/blog/2012/02/08/cpanratings-webservice-aladdin/"/>
     <updated>2012-02-08T16:27:00+09:00</updated>
-    <id>http://JEEN.github.com/blog/2012/02/08/cpanratings-webservice-aladdin</id>
+    <id>http://jeen.github.com/blog/2012/02/08/cpanratings-webservice-aladdin</id>
     <content type="html"><![CDATA[<blockquote class="twitter-tweet" data-in-reply-to="166961671741521922"><p>@<a href="https://twitter.com/keedi">keedi</a> @<a href="https://twitter.com/gypark">gypark</a> 오오오&#8230; 가문의 영광!!!</p>&mdash; JEEN (@JEEN_LEE) <a href="https://twitter.com/JEEN_LEE/status/167063345000755200" data-datetime="2012-02-08T01:52:59+00:00">February 8, 2012</a></blockquote>
 
 
@@ -2530,9 +2699,9 @@ I think you should use an
   
   <entry>
     <title type="html"><![CDATA[Date::Holidays::KR Released]]></title>
-    <link href="http://JEEN.github.com/blog/2012/02/07/date-holidays-kr-0-dot-01-released/"/>
+    <link href="http://jeen.github.com/blog/2012/02/07/date-holidays-kr-0-dot-01-released/"/>
     <updated>2012-02-07T20:28:00+09:00</updated>
-    <id>http://JEEN.github.com/blog/2012/02/07/date-holidays-kr-0-dot-01-released</id>
+    <id>http://jeen.github.com/blog/2012/02/07/date-holidays-kr-0-dot-01-released</id>
     <content type="html"><![CDATA[<p>  회사의 경영자 @y0ngbin 께서 <code>is_bizday</code> 라는 스크립트를 만들어서 쓰는 것을 보고 호오 했었는데&#8230;</p>
 
 <p>  <script src="https://gist.github.com/1646007.js?file=is_bizday.pl"></script></p>
@@ -2589,263 +2758,15 @@ I think you should use an
   
   <entry>
     <title type="html"><![CDATA[Perl and Continuous Integration with Jenkins - II]]></title>
-    <link href="http://JEEN.github.com/blog/2012/02/02/perl-and-continuous-integration-with-jenkins-2/"/>
+    <link href="http://jeen.github.com/blog/2012/02/02/perl-and-continuous-integration-with-jenkins-2/"/>
     <updated>2012-02-02T07:00:00+09:00</updated>
-    <id>http://JEEN.github.com/blog/2012/02/02/perl-and-continuous-integration-with-jenkins-2</id>
+    <id>http://jeen.github.com/blog/2012/02/02/perl-and-continuous-integration-with-jenkins-2</id>
     <content type="html"><![CDATA[<p>  애시당초 블로깅하려던 내용을 발표자료로 엮었습니다.</p>
 
 <script src="http://storify.com/jeen_lee/perl-and-continuous-integration-w-jenkins.js"></script>
 
 
 <p><noscript>[<a href="http://storify.com/jeen_lee/perl-and-continuous-integration-w-jenkins" target="_blank">View the story &#8220;Perl and Continuous Integration w/ Jenkins&#8221; on Storify</a>]</noscript></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Carton - CPAN dependencies manager]]></title>
-    <link href="http://JEEN.github.com/blog/2012/01/16/carton-cpan-dependencies-manager/"/>
-    <updated>2012-01-16T22:49:00+09:00</updated>
-    <id>http://JEEN.github.com/blog/2012/01/16/carton-cpan-dependencies-manager</id>
-    <content type="html"><![CDATA[<p>  Jenkins 이야기를 마저 쓸려고 했는 데, 그 사이사이에 사용된 것들부터 정리하고자 우선은 Carton 이야기 부터 먼저하고자 합니다.</p>
-
-<p>  잘은 모르지만 Carton 은 Ruby 의 Bundler 에 영감을 받아서 만들어 진 것입니다. 어떤 Perl 로 만든 소프트웨어의 의존모듈의 관리가 편해집니다. :-) 일례로, 노트북에서 개발을 하고 이것을 서버에 올릴려고 할 때, 일일이 의존모듈 체크를 해야할 필요성이 있습니다. 그때마다 <code>cpan MODULE</code> 등으로 설치를 해나가야 한다면 여간 힘든 일이 아니죠.</p>
-
-<p>  그런 상황에서 쉽게 문제를 해결할 수 있는 것이 <code>Carton</code> 이 아닐까 생각합니다.</p>
-
-<h3>Carton 설치</h3>
-
-<p>  <code>Carton</code> 은 간단하게 <code>cpan</code> 으로 설치할 수 있습니다.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>cpanm carton
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>  위의 커맨드로 <code>Carton</code> 을 설치하면 <code>carton</code> 이라는 커맨드가 생깁니다.</p>
-
-<h3>Carton 이용</h3>
-
-<p>  <code>Carton</code> 을 제대로 이용하려면, 해당 Perl App 의 의존모듈이 <code>Makefile.PL</code> 안에서 잘 관리되고 있어야 합니다.</p>
-
-<figure class='code'><figcaption><span>Makefile.PL</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="k">use</span> <span class="nn">ExtUtils::</span><span class="n">MakeMaker</span><span class="p">;</span>
-</span><span class='line'><span class="n">WriteMakefile</span><span class="p">(</span>
-</span><span class='line'>    <span class="s">&#39;NAME&#39;</span>      <span class="o">=&gt;</span> <span class="s">&#39;WebService::Aladdin&#39;</span><span class="p">,</span>
-</span><span class='line'>    <span class="s">&#39;AUTHOR&#39;</span>    <span class="o">=&gt;</span> <span class="s">&#39;JEEN &lt;jeen@perl.kr&gt;&#39;</span><span class="p">,</span>
-</span><span class='line'>    <span class="s">&#39;VERSION_FROM&#39;</span> <span class="o">=&gt;</span> <span class="s">&#39;lib/WebService/Aladdin.pm&#39;</span><span class="p">,</span> <span class="c1"># finds $VERSION</span>
-</span><span class='line'>    <span class="s">&#39;PREREQ_PM&#39;</span> <span class="o">=&gt;</span> <span class="p">{</span>
-</span><span class='line'>        <span class="nn">Test::</span><span class="n">Base</span> <span class="o">=&gt;</span> <span class="mi">0</span><span class="p">,</span>
-</span><span class='line'>        <span class="n">version</span>    <span class="o">=&gt;</span> <span class="mi">0</span><span class="p">,</span>
-</span><span class='line'>        <span class="nn">Class::Accessor::</span><span class="n">Fast</span> <span class="o">=&gt;</span> <span class="mi">0</span><span class="p">,</span>
-</span><span class='line'>        <span class="nn">LWP::</span><span class="n">UserAgent</span> <span class="o">=&gt;</span> <span class="mi">0</span><span class="p">,</span>
-</span><span class='line'>        <span class="n">URI</span>            <span class="o">=&gt;</span> <span class="mi">0</span><span class="p">,</span>
-</span><span class='line'>        <span class="n">Carp</span>           <span class="o">=&gt;</span> <span class="mi">0</span><span class="p">,</span>
-</span><span class='line'>        <span class="nn">XML::</span><span class="n">FeedPP</span>    <span class="o">=&gt;</span> <span class="mi">0</span>
-</span><span class='line'>    <span class="p">},</span>
-</span><span class='line'><span class="p">);</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>  우선 예제로 제가 만든 <code>WebService::Aladdin</code> 모듈의 <code>Makefile.PL</code> 이 위와 같습니다. 이는 <code>WebService::Aladdin</code> 모듈에서 필요로 하는 의존모듈 등의 정보들을 나타내고 있습니다.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>carton install
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>  <code>carton install</code> 을 통해서 <code>Makefile.PL</code> 에 정의된 의존모듈을 설치합니다. 이때 <code>Carton</code> 은 의존모듈의 의존트리까지도 설치해버립니다. 그러니 실제 의존모듈이 10개라도, 그 10개의 각각의 모듈의 의존모듈까지도 설치하기 때문에 실제로 설치되는 것은 10개 이상의 모듈들이 될 것입니다.</p>
-
-<p>  아무튼 <code>carton install</code> 이 끝났다면 <code>carton.lock</code> 파일이 생성됩니다. 그리고 <code>local</code> 이라는 디렉토리의 아래에 의존모듈들이 설치됩니다.</p>
-
-<figure class='code'><figcaption><span>carton.lock</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-<span class='line-number'>40</span>
-<span class='line-number'>41</span>
-<span class='line-number'>42</span>
-<span class='line-number'>43</span>
-<span class='line-number'>44</span>
-<span class='line-number'>45</span>
-<span class='line-number'>46</span>
-<span class='line-number'>47</span>
-<span class='line-number'>48</span>
-<span class='line-number'>49</span>
-<span class='line-number'>50</span>
-<span class='line-number'>51</span>
-<span class='line-number'>52</span>
-<span class='line-number'>53</span>
-<span class='line-number'>54</span>
-<span class='line-number'>55</span>
-<span class='line-number'>56</span>
-<span class='line-number'>57</span>
-<span class='line-number'>58</span>
-<span class='line-number'>59</span>
-<span class='line-number'>60</span>
-<span class='line-number'>61</span>
-</pre></td><td class='code'><pre><code class='text'><span class='line'>{
-</span><span class='line'>   &quot;modules&quot; : {
-</span><span class='line'>      &quot;Algorithm::Diff&quot; : {
-</span><span class='line'>         &quot;dist&quot; : &quot;Algorithm-Diff-1.1902&quot;,
-</span><span class='line'>         &quot;module&quot; : &quot;Algorithm::Diff&quot;,
-</span><span class='line'>         &quot;mymeta&quot; : {
-</span><span class='line'>            &quot;abstract&quot; : &quot;unknown&quot;,
-</span><span class='line'>            &quot;author&quot; : [
-</span><span class='line'>               &quot;unknown&quot;
-</span><span class='line'>            ],
-</span><span class='line'>            &quot;dynamic_config&quot; : 0,
-</span><span class='line'>            &quot;generated_by&quot; : &quot;ExtUtils::MakeMaker version 6.62, CPAN::Meta::Converter version 2.112621, CPAN::Meta::Converter version 2.112150&quot;,
-</span><span class='line'>            &quot;license&quot; : [
-</span><span class='line'>               &quot;unknown&quot;
-</span><span class='line'>            ],
-</span><span class='line'>            &quot;meta-spec&quot; : {
-</span><span class='line'>               &quot;url&quot; : &quot;http://search.cpan.org/perldoc?CPAN::Meta::Spec&quot;,
-</span><span class='line'>               &quot;version&quot; : &quot;2&quot;
-</span><span class='line'>            },
-</span><span class='line'>            &quot;name&quot; : &quot;Algorithm-Diff&quot;,
-</span><span class='line'>            &quot;no_index&quot; : {
-</span><span class='line'>               &quot;directory&quot; : [
-</span><span class='line'>                  &quot;t&quot;,
-</span><span class='line'>                  &quot;inc&quot;
-</span><span class='line'>               ]
-</span><span class='line'>            },
-</span><span class='line'>            &quot;prereqs&quot; : {
-</span><span class='line'>               &quot;build&quot; : {
-</span><span class='line'>                  &quot;requires&quot; : {
-</span><span class='line'>                     &quot;ExtUtils::MakeMaker&quot; : 0
-</span><span class='line'>                  }
-</span><span class='line'>               },
-</span><span class='line'>               &quot;configure&quot; : {
-</span><span class='line'>                  &quot;requires&quot; : {
-</span><span class='line'>                     &quot;ExtUtils::MakeMaker&quot; : 0
-</span><span class='line'>                  }
-</span><span class='line'>               },
-</span><span class='line'>               &quot;runtime&quot; : {
-</span><span class='line'>                  &quot;requires&quot; : {}
-</span><span class='line'>               }
-</span><span class='line'>            },
-</span><span class='line'>            &quot;release_status&quot; : &quot;stable&quot;,
-</span><span class='line'>            &quot;version&quot; : &quot;1.1902&quot;
-</span><span class='line'>         },
-</span><span class='line'>         &quot;name&quot; : &quot;Algorithm::Diff&quot;,
-</span><span class='line'>         &quot;pathname&quot; : &quot;T/TY/TYEMQ/Algorithm-Diff-1.1902.tar.gz&quot;,
-</span><span class='line'>         &quot;provides&quot; : {
-</span><span class='line'>            &quot;Algorithm::Diff&quot; : {
-</span><span class='line'>               &quot;file&quot; : &quot;Algorithm/Diff.pm&quot;,
-</span><span class='line'>               &quot;version&quot; : &quot;1.1902&quot;
-</span><span class='line'>            },
-</span><span class='line'>            &quot;Algorithm::DiffOld&quot; : {
-</span><span class='line'>               &quot;file&quot; : &quot;Algorithm/DiffOld.pm&quot;,
-</span><span class='line'>               &quot;version&quot; : &quot;1.1&quot;
-</span><span class='line'>            }
-</span><span class='line'>         },
-</span><span class='line'>         &quot;version&quot; : &quot;1.1902&quot;
-</span><span class='line'>      },
-</span><span class='line'>      ...
-</span><span class='line'>   }
-</span><span class='line'>}
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>  이후 <code>Makefile.PL</code> 에서 또다른 의존모듈이 추가되었을 시에, 또다시</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>carton install
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>을 통해서 추가의존모듈을 설치할 수 있습니다. 이렇게 <code>carton install</code> 로 설치된 로컬 모듈들은</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>carton list
-</span><span class='line'>IO-stringy-2.110
-</span><span class='line'>File-Listing-6.03
-</span><span class='line'>XML-FeedPP-0.43
-</span><span class='line'>CPAN-Meta-2.112621
-</span><span class='line'>...
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>  <code>carton list</code> 로 확인할 수 있습니다.</p>
-
-<p>  그리고 <code>carton exec</code> 를 통해서 로컬모듈에 설치된 의존모듈을 참조해서 실행할 수 있습니다. 일례로 <code>Catalyst</code> 나 <code>Dancer</code> 로 만든 WebApp 들을 위에서 설명한 대로 <code>carton install</code> 한다음,</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>carton <span class="nb">exec</span> -- plackup -a app.psgi -p 3000 --mode production
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>  이처럼 <code>carton exec</code> 를 통해서 실행할 수 있지요.</p>
-
-<h3>Carton 을 이용하고서&#8230;</h3>
-
-<p>  우선은 Carton 을 이용함으로, 한 어플리케이션 당 하나의 모듈참조장소를 가지게해서 여러 어플리케이션이 혼잡한 경우에 발생할 수 있는 부작용을 예방할 수 있습니다. <code>Makefile.PL</code> 에서 해당 모듈의 버젼을 지정함으로 특정 버젼에 대해서만 의존을 가질 수 있기 때문에 더더욱 이런 면에서는 효과적입니다.</p>
-
-<p>  그래서 저같은 경우는 오히려 서비스마다 그 서비스용 계정을 만들고 <code>perlbrew</code> 환경을 갖추는 것보다 가볍게 서비스용 계정은 하나만 가지며 각 서비스디렉토리마다 <code>Carton</code> 을 올리는 쪽으로 움직이고 있습니다. 그러니 굳이 시스템 펄을 사용하는 것이 큰 거부감을 느끼지 않게 되었네요.</p>
-
-<h3>그 외</h3>
-
-<p>  일단 <code>carton.lock</code> 에 기재된 의존모듈 정보가 많으면 많을수록 <code>carton install</code> 에 걸리는 시간은 더 오래걸리게 됩니다. 물론 Carton 이 기본적으로 외부미러(http://cpan.metacpan.org) 를 사용하고 있기에, 그럴 수도 있겠다 싶어서 코드를 한번 훑어봤는데, 마침 <code>PERL_CARTON_MIRROR</code> 라는 환경변수를 통해서 가까운 혹은 로컬 네트워크 안의 CPAN 미러를 지정해줌으로 많은 시간을 단축할 수 있지 않을까 생각해봅니다.</p>
-
-<h3>Conclusion</h3>
-
-<p>  물론 Carton 은 현재 ALPHA 퀄리티라고 합니다. 버젼도 현재(2012-01-16) 로는 0.9.3 이고, 1.0 정식 릴리즈까지는 아직 시간이 남아있습니다. 몇몇 기능이 바뀔거라는 주의사항이 <a href="http://metacan.org/module/Carton">Carton 모듈페이지</a> 에서 확인할 수 있습니다.</p>
-
-<p>  좀 더 다양한 <code>Carton</code> 에 대한 이야기는 작년 <a href="http://yapcasia.org/2011/talk/91">YAPC::Asia2011 의 Carton Talk Page</a> 에서도 확인하실 수 있습니다.</p>
 ]]></content>
   </entry>
   

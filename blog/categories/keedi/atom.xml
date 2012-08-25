@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: keedi | Jeen's techlog]]></title>
-  <link href="http://JEEN.github.com/blog/categories/keedi/atom.xml" rel="self"/>
-  <link href="http://JEEN.github.com/"/>
-  <updated>2012-08-09T16:45:34+09:00</updated>
-  <id>http://JEEN.github.com/</id>
+  <link href="http://jeen.github.com/blog/categories/keedi/atom.xml" rel="self"/>
+  <link href="http://jeen.github.com/"/>
+  <updated>2012-08-25T13:45:37+09:00</updated>
+  <id>http://jeen.github.com/</id>
   <author>
     <name><![CDATA[Jeen Lee]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Date::Holidays::KR Pull Requested]]></title>
-    <link href="http://JEEN.github.com/blog/2012/02/15/date-holidays-kr-pull-requested/"/>
+    <link href="http://jeen.github.com/blog/2012/02/15/date-holidays-kr-pull-requested/"/>
     <updated>2012-02-15T23:48:00+09:00</updated>
-    <id>http://JEEN.github.com/blog/2012/02/15/date-holidays-kr-pull-requested</id>
+    <id>http://jeen.github.com/blog/2012/02/15/date-holidays-kr-pull-requested</id>
     <content type="html"><![CDATA[<ul>
 <li><p><a href="http://jeen.github.com/blog/2012/02/07/date-holidays-kr-0-dot-01-released/">Date::Holidays::KR Released</a></p></li>
 <li><p><a href="http://jeen.github.com/blog/2012/02/09/cpan-module-update/">CPAN Module Update</a></p>

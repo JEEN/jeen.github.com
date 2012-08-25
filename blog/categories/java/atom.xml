@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: java | Jeen's techlog]]></title>
-  <link href="http://JEEN.github.com/blog/categories/java/atom.xml" rel="self"/>
-  <link href="http://JEEN.github.com/"/>
-  <updated>2012-08-09T16:45:34+09:00</updated>
-  <id>http://JEEN.github.com/</id>
+  <link href="http://jeen.github.com/blog/categories/java/atom.xml" rel="self"/>
+  <link href="http://jeen.github.com/"/>
+  <updated>2012-08-25T13:45:37+09:00</updated>
+  <id>http://jeen.github.com/</id>
   <author>
     <name><![CDATA[Jeen Lee]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Perl and Continuous Integration with Jenkins - II]]></title>
-    <link href="http://JEEN.github.com/blog/2012/02/02/perl-and-continuous-integration-with-jenkins-2/"/>
+    <link href="http://jeen.github.com/blog/2012/02/02/perl-and-continuous-integration-with-jenkins-2/"/>
     <updated>2012-02-02T07:00:00+09:00</updated>
-    <id>http://JEEN.github.com/blog/2012/02/02/perl-and-continuous-integration-with-jenkins-2</id>
+    <id>http://jeen.github.com/blog/2012/02/02/perl-and-continuous-integration-with-jenkins-2</id>
     <content type="html"><![CDATA[<p>  애시당초 블로깅하려던 내용을 발표자료로 엮었습니다.</p>
 
 <script src="http://storify.com/jeen_lee/perl-and-continuous-integration-w-jenkins.js"></script>
@@ -29,9 +29,9 @@
   
   <entry>
     <title type="html"><![CDATA[Perl and Continuous Integration with Jenkins - I]]></title>
-    <link href="http://JEEN.github.com/blog/2012/01/03/perl-and-continuous-integration-with-jenkins-1/"/>
+    <link href="http://jeen.github.com/blog/2012/01/03/perl-and-continuous-integration-with-jenkins-1/"/>
     <updated>2012-01-03T11:45:00+09:00</updated>
-    <id>http://JEEN.github.com/blog/2012/01/03/perl-and-continuous-integration-with-jenkins-1</id>
+    <id>http://jeen.github.com/blog/2012/01/03/perl-and-continuous-integration-with-jenkins-1</id>
     <content type="html"><![CDATA[<h3>Jenkins 를 사용하기 까지</h3>
 
 <p>  사실 지난주에 NHN 에서 주최하는 공개개발자 교육에  갔다왔었습니다. 평소 Jenkins 에 대해서 약간 환상 같은 게 있다고 할까, 필요성이 있다고 할까요. 좀 더 프로젝트의 품질이 나아지고 있다는 환상, 그런 걸 보면서 나름 보람을 느끼고 싶다라는 생각도 있었습니다.</p>

@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: book | Jeen's techlog]]></title>
-  <link href="http://JEEN.github.com/blog/categories/book/atom.xml" rel="self"/>
-  <link href="http://JEEN.github.com/"/>
-  <updated>2012-08-09T16:45:34+09:00</updated>
-  <id>http://JEEN.github.com/</id>
+  <link href="http://jeen.github.com/blog/categories/book/atom.xml" rel="self"/>
+  <link href="http://jeen.github.com/"/>
+  <updated>2012-08-25T13:45:37+09:00</updated>
+  <id>http://jeen.github.com/</id>
   <author>
     <name><![CDATA[Jeen Lee]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Beginning Perl]]></title>
-    <link href="http://JEEN.github.com/blog/2012/06/14/beginning-perl/"/>
+    <link href="http://jeen.github.com/blog/2012/06/14/beginning-perl/"/>
     <updated>2012-06-14T22:42:00+09:00</updated>
-    <id>http://JEEN.github.com/blog/2012/06/14/beginning-perl</id>
+    <id>http://jeen.github.com/blog/2012/06/14/beginning-perl</id>
     <content type="html"><![CDATA[<ul>
 <li><a href="http://blogs.perl.org/users/ovid/2012/06/read-my-book-online-for-free.html">Read my book online for free | Ovid [blogs.perl.org]</a></li>
 </ul>

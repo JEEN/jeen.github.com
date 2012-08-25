@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: bash | Jeen's techlog]]></title>
-  <link href="http://JEEN.github.com/blog/categories/bash/atom.xml" rel="self"/>
-  <link href="http://JEEN.github.com/"/>
-  <updated>2012-08-09T16:45:34+09:00</updated>
-  <id>http://JEEN.github.com/</id>
+  <link href="http://jeen.github.com/blog/categories/bash/atom.xml" rel="self"/>
+  <link href="http://jeen.github.com/"/>
+  <updated>2012-08-25T13:45:37+09:00</updated>
+  <id>http://jeen.github.com/</id>
   <author>
     <name><![CDATA[Jeen Lee]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[oh-my-zsh → bash-it]]></title>
-    <link href="http://JEEN.github.com/blog/2012/06/18/oh-my-zsh-bash-it/"/>
+    <link href="http://jeen.github.com/blog/2012/06/18/oh-my-zsh-bash-it/"/>
     <updated>2012-06-18T17:42:00+09:00</updated>
-    <id>http://JEEN.github.com/blog/2012/06/18/oh-my-zsh-bash-it</id>
+    <id>http://jeen.github.com/blog/2012/06/18/oh-my-zsh-bash-it</id>
     <content type="html"><![CDATA[<p> 한동안 zsh 을 사용하면서 oh-my-zsh 로 화려한 셸환경을 이용하고 있었는데요, 언제부턴가 grep warning 이 뜨기도 하고, bash 위주의 작업환경에 맞춘 기사들이 소개되기에 이르러 결국 zsh 을 버리고 다시 bash 로 돌아오게 되었습니다.</p>
 
 <ul>

@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: mail | Jeen's techlog]]></title>
-  <link href="http://JEEN.github.com/blog/categories/mail/atom.xml" rel="self"/>
-  <link href="http://JEEN.github.com/"/>
-  <updated>2012-08-09T16:45:34+09:00</updated>
-  <id>http://JEEN.github.com/</id>
+  <link href="http://jeen.github.com/blog/categories/mail/atom.xml" rel="self"/>
+  <link href="http://jeen.github.com/"/>
+  <updated>2012-08-25T13:45:37+09:00</updated>
+  <id>http://jeen.github.com/</id>
   <author>
     <name><![CDATA[Jeen Lee]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Perl - Mail Send II]]></title>
-    <link href="http://JEEN.github.com/blog/2012/01/04/perl-mail-send-ii/"/>
+    <link href="http://jeen.github.com/blog/2012/01/04/perl-mail-send-ii/"/>
     <updated>2012-01-04T18:26:00+09:00</updated>
-    <id>http://JEEN.github.com/blog/2012/01/04/perl-mail-send-ii</id>
+    <id>http://jeen.github.com/blog/2012/01/04/perl-mail-send-ii</id>
     <content type="html"><![CDATA[<ul>
 <li><p><a href="http://jeen.github.com/blog/2011/12/29/perl-email-send/">Perl - Mail Send</a></p>
 

@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: freebsd | Jeen's techlog]]></title>
-  <link href="http://JEEN.github.com/blog/categories/freebsd/atom.xml" rel="self"/>
-  <link href="http://JEEN.github.com/"/>
-  <updated>2012-08-09T16:45:34+09:00</updated>
-  <id>http://JEEN.github.com/</id>
+  <link href="http://jeen.github.com/blog/categories/freebsd/atom.xml" rel="self"/>
+  <link href="http://jeen.github.com/"/>
+  <updated>2012-08-25T13:45:37+09:00</updated>
+  <id>http://jeen.github.com/</id>
   <author>
     <name><![CDATA[Jeen Lee]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[FreeBSD 8.2 STABLE - CPAN Error]]></title>
-    <link href="http://JEEN.github.com/blog/2012/01/05/freebsd-8-dot-2-stable-cpan-error/"/>
+    <link href="http://jeen.github.com/blog/2012/01/05/freebsd-8-dot-2-stable-cpan-error/"/>
     <updated>2012-01-05T22:32:00+09:00</updated>
-    <id>http://JEEN.github.com/blog/2012/01/05/freebsd-8-dot-2-stable-cpan-error</id>
+    <id>http://jeen.github.com/blog/2012/01/05/freebsd-8-dot-2-stable-cpan-error</id>
     <content type="html"><![CDATA[<p>  회사업무차 <code>FreeBSD 8.2 STABLE</code> OS 를 사용하는 서버에서 CPAN 사용시 에러가 발생했습니다.</p>
 
 <p>``` bash

@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: translation | Jeen's techlog]]></title>
-  <link href="http://JEEN.github.com/blog/categories/translation/atom.xml" rel="self"/>
-  <link href="http://JEEN.github.com/"/>
-  <updated>2012-08-09T16:45:34+09:00</updated>
-  <id>http://JEEN.github.com/</id>
+  <link href="http://jeen.github.com/blog/categories/translation/atom.xml" rel="self"/>
+  <link href="http://jeen.github.com/"/>
+  <updated>2012-08-25T13:45:37+09:00</updated>
+  <id>http://jeen.github.com/</id>
   <author>
     <name><![CDATA[Jeen Lee]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[[번역] PM's Task Management @ EA]]></title>
-    <link href="http://JEEN.github.com/blog/2012/01/03/ea-pms-task-management/"/>
+    <link href="http://jeen.github.com/blog/2012/01/03/ea-pms-task-management/"/>
     <updated>2012-01-03T20:53:00+09:00</updated>
-    <id>http://JEEN.github.com/blog/2012/01/03/ea-pms-task-management</id>
+    <id>http://jeen.github.com/blog/2012/01/03/ea-pms-task-management</id>
     <content type="html"><![CDATA[<ul>
 <li><p>프로젝트의 두목은 두명으로 나뉜다. 한명은 Creative Director, 다른 한명은 Project Manager. PM 은 예산/외주관리/리소스 관리의 모든 권한을 가지고, CD 가 그 이외의 권한을 가진다.</p></li>
 <li><p>권력의 관계는 CD>PM. CD 가 "좀 늦어도 되니까 이것을 한다" 라고 정하면 PM 은 그에 따라, 프로젝트를 짜맞춰야 한다. 단, CD 가 최종책임은 전부 덮어쓰는 것이 룰.</p></li>
@@ -43,9 +43,9 @@
   
   <entry>
     <title type="html"><![CDATA[[번역] About Tim Sort]]></title>
-    <link href="http://JEEN.github.com/blog/2012/01/03/about-tim-sort/"/>
+    <link href="http://jeen.github.com/blog/2012/01/03/about-tim-sort/"/>
     <updated>2012-01-03T19:44:00+09:00</updated>
-    <id>http://JEEN.github.com/blog/2012/01/03/about-tim-sort</id>
+    <id>http://jeen.github.com/blog/2012/01/03/about-tim-sort</id>
     <content type="html"><![CDATA[<p>  최근, <code>TimSort</code> 라는 정렬 알고리즘 이 화제가 되었습니다. <code>TimSort</code> 는 빠르고 안정적인 정렬 알고리즘으로, <code>Python(&gt;=2.3)</code> 과 <code>Java SE 7</code>, 그리고 <code>Android</code> 에서 표준 정렬 알고리즘으로 채용되었다고 합니다.</p>
 
 <p>   C++ 의 <code>std::sort()</code> 보다도 빠르다는 벤치마크 결과가 화제가 되어(나중에 벤치마크의 오류라고 판명났지만), 그때 <code>TimSort</code> 의 존재를 알았습니다. 실제로 랜덤 데이터에 대해서는 <code>Quick Sort(IntroSort)</code> 보다 빠르지는 않지만, 정렬이라는 단순한 일을 하는 알고리즘 이 지금도 더욱 개량해오며 사람들의 관심을 끌고 있다는 것은 흥미깊은 일입니다.</p>

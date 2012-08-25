@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: zsh | Jeen's techlog]]></title>
-  <link href="http://JEEN.github.com/blog/categories/zsh/atom.xml" rel="self"/>
-  <link href="http://JEEN.github.com/"/>
-  <updated>2012-08-09T16:45:34+09:00</updated>
-  <id>http://JEEN.github.com/</id>
+  <link href="http://jeen.github.com/blog/categories/zsh/atom.xml" rel="self"/>
+  <link href="http://jeen.github.com/"/>
+  <updated>2012-08-25T13:45:37+09:00</updated>
+  <id>http://jeen.github.com/</id>
   <author>
     <name><![CDATA[Jeen Lee]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Moving from bash to zsh again]]></title>
-    <link href="http://JEEN.github.com/blog/2012/08/09/moving-from-bash-to-zsh-again/"/>
+    <link href="http://jeen.github.com/blog/2012/08/09/moving-from-bash-to-zsh-again/"/>
     <updated>2012-08-09T16:30:00+09:00</updated>
-    <id>http://JEEN.github.com/blog/2012/08/09/moving-from-bash-to-zsh-again</id>
+    <id>http://jeen.github.com/blog/2012/08/09/moving-from-bash-to-zsh-again</id>
     <content type="html"><![CDATA[<p> 밥벌이도구가 바뀌고 해서 다시 ZSH 로 돌아갔습니다.</p>
 
 <blockquote class="twitter-tweet" lang="ko"><p>레티나 맥북프로를 오늘 받은 게 자랑.txt <a href="http://t.co/38oGVx7W" title="http://jeen.tistory.com/560">jeen.tistory.com/560</a></p>&mdash; JEEN (@JEEN_LEE) <a href="https://twitter.com/JEEN_LEE/status/232821768325300225" data-datetime="2012-08-07T12:53:29+00:00">8월 7, 2012</a></blockquote>
@@ -65,9 +65,9 @@ chsh: /usr/local/Cellar/zsh/5.0.0/bin/zsh: non-standard shell
   
   <entry>
     <title type="html"><![CDATA[oh-my-zsh → bash-it]]></title>
-    <link href="http://JEEN.github.com/blog/2012/06/18/oh-my-zsh-bash-it/"/>
+    <link href="http://jeen.github.com/blog/2012/06/18/oh-my-zsh-bash-it/"/>
     <updated>2012-06-18T17:42:00+09:00</updated>
-    <id>http://JEEN.github.com/blog/2012/06/18/oh-my-zsh-bash-it</id>
+    <id>http://jeen.github.com/blog/2012/06/18/oh-my-zsh-bash-it</id>
     <content type="html"><![CDATA[<p> 한동안 zsh 을 사용하면서 oh-my-zsh 로 화려한 셸환경을 이용하고 있었는데요, 언제부턴가 grep warning 이 뜨기도 하고, bash 위주의 작업환경에 맞춘 기사들이 소개되기에 이르러 결국 zsh 을 버리고 다시 bash 로 돌아오게 되었습니다.</p>
 
 <ul>
