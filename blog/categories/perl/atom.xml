@@ -4,7 +4,7 @@
   <title><![CDATA[Category: perl | Jeen's techlog]]></title>
   <link href="http://jeen.github.com/blog/categories/perl/atom.xml" rel="self"/>
   <link href="http://jeen.github.com/"/>
-  <updated>2012-08-25T13:45:37+09:00</updated>
+  <updated>2012-08-25T13:47:40+09:00</updated>
   <id>http://jeen.github.com/</id>
   <author>
     <name><![CDATA[Jeen Lee]]></name>
@@ -48,11 +48,8 @@
 
 <p> 위처럼 특정컬럼을 선별해서 넣어주는 방법이 있겠지요. 좀 더 단순화한다면, 각  스키마테이블 별로 HashRef 를 반환하는 메소드를 넣어두는 것도 좋습니다.</p>
 
-<p> ``` perl</p>
-
-<h1>lib/MyApp/Schema/Result/User.pm</h1>
-
-<p>sub to_hashref {</p>
+<p>``` perl  lib/MyApp/Schema/Result/User.pm
+sub to_hashref {</p>
 
 <pre><code>my $self = shift;
 return {
@@ -64,9 +61,8 @@ return {
 
 <p>}</p>
 
-<h1>Controller</h1>
-
-<p>   my @data;
+<p>   # Controller
+   my @data;
    my $rs = $c->model('DB')->resultset('User')->search();
    while(my $row = $rs->next) {</p>
 
