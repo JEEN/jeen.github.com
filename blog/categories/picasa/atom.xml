@@ -4,7 +4,7 @@
   <title><![CDATA[Category: picasa | Jeen's techlog]]></title>
   <link href="http://jeen.github.com/blog/categories/picasa/atom.xml" rel="self"/>
   <link href="http://jeen.github.com/"/>
-  <updated>2012-08-25T13:47:40+09:00</updated>
+  <updated>2012-08-26T15:37:45+09:00</updated>
   <id>http://jeen.github.com/</id>
   <author>
     <name><![CDATA[Jeen Lee]]></name>
@@ -142,10 +142,10 @@ my $post_url = sprintf 'https://picasaweb.google.com/data/feed/api/user/%s/album
 my ($mime_type, $encoding) = MIME::Types::by_suffix($file-&gt;basename);
 my $content = $file-&gt;slurp;
 my $res = $self-&gt;_ua-&gt;post($post_url,
-    %{ $self-&gt;google_auth-&gt;auth_params },
+    $self-&gt;google_auth-&gt;auth_params,
     Content_Type   =&gt; $mime_type,
     Slug           =&gt; $file-&gt;basename,
-    Content        =&gt; $content,  
+    Content        =&gt; $content,
 );
 
 die 'UPLOAD Failed : '.$res-&gt;status_line unless $res-&gt;is_success;
