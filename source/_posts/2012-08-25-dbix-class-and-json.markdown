@@ -33,9 +33,7 @@ categories: [ perl,catalyst,dbic ]
 
  위처럼 특정컬럼을 선별해서 넣어주는 방법이 있겠지요. 좀 더 단순화한다면, 각  스키마테이블 별로 HashRef 를 반환하는 메소드를 넣어두는 것도 좋습니다.
 
-
- ``` perl
-# lib/MyApp/Schema/Result/User.pm
+``` perl  lib/MyApp/Schema/Result/User.pm
 sub to_hashref {
     my $self = shift;
     return {
@@ -45,7 +43,7 @@ sub to_hashref {
     };
 }
 
-# Controller
+   # Controller
    my @data;
    my $rs = $c->model('DB')->resultset('User')->search();
    while(my $row = $rs->next) {

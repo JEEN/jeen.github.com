@@ -97,10 +97,10 @@ sub upload_file {
     my ($mime_type, $encoding) = MIME::Types::by_suffix($file->basename);
     my $content = $file->slurp;
     my $res = $self->_ua->post($post_url,
-        %{ $self->google_auth->auth_params },
+        $self->google_auth->auth_params,
         Content_Type   => $mime_type,
         Slug           => $file->basename,
-        Content        => $content,  
+        Content        => $content,
     );
     
     die 'UPLOAD Failed : '.$res->status_line unless $res->is_success;

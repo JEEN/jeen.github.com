@@ -4,7 +4,7 @@
   <title><![CDATA[Category: perl | Jeen's techlog]]></title>
   <link href="http://jeen.github.com/blog/categories/perl/atom.xml" rel="self"/>
   <link href="http://jeen.github.com/"/>
-  <updated>2012-08-09T16:44:12+09:00</updated>
+  <updated>2012-08-26T15:37:45+09:00</updated>
   <id>http://jeen.github.com/</id>
   <author>
     <name><![CDATA[Jeen Lee]]></name>
@@ -12,6 +12,148 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[DBIx::Class and JSON]]></title>
+    <link href="http://jeen.github.com/blog/2012/08/25/dbix-class-and-json/"/>
+    <updated>2012-08-25T12:44:00+09:00</updated>
+    <id>http://jeen.github.com/blog/2012/08/25/dbix-class-and-json</id>
+    <content type="html"><![CDATA[<p> 흔한 웹서비스의 흔한 AJAX 나 흔한 RESTful API 를 제공하기 위해서, 대개 JSON 포맷의 데이터를 서버에서 뿜어내고는 합니다.</p>
+
+<p> 하지만 누구나가 Catalyst + DBIx::Class 조합에서 이렇게 하면 되는 게 아닐까 하고 접근했다가…</p>
+
+<blockquote><p>… encountered object '..', but neither allow_blessed nor convert_blessed settings are enabled …</p></blockquote>
+
+<p> 라는 에러를 접하게 됩니다. bless 된 오브젝트를 어떻게든 JSON 인코딩을 시도하려고 했을 때는 위와 같은 에러를 쉬이 접할 수 있습니다.</p>
+
+<p> 이것을 푸는 방법은 사실 여러가지가 있습니다.</p>
+
+<p> 이것저것 신경쓰지 말고 한번에 가자고 할 때는 Catalyst::View::JSON 에서 인코딩하게 되는 stash 된 값들을 전부 ArrayRef 나 HashRef 로 변환해서 넘기는 방법입니다.</p>
+
+<p>``` perl
+   my @data;
+   my $rs = $c->model('DB')->resultset('User')->search();
+   while(my $row = $rs->next) {</p>
+
+<pre><code>   push @data, {
+       id =&gt; $row-&gt;id,
+       name =&gt; $row-&gt;name,
+       created_at =&gt; $row-&gt;created_at,
+   };
+</code></pre>
+
+<p>   }
+   $c->stash->{people} = \@data;
+```</p>
+
+<p> 위처럼 특정컬럼을 선별해서 넣어주는 방법이 있겠지요. 좀 더 단순화한다면, 각  스키마테이블 별로 HashRef 를 반환하는 메소드를 넣어두는 것도 좋습니다.</p>
+
+<p>``` perl  lib/MyApp/Schema/Result/User.pm
+sub to_hashref {</p>
+
+<pre><code>my $self = shift;
+return {
+    id =&gt; $self-&gt;id,
+    name =&gt; $self-&gt;name,
+    created_at =&gt; $self-&gt;created_at,
+};
+</code></pre>
+
+<p>}</p>
+
+<p>   # Controller
+   my @data;
+   my $rs = $c->model('DB')->resultset('User')->search();
+   while(my $row = $rs->next) {</p>
+
+<pre><code>   push @data, $row-&gt;to_hashref;
+</code></pre>
+
+<p>   }
+   $c->stash->{people} = \@data;
+```</p>
+
+<p>``` perl
+  my $person = $c->model('DB')->resultset('User')->search($cond, {</p>
+
+<pre><code>  result_class =&gt; 'DBIx::Class::ResultClass::HashRefInflator',
+</code></pre>
+
+<p>  })->first;
+  $c->stash->{person} = $person;
+```</p>
+
+<p> 그럴 필요가 없다면 위처럼 <code>result_class</code> 를 지정해줌으로써 결과를 무조건 HashRef 로 반환하게끔 합니다.</p>
+
+<p> 사실 <code>DBIx::Class::ResultClass::HashRefInflator</code> 를 적용하면 일일이 오브젝트를 만들어내지 않기 때문에 퍼포먼스 측면에서 매우 좋습니다만, 그냥 HashRef 일 따름인지라Resultset 에서 정의한 각종 메소드를 참조할 수 없습니다.
+ 그러니 이런저런 경우에는 가려서 사용하는 것이 좋습니다.</p>
+
+<p> 이제 본질적으로 좀 더 접근해보면…
+ JSON::XS 는 인코딩할 시에, 오브젝트가 대상인 경우에는 해당 오브젝트의 TO_JSON 메소드를 참조하여 결과를 뽑아낼 수 있습니다. 물론 <code>allow_blessed</code>, <code>convert_blessed</code> 플래그를 지정할 필요가 있지요.</p>
+
+<p>``` perl</p>
+
+<h1>lib/MyApp/View/JSON.pm</h1>
+
+<p>package MyApp::View::JSON;
+use JSON::XS ();</p>
+
+<p>use parent qw(Catalyst::View::JSON);</p>
+
+<p>my $encoder = JSON::XS->new</p>
+
+<pre><code>          -&gt;utf8
+                      -&gt;pretty(0)
+                      -&gt;indent(0)
+                      -&gt;allow_blessed(1)
+                      -&gt;convert_blessed(1);
+</code></pre>
+
+<p>sub encode_json {</p>
+
+<pre><code>my ($self, $c, $data) = @_;
+$encoder-&gt;encode($data);
+</code></pre>
+
+<p>}</p>
+
+<p>1;
+```</p>
+
+<p> 그러면 위처럼 <code>encode_json</code> 을 오버라이드 합니다. <code>allow_blessed</code> 와 <code>convert_blessed</code>  플래그를 켜주는 것이죠.</p>
+
+<p>``` perl</p>
+
+<h1>lib/MyApp/Schema/Result/User.pm</h1>
+
+<p>..
+sub TO_JSON {</p>
+
+<pre><code>return { $_[0]-&gt;get_inflated_columns };
+</code></pre>
+
+<p>}
+..
+```</p>
+
+<p>그리고 위처럼 User Result 에 대해서 TO_JSON 를 지정합니다.</p>
+
+<p><code>perl
+   $c-&gt;stash-&gt;{people} = [  $c-&gt;model('DB')-&gt;resultset('User')-&gt;search()-&gt;all ];
+</code></p>
+
+<p>그러면 이제는 아무런 걱정없이 그냥 생짜 DBIC Resultset 을 날려버려도 이제는 알아서 문제해결이 됩니다. :-)</p>
+
+<p> 각 Resultset 마다 <code>TO_JSON</code> 을 지정하기가 벅차다면…</p>
+
+<ul>
+<li>(Seoul.pm Advent Calendar 2011 - 열일곱번째 날 : DBIx::Class로 스키마 관리하기)[http://advent.perl.kr/2011/2011-12-17.html]</li>
+</ul>
+
+
+<p>위의 글에서 <code>ResultBase</code> 를 참고해주세요.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[App::Zamakist...]]></title>
@@ -529,119 +671,6 @@ Data::Section::Simple-&gt;new()-&gt;get_data_section();
 <p> <code>Net::GitHub</code> 의 <code>-&gt;next_page</code> 가 최근 최근에 사용된 API 기준으로 동작을 하다보니, <code>while()</code> 안에서 <code>events</code>, <code>comments</code> 를 혼용해서 사용해버리면 의도한 대로 동작을 하지 않아서, <code>@issues</code> 안에 일단 전체 이슈를 뽑고서 시작을 했습니다.</p>
 
 <p> 아무튼 뭐 얼기설기 그냥 놔두기도 그렇고 혹여나 해서 일단 올려봅니다.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[HTTPS-SSL-LWP-SOAP and Perl]]></title>
-    <link href="http://jeen.github.com/blog/2012/07/02/https-ssl-lwp-soap-and-perl/"/>
-    <updated>2012-07-02T15:23:00+09:00</updated>
-    <id>http://jeen.github.com/blog/2012/07/02/https-ssl-lwp-soap-and-perl</id>
-    <content type="html"><![CDATA[<blockquote><p>tl;dr: I hate Java and SOAP, use Perl</p></blockquote>
-
-<p> 지난 주에 고객으로부터 요구를 받았는데, DB특정 항목에 대치되는 어떤 값을 가지고 모 API를 통해서 결과를 받아서 뿌려주는 간단한 것이었습니다.</p>
-
-<p> 그 API 제공회사에서 날라온 API 명세서는 뭘 해도 자바였었죠. 샘플이라고 널려놓은 두세네개 코드도 전부 자바였습니다. 해야하는 건 결국 뭐 SOAP 정도였죠.</p>
-
-<p> 명세서에는 Axis 라는 것을 깔아서 뭐 붙여서 어떻게 뭐 wsdl 붙이고 어쩌고 복잡하게 써놨는데...</p>
-
-<p> 결론부터 말하면 endpoint 와 보낼 값들만 필요하면 자바가 무슨 소용이냐 싶어서 집어냈습니다.</p>
-
-<p>``` perl
-use strict;
-use warnings;
-use LWP::UserAgent;
-use Data::Dumper;</p>
-
-<p>my $q = {
-&lt;?xml version="1.0" encoding="UTF-8"?>
-&lt;soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
- &lt;soapenv:Body>
- .........
- &lt;/soapenv:Body>
-};</p>
-
-<p>my $ua = LWP::UserAgent->new;
-my $res = $ua->post('https://........',
-  'Content-Type' => 'text/xml; charset=utf-8',
-  Content => $q,
-);</p>
-
-<p>print Dumper $res->content;
-```</p>
-
-<p> 우선 SOAP XML 내용 및 endpoint 는 해당업체 비밀자료이기에 표시하지 않습니다.</p>
-
-<p> 위의 코드의 결과는</p>
-
-<p>``` bash
-Can\'t connect to demo-asp.ysdasp-service.ne.jp:443 (certificate verify failed)</p>
-
-<p>LWP::Protocol::https::Socket: SSL connect attempt failed with unknown error error:14090086:SSL routines:SSL3_GET_SERVER_CERTIFICATE:certificate verify failed at .../perl-5.14.2-llvm/lib/site_perl/5.14.2/LWP/Protocol/http.pm line 51.
-```</p>
-
-<p>이라고 나온 것이었습니다. 유효하지 않은 인증서라는 데, 브라우저에서는 그냥 무시하고 지나가버리면 되는 데, Perl 의 경우에서는 어떻게 할까... 결론은 구글해봤습니다.</p>
-
-<p><code>perl
-$ENV{'PERL_LWP_SSL_VERIFY_HOSTNAME'} = 0;
-</code></p>
-
-<p> <code>PERL_LWP_SSL_VERIFY_HOSTNAME</code> 이라는 환경변수의 값을 0으로 지정함으로써 LWP 가 인증서의 유효성 체크를 생략시켜버립니다.</p>
-
-<p> 이제는 되겠지 하고 실행을 시켜보니...</p>
-
-<p><code>xml
-&lt;?xml version="1.0" encoding="UTF-8"?&gt;
-&lt;soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"&gt;
- &lt;soapenv:Body&gt;
-  &lt;soapenv:Fault&gt;
-   &lt;faultcode xmlns:ns1="http://xml.apache.org/axis/"&gt;ns1:Client.NoSOAPAction&lt;/faultcode&gt;
-   &lt;faultstring&gt;no SOAPAction header!&lt;/faultstring&gt;
-   &lt;detail/&gt;
-  &lt;/soapenv:Fault&gt;
- &lt;/soapenv:Body&gt;
-&lt;/soapenv:Envelope&gt;
-</code></p>
-
-<p> 이라는 결과가 나옵니다. <code>SOAPAction</code> 이라는 헤더가 없다고 하는데... SOAP 통신에는 SOAPAction 이라는 헤더를 넣는다고... 그냥 해보니 <code>SOAPAction</code> 에 그냥 빈값이라도 헤더이름만 넣고 돌려보면 되겠구나 라는 생각이 들었습니다.</p>
-
-<p><code>perl
-my $res = $ua-&gt;post('https://........',
-  'Content-Type' =&gt; 'text/xml; charset=utf-8',
-  SOAPAction =&gt; '""',
-  Content =&gt; $q,
-);
-</code></p>
-
-<p> POST 시에 <code>SOAPAction</code> 헤더를 넣어주고 다시 돌려보았습니다.</p>
-
-<p><code>xml
-&lt;?xml version="1.0" encoding="UTF-8"?&gt;
-&lt;soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"&gt;
- &lt;soapenv:Body&gt;
-  &lt;soapenv:Fault&gt;
-   &lt;faultcode&gt;soapenv:Server.userException&lt;/faultcode&gt;
-   &lt;faultstring&gt;org.xml.sax.SAXParseException: The processing instruction target matching &amp;quot;[xX][mM][lL]&amp;quot; is not allowed.&lt;/faultstring&gt;
-   &lt;detail/&gt;
-  &lt;/soapenv:Fault&gt;
- &lt;/soapenv:Body&gt;
-&lt;/soapenv:Envelope&gt;
-</code></p>
-
-<p> 다시 해당 <code>faultstring</code> 으로 검색을 해본 결과, 이유는 &lt;?xml ...?> 앞에 빈 공백값이 있으면 안된다는 것이었습니다.</p>
-
-<p><code>perl
-my $q = q{&lt;?xml version="1.0" encoding="UTF-8"?&gt;
-&lt;soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"&gt;
- &lt;soapenv:Body&gt;
- .........
- &lt;/soapenv:Body&gt;
-};
-</code></p>
-
-<p> 맨 위의 코드에서 <code>q{</code> 다음에 개행을 넣은 게 문제가 되어서 다시 지우고 돌려본 결과 좌르르르륵 펴쳐져 나오는 기나긴 XML의 향연...</p>
-
-<p> 아무튼 이걸로 API 제공업체에서 JAVA 를 기준으로 작성된 길고 긴 명세서들과 설치요령 등등의 문서들을 제쳐두고 해야할 일에만 집중할 수 있게 되었습니다.</p>
 ]]></content>
   </entry>
   
