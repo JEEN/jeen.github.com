@@ -110,7 +110,11 @@ sub TO_JSON {
 
  각 Resultset 마다 `TO_JSON` 을 지정하기가 벅차다면…
  
- - (Seoul.pm Advent Calendar 2011 - 열일곱번째 날 : DBIx::Class로 스키마 관리하기)[http://advent.perl.kr/2011/2011-12-17.html]
+ - [Seoul.pm Advent Calendar 2011 - 열일곱번째 날 : DBIx::Class로 스키마 관리하기](http://advent.perl.kr/2011/2011-12-17.html)
  
 위의 글에서 `ResultBase` 를 참고해주세요.
+
+ `MyApp::Schema::ResultBase` 를 상속받은 각 Result 테이블들은 `TO_JSON` 을 오버라이드 해서 빼놓고 싶은 컬럼(예를 들어 `password` 같은 컬럼) 을 배제해서 출력할 수 있지 않을까요?
+ 
+ 
 
