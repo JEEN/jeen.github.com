@@ -4,7 +4,7 @@
   <title><![CDATA[Category: dbic | Jeen's techlog]]></title>
   <link href="http://jeen.github.com/blog/categories/dbic/atom.xml" rel="self"/>
   <link href="http://jeen.github.com/"/>
-  <updated>2012-08-26T15:37:45+09:00</updated>
+  <updated>2012-08-28T14:46:01+09:00</updated>
   <id>http://jeen.github.com/</id>
   <author>
     <name><![CDATA[Jeen Lee]]></name>
@@ -147,11 +147,13 @@ sub TO_JSON {</p>
 <p> 각 Resultset 마다 <code>TO_JSON</code> 을 지정하기가 벅차다면…</p>
 
 <ul>
-<li>(Seoul.pm Advent Calendar 2011 - 열일곱번째 날 : DBIx::Class로 스키마 관리하기)[http://advent.perl.kr/2011/2011-12-17.html]</li>
+<li><a href="http://advent.perl.kr/2011/2011-12-17.html">Seoul.pm Advent Calendar 2011 - 열일곱번째 날 : DBIx::Class로 스키마 관리하기</a></li>
 </ul>
 
 
 <p>위의 글에서 <code>ResultBase</code> 를 참고해주세요.</p>
+
+<p> <code>MyApp::Schema::ResultBase</code> 를 상속받은 각 Result 테이블들은 <code>TO_JSON</code> 을 오버라이드 해서 빼놓고 싶은 컬럼(예를 들어 <code>password</code> 같은 컬럼) 을 배제해서 출력할 수 있지 않을까요?</p>
 ]]></content>
   </entry>
   
