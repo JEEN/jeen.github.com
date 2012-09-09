@@ -9,8 +9,8 @@
   <meta name="author" content="Jeen Lee">
 
   
-  <meta name="description" content="지난번 1회 티타임때의 문제가 제대로 참가비 징수를 못해서 비용정산에 어려움이 있었는데,
-이 문제를 해결하기 위해서 간단하게 참가자 리스트를 A4 용지로 뽑아내서 체크하도록 하는 건 어떨까 하는 생각이 있었습니다. #perl-kr 티타임 Vol.2 아무튼 그런 &hellip;">
+  <meta name="description" content="Tweet Export Facebook Event Attending List - Perl-kr TeaTime Jul 26th, 2012 | Comments 지난번 1회 티타임때의 문제가 제대로 참가비 징수를 못해서 비용정산에 어려움이 있었는데,
+이 문제를 해결하기 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -46,44 +46,89 @@
 
 </head>
 
-<body   >
-  <header role="banner"><hgroup>
-  <h1><a href="/">Jeen's techlog</a></h1>
-  
-    <h2>Yet Another Jeen's Blog</h2>
-  
-</hgroup>
+<body >
+  <header role="banner" id="sidebar">
+    <!-- Logo -->
+<aside id="logo" class="clearfix">
+  <div class="clearfix">
+    <a href="/">Jeen's techlog</a>
+  </div>
+</aside>
 
-</header>
-  <nav role="navigation"><ul class="subscription" data-subscription="rss">
-  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
-  
+<ul id="menu">
+
+  <li class="title">
+    <h1 id="title"><a href="/">Jeen's techlog</a></h1>
+  </li>
+
+
+  <li class="subtitle">
+    <h2 id="subtitle">Yet Another Jeen's Blog</h2>
+  </li>
+
+  <li class="link">
+    <a href="/about/">about</a>
+  </li>
+
+  <li class="link">
+    <a href="http://twitter.com/JEEN_LEE/">twitter</a>
+  </li>
+
+
+  <li class="link">
+    <a href="http://github.com/jeen/">github</a>
+  </li>
+
+  <li class="link rss">
+    <a href="/atom.xml">rss feed</a>
+  </li>
 </ul>
-  
+
+
 <form action="http://google.com/search" method="get">
   <fieldset role="search">
     <input type="hidden" name="q" value="site:jeen.github.com" />
     <input class="search" type="text" name="q" results="0" placeholder="Search"/>
   </fieldset>
 </form>
-  
-<ul class="main-navigation">
-  <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
-</ul>
 
-</nav>
-  <div id="main">
-    <div id="content">
-      <div class="blog-index">
+
+<!-- Octopress Love -->
+<aside id="octopress_linkback">
+  <a href="http://octopress.org/">
+    <span class="unicode_square">
+      <span class="unicode_circle">
+        &nbsp;
+      </span>
+    </span>
+    <span class="octopress">Powered by Octopress</span>
+  </a>
+</aside>
+
+  </header>
+  <section id="main">
+      
+  
+  
+    <article class="post">
+      <div class="sharing-box">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://jeen.github.com/blog/page/3/index.html" data-via="JEEN_LEE" data-counturl="http://jeen.github.com/blog/page/3/index.html" data-size="large">Tweet</a>
   
   
   
-    <article>
+  <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2012/07/26/export-facebook-event-attending-list-perl-kr-teatime/">Export Facebook Event Attending List - Perl-kr TeaTime</a></h1>
+      <h2 class="entry-title">
+        
+        <a href="/blog/2012/07/26/export-facebook-event-attending-list-perl-kr-teatime/">Export Facebook Event Attending List - Perl-kr TeaTime</a>
+        
+      </h2>
     
     
       <p class="meta">
@@ -108,7 +153,7 @@
   </header>
 
 
-  <div class="entry-content"><p> 지난번 1회 티타임때의 문제가 제대로 참가비 징수를 못해서 비용정산에 어려움이 있었는데,
+  <p> 지난번 1회 티타임때의 문제가 제대로 참가비 징수를 못해서 비용정산에 어려움이 있었는데,
 이 문제를 해결하기 위해서 간단하게 참가자 리스트를 A4 용지로 뽑아내서 체크하도록 하는 건 어떨까 하는 생각이 있었습니다.</p>
 
 <p> <a href="http://jeen.tistory.com/entry/perlkr-%ED%8B%B0%ED%83%80%EC%9E%84-2-%EC%84%B1%ED%99%A9%EB%A6%AC%EC%97%90-%EB%81%9D%EB%82%AC%EC%8A%B5%EB%8B%88%EB%8B%A4">#perl-kr 티타임 Vol.2</a></p>
@@ -529,7 +574,7 @@
 <p> <code>Facebook::Graph</code> 모듈은 생각보다 좀 변태같습니다. 그 이유는 Facebook Graph API 도 변태같다는 근본적인 &#8230;. 그리고 Access Token 은 뭐 적당하게 Developer 페이지 가서 줏어서 넣었습니다. :-)</p>
 
 <p><img src="https://lh6.googleusercontent.com/-GrgEvhNP0d0/UBDW9W-YzLI/AAAAAAAACAQ/5G48cMzvryY/w389-h521-k/list.jpg" alt="" /></p>
-</div>
+
   
   
 
@@ -537,11 +582,26 @@
     </article>
   
   
-    <article>
+    <article class="post">
+      <div class="sharing-box">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://jeen.github.com/blog/page/3/index.html" data-via="JEEN_LEE" data-counturl="http://jeen.github.com/blog/page/3/index.html" data-size="large">Tweet</a>
+  
+  
+  
+  <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2012/07/18/mysql-diff-a-vs-b/">MySQL::Diff - a vs B</a></h1>
+      <h2 class="entry-title">
+        
+        <a href="http://google.com">The Problem With Pingdom</a>
+        <a href="/blog/2012/07/22/the-problem-with-pingdom/" class="anchor">&#9875;</a>
+        
+      </h2>
     
     
       <p class="meta">
@@ -557,179 +617,61 @@
   
 
 
-<time datetime="2012-07-18T18:30:00+09:00" pubdate data-updated="true">Jul 18<span>th</span>, 2012</time>
+<time datetime="2012-07-22T19:13:00+09:00" pubdate data-updated="true">Jul 22<span>nd</span>, 2012</time>
         
-         | <a href="/blog/2012/07/18/mysql-diff-a-vs-b/#disqus_thread">Comments</a>
+         | <a href="/blog/2012/07/22/the-problem-with-pingdom/#disqus_thread">Comments</a>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p> 최근에 유지보수 관련 일로 골머리를 싸고 있다가 겨우겨우 마무리하고 있는 일이 하나 있었습니다.</p>
+  
 
-<p> PHP 프로젝트였는데, 유지보수 관련해서 여러가지 이슈들이 나오기 마련이고, 그 때문에 잘 움직이던 기존의 DB구조를
-변경해줄 필요가 있었습니다.</p>
-
-<p> 뭐 테이블을 추가하거나, 어떤 컬럼의 형식을 변경하거나, 혹은 인덱스를 추가하거나 하는 뭐 이런 경우 말이죠.</p>
-
-<p> 처음에는 개발환경아래에서 기존의 product 환경에서 운용중인 DB를 dump 떠와서 진행하고, 프로젝트를 진행하면서
-변경되는 SQL 내용들을 일일이 적어주었습니다. 그러다가 뭐 이사람 저사람 손을 옮겨타다가 결국 최종 마무리단계에서
-어떤 컬럼이 변경되었는지, 어떤 테이블이 추가되었는지에 대한 확신을 할 수 없었습니다.</p>
-
-<p> 그래서 기록된 SQL 을 기반으로 눈과 손으로 검수를 해야하는 지경에서 결국 실수가 생기기 마련이죠. 그리고 클레임이 발생했습니다.</p>
-
-<p> 자, 그럼 어떻게 하면 이런 상황에서 사태를 수습하느냐&#8230; 고심했습니다.</p>
-
-<p> 그 결과 혹시 이거라면 해서 찔러본 것이 빙고 였던 것이 <a href="http://metacpan.org/module/MySQL::Diff">MySQL::Diff</a> 였습니다.</p>
-
-<p> 맨처음 덤프떠온 DB 를 <code>DB_A</code> 로 지정하고, 최종적으로 개발이 종료된 DB 를 <code>DB_B</code> 라고 놓습니다.</p>
-
-<p> 이 <code>DB_A</code> 와 <code>DB_B</code> 를 서로 비교하는 것이죠. 그걸을 위해서 <code>MySQL::Diff</code> 모듈이 사용됩니다.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>mysqldiff --host1 localhost --user1 root --password1 whatthehell --host2 localhost --user2 root --password2 whatthehell bto bto_test
-</span><span class='line'><span class="c">## mysqldiff 0.43</span>
-</span><span class='line'><span class="c">## </span>
-</span><span class='line'><span class="c">## Run on Wed Jul 18 18:26:39 2012</span>
-</span><span class='line'><span class="c">## Options: password2=whatthehell, password1=whatthehell, user1=root, host2=localhost, debug=0, host1=localhost, user2=root</span>
-</span><span class='line'><span class="c">##</span>
-</span><span class='line'><span class="c">## ---   db: bto (host=localhost user=root)</span>
-</span><span class='line'><span class="c">## +++   db: bto_test (host=localhost user=root)</span>
-</span><span class='line'>
-</span><span class='line'>ALTER TABLE auth DROP COLUMN updated_on; <span class="c"># was datetime NOT NULL DEFAULT &#39;0000-00-00 00:00:00&#39;</span>
-</span><span class='line'>ALTER TABLE auth DROP COLUMN created_on; <span class="c"># was datetime NOT NULL DEFAULT &#39;0000-00-00 00:00:00&#39;</span>
-</span><span class='line'>ALTER TABLE auth ADD UNIQUE passwd <span class="o">(</span>passwd<span class="o">)</span>;
-</span><span class='line'>CREATE TABLE test1 <span class="o">(</span>
-</span><span class='line'>  test1 int<span class="o">(</span>11<span class="o">)</span> NOT NULL
-</span><span class='line'><span class="o">)</span> <span class="nv">ENGINE</span><span class="o">=</span>MyISAM DEFAULT <span class="nv">CHARSET</span><span class="o">=</span>utf8;
+<figure class='code'><figcaption><span>Time to be Awesome - awesome.rb </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='rb'><span class='line'><span class="nb">puts</span> <span class="s2">&quot;Awesome!&quot;</span> <span class="k">unless</span> <span class="n">lame</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>위처럼 컬럼의 삭제, 인덱스의 추가, 테이블의 추가 등 모든 변경 내역들이 나오게 됩니다.</p>
+<p><a href="http://www.pingdom.com%20Pingdom">The problem with pingdom.</a></p>
 
-<p>다음부터는 이처럼 좀 더 간단하고 확실하게 할 수 있는 방법을 취해야 되겠습니다.</p>
-</div>
+<p>My money&#8217;s in that office, right? If she start giving me some bullshit about it ain&#8217;t there, and we got to go someplace else and get it, I&#8217;m gonna shoot you in the head then and there. Then I&#8217;m gonna shoot that bitch in the kneecaps, find out where my goddamn money is. She gonna tell me too. Hey, look at me when I&#8217;m talking to you, motherfucker. You listen: we go in there, and that nigga Winston or anybody else is in there, you the first motherfucker to get shot. You understand?</p>
+
+<blockquote><p>Blockquote is what goes
+inside this block here
+would you believe that
+bullshit?</p></blockquote>
+
+<p>Well, the way they make shows is, they make one show. That show&#8217;s called a pilot. Then they show that show to the people who make shows, and on the strength of that one show they decide if they&#8217;re going to make more shows. Some pilots get picked and become television programs. Some don&#8217;t, become nothing. She starred in one of the ones that became nothing.</p>
+
+<p>The path of the righteous man is beset on all sides by the iniquities of the selfish and the tyranny of evil men. Blessed is he who, in the name of charity and good will, shepherds the weak through the valley of darkness, for he is truly his brother&#8217;s keeper and the finder of lost children. And I will strike down upon thee with great vengeance and furious anger those who would attempt to poison and destroy My brothers. And you will know My name is the Lord when I lay My vengeance upon thee.</p>
+
+<p>Your bones don&#8217;t break, mine do. That&#8217;s clear. Your cells react to bacteria and viruses differently than mine. You don&#8217;t get sick, I do. That&#8217;s also clear. But for some reason, you and I react the exact same way to water. We swallow it too fast, we choke. We get some in our lungs, we drown. However unreal it may seem, we are connected, you and I. We&#8217;re on the same curve, just on opposite ends.</p>
+
+<p>Do you see any Teletubbies in here? Do you see a slender plastic tag clipped to my shirt with my name printed on it? Do you see a little Asian child with a blank expression on his face sitting outside on a mechanical helicopter that shakes when you put quarters in it? No? Well, that&#8217;s what you see at a toy store. And you must think you&#8217;re in a toy store, because you&#8217;re here shopping for an infant named Jeb.</p>
+
   
   
 
 
     </article>
   
-  <div class="pagination">
-    
-      <a class="prev" href="/blog/page/4/">&larr; Older</a>
-    
-    <a href="/blog/archives">Blog Archives</a>
-    
-    <a class="next" href="/blog/page/2/">Newer &rarr;</a>
-    
-  </div>
-</div>
-<aside class="sidebar">
+
+    <nav role="navigation" id="pagination">
+  <span class="next">
+    <a href="/blog/page/4/" rel="next">Continue &rarr;</a>
+  </span>
+
+
+  <span class="prev">
+    <a href="/blog/page/2/" rel="prev">Newer &larr;</a>
+  </span>
+
+</nav>
+  </section>
   
-    <section>
-  <h1>Recent Posts</h1>
-  <ul id="recent_posts">
-    
-      <li class="post">
-        <a href="/blog/2012/08/28/building-a-perl-project-on-travis-ci/">Building a perl project on Travis CI</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/08/25/dbix-class-and-json/">DBIx::Class and JSON</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/08/09/moving-from-bash-to-zsh-again/">Moving from bash to zsh again</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/08/09/app-zamakist-dot-dot-dot/">App::Zamakist&#8230;</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/07/26/export-facebook-event-attending-list-perl-kr-teatime/">Export Facebook Event Attending List - perl-kr TeaTime</a>
-      </li>
-    
-  </ul>
-</section>
 
-<section>
-  <h1>GitHub Repos</h1>
-  <ul id="gh_repos">
-    <li class="loading">Status updating&#8230;</li>
-  </ul>
-  
-  <a href="https://github.com/jeen">@jeen</a> on GitHub
-  
-  <script type="text/javascript">
-    $.domReady(function(){
-        if (!window.jXHR){
-            var jxhr = document.createElement('script');
-            jxhr.type = 'text/javascript';
-            jxhr.src = '/javascripts/libs/jXHR.js';
-            var s = document.getElementsByTagName('script')[0];
-            s.parentNode.insertBefore(jxhr, s);
-        }
-
-        github.showRepos({
-            user: 'jeen',
-            count: 3,
-            skip_forks: true,
-            target: '#gh_repos'
-        });
-    });
-  </script>
-  <script src="/javascripts/github.js" type="text/javascript"> </script>
-</section>
-
-
-<section>
-  <h1>Latest Tweets</h1>
-  <ul id="tweets">
-    <li class="loading">Status updating&#8230;</li>
-  </ul>
-  <script type="text/javascript">
-    $.domReady(function(){
-      getTwitterFeed("JEEN_LEE", 4, false);
-    });
-  </script>
-  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
-  
-    <a href="http://twitter.com/JEEN_LEE" class="twitter-follow-button" data-show-count="false">Follow @JEEN_LEE</a>
-  
-</section>
-
-
-
-
-
-  
-</aside>
-
-    </div>
-  </div>
-  <footer role="contentinfo"><p>
-  Copyright &copy; 2012 - Jeen Lee -
-  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
-</p>
-
-</footer>
   
 
 <script type="text/javascript">
@@ -769,7 +711,6 @@
       document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
     })();
   </script>
-
 
 
 

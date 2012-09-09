@@ -9,7 +9,7 @@
   <meta name="author" content="Jeen Lee">
 
   
-  <meta name="description" content="@keedi @gypark 오오오&#8230; 가문의 영광!!!&mdash; JEEN (@JEEN_LEE) February 8, 2012 새벽에 @keedi 님으로부터 트윗을 받고 알게되었습니다. 인생 처음으로 CPANRatings 에서 Rating 을 받아보는 군요 &hellip;">
+  <meta name="description" content="Tweet CPANRatings - WebService::Aladdin Feb 8th, 2012 | Comments @keedi @gypark 오오오&#8230; 가문의 영광!!!&mdash; JEEN (@JEEN_LEE) February 8, 2012 새벽에 @ &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -45,41 +45,82 @@
 
 </head>
 
-<body   >
-  <header role="banner"><hgroup>
-  <h1><a href="/">Jeen's techlog</a></h1>
-  
-    <h2>Yet Another Jeen's Blog</h2>
-  
-</hgroup>
+<body >
+  <header role="banner" id="sidebar">
+    <!-- Logo -->
+<aside id="logo" class="clearfix">
+  <div class="clearfix">
+    <a href="/">Jeen's techlog</a>
+  </div>
+</aside>
 
-</header>
-  <nav role="navigation"><ul class="subscription" data-subscription="rss">
-  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
-  
+<ul id="menu">
+
+  <li class="title">
+    <h1 id="title"><a href="/">Jeen's techlog</a></h1>
+  </li>
+
+
+  <li class="subtitle">
+    <h2 id="subtitle">Yet Another Jeen's Blog</h2>
+  </li>
+
+  <li class="link">
+    <a href="/about/">about</a>
+  </li>
+
+  <li class="link">
+    <a href="http://twitter.com/JEEN_LEE/">twitter</a>
+  </li>
+
+
+  <li class="link">
+    <a href="http://github.com/jeen/">github</a>
+  </li>
+
+  <li class="link rss">
+    <a href="/atom.xml">rss feed</a>
+  </li>
 </ul>
-  
+
+
 <form action="http://google.com/search" method="get">
   <fieldset role="search">
     <input type="hidden" name="q" value="site:jeen.github.com" />
     <input class="search" type="text" name="q" results="0" placeholder="Search"/>
   </fieldset>
 </form>
-  
-<ul class="main-navigation">
-  <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
-</ul>
 
-</nav>
-  <div id="main">
-    <div id="content">
-      <div>
-<article class="hentry" role="article">
+
+<!-- Octopress Love -->
+<aside id="octopress_linkback">
+  <a href="http://octopress.org/">
+    <span class="unicode_square">
+      <span class="unicode_circle">
+        &nbsp;
+      </span>
+    </span>
+    <span class="octopress">Powered by Octopress</span>
+  </a>
+</aside>
+
+  </header>
+  <section id="main">
+    <article class="post">
+  <div class="sharing-box">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://jeen.github.com/blog/2012/02/08/cpanratings-webservice-aladdin/" data-via="JEEN_LEE" data-counturl="http://jeen.github.com/blog/2012/02/08/cpanratings-webservice-aladdin/" data-size="large">Tweet</a>
+  
+  
+  
+  <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
   
   <header>
     
-      <h1 class="entry-title">CPANRatings - WebService::Aladdin</h1>
+      <h2 class="entry-title">CPANRatings - WebService::Aladdin</h2>
     
     
       <p class="meta">
@@ -104,7 +145,7 @@
   </header>
 
 
-<div class="entry-content"><blockquote class="twitter-tweet" data-in-reply-to="166961671741521922"><p>@<a href="https://twitter.com/keedi">keedi</a> @<a href="https://twitter.com/gypark">gypark</a> 오오오&#8230; 가문의 영광!!!</p>&mdash; JEEN (@JEEN_LEE) <a href="https://twitter.com/JEEN_LEE/status/167063345000755200" data-datetime="2012-02-08T01:52:59+00:00">February 8, 2012</a></blockquote>
+<blockquote class="twitter-tweet" data-in-reply-to="166961671741521922"><p>@<a href="https://twitter.com/keedi">keedi</a> @<a href="https://twitter.com/gypark">gypark</a> 오오오&#8230; 가문의 영광!!!</p>&mdash; JEEN (@JEEN_LEE) <a href="https://twitter.com/JEEN_LEE/status/167063345000755200" data-datetime="2012-02-08T01:52:59+00:00">February 8, 2012</a></blockquote>
 
 
 <p> 새벽에 @keedi 님으로부터 트윗을 받고 알게되었습니다. 인생 처음으로 <a href="http://cpanratings.perl.org/">CPANRatings</a> 에서 Rating 을 받아보는 군요. 그것도 별 다섯개.</p>
@@ -128,161 +169,24 @@
 <p>Date::Holidays::KR 에 Repository 가 없는 이유는 META.yml 이 없어서 였던 듯&#8230;</p></li>
 </ul>
 
-</div>
-
-
-  <footer>
-    <p class="meta">
-      
-  
-
-<span class="byline author vcard">Posted by <span class="fn">Jeen Lee</span></span>
-
-      
 
 
 
-
-
-
-
-
-  
-
-
-<time datetime="2012-02-08T16:27:00+09:00" pubdate data-updated="true">Feb 8<span>th</span>, 2012</time>
-      
-
-<span class="categories">
-  
-    <a class='category' href='/blog/categories/cpan/'>cpan</a>, <a class='category' href='/blog/categories/perl/'>perl</a>
-  
-</span>
-
-
-    </p>
-    
-      <div class="sharing">
-  
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://jeen.github.com/blog/2012/02/08/cpanratings-webservice-aladdin/" data-via="JEEN_LEE" data-counturl="http://jeen.github.com/blog/2012/02/08/cpanratings-webservice-aladdin/" >Tweet</a>
-  
-  
-  
-    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
-  
-</div>
-
-    
-    <p class="meta">
-      
-        <a class="basic-alignment left" href="/blog/2012/02/07/date-holidays-kr-0-dot-01-released/" title="Previous Post: Date::Holidays::KR Released">&laquo; Date::Holidays::KR Released</a>
-      
-      
-        <a class="basic-alignment right" href="/blog/2012/02/09/cpan-module-update/" title="Next Post: CPAN Module Update">CPAN Module Update &raquo;</a>
-      
-    </p>
-  </footer>
 </article>
 
-  <section>
-    <h1>Comments</h1>
+  <section class="comments">
+    <h2>Comments</h2>
     <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 </div>
   </section>
 
-</div>
 
-<aside class="sidebar">
+    <nav role="navigation" id="pagination">
+
+</nav>
+  </section>
   
-    <section>
-  <h1>Recent Posts</h1>
-  <ul id="recent_posts">
-    
-      <li class="post">
-        <a href="/blog/2012/08/28/building-a-perl-project-on-travis-ci/">Building a perl project on Travis CI</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/08/25/dbix-class-and-json/">DBIx::Class and JSON</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/08/09/moving-from-bash-to-zsh-again/">Moving from bash to zsh again</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/08/09/app-zamakist-dot-dot-dot/">App::Zamakist...</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/07/26/export-facebook-event-attending-list-perl-kr-teatime/">Export Facebook Event Attending List - perl-kr TeaTime</a>
-      </li>
-    
-  </ul>
-</section>
 
-<section>
-  <h1>GitHub Repos</h1>
-  <ul id="gh_repos">
-    <li class="loading">Status updating...</li>
-  </ul>
-  
-  <a href="https://github.com/jeen">@jeen</a> on GitHub
-  
-  <script type="text/javascript">
-    $.domReady(function(){
-        if (!window.jXHR){
-            var jxhr = document.createElement('script');
-            jxhr.type = 'text/javascript';
-            jxhr.src = '/javascripts/libs/jXHR.js';
-            var s = document.getElementsByTagName('script')[0];
-            s.parentNode.insertBefore(jxhr, s);
-        }
-
-        github.showRepos({
-            user: 'jeen',
-            count: 3,
-            skip_forks: true,
-            target: '#gh_repos'
-        });
-    });
-  </script>
-  <script src="/javascripts/github.js" type="text/javascript"> </script>
-</section>
-
-
-<section>
-  <h1>Latest Tweets</h1>
-  <ul id="tweets">
-    <li class="loading">Status updating...</li>
-  </ul>
-  <script type="text/javascript">
-    $.domReady(function(){
-      getTwitterFeed("JEEN_LEE", 4, false);
-    });
-  </script>
-  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
-  
-    <a href="http://twitter.com/JEEN_LEE" class="twitter-follow-button" data-show-count="false">Follow @JEEN_LEE</a>
-  
-</section>
-
-
-
-
-
-  
-</aside>
-
-
-    </div>
-  </div>
-  <footer role="contentinfo"><p>
-  Copyright &copy; 2012 - Jeen Lee -
-  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
-</p>
-
-</footer>
   
 
 <script type="text/javascript">
@@ -325,7 +229,6 @@
       document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
     })();
   </script>
-
 
 
 
