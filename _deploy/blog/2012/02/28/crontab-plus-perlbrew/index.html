@@ -9,7 +9,7 @@
   <meta name="author" content="Jeen Lee">
 
   
-  <meta name="description" content="이번 글은 성의가 매우 부족하게 트윗의 열거로 끝낼까 합니다. 질문. perlbrew 설정이 crontab에서도 적용되게 하려면 어떻게 적어줘야 할까요..? .bashrc 에서 perlbrew의 설정파일을 부르게 해 둔 상태인데 crontab으로 실행하는 &hellip;">
+  <meta name="description" content="Tweet Crontab + Perlbrew Feb 28th, 2012 | Comments 이번 글은 성의가 매우 부족하게 트윗의 열거로 끝낼까 합니다. 질문. perlbrew 설정이 crontab에서도 적용되게 하려면 어떻게 적어줘야 할까요..? .bashrc &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -45,41 +45,82 @@
 
 </head>
 
-<body   >
-  <header role="banner"><hgroup>
-  <h1><a href="/">Jeen's techlog</a></h1>
-  
-    <h2>Yet Another Jeen's Blog</h2>
-  
-</hgroup>
+<body >
+  <header role="banner" id="sidebar">
+    <!-- Logo -->
+<aside id="logo" class="clearfix">
+  <div class="clearfix">
+    <a href="/">Jeen's techlog</a>
+  </div>
+</aside>
 
-</header>
-  <nav role="navigation"><ul class="subscription" data-subscription="rss">
-  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
-  
+<ul id="menu">
+
+  <li class="title">
+    <h1 id="title"><a href="/">Jeen's techlog</a></h1>
+  </li>
+
+
+  <li class="subtitle">
+    <h2 id="subtitle">Yet Another Jeen's Blog</h2>
+  </li>
+
+  <li class="link">
+    <a href="/about/">about</a>
+  </li>
+
+  <li class="link">
+    <a href="http://twitter.com/JEEN_LEE/">twitter</a>
+  </li>
+
+
+  <li class="link">
+    <a href="http://github.com/jeen/">github</a>
+  </li>
+
+  <li class="link rss">
+    <a href="/atom.xml">rss feed</a>
+  </li>
 </ul>
-  
+
+
 <form action="http://google.com/search" method="get">
   <fieldset role="search">
     <input type="hidden" name="q" value="site:jeen.github.com" />
     <input class="search" type="text" name="q" results="0" placeholder="Search"/>
   </fieldset>
 </form>
-  
-<ul class="main-navigation">
-  <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
-</ul>
 
-</nav>
-  <div id="main">
-    <div id="content">
-      <div>
-<article class="hentry" role="article">
+
+<!-- Octopress Love -->
+<aside id="octopress_linkback">
+  <a href="http://octopress.org/">
+    <span class="unicode_square">
+      <span class="unicode_circle">
+        &nbsp;
+      </span>
+    </span>
+    <span class="octopress">Powered by Octopress</span>
+  </a>
+</aside>
+
+  </header>
+  <section id="main">
+    <article class="post">
+  <div class="sharing-box">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://jeen.github.com/blog/2012/02/28/crontab-plus-perlbrew/" data-via="JEEN_LEE" data-counturl="http://jeen.github.com/blog/2012/02/28/crontab-plus-perlbrew/" data-size="large">Tweet</a>
+  
+  
+  
+  <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
   
   <header>
     
-      <h1 class="entry-title">Crontab + Perlbrew</h1>
+      <h2 class="entry-title">Crontab + Perlbrew</h2>
     
     
       <p class="meta">
@@ -104,7 +145,7 @@
   </header>
 
 
-<div class="entry-content"><p>  이번 글은 성의가 매우 부족하게 트윗의 열거로 끝낼까 합니다.</p>
+<p>  이번 글은 성의가 매우 부족하게 트윗의 열거로 끝낼까 합니다.</p>
 
 <blockquote class="twitter-tweet"><p>질문. perlbrew 설정이 crontab에서도 적용되게 하려면 어떻게 적어줘야 할까요..? .bashrc 에서 perlbrew의 설정파일을 부르게 해 둔 상태인데 crontab으로 실행하는 스크립트에는 적용이 안 되어 시스템 펄을 부르네요.</p>&mdash; Raymundo (@gypark) <a href="https://twitter.com/gypark/status/172218904352010240" data-datetime="2012-02-22T07:19:21+00:00">February 22, 2012</a></blockquote>
 
@@ -802,161 +843,24 @@ I think you should use an
 
 
 <p> 이상 날로먹는 crontab + perlbrew 끝.</p>
-</div>
-
-
-  <footer>
-    <p class="meta">
-      
-  
-
-<span class="byline author vcard">Posted by <span class="fn">Jeen Lee</span></span>
-
-      
 
 
 
-
-
-
-
-
-  
-
-
-<time datetime="2012-02-28T21:03:00+09:00" pubdate data-updated="true">Feb 28<span>th</span>, 2012</time>
-      
-
-<span class="categories">
-  
-    <a class='category' href='/blog/categories/crontab/'>crontab</a>, <a class='category' href='/blog/categories/perl/'>perl</a>
-  
-</span>
-
-
-    </p>
-    
-      <div class="sharing">
-  
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://jeen.github.com/blog/2012/02/28/crontab-plus-perlbrew/" data-via="JEEN_LEE" data-counturl="http://jeen.github.com/blog/2012/02/28/crontab-plus-perlbrew/" >Tweet</a>
-  
-  
-  
-    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
-  
-</div>
-
-    
-    <p class="meta">
-      
-        <a class="basic-alignment left" href="/blog/2012/02/15/date-holidays-kr-pull-requested/" title="Previous Post: Date::Holidays::KR Pull Requested">&laquo; Date::Holidays::KR Pull Requested</a>
-      
-      
-        <a class="basic-alignment right" href="/blog/2012/06/14/rex-im-a-contributor/" title="Next Post: Rex - Contributor 가 되어 있었습니다">Rex - Contributor 가 되어 있었습니다 &raquo;</a>
-      
-    </p>
-  </footer>
 </article>
 
-  <section>
-    <h1>Comments</h1>
+  <section class="comments">
+    <h2>Comments</h2>
     <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 </div>
   </section>
 
-</div>
 
-<aside class="sidebar">
+    <nav role="navigation" id="pagination">
+
+</nav>
+  </section>
   
-    <section>
-  <h1>Recent Posts</h1>
-  <ul id="recent_posts">
-    
-      <li class="post">
-        <a href="/blog/2012/08/25/dbix-class-and-json/">DBIx::Class and JSON</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/08/09/moving-from-bash-to-zsh-again/">Moving from bash to zsh again</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/08/09/app-zamakist-dot-dot-dot/">App::Zamakist...</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/07/26/export-facebook-event-attending-list-perl-kr-teatime/">Export Facebook Event Attending List - perl-kr TeaTime</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/07/18/mysql-diff-a-vs-b/">MySQL::Diff - A vs B</a>
-      </li>
-    
-  </ul>
-</section>
 
-<section>
-  <h1>GitHub Repos</h1>
-  <ul id="gh_repos">
-    <li class="loading">Status updating...</li>
-  </ul>
-  
-  <a href="https://github.com/jeen">@jeen</a> on GitHub
-  
-  <script type="text/javascript">
-    $.domReady(function(){
-        if (!window.jXHR){
-            var jxhr = document.createElement('script');
-            jxhr.type = 'text/javascript';
-            jxhr.src = '/javascripts/libs/jXHR.js';
-            var s = document.getElementsByTagName('script')[0];
-            s.parentNode.insertBefore(jxhr, s);
-        }
-
-        github.showRepos({
-            user: 'jeen',
-            count: 3,
-            skip_forks: true,
-            target: '#gh_repos'
-        });
-    });
-  </script>
-  <script src="/javascripts/github.js" type="text/javascript"> </script>
-</section>
-
-
-<section>
-  <h1>Latest Tweets</h1>
-  <ul id="tweets">
-    <li class="loading">Status updating...</li>
-  </ul>
-  <script type="text/javascript">
-    $.domReady(function(){
-      getTwitterFeed("JEEN_LEE", 4, false);
-    });
-  </script>
-  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
-  
-    <a href="http://twitter.com/JEEN_LEE" class="twitter-follow-button" data-show-count="false">Follow @JEEN_LEE</a>
-  
-</section>
-
-
-
-
-
-  
-</aside>
-
-
-    </div>
-  </div>
-  <footer role="contentinfo"><p>
-  Copyright &copy; 2012 - Jeen Lee -
-  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
-</p>
-
-</footer>
   
 
 <script type="text/javascript">
@@ -999,7 +903,6 @@ I think you should use an
       document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
     })();
   </script>
-
 
 
 

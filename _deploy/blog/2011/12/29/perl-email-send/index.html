@@ -9,7 +9,7 @@
   <meta name="author" content="Jeen Lee">
 
   
-  <meta name="description" content="회사 선배이신 @mintegrals 께서 최근에 사내 버그질라에 올려놓은 내용을 보고 약간 코드를 수정해봤습니다. 내용인즉슨, 파일 첨부한 메일을 어떻게 보낼 수 있냐라는 것이었지요. 기존에 써놨던 메일송신을 하는 모듈이 파일첨부를 고려하지 않았던 것이었는데, 그런 &hellip;">
+  <meta name="description" content="Tweet Perl - Email Send Dec 29th, 2011 | Comments 회사 선배이신 @mintegrals 께서 최근에 사내 버그질라에 올려놓은 내용을 보고 약간 코드를 수정해봤습니다. 내용인즉슨, 파일 첨부한 메일을 어떻게 보낼 수 있냐라는 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -45,41 +45,82 @@
 
 </head>
 
-<body   >
-  <header role="banner"><hgroup>
-  <h1><a href="/">Jeen's techlog</a></h1>
-  
-    <h2>Yet Another Jeen's Blog</h2>
-  
-</hgroup>
+<body >
+  <header role="banner" id="sidebar">
+    <!-- Logo -->
+<aside id="logo" class="clearfix">
+  <div class="clearfix">
+    <a href="/">Jeen's techlog</a>
+  </div>
+</aside>
 
-</header>
-  <nav role="navigation"><ul class="subscription" data-subscription="rss">
-  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
-  
+<ul id="menu">
+
+  <li class="title">
+    <h1 id="title"><a href="/">Jeen's techlog</a></h1>
+  </li>
+
+
+  <li class="subtitle">
+    <h2 id="subtitle">Yet Another Jeen's Blog</h2>
+  </li>
+
+  <li class="link">
+    <a href="/about/">about</a>
+  </li>
+
+  <li class="link">
+    <a href="http://twitter.com/JEEN_LEE/">twitter</a>
+  </li>
+
+
+  <li class="link">
+    <a href="http://github.com/jeen/">github</a>
+  </li>
+
+  <li class="link rss">
+    <a href="/atom.xml">rss feed</a>
+  </li>
 </ul>
-  
+
+
 <form action="http://google.com/search" method="get">
   <fieldset role="search">
     <input type="hidden" name="q" value="site:jeen.github.com" />
     <input class="search" type="text" name="q" results="0" placeholder="Search"/>
   </fieldset>
 </form>
-  
-<ul class="main-navigation">
-  <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
-</ul>
 
-</nav>
-  <div id="main">
-    <div id="content">
-      <div>
-<article class="hentry" role="article">
+
+<!-- Octopress Love -->
+<aside id="octopress_linkback">
+  <a href="http://octopress.org/">
+    <span class="unicode_square">
+      <span class="unicode_circle">
+        &nbsp;
+      </span>
+    </span>
+    <span class="octopress">Powered by Octopress</span>
+  </a>
+</aside>
+
+  </header>
+  <section id="main">
+    <article class="post">
+  <div class="sharing-box">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://jeen.github.com/blog/2011/12/29/perl-email-send/" data-via="JEEN_LEE" data-counturl="http://jeen.github.com/blog/2011/12/29/perl-email-send/" data-size="large">Tweet</a>
+  
+  
+  
+  <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
   
   <header>
     
-      <h1 class="entry-title">Perl - Email Send</h1>
+      <h2 class="entry-title">Perl - Email Send</h2>
     
     
       <p class="meta">
@@ -104,7 +145,7 @@
   </header>
 
 
-<div class="entry-content"><p>  회사 선배이신 <a href="http://twitter.com/mintegrals">@mintegrals</a> 께서 최근에 사내 버그질라에 올려놓은 내용을 보고 약간 코드를 수정해봤습니다.
+<p>  회사 선배이신 <a href="http://twitter.com/mintegrals">@mintegrals</a> 께서 최근에 사내 버그질라에 올려놓은 내용을 보고 약간 코드를 수정해봤습니다.
   내용인즉슨, 파일 첨부한 메일을 어떻게 보낼 수 있냐라는 것이었지요.
   기존에 써놨던 메일송신을 하는 모듈이 파일첨부를 고려하지 않았던 것이었는데, 그런 상황등을 고려해서 좀 더 수정해봤습니다.</p>
 
@@ -449,161 +490,24 @@
 <p>  이전에 메일보내기 관련해서 <code>SSMTP</code> + <code>MIME::Lite</code> 를 사용하는 그런 코드를 2008년쯤에 썼었네요. 부끄럽습니다. 2009년부터는 아마 <code>MIME::Lite</code> 를 안 썼던 것 같네요.</p>
 
 <p>  뭐 당장 필요로 하는 부분만 구현을 한 것일 뿐인지라, 차후에 다른 어떤 요구사항이 있다면 그에 맞춰서 다시 한번 소개를 해볼까 합니다.</p>
-</div>
-
-
-  <footer>
-    <p class="meta">
-      
-  
-
-<span class="byline author vcard">Posted by <span class="fn">Jeen Lee</span></span>
-
-      
 
 
 
-
-
-
-
-
-  
-
-
-<time datetime="2011-12-29T17:45:00+09:00" pubdate data-updated="true">Dec 29<span>th</span>, 2011</time>
-      
-
-<span class="categories">
-  
-    <a class='category' href='/blog/categories/attachments/'>attachments</a>, <a class='category' href='/blog/categories/email/'>email</a>, <a class='category' href='/blog/categories/perl/'>perl</a>, <a class='category' href='/blog/categories/rjbs/'>rjbs</a>
-  
-</span>
-
-
-    </p>
-    
-      <div class="sharing">
-  
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://jeen.github.com/blog/2011/12/29/perl-email-send/" data-via="JEEN_LEE" data-counturl="http://jeen.github.com/blog/2011/12/29/perl-email-send/" >Tweet</a>
-  
-  
-  
-    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
-  
-</div>
-
-    
-    <p class="meta">
-      
-        <a class="basic-alignment left" href="/blog/2011/12/27/catalyst-actionrole/" title="Previous Post: Catalyst - ActionRole">&laquo; Catalyst - ActionRole</a>
-      
-      
-        <a class="basic-alignment right" href="/blog/2012/01/03/perl-and-continuous-integration-with-jenkins-1/" title="Next Post: Perl and Continuous Integration with Jenkins - I">Perl and Continuous Integration with Jenkins - I &raquo;</a>
-      
-    </p>
-  </footer>
 </article>
 
-  <section>
-    <h1>Comments</h1>
+  <section class="comments">
+    <h2>Comments</h2>
     <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 </div>
   </section>
 
-</div>
 
-<aside class="sidebar">
+    <nav role="navigation" id="pagination">
+
+</nav>
+  </section>
   
-    <section>
-  <h1>Recent Posts</h1>
-  <ul id="recent_posts">
-    
-      <li class="post">
-        <a href="/blog/2012/08/25/dbix-class-and-json/">DBIx::Class and JSON</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/08/09/moving-from-bash-to-zsh-again/">Moving from bash to zsh again</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/08/09/app-zamakist-dot-dot-dot/">App::Zamakist...</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/07/26/export-facebook-event-attending-list-perl-kr-teatime/">Export Facebook Event Attending List - perl-kr TeaTime</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/07/18/mysql-diff-a-vs-b/">MySQL::Diff - A vs B</a>
-      </li>
-    
-  </ul>
-</section>
 
-<section>
-  <h1>GitHub Repos</h1>
-  <ul id="gh_repos">
-    <li class="loading">Status updating...</li>
-  </ul>
-  
-  <a href="https://github.com/jeen">@jeen</a> on GitHub
-  
-  <script type="text/javascript">
-    $.domReady(function(){
-        if (!window.jXHR){
-            var jxhr = document.createElement('script');
-            jxhr.type = 'text/javascript';
-            jxhr.src = '/javascripts/libs/jXHR.js';
-            var s = document.getElementsByTagName('script')[0];
-            s.parentNode.insertBefore(jxhr, s);
-        }
-
-        github.showRepos({
-            user: 'jeen',
-            count: 3,
-            skip_forks: true,
-            target: '#gh_repos'
-        });
-    });
-  </script>
-  <script src="/javascripts/github.js" type="text/javascript"> </script>
-</section>
-
-
-<section>
-  <h1>Latest Tweets</h1>
-  <ul id="tweets">
-    <li class="loading">Status updating...</li>
-  </ul>
-  <script type="text/javascript">
-    $.domReady(function(){
-      getTwitterFeed("JEEN_LEE", 4, false);
-    });
-  </script>
-  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
-  
-    <a href="http://twitter.com/JEEN_LEE" class="twitter-follow-button" data-show-count="false">Follow @JEEN_LEE</a>
-  
-</section>
-
-
-
-
-
-  
-</aside>
-
-
-    </div>
-  </div>
-  <footer role="contentinfo"><p>
-  Copyright &copy; 2012 - Jeen Lee -
-  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
-</p>
-
-</footer>
   
 
 <script type="text/javascript">
@@ -646,7 +550,6 @@
       document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
     })();
   </script>
-
 
 
 
