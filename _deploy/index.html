@@ -9,7 +9,7 @@
   <meta name="author" content="Jeen Lee">
 
   
-  <meta name="description" content="Tweet Building a Perl Project on Travis CI Aug 28th, 2012 | Comments Travis CI - Distributed build platform for the open source community Travis CI은 &hellip;">
+  <meta name="description" content="Tweet Using Test::Pretty Nov 21st, 2012 | Comments 사실 TAP 의 결과자체는 그렇게 이쁘장하지 않습니다. 이전에 NHN Deview 2012 에서 Mocha 로 돌렸을 때 나오는 이쁨직한 테스트 결과를 보고, 아, 저러면 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -25,6 +25,15 @@
   <script src="/javascripts/ender.js"></script>
   <script src="/javascripts/octopress.js" type="text/javascript"></script>
   <link href="/atom.xml" rel="alternate" title="Jeen's techlog" type="application/atom+xml">
+
+  <script src="http://platform.twitter.com/anywhere.js?id=jeen_lee&v=1" type="text/javascript">
+  </script>
+  <script src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+  <script type="text/javascript">
+    twttr.anywhere(function (T) {
+      T.hovercards();
+     });
+  </script>
   <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
 <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
 <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
@@ -43,7 +52,7 @@
   </script>
 
 
-</head>
+  </head>
 
 <body >
   <header role="banner" id="sidebar">
@@ -107,6 +116,91 @@
   </header>
   <section id="main">
       
+  
+  
+    <article class="post">
+      <div class="sharing-box">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://jeen.github.com/index.html" data-via="JEEN_LEE" data-counturl="http://jeen.github.com/index.html" data-size="large">Tweet</a>
+  
+  
+  
+  <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+      
+  <header>
+    
+      <h2 class="entry-title">
+        
+        <a href="/blog/2012/11/21/using-test-pretty/">Using Test::Pretty</a>
+        
+      </h2>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-11-21T22:40:00+09:00" pubdate data-updated="true">Nov 21<span>st</span>, 2012</time>
+        
+         | <a href="/blog/2012/11/21/using-test-pretty/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <p> 사실 <code>TAP</code> 의 결과자체는 그렇게 이쁘장하지 않습니다.
+  이전에 <code>NHN Deview 2012</code> 에서 <code>Mocha</code> 로 돌렸을 때 나오는 이쁨직한 테스트 결과를 보고,</p>
+
+<blockquote><p>아, 저러면 왠지 테스트코드 쓰고, 돌릴 만하겠다</p></blockquote>
+
+<p> 라는 뻘생각이 들었습니다. 하지만 전 테스트코드를 그렇게 용의주도하게 쓰지 않는 편이어서 그냥 다른 세상 이야기라고 넘겼습니다.</p>
+
+<p> 그러는 와중에 일본의 Perl IRC 채널에서 <code>Test::*</code> 와 <code>TAP</code> 등에 대한 여러가지 회의론(?) 같은 이야기가 들려오다가 <code>BDD</code> 나 테스트 결과 자체가 하나의 <code>Spec</code> 으로 재이용되는 등의 이야기를 듣고는 많이 감화되었죠.</p>
+
+<p> 그러는 중에 @tokuhirom 씨가 최근에 내놓은 <code>Test::Pretty</code> 와 <code>Test::Ika</code> 라는 모듈이 등장했습니다.</p>
+
+<ul>
+<li><a href="http://metacpan.org/module/Test::Pretty">Test::Pretty</a></li>
+<li><a href="http://metacpan.org/module/Test::Ika">Test::Ika</a></li>
+</ul>
+
+
+<p><code>Test::Ika</code> 의 경우는 Perl5 용 <code>BDD</code> Framework 의 자리를 노리는 그런 모듈입니다만.. 현재의 버젼(<code>0.02</code>)에서는 생각대로 결과가 나와주지 않기에 조금 아쉬웠습니다.</p>
+
+<p>그게 <code>describe</code>, <code>it</code> 등의 <code>BDD</code> 에서 사용하는 구문을 사용하고 있지만, <code>Test::Mojo</code> 처럼 <code>Test::More</code> 를 래핑한 모듈에서 사용할 때라든가… 좀 많이 아쉬운 장면들이 아직 있습니다. 뭐 물론 만든 지 얼마 안되기도 하고 그런 의미에서는 전도유망하다고할까요 :-)</p>
+
+<p><code>Test::Pretty</code> 의 경우는 크게 이를 고려하지 않고도 흔히  사용하는 <code>Test::More</code> 로  테스트코드를 쓰고, <code>prove</code> Plugin 으로 동작합니다. 이름 그대로 결과를 이쁘게 보여준다는 것이죠.</p>
+
+<p>다음처럼 말이죠.</p>
+
+<h3>일반적인 TAP 형식의 출력</h3>
+
+<p><img src="https://lh5.googleusercontent.com/-trTeNFoXQtU/UKzc4yghokI/AAAAAAAACFY/zaEbENGNHOQ/test-pretty-01.png" alt="일반적인 TAP 형식" /></p>
+
+<h3>Test::Pretty 를 이용한 출력</h3>
+
+<p><img src="https://lh3.googleusercontent.com/-okmAPP0EmC8/UKzc74KHsYI/AAAAAAAACFg/rthGC2gQn_E/test-pretty-02.png" alt="Test::Pretty 를 이용한 출력" /></p>
+
+<p>그러다가 JS 테스트 프레임워크인 <a href="http://visionmedia.github.com/mocha/">Mocha</a> 를 들여다 봤는데 여러모로 베껴왔으면 하는 그런 세련됨이 있네요. :-)</p>
+
+  
+  
+
+
+    </article>
   
   
     <article class="post">
@@ -321,227 +415,6 @@
 <li><a href="http://travis-ci.org/#!/JEEN/p5-App-Zamakist/builds/2257622">Travis CI : p5-App-Zamakist</a></li>
 </ul>
 
-
-  
-  
-
-
-    </article>
-  
-  
-    <article class="post">
-      <div class="sharing-box">
-  
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://jeen.github.com/index.html" data-via="JEEN_LEE" data-counturl="http://jeen.github.com/index.html" data-size="large">Tweet</a>
-  
-  
-  
-  <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
-  
-</div>
-
-      
-  <header>
-    
-      <h2 class="entry-title">
-        
-        <a href="/blog/2012/08/25/dbix-class-and-json/">DBIx::Class and JSON</a>
-        
-      </h2>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-08-25T12:44:00+09:00" pubdate data-updated="true">Aug 25<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/08/25/dbix-class-and-json/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <p> 흔한 웹서비스의 흔한 AJAX 나 흔한 RESTful API 를 제공하기 위해서, 대개 JSON 포맷의 데이터를 서버에서 뿜어내고는 합니다.</p>
-
-<p> 하지만 누구나가 Catalyst + DBIx::Class 조합에서 이렇게 하면 되는 게 아닐까 하고 접근했다가…</p>
-
-<blockquote><p>… encountered object &#8216;..&#8217;, but neither allow_blessed nor convert_blessed settings are enabled …</p></blockquote>
-
-<p> 라는 에러를 접하게 됩니다. bless 된 오브젝트를 어떻게든 JSON 인코딩을 시도하려고 했을 때는 위와 같은 에러를 쉬이 접할 수 있습니다.</p>
-
-<p> 이것을 푸는 방법은 사실 여러가지가 있습니다.</p>
-
-<p> 이것저것 신경쓰지 말고 한번에 가자고 할 때는 Catalyst::View::JSON 에서 인코딩하게 되는 stash 된 값들을 전부 ArrayRef 나 HashRef 로 변환해서 넘기는 방법입니다.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class='perl'><span class='line'>   <span class="k">my</span> <span class="nv">@data</span><span class="p">;</span>
-</span><span class='line'>   <span class="k">my</span> <span class="nv">$rs</span> <span class="o">=</span> <span class="nv">$c</span><span class="o">-&gt;</span><span class="n">model</span><span class="p">(</span><span class="s">&#39;DB&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">resultset</span><span class="p">(</span><span class="s">&#39;User&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">search</span><span class="p">();</span>
-</span><span class='line'>   <span class="k">while</span><span class="p">(</span><span class="k">my</span> <span class="nv">$row</span> <span class="o">=</span> <span class="nv">$rs</span><span class="o">-&gt;</span><span class="k">next</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>       <span class="nb">push</span> <span class="nv">@data</span><span class="p">,</span> <span class="p">{</span>
-</span><span class='line'>           <span class="n">id</span> <span class="o">=&gt;</span> <span class="nv">$row</span><span class="o">-&gt;</span><span class="n">id</span><span class="p">,</span>
-</span><span class='line'>           <span class="n">name</span> <span class="o">=&gt;</span> <span class="nv">$row</span><span class="o">-&gt;</span><span class="n">name</span><span class="p">,</span>
-</span><span class='line'>           <span class="n">created_at</span> <span class="o">=&gt;</span> <span class="nv">$row</span><span class="o">-&gt;</span><span class="n">created_at</span><span class="p">,</span>
-</span><span class='line'>       <span class="p">};</span>
-</span><span class='line'>   <span class="p">}</span>
-</span><span class='line'>   <span class="nv">$c</span><span class="o">-&gt;</span><span class="n">stash</span><span class="o">-&gt;</span><span class="p">{</span><span class="n">people</span><span class="p">}</span> <span class="o">=</span> <span class="o">\</span><span class="nv">@data</span><span class="p">;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p> 위처럼 특정컬럼을 선별해서 넣어주는 방법이 있겠지요. 좀 더 단순화한다면, 각  스키마테이블 별로 HashRef 를 반환하는 메소드를 넣어두는 것도 좋습니다.</p>
-
-<figure class='code'><figcaption><span>lib/MyApp/Schema/Result/User.pm</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="k">sub </span><span class="nf">to_hashref</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">my</span> <span class="nv">$self</span> <span class="o">=</span> <span class="nb">shift</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">return</span> <span class="p">{</span>
-</span><span class='line'>        <span class="n">id</span> <span class="o">=&gt;</span> <span class="nv">$self</span><span class="o">-&gt;</span><span class="n">id</span><span class="p">,</span>
-</span><span class='line'>        <span class="n">name</span> <span class="o">=&gt;</span> <span class="nv">$self</span><span class="o">-&gt;</span><span class="n">name</span><span class="p">,</span>
-</span><span class='line'>        <span class="n">created_at</span> <span class="o">=&gt;</span> <span class="nv">$self</span><span class="o">-&gt;</span><span class="n">created_at</span><span class="p">,</span>
-</span><span class='line'>    <span class="p">};</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'>   <span class="c1"># Controller</span>
-</span><span class='line'>   <span class="k">my</span> <span class="nv">@data</span><span class="p">;</span>
-</span><span class='line'>   <span class="k">my</span> <span class="nv">$rs</span> <span class="o">=</span> <span class="nv">$c</span><span class="o">-&gt;</span><span class="n">model</span><span class="p">(</span><span class="s">&#39;DB&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">resultset</span><span class="p">(</span><span class="s">&#39;User&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">search</span><span class="p">();</span>
-</span><span class='line'>   <span class="k">while</span><span class="p">(</span><span class="k">my</span> <span class="nv">$row</span> <span class="o">=</span> <span class="nv">$rs</span><span class="o">-&gt;</span><span class="k">next</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>       <span class="nb">push</span> <span class="nv">@data</span><span class="p">,</span> <span class="nv">$row</span><span class="o">-&gt;</span><span class="n">to_hashref</span><span class="p">;</span>
-</span><span class='line'>   <span class="p">}</span>
-</span><span class='line'>   <span class="nv">$c</span><span class="o">-&gt;</span><span class="n">stash</span><span class="o">-&gt;</span><span class="p">{</span><span class="n">people</span><span class="p">}</span> <span class="o">=</span> <span class="o">\</span><span class="nv">@data</span><span class="p">;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='perl'><span class='line'>  <span class="k">my</span> <span class="nv">$person</span> <span class="o">=</span> <span class="nv">$c</span><span class="o">-&gt;</span><span class="n">model</span><span class="p">(</span><span class="s">&#39;DB&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">resultset</span><span class="p">(</span><span class="s">&#39;User&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">search</span><span class="p">(</span><span class="nv">$cond</span><span class="p">,</span> <span class="p">{</span>
-</span><span class='line'>      <span class="n">result_class</span> <span class="o">=&gt;</span> <span class="s">&#39;DBIx::Class::ResultClass::HashRefInflator&#39;</span><span class="p">,</span>
-</span><span class='line'>  <span class="p">})</span><span class="o">-&gt;</span><span class="n">first</span><span class="p">;</span>
-</span><span class='line'>  <span class="nv">$c</span><span class="o">-&gt;</span><span class="n">stash</span><span class="o">-&gt;</span><span class="p">{</span><span class="n">person</span><span class="p">}</span> <span class="o">=</span> <span class="nv">$person</span><span class="p">;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p> 그럴 필요가 없다면 위처럼 <code>result_class</code> 를 지정해줌으로써 결과를 무조건 HashRef 로 반환하게끔 합니다.</p>
-
-<p> 사실 <code>DBIx::Class::ResultClass::HashRefInflator</code> 를 적용하면 일일이 오브젝트를 만들어내지 않기 때문에 퍼포먼스 측면에서 매우 좋습니다만, 그냥 HashRef 일 따름인지라Resultset 에서 정의한 각종 메소드를 참조할 수 없습니다.
- 그러니 이런저런 경우에는 가려서 사용하는 것이 좋습니다.</p>
-
-<p> 이제 본질적으로 좀 더 접근해보면…
- JSON::XS 는 인코딩할 시에, 오브젝트가 대상인 경우에는 해당 오브젝트의 TO_JSON 메소드를 참조하여 결과를 뽑아낼 수 있습니다. 물론 <code>allow_blessed</code>, <code>convert_blessed</code> 플래그를 지정할 필요가 있지요.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="c1"># lib/MyApp/View/JSON.pm</span>
-</span><span class='line'><span class="nb">package</span> <span class="nn">MyApp::View::</span><span class="n">JSON</span><span class="p">;</span>
-</span><span class='line'><span class="k">use</span> <span class="nn">JSON::</span><span class="n">XS</span> <span class="p">();</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">use</span> <span class="n">parent</span> <span class="sx">qw(Catalyst::View::JSON)</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">my</span> <span class="nv">$encoder</span> <span class="o">=</span> <span class="nn">JSON::</span><span class="n">XS</span><span class="o">-&gt;</span><span class="k">new</span>
-</span><span class='line'>              <span class="o">-&gt;</span><span class="n">utf8</span>
-</span><span class='line'>                          <span class="o">-&gt;</span><span class="n">pretty</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-</span><span class='line'>                          <span class="o">-&gt;</span><span class="n">indent</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-</span><span class='line'>                          <span class="o">-&gt;</span><span class="n">allow_blessed</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-</span><span class='line'>                          <span class="o">-&gt;</span><span class="n">convert_blessed</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">sub </span><span class="nf">encode_json</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">my</span> <span class="p">(</span><span class="nv">$self</span><span class="p">,</span> <span class="nv">$c</span><span class="p">,</span> <span class="nv">$data</span><span class="p">)</span> <span class="o">=</span> <span class="nv">@_</span><span class="p">;</span>
-</span><span class='line'>    <span class="nv">$encoder</span><span class="o">-&gt;</span><span class="n">encode</span><span class="p">(</span><span class="nv">$data</span><span class="p">);</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="mi">1</span><span class="p">;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p> 그러면 위처럼 <code>encode_json</code> 을 오버라이드 합니다. <code>allow_blessed</code> 와 <code>convert_blessed</code>  플래그를 켜주는 것이죠.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="c1"># lib/MyApp/Schema/Result/User.pm</span>
-</span><span class='line'><span class="o">..</span>
-</span><span class='line'><span class="k">sub </span><span class="nf">TO_JSON</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">return</span> <span class="p">{</span> <span class="nv">$_</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">get_inflated_columns</span> <span class="p">};</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="o">..</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>그리고 위처럼 User Result 에 대해서 TO_JSON 를 지정합니다.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='perl'><span class='line'>   <span class="nv">$c</span><span class="o">-&gt;</span><span class="n">stash</span><span class="o">-&gt;</span><span class="p">{</span><span class="n">people</span><span class="p">}</span> <span class="o">=</span> <span class="p">[</span>  <span class="nv">$c</span><span class="o">-&gt;</span><span class="n">model</span><span class="p">(</span><span class="s">&#39;DB&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">resultset</span><span class="p">(</span><span class="s">&#39;User&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">search</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">all</span> <span class="p">];</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>그러면 이제는 아무런 걱정없이 그냥 생짜 DBIC Resultset 을 날려버려도 이제는 알아서 문제해결이 됩니다. :-)</p>
-
-<p> 각 Resultset 마다 <code>TO_JSON</code> 을 지정하기가 벅차다면…</p>
-
-<ul>
-<li><a href="http://advent.perl.kr/2011/2011-12-17.html">Seoul.pm Advent Calendar 2011 - 열일곱번째 날 : DBIx::Class로 스키마 관리하기</a></li>
-</ul>
-
-
-<p>위의 글에서 <code>ResultBase</code> 를 참고해주세요.</p>
-
-<p> <code>MyApp::Schema::ResultBase</code> 를 상속받은 각 Result 테이블들은 <code>TO_JSON</code> 을 오버라이드 해서 빼놓고 싶은 컬럼(예를 들어 <code>password</code> 같은 컬럼) 을 배제해서 출력할 수 있지 않을까요?</p>
 
   
   

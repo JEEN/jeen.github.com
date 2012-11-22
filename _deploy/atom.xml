@@ -4,7 +4,7 @@
   <title><![CDATA[Jeen's techlog]]></title>
   <link href="http://jeen.github.com/atom.xml" rel="self"/>
   <link href="http://jeen.github.com/"/>
-  <updated>2012-09-09T20:56:07+09:00</updated>
+  <updated>2012-11-21T23:10:34+09:00</updated>
   <id>http://jeen.github.com/</id>
   <author>
     <name><![CDATA[Jeen Lee]]></name>
@@ -12,6 +12,48 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Using Test::Pretty]]></title>
+    <link href="http://jeen.github.com/blog/2012/11/21/using-test-pretty/"/>
+    <updated>2012-11-21T22:40:00+09:00</updated>
+    <id>http://jeen.github.com/blog/2012/11/21/using-test-pretty</id>
+    <content type="html"><![CDATA[<p> 사실 <code>TAP</code> 의 결과자체는 그렇게 이쁘장하지 않습니다.
+  이전에 <code>NHN Deview 2012</code> 에서 <code>Mocha</code> 로 돌렸을 때 나오는 이쁨직한 테스트 결과를 보고,</p>
+
+<blockquote><p>아, 저러면 왠지 테스트코드 쓰고, 돌릴 만하겠다</p></blockquote>
+
+<p> 라는 뻘생각이 들었습니다. 하지만 전 테스트코드를 그렇게 용의주도하게 쓰지 않는 편이어서 그냥 다른 세상 이야기라고 넘겼습니다.</p>
+
+<p> 그러는 와중에 일본의 Perl IRC 채널에서 <code>Test::*</code> 와 <code>TAP</code> 등에 대한 여러가지 회의론(?) 같은 이야기가 들려오다가 <code>BDD</code> 나 테스트 결과 자체가 하나의 <code>Spec</code> 으로 재이용되는 등의 이야기를 듣고는 많이 감화되었죠.</p>
+
+<p> 그러는 중에 @tokuhirom 씨가 최근에 내놓은 <code>Test::Pretty</code> 와 <code>Test::Ika</code> 라는 모듈이 등장했습니다.</p>
+
+<ul>
+<li><a href="http://metacpan.org/module/Test::Pretty">Test::Pretty</a></li>
+<li><a href="http://metacpan.org/module/Test::Ika">Test::Ika</a></li>
+</ul>
+
+
+<p><code>Test::Ika</code> 의 경우는 Perl5 용 <code>BDD</code> Framework 의 자리를 노리는 그런 모듈입니다만.. 현재의 버젼(<code>0.02</code>)에서는 생각대로 결과가 나와주지 않기에 조금 아쉬웠습니다.</p>
+
+<p>그게 <code>describe</code>, <code>it</code> 등의 <code>BDD</code> 에서 사용하는 구문을 사용하고 있지만, <code>Test::Mojo</code> 처럼 <code>Test::More</code> 를 래핑한 모듈에서 사용할 때라든가… 좀 많이 아쉬운 장면들이 아직 있습니다. 뭐 물론 만든 지 얼마 안되기도 하고 그런 의미에서는 전도유망하다고할까요 :-)</p>
+
+<p><code>Test::Pretty</code> 의 경우는 크게 이를 고려하지 않고도 흔히  사용하는 <code>Test::More</code> 로  테스트코드를 쓰고, <code>prove</code> Plugin 으로 동작합니다. 이름 그대로 결과를 이쁘게 보여준다는 것이죠.</p>
+
+<p>다음처럼 말이죠.</p>
+
+<h3>일반적인 TAP 형식의 출력</h3>
+
+<p><img src="https://lh5.googleusercontent.com/-trTeNFoXQtU/UKzc4yghokI/AAAAAAAACFY/zaEbENGNHOQ/test-pretty-01.png" alt="일반적인 TAP 형식" /></p>
+
+<h3>Test::Pretty 를 이용한 출력</h3>
+
+<p><img src="https://lh3.googleusercontent.com/-okmAPP0EmC8/UKzc74KHsYI/AAAAAAAACFg/rthGC2gQn_E/test-pretty-02.png" alt="Test::Pretty 를 이용한 출력" /></p>
+
+<p>그러다가 JS 테스트 프레임워크인 <a href="http://visionmedia.github.com/mocha/">Mocha</a> 를 들여다 봤는데 여러모로 베껴왔으면 하는 그런 세련됨이 있네요. :-)</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Building a perl project on Travis CI]]></title>
@@ -1010,57 +1052,6 @@
 <p> <code>Facebook::Graph</code> 모듈은 생각보다 좀 변태같습니다. 그 이유는 Facebook Graph API 도 변태같다는 근본적인 &#8230;. 그리고 Access Token 은 뭐 적당하게 Developer 페이지 가서 줏어서 넣었습니다. :-)</p>
 
 <p><img src="https://lh6.googleusercontent.com/-GrgEvhNP0d0/UBDW9W-YzLI/AAAAAAAACAQ/5G48cMzvryY/w389-h521-k/list.jpg" alt="" /></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[The problem with Pingdom]]></title>
-    <link href="http://jeen.github.com/blog/2012/07/22/the-problem-with-pingdom/"/>
-    <updated>2012-07-22T19:13:00+09:00</updated>
-    <id>http://jeen.github.com/blog/2012/07/22/the-problem-with-pingdom</id>
-    <content type="html"><![CDATA[
-
-<figure class='code'><figcaption><span>Time to be Awesome - awesome.rb </span></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='rb'><span class='line'><span class="nb">puts</span> <span class="s2">&quot;Awesome!&quot;</span> <span class="k">unless</span> <span class="n">lame</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><a href="http://www.pingdom.com%20Pingdom">The problem with pingdom.</a></p>
-
-<p>My money&#8217;s in that office, right? If she start giving me some bullshit about it ain&#8217;t there, and we got to go someplace else and get it, I&#8217;m gonna shoot you in the head then and there. Then I&#8217;m gonna shoot that bitch in the kneecaps, find out where my goddamn money is. She gonna tell me too. Hey, look at me when I&#8217;m talking to you, motherfucker. You listen: we go in there, and that nigga Winston or anybody else is in there, you the first motherfucker to get shot. You understand?</p>
-
-<blockquote><p>Blockquote is what goes
-inside this block here
-would you believe that
-bullshit?</p></blockquote>
-
-<p>Well, the way they make shows is, they make one show. That show&#8217;s called a pilot. Then they show that show to the people who make shows, and on the strength of that one show they decide if they&#8217;re going to make more shows. Some pilots get picked and become television programs. Some don&#8217;t, become nothing. She starred in one of the ones that became nothing.</p>
-
-<p>The path of the righteous man is beset on all sides by the iniquities of the selfish and the tyranny of evil men. Blessed is he who, in the name of charity and good will, shepherds the weak through the valley of darkness, for he is truly his brother&#8217;s keeper and the finder of lost children. And I will strike down upon thee with great vengeance and furious anger those who would attempt to poison and destroy My brothers. And you will know My name is the Lord when I lay My vengeance upon thee.</p>
-
-<p>Your bones don&#8217;t break, mine do. That&#8217;s clear. Your cells react to bacteria and viruses differently than mine. You don&#8217;t get sick, I do. That&#8217;s also clear. But for some reason, you and I react the exact same way to water. We swallow it too fast, we choke. We get some in our lungs, we drown. However unreal it may seem, we are connected, you and I. We&#8217;re on the same curve, just on opposite ends.</p>
-
-<p>Do you see any Teletubbies in here? Do you see a slender plastic tag clipped to my shirt with my name printed on it? Do you see a little Asian child with a blank expression on his face sitting outside on a mechanical helicopter that shakes when you put quarters in it? No? Well, that&#8217;s what you see at a toy store. And you must think you&#8217;re in a toy store, because you&#8217;re here shopping for an infant named Jeb.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Intro]]></title>
-    <link href="http://jeen.github.com/blog/2012/07/22/intro/"/>
-    <updated>2012-07-22T08:23:00+09:00</updated>
-    <id>http://jeen.github.com/blog/2012/07/22/intro</id>
-    <content type="html"><![CDATA[<p>Testing!</p>
-
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sollicitudin, massa eu vestibulum laoreet, nibh ante vulputate lorem, ac lobortis ante tellus eu mi. Duis sem nisi, luctus at feugiat eget, fringilla ut tellus. Nam a molestie justo. Sed pulvinar est vitae tellus semper tincidunt. Fusce euismod luctus lacus nec placerat. Mauris rutrum scelerisque nulla ut tempor. Nunc porttitor posuere mi, aliquet vehicula lorem feugiat in. Ut ut fermentum risus. Aliquam tincidunt ultricies ante sit amet bibendum. Cras nec sapien odio. Duis posuere congue sem, at congue massa faucibus at.</p>
-
-<p>Integer ut sapien eget nisl auctor faucibus ut fermentum arcu. Nunc rutrum urna non risus congue et tristique felis eleifend. Maecenas blandit est eu mauris aliquam aliquet. Quisque porttitor enim eget risus blandit in mollis orci eleifend. Nam malesuada nulla sed lacus elementum placerat accumsan arcu rhoncus. Phasellus feugiat cursus turpis nec facilisis. Duis eget metus arcu, eget commodo velit. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Integer cursus vulputate enim, vel gravida velit faucibus et. Ut a urna vitae tellus cursus rhoncus. Maecenas at odio eget quam cursus elementum. Aliquam vitae eros quis tellus laoreet accumsan sed id lorem. Suspendisse et rutrum leo. Integer scelerisque vestibulum adipiscing. In posuere, libero ac accumsan suscipit, nulla ligula gravida erat, ut tempor odio erat nec sem. Quisque justo ipsum, adipiscing volutpat varius vitae, blandit eget nisi.</p>
-
-<p>Nullam adipiscing neque ac lacus commodo vitae imperdiet dui sollicitudin. Ut ac nunc augue. Nam at sem ut quam commodo aliquet vitae vitae dui. Vivamus scelerisque felis eget dolor cursus feugiat. Phasellus at dui sed lectus scelerisque pretium. Etiam nec massa ut justo vestibulum fringilla ac vitae urna. Morbi tortor erat, tempus sed consectetur at, elementum nec eros. Vivamus mattis arcu a sapien semper non lacinia eros pretium.</p>
-
-<p>Proin ut hendrerit arcu. Maecenas ullamcorper tristique magna vel mattis. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nullam tincidunt euismod viverra. In sit amet neque turpis. Suspendisse ac sapien mi, id blandit purus. Ut tortor turpis, rutrum ac tempor at, accumsan sit amet erat. Etiam ultricies eleifend dolor, eget tempus justo tristique vitae. In hac habitasse platea dictumst. Aliquam eu enim neque.</p>
-
-<p>Morbi massa lorem, viverra non dictum at, malesuada vel nibh. Nam fermentum lobortis varius. Sed a nulla lacus, quis posuere risus. Nunc id urna libero, quis rutrum mi. In gravida felis urna. Praesent nec dolor ac urna tempor fermentum. Curabitur rutrum arcu et lorem volutpat viverra.</p>
 ]]></content>
   </entry>
   
@@ -2899,6 +2890,38 @@ I think you should use an
 <p>  위는 <a href="http://metacpan.org/module/Date::Holidays::KR">Date::Holidays::KR</a> 의 <code>Makefile.PL</code> 입니다. 몇몇 모듈은 <a href="http://metacpan.org/module/ExtUtils::MakeMaker">ExtUtils::MakeMaker</a> 를 사용하고 있었는데, 모두 <a href="http://metacpan.org/module/Module::Install">Module::Install</a> 을 사용하도록 교체하고, repository 를 각각의 github repository 를 지정한 것뿐입니다.</p>
 
 <p>  마음먹은 김에 이슈처리하고 저녁시간을 빌어서 CPAN 에 일괄 업로드했습니다. 완전 스팸이네요.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[CPANRatings - WebService::Aladdin]]></title>
+    <link href="http://jeen.github.com/blog/2012/02/08/cpanratings-webservice-aladdin/"/>
+    <updated>2012-02-08T16:27:00+09:00</updated>
+    <id>http://jeen.github.com/blog/2012/02/08/cpanratings-webservice-aladdin</id>
+    <content type="html"><![CDATA[<blockquote class="twitter-tweet" data-in-reply-to="166961671741521922"><p>@<a href="https://twitter.com/keedi">keedi</a> @<a href="https://twitter.com/gypark">gypark</a> 오오오&#8230; 가문의 영광!!!</p>&mdash; JEEN (@JEEN_LEE) <a href="https://twitter.com/JEEN_LEE/status/167063345000755200" data-datetime="2012-02-08T01:52:59+00:00">February 8, 2012</a></blockquote>
+
+
+<p> 새벽에 @keedi 님으로부터 트윗을 받고 알게되었습니다. 인생 처음으로 <a href="http://cpanratings.perl.org/">CPANRatings</a> 에서 Rating 을 받아보는 군요. 그것도 별 다섯개.</p>
+
+<ul>
+<li><p><a href="http://cpanratings.perl.org/dist/WebService-Aladdin">http://cpanratings.perl.org/dist/WebService-Aladdin</a></p>
+
+<p>아, CPANRatings 는 CPAN 에 올라온 모듈들에 평가를 남길 수 있는 곳입니다.</p>
+
+<p>Rating 은 @gypark 님으로부터 였습니다. 제가 얼기설기 CPAN 에 모듈 올려보겠답시고 2007년쯤에 올린 모듈이고, 저 조차도 잠깐 쓰다가 뭐 당장 쓸일이 없어서 내팽개쳐뒀지만 말이죠.. =3</p>
+
+<p>아무튼 의욕이 새록새록 돋습니다.</p>
+
+<p> <blockquote class="twitter-tweet" data-in-reply-to="167064715812552705" lang="ko"><p>@<a href="https://twitter.com/gypark">gypark</a> @<a href="https://twitter.com/JEEN_LEE">JEEN_LEE</a> @<a href="https://twitter.com/keedi">keedi</a> <a href="http://t.co/7v2VeWFW" title="http://jof4002.net/%EC%A1%B0%ED%94%84%EC%9D%BC%EA%B8%B0/2012-01-17">jof4002.net/%EC%A1%B0%ED%9…</a> 저 Rating 뒤에는 이런 슬픈 사연이 있습니다.</p>&mdash; SangYeon Jeon (@jof4002) <a href="https://twitter.com/jof4002/status/167174435084828672" data-datetime="2012-02-08T09:14:25+00:00">2월 8, 2012</a></blockquote></p>
+
+<p>사실 이 Rating 뒤에는 @jof4002 님의 어떤 사연이 있었다고 합니다. 도움이 되었다니 다행입니다.</p></li>
+<li><p><a href="http://jof4002.net/%EC%A1%B0%ED%94%84%EC%9D%BC%EA%B8%B0/2012-01-17">http://jof4002.net/조프일기/2012-01-17</a></p>
+
+<p>오늘은 @keedi 님께 어제 올린 <a href="http://metacpan.org/module/Date::Holidays::KR">Date::Holidays::KR</a> 에 Repository 정보가 없다는 말을 듣고, 흡&#8230; 해서 나머지 모듈들도 전부 Repository 정보를 추가해보려고 합니다.</p>
+
+<p>Date::Holidays::KR 에 Repository 가 없는 이유는 META.yml 이 없어서 였던 듯&#8230;</p></li>
+</ul>
+
 ]]></content>
   </entry>
   
