@@ -4,7 +4,7 @@
   <title><![CDATA[Jeen's techlog]]></title>
   <link href="http://jeen.github.com/atom.xml" rel="self"/>
   <link href="http://jeen.github.com/"/>
-  <updated>2012-11-26T21:59:40+09:00</updated>
+  <updated>2012-11-26T22:01:27+09:00</updated>
   <id>http://jeen.github.com/</id>
   <author>
     <name><![CDATA[Jeen Lee]]></name>
@@ -19,7 +19,7 @@
     <updated>2012-11-26T21:44:00+09:00</updated>
     <id>http://jeen.github.com/blog/2012/11/26/proverc-for-less-typing</id>
     <content type="html"><![CDATA[<ul>
-<li><a href="">http://jeen.github.com/blog/2012/11/21/using-test-pretty/</a></li>
+<li><a href="http://jeen.github.com/blog/2012/11/21/using-test-pretty/">http://jeen.github.com/blog/2012/11/21/using-test-pretty/</a></li>
 </ul>
 
 
@@ -33,7 +33,7 @@
 <p>요렇게 길게 쓰고 있었는데, 문서도 제대로 안보고 이래저래 옵션들을 갖다붙이다보니 돌이켜보면 참 부끄럽기 그지 없습니다.</p>
 
 <ul>
-<li><a href="">https://metacpan.org/module/prove#OPTIONS</a></li>
+<li><a href="https://metacpan.org/module/prove#OPTIONS">https://metacpan.org/module/prove#OPTIONS</a></li>
 </ul>
 
 
