@@ -6,7 +6,7 @@ comments: true
 categories: [ perl, test ]
 ---
 
-- [http://jeen.github.com/blog/2012/11/21/using-test-pretty/]()
+- [http://jeen.github.com/blog/2012/11/21/using-test-pretty/](http://jeen.github.com/blog/2012/11/21/using-test-pretty/)
 
 그러고보니 앞전에 쓴 글에서
  
@@ -16,7 +16,7 @@ $ prove -Ilib -Pretty -v -lr
 
 요렇게 길게 쓰고 있었는데, 문서도 제대로 안보고 이래저래 옵션들을 갖다붙이다보니 돌이켜보면 참 부끄럽기 그지 없습니다.
 
-- [https://metacpan.org/module/prove#OPTIONS]()
+- [https://metacpan.org/module/prove#OPTIONS](https://metacpan.org/module/prove#OPTIONS)
 
 위의 prove 문서를 참고로해서 제가 무엇을 잘못했는지 다시 한번 돌이켜봤습니다.
 

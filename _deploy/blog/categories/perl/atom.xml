@@ -4,7 +4,7 @@
   <title><![CDATA[Category: perl | Jeen's techlog]]></title>
   <link href="http://jeen.github.com/blog/categories/perl/atom.xml" rel="self"/>
   <link href="http://jeen.github.com/"/>
-  <updated>2012-11-22T21:44:37+09:00</updated>
+  <updated>2012-11-26T21:59:40+09:00</updated>
   <id>http://jeen.github.com/</id>
   <author>
     <name><![CDATA[Jeen Lee]]></name>
@@ -12,6 +12,74 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[.proverc for less typing]]></title>
+    <link href="http://jeen.github.com/blog/2012/11/26/proverc-for-less-typing/"/>
+    <updated>2012-11-26T21:44:00+09:00</updated>
+    <id>http://jeen.github.com/blog/2012/11/26/proverc-for-less-typing</id>
+    <content type="html"><![CDATA[<ul>
+<li><a href="">http://jeen.github.com/blog/2012/11/21/using-test-pretty/</a></li>
+</ul>
+
+
+<p>그러고보니 앞전에 쓴 글에서</p>
+
+<p><code>bash
+$ prove -Ilib -Pretty -v -lr
+</code></p>
+
+<p>요렇게 길게 쓰고 있었는데, 문서도 제대로 안보고 이래저래 옵션들을 갖다붙이다보니 돌이켜보면 참 부끄럽기 그지 없습니다.</p>
+
+<ul>
+<li><a href="">https://metacpan.org/module/prove#OPTIONS</a></li>
+</ul>
+
+
+<p>위의 prove 문서를 참고로해서 제가 무엇을 잘못했는지 다시 한번 돌이켜봤습니다.</p>
+
+<h3>-Ilib 과 -l 은 같다.</h3>
+
+<p> 그러니까 위에서는 <code>-Ilib</code> 과 <code>-lr</code> 로 같이 쓰고 있었는데 -_-;;</p>
+
+<p><code>
+-l,  --lib             Add 'lib' to the path for your tests (-Ilib).
+</code></p>
+
+<p><code>-l</code> 로 단순히 줄여서 표현할 수 있습니다. 해당 옵션이 무엇인지도 모르고 그냥 붙여쓰고 있었다니...</p>
+
+<h3>타이핑횟수를 줄인다.</h3>
+
+<p>그러니까 매번 테스트할 때마다</p>
+
+<p><code>
+$ prove -Pretty -lvr
+</code></p>
+
+<p>이렇게 쓰기 참 번거롭지요.</p>
+
+<p>그러고보니 해당 프로젝트 루트아래에 <code>.proverc</code> 를 만들어서 사용하는 방법이 있었습니다.</p>
+
+<p><code>
+-l
+-v
+-r
+-Pretty
+</code></p>
+
+<p>이렇게 해두면 이제 앞으로는</p>
+
+<p><code>
+$ prove
+</code></p>
+
+<p>만으로 위의 옵션을 활성화한 채로 테스트를 동작시킬 수 있습니다.</p>
+
+<h3>결론</h3>
+
+<p>똑같은 일을 3번, 4번하다 보면 가끔 내가 뭐하는 짓인가 하는 생각이 들 때가 있는데… 좀 더 빨리 깨달았으면 좋았을 것을 이라는 생각을 그때마다 하게 됩니다.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Using Test::Pretty]]></title>
@@ -424,248 +492,6 @@ drwxr-xr-x+ 52 jeen  staff   1768  8  9 13:46 ..
 <p>검색방식은 뭐 파일이름에서 확장자만 떼서 검색날려서 뭐 여차저차해서 파일다운로드 하는 링크 빼서 일괄 다운로드 하는 것이죠.</p>
 
 <p>이제 시작하려는 미드가 있는데 자막이 없다면 이거 한번만 돌려주면 앞으로 자막찾는 수고없어지겠습니다. :-)</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Export Facebook Event Attending List - perl-kr TeaTime]]></title>
-    <link href="http://jeen.github.com/blog/2012/07/26/export-facebook-event-attending-list-perl-kr-teatime/"/>
-    <updated>2012-07-26T14:22:00+09:00</updated>
-    <id>http://jeen.github.com/blog/2012/07/26/export-facebook-event-attending-list-perl-kr-teatime</id>
-    <content type="html"><![CDATA[<p> 지난번 1회 티타임때의 문제가 제대로 참가비 징수를 못해서 비용정산에 어려움이 있었는데,
-이 문제를 해결하기 위해서 간단하게 참가자 리스트를 A4 용지로 뽑아내서 체크하도록 하는 건 어떨까 하는 생각이 있었습니다.</p>
-
-<p> <a href="http://jeen.tistory.com/entry/perlkr-%ED%8B%B0%ED%83%80%EC%9E%84-2-%EC%84%B1%ED%99%A9%EB%A6%AC%EC%97%90-%EB%81%9D%EB%82%AC%EC%8A%B5%EB%8B%88%EB%8B%A4">#perl-kr 티타임 Vol.2</a></p>
-
-<p> 아무튼 그런 생각을 잠깐 했다가 해볼까 해서 아래처럼 코드를 써넣었습니다.</p>
-
-<p>``` perl
-use strict;
-use warnings;
-use Text::Xslate;
-use Data::Section::Simple;
-use Facebook::Graph;</p>
-
-<p>my $fb = Facebook::Graph->new;
-$fb->access_token("YOUR ACCESS TOKEN");
-my $r = $fb->fetch('466164950078338/attending');
-my @attendees;
-for my $person (@{ $r->{data} }) {</p>
-
-<pre><code>my $f = $fb-&gt;fetch($person-&gt;{id});
-$f-&gt;{profile_image} = $fb-&gt;picture($person-&gt;{id})-&gt;get_large-&gt;uri_as_string;  
-push @attendees, $f;
-</code></pre>
-
-<p>}
-push @attendees, {} for (1..3);</p>
-
-<p>my $tx  = Text::Xslate->new(</p>
-
-<pre><code>syntax =&gt; 'TTerse',
-module =&gt; [ 'Text::Xslate::Bridge::TT2Like' ],
-path =&gt; [
-    Data::Section::Simple-&gt;new()-&gt;get_data_section()
-],
-</code></pre>
-
-<p>);</p>
-
-<p>print $tx->render('template.tx', { attendees => \@attendees });</p>
-
-<p><strong>DATA</strong></p>
-
-<p>@@ template.tx
-<html>
- <head>
-   <title>#perl-kr 티타임 #2</title>
-   <style></p>
-
-<pre><code> [% INCLUDE "css.tx" %]
-</code></pre>
-
-<p>   </style>
- </head>
- <body>
-   <h1>※ #perl-kr 티타임 #2</h1>
-   <table class="table table-striped table-bordered" style="width:50%"></p>
-
-<pre><code> &lt;thead&gt;
-   &lt;tr&gt;
-     &lt;th class="span1"&gt;&amp;nbsp;&lt;/th&gt;
-     &lt;th class="span1"&gt;&amp;nbsp;&lt;/th&gt;
-     &lt;th class="span2"&gt;Name&lt;/th&gt; 
-     &lt;th class="span1"&gt;Attend?&lt;/th&gt;
-   &lt;/tr&gt;
- &lt;/thead&gt;
- &lt;tbody&gt;
-   [% FOREACH p IN attendees %]
-   &lt;tr&gt;
-     &lt;td&gt;[% loop.count %]&lt;/td&gt;
-     &lt;td&gt;&lt;img src="[% p.profile_image %]" width="30" height="30" /&gt;&lt;/td&gt;
-     &lt;td&gt;[% p.name %][% IF p.username %]([% p.username %])[% END %]&lt;/td&gt; 
-     &lt;td&gt;&lt;/td&gt;
-   &lt;/tr&gt;
-   [% END %] 
- &lt;/tbody&gt;
-</code></pre>
-
-<p>   </table>
- </body>
-</html></p>
-
-<p>@@ css.tx
-table {
-  max-width: 100%;
-  border-collapse: collapse;
-  border-spacing: 0;
-}</p>
-
-<p>.table {
-  width: 100%;
-  margin-bottom: 18px;
-}
-.table th, .table td {
-  padding: 8px;
-  line-height: 18px;
-  text-align: left;
-  vertical-align: top;
-  border-top: 1px solid #ddd;
-}
-.table th {
-  font-weight: bold;
-}
-.table thead th {
-  vertical-align: bottom;
-}
-.table thead:first-child tr th, .table thead:first-child tr td {
-  border-top: 0;
-}
-.table tbody + tbody {
-  border-top: 2px solid #ddd;
-}
-.table-condensed th, .table-condensed td {
-  padding: 4px 5px;
-}</p>
-
-<p>.table-bordered {
-  border: 1px solid #ddd;
-  border-collapse: separate;
-  <em>border-collapse: collapsed;
-  -webkit-border-radius: 4px;
-  -moz-border-radius: 4px;
-  border-radius: 4px;
-}
-.table-bordered th + th, .table-bordered td + td, .table-bordered th + td, .table-bordered td + th {
-  border-left: 1px solid #ddd;
-}
-.table-bordered thead:first-child tr:first-child th, .table-bordered tbody:first-child tr:first-child th, .table-bordered tbody:first-child tr:first-child td {
-  border-top: 0;
-}
-/</em> line 75, ../../../../../../.rvm/gems/ruby-1.9.2-p290/gems/bootstrap-sass-2.0.1/vendor/assets/stylesheets/bootstrap/_tables.scss */
-.table-bordered thead:first-child tr:first-child th:first-child, .table-bordered tbody:first-child tr:first-child td:first-child {
-  -webkit-border-radius: 4px 0 0 0;
-  -moz-border-radius: 4px 0 0 0;
-  border-radius: 4px 0 0 0;
-}
-.table-bordered thead:first-child tr:first-child th:last-child, .table-bordered tbody:first-child tr:first-child td:last-child {
-  -webkit-border-radius: 0 4px 0 0;
-  -moz-border-radius: 0 4px 0 0;
-  border-radius: 0 4px 0 0;
-}
-.table-bordered thead:last-child tr:last-child th:first-child, .table-bordered tbody:last-child tr:last-child td:first-child {
-  -webkit-border-radius: 0 0 0 4px;
-  -moz-border-radius: 0 0 0 4px;
-  border-radius: 0 0 0 4px;
-}
-.table-bordered thead:last-child tr:last-child th:last-child, .table-bordered tbody:last-child tr:last-child td:last-child {
-  -webkit-border-radius: 0 0 4px 0;
-  -moz-border-radius: 0 0 4px 0;
-  border-radius: 0 0 4px 0;
-}
-.table-striped tbody tr:nth-child(odd) td, .table-striped tbody tr:nth-child(odd) th {
-  background-color: #f9f9f9;
-}</p>
-
-<p>.table tbody tr:hover td, .table tbody tr:hover th {
-  background-color: #f5f5f5;
-}</p>
-
-<p>table .span1 {
-  float: none;
-  width: 44px;
-  margin-left: 0;
-}
-table .span2 {
-  float: none;
-  width: 124px;
-  margin-left: 0;
-}
-table .span3 {
-  float: none;
-  width: 204px;
-  margin-left: 0;
-}
-table .span4 {
-  float: none;
-  width: 284px;
-  margin-left: 0;
-}
-table .span5 {
-  float: none;
-  width: 364px;
-  margin-left: 0;
-}
-table .span6 {
-  float: none;
-  width: 444px;
-  margin-left: 0;
-}
-table .span7 {
-  float: none;
-  width: 524px;
-  margin-left: 0;
-}
-table .span8 {
-  float: none;
-  width: 604px;
-  margin-left: 0;
-}
-table .span9 {
-  float: none;
-  width: 684px;
-  margin-left: 0;
-}
-table .span10 {
-  float: none;
-  width: 764px;
-  margin-left: 0;
-}
-table .span11 {
-  float: none;
-  width: 844px;
-  margin-left: 0;
-}</p>
-
-<p>table .span12 {
-  float: none;
-  width: 924px;
-  margin-left: 0;
-}</p>
-
-<p>```</p>
-
-<p> 급작스레 한 작업이라 그냥 간단히 HTML 로 뽑아버렸지만... 사실 꿈은 좀 더 아름다운 레이아웃으로 뙇하고 나와줬으면                                                                 했었지요.</p>
-
-<p> 일단 예정 참가자 이외에 예상치못한 참가자가 있을 것을 염두해서 3개정도의 행을 더 추가해주었구요;;</p>
-
-<p> <code>Text::Xslate</code> + <code>Data::Section::Simple</code> 의 조합은 파일하나에 우걱우걱 템플릿까지 끼워넣고 이럴 경우에는 아주 좋았습니다.</p>
-
-<p> CSS 도 그냥 별도의 섹션으로 나눠서 <code>INCLUDE</code> 해버릴 수도 있으니 :-)</p>
-
-<p> <code>Facebook::Graph</code> 모듈은 생각보다 좀 변태같습니다. 그 이유는 Facebook Graph API 도 변태같다는 근본적인 .... 그리고 Access Token 은 뭐 적당하게 Developer 페이지 가서 줏어서 넣었습니다. :-)</p>
-
-<p><img src="https://lh6.googleusercontent.com/-GrgEvhNP0d0/UBDW9W-YzLI/AAAAAAAACAQ/5G48cMzvryY/w389-h521-k/list.jpg" alt="" /></p>
 ]]></content>
   </entry>
   
