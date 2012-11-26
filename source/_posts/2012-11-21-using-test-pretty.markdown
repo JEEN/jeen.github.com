@@ -36,5 +36,15 @@ categories: [ perl, test ]
 
 ![Test::Pretty 를 이용한 출력](https://lh3.googleusercontent.com/-okmAPP0EmC8/UKzc74KHsYI/AAAAAAAACFg/rthGC2gQn_E/test-pretty-02.png)
 
-그러다가 JS 테스트 프레임워크인 [Mocha](http://visionmedia.github.com/mocha/) 를 들여다 봤는데 여러모로 베껴왔으면 하는 그런 세련됨이 있네요. :-)
+### 어떻게 실행을?
+
+Pretty 형식으로는 단일파일만 나오고, 전체 테스트코드를 한번에 돌렸을 때는 위처럼 나오지 않기에 왜 그럴까 고심해보다가 아래처럼 테스트코드를 실행하면 제대로 동작하는 것을 확인했습니다.
+
+```
+$ prove -Ilib -Pretty -v -lr 
+```
+
+### 결론
+
+ JS 테스트 프레임워크인 [Mocha](http://visionmedia.github.com/mocha/) 를 들여다 봤는데 여러모로 베껴왔으면 하는 그런 세련됨이 있네요. :-)
 
