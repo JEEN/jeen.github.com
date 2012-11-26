@@ -9,7 +9,8 @@
   <meta name="author" content="Jeen Lee">
 
   
-  <meta name="description" content="Tweet Perl - Mail Send II Jan 4th, 2012 | Comments Perl - Mail Send 이전에 Perl 에서 Mail Send 관련해서 한번 깨작거린 적이 있습니다. 오늘은 이에 대해서 추가적인 수정이 필요한 부분이 있어서, &hellip;">
+  <meta name="description" content="Tweet Test::More - Use &#8216;Subtest&#8217; Instead of {} Block Jan 5th, 2012 | Comments 여태껏 테스트코드를 써나가면서 그냥 {} 블록안에 일정한 흐름의 테스트 코드를 적곤 했었습니다. 1
+2 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -116,6 +117,220 @@
   </header>
   <section id="main">
       
+  
+  
+    <article class="post">
+      <div class="sharing-box">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://jeen.github.com/blog/page/14/index.html" data-via="JEEN_LEE" data-counturl="http://jeen.github.com/blog/page/14/index.html" data-size="large">Tweet</a>
+  
+  
+  
+  <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+      
+  <header>
+    
+      <h2 class="entry-title">
+        
+        <a href="/blog/2012/01/05/test-more-use-subtest-instead-of-block/">Test::More - Use &#8216;Subtest&#8217; Instead of {} Block</a>
+        
+      </h2>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-01-05T20:33:00+09:00" pubdate data-updated="true">Jan 5<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/01/05/test-more-use-subtest-instead-of-block/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <p>  여태껏 테스트코드를 써나가면서 그냥 {} 블록안에 일정한 흐름의 테스트 코드를 적곤 했었습니다.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="k">use</span> <span class="nn">Test::</span><span class="n">More</span><span class="p">;</span>
+</span><span class='line'><span class="k">use</span> <span class="nn">HTTP::Request::</span><span class="n">Common</span><span class="p">;</span>
+</span><span class='line'><span class="k">use</span> <span class="nn">Catalyst::</span><span class="n">Test</span> <span class="s">&#39;MyApp::Web&#39;</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1"># Access /</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="k">my</span> <span class="nv">$res</span> <span class="o">=</span> <span class="n">request</span><span class="p">(</span><span class="s">&#39;/&#39;</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">ok</span><span class="p">(</span><span class="nv">$res</span><span class="o">-&gt;</span><span class="n">is_success</span><span class="p">,</span> <span class="s">&quot;Request should be succeed&quot;</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">ok</span><span class="p">(</span><span class="nv">$res</span><span class="o">-&gt;</span><span class="n">header</span><span class="p">(</span><span class="s">&#39;.......&#39;</span><span class="p">),</span> <span class="s">&#39;Header xxxxx exist&#39;</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">like</span><span class="p">(</span><span class="nv">$res</span><span class="o">-&gt;</span><span class="n">content</span><span class="p">,</span> <span class="sx">qr|some sentences|</span><span class="p">,</span> <span class="s">&quot;Found some sentences&quot;</span><span class="p">)</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1"># Login</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="k">my</span> <span class="nv">$req</span> <span class="o">=</span> <span class="n">POST</span><span class="p">(</span><span class="s">&#39;/login&#39;</span><span class="p">,</span> <span class="p">[</span> <span class="s">&#39;username&#39;</span> <span class="o">=&gt;</span> <span class="s">&#39;blahblah&#39;</span><span class="p">,</span> <span class="s">&#39;password&#39;</span> <span class="o">=&gt;</span> <span class="s">&#39;blahblah&#39;</span> <span class="p">]);</span>
+</span><span class='line'>    <span class="k">my</span> <span class="nv">$res</span> <span class="o">=</span> <span class="n">request</span><span class="p">(</span><span class="nv">$req</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">ok</span><span class="p">(</span><span class="nv">$res</span><span class="o">-&gt;</span><span class="n">is_success</span><span class="p">,</span> <span class="s">&quot;Request should be suceed&quot;</span><span class="p">);</span>
+</span><span class='line'>    <span class="o">....</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1"># some action</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="o">...</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>  일단 뭐 {} 블록으로 각 action 에 대한 접근결과를 테스트하고, <code>#</code> 로 주석표시를 하면서 하나둘 하나둘 각 블록에 <code>$req</code>, <code>$res</code> 를 추가했었습니다. 일단 뭐 {} 블록으로 묶으면서 <code>$req</code>, <code>$res</code> 따위의 변수의 재정의 등에 관한 경고같은 것이 안나와서 좋고, 제대로 분류가 되는 느낌이기도 했습니다.</p>
+
+<h3>그냥 <code>subtest</code> 를 사용하면 어떨까?</h3>
+
+<p>  그러는 도중에 <a href="http://search.cpan.org/perldoc?Test::More">Test::More 매뉴얼</a>을 읽어보다가 <code>subtest</code> 를 사용할 수 있다는 것을 알게 되었습니다.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="k">use</span> <span class="nn">HTTP::Request::</span><span class="n">Common</span><span class="p">;</span>
+</span><span class='line'><span class="k">use</span> <span class="nn">Catalyst::</span><span class="n">Test</span> <span class="s">&#39;MyApp::Web&#39;</span><span class="p">;</span>
+</span><span class='line'><span class="k">use</span> <span class="nn">Test::</span><span class="n">More</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">subtest</span> <span class="s">&#39;access to /&#39;</span> <span class="o">=&gt;</span> <span class="k">sub </span><span class="p">{</span>
+</span><span class='line'>    <span class="k">my</span> <span class="nv">$res</span> <span class="o">=</span> <span class="n">request</span><span class="p">(</span><span class="s">&#39;/&#39;</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">ok</span><span class="p">(</span><span class="nv">$res</span><span class="o">-&gt;</span><span class="n">is_success</span><span class="p">,</span> <span class="s">&quot;Request should be succeed&quot;</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">ok</span><span class="p">(</span><span class="nv">$res</span><span class="o">-&gt;</span><span class="n">header</span><span class="p">(</span><span class="s">&#39;.......&#39;</span><span class="p">),</span> <span class="s">&#39;Header xxxxx exist&#39;</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">like</span><span class="p">(</span><span class="nv">$res</span><span class="o">-&gt;</span><span class="n">content</span><span class="p">,</span> <span class="sx">qr|some sentences|</span><span class="p">,</span> <span class="s">&quot;Found some sentences&quot;</span><span class="p">)</span>
+</span><span class='line'><span class="p">};</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">subtest</span> <span class="s">&#39;Login&#39;</span> <span class="o">=&gt;</span> <span class="k">sub </span><span class="p">{</span>
+</span><span class='line'>    <span class="k">my</span> <span class="nv">$req</span> <span class="o">=</span> <span class="n">POST</span><span class="p">(</span><span class="s">&#39;/login&#39;</span><span class="p">,</span> <span class="p">[</span> <span class="s">&#39;username&#39;</span> <span class="o">=&gt;</span> <span class="s">&#39;blahblah&#39;</span><span class="p">,</span> <span class="s">&#39;password&#39;</span> <span class="o">=&gt;</span> <span class="s">&#39;blahblah&#39;</span> <span class="p">]);</span>
+</span><span class='line'>    <span class="k">my</span> <span class="nv">$res</span> <span class="o">=</span> <span class="n">request</span><span class="p">(</span><span class="nv">$req</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">ok</span><span class="p">(</span><span class="nv">$res</span><span class="o">-&gt;</span><span class="n">is_success</span><span class="p">,</span> <span class="s">&quot;Request should be suceed&quot;</span><span class="p">);</span>
+</span><span class='line'>    <span class="o">....</span>
+</span><span class='line'><span class="p">};</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>  <code>subtest</code> 를 사용하면서 코드는 위처럼 바뀌었습니다. <code>#</code> 로 주석처리를 할 필요도 없고, 해당 <code>subtest</code> 마다 명확하게 무엇을 하는 지 확실하게 의미있는 <code>subtest</code> 의 이름으로 정해줄 수 있었습니다.</p>
+
+<p>  <code>subtest</code> 로 테스트를 썼을 경우는 TAP 결과는 다음과 같습니다.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>prove t/myapp.t
+</span><span class='line'>ok 1 - access to /
+</span><span class='line'>    ok 1 - Request should be succeed
+</span><span class='line'>    ok 2 - Header xxxxx exist
+</span><span class='line'>    ok 3 - Found some sentences
+</span><span class='line'>    1..3
+</span><span class='line'>ok 2 - Login
+</span><span class='line'>    ok 1 - Request should be suceed
+</span><span class='line'>    ...
+</span><span class='line'>    1..3
+</span><span class='line'>....
+</span><span class='line'>1..3
+</span><span class='line'>ok
+</span><span class='line'>All tests successful.
+</span><span class='line'><span class="nv">Files</span><span class="o">=</span>1, <span class="nv">Tests</span><span class="o">=</span>3, 10 wallclock secs <span class="o">(</span> 0.07 usr  0.01 sys +  6.16 cusr  0.61 <span class="nv">csys</span> <span class="o">=</span>  6.85 CPU<span class="o">)</span>
+</span><span class='line'>Result: PASS
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>  전체 테스트 횟수는 <code>subtest</code> 안의 테스트 항목이 아니라, <code>subtest</code> 의 갯수가 되는 것입니다.</p>
+
+<p>  그리고 <code>subtest</code> 를 사용하지 않고 {} 블록을 이용해서 flat 하게 정의했을 때는 아래와 같습니다.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>...
+</span><span class='line'>ok 1 - Request should be succeed
+</span><span class='line'>ok 2 - Header xxxxx exist
+</span><span class='line'>ok 3 - Found some sentences
+</span><span class='line'>ok 4 - Request should be suceed
+</span><span class='line'> ...
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>  테스트 항목 1,4 번의 메시지가 같기 때문에 매번 달리 지정해줘야 되는 수고가 발생하죠. 그리고 각각의 테스트 항목 하나하나가 테스트 갯수가 되는 것입니다.</p>
+
+<p>  사실은 위의 Jenkins 상의 <code>Test Result Trend</code> 의 그래프가 어느 순간 갑자기 뚝 떨어지길래, 어라 이상하다 싶어서 살펴본 결과, <code>subtest</code> 기준으로 카운트되어있는 것을 확인했습니다.</p>
+
+<p><img src="https://lh5.googleusercontent.com/-TSX-Kd5-fX4/TwWRjvHx2LI/AAAAAAAAA94/pYrEEgHBZic/test-result-trend.png" alt="Jenkins Test Result Trend 의 낙폭" /></p>
+
+<p>  대충 위의 <code>#58</code> 번 빌드가 그 쯤이 되겠네요.</p>
+
+<p>  아무튼 Jenkins 도입이후에 좀 더 테스트코드에 더 신경을 쓰고 있는 요즘입니다.</p>
+
+  
+  
+
+
+    </article>
   
   
     <article class="post">
@@ -584,77 +799,6 @@
 <p>  물론 <code>$deliveries</code> 변수를 덤프해보면 각각의 메일헤더들이 존재하고 좀 더 항목당 세밀하게 테스트를  수행할 수 있겠지만, 여기서는 단순하게 이정도로 그치도록 합니다.</p>
 
 <p>  사실은 뭐 <code>To</code> 안에 여러개의 메일이 들어간다는 전제로 ArrayRef 를 넣었지만, 사실 Str 을 받기에 <code>To</code> 에 대해서는 그냥 문자열로 <code>mail-1@mail.com, mail-2@mail.com, mail-3@mail.com</code> 으로 해도 가능합니다. 하지만 그냥 제 고집상 복수의 데이터셋이 들어갈 때는 왠지 ArrayRef 로 넣고 싶어졌을 뿐입니다. 존중받고 싶은 취향같은 것이죠.</p>
-
-  
-  
-
-
-    </article>
-  
-  
-    <article class="post">
-      <div class="sharing-box">
-  
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://jeen.github.com/blog/page/14/index.html" data-via="JEEN_LEE" data-counturl="http://jeen.github.com/blog/page/14/index.html" data-size="large">Tweet</a>
-  
-  
-  
-  <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
-  
-</div>
-
-      
-  <header>
-    
-      <h2 class="entry-title">
-        
-        <a href="/blog/2012/01/03/ea-pms-task-management/">[번역] PM&#8217;s Task Management @ EA</a>
-        
-      </h2>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-01-03T20:53:00+09:00" pubdate data-updated="true">Jan 3<span>rd</span>, 2012</time>
-        
-         | <a href="/blog/2012/01/03/ea-pms-task-management/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <ul>
-<li><p>프로젝트의 두목은 두명으로 나뉜다. 한명은 Creative Director, 다른 한명은 Project Manager. PM 은 예산/외주관리/리소스 관리의 모든 권한을 가지고, CD 가 그 이외의 권한을 가진다.</p></li>
-<li><p>권력의 관계는 CD>PM. CD 가 &#8220;좀 늦어도 되니까 이것을 한다&#8221; 라고 정하면 PM 은 그에 따라, 프로젝트를 짜맞춰야 한다. 단, CD 가 최종책임은 전부 덮어쓰는 것이 룰.</p></li>
-<li><p>PM 이 실제로 스케쥴을 진행하는 방법은 리소스 관리를 하면서, 2두 단위로 마일스톤을 내놓는다. 마일스톤에는 반드시 목적이 있고, 상황에 맞춰서 최종 스케쥴은 항상 바뀐다.</p></li>
-<li><p>마일스톤 6개에 하나 정도는 빅 마일스톤, 프로젝트의 진행상황을 외부(상층부)에 대해 나타내는 [알파] 를 내놓는다.</p></li>
-<li><p>최종 스케쥴은 필요한 리소스를 전부 나열해서, 팀원 스스로 골라서 맡게 된다. 다음은 PM 이 팀의 실적을 보고 속도를 CD 와 상층부에 알리고, 어디가 병목이 되는 지 등을 관리한다.</p></li>
-<li><p>프로젝트 팀원은 항상 마일스톤에서 당면한 목표를 알고 있어서 정말로 프로세스를 가지고 생각할 수 있으며, PM 이 항상 스케쥴을 쌓고, 속도를 계산해서 무엇이 늦어지고 있는 지 알려줄 수 있기 때문에 편하다</p></li>
-<li><p>내용과 진행 관리를 완전히 나눠서 최종적으로 내용관리로 정리한다. 처음은 내용을 전부 리스트로 만든다. 어떻게든 모든 요소라고 생각되는 것을 가시화 해서 리스트로 만들고 &#8220;어느 정도의 작업이 있는가&#8221;를 계산해낸다.</p></li>
-<li><p>그리고 그 내용중에 &#8220;절대로 fun factor 에 빠질 수 없는 것&#8221; 등을 CD 가 가르쳐 준다. 그 다음은 마일스톤에서 쌓아가면서 스케쥴을 보고, 일정 실적을 쌓을 즘에 실제로 가능한 것인지 전부 리스트로 만든다.</p></li>
-<li><p>그래서 PM 에게 질문하면 &#8220;이 추가예산이 있다면 아웃소싱이 있다면 여기에 이것을 투입하면 이렇게 단축할 수 있다&#8221; 라는 매우 구체적인 스케쥴을 항상 가질 수 있다.</p></li>
-<li><p>덧붙여 CD>PM 이라는 권력관계가 되어 있는 것은 EA 의 게임 크리에이티브와 재미를 담보로 하는 것은 결국은 게임 디자이너가 아니면 안된다라는 생각을 가지고 있기 때문이다.</p></li>
-</ul>
-
-
-<h3>원문</h3>
-
-<ul>
-<li><a href="http://togetter.com/li/198059">EA流のPMのタスク管理の仕方 - Togetter</a></li>
-</ul>
-
 
   
   

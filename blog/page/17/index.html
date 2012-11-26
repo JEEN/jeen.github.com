@@ -9,7 +9,7 @@
   <meta name="author" content="Jeen Lee">
 
   
-  <meta name="description" content="Tweet Using Plack::Middleware::OAuth Dec 27th, 2011 | Comments Before Using Plack::Middleware::OAuth 사실은 Plack::Middleware::OAuth 를 사용하기 이전에는 OAuth &hellip;">
+  <meta name="description" content="Tweet Catalyst - ActionRole Dec 27th, 2011 | Comments Action Role 오래된 이야기이지만 Catalyst 가 Moose 기반으로 만들어지면서 ActionRole 이라는 개념이 만들어졌었지요. 실제 업무에서 적용해볼 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -116,6 +116,174 @@
   </header>
   <section id="main">
       
+  
+  
+    <article class="post">
+      <div class="sharing-box">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://jeen.github.com/blog/page/17/index.html" data-via="JEEN_LEE" data-counturl="http://jeen.github.com/blog/page/17/index.html" data-size="large">Tweet</a>
+  
+  
+  
+  <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+      
+  <header>
+    
+      <h2 class="entry-title">
+        
+        <a href="/blog/2011/12/27/catalyst-actionrole/">Catalyst - ActionRole</a>
+        
+      </h2>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-12-27T21:14:00+09:00" pubdate data-updated="true">Dec 27<span>th</span>, 2011</time>
+        
+         | <a href="/blog/2011/12/27/catalyst-actionrole/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <h3>Action Role</h3>
+
+<p>  오래된 이야기이지만 Catalyst 가 Moose 기반으로 만들어지면서 ActionRole 이라는 개념이 만들어졌었지요.
+  실제 업무에서 적용해볼 껀덕지가 없어서 만져보지는 못했습니다만, 최근에 업무에서 ActionRole 을 적용해서 간단한 수정작업을 진행했습니다.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="nb">package</span> <span class="nn">MyApp::Web::ActionRole::</span><span class="n">Logger</span><span class="p">;</span>
+</span><span class='line'><span class="k">use</span> <span class="nn">Moose::</span><span class="n">Role</span><span class="p">;</span>
+</span><span class='line'><span class="k">use</span> <span class="nn">namespace::</span><span class="n">autoclean</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">after</span> <span class="n">execute</span> <span class="o">=&gt;</span> <span class="k">sub </span><span class="p">{</span>
+</span><span class='line'>    <span class="k">my</span> <span class="p">(</span><span class="nv">$self</span><span class="p">,</span> <span class="nv">$controller</span><span class="p">,</span> <span class="nv">$c</span><span class="p">)</span> <span class="o">=</span> <span class="nv">@_</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1"># ...</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="mi">1</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>  일단 업무에서 사용한 ActionRole 의 기본형은 위와 같습니다.</p>
+
+<p>  Catalyst App 을 만들 때 사용한 네임스페이스를 기준으로 <code>ActionRole::[RoleName]</code> 을 사용합니다. 그러니 위에서 봤을 때 Catalyst App 의 이름은 <code>MyApp::Web</code> 이 되겠죠. 당연히 ActionRole 의 이름은 Logger 입니다.</p>
+
+<p>  또한, Logger 라는 ActionRole 을 참조할 때, Catalyst 는 <code>MyApp::Web</code> 뿐만 아니라 <code>Catalyst::ActionRole::Logger</code> 가 있으면 이를 참조할 수 있습니다.
+   <code>MyApp::Web::ActionRole::Logger</code> 와 <code>Catalyst::ActionRole::Logger</code> 두개가 존재할 시에는 앞의 <code>MyApp::Web::ActionRole::Logger</code> 를 우선적으로 사용하게 됩니다.</p>
+
+<h3>주의점</h3>
+
+<p>  위의 코드의 <code>after execute =&gt; sub { ... }</code> 에서 주의할 점이 한가지 있습니다. Catalyst 의 <code>auto</code>, <code>begin</code>, <code>end</code> 등의 Private Action 들 또한 실행이 된다는 점 입니다.
+  예를들어 <code>/user/login</code> 이라는 수행하기 위해서 각 컨트롤러 마다 <code>auto</code>, <code>begin</code> 등의 Private Action 이 정의되어 있다고 하면, 아마 아래와 같이 나올 것입니다.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='perl'><span class='line'>  <span class="o">.------------------------------------------------------------+-----------.</span>
+</span><span class='line'><span class="o">|</span> <span class="n">Action</span>                                                     <span class="o">|</span> <span class="n">Time</span>      <span class="o">|</span>
+</span><span class='line'><span class="o">+------------------------------------------------------------+-----------+</span>
+</span><span class='line'><span class="o">|</span> <span class="o">/</span><span class="n">auto</span>                                                      <span class="o">|</span> <span class="mf">0.000600</span><span class="n">s</span> <span class="o">|</span>
+</span><span class='line'><span class="o">|</span> <span class="sr">/user/</span><span class="n">auto</span>                                                 <span class="o">|</span> <span class="mf">0.000208</span><span class="n">s</span> <span class="o">|</span>
+</span><span class='line'><span class="o">|</span> <span class="sr">/user/</span><span class="n">login</span>                                                <span class="o">|</span> <span class="mf">0.000219</span><span class="n">s</span> <span class="o">|</span>
+</span><span class='line'><span class="o">|</span> <span class="sr">/user/</span><span class="n">end</span>                                                  <span class="o">|</span> <span class="mf">0.009542</span><span class="n">s</span> <span class="o">|</span>
+</span><span class='line'><span class="o">|</span>  <span class="o">-&gt;</span> <span class="nn">MyApp::Web::View::</span><span class="n">Default</span><span class="o">-&gt;</span><span class="n">process</span>                    <span class="o">|</span> <span class="mf">0.008665</span><span class="n">s</span> <span class="o">|</span>
+</span><span class='line'><span class="s">&#39;------------------------------------------------------------+-----------&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>  애시당초 <code>/user/login</code> 가 끝나면 무엇무엇을 한다라고 <code>ActionRole::Logger</code> 에 정의한 마당에서 해당 액션이 2-3회 중복해서 실행되는 경우가 발생하는 것입니다. 바로 <code>auto</code>, <code>end</code> 가 끝난 다음에도 해당 ActionRole 을 참고한다는 것이죠.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="nb">package</span> <span class="nn">MyApp::Web::ActionRole::</span><span class="n">Logger</span><span class="p">;</span>
+</span><span class='line'><span class="k">use</span> <span class="nn">Moose::</span><span class="n">Role</span><span class="p">;</span>
+</span><span class='line'><span class="k">use</span> <span class="nn">namespace::</span><span class="n">autoclean</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">after</span> <span class="n">execute</span> <span class="o">=&gt;</span> <span class="k">sub </span><span class="p">{</span>
+</span><span class='line'>    <span class="k">my</span> <span class="p">(</span><span class="nv">$self</span><span class="p">,</span> <span class="nv">$controller</span><span class="p">,</span> <span class="nv">$c</span><span class="p">)</span> <span class="o">=</span> <span class="nv">@_</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">return</span> <span class="k">if</span> <span class="nv">$self</span> <span class="o">=~</span><span class="sr"> /(?:auto|begin|end)/</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1"># ...</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="mi">1</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>  그래서 적절하게 <code>auto</code>, <code>begin</code>, <code>end</code> 는 필터링해줍니다. <code>$self</code> 변수에 어떤 액션에서 온 것인지 알 수 있습니다. 전 처음에 계속 <code>$c-&gt;action</code> 으로 알고 착각을 했더랬습니다.</p>
+
+<p>  아, 물론 ActionRole 을 추가해줬다고 바로 쓸 수 있는 것은 아닙니다.
+  해당 ActionRole 을 사용할 컨트롤러의 기본 상속 모듈을 <code>Catalyst::Controller</code> 에서 <code>Catalyst::Controller::ActionRole</code> 로 바꾸도록 합니다.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="nb">package</span> <span class="nn">MyApp::Web::Controller::</span><span class="n">Root</span><span class="p">;</span>
+</span><span class='line'><span class="k">use</span> <span class="n">Moose</span><span class="p">;</span>
+</span><span class='line'><span class="k">use</span> <span class="nn">namespace::</span><span class="n">autoclean</span><span class="p">;</span>
+</span><span class='line'><span class="k">BEGIN</span> <span class="p">{</span> <span class="n">extends</span> <span class="err">&#39;</span><span class="nn">Catalyst::Controller::</span><span class="n">ActionRole</span><span class="err">`</span> <span class="p">}</span>
+</span><span class='line'><span class="o">...</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Conclusion</h3>
+
+<p>  위의 예제에서는 그냥 단순히 <code>Root</code> 에서만 사용하고 있는 것 처럼 보이지만, 업무상에서는  특정 컨트롤러 몇개를 제외한 나머지 모든 컨트롤러에서 공통으로 사용하고 있습니다.</p>
+
+<p>  거의 모든 컨트롤러 상의 액션이 끝날 때, 시작될 때, 혹은 양쪽 모두에서 공통적으로 특정 행동을 정의할 때 ActionRole 과 함께하면 좀 더 유연하고 아름다운 코드작성에 도움이 되지 않을까 생각하고 있습니다.</p>
+
+  
+  
+
+
+    </article>
   
   
     <article class="post">
@@ -361,213 +529,12 @@
 
     </article>
   
-  
-    <article class="post">
-      <div class="sharing-box">
-  
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://jeen.github.com/blog/page/17/index.html" data-via="JEEN_LEE" data-counturl="http://jeen.github.com/blog/page/17/index.html" data-size="large">Tweet</a>
-  
-  
-  
-  <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
-  
-</div>
-
-      
-  <header>
-    
-      <h2 class="entry-title">
-        
-        <a href="/blog/2011/12/26/dbix-class-using-gis-extensions/">DBIx::Class - Using GIS Extensions</a>
-        
-      </h2>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-12-26T15:56:00+09:00" pubdate data-updated="true">Dec 26<span>th</span>, 2011</time>
-        
-         | <a href="/blog/2011/12/26/dbix-class-using-gis-extensions/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <h3>DBIx::Class 에서의 GIS!?</h3>
-
-<p>  ORM 을 사용함에 있어서 단순한 SELECT 문은 그렇게 큰 고민없이 사용할 수 있습니다. 하지만 GIS Extension 을 사용한 쿼리들을 ORM 에서 사용한다면 일단 고민이 들어가기 마련입니다.</p>
-
-<h3>DBIx::Class 로 사용할 GIS 용 Query 확인</h3>
-
-<p>  우선 대상으로 할 테이블은 아래와 같습니다.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">venue</span> <span class="p">(</span>
-</span><span class='line'>  <span class="n">id</span>            <span class="nb">INT</span> <span class="k">NOT</span> <span class="k">NULL</span> <span class="k">PRIMARY</span> <span class="k">KEY</span> <span class="n">AUTO_INCREMENT</span><span class="p">,</span>
-</span><span class='line'>  <span class="n">name</span>          <span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">255</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
-</span><span class='line'>  <span class="n">latitude</span>      <span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">64</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
-</span><span class='line'>  <span class="n">longitude</span>     <span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">64</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
-</span><span class='line'>  <span class="k">location</span>      <span class="n">Point</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
-</span><span class='line'>  <span class="n">SPATIAL</span> <span class="k">INDEX</span><span class="p">(</span><span class="k">location</span><span class="p">),</span>
-</span><span class='line'>  <span class="n">created_on</span>    <span class="n">DATETIME</span> <span class="k">NOT</span> <span class="k">NULL</span> <span class="k">DEFAULT</span> <span class="s1">&#39;0000-00-00 00:00:00&#39;</span>
-</span><span class='line'><span class="p">)</span> <span class="n">ENGINE</span><span class="o">=</span><span class="n">MyISAM</span> <span class="k">DEFAULT</span> <span class="n">CHARSET</span> <span class="n">UTF8</span><span class="p">;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>  위의 CREATE TABLE 문에서 알 수 있듯, <code>location</code> 이<em>SPATIAL INDEX</em> 를 사용하게 됩니다. 이제 이 <code>location</code> 컬럼을 대상으로 온갖 GIS 관련 쿼리를 ORM 에서 사용하게끔 합니다.</p>
-
-<h3>INSERT</h3>
-
-<p>  우선 DB 스키마는 덤프되어 있다고 가정하며 <code>Venue</code> 라는 결과 클래스에 데이터를 등록해보도록 합니다.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='perl'><span class='line'>  <span class="o">....</span>
-</span><span class='line'>  <span class="nv">$self</span><span class="o">-&gt;</span><span class="n">resultset</span><span class="p">(</span><span class="s">&#39;Venue&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">create</span><span class="p">({</span>
-</span><span class='line'>      <span class="n">name</span>     <span class="o">=&gt;</span> <span class="s">&#39;Silex&#39;</span><span class="p">,</span>
-</span><span class='line'>      <span class="n">latitude</span> <span class="o">=&gt;</span> <span class="s">&#39;32.123512&#39;</span><span class="p">,</span>
-</span><span class='line'>      <span class="n">longitude</span> <span class="o">=&gt;</span> <span class="s">&#39;127.0123123&#39;</span><span class="p">,</span>
-</span><span class='line'>      <span class="n">location</span>  <span class="o">=&gt;</span> <span class="o">\</span><span class="s">&quot;GeomFromText(&#39;POINT(32.123512 127.0123123)&#39;)&quot;</span><span class="p">,</span>
-</span><span class='line'>  <span class="p">});</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>  위와같은 코드로 <code>location</code> 에 대해서 Scalar Reference 를 지정함으로 GIS 관련 <code>GeomFromText</code> 라는 Function 을 사용할 수 있게 됩니다.</p>
-
-<h3>SELECT</h3>
-
-<p>  일단 위치정보의 등록은 위와같은 코드로 가능했고, 이제 결과값을 찾아보도록 합니다.
-   인자로 사용될 값은 모바일기기의 화면단의 좌상단 Latitude/Longitude 좌표와 우하단 Latitude/Longitude 좌표입니다.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="o">...</span>
-</span><span class='line'><span class="nv">$self</span><span class="o">-&gt;</span><span class="n">resultset</span><span class="p">(</span><span class="s">&#39;Venue&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">search</span><span class="p">({</span>
-</span><span class='line'>    <span class="o">-</span><span class="ow">and</span> <span class="o">=&gt;</span> <span class="p">[</span>
-</span><span class='line'>        <span class="o">\</span><span class="s">&quot;Intersects(location, Envelope(GeomFromText(&#39;LineString(32.0 127.0, 33.0 128.0)&#39;)))&quot;</span><span class="p">,</span>
-</span><span class='line'>    <span class="p">]</span>
-</span><span class='line'><span class="p">});</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>  위처럼 또다시 Scalar Reference 의 힘을 빌려서 사태를 회피할 수 있습니다. 위의 코드로 좌상단의 점과 우하단의 점을 잇는 사각형의 영역에 대해서 결과를 얻어낼 수 있습니다.</p>
-
-<h3>SELECT + ORDER_BY</h3>
-
-<p>  여기까지는 그저 Scalar Reference 의 마법을 이용해서 잘도 헤쳐왔지만 이제부터가 문제입니다. 결과값을 뽑아낼 때에, 중점을 기준으로 결과값을 정렬해서 보여줄 필요가 생겼습니다.</p>
-
-<p>  이제껏 <a href="http://search.cpan.org/perldoc?DBIx::Class">DBIx::Class</a> 를 사용하며 숱하게 회피방법을 연구해봤지만 도저히 답이 나오지 않아서 결국은 GIS 관련 등의 복잡한 쿼리에서 ORM 의 사용을 피하고 쌩 SQL 을 날릴 수 밖에 없었습니다만, 이런저런 시련의 세월 속에서 결국은 방법을 찾아냈습니다.</p>
-
-<p>  그 방법이란 Dynamic View 를 이용하는 방법입니다. 일반적으로 View 를 만듬에 있어서 컬럼들의 비교나 의미가 정해진 정적인 값을 써서 미리 View 를 만들어서 사용하는 방법을 주로 사용해왔었는데, Dynamic View 를 통해서 해당 위치정보에 해당하는 값들을 바인딩해서 즉석에서 View 를 생성하는 방법입니다.</p>
-
-<p>  우선은 <code>VenueComplex</code> 라는 View Table Class 를 작성합니다.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="nb">package</span> <span class="nn">MyApp::Schema::Result::</span><span class="n">VenueComplex</span><span class="p">;</span>
-</span><span class='line'><span class="k">use</span> <span class="n">strict</span><span class="p">;</span>
-</span><span class='line'><span class="k">use</span> <span class="n">warnings</span><span class="p">;</span>
-</span><span class='line'><span class="k">use</span> <span class="n">base</span> <span class="sx">qw/DBIx::Class::Core/</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">__PACKAGE__</span><span class="o">-&gt;</span><span class="n">table_class</span><span class="p">(</span><span class="s">&#39;DBIx::Class::ResultSource::View&#39;</span><span class="p">);</span>
-</span><span class='line'><span class="n">__PACKAGE__</span><span class="o">-&gt;</span><span class="n">table</span><span class="p">(</span><span class="s">&#39;venue_complex&#39;</span><span class="p">);</span>
-</span><span class='line'><span class="n">__PACKAGE__</span><span class="o">-&gt;</span><span class="n">result_source_instance</span><span class="o">-&gt;</span><span class="n">is_virtual</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
-</span><span class='line'><span class="n">__PACKAGE__</span><span class="o">-&gt;</span><span class="n">result_source_instance</span><span class="o">-&gt;</span><span class="n">view_definition</span><span class="p">(</span><span class="sx">q{</span>
-</span><span class='line'><span class="sx">  SELECT v.*, SQRT(POW(ABS(X(v.location) - X(GeomFromText(?))), 2) + POW(ABS(Y(v.location) - Y(GeomFromText(?))), 2)) as distance FROM venue v WHERE Intersects(v.location, Envelope(GeomFromText(x))) ORDER BY distance asc</span>
-</span><span class='line'><span class="sx">}</span><span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">__PACKAGE__</span><span class="o">-&gt;</span><span class="n">add_columns</span><span class="p">(</span> <span class="o">...</span> <span class="p">);</span>
-</span><span class='line'><span class="o">...</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>  여타 컬럼정보, 릴레이션 설정등은 기존의 <code>Venue</code> 결과클래스에서 정의한 것을 그대로 사용하도록 합니다. 위의 view_definition 의 Prepared Statement SQL 에 바인딩 될 값은 3개입니다.</p>
-
-<p>  자, 준비는 끝났으니, 이제 중점기준으로 값을 구해봅니다.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="k">my</span> <span class="p">(</span><span class="nv">$nw_lat</span><span class="p">,</span> <span class="nv">$nw_lng</span><span class="p">)</span> <span class="o">=</span> <span class="nb">split</span> <span class="s">&#39;,&#39;</span><span class="p">,</span> <span class="nv">$args</span><span class="o">-&gt;</span><span class="p">{</span><span class="n">location1</span><span class="p">};</span>
-</span><span class='line'><span class="k">my</span> <span class="p">(</span><span class="nv">$se_lat</span><span class="p">,</span> <span class="nv">$se_lng</span><span class="p">)</span> <span class="o">=</span> <span class="nb">split</span> <span class="s">&#39;,&#39;</span><span class="p">,</span> <span class="nv">$args</span><span class="o">-&gt;</span><span class="p">{</span><span class="n">location2</span><span class="p">};</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">my</span> <span class="nv">$center_point_x</span> <span class="o">=</span> <span class="p">(</span><span class="nv">$se_lat</span> <span class="o">-</span> <span class="nv">$nw_lat</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">+</span> <span class="nv">$nw_lat</span><span class="p">;</span>
-</span><span class='line'><span class="k">my</span> <span class="nv">$center_point_y</span> <span class="o">=</span> <span class="p">(</span><span class="nv">$se_lng</span> <span class="o">-</span> <span class="nv">$nw_lng</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">+</span> <span class="nv">$nw_lng</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">my</span> <span class="nv">$r</span> <span class="o">=</span> <span class="nv">$self</span><span class="o">-&gt;</span><span class="n">resultset</span><span class="p">(</span><span class="s">&#39;VenueComplex&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">search</span><span class="p">({},</span> <span class="p">{</span>
-</span><span class='line'>     <span class="nb">bind</span> <span class="o">=&gt;</span> <span class="p">[</span> <span class="s">&quot;POINT($center_point_x $center_point_y)&quot;</span><span class="p">,</span>
-</span><span class='line'>               <span class="s">&quot;POINT($center_point_x $center_point_y)&quot;</span><span class="p">,</span>
-</span><span class='line'>               <span class="s">&quot;LineString($nw_lat $nw_lng , $se_lat $se_lng)&quot;</span><span class="p">,</span>
-</span><span class='line'>             <span class="p">],</span>
-</span><span class='line'><span class="p">});</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>  기존의 <code>Venue</code> 클래스가 아닌 <code>VenueComplex</code> 로 대상을 바꾸고, bind 로 세개의 값을 넘겨줍니다. 중점기준으로 정렬은 위의 <code>VenueComplex</code> 의 SQL 상에서 처리하고 있습니다.</p>
-
-<h3>Conclusion</h3>
-
-<p>  ORM 을 사용할 때에는 수많은 장점에도 불구하고 아직까지 논의되고 있는 수많은 단점들을 명확하게 인지해야 합니다. 상황에 맞게 쓰는 것이 당연히 중요하겠죠.
-  위에서 제가 제시한 코드들이 바른 길이라고는 장담할 수 없겠습니다만, 다양한 요구사항을 수렴할 수 있다면 그걸로 괜찮다고 그냥 생각하고 있습니다.</p>
-
-  
-  
-
-
-    </article>
-  
 
     <nav role="navigation" id="pagination">
+  <span class="next">
+    <a href="/blog/page/18/" rel="next">Continue &rarr;</a>
+  </span>
+
 
   <span class="prev">
     <a href="/blog/page/16/" rel="prev">Newer &larr;</a>
