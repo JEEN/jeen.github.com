@@ -9,7 +9,7 @@
   <meta name="author" content="Jeen Lee">
 
   
-  <meta name="description" content="Tweet CPANRatings - WebService::Aladdin Feb 8th, 2012 | Comments @keedi @gypark 오오오&#8230; 가문의 영광!!!&mdash; JEEN (@JEEN_LEE) February 8, 2012 새벽에 @ &hellip;">
+  <meta name="description" content="Tweet CPAN Module Update Feb 9th, 2012 | Comments Acme-CPANAuthors-Korean 0.08 by JEEN - metacpan.org/release/JEEN/A…&mdash; CPAN New Modules (@ &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -134,6 +134,108 @@
     
       <h2 class="entry-title">
         
+        <a href="/blog/2012/02/09/cpan-module-update/">CPAN Module Update</a>
+        
+      </h2>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-02-09T01:06:00+09:00" pubdate data-updated="true">Feb 9<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/02/09/cpan-module-update/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <blockquote class="twitter-tweet" lang="ko"><p>Acme-CPANAuthors-Korean 0.08 by JEEN - <a href="http://t.co/CjlRnKEO" title="http://metacpan.org/release/JEEN/Acme-CPANAuthors-Korean-0.08/">metacpan.org/release/JEEN/A…</a></p>&mdash; CPAN New Modules (@cpan_new) <a href="https://twitter.com/cpan_new/status/167271503061200896" data-datetime="2012-02-08T15:40:08+00:00">2월 8, 2012</a></blockquote>
+
+
+
+
+<blockquote class="twitter-tweet" lang="ko"><p>Lingua-KO-TypoCorrector 0.03 by JEEN - <a href="http://t.co/b1Lp98PW" title="http://metacpan.org/release/JEEN/Lingua-KO-TypoCorrector-0.03/">metacpan.org/release/JEEN/L…</a></p>&mdash; CPAN New Modules (@cpan_new) <a href="https://twitter.com/cpan_new/status/167273895550922753" data-datetime="2012-02-08T15:49:39+00:00">2월 8, 2012</a></blockquote>
+
+
+
+
+<blockquote class="twitter-tweet" lang="ko"><p>Date-Holidays-KR 0.03 by JEEN - <a href="http://t.co/qAXrPO6f" title="http://metacpan.org/release/JEEN/Date-Holidays-KR-0.03/">metacpan.org/release/JEEN/D…</a></p>&mdash; CPAN New Modules (@cpan_new) <a href="https://twitter.com/cpan_new/status/167275532466143232" data-datetime="2012-02-08T15:56:09+00:00">2월 8, 2012</a></blockquote>
+
+
+
+
+<blockquote class="twitter-tweet" lang="ko"><p>WebService-Aladdin 0.0706 by JEEN - <a href="http://t.co/lyGpgk6W" title="http://metacpan.org/release/JEEN/WebService-Aladdin-0.0706/">metacpan.org/release/JEEN/W…</a></p>&mdash; CPAN New Modules (@cpan_new) <a href="https://twitter.com/cpan_new/status/167276286962704385" data-datetime="2012-02-08T15:59:09+00:00">2월 8, 2012</a></blockquote>
+
+
+
+
+<blockquote class="twitter-tweet" lang="ko"><p>WWW-Shorten-Durl 0.05 by JEEN - <a href="http://t.co/mtnX4oEn" title="http://metacpan.org/release/JEEN/WWW-Shorten-Durl-0.05/">metacpan.org/release/JEEN/W…</a></p>&mdash; CPAN New Modules (@cpan_new) <a href="https://twitter.com/cpan_new/status/167277296259055616" data-datetime="2012-02-08T16:03:09+00:00">2월 8, 2012</a></blockquote>
+
+
+<p>  이전 글에서 언급했듯, 제가 만든 CPAN Module 들의 Meta 정보중에 repository 가 누락된 것도 있었고, 이 중 몇몇은 Github Project 이름까지 p5-* 형식으로 바꿔놓아서 이왕 이렇게 된 거 전부 바꿔보자는 생각이 들어서 작업을 했습니다.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="k">use</span> <span class="nn">inc::Module::</span><span class="n">Install</span><span class="p">;</span>
+</span><span class='line'><span class="n">name</span> <span class="s">&#39;Date-Holidays-KR&#39;</span><span class="p">;</span>
+</span><span class='line'><span class="n">all_from</span> <span class="s">&#39;lib/Date/Holidays/KR.pm&#39;</span><span class="p">;</span>
+</span><span class='line'><span class="n">requires</span> <span class="s">&#39;Date::Korean&#39;</span> <span class="o">=&gt;</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">tests</span> <span class="s">&#39;t/*.t&#39;</span><span class="p">;</span>
+</span><span class='line'><span class="n">test_requires</span> <span class="s">&#39;Test::More&#39;</span><span class="p">;</span>
+</span><span class='line'><span class="n">resources</span> <span class="n">repository</span> <span class="o">=&gt;</span> <span class="s">&#39;git://github.com/JEEN/p5-Date-Holidays-KR.git&#39;</span><span class="p">;</span>
+</span><span class='line'><span class="n">auto_include</span><span class="p">;</span>
+</span><span class='line'><span class="n">WriteAll</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>  위는 <a href="http://metacpan.org/module/Date::Holidays::KR">Date::Holidays::KR</a> 의 <code>Makefile.PL</code> 입니다. 몇몇 모듈은 <a href="http://metacpan.org/module/ExtUtils::MakeMaker">ExtUtils::MakeMaker</a> 를 사용하고 있었는데, 모두 <a href="http://metacpan.org/module/Module::Install">Module::Install</a> 을 사용하도록 교체하고, repository 를 각각의 github repository 를 지정한 것뿐입니다.</p>
+
+<p>  마음먹은 김에 이슈처리하고 저녁시간을 빌어서 CPAN 에 일괄 업로드했습니다. 완전 스팸이네요.</p>
+
+  
+  
+
+
+    </article>
+  
+  
+    <article class="post">
+      <div class="sharing-box">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://jeen.github.com/blog/page/11/index.html" data-via="JEEN_LEE" data-counturl="http://jeen.github.com/blog/page/11/index.html" data-size="large">Tweet</a>
+  
+  
+  
+  <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+      
+  <header>
+    
+      <h2 class="entry-title">
+        
         <a href="/blog/2012/02/08/cpanratings-webservice-aladdin/">CPANRatings - WebService::Aladdin</a>
         
       </h2>
@@ -184,108 +286,6 @@
 
 <p>Date::Holidays::KR 에 Repository 가 없는 이유는 META.yml 이 없어서 였던 듯&#8230;</p></li>
 </ul>
-
-
-  
-  
-
-
-    </article>
-  
-  
-    <article class="post">
-      <div class="sharing-box">
-  
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://jeen.github.com/blog/page/11/index.html" data-via="JEEN_LEE" data-counturl="http://jeen.github.com/blog/page/11/index.html" data-size="large">Tweet</a>
-  
-  
-  
-  <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
-  
-</div>
-
-      
-  <header>
-    
-      <h2 class="entry-title">
-        
-        <a href="/blog/2012/02/07/date-holidays-kr-0-dot-01-released/">Date::Holidays::KR Released</a>
-        
-      </h2>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-02-07T20:28:00+09:00" pubdate data-updated="true">Feb 7<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/02/07/date-holidays-kr-0-dot-01-released/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <p>  회사의 경영자 @y0ngbin 께서 <code>is_bizday</code> 라는 스크립트를 만들어서 쓰는 것을 보고 호오 했었는데&#8230;</p>
-
-<p>  <script src="https://gist.github.com/1646007.js?file=is_bizday.pl"></script></p>
-
-<p>  알고보니 내용인즉슨 HTTP Request 를 날리고 그 결과를 파싱하는 일을 하고 있다는 것을 알고, 급히 <a href="http://metacpan.org/module/Date::Holidays::KR">Date::Holidays::KR</a> 이라는 모듈을 만들기로 했습니다&#8230; 랄까 사실은 작년부터 떠밀려온 <code>Things</code> 의 이슈 중 하나였습니다.</p>
-
-<p>  사실 일본같은 경우에는 음력이 옛날에 없어져버렸고, 지금은 양력만으로 돌고 있고, 중국은 한국과 마찬가지로 음력을 사용하고 있습니다. 재미삼아서 여러나라의 공휴일을 살펴봤는데, 대개 정해진 날, 또는 몇 월의 몇번째 주의 월요일이라든가 하는 식으로 공휴일이 지정되어 있는 것을 봤습니다.
-  캐나다의 경우는 주마다 휴일이 다르더군요. :-)</p>
-
-<p>  아무튼 같은 음력을 사용하는 중국, 그 중국용으로 만든 <a href="http://metacpan.org/module/Date::Holidays::CN">Date::Holidays::CN</a> 을 참고해서 <code>Date::Holidays::KR</code> 을 만들었습니다. 음력도 미묘하게 중국과는 다르다고 하는데, 이 부분은 @aer0 님께서 만드신 <a href="http://metacpan.org/module/Date::Korean">Date::Korean</a> 모듈을 사용해서 음력/양력 변환을 이용했구요. (설날,추석,석가탄신일의 경우는 음력)</p>
-
-<blockquote class="twitter-tweet"><p>Date-Holidays-KR 0.01 by JEEN - <a href="http://t.co/pHQVHLaJ" title="http://metacpan.org/release/JEEN/Date-Holidays-KR-0.01/">metacpan.org/release/JEEN/D…</a></p>&mdash; CPAN New Modules (@cpan_new) <a href="https://twitter.com/cpan_new/status/166840689223675904" data-datetime="2012-02-07T11:08:14+00:00">February 7, 2012</a></blockquote>
-
-
-
-
-<blockquote class="twitter-tweet"><p>Date-Holidays-KR 0.02 by JEEN - <a href="http://t.co/mgouifly" title="http://metacpan.org/release/JEEN/Date-Holidays-KR-0.02/">metacpan.org/release/JEEN/D…</a></p>&mdash; CPAN New Modules (@cpan_new) <a href="https://twitter.com/cpan_new/status/167066106622771200" data-datetime="2012-02-08T02:03:58+00:00">February 8, 2012</a></blockquote>
-
-
-<p>  어제 0.01 올리다가 <code>Makefile.PL</code> 에 의존모듈을 안정해놨구나 해서 추가해서 다시 올려놨습니다.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-</pre></td><td class='code'><pre><code class='diff'><span class='line'><span class="gh">diff --git a/Makefile.PL b/Makefile.PL</span>
-</span><span class='line'><span class="gh">index 7b27280..fef5219 100644</span>
-</span><span class='line'><span class="gd">--- a/Makefile.PL</span>
-</span><span class='line'><span class="gi">+++ b/Makefile.PL</span>
-</span><span class='line'><span class="gu">@@ -2,7 +2,7 @@ use inc::Module::Install;</span>
-</span><span class='line'> name &#39;Date-Holidays-KR&#39;;
-</span><span class='line'> all_from &#39;lib/Date/Holidays/KR.pm&#39;;
-</span><span class='line'>
-</span><span class='line'><span class="gd">-# requires &#39;&#39;;</span>
-</span><span class='line'><span class="gi">+requires &#39;Date::Korean&#39;;</span>
-</span><span class='line'>
-</span><span class='line'> tests &#39;t/*.t&#39;;
-</span><span class='line'> author_tests &#39;xt&#39;;
-</span></code></pre></td></tr></table></div></figure>
-
-
 
 
   

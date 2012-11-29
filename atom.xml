@@ -4,7 +4,7 @@
   <title><![CDATA[Jeen's techlog]]></title>
   <link href="http://jeen.github.com/atom.xml" rel="self"/>
   <link href="http://jeen.github.com/"/>
-  <updated>2012-11-26T22:01:27+09:00</updated>
+  <updated>2012-11-29T20:18:28+09:00</updated>
   <id>http://jeen.github.com/</id>
   <author>
     <name><![CDATA[Jeen Lee]]></name>
@@ -12,6 +12,35 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Download package dir/files from Directory Index]]></title>
+    <link href="http://jeen.github.com/blog/2012/11/29/download-package-dir-slash-files-from-directory-index/"/>
+    <updated>2012-11-29T20:10:00+09:00</updated>
+    <id>http://jeen.github.com/blog/2012/11/29/download-package-dir-slash-files-from-directory-index</id>
+    <content type="html"><![CDATA[<p> 최근에 모 오픈소스의 패키지 리포지트리가 조만간 닫힐 것이라는 뉴스가 있어서… 만일을 위해 거기 있는 패키지 파일들을 일단 긁어오기로 했습니다. -_-;</p>
+
+<p> 그래서 크롤러를 하나 만들까 하다가… 이런 류의 작업은 뭔가 만들어 놓은 툴이 있을 것이라는 생각에 이리저리 뒤져보고 찾아봤지만 마땅한 키워드를 얻지 못했습니다.</p>
+
+<p> 결국 지인들에게 수소문해본 결과 아래와 같은 커맨드를 통해서 Directory Index 구조를 취하는 페이지에서 파일들을 몽땅 긁어올 수 있다는 걸을 알게되었습니다.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>wget -e <span class="nv">robots</span><span class="o">=</span>off -k -r --no-parent --wait<span class="o">=</span>5 http://download.virtualbox.org/virtualbox/debian/
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p> <code>index.html</code> 등의 불필요한 파일들도 같이 다운로드 되기도 하지만… 일단 다 받고나서…</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>find . | grep index.html | xargs rm
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>으로 삭제…</p>
+
+<p>그리하여 조만간 끊어질지도 모르는 사태에 대비코자 미리 이렇게 준비를 끝냈습니다.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[.proverc for less typing]]></title>
@@ -2917,65 +2946,6 @@ I think you should use an
 
 
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[CPAN Module Update]]></title>
-    <link href="http://jeen.github.com/blog/2012/02/09/cpan-module-update/"/>
-    <updated>2012-02-09T01:06:00+09:00</updated>
-    <id>http://jeen.github.com/blog/2012/02/09/cpan-module-update</id>
-    <content type="html"><![CDATA[<blockquote class="twitter-tweet" lang="ko"><p>Acme-CPANAuthors-Korean 0.08 by JEEN - <a href="http://t.co/CjlRnKEO" title="http://metacpan.org/release/JEEN/Acme-CPANAuthors-Korean-0.08/">metacpan.org/release/JEEN/A…</a></p>&mdash; CPAN New Modules (@cpan_new) <a href="https://twitter.com/cpan_new/status/167271503061200896" data-datetime="2012-02-08T15:40:08+00:00">2월 8, 2012</a></blockquote>
-
-
-
-
-<blockquote class="twitter-tweet" lang="ko"><p>Lingua-KO-TypoCorrector 0.03 by JEEN - <a href="http://t.co/b1Lp98PW" title="http://metacpan.org/release/JEEN/Lingua-KO-TypoCorrector-0.03/">metacpan.org/release/JEEN/L…</a></p>&mdash; CPAN New Modules (@cpan_new) <a href="https://twitter.com/cpan_new/status/167273895550922753" data-datetime="2012-02-08T15:49:39+00:00">2월 8, 2012</a></blockquote>
-
-
-
-
-<blockquote class="twitter-tweet" lang="ko"><p>Date-Holidays-KR 0.03 by JEEN - <a href="http://t.co/qAXrPO6f" title="http://metacpan.org/release/JEEN/Date-Holidays-KR-0.03/">metacpan.org/release/JEEN/D…</a></p>&mdash; CPAN New Modules (@cpan_new) <a href="https://twitter.com/cpan_new/status/167275532466143232" data-datetime="2012-02-08T15:56:09+00:00">2월 8, 2012</a></blockquote>
-
-
-
-
-<blockquote class="twitter-tweet" lang="ko"><p>WebService-Aladdin 0.0706 by JEEN - <a href="http://t.co/lyGpgk6W" title="http://metacpan.org/release/JEEN/WebService-Aladdin-0.0706/">metacpan.org/release/JEEN/W…</a></p>&mdash; CPAN New Modules (@cpan_new) <a href="https://twitter.com/cpan_new/status/167276286962704385" data-datetime="2012-02-08T15:59:09+00:00">2월 8, 2012</a></blockquote>
-
-
-
-
-<blockquote class="twitter-tweet" lang="ko"><p>WWW-Shorten-Durl 0.05 by JEEN - <a href="http://t.co/mtnX4oEn" title="http://metacpan.org/release/JEEN/WWW-Shorten-Durl-0.05/">metacpan.org/release/JEEN/W…</a></p>&mdash; CPAN New Modules (@cpan_new) <a href="https://twitter.com/cpan_new/status/167277296259055616" data-datetime="2012-02-08T16:03:09+00:00">2월 8, 2012</a></blockquote>
-
-
-<p>  이전 글에서 언급했듯, 제가 만든 CPAN Module 들의 Meta 정보중에 repository 가 누락된 것도 있었고, 이 중 몇몇은 Github Project 이름까지 p5-* 형식으로 바꿔놓아서 이왕 이렇게 된 거 전부 바꿔보자는 생각이 들어서 작업을 했습니다.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="k">use</span> <span class="nn">inc::Module::</span><span class="n">Install</span><span class="p">;</span>
-</span><span class='line'><span class="n">name</span> <span class="s">&#39;Date-Holidays-KR&#39;</span><span class="p">;</span>
-</span><span class='line'><span class="n">all_from</span> <span class="s">&#39;lib/Date/Holidays/KR.pm&#39;</span><span class="p">;</span>
-</span><span class='line'><span class="n">requires</span> <span class="s">&#39;Date::Korean&#39;</span> <span class="o">=&gt;</span> <span class="mi">0</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">tests</span> <span class="s">&#39;t/*.t&#39;</span><span class="p">;</span>
-</span><span class='line'><span class="n">test_requires</span> <span class="s">&#39;Test::More&#39;</span><span class="p">;</span>
-</span><span class='line'><span class="n">resources</span> <span class="n">repository</span> <span class="o">=&gt;</span> <span class="s">&#39;git://github.com/JEEN/p5-Date-Holidays-KR.git&#39;</span><span class="p">;</span>
-</span><span class='line'><span class="n">auto_include</span><span class="p">;</span>
-</span><span class='line'><span class="n">WriteAll</span><span class="p">;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>  위는 <a href="http://metacpan.org/module/Date::Holidays::KR">Date::Holidays::KR</a> 의 <code>Makefile.PL</code> 입니다. 몇몇 모듈은 <a href="http://metacpan.org/module/ExtUtils::MakeMaker">ExtUtils::MakeMaker</a> 를 사용하고 있었는데, 모두 <a href="http://metacpan.org/module/Module::Install">Module::Install</a> 을 사용하도록 교체하고, repository 를 각각의 github repository 를 지정한 것뿐입니다.</p>
-
-<p>  마음먹은 김에 이슈처리하고 저녁시간을 빌어서 CPAN 에 일괄 업로드했습니다. 완전 스팸이네요.</p>
 ]]></content>
   </entry>
   

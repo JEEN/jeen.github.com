@@ -9,34 +9,7 @@
   <meta name="author" content="Jeen Lee">
 
   
-  <meta name="description" content="Tweet Picasa Upload Script II Jan 13th, 2012 | Comments picasa-uploader.pl1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28 &hellip;">
+  <meta name="description" content="Tweet Carton - CPAN Dependencies Manager Jan 16th, 2012 | Comments Jenkins 이야기를 마저 쓸려고 했는 데, 그 사이사이에 사용된 것들부터 정리하고자 우선은 Carton 이야기 부터 먼저하고자 합니다. 잘은 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -143,6 +116,297 @@
   </header>
   <section id="main">
       
+  
+  
+    <article class="post">
+      <div class="sharing-box">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://jeen.github.com/blog/page/13/index.html" data-via="JEEN_LEE" data-counturl="http://jeen.github.com/blog/page/13/index.html" data-size="large">Tweet</a>
+  
+  
+  
+  <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+      
+  <header>
+    
+      <h2 class="entry-title">
+        
+        <a href="/blog/2012/01/16/carton-cpan-dependencies-manager/">Carton - CPAN Dependencies Manager</a>
+        
+      </h2>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-01-16T22:49:00+09:00" pubdate data-updated="true">Jan 16<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/01/16/carton-cpan-dependencies-manager/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <p>  Jenkins 이야기를 마저 쓸려고 했는 데, 그 사이사이에 사용된 것들부터 정리하고자 우선은 Carton 이야기 부터 먼저하고자 합니다.</p>
+
+<p>  잘은 모르지만 Carton 은 Ruby 의 Bundler 에 영감을 받아서 만들어 진 것입니다. 어떤 Perl 로 만든 소프트웨어의 의존모듈의 관리가 편해집니다. :-) 일례로, 노트북에서 개발을 하고 이것을 서버에 올릴려고 할 때, 일일이 의존모듈 체크를 해야할 필요성이 있습니다. 그때마다 <code>cpan MODULE</code> 등으로 설치를 해나가야 한다면 여간 힘든 일이 아니죠.</p>
+
+<p>  그런 상황에서 쉽게 문제를 해결할 수 있는 것이 <code>Carton</code> 이 아닐까 생각합니다.</p>
+
+<h3>Carton 설치</h3>
+
+<p>  <code>Carton</code> 은 간단하게 <code>cpan</code> 으로 설치할 수 있습니다.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>cpanm carton
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>  위의 커맨드로 <code>Carton</code> 을 설치하면 <code>carton</code> 이라는 커맨드가 생깁니다.</p>
+
+<h3>Carton 이용</h3>
+
+<p>  <code>Carton</code> 을 제대로 이용하려면, 해당 Perl App 의 의존모듈이 <code>Makefile.PL</code> 안에서 잘 관리되고 있어야 합니다.</p>
+
+<figure class='code'><figcaption><span>Makefile.PL</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="k">use</span> <span class="nn">ExtUtils::</span><span class="n">MakeMaker</span><span class="p">;</span>
+</span><span class='line'><span class="n">WriteMakefile</span><span class="p">(</span>
+</span><span class='line'>    <span class="s">&#39;NAME&#39;</span>      <span class="o">=&gt;</span> <span class="s">&#39;WebService::Aladdin&#39;</span><span class="p">,</span>
+</span><span class='line'>    <span class="s">&#39;AUTHOR&#39;</span>    <span class="o">=&gt;</span> <span class="s">&#39;JEEN &lt;jeen@perl.kr&gt;&#39;</span><span class="p">,</span>
+</span><span class='line'>    <span class="s">&#39;VERSION_FROM&#39;</span> <span class="o">=&gt;</span> <span class="s">&#39;lib/WebService/Aladdin.pm&#39;</span><span class="p">,</span> <span class="c1"># finds $VERSION</span>
+</span><span class='line'>    <span class="s">&#39;PREREQ_PM&#39;</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nn">Test::</span><span class="n">Base</span> <span class="o">=&gt;</span> <span class="mi">0</span><span class="p">,</span>
+</span><span class='line'>        <span class="n">version</span>    <span class="o">=&gt;</span> <span class="mi">0</span><span class="p">,</span>
+</span><span class='line'>        <span class="nn">Class::Accessor::</span><span class="n">Fast</span> <span class="o">=&gt;</span> <span class="mi">0</span><span class="p">,</span>
+</span><span class='line'>        <span class="nn">LWP::</span><span class="n">UserAgent</span> <span class="o">=&gt;</span> <span class="mi">0</span><span class="p">,</span>
+</span><span class='line'>        <span class="n">URI</span>            <span class="o">=&gt;</span> <span class="mi">0</span><span class="p">,</span>
+</span><span class='line'>        <span class="n">Carp</span>           <span class="o">=&gt;</span> <span class="mi">0</span><span class="p">,</span>
+</span><span class='line'>        <span class="nn">XML::</span><span class="n">FeedPP</span>    <span class="o">=&gt;</span> <span class="mi">0</span>
+</span><span class='line'>    <span class="p">},</span>
+</span><span class='line'><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>  우선 예제로 제가 만든 <code>WebService::Aladdin</code> 모듈의 <code>Makefile.PL</code> 이 위와 같습니다. 이는 <code>WebService::Aladdin</code> 모듈에서 필요로 하는 의존모듈 등의 정보들을 나타내고 있습니다.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>carton install
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>  <code>carton install</code> 을 통해서 <code>Makefile.PL</code> 에 정의된 의존모듈을 설치합니다. 이때 <code>Carton</code> 은 의존모듈의 의존트리까지도 설치해버립니다. 그러니 실제 의존모듈이 10개라도, 그 10개의 각각의 모듈의 의존모듈까지도 설치하기 때문에 실제로 설치되는 것은 10개 이상의 모듈들이 될 것입니다.</p>
+
+<p>  아무튼 <code>carton install</code> 이 끝났다면 <code>carton.lock</code> 파일이 생성됩니다. 그리고 <code>local</code> 이라는 디렉토리의 아래에 의존모듈들이 설치됩니다.</p>
+
+<figure class='code'><figcaption><span>carton.lock</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+</pre></td><td class='code'><pre><code class='text'><span class='line'>{
+</span><span class='line'>   &quot;modules&quot; : {
+</span><span class='line'>      &quot;Algorithm::Diff&quot; : {
+</span><span class='line'>         &quot;dist&quot; : &quot;Algorithm-Diff-1.1902&quot;,
+</span><span class='line'>         &quot;module&quot; : &quot;Algorithm::Diff&quot;,
+</span><span class='line'>         &quot;mymeta&quot; : {
+</span><span class='line'>            &quot;abstract&quot; : &quot;unknown&quot;,
+</span><span class='line'>            &quot;author&quot; : [
+</span><span class='line'>               &quot;unknown&quot;
+</span><span class='line'>            ],
+</span><span class='line'>            &quot;dynamic_config&quot; : 0,
+</span><span class='line'>            &quot;generated_by&quot; : &quot;ExtUtils::MakeMaker version 6.62, CPAN::Meta::Converter version 2.112621, CPAN::Meta::Converter version 2.112150&quot;,
+</span><span class='line'>            &quot;license&quot; : [
+</span><span class='line'>               &quot;unknown&quot;
+</span><span class='line'>            ],
+</span><span class='line'>            &quot;meta-spec&quot; : {
+</span><span class='line'>               &quot;url&quot; : &quot;http://search.cpan.org/perldoc?CPAN::Meta::Spec&quot;,
+</span><span class='line'>               &quot;version&quot; : &quot;2&quot;
+</span><span class='line'>            },
+</span><span class='line'>            &quot;name&quot; : &quot;Algorithm-Diff&quot;,
+</span><span class='line'>            &quot;no_index&quot; : {
+</span><span class='line'>               &quot;directory&quot; : [
+</span><span class='line'>                  &quot;t&quot;,
+</span><span class='line'>                  &quot;inc&quot;
+</span><span class='line'>               ]
+</span><span class='line'>            },
+</span><span class='line'>            &quot;prereqs&quot; : {
+</span><span class='line'>               &quot;build&quot; : {
+</span><span class='line'>                  &quot;requires&quot; : {
+</span><span class='line'>                     &quot;ExtUtils::MakeMaker&quot; : 0
+</span><span class='line'>                  }
+</span><span class='line'>               },
+</span><span class='line'>               &quot;configure&quot; : {
+</span><span class='line'>                  &quot;requires&quot; : {
+</span><span class='line'>                     &quot;ExtUtils::MakeMaker&quot; : 0
+</span><span class='line'>                  }
+</span><span class='line'>               },
+</span><span class='line'>               &quot;runtime&quot; : {
+</span><span class='line'>                  &quot;requires&quot; : {}
+</span><span class='line'>               }
+</span><span class='line'>            },
+</span><span class='line'>            &quot;release_status&quot; : &quot;stable&quot;,
+</span><span class='line'>            &quot;version&quot; : &quot;1.1902&quot;
+</span><span class='line'>         },
+</span><span class='line'>         &quot;name&quot; : &quot;Algorithm::Diff&quot;,
+</span><span class='line'>         &quot;pathname&quot; : &quot;T/TY/TYEMQ/Algorithm-Diff-1.1902.tar.gz&quot;,
+</span><span class='line'>         &quot;provides&quot; : {
+</span><span class='line'>            &quot;Algorithm::Diff&quot; : {
+</span><span class='line'>               &quot;file&quot; : &quot;Algorithm/Diff.pm&quot;,
+</span><span class='line'>               &quot;version&quot; : &quot;1.1902&quot;
+</span><span class='line'>            },
+</span><span class='line'>            &quot;Algorithm::DiffOld&quot; : {
+</span><span class='line'>               &quot;file&quot; : &quot;Algorithm/DiffOld.pm&quot;,
+</span><span class='line'>               &quot;version&quot; : &quot;1.1&quot;
+</span><span class='line'>            }
+</span><span class='line'>         },
+</span><span class='line'>         &quot;version&quot; : &quot;1.1902&quot;
+</span><span class='line'>      },
+</span><span class='line'>      ...
+</span><span class='line'>   }
+</span><span class='line'>}
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>  이후 <code>Makefile.PL</code> 에서 또다른 의존모듈이 추가되었을 시에, 또다시</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>carton install
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>을 통해서 추가의존모듈을 설치할 수 있습니다. 이렇게 <code>carton install</code> 로 설치된 로컬 모듈들은</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>carton list
+</span><span class='line'>IO-stringy-2.110
+</span><span class='line'>File-Listing-6.03
+</span><span class='line'>XML-FeedPP-0.43
+</span><span class='line'>CPAN-Meta-2.112621
+</span><span class='line'>...
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>  <code>carton list</code> 로 확인할 수 있습니다.</p>
+
+<p>  그리고 <code>carton exec</code> 를 통해서 로컬모듈에 설치된 의존모듈을 참조해서 실행할 수 있습니다. 일례로 <code>Catalyst</code> 나 <code>Dancer</code> 로 만든 WebApp 들을 위에서 설명한 대로 <code>carton install</code> 한다음,</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>carton <span class="nb">exec</span> -- plackup -a app.psgi -p 3000 --mode production
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>  이처럼 <code>carton exec</code> 를 통해서 실행할 수 있지요.</p>
+
+<h3>Carton 을 이용하고서&#8230;</h3>
+
+<p>  우선은 Carton 을 이용함으로, 한 어플리케이션 당 하나의 모듈참조장소를 가지게해서 여러 어플리케이션이 혼잡한 경우에 발생할 수 있는 부작용을 예방할 수 있습니다. <code>Makefile.PL</code> 에서 해당 모듈의 버젼을 지정함으로 특정 버젼에 대해서만 의존을 가질 수 있기 때문에 더더욱 이런 면에서는 효과적입니다.</p>
+
+<p>  그래서 저같은 경우는 오히려 서비스마다 그 서비스용 계정을 만들고 <code>perlbrew</code> 환경을 갖추는 것보다 가볍게 서비스용 계정은 하나만 가지며 각 서비스디렉토리마다 <code>Carton</code> 을 올리는 쪽으로 움직이고 있습니다. 그러니 굳이 시스템 펄을 사용하는 것이 큰 거부감을 느끼지 않게 되었네요.</p>
+
+<h3>그 외</h3>
+
+<p>  일단 <code>carton.lock</code> 에 기재된 의존모듈 정보가 많으면 많을수록 <code>carton install</code> 에 걸리는 시간은 더 오래걸리게 됩니다. 물론 Carton 이 기본적으로 외부미러(http://cpan.metacpan.org) 를 사용하고 있기에, 그럴 수도 있겠다 싶어서 코드를 한번 훑어봤는데, 마침 <code>PERL_CARTON_MIRROR</code> 라는 환경변수를 통해서 가까운 혹은 로컬 네트워크 안의 CPAN 미러를 지정해줌으로 많은 시간을 단축할 수 있지 않을까 생각해봅니다.</p>
+
+<h3>Conclusion</h3>
+
+<p>  물론 Carton 은 현재 ALPHA 퀄리티라고 합니다. 버젼도 현재(2012-01-16) 로는 0.9.3 이고, 1.0 정식 릴리즈까지는 아직 시간이 남아있습니다. 몇몇 기능이 바뀔거라는 주의사항이 <a href="http://metacan.org/module/Carton">Carton 모듈페이지</a> 에서 확인할 수 있습니다.</p>
+
+<p>  좀 더 다양한 <code>Carton</code> 에 대한 이야기는 작년 <a href="http://yapcasia.org/2011/talk/91">YAPC::Asia2011 의 Carton Talk Page</a> 에서도 확인하실 수 있습니다.</p>
+
+  
+  
+
+
+    </article>
   
   
     <article class="post">
@@ -408,263 +672,6 @@
 <p>  <a href="http://aanoaa.github.com/blog/2012/01/03/picasa-upload-script/">@aanoaa 님의 글</a>에서 Picasa Uploader 스크립트를 소개했었는데요. <code>PicasaUploader</code> 라고 package 로 정의해서 쓰도록 했습니다.
   거기에 <a href="https://metacpan.org/module/Config::Pit">Config::Pit</a> 을 써서 계정정보를 다루도록 했구요.
   심심해서 그냥 약간 개량해봤습니다.</p>
-
-  
-  
-
-
-    </article>
-  
-  
-    <article class="post">
-      <div class="sharing-box">
-  
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://jeen.github.com/blog/page/13/index.html" data-via="JEEN_LEE" data-counturl="http://jeen.github.com/blog/page/13/index.html" data-size="large">Tweet</a>
-  
-  
-  
-  <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
-  
-</div>
-
-      
-  <header>
-    
-      <h2 class="entry-title">
-        
-        <a href="/blog/2012/01/05/freebsd-8-dot-2-stable-cpan-error/">FreeBSD 8.2 STABLE - CPAN Error</a>
-        
-      </h2>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-01-05T22:32:00+09:00" pubdate data-updated="true">Jan 5<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/01/05/freebsd-8-dot-2-stable-cpan-error/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <p>  회사업무차 <code>FreeBSD 8.2 STABLE</code> OS 를 사용하는 서버에서 CPAN 사용시 에러가 발생했습니다.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>cpan Module::Install
-</span><span class='line'>Reading <span class="s1">&#39;/home/jeen/.cpan/sources/authors/01mailrc.txt.gz&#39;</span>
-</span><span class='line'>............................................................................DONE
-</span><span class='line'>Reading <span class="s1">&#39;/home/jeen/.cpan/sources/modules/02packages.details.txt.gz&#39;</span>
-</span><span class='line'>  Database was generated on Thu, 05 Jan 2012 05:12:02 GMT
-</span><span class='line'>............................................................................DONE
-</span><span class='line'>Reading <span class="s1">&#39;/home/jeen/.cpan/sources/modules/03modlist.data.gz&#39;</span>
-</span><span class='line'>Can<span class="s1">&#39;t locate object method &quot;data&quot; via package &quot;CPAN::Modulelist&quot; (perhaps you forgot to load &quot;CPAN::Modulelist&quot;?) at (eval 24) line 1.</span>
-</span><span class='line'><span class="s1"> at /home/jeen/perl5/perlbrew/perls/perl-5.14.2/lib/5.14.2/CPAN/Index.pm line 524</span>
-</span><span class='line'><span class="s1"> CPAN::Index::rd_modlist(&#39;</span>CPAN::Index<span class="s1">&#39;, &#39;</span>/home/jeen/.cpan/sources/modules/03modlist.data.gz<span class="s1">&#39;) called at /home/jeen/perl5/perlbrew/perls/perl-5.14.2/lib/5.14.2/CPAN/Index.pm line 85</span>
-</span><span class='line'><span class="s1"> CPAN::Index::reload(&#39;</span>CPAN::Index<span class="s1">&#39;) called at /home/jeen/perl5/perlbrew/perls/perl-5.14.2/lib/5.14.2/CPAN.pm line 976</span>
-</span><span class='line'><span class="s1"> CPAN::exists(&#39;</span><span class="nv">CPAN</span><span class="o">=</span>HASH<span class="o">(</span>0x801fe27f8<span class="o">)</span><span class="s1">&#39;, &#39;</span>CPAN::Module<span class="s1">&#39;, &#39;</span>Module::Install<span class="s1">&#39;) called at /home/jeen/perl5/perlbrew/perls/perl-5.14.2/lib/5.14.2/CPAN/Shell.pm line 1256</span>
-</span><span class='line'><span class="s1"> CPAN::Shell::expandany(&#39;</span>CPAN::Shell<span class="s1">&#39;, &#39;</span>Module::Install<span class="s1">&#39;) called at /home/jeen/perl5/perlbrew/perls/perl-5.14.2/lib/5.14.2/CPAN/Shell.pm line 1681</span>
-</span><span class='line'><span class="s1"> CPAN::Shell::rematein(&#39;</span>CPAN::Shell<span class="s1">&#39;, &#39;</span>install<span class="s1">&#39;, &#39;</span>Module::Install<span class="s1">&#39;) called at /home/jeen/perl5/perlbrew/perls/perl-5.14.2/lib/5.14.2/CPAN/Shell.pm line 1977</span>
-</span><span class='line'><span class="s1"> CPAN::Shell::__ANON__(&#39;</span>CPAN::Shell<span class="s1">&#39;, &#39;</span>Module::Install<span class="s1">&#39;) called at /home/jeen/perl5/perlbrew/perls/perl-5.14.2/lib/5.14.2/App/Cpan.pm line 459</span>
-</span><span class='line'><span class="s1"> App::Cpan::__ANON__(&#39;</span>Module::Install<span class="s1">&#39;) called at /home/jeen/perl5/perlbrew/perls/perl-5.14.2/lib/5.14.2/App/Cpan.pm line 468</span>
-</span><span class='line'><span class="s1"> App::Cpan::_default(&#39;</span>ARRAY<span class="o">(</span>0x800e92780<span class="o">)</span><span class="s1">&#39;, &#39;</span>HASH<span class="o">(</span>0x801fe7d38<span class="o">)</span><span class="s1">&#39;) called at /home/jeen/perl5/perlbrew/perls/perl-5.14.2/lib/5.14.2/App/Cpan.pm line 386</span>
-</span><span class='line'><span class="s1"> App::Cpan::run(&#39;</span>App::Cpan<span class="s1">&#39;, &#39;</span>Module::Install<span class="err">&#39;</span><span class="o">)</span> called at /home/jeen/perl5/perlbrew/perls/perl-5.14.2/bin/cpan line 11
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>  마땅히 어떻게 <code>cpan</code> 자체가 안되니, 다른 CPAN 모듈 설치도 안되고&#8230;</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>curl -L http://cpanmin.us | perl - --self-upgrade
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>  그래서 일단은 그냥 <code>cpanm</code> 을 설치하고 필요한 모듈들을 설치했습니다. 하지만 여전히 <code>cpan</code> 으로 모듈을 설치하려면 위처럼 에러가 뜨니 아직도 찜찜하기 그지 없네요.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>uname -a
-</span><span class='line'>FreeBSD xxx.xxxxx.kr 8.2-STABLE FreeBSD 8.2-STABLE <span class="c">#1: Wed Apr 13 13:10:49 KST 2011     root@xxx.xxxx.kr:/usr/obj/usr/src/sys/GENERIC  amd64</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p></p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-<span class='line-number'>40</span>
-<span class='line-number'>41</span>
-<span class='line-number'>42</span>
-<span class='line-number'>43</span>
-<span class='line-number'>44</span>
-<span class='line-number'>45</span>
-<span class='line-number'>46</span>
-<span class='line-number'>47</span>
-<span class='line-number'>48</span>
-<span class='line-number'>49</span>
-<span class='line-number'>50</span>
-<span class='line-number'>51</span>
-<span class='line-number'>52</span>
-<span class='line-number'>53</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>perl -V
-</span><span class='line'>Summary of my perl5 <span class="o">(</span>revision 5 version 14 subversion 2<span class="o">)</span> configuration:
-</span><span class='line'>
-</span><span class='line'>  Platform:
-</span><span class='line'>    <span class="nv">osname</span><span class="o">=</span>freebsd, <span class="nv">osvers</span><span class="o">=</span>8.2-stable, <span class="nv">archname</span><span class="o">=</span>amd64-freebsd
-</span><span class='line'>    <span class="nv">uname</span><span class="o">=</span><span class="s1">&#39;freebsd xxx.xxxxx.kr 8.2-stable freebsd 8.2-stable #1: wed apr 13 13:10:49 kst 2011 root@xxx.xxxx.kr:usrobjusrsrcsysgeneric amd64 &#39;</span>
-</span><span class='line'>    <span class="nv">config_args</span><span class="o">=</span><span class="s1">&#39;-de -Dprefix=/home/jeen/perl5/perlbrew/perls/perl-5.14.2&#39;</span>
-</span><span class='line'>    <span class="nv">hint</span><span class="o">=</span>recommended, <span class="nv">useposix</span><span class="o">=</span><span class="nb">true</span>, <span class="nv">d_sigaction</span><span class="o">=</span>define
-</span><span class='line'>    <span class="nv">useithreads</span><span class="o">=</span>undef, <span class="nv">usemultiplicity</span><span class="o">=</span>undef
-</span><span class='line'>    <span class="nv">useperlio</span><span class="o">=</span>define, <span class="nv">d_sfio</span><span class="o">=</span>undef, <span class="nv">uselargefiles</span><span class="o">=</span>define, <span class="nv">usesocks</span><span class="o">=</span>undef
-</span><span class='line'>    <span class="nv">use64bitint</span><span class="o">=</span>define, <span class="nv">use64bitall</span><span class="o">=</span>define, <span class="nv">uselongdouble</span><span class="o">=</span>undef
-</span><span class='line'>    <span class="nv">usemymalloc</span><span class="o">=</span>n, <span class="nv">bincompat5005</span><span class="o">=</span>undef
-</span><span class='line'>  Compiler:
-</span><span class='line'>    <span class="nv">cc</span><span class="o">=</span><span class="s1">&#39;cc&#39;</span>, <span class="nv">ccflags</span> <span class="o">=</span><span class="s1">&#39;-DHAS_FPSETMASK -DHAS_FLOATINGPOINT_H -fno-strict-aliasing -pipe -fstack-protector -I/usr/local/include&#39;</span>,
-</span><span class='line'>    <span class="nv">optimize</span><span class="o">=</span><span class="s1">&#39;-O&#39;</span>,
-</span><span class='line'>    <span class="nv">cppflags</span><span class="o">=</span><span class="s1">&#39;-DHAS_FPSETMASK -DHAS_FLOATINGPOINT_H -fno-strict-aliasing -pipe -fstack-protector -I/usr/local/include&#39;</span>
-</span><span class='line'>    <span class="nv">ccversion</span><span class="o">=</span><span class="s1">&#39;&#39;</span>, <span class="nv">gccversion</span><span class="o">=</span><span class="s1">&#39;4.2.1 20070719  [FreeBSD]&#39;</span>, <span class="nv">gccosandvers</span><span class="o">=</span><span class="s1">&#39;&#39;</span>
-</span><span class='line'>    <span class="nv">intsize</span><span class="o">=</span>4, <span class="nv">longsize</span><span class="o">=</span>8, <span class="nv">ptrsize</span><span class="o">=</span>8, <span class="nv">doublesize</span><span class="o">=</span>8, <span class="nv">byteorder</span><span class="o">=</span>12345678
-</span><span class='line'>    <span class="nv">d_longlong</span><span class="o">=</span>define, <span class="nv">longlongsize</span><span class="o">=</span>8, <span class="nv">d_longdbl</span><span class="o">=</span>define, <span class="nv">longdblsize</span><span class="o">=</span>16
-</span><span class='line'>    <span class="nv">ivtype</span><span class="o">=</span><span class="s1">&#39;long&#39;</span>, <span class="nv">ivsize</span><span class="o">=</span>8, <span class="nv">nvtype</span><span class="o">=</span><span class="s1">&#39;double&#39;</span>, <span class="nv">nvsize</span><span class="o">=</span>8, <span class="nv">Off_t</span><span class="o">=</span><span class="s1">&#39;off_t&#39;</span>, <span class="nv">lseeksize</span><span class="o">=</span>8
-</span><span class='line'>    <span class="nv">alignbytes</span><span class="o">=</span>8, <span class="nv">prototype</span><span class="o">=</span>define
-</span><span class='line'>  Linker and Libraries:
-</span><span class='line'>    <span class="nv">ld</span><span class="o">=</span><span class="s1">&#39;cc&#39;</span>, <span class="nv">ldflags</span> <span class="o">=</span><span class="s1">&#39;-Wl,-E  -fstack-protector -L/usr/local/lib&#39;</span>
-</span><span class='line'>    <span class="nv">libpth</span><span class="o">=</span>/usr/lib /usr/local/lib
-</span><span class='line'>    <span class="nv">libs</span><span class="o">=</span>-lm -lcrypt -lutil -lc
-</span><span class='line'>    <span class="nv">perllibs</span><span class="o">=</span>-lm -lcrypt -lutil -lc
-</span><span class='line'>    <span class="nv">libc</span><span class="o">=</span>, <span class="nv">so</span><span class="o">=</span>so, <span class="nv">useshrplib</span><span class="o">=</span><span class="nb">false</span>, <span class="nv">libperl</span><span class="o">=</span>libperl.a
-</span><span class='line'>    <span class="nv">gnulibc_version</span><span class="o">=</span><span class="s1">&#39;&#39;</span>
-</span><span class='line'>  Dynamic Linking:
-</span><span class='line'>    <span class="nv">dlsrc</span><span class="o">=</span>dl_dlopen.xs, <span class="nv">dlext</span><span class="o">=</span>so, <span class="nv">d_dlsymun</span><span class="o">=</span>undef, <span class="nv">ccdlflags</span><span class="o">=</span><span class="s1">&#39; &#39;</span>
-</span><span class='line'>    <span class="nv">cccdlflags</span><span class="o">=</span><span class="s1">&#39;-DPIC -fPIC&#39;</span>, <span class="nv">lddlflags</span><span class="o">=</span><span class="s1">&#39;-shared  -L/usr/local/lib -fstack-protector&#39;</span>
-</span><span class='line'>
-</span><span class='line'>
-</span><span class='line'>Characteristics of this binary <span class="o">(</span>from libperl<span class="o">)</span>:
-</span><span class='line'>  Compile-time options: PERL_DONT_CREATE_GVSV PERL_MALLOC_WRAP
-</span><span class='line'>                        PERL_PRESERVE_IVUV USE_64_BIT_ALL USE_64_BIT_INT
-</span><span class='line'>                        USE_LARGE_FILES USE_PERLIO USE_PERL_ATOF
-</span><span class='line'>  Built under freebsd
-</span><span class='line'>  Compiled at Jan  5 2012 15:51:41
-</span><span class='line'>  %ENV:
-</span><span class='line'>    <span class="nv">PERLBREW_BASHRC_VERSION</span><span class="o">=</span><span class="s2">&quot;0.39&quot;</span>
-</span><span class='line'>    <span class="nv">PERLBREW_HOME</span><span class="o">=</span><span class="s2">&quot;/home/jeen/.perlbrew&quot;</span>
-</span><span class='line'>    <span class="nv">PERLBREW_MANPATH</span><span class="o">=</span><span class="s2">&quot;/home/jeen/perl5/perlbrew/perls/perl-5.14.2/man&quot;</span>
-</span><span class='line'>    <span class="nv">PERLBREW_PATH</span><span class="o">=</span><span class="s2">&quot;/home/jeen/perl5/perlbrew/bin:/home/jeen/perl5/perlbrew/perls/perl-5.14.2/bin&quot;</span>
-</span><span class='line'>    <span class="nv">PERLBREW_PERL</span><span class="o">=</span><span class="s2">&quot;perl-5.14.2&quot;</span>
-</span><span class='line'>    <span class="nv">PERLBREW_ROOT</span><span class="o">=</span><span class="s2">&quot;/home/jeen/perl5/perlbrew&quot;</span>
-</span><span class='line'>    <span class="nv">PERLBREW_VERSION</span><span class="o">=</span><span class="s2">&quot;0.39&quot;</span>
-</span><span class='line'>  @INC:
-</span><span class='line'>    /home/jeen/perl5/perlbrew/perls/perl-5.14.2/lib/site_perl/5.14.2/amd64-freebsd
-</span><span class='line'>    /home/jeen/perl5/perlbrew/perls/perl-5.14.2/lib/site_perl/5.14.2
-</span><span class='line'>    /home/jeen/perl5/perlbrew/perls/perl-5.14.2/lib/5.14.2/amd64-freebsd
-</span><span class='line'>    /home/jeen/perl5/perlbrew/perls/perl-5.14.2/lib/5.14.2
-</span><span class='line'>    .
-</span></code></pre></td></tr></table></div></figure>
-
-
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>df -Th .
-</span><span class='line'>Filesystem   Type    Size    Used   Avail Capacity  Mounted on
-</span><span class='line'>/dev/ar0s1f  ufs      43G    5.1G     35G    13%    /usr
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>  일단 사건해결에 도움이 될 만한 정보들은 모조리 뽑아봤습니다.
-  천천히 살펴보며 구원을 요청해야 되겠네요.</p>
-
-<h3>Conclusion</h3>
-
-<p>  <a href="http://webchat.freenode.net?channels=perl-kr">#perl-kr</a> 에서 위에 정리한 내용들로 <a href="http://twitter.com/aer0">@aer0</a> 님께 질문을 날렸습니다. @aer0 님께서 제안하신 방법으로</p>
-
-<ul>
-<li><code>Bundle::CPAN</code> 을 설치</li>
-<li><p><code>~/.cpan</code> 디렉토리를 삭제 후 다시 <code>cpan</code> 실행</p>
-
-<p>이었습니다.</p>
-
-<p><code>Bundle::CPAN</code> 을 설치해도 사태가 해결되지 않아서, 결국은 <code>~/.cpan</code> 디렉토리를 삭제한 후 다시 <code>cpan</code> 을 실행했습니다.</p></li>
-<li><p>~/.cpan/sources/modules/02packages.details.txt.gz</p></li>
-<li><p>~/.cpan/sources/modules/03modlist.data.gz</p>
-
-<p>같은 CPAN 미러에서 가져오는 인덱스 파일이 이상해서 꼬인 것 같다라는 @aer0 님의 총평이었습니다.</p>
-
-<p>역시 이런 사건이 발생할 때는 <code>#perl-kr</code> 에 들러야 됩니다. :-)</p></li>
-</ul>
-
-
-<blockquote class="twitter-tweet" data-in-reply-to="154824190581678081" lang="ko"><p>@<a href="https://twitter.com/JEEN_LEE">JEEN_LEE</a> 자문자답 <a href="http://t.co/hSGdHz9i" title="http://jeen.github.com/blog/2012/01/05/freebsd-8-dot-2-stable-cpan-error/">jeen.github.com/blog/2012/01/0…</a></p>&mdash; JEEN (@JEEN_LEE) <a href="https://twitter.com/JEEN_LEE/status/154930926294536192" data-datetime="2012-01-05T14:23:05+00:00">1월 5, 2012</a></blockquote>
-
-
-
 
   
   

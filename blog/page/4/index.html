@@ -9,8 +9,7 @@
   <meta name="author" content="Jeen Lee">
 
   
-  <meta name="description" content="Tweet Export Facebook Event Attending List - Perl-kr TeaTime Jul 26th, 2012 | Comments 지난번 1회 티타임때의 문제가 제대로 참가비 징수를 못해서 비용정산에 어려움이 있었는데,
-이 문제를 해결하기 &hellip;">
+  <meta name="description" content="Tweet App::Zamakist&#8230; Aug 9th, 2012 | Comments 취미라고 할 것이 있다면 잠, 책, 드라마감상 정도라고 할까요. 걔중에 몇몇 미드들을 아직까지 꾸준하게 시간을 내면서 보고 있습니다. 걔중에는 가끔보면 자막이 없어서 일일이 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -117,6 +116,209 @@
   </header>
   <section id="main">
       
+  
+  
+    <article class="post">
+      <div class="sharing-box">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://jeen.github.com/blog/page/4/index.html" data-via="JEEN_LEE" data-counturl="http://jeen.github.com/blog/page/4/index.html" data-size="large">Tweet</a>
+  
+  
+  
+  <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+      
+  <header>
+    
+      <h2 class="entry-title">
+        
+        <a href="/blog/2012/08/09/app-zamakist-dot-dot-dot/">App::Zamakist&#8230;</a>
+        
+      </h2>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-08-09T13:33:00+09:00" pubdate data-updated="true">Aug 9<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/08/09/app-zamakist-dot-dot-dot/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <p>취미라고 할 것이 있다면 잠, 책, 드라마감상 정도라고 할까요.</p>
+
+<p>걔중에 몇몇 미드들을 아직까지 꾸준하게 시간을 내면서 보고 있습니다.</p>
+
+<p>걔중에는 가끔보면 자막이 없어서 일일이 자막찾으러 들어가고 받고 해야하는 지루한 클릭이 필요한 경우도 있습니다.</p>
+
+<p>윈도라면 <code>곰플레이어</code> 로 이런 부분의 수고가 조금 줄어들기는 하지만 Mac 에서 <code>Movist</code> 를 통해서 주로 영상을 감상하려면 심히 신경쓰이지 않을리 없습니다.</p>
+
+<blockquote class="twitter-tweet" lang="ko"><p>멘탈리스트 4기를 볼려고 했는데, 자막이 없네&#8230; 그래서 자막을 세팅하는 스크립트를 깨작거려서 만들어봤다. 좀 더 브러쉬 업해야 되지만서도&#8230; <a href="https://t.co/jeXVNTnI" title="https://gist.github.com/3150026">gist.github.com/3150026</a></p>&mdash; JEEN (@JEEN_LEE) <a href="https://twitter.com/JEEN_LEE/status/226260944597180417" data-datetime="2012-07-20T10:23:07+00:00">7월 20, 2012</a></blockquote>
+
+
+<p>그러니까 7월 20일경에 일단 이런 문제를 겪어서 잠깐 깨작거려서 만들어보기는 했지만 대놓고 앞에 내놓기도 그렇고해서 그냥 보류했었는데요. 뭐 물론 여전히 앞에 내놓는 게 좀 그렇기는 합니다.</p>
+
+<ul>
+<li><a href="https://github.com/JEEN/p5-App-Zamakist">https://github.com/JEEN/p5-App-Zamakist</a></li>
+</ul>
+
+
+<p>일련의 과정을 말하자면…</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>ls -la
+</span><span class='line'>total 0
+</span><span class='line'>drwxr-xr-x  12 jeen  staff   408  8  9 13:45 .
+</span><span class='line'>drwxr-xr-x+ 52 jeen  staff  1768  8  9 13:45 ..
+</span><span class='line'>-rw-r--r--   1 jeen  staff     0  8  9 13:45 NCIS.Los.Angeles.S03E01.720p.HDTV.X264-DIMENSION.avi
+</span><span class='line'>-rw-r--r--   1 jeen  staff     0  8  9 13:45 NCIS.Los.Angeles.S03E02.720p.HDTV.X264-DIMENSION.avi
+</span><span class='line'>-rw-r--r--   1 jeen  staff     0  8  9 13:45 NCIS.Los.Angeles.S03E03.720p.HDTV.X264-DIMENSION.avi
+</span><span class='line'>-rw-r--r--   1 jeen  staff     0  8  9 13:45 NCIS.Los.Angeles.S03E04.720p.HDTV.X264-DIMENSION.avi
+</span><span class='line'>-rw-r--r--   1 jeen  staff     0  8  9 13:45 NCIS.Los.Angeles.S03E05.720p.HDTV.X264-DIMENSION.avi
+</span><span class='line'>-rw-r--r--   1 jeen  staff     0  8  9 13:45 NCIS.Los.Angeles.S03E06.720p.HDTV.X264-DIMENSION.avi
+</span><span class='line'>-rw-r--r--   1 jeen  staff     0  8  9 13:45 NCIS.Los.Angeles.S03E07.720p.HDTV.X264-DIMENSION.avi
+</span><span class='line'>-rw-r--r--   1 jeen  staff     0  8  9 13:45 NCIS.Los.Angeles.S03E08.720p.HDTV.X264-DIMENSION.avi
+</span><span class='line'>-rw-r--r--   1 jeen  staff     0  8  9 11:44 NCIS.Los.Angeles.S03E09.720p.HDTV.X264-DIMENSION.avi
+</span><span class='line'>-rw-r--r--   1 jeen  staff     0  8  9 09:29 NCIS.Los.Angeles.S03E10.720p.HDTV.X264-DIMENSION.avi
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>이렇게 뭐 디렉토리에 영상자료들이 널부러져 있습니다. 하지만 자막은 없죠.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>zamakist --dir .
+</span><span class='line'>Found 10 subscriptions
+</span><span class='line'>┌────┬──────────────────────────────────────────────────────┐
+</span><span class='line'>│ id │ filename                                             │
+</span><span class='line'>├────┼──────────────────────────────────────────────────────┤
+</span><span class='line'>│  1 │ NCIS.Los.Angeles.S03E01.720p.HDTV.X264-DIMENSION.avi │
+</span><span class='line'>│  2 │ NCIS.Los.Angeles.S03E02.720p.HDTV.X264-DIMENSION.avi │
+</span><span class='line'>│  3 │ NCIS.Los.Angeles.S03E03.720p.HDTV.X264-DIMENSION.avi │
+</span><span class='line'>│  4 │ NCIS.Los.Angeles.S03E04.720p.HDTV.X264-DIMENSION.avi │
+</span><span class='line'>│  5 │ NCIS.Los.Angeles.S03E05.720p.HDTV.X264-DIMENSION.avi │
+</span><span class='line'>│  6 │ NCIS.Los.Angeles.S03E06.720p.HDTV.X264-DIMENSION.avi │
+</span><span class='line'>│  7 │ NCIS.Los.Angeles.S03E07.720p.HDTV.X264-DIMENSION.avi │
+</span><span class='line'>│  8 │ NCIS.Los.Angeles.S03E08.720p.HDTV.X264-DIMENSION.avi │
+</span><span class='line'>│  9 │ NCIS.Los.Angeles.S03E09.720p.HDTV.X264-DIMENSION.avi │
+</span><span class='line'>│ 10 │ NCIS.Los.Angeles.S03E10.720p.HDTV.X264-DIMENSION.avi │
+</span><span class='line'>└────┴──────────────────────────────────────────────────────┘
+</span><span class='line'>Continue to download? <span class="o">[</span>y/n<span class="o">]</span> y
+</span><span class='line'>Downloaded 10 subscriptions
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>그래서 뭐 <code>App::Zamakist</code> 라는 모듈을 사용하면 뭐 이렇게 자막을 한꺼번에 다운받을 수 있다 뭐 이런 거죠.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>ls -la
+</span><span class='line'>total 1592
+</span><span class='line'>drwxr-xr-x  22 jeen  staff    748  8  9 13:46 .
+</span><span class='line'>drwxr-xr-x+ 52 jeen  staff   1768  8  9 13:46 ..
+</span><span class='line'>-rw-r--r--   1 jeen  staff      0  8  9 13:45 NCIS.Los.Angeles.S03E01.720p.HDTV.X264-DIMENSION.avi
+</span><span class='line'>-rw-r--r--   1 jeen  staff  63779  8  9 13:46 NCIS.Los.Angeles.S03E01.720p.HDTV.X264-DIMENSION.smi
+</span><span class='line'>-rw-r--r--   1 jeen  staff      0  8  9 13:45 NCIS.Los.Angeles.S03E02.720p.HDTV.X264-DIMENSION.avi
+</span><span class='line'>-rw-r--r--   1 jeen  staff  75041  8  9 13:46 NCIS.Los.Angeles.S03E02.720p.HDTV.X264-DIMENSION.smi
+</span><span class='line'>-rw-r--r--   1 jeen  staff      0  8  9 13:45 NCIS.Los.Angeles.S03E03.720p.HDTV.X264-DIMENSION.avi
+</span><span class='line'>-rw-r--r--   1 jeen  staff  84915  8  9 13:46 NCIS.Los.Angeles.S03E03.720p.HDTV.X264-DIMENSION.smi
+</span><span class='line'>-rw-r--r--   1 jeen  staff      0  8  9 13:45 NCIS.Los.Angeles.S03E04.720p.HDTV.X264-DIMENSION.avi
+</span><span class='line'>-rw-r--r--   1 jeen  staff  78550  8  9 13:46 NCIS.Los.Angeles.S03E04.720p.HDTV.X264-DIMENSION.smi
+</span><span class='line'>-rw-r--r--   1 jeen  staff      0  8  9 13:45 NCIS.Los.Angeles.S03E05.720p.HDTV.X264-DIMENSION.avi
+</span><span class='line'>-rw-r--r--   1 jeen  staff  94809  8  9 13:46 NCIS.Los.Angeles.S03E05.720p.HDTV.X264-DIMENSION.smi
+</span><span class='line'>-rw-r--r--   1 jeen  staff      0  8  9 13:45 NCIS.Los.Angeles.S03E06.720p.HDTV.X264-DIMENSION.avi
+</span><span class='line'>-rw-r--r--   1 jeen  staff  98759  8  9 13:46 NCIS.Los.Angeles.S03E06.720p.HDTV.X264-DIMENSION.smi
+</span><span class='line'>-rw-r--r--   1 jeen  staff      0  8  9 13:45 NCIS.Los.Angeles.S03E07.720p.HDTV.X264-DIMENSION.avi
+</span><span class='line'>-rw-r--r--   1 jeen  staff  76016  8  9 13:46 NCIS.Los.Angeles.S03E07.720p.HDTV.X264-DIMENSION.smi
+</span><span class='line'>-rw-r--r--   1 jeen  staff      0  8  9 13:45 NCIS.Los.Angeles.S03E08.720p.HDTV.X264-DIMENSION.avi
+</span><span class='line'>-rw-r--r--   1 jeen  staff  94320  8  9 13:46 NCIS.Los.Angeles.S03E08.720p.HDTV.X264-DIMENSION.smi
+</span><span class='line'>-rw-r--r--   1 jeen  staff      0  8  9 11:44 NCIS.Los.Angeles.S03E09.720p.HDTV.X264-DIMENSION.avi
+</span><span class='line'>-rw-r--r--   1 jeen  staff  69537  8  9 13:46 NCIS.Los.Angeles.S03E09.720p.HDTV.X264-DIMENSION.smi
+</span><span class='line'>-rw-r--r--   1 jeen  staff      0  8  9 09:29 NCIS.Los.Angeles.S03E10.720p.HDTV.X264-DIMENSION.avi
+</span><span class='line'>-rw-r--r--   1 jeen  staff  55905  8  9 13:46 NCIS.Los.Angeles.S03E10.720p.HDTV.X264-DIMENSION.smi
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>뭐 일단 CPAN 에 올릴 생각도 없는 토이모듈 겸 생활용품 모듈이라서…</p>
+
+<p>아 물론 자막검색은 GOM 자막을 애용하고 있습니다.</p>
+
+<p>검색방식은 뭐 파일이름에서 확장자만 떼서 검색날려서 뭐 여차저차해서 파일다운로드 하는 링크 빼서 일괄 다운로드 하는 것이죠.</p>
+
+<p>이제 시작하려는 미드가 있는데 자막이 없다면 이거 한번만 돌려주면 앞으로 자막찾는 수고없어지겠습니다. :-)</p>
+
+  
+  
+
+
+    </article>
   
   
     <article class="post">
@@ -583,114 +785,6 @@
 <p> <code>Facebook::Graph</code> 모듈은 생각보다 좀 변태같습니다. 그 이유는 Facebook Graph API 도 변태같다는 근본적인 &#8230;. 그리고 Access Token 은 뭐 적당하게 Developer 페이지 가서 줏어서 넣었습니다. :-)</p>
 
 <p><img src="https://lh6.googleusercontent.com/-GrgEvhNP0d0/UBDW9W-YzLI/AAAAAAAACAQ/5G48cMzvryY/w389-h521-k/list.jpg" alt="" /></p>
-
-  
-  
-
-
-    </article>
-  
-  
-    <article class="post">
-      <div class="sharing-box">
-  
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://jeen.github.com/blog/page/4/index.html" data-via="JEEN_LEE" data-counturl="http://jeen.github.com/blog/page/4/index.html" data-size="large">Tweet</a>
-  
-  
-  
-  <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
-  
-</div>
-
-      
-  <header>
-    
-      <h2 class="entry-title">
-        
-        <a href="/blog/2012/07/18/mysql-diff-a-vs-b/">MySQL::Diff - a vs B</a>
-        
-      </h2>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-07-18T18:30:00+09:00" pubdate data-updated="true">Jul 18<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/07/18/mysql-diff-a-vs-b/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <p> 최근에 유지보수 관련 일로 골머리를 싸고 있다가 겨우겨우 마무리하고 있는 일이 하나 있었습니다.</p>
-
-<p> PHP 프로젝트였는데, 유지보수 관련해서 여러가지 이슈들이 나오기 마련이고, 그 때문에 잘 움직이던 기존의 DB구조를
-변경해줄 필요가 있었습니다.</p>
-
-<p> 뭐 테이블을 추가하거나, 어떤 컬럼의 형식을 변경하거나, 혹은 인덱스를 추가하거나 하는 뭐 이런 경우 말이죠.</p>
-
-<p> 처음에는 개발환경아래에서 기존의 product 환경에서 운용중인 DB를 dump 떠와서 진행하고, 프로젝트를 진행하면서
-변경되는 SQL 내용들을 일일이 적어주었습니다. 그러다가 뭐 이사람 저사람 손을 옮겨타다가 결국 최종 마무리단계에서
-어떤 컬럼이 변경되었는지, 어떤 테이블이 추가되었는지에 대한 확신을 할 수 없었습니다.</p>
-
-<p> 그래서 기록된 SQL 을 기반으로 눈과 손으로 검수를 해야하는 지경에서 결국 실수가 생기기 마련이죠. 그리고 클레임이 발생했습니다.</p>
-
-<p> 자, 그럼 어떻게 하면 이런 상황에서 사태를 수습하느냐&#8230; 고심했습니다.</p>
-
-<p> 그 결과 혹시 이거라면 해서 찔러본 것이 빙고 였던 것이 <a href="http://metacpan.org/module/MySQL::Diff">MySQL::Diff</a> 였습니다.</p>
-
-<p> 맨처음 덤프떠온 DB 를 <code>DB_A</code> 로 지정하고, 최종적으로 개발이 종료된 DB 를 <code>DB_B</code> 라고 놓습니다.</p>
-
-<p> 이 <code>DB_A</code> 와 <code>DB_B</code> 를 서로 비교하는 것이죠. 그걸을 위해서 <code>MySQL::Diff</code> 모듈이 사용됩니다.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>mysqldiff --host1 localhost --user1 root --password1 whatthehell --host2 localhost --user2 root --password2 whatthehell bto bto_test
-</span><span class='line'><span class="c">## mysqldiff 0.43</span>
-</span><span class='line'><span class="c">## </span>
-</span><span class='line'><span class="c">## Run on Wed Jul 18 18:26:39 2012</span>
-</span><span class='line'><span class="c">## Options: password2=whatthehell, password1=whatthehell, user1=root, host2=localhost, debug=0, host1=localhost, user2=root</span>
-</span><span class='line'><span class="c">##</span>
-</span><span class='line'><span class="c">## ---   db: bto (host=localhost user=root)</span>
-</span><span class='line'><span class="c">## +++   db: bto_test (host=localhost user=root)</span>
-</span><span class='line'>
-</span><span class='line'>ALTER TABLE auth DROP COLUMN updated_on; <span class="c"># was datetime NOT NULL DEFAULT &#39;0000-00-00 00:00:00&#39;</span>
-</span><span class='line'>ALTER TABLE auth DROP COLUMN created_on; <span class="c"># was datetime NOT NULL DEFAULT &#39;0000-00-00 00:00:00&#39;</span>
-</span><span class='line'>ALTER TABLE auth ADD UNIQUE passwd <span class="o">(</span>passwd<span class="o">)</span>;
-</span><span class='line'>CREATE TABLE test1 <span class="o">(</span>
-</span><span class='line'>  test1 int<span class="o">(</span>11<span class="o">)</span> NOT NULL
-</span><span class='line'><span class="o">)</span> <span class="nv">ENGINE</span><span class="o">=</span>MyISAM DEFAULT <span class="nv">CHARSET</span><span class="o">=</span>utf8;
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>위처럼 컬럼의 삭제, 인덱스의 추가, 테이블의 추가 등 모든 변경 내역들이 나오게 됩니다.</p>
-
-<p>다음부터는 이처럼 좀 더 간단하고 확실하게 할 수 있는 방법을 취해야 되겠습니다.</p>
 
   
   
