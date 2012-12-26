@@ -5,7 +5,7 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Jeen's techlog</title>
+  <title>A usecase of App::Fatpacker - Nagios Plugin - Jeen's techlog</title>
   <meta name="author" content="Jeen Lee">
 
   
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://jeen.github.com/">
+  <link rel="canonical" href="http://jeen.github.com/blog/2012/12/26/a-usecase-of-app-fatpacker/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -115,13 +115,10 @@
 
   </header>
   <section id="main">
-      
-  
-  
     <article class="post">
-      <div class="sharing-box">
+  <div class="sharing-box">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://jeen.github.com/index.html" data-via="JEEN_LEE" data-counturl="http://jeen.github.com/index.html" data-size="large">Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://jeen.github.com/blog/2012/12/26/a-usecase-of-app-fatpacker/" data-via="JEEN_LEE" data-counturl="http://jeen.github.com/blog/2012/12/26/a-usecase-of-app-fatpacker/" data-size="large">Tweet</a>
   
   
   
@@ -129,14 +126,10 @@
   
 </div>
 
-      
+  
   <header>
     
-      <h2 class="entry-title">
-        
-        <a href="/blog/2012/12/26/a-usecase-of-app-fatpacker/">A Usecase of App::Fatpacker - Nagios Plugin</a>
-        
-      </h2>
+      <h2 class="entry-title">A Usecase of App::Fatpacker - Nagios Plugin</h2>
     
     
       <p class="meta">
@@ -154,14 +147,14 @@
 
 <time datetime="2012-12-26T23:48:00+09:00" pubdate data-updated="true">Dec 26<span>th</span>, 2012</time>
         
-         | <a href="/blog/2012/12/26/a-usecase-of-app-fatpacker/#disqus_thread">Comments</a>
+         | <a href="#disqus_thread">Comments</a>
         
       </p>
     
   </header>
 
 
-  <p> 최근 업무때문에 Nagios Plugin 을 만져야 하는 일들이 빈번하게 있었고, 앞으로도 발생할 소지가 상당히 높습니다. 이런 Nagios Plugin 을 만들거나 기존에 만들어 진 것들을 간편하게 다른 복수의 서버에 배포하는 일도 필요합니다.</p>
+<p> 최근 업무때문에 Nagios Plugin 을 만져야 하는 일들이 빈번하게 있었고, 앞으로도 발생할 소지가 상당히 높습니다. 이런 Nagios Plugin 을 만들거나 기존에 만들어 진 것들을 간편하게 다른 복수의 서버에 배포하는 일도 필요합니다.</p>
 
 <p> Nagios Plugin 이야 굳이 언어를 가리지 않는다고 치더라도, 언어의 특정 라이브러리에 의존을 가지는 경우가 많습니다. MongoDB 용 Nagios Plugin 에는 Python 의 pymongo 라이브러리를 설치해야하는 경우가 있지요.</p>
 
@@ -414,90 +407,18 @@
 
 <p>덩달아서 같이 참고하시면 좋을 것 같습니다.</p>
 
-  
-  
 
 
-    </article>
-  
-  
-    <article class="post">
-      <div class="sharing-box">
-  
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://jeen.github.com/index.html" data-via="JEEN_LEE" data-counturl="http://jeen.github.com/index.html" data-size="large">Tweet</a>
-  
-  
-  
-  <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
-  
+</article>
+
+  <section class="comments">
+    <h2>Comments</h2>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 </div>
+  </section>
 
-      
-  <header>
-    
-      <h2 class="entry-title">
-        
-        <a href="/blog/2012/11/29/download-package-dir-slash-files-from-directory-index/">Download Package Dir/files From Directory Index</a>
-        
-      </h2>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-11-29T20:10:00+09:00" pubdate data-updated="true">Nov 29<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/11/29/download-package-dir-slash-files-from-directory-index/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <p> 최근에 모 오픈소스의 패키지 리포지트리가 조만간 닫힐 것이라는 뉴스가 있어서… 만일을 위해 거기 있는 패키지 파일들을 일단 긁어오기로 했습니다. -_-;</p>
-
-<p> 그래서 크롤러를 하나 만들까 하다가… 이런 류의 작업은 뭔가 만들어 놓은 툴이 있을 것이라는 생각에 이리저리 뒤져보고 찾아봤지만 마땅한 키워드를 얻지 못했습니다.</p>
-
-<p> 결국 지인들에게 수소문해본 결과 아래와 같은 커맨드를 통해서 Directory Index 구조를 취하는 페이지에서 파일들을 몽땅 긁어올 수 있다는 걸을 알게되었습니다.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>wget -e <span class="nv">robots</span><span class="o">=</span>off -k -r --no-parent --wait<span class="o">=</span>5 http://download.virtualbox.org/virtualbox/debian/
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p> <code>index.html</code> 등의 불필요한 파일들도 같이 다운로드 되기도 하지만… 일단 다 받고나서…</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>find . | grep index.html | xargs rm
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>으로 삭제…</p>
-
-<p>그리하여 조만간 끊어질지도 모르는 사태에 대비코자 미리 이렇게 준비를 끝냈습니다.</p>
-
-  
-  
-
-
-    </article>
-  
 
     <nav role="navigation" id="pagination">
-  <span class="next">
-    <a href="/blog/page/2/" rel="next">Continue &rarr;</a>
-  </span>
-
 
 </nav>
   </section>
@@ -509,7 +430,10 @@
       var disqus_shortname = 'jeen';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://jeen.github.com/blog/2012/12/26/a-usecase-of-app-fatpacker/';
+        var disqus_url = 'http://jeen.github.com/blog/2012/12/26/a-usecase-of-app-fatpacker/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
