@@ -9,7 +9,7 @@
   <meta name="author" content="Jeen Lee">
 
   
-  <meta name="description" content="Tweet DBIx::Class - Using GIS Extensions Dec 26th, 2011 | Comments DBIx::Class 에서의 GIS!? ORM 을 사용함에 있어서 단순한 SELECT 문은 그렇게 큰 고민없이 사용할 수 있습니다. 하지만 GIS &hellip;">
+  <meta name="description" content="Tweet Using Plack::Middleware::OAuth Dec 27th, 2011 | Comments Before Using Plack::Middleware::OAuth 사실은 Plack::Middleware::OAuth 를 사용하기 이전에는 OAuth &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -116,6 +116,250 @@
   </header>
   <section id="main">
       
+  
+  
+    <article class="post">
+      <div class="sharing-box">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://jeen.github.com/blog/page/19/index.html" data-via="JEEN_LEE" data-counturl="http://jeen.github.com/blog/page/19/index.html" data-size="large">Tweet</a>
+  
+  
+  
+  <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+      
+  <header>
+    
+      <h2 class="entry-title">
+        
+        <a href="/blog/2011/12/27/using-plack-middleware-oauth/">Using Plack::Middleware::OAuth</a>
+        
+      </h2>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-12-27T13:24:00+09:00" pubdate data-updated="true">Dec 27<span>th</span>, 2011</time>
+        
+         | <a href="/blog/2011/12/27/using-plack-middleware-oauth/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <h3>Before Using Plack::Middleware::OAuth</h3>
+
+<p>  사실은 <a href="http://search.cpan.org/perldoc?Plack::Middleware::OAuth">Plack::Middleware::OAuth</a> 를 사용하기 이전에는 OAuth 관련 callback 처리등을 직접 파라메터를 확인해가면서 해당 액션을 처리했었습니다. 그게 P::M::OAuth 를 사용해서 각 OAuth Provider 들을 좀 더 유연하게 다룰 수 있게 되지 않았나 합니다.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="k">sub </span><span class="nf">redirect_to_foursquare</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">my</span> <span class="nv">$self</span> <span class="o">=</span> <span class="nb">shift</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1"># redirect to foursquare authentication url</span>
+</span><span class='line'>    <span class="nv">$self</span><span class="o">-&gt;</span><span class="n">response</span><span class="o">-&gt;</span><span class="n">redirect</span><span class="p">(</span><span class="s">&quot;https://foursquare.com/oauth2/authenticate?client_id=$client_id&amp;response_type=code&amp;redirect_uri=$callback_url&quot;</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">sub </span><span class="nf">receive_token_foursquare</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">my</span> <span class="nv">$self</span> <span class="o">=</span> <span class="nb">shift</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">my</span> <span class="nv">$res</span> <span class="o">=</span> <span class="n">Furl</span><span class="o">-&gt;</span><span class="k">new</span><span class="o">-&gt;</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;https://foursquare.com/oauth2/access_token?client_id=$client_id&amp;client_secret=$client_secret&amp;grant_type=authorization_code&amp;redirect_uri=$redirect_url&amp;code=&quot;</span><span class="o">.</span><span class="nv">$self</span><span class="o">-&gt;</span><span class="n">request</span><span class="o">-&gt;</span><span class="n">param</span><span class="p">(</span><span class="s">&#39;code&#39;</span><span class="p">));</span>
+</span><span class='line'>  <span class="o">...</span>
+</span><span class='line'>  <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>  예, 뭐 위처럼 OAuth 인증시에 <code>client_id</code> 랑 <code>client_secret</code> 그리고 <code>grant_type</code> 등 여러가지 파라메터의 지정이나 인증 URL 등등이 Provider 마다 다르고 이러니 뭐 일일이 Provider 마다 매번 어플리케이션 단에서 코드를 써나가는 것이 참 불쾌하기 마련이었습니다.
+  나름 플러거블하게 만든다고 해봤지만 역시 이런 부분은 Middleware 단에서 처리하는 게 좋지 않을까 생각하고 있었지요.
+  그런의미에서 P::M::OAuth 를 사용하게 되었습니다.</p>
+
+<h3>Custom Provider</h3>
+
+<p>  P::M::OAuth 는 OAuth v1/v2 를 지원합니다. OAuth 버젼마다 파라메터가 바뀌기 때문에 사용하고자 하는 OAuth Provider 가 어떤 버젼을 지원하는 지 확인해봐야 합니다.
+   P::M::OAuth 는 기본적으로 <em>Github</em>, <em>Twitter</em>, <em>Facebook</em>, <em>Live</em>, <em>Google</em> 의 다섯가지 OAuth Provider 를 지원합니다.</p>
+
+<p>  저는 <em>FourSquare</em> 의 OAuth 를 사용하려고 하는 데, 기본적으로 제공해주지 않으니, 약간 손질을 해줘야 되겠죠.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="nb">package</span> <span class="nn">Plack::Middleware::OAuth::</span><span class="n">Foursquare</span><span class="p">;</span>
+</span><span class='line'><span class="k">use</span> <span class="n">strict</span><span class="p">;</span>
+</span><span class='line'><span class="k">use</span> <span class="n">warnings</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">sub </span><span class="nf">config</span> <span class="p">{</span>
+</span><span class='line'>    <span class="o">+</span><span class="p">{</span>
+</span><span class='line'>        <span class="n">version</span>          <span class="o">=&gt;</span> <span class="mi">2</span><span class="p">,</span>
+</span><span class='line'>        <span class="n">authorize_url</span>    <span class="o">=&gt;</span> <span class="s">&#39;https://foursquare.com/oauth2/authenticate&#39;</span><span class="p">,</span>
+</span><span class='line'>        <span class="n">access_token_url</span> <span class="o">=&gt;</span> <span class="s">&#39;https://foursquare.com/oauth2/access_token&#39;</span><span class="p">,</span>
+</span><span class='line'>        <span class="n">response_type</span>    <span class="o">=&gt;</span> <span class="s">&#39;code&#39;</span><span class="p">,</span>
+</span><span class='line'>        <span class="n">grant_type</span>       <span class="o">=&gt;</span> <span class="s">&#39;authorization_code&#39;</span><span class="p">,</span>
+</span><span class='line'>    <span class="p">};</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="mi">1</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>  위처럼 <code>Plack::Middleware::OAuth::Foursquare</code> 와,</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="nb">package</span> <span class="nn">Plack::Middleware::OAuth::UserInfo::</span><span class="n">Foursquare</span><span class="p">;</span>
+</span><span class='line'><span class="k">use</span> <span class="n">strict</span><span class="p">;</span>
+</span><span class='line'><span class="k">use</span> <span class="n">warnings</span><span class="p">;</span>
+</span><span class='line'><span class="k">use</span> <span class="n">parent</span> <span class="sx">qw(Plack::Middleware::OAuth::UserInfo)</span><span class="p">;</span>
+</span><span class='line'><span class="k">use</span> <span class="nn">LWP::</span><span class="n">UserAgent</span><span class="p">;</span>
+</span><span class='line'><span class="k">use</span> <span class="n">JSON</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">sub </span><span class="nf">create_handle</span> <span class="p">{}</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">sub </span><span class="nf">query</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">my</span> <span class="nv">$self</span> <span class="o">=</span> <span class="nb">shift</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">my</span> <span class="nv">$uri</span> <span class="o">=</span> <span class="n">URI</span><span class="o">-&gt;</span><span class="k">new</span><span class="p">(</span><span class="s">&#39;https://api.foursquare.com/v2/users/self&#39;</span><span class="p">);</span>
+</span><span class='line'>    <span class="nv">$uri</span><span class="o">-&gt;</span><span class="n">query_form</span><span class="p">(</span> <span class="n">oauth_token</span> <span class="o">=&gt;</span> <span class="nv">$self</span><span class="o">-&gt;</span><span class="n">token</span><span class="o">-&gt;</span><span class="n">access_token</span> <span class="p">);</span>
+</span><span class='line'>    <span class="k">my</span> <span class="nv">$res</span> <span class="o">=</span> <span class="nn">LWP::</span><span class="n">UserAgent</span><span class="o">-&gt;</span><span class="k">new</span><span class="o">-&gt;</span><span class="n">get</span><span class="p">(</span><span class="nv">$uri</span><span class="p">);</span>
+</span><span class='line'>    <span class="k">my</span> <span class="nv">$body</span> <span class="o">=</span> <span class="nv">$res</span><span class="o">-&gt;</span><span class="n">decoded_content</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">return</span> <span class="k">unless</span> <span class="nv">$body</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">my</span> <span class="nv">$obj</span> <span class="o">=</span> <span class="n">decode_json</span><span class="p">(</span><span class="nv">$body</span><span class="p">)</span> <span class="o">||</span> <span class="p">{};</span>
+</span><span class='line'>    <span class="k">return</span> <span class="nv">$obj</span><span class="o">-&gt;</span><span class="p">{</span><span class="n">response</span><span class="p">}</span><span class="o">-&gt;</span><span class="p">{</span><span class="n">user</span><span class="p">};</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="mi">1</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>  <code>Plack::Middleware::OAuth::UserInfo::Foursquare</code> 를 추가합니다.</p>
+
+<p>  이렇게 쉽게 OAuth Provider 마다 해당 네임스페이스 맞는 모듈을 추가해줍니다.</p>
+
+<h3>MyApp</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="c1"># ...</span>
+</span><span class='line'><span class="k">my</span> <span class="nv">$app</span> <span class="o">=</span> <span class="n">MyApp</span><span class="o">-&gt;</span><span class="n">psgi_app</span><span class="p">;</span>
+</span><span class='line'><span class="n">builder</span> <span class="p">{</span>
+</span><span class='line'>    <span class="n">mount</span> <span class="s">&#39;/oauth&#39;</span> <span class="o">=&gt;</span> <span class="n">builder</span> <span class="p">{</span>
+</span><span class='line'>        <span class="n">enable</span> <span class="s">&#39;OAuth&#39;</span><span class="p">,</span>
+</span><span class='line'>            <span class="n">on_success</span> <span class="o">=&gt;</span> <span class="k">sub </span><span class="p">{</span>
+</span><span class='line'>                <span class="k">my</span> <span class="p">(</span><span class="nv">$mw</span><span class="p">,</span> <span class="nv">$token</span><span class="p">)</span> <span class="o">=</span> <span class="nv">@_</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>                <span class="c1"># get Foursquare&#39;s UserInfo</span>
+</span><span class='line'>                <span class="k">my</span> <span class="nv">$info</span> <span class="o">=</span> <span class="nn">Plack::Middleware::OAuth::</span><span class="n">UserInfo</span><span class="o">-&gt;</span><span class="k">new</span><span class="p">(</span> <span class="n">config</span> <span class="o">=&gt;</span> <span class="nv">$mw</span><span class="o">-&gt;</span><span class="n">config</span><span class="p">,</span> <span class="n">token</span> <span class="o">=&gt;</span> <span class="nv">$token</span> <span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>                <span class="k">if</span> <span class="p">(</span><span class="nv">$token</span><span class="o">-&gt;</span><span class="n">is_provider</span><span class="p">(</span><span class="s">&#39;Foursquare&#39;</span><span class="p">))</span> <span class="p">{</span>
+</span><span class='line'>                <span class="k">return</span> <span class="nv">$mw</span><span class="o">-&gt;</span><span class="n">redirect</span><span class="p">(</span><span class="s">&#39;/&#39;</span><span class="p">);</span>
+</span><span class='line'>              <span class="p">}</span>
+</span><span class='line'>              <span class="n">on_error</span> <span class="o">=&gt;</span> <span class="k">sub </span><span class="p">{</span> <span class="c1">#... },</span>
+</span><span class='line'>              <span class="n">providers</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span><span class='line'>                  <span class="s">&#39;Foursquare&#39;</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span><span class='line'>                      <span class="n">client_id</span> <span class="o">=&gt;</span> <span class="s">&#39;YOUR CLIENT_ID&#39;</span><span class="p">,</span>
+</span><span class='line'>                      <span class="n">client_secret</span> <span class="o">=&gt;</span> <span class="s">&#39;YOUR CLIENT_SECRET&#39;</span><span class="p">,</span>
+</span><span class='line'>                  <span class="p">},</span>
+</span><span class='line'>              <span class="p">};</span>
+</span><span class='line'>            <span class="p">}</span>
+</span><span class='line'>    <span class="p">};</span>
+</span><span class='line'>    <span class="n">mount</span> <span class="s">&#39;/&#39;</span> <span class="o">=&gt;</span> <span class="nv">$app</span><span class="p">;</span>
+</span><span class='line'><span class="p">};</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>  대충 위처럼 사용을 합니다.
+  좀 더 자세한 예제는 <a href="https://github.com/c9s/Plack-Middleware-OAuth/blob/develop/eg/app.psgi">P::M::OAuth 모듈의 예제 psgi 파일</a> 또는 , 이 모듈을 사용한 제 프로젝트 <a href="https://github.com/JEEN/Bobby-Akawa/blob/develop/lib/Bobby.pm#L46">Bobby-Akawa 의 특정 모듈</a>에서 찾아볼 수 있습니다.</p>
+
+<h3>Conclusion</h3>
+
+<p>  이로써 간략하게나마 Plack::Middleware::OAuth 를 이용해서 OAuth 인증을 Plack Middleware 단에서 구현할 수 있게 되었습니다. 조금 설명이 빈약해서 차후에 좀 더 구현단으로 들어가서 좀 더 깊게 파고들어가 볼까 합니다.</p>
+
+  
+  
+
+
+    </article>
   
   
     <article class="post">
