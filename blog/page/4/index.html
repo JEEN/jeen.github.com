@@ -9,7 +9,7 @@
   <meta name="author" content="Jeen Lee">
 
   
-  <meta name="description" content="Tweet DBIx::Class and JSON Aug 25th, 2012 | Comments 흔한 웹서비스의 흔한 AJAX 나 흔한 RESTful API 를 제공하기 위해서, 대개 JSON 포맷의 데이터를 서버에서 뿜어내고는 합니다. 하지만 누구나가 &hellip;">
+  <meta name="description" content="Tweet Building a Perl Project on Travis CI Aug 28th, 2012 | Comments Travis CI - Distributed build platform for the open source community Travis CI은 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -116,6 +116,226 @@
   </header>
   <section id="main">
       
+  
+  
+    <article class="post">
+      <div class="sharing-box">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://jeen.github.com/blog/page/4/index.html" data-via="JEEN_LEE" data-counturl="http://jeen.github.com/blog/page/4/index.html" data-size="large">Tweet</a>
+  
+  
+  
+  <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+      
+  <header>
+    
+      <h2 class="entry-title">
+        
+        <a href="/blog/2012/08/28/building-a-perl-project-on-travis-ci/">Building a Perl Project on Travis CI</a>
+        
+      </h2>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-08-28T14:25:00+09:00" pubdate data-updated="true">Aug 28<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/08/28/building-a-perl-project-on-travis-ci/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <ul>
+<li><a href="http://travis-ci.org/">Travis CI - Distributed build platform for the open source community</a></li>
+</ul>
+
+
+<p><code>Travis CI</code>은 이전에 얘기를 들었을 때는 별  관심이 없었는데(처음에는 확실히 Perl 을 지원하지 않아서), 언제부턴가 Perl 을 지원한다는 얘기를 듣고 Perl 커뮤니티에서 움직임이 조금씩 있더라구요. <code>Dist::Zilla::TravisCI</code> 같은 모듈들도 나오는 걸로 봐서…</p>
+
+<p>사용하는 방법은 아주 간단합니다. <code>Github</code> 계정에 연결되고, 그리고 Github 의 Public 상태의 프로젝트를 고르고… 그 프로젝트에 <code>.travis.yml</code> 파일을 놓아주면 됩니다.</p>
+
+<ul>
+<li><a href="http://about.travis-ci.org/docs/user/languages/perl/">Travis CI - Building a Perl Project</a></li>
+</ul>
+
+
+<p>자세한 건 위의 설명페이지를 참고해서 이전에 살짝 만들어 놓은 <code>Zamakist</code> 를 <code>Travis CI</code> 에서 돌려보게 해봤습니다.</p>
+
+<p><img src="https://lh5.googleusercontent.com/-EUnpasmILzs/UDxYWf7j2WI/AAAAAAAACBg/y1EdG7zFKoM/%2525C3%2525A1%2525C2%252584%2525C2%252589%2525C3%2525A1%2525C2%252585%2525C2%2525B3%2525C3%2525A1%2525C2%252584%2525C2%25258F%2525C3%2525A1%2525C2%252585%2525C2%2525B3%2525C3%2525A1%2525C2%252584%2525C2%252585%2525C3%2525A1%2525C2%252585%2525C2%2525B5%2525C3%2525A1%2525C2%252586%2525C2%2525AB%2525C3%2525A1%2525C2%252584%2525C2%252589%2525C3%2525A1%2525C2%252585%2525C2%2525A3%2525C3%2525A1%2525C2%252586%2525C2%2525BA%2525202012-08-28%252520%2525C3%2525A1%2525C2%252584%2525C2%25258B%2525C3%2525A1%2525C2%252585%2525C2%2525A9%2525C3%2525A1%2525C2%252584%2525C2%252592%2525C3%2525A1%2525C2%252585%2525C2%2525AE%2525202.33.19.png" alt="img-failed" /></p>
+
+<p> 처음에야 뭐 물론 <code>.travis.yml</code> 파일이 없어서 실패했다는 메일이 날라왔구요.</p>
+
+<p> <code>.travis.yml</code> 을 추가해준 결과로는 다시 이렇게 제대로 돌아간다는 메일이 옵니다.</p>
+
+<p><img src="https://lh5.googleusercontent.com/-ub5BrJZrXPw/UDxYT_Xl7JI/AAAAAAAACBY/CtHCGYNaJcY/%2525C3%2525A1%2525C2%252584%2525C2%252589%2525C3%2525A1%2525C2%252585%2525C2%2525B3%2525C3%2525A1%2525C2%252584%2525C2%25258F%2525C3%2525A1%2525C2%252585%2525C2%2525B3%2525C3%2525A1%2525C2%252584%2525C2%252585%2525C3%2525A1%2525C2%252585%2525C2%2525B5%2525C3%2525A1%2525C2%252586%2525C2%2525AB%2525C3%2525A1%2525C2%252584%2525C2%252589%2525C3%2525A1%2525C2%252585%2525C2%2525A3%2525C3%2525A1%2525C2%252586%2525C2%2525BA%2525202012-08-28%252520%2525C3%2525A1%2525C2%252584%2525C2%25258B%2525C3%2525A1%2525C2%252585%2525C2%2525A9%2525C3%2525A1%2525C2%252584%2525C2%252592%2525C3%2525A1%2525C2%252585%2525C2%2525AE%2525202.33.13.png" alt="Img1" /></p>
+
+<p> <code>Travis CI</code> 에서 출력되는 빌드 내용은 아래와 같습니다.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>Using worker: ppp3.worker.travis-ci.org:php-1
+</span><span class='line'>
+</span><span class='line'><span class="nv">$ </span><span class="nb">cd</span> ~/builds
+</span><span class='line'><span class="nv">$ </span>git clone --depth<span class="o">=</span>100 --quiet git://github.com/JEEN/p5-App-Zamakist.git JEEN/p5-App-Zamakist
+</span><span class='line'><span class="nv">$ </span><span class="nb">cd </span>JEEN/p5-App-Zamakist
+</span><span class='line'><span class="nv">$ </span>git checkout -qf df10bdfea286c9933c345c84206eaa90b8f298a6
+</span><span class='line'><span class="nv">$ </span>perlbrew use 5.16
+</span><span class='line'><span class="nv">$ </span>perl --version
+</span><span class='line'>
+</span><span class='line'>This is perl 5, version 16, subversion 0 <span class="o">(</span>v5.16.0<span class="o">)</span> built <span class="k">for </span>i686-linux
+</span><span class='line'>
+</span><span class='line'>Copyright 1987-2012, Larry Wall
+</span><span class='line'>
+</span><span class='line'>Perl may be copied only under the terms of either the Artistic License or the
+</span><span class='line'>GNU General Public License, which may be found in the Perl 5 <span class="nb">source </span>kit.
+</span><span class='line'>
+</span><span class='line'>Complete documentation <span class="k">for </span>Perl, including FAQ lists, should be found on
+</span><span class='line'>this system using <span class="s2">&quot;man perl&quot;</span> or <span class="s2">&quot;perldoc perl&quot;</span>.  If you have access to the
+</span><span class='line'>Internet, point your browser at http://www.perl.org/, the Perl Home Page.
+</span><span class='line'>
+</span><span class='line'><span class="nv">$ </span>cpanm --version
+</span><span class='line'>cpanm <span class="o">(</span>App::cpanminus<span class="o">)</span> version 1.5017
+</span><span class='line'><span class="nv">$ </span>cpanm --quiet --installdeps --notest .
+</span><span class='line'>Successfully installed Text-CharWidth-0.04
+</span><span class='line'>Successfully installed Text-UnicodeBox-0.03
+</span><span class='line'>Successfully installed XML-XPathEngine-0.13
+</span><span class='line'>Successfully installed HTML-Tree-5.02
+</span><span class='line'>Successfully installed HTML-TreeBuilder-XPath-0.14
+</span><span class='line'>Successfully installed HTML-Selector-XPath-0.14
+</span><span class='line'>Successfully installed Web-Query-0.08
+</span><span class='line'>Successfully installed Term-ReadLine-Zoid-0.07
+</span><span class='line'>8 distributions installed
+</span><span class='line'><span class="nv">$ </span>perl Makefile.PL <span class="o">&amp;&amp;</span> make <span class="nb">test</span>
+</span><span class='line'>include /home/travis/builds/JEEN/p5-App-Zamakist/inc/Module/Install.pm
+</span><span class='line'>include inc/Module/Install/Metadata.pm
+</span><span class='line'>include inc/Module/Install/Base.pm
+</span><span class='line'>include inc/Module/Install/Makefile.pm
+</span><span class='line'>Cannot determine perl version info from lib/App/Zamakist.pm
+</span><span class='line'>include inc/Module/Install/Scripts.pm
+</span><span class='line'>include inc/Module/Install/Include.pm
+</span><span class='line'>include inc/Test/More.pm
+</span><span class='line'>include inc/Module/Install/WriteAll.pm
+</span><span class='line'>include inc/Module/Install/Win32.pm
+</span><span class='line'>include inc/Module/Install/Can.pm
+</span><span class='line'>include inc/Module/Install/Fetch.pm
+</span><span class='line'>Writing Makefile <span class="k">for </span>App::Zamakist
+</span><span class='line'>Writing MYMETA.yml and MYMETA.json
+</span><span class='line'>Writing META.yml
+</span><span class='line'>cp lib/App/Zamakist/Media.pm blib/lib/App/Zamakist/Media.pm
+</span><span class='line'>cp lib/App/Zamakist.pm blib/lib/App/Zamakist.pm
+</span><span class='line'>cp lib/App/Zamakist/Role/Reportable.pm blib/lib/App/Zamakist/Role/Reportable.pm
+</span><span class='line'>cp lib/App/Zamakist/Handler/GOM.pm blib/lib/App/Zamakist/Handler/GOM.pm
+</span><span class='line'>cp bin/zamakist blib/script/zamakist
+</span><span class='line'>/home/travis/perl5/perlbrew/perls/5.16/bin/perl <span class="s2">&quot;-Iinc&quot;</span> -MExtUtils::MY -e <span class="s1">&#39;MY-&gt;fixin(shift)&#39;</span> -- blib/script/zamakist
+</span><span class='line'><span class="nv">PERL_DL_NONLAZY</span><span class="o">=</span>1 /home/travis/perl5/perlbrew/perls/5.16/bin/perl <span class="s2">&quot;-MExtUtils::Command::MM&quot;</span> <span class="s2">&quot;-e&quot;</span> <span class="s2">&quot;test_harness(0, &#39;inc&#39;, &#39;blib/lib&#39;, &#39;blib/arch&#39;)&quot;</span> t/*.t
+</span><span class='line'>t/00_compile.t ......... ok
+</span><span class='line'>t/01_find_permalink.t .. 5/7 <span class="c"># http://search.gomtv.com/searchjm.gom?key=The.Mentalist.S04E01.HDTV.XviD-ASAP.%5BVTV%5D.Scarlet.Ribbons&amp;preface=0</span>
+</span><span class='line'><span class="c"># http://gom.gomtv.com/jmdb/view.html?intSeq=808364&amp;preface=0&amp;spage=1</span>
+</span><span class='line'>Wide character in print at /home/travis/perl5/perlbrew/perls/5.16/lib/5.16.0/Test/Builder.pm line 1759.
+</span><span class='line'><span class="c"># [통합] The.Mentalist.S04E01.HDTV.XviD-ASAP</span>
+</span><span class='line'>t/01_find_permalink.t .. ok
+</span><span class='line'>All tests successful.
+</span><span class='line'><span class="nv">Files</span><span class="o">=</span>2, <span class="nv">Tests</span><span class="o">=</span>8, 10 wallclock secs <span class="o">(</span> 0.03 usr  0.01 sys +  1.79 cusr  0.10 <span class="nv">csys</span> <span class="o">=</span>  1.93 CPU<span class="o">)</span>
+</span><span class='line'>Result: PASS
+</span><span class='line'>
+</span><span class='line'>Done. Build script exited with: 0
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>좀 더 뭐 욕심이 있다면 Jenkins 에서 처럼 정적분석이나 테스트 케이스에 대해서 좀 더 자세한 내용이 나와줬으면 좋겠다 싶지만… 사실 그건 뽀대의 문제라…</p>
+
+<p>위의 빌드 내용에 대한 자세한 내용은 아래의 링크를 참고하세요.</p>
+
+<ul>
+<li><a href="http://travis-ci.org/#!/JEEN/p5-App-Zamakist/builds/2257622">Travis CI : p5-App-Zamakist</a></li>
+</ul>
+
+
+  
+  
+
+
+    </article>
   
   
     <article class="post">
@@ -331,105 +551,6 @@
 <p>위의 글에서 <code>ResultBase</code> 를 참고해주세요.</p>
 
 <p> <code>MyApp::Schema::ResultBase</code> 를 상속받은 각 Result 테이블들은 <code>TO_JSON</code> 을 오버라이드 해서 빼놓고 싶은 컬럼(예를 들어 <code>password</code> 같은 컬럼) 을 배제해서 출력할 수 있지 않을까요?</p>
-
-  
-  
-
-
-    </article>
-  
-  
-    <article class="post">
-      <div class="sharing-box">
-  
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://jeen.github.com/blog/page/4/index.html" data-via="JEEN_LEE" data-counturl="http://jeen.github.com/blog/page/4/index.html" data-size="large">Tweet</a>
-  
-  
-  
-  <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
-  
-</div>
-
-      
-  <header>
-    
-      <h2 class="entry-title">
-        
-        <a href="/blog/2012/08/09/moving-from-bash-to-zsh-again/">Moving From Bash to Zsh Again</a>
-        
-      </h2>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-08-09T16:30:00+09:00" pubdate data-updated="true">Aug 9<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/08/09/moving-from-bash-to-zsh-again/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <p> 밥벌이도구가 바뀌고 해서 다시 ZSH 로 돌아갔습니다.</p>
-
-<blockquote class="twitter-tweet" lang="ko"><p>레티나 맥북프로를 오늘 받은 게 자랑.txt <a href="http://t.co/38oGVx7W" title="http://jeen.tistory.com/560">jeen.tistory.com/560</a></p>&mdash; JEEN (@JEEN_LEE) <a href="https://twitter.com/JEEN_LEE/status/232821768325300225" data-datetime="2012-08-07T12:53:29+00:00">8월 7, 2012</a></blockquote>
-
-
-<ul>
-<li><a href="https://github.com/skwp/dotfiles">https://github.com/skwp/dotfiles</a></li>
-</ul>
-
-
-<p>지난번에 MacBook Air 에 올리다가 뭐가 꼬인 <code>YADR</code> 을 썼습니다. <code>grep</code> 경고메시지가 없이 깔끔하게 돌아가는 군요.</p>
-
-<p> 이래저래 개발환경도 맞추고 그러다가 지난달에 zsh 5.0 이 릴리즈 된 것을 보고 Mt.LION 에 깔린 zsh 버젼을 확인하니..</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>zsh --version
-</span><span class='line'>zsh 4.3.11 <span class="o">(</span>i386-apple-darwin12.0<span class="o">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><code>4.3.11</code> 이었습니다. 그래서 zsh 5.0 으로 올려보려고 brew 로 일단 깔았죠.</p>
-
-<p>그리고 <code>chsh</code> 로 셸을 바꾸려고 하는 데…</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>chsh -s /usr/local/bin/zsh
-</span><span class='line'>Changing shell <span class="k">for </span>jeen.
-</span><span class='line'>Password <span class="k">for </span>jeen:
-</span><span class='line'>chsh: /usr/local/Cellar/zsh/5.0.0/bin/zsh: non-standard shell
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>이라고 뜨는 것이었지요.</p>
-
-<p>구글검색결과 <code>/etc/shells</code> 에 해당 셸의 패스를 추가하는 것으로 이 난관을 헤쳐나갈 수 있다고 합니다.</p>
-
-<p>그래서 네. zsh 5.0 쓰고 있는데 뭐가 좋은지는 써보면서 느끼게 되려나요.</p>
-
-<ul>
-<li><a href="https://github.com/zsh-users/zsh/blob/master/NEWS">https://github.com/zsh-users/zsh/blob/master/NEWS</a></li>
-</ul>
-
-
-<p>이런 CHANGELOG 도 일단 보고 있지만요&#8230;</p>
 
   
   
