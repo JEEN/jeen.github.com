@@ -9,8 +9,7 @@
   <meta name="author" content="Jeen Lee">
 
   
-  <meta name="description" content="Tweet .proverc for Less Typing Nov 26th, 2012 | Comments http://jeen.github.com/blog/2012/11/21/using-test-pretty/ 그러고보니 앞전에 쓴 글에서 1
-$ prove -Ilib - &hellip;">
+  <meta name="description" content="Tweet Download Package Dir/files From Directory Index Nov 29th, 2012 | Comments 최근에 모 오픈소스의 패키지 리포지트리가 조만간 닫힐 것이라는 뉴스가 있어서… 만일을 위해 거기 있는 패키지 파일들을 일단 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -135,6 +134,78 @@ $ prove -Ilib - &hellip;">
     
       <h2 class="entry-title">
         
+        <a href="/blog/2012/11/29/download-package-dir-slash-files-from-directory-index/">Download Package Dir/files From Directory Index</a>
+        
+      </h2>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-11-29T20:10:00+09:00" pubdate data-updated="true">Nov 29<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/11/29/download-package-dir-slash-files-from-directory-index/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <p> 최근에 모 오픈소스의 패키지 리포지트리가 조만간 닫힐 것이라는 뉴스가 있어서… 만일을 위해 거기 있는 패키지 파일들을 일단 긁어오기로 했습니다. -_-;</p>
+
+<p> 그래서 크롤러를 하나 만들까 하다가… 이런 류의 작업은 뭔가 만들어 놓은 툴이 있을 것이라는 생각에 이리저리 뒤져보고 찾아봤지만 마땅한 키워드를 얻지 못했습니다.</p>
+
+<p> 결국 지인들에게 수소문해본 결과 아래와 같은 커맨드를 통해서 Directory Index 구조를 취하는 페이지에서 파일들을 몽땅 긁어올 수 있다는 걸을 알게되었습니다.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>wget -e <span class="nv">robots</span><span class="o">=</span>off -k -r --no-parent --wait<span class="o">=</span>5 http://download.virtualbox.org/virtualbox/debian/
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p> <code>index.html</code> 등의 불필요한 파일들도 같이 다운로드 되기도 하지만… 일단 다 받고나서…</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>find . | grep index.html | xargs rm
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>으로 삭제…</p>
+
+<p>그리하여 조만간 끊어질지도 모르는 사태에 대비코자 미리 이렇게 준비를 끝냈습니다.</p>
+
+  
+  
+
+
+    </article>
+  
+  
+    <article class="post">
+      <div class="sharing-box">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://jeen.github.com/blog/page/3/index.html" data-via="JEEN_LEE" data-counturl="http://jeen.github.com/blog/page/3/index.html" data-size="large">Tweet</a>
+  
+  
+  
+  <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+      
+  <header>
+    
+      <h2 class="entry-title">
+        
         <a href="/blog/2012/11/26/proverc-for-less-typing/">.proverc for Less Typing</a>
         
       </h2>
@@ -230,101 +301,6 @@ $ prove -Ilib - &hellip;">
 <h3>결론</h3>
 
 <p>똑같은 일을 3번, 4번하다 보면 가끔 내가 뭐하는 짓인가 하는 생각이 들 때가 있는데… 좀 더 빨리 깨달았으면 좋았을 것을 이라는 생각을 그때마다 하게 됩니다.</p>
-
-  
-  
-
-
-    </article>
-  
-  
-    <article class="post">
-      <div class="sharing-box">
-  
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://jeen.github.com/blog/page/3/index.html" data-via="JEEN_LEE" data-counturl="http://jeen.github.com/blog/page/3/index.html" data-size="large">Tweet</a>
-  
-  
-  
-  <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
-  
-</div>
-
-      
-  <header>
-    
-      <h2 class="entry-title">
-        
-        <a href="/blog/2012/11/21/using-test-pretty/">Using Test::Pretty</a>
-        
-      </h2>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-11-21T22:40:00+09:00" pubdate data-updated="true">Nov 21<span>st</span>, 2012</time>
-        
-         | <a href="/blog/2012/11/21/using-test-pretty/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <p> 사실 <code>TAP</code> 의 결과자체는 그렇게 이쁘장하지 않습니다.
-  이전에 <code>NHN Deview 2012</code> 에서 <code>Mocha</code> 로 돌렸을 때 나오는 이쁨직한 테스트 결과를 보고,</p>
-
-<blockquote><p>아, 저러면 왠지 테스트코드 쓰고, 돌릴 만하겠다</p></blockquote>
-
-<p> 라는 뻘생각이 들었습니다. 하지만 전 테스트코드를 그렇게 용의주도하게 쓰지 않는 편이어서 그냥 다른 세상 이야기라고 넘겼습니다.</p>
-
-<p> 그러는 와중에 일본의 Perl IRC 채널에서 <code>Test::*</code> 와 <code>TAP</code> 등에 대한 여러가지 회의론(?) 같은 이야기가 들려오다가 <code>BDD</code> 나 테스트 결과 자체가 하나의 <code>Spec</code> 으로 재이용되는 등의 이야기를 듣고는 많이 감화되었죠.</p>
-
-<p> 그러는 중에 @tokuhirom 씨가 최근에 내놓은 <code>Test::Pretty</code> 와 <code>Test::Ika</code> 라는 모듈이 등장했습니다.</p>
-
-<ul>
-<li><a href="http://metacpan.org/module/Test::Pretty">Test::Pretty</a></li>
-<li><a href="http://metacpan.org/module/Test::Ika">Test::Ika</a></li>
-</ul>
-
-
-<p><code>Test::Ika</code> 의 경우는 Perl5 용 <code>BDD</code> Framework 의 자리를 노리는 그런 모듈입니다만.. 현재의 버젼(<code>0.02</code>)에서는 생각대로 결과가 나와주지 않기에 조금 아쉬웠습니다.</p>
-
-<p>그게 <code>describe</code>, <code>it</code> 등의 <code>BDD</code> 에서 사용하는 구문을 사용하고 있지만, <code>Test::Mojo</code> 처럼 <code>Test::More</code> 를 래핑한 모듈에서 사용할 때라든가… 좀 많이 아쉬운 장면들이 아직 있습니다. 뭐 물론 만든 지 얼마 안되기도 하고 그런 의미에서는 전도유망하다고할까요 :-)</p>
-
-<p><code>Test::Pretty</code> 의 경우는 크게 이를 고려하지 않고도 흔히  사용하는 <code>Test::More</code> 로  테스트코드를 쓰고, <code>prove</code> Plugin 으로 동작합니다. 이름 그대로 결과를 이쁘게 보여준다는 것이죠.</p>
-
-<p>다음처럼 말이죠.</p>
-
-<h3>일반적인 TAP 형식의 출력</h3>
-
-<p><img src="https://lh5.googleusercontent.com/-trTeNFoXQtU/UKzc4yghokI/AAAAAAAACFY/zaEbENGNHOQ/test-pretty-01.png" alt="일반적인 TAP 형식" /></p>
-
-<h3>Test::Pretty 를 이용한 출력</h3>
-
-<p><img src="https://lh3.googleusercontent.com/-okmAPP0EmC8/UKzc74KHsYI/AAAAAAAACFg/rthGC2gQn_E/test-pretty-02.png" alt="Test::Pretty 를 이용한 출력" /></p>
-
-<h3>어떻게 실행을?</h3>
-
-<p>Pretty 형식으로는 단일파일만 나오고, 전체 테스트코드를 한번에 돌렸을 때는 위처럼 나오지 않기에 왜 그럴까 고심해보다가 아래처럼 테스트코드를 실행하면 제대로 동작하는 것을 확인했습니다.</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ prove -Ilib -Pretty -v -lr </span></code></pre></td></tr></table></div></figure>
-
-
-<h3>결론</h3>
-
-<p> JS 테스트 프레임워크인 <a href="http://visionmedia.github.com/mocha/">Mocha</a> 를 들여다 봤는데 여러모로 베껴왔으면 하는 그런 세련됨이 있네요. :-)</p>
 
   
   

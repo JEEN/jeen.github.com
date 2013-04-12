@@ -9,7 +9,7 @@
   <meta name="author" content="Jeen Lee">
 
   
-  <meta name="description" content="Tweet A Usecase of App::Fatpacker - Nagios Plugin Dec 26th, 2012 | Comments 최근 업무때문에 Nagios Plugin 을 만져야 하는 일들이 빈번하게 있었고, 앞으로도 발생할 소지가 상당히 높습니다. 이런 &hellip;">
+  <meta name="description" content="Tweet Cpanm 1.6 Is Here for You Feb 28th, 2013 | Comments 엊그제 cpanm 1.6 이 릴리즈되었습니다. 그동안 개발버젼으로 1.6에 포함될 기능들이 일부 소개되어 왔지만, 아무튼 뭐 @miyagawa 씨가 친히 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -116,6 +116,151 @@
   </header>
   <section id="main">
       
+  
+  
+    <article class="post">
+      <div class="sharing-box">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://jeen.github.com/blog/page/2/index.html" data-via="JEEN_LEE" data-counturl="http://jeen.github.com/blog/page/2/index.html" data-size="large">Tweet</a>
+  
+  
+  
+  <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+      
+  <header>
+    
+      <h2 class="entry-title">
+        
+        <a href="/blog/2013/02/28/cpanm-1-dot-6-is-here-for-you/">Cpanm 1.6 Is Here for You</a>
+        
+      </h2>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-02-28T09:34:00+09:00" pubdate data-updated="true">Feb 28<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/02/28/cpanm-1-dot-6-is-here-for-you/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <p> 엊그제 cpanm 1.6 이 릴리즈되었습니다. 그동안 개발버젼으로 1.6에 포함될 기능들이 일부 소개되어 왔지만, 아무튼 뭐 @miyagawa 씨가 친히 Screencast 까지 준비해서 소개할 정도로 많은 기능들이 추가되었습니다.</p>
+
+<p> <iframe width="560" height="315" src="http://www.youtube.com/embed/6Vglyf7X2S8" frameborder="0" allowfullscreen></iframe></p>
+
+<h2>버젼지정 설치</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ cpanm MIYAGAWA/Plack-1.0015.tar.gz</span></code></pre></td></tr></table></div></figure>
+
+
+<p>위처럼 번거로운 버젼지정 설치방식이</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ cpanm Plack@1.0015</span></code></pre></td></tr></table></div></figure>
+
+
+<p>이렇게 간단해졌습니다.</p>
+
+<p>예전에 <code>Mail::Sender</code> 의 마이너버젼에 따라서 인코딩지정이 좀 엉망이 되어서 우회코드를 쓸 까 하다가</p>
+
+<p>그냥 증상이 나타나기 이전버젼으로 땜빵으로 버티던 기억이 있습니다. (물론 해당 버젼의 동작이 이상해서 뭐 금방 업데이트 되었었지만…)</p>
+
+<h2>개발버젼 설치</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ cpanm --dev Plack</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>--dev</code> 옵션을 이용하여 개발버젼의 모듈을 설치할 수 있습니다.</p>
+
+<p>저같은 경우는 요즘 거의 개발버젼을 보고 사용하는 경우가 없어서 쓸 일은 없을 것 같습니다.</p>
+
+<ul>
+<li>버젼범위 지정</li>
+</ul>
+
+
+<p> 1.0000 이상 2.0000 미만의 Plack 모듈 설치</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ cpanm Plack~"&gt;= 1.0000, &lt; 2.0000"</span></code></pre></td></tr></table></div></figure>
+
+
+<p> 1.0000 버젼의 Plack 설치 (<code>cpanm Plack@1.0000</code> 과 동일합니다.)</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ cpanm Plack~"== 1.0000"</span></code></pre></td></tr></table></div></figure>
+
+
+<p> 1.0000 이상이지만 1.0016 버젼은 제외한 가장 최신의 Plack 모듈 설치</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ cpanm Plack~"&gt;= 1.0000, != 1.0016"</span></code></pre></td></tr></table></div></figure>
+
+
+<p>사실 <code>Makefile.PL</code> 에 의존모듈들을 넣었을 때 위와 같은 표기가 필요할 경우가 발생할 수 있겠습니다만, 대개의 경우는 특정 버젼만 지정해서 사용하는 경우가 많았기 때문에 어떨런지 잘 모르겠습니다.</p>
+
+<h2>Git Repository 에서 받아서 설치</h2>
+
+<p> 몇몇 CPAN Author 들을 보면, CPAN 에 올릴 만큼 정비되지 않았다는 이유로 Github 에만 공개해놓는 경우를 많이 볼 수 있습니다. 몇번 그런 경우가 있었고, 일부러 다른 툴을 사용해서 Github 에서 CPAN Module 을 설치했던 기억도 있습니다. 이제부터 cpanm 이 이런 케이스를 지원해주니 다행이군요.</p>
+
+<p> 기본 브랜치를 설치</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ cpanm git://github.com/JEEN/p5-WebService-Aladdin.git</span></code></pre></td></tr></table></div></figure>
+
+
+<p> devel 브랜치를 설치</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ cpanm git://github.com/JEEN/p5-WebService-Aladdin.git@devel</span></code></pre></td></tr></table></div></figure>
+
+
+<p> 특정 커밋내용이 적용된 부분을 설치</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ cpanm git://github.com/JEEN/p5-WebService-Aladdin.git@730fbd0a80</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>결론</h2>
+
+<p> perlbrew 에서 <code>perlbrew install-cpanm</code> 으로 설치된 cpanm 을 사용하고 있었는데,</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ cpanm --self-upgrade</span></code></pre></td></tr></table></div></figure>
+
+
+<p> 로는 perlbrew 를 통해서 설치된 cpanm 의 버젼이 바뀌지 않는군요. 그럴 경우는,</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ perlbrew install-cpanm</span></code></pre></td></tr></table></div></figure>
+
+
+<p> 을 통해서 기존의 cpanm 을 덮어써서 설치할 수 있습니다.</p>
+
+  
+  
+
+
+    </article>
   
   
     <article class="post">
@@ -413,78 +558,6 @@
 
 
 <p>덩달아서 같이 참고하시면 좋을 것 같습니다.</p>
-
-  
-  
-
-
-    </article>
-  
-  
-    <article class="post">
-      <div class="sharing-box">
-  
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://jeen.github.com/blog/page/2/index.html" data-via="JEEN_LEE" data-counturl="http://jeen.github.com/blog/page/2/index.html" data-size="large">Tweet</a>
-  
-  
-  
-  <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
-  
-</div>
-
-      
-  <header>
-    
-      <h2 class="entry-title">
-        
-        <a href="/blog/2012/11/29/download-package-dir-slash-files-from-directory-index/">Download Package Dir/files From Directory Index</a>
-        
-      </h2>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-11-29T20:10:00+09:00" pubdate data-updated="true">Nov 29<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/11/29/download-package-dir-slash-files-from-directory-index/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <p> 최근에 모 오픈소스의 패키지 리포지트리가 조만간 닫힐 것이라는 뉴스가 있어서… 만일을 위해 거기 있는 패키지 파일들을 일단 긁어오기로 했습니다. -_-;</p>
-
-<p> 그래서 크롤러를 하나 만들까 하다가… 이런 류의 작업은 뭔가 만들어 놓은 툴이 있을 것이라는 생각에 이리저리 뒤져보고 찾아봤지만 마땅한 키워드를 얻지 못했습니다.</p>
-
-<p> 결국 지인들에게 수소문해본 결과 아래와 같은 커맨드를 통해서 Directory Index 구조를 취하는 페이지에서 파일들을 몽땅 긁어올 수 있다는 걸을 알게되었습니다.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>wget -e <span class="nv">robots</span><span class="o">=</span>off -k -r --no-parent --wait<span class="o">=</span>5 http://download.virtualbox.org/virtualbox/debian/
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p> <code>index.html</code> 등의 불필요한 파일들도 같이 다운로드 되기도 하지만… 일단 다 받고나서…</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>find . | grep index.html | xargs rm
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>으로 삭제…</p>
-
-<p>그리하여 조만간 끊어질지도 모르는 사태에 대비코자 미리 이렇게 준비를 끝냈습니다.</p>
 
   
   
