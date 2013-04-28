@@ -9,7 +9,7 @@
   <meta name="author" content="Jeen Lee">
 
   
-  <meta name="description" content="Tweet Download Package Dir/files From Directory Index Nov 29th, 2012 | Comments 최근에 모 오픈소스의 패키지 리포지트리가 조만간 닫힐 것이라는 뉴스가 있어서… 만일을 위해 거기 있는 패키지 파일들을 일단 &hellip;">
+  <meta name="description" content="Tweet A Usecase of App::Fatpacker - Nagios Plugin Dec 26th, 2012 | Comments 최근 업무때문에 Nagios Plugin 을 만져야 하는 일들이 빈번하게 있었고, 앞으로도 발생할 소지가 상당히 높습니다. 이런 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -134,6 +134,309 @@
     
       <h2 class="entry-title">
         
+        <a href="/blog/2012/12/26/a-usecase-of-app-fatpacker/">A Usecase of App::Fatpacker - Nagios Plugin</a>
+        
+      </h2>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-12-26T23:48:00+09:00" pubdate data-updated="true">Dec 26<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/12/26/a-usecase-of-app-fatpacker/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <p> 최근 업무때문에 Nagios Plugin 을 만져야 하는 일들이 빈번하게 있었고, 앞으로도 발생할 소지가 상당히 높습니다. 이런 Nagios Plugin 을 만들거나 기존에 만들어 진 것들을 간편하게 다른 복수의 서버에 배포하는 일도 필요합니다.</p>
+
+<p> Nagios Plugin 이야 굳이 언어를 가리지 않는다고 치더라도, 언어의 특정 라이브러리에 의존을 가지는 경우가 많습니다. MongoDB 용 Nagios Plugin 에는 Python 의 pymongo 라이브러리를 설치해야하는 경우가 있지요.</p>
+
+<p> 일례로 Redis 용 Nagios Plugin 을 설치할 시에는 Redis CPAN 모듈을 필요로 합니다. 그런데 Redis 서버가 여러대이고, 이 여러대의 서버에 매번 Redis 모듈을 깔고, Redis 모니터링용 Nagios Plugin 도 설치를 해야하는 경우가 있습니다. 그냥 뭐 시간을 좀 허비해서라도 그렇게 번거로운 일을 하면 일이야 끝나겠지만, 현인(@aer0 님)의 조언을 빌어서 <a href="http://metacpan.org/module/App::FatPacker">App::FatPacker</a> 를 사용해서 단일 스크립트에 우겨넣는 방향으로 돌리도록 합니다.</p>
+
+<p> 우선은 <code>App::FatPacker</code> 를 설치하면 <code>fatpack</code> 이라는 커맨드를 사용할 수 있습니다.</p>
+
+<p> <a href="http://exchange.nagios.org">Nagios Exchange</a> 에서 찾아낸 <a href="http://exchange.nagios.org/directory/Plugins/Databases/check_redis-2Epl/details">check_redis</a> 중에 <code>check_redis.pl</code> 파일이 위에 말한대로 Redis 모듈에 의존이 걸린 상황입니다.</p>
+
+<p> 그럼 우선 <code>fatpack</code> 커맨드로 다음과 같이 입력을 합니다.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>fatpack trace check_redis.pl
+</span><span class='line'>check_redis.pl syntax OK
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p> 결과 <code>syntax OK</code> 가 뜨고 해당 디렉토리에 <code>fatpacker.trace</code> 라는 파일이 생성됩니다.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>cat fatpacker.trace
+</span><span class='line'>IO/Handle.pm
+</span><span class='line'>List/Util.pm
+</span><span class='line'>Getopt/Long.pm
+</span><span class='line'>SelectSaver.pm
+</span><span class='line'>IO/Socket.pm
+</span><span class='line'>Fcntl.pm
+</span><span class='line'>Text/ParseWords.pm
+</span><span class='line'>Symbol.pm
+</span><span class='line'>Scalar/Util.pm
+</span><span class='line'>IO/Socket/INET.pm
+</span><span class='line'>Errno.pm
+</span><span class='line'>fields.pm
+</span><span class='line'>warnings/register.pm
+</span><span class='line'>Encode/Alias.pm
+</span><span class='line'>Time/HiRes.pm
+</span><span class='line'>Encode/Config.pm
+</span><span class='line'>Encode/Encoding.pm
+</span><span class='line'>Redis.pm
+</span><span class='line'>Encode.pm
+</span><span class='line'>base.pm
+</span><span class='line'>Config.pm
+</span><span class='line'>IO.pm
+</span><span class='line'>IO/Socket/UNIX.pm
+</span><span class='line'>Carp.pm
+</span><span class='line'>bytes.pm
+</span><span class='line'>Exporter/Heavy.pm
+</span><span class='line'>vars.pm
+</span><span class='line'>constant.pm
+</span><span class='line'>Socket.pm
+</span><span class='line'>Try/Tiny.pm
+</span><span class='line'>IO/Select.pm
+</span><span class='line'>overload.pm
+</span><span class='line'>lib.pm
+</span><span class='line'>DynaLoader.pm
+</span><span class='line'>Data/Dumper.pm
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>내용을 보면 말 그대로 해당 모듈이 가지고 있는 의존 모듈이 좌르르륵 표시됩니다. 물론 걔중에는 Core 모듈도 있기도 합니다.</p>
+
+<p> 일단 <code>App::FatPacker</code> SYNOPSIS 대로 진행을 해보면…</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>fatpack packlists-for <span class="sb">`</span>cat fatpacker.trace<span class="sb">`</span>  &gt; packlists
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>위 결과로 생긴 <code>packlists</code> 는 파일은 다음과 같은 내용을 가집니다.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>cat packlists
+</span><span class='line'>/home/jeen/perl5/perlbrew/perls/perl-5.14.0/lib/5.14.0/x86_64-linux-thread-multi/auto/Time/HiRes/.packlist
+</span><span class='line'>/home/jeen/perl5/perlbrew/perls/perl-5.14.0/lib/site_perl/5.14.0/x86_64-linux-thread-multi/auto/Redis/.packlist
+</span><span class='line'>/home/jeen/perl5/perlbrew/perls/perl-5.14.0/lib/site_perl/5.14.0/x86_64-linux-thread-multi/auto/Try/Tiny/.packlist
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>각 의존 모듈 위치에 맞춰서 <code>.packlist</code> 파일이 생성되고, 그 내용은…</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>cat /home/jeen/perl5/perlbrew/perls/perl-5.14.0/lib/site_perl/5.14.0/x86_64-linux-thread-multi/auto/Redis/.packlist
+</span><span class='line'>/home/jeen/perl5/perlbrew/perls/perl-5.14.0/lib/site_perl/5.14.0/Redis.pm
+</span><span class='line'>/home/jeen/perl5/perlbrew/perls/perl-5.14.0/lib/site_perl/5.14.0/Redis/Hash.pm
+</span><span class='line'>/home/jeen/perl5/perlbrew/perls/perl-5.14.0/lib/site_perl/5.14.0/Redis/List.pm
+</span><span class='line'>/home/jeen/perl5/perlbrew/perls/perl-5.14.0/man/man3/Redis.3
+</span><span class='line'>/home/jeen/perl5/perlbrew/perls/perl-5.14.0/man/man3/Redis::Hash.3
+</span><span class='line'>/home/jeen/perl5/perlbrew/perls/perl-5.14.0/man/man3/Redis::List.3
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>위와 같습니다.</p>
+
+<p>그리고 다음 커맨드를 입력해봅니다.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>fatpack tree <span class="sb">`</span>cat packlists<span class="sb">`</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>그 결과 현재 디렉토리에서 <code>fatlib</code> 이라는 디렉토리가 생성되고 그 안에 관련 의존모듈들이 복사됩니다.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>tree
+</span><span class='line'>…
+</span><span class='line'>├── fatlib
+</span><span class='line'>│   ├── Redis
+</span><span class='line'>│   │   ├── Hash.pm
+</span><span class='line'>│   │   └── List.pm
+</span><span class='line'>│   ├── Redis.pm
+</span><span class='line'>│   ├── Try
+</span><span class='line'>│   │   └── Tiny.pm
+</span><span class='line'>│   └── x86_64-linux-thread-multi
+</span><span class='line'>│       ├── Time
+</span><span class='line'>│       │   └── HiRes.pm
+</span><span class='line'>│       └── auto
+</span><span class='line'>│           └── Time
+</span><span class='line'>│               └── HiRes
+</span><span class='line'>│                   ├── HiRes.bs
+</span><span class='line'>│                   └── HiRes.so
+</span><span class='line'>…
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>그럼 다음 커맨드를 입력해보면…</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span><span class="o">(</span>fatpack file; cat check_redis.pl <span class="o">)</span> &gt; check_redis.packed.pl
+</span><span class='line'>Can<span class="err">&#39;</span>t stat /home/jeen/fp/tt/lib: 그런 파일이나 디렉터리가 없습니다
+</span><span class='line'> at /home/jeen/perl5/perlbrew/perls/perl-5.14.0/lib/site_perl/5.14.0/App/FatPacker.pm line 200
+</span><span class='line'>BEGIN failed--compilation aborted at /home/jeen/perl5/perlbrew/perls/perl-5.14.0/bin/fatpack line 3.
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>제대로 동작하지 않습니다. 에러가 발생하네요. 정답은 에러메시지에 있습니다. <code>App::FatPacker</code> 자체는 Perl Library 규칙에 정형화된 디렉토리 구조를 가정하고 있습니다. 즉 <code>lib</code> 디렉토리가 존재하지 않기 때문에 발생하는 것이죠. 뭐 물론 다운받은 <code>check_redis.pl</code> 파일 하나만 있는 데 <code>lib</code> 디렉토리를 가지고 뭐 더 넣고 자시고 할 것도 아닌데…, 그래도 뭐 일단 사태해결을 위해서 아무것도 없어도 그냥 <code>lib</code> 디렉토리 하나는 만들어 줍니다.</p>
+
+<p>그리고 다시 실행해보면 <code>check_redis.packed.pl</code> 이라는 파일이 생성됩니다.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='perl'><span class='line'> <span class="c1"># This chunk of stuff was generated by App::FatPacker. To find the original</span>
+</span><span class='line'> <span class="c1"># file&#39;s code, look for the end of this BEGIN block or the string &#39;FATPACK&#39;</span>
+</span><span class='line'><span class="k">BEGIN</span> <span class="p">{</span>
+</span><span class='line'><span class="k">my</span> <span class="nv">%fatpacked</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">$fatpacked</span><span class="p">{</span><span class="s">&quot;Redis.pm&quot;</span><span class="p">}</span> <span class="o">=</span> <span class="o">&lt;&lt;</span><span class="s">&#39;REDIS&#39;</span><span class="p">;</span>
+</span><span class='line'>  <span class="nb">package</span> <span class="n">Redis</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1"># ABSTRACT: Perl binding for Redis database</span>
+</span><span class='line'>  <span class="k">our</span> <span class="nv">$VERSION</span> <span class="o">=</span> <span class="s">&#39;1.955&#39;</span><span class="p">;</span> <span class="c1"># VERSION</span>
+</span><span class='line'>  <span class="k">our</span> <span class="nv">$AUTHORITY</span> <span class="o">=</span> <span class="s">&#39;cpan:MELO&#39;</span><span class="p">;</span> <span class="c1"># AUTHORITY</span>
+</span><span class='line'>  <span class="err">…</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p> 일단 Nagios Plugin 은 기본 실행권한을 가지는 파일로 해두는 것이 여러모로 편합니다. 한가지 주의할 점은 일단 위처럼 생성된 파일에서 shebang line 이 존재하지 않기때문에 shebang line 을 추가해주면 됩니다. :-)</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='perl'><span class='line'> <span class="c1">#!/usr/bin/env perl</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p> 위의 내용을 <code>check_redis.packed.pl</code> 파일의 첫째줄에 추가해줍니다.</p>
+
+<p> 그리고 완성된 파일들을 Redis 서버에 붙여서 <code>check_nrpe</code> 등으로 동작을 확인하고 설정에 추가하는 것으로 관련된 작업은 끝이 났습니다.</p>
+
+<p> 파일 중앙배포와 관련해서도 다양한 이슈가 있지만 이에 관련해서는 추후 <code>Rex</code> 를 다루면서 이야기를 계속할 까 합니다.</p>
+
+<p> 다 쓰고 나서 검색을 해보니 예전에 @aer0 님께서 작성하신 블로그 기사가 있군요.</p>
+
+<ul>
+<li><a href="http://aero2blog.blogspot.kr/2010/09/perl-appfatpacker.html">Perl 스크립트에 필요한 모듈 같이 넣기 App::FatPacker</a></li>
+</ul>
+
+
+<p>덩달아서 같이 참고하시면 좋을 것 같습니다.</p>
+
+  
+  
+
+
+    </article>
+  
+  
+    <article class="post">
+      <div class="sharing-box">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://jeen.github.com/blog/page/3/index.html" data-via="JEEN_LEE" data-counturl="http://jeen.github.com/blog/page/3/index.html" data-size="large">Tweet</a>
+  
+  
+  
+  <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+      
+  <header>
+    
+      <h2 class="entry-title">
+        
         <a href="/blog/2012/11/29/download-package-dir-slash-files-from-directory-index/">Download Package Dir/files From Directory Index</a>
         
       </h2>
@@ -182,125 +485,6 @@
 <p>으로 삭제…</p>
 
 <p>그리하여 조만간 끊어질지도 모르는 사태에 대비코자 미리 이렇게 준비를 끝냈습니다.</p>
-
-  
-  
-
-
-    </article>
-  
-  
-    <article class="post">
-      <div class="sharing-box">
-  
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://jeen.github.com/blog/page/3/index.html" data-via="JEEN_LEE" data-counturl="http://jeen.github.com/blog/page/3/index.html" data-size="large">Tweet</a>
-  
-  
-  
-  <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
-  
-</div>
-
-      
-  <header>
-    
-      <h2 class="entry-title">
-        
-        <a href="/blog/2012/11/26/proverc-for-less-typing/">.proverc for Less Typing</a>
-        
-      </h2>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-11-26T21:44:00+09:00" pubdate data-updated="true">Nov 26<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/11/26/proverc-for-less-typing/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <ul>
-<li><a href="http://jeen.github.com/blog/2012/11/21/using-test-pretty/">http://jeen.github.com/blog/2012/11/21/using-test-pretty/</a></li>
-</ul>
-
-
-<p>그러고보니 앞전에 쓴 글에서</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>prove -Ilib -Pretty -v -lr
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>요렇게 길게 쓰고 있었는데, 문서도 제대로 안보고 이래저래 옵션들을 갖다붙이다보니 돌이켜보면 참 부끄럽기 그지 없습니다.</p>
-
-<ul>
-<li><a href="https://metacpan.org/module/prove#OPTIONS">https://metacpan.org/module/prove#OPTIONS</a></li>
-</ul>
-
-
-<p>위의 prove 문서를 참고로해서 제가 무엇을 잘못했는지 다시 한번 돌이켜봤습니다.</p>
-
-<h3>-Ilib 과 -l 은 같다.</h3>
-
-<p> 그러니까 위에서는 <code>-Ilib</code> 과 <code>-lr</code> 로 같이 쓰고 있었는데 -_-;;</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>-l,  --lib             Add <span class="s1">&#39;lib&#39;</span> to the path <span class="k">for </span>your tests <span class="o">(</span>-Ilib<span class="o">)</span>.
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><code>-l</code> 로 단순히 줄여서 표현할 수 있습니다. 해당 옵션이 무엇인지도 모르고 그냥 붙여쓰고 있었다니&#8230;</p>
-
-<h3>타이핑횟수를 줄인다.</h3>
-
-<p>그러니까 매번 테스트할 때마다</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>prove -Pretty -lvr
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>이렇게 쓰기 참 번거롭지요.</p>
-
-<p>그러고보니 해당 프로젝트 루트아래에 <code>.proverc</code> 를 만들어서 사용하는 방법이 있었습니다.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>-l
-</span><span class='line'>-v
-</span><span class='line'>-r
-</span><span class='line'>-Pretty
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>이렇게 해두면 이제 앞으로는</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>prove
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>만으로 위의 옵션을 활성화한 채로 테스트를 동작시킬 수 있습니다.</p>
-
-<h3>결론</h3>
-
-<p>똑같은 일을 3번, 4번하다 보면 가끔 내가 뭐하는 짓인가 하는 생각이 들 때가 있는데… 좀 더 빨리 깨달았으면 좋았을 것을 이라는 생각을 그때마다 하게 됩니다.</p>
 
   
   

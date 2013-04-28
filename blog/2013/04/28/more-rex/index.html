@@ -5,7 +5,7 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Jeen's techlog</title>
+  <title>Rex Common Practice - Jeen's techlog</title>
   <meta name="author" content="Jeen Lee">
 
   
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://jeen.github.com/">
+  <link rel="canonical" href="http://jeen.github.com/blog/2013/04/28/more-rex/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -115,13 +115,10 @@
 
   </header>
   <section id="main">
-      
-  
-  
     <article class="post">
-      <div class="sharing-box">
+  <div class="sharing-box">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://jeen.github.com/index.html" data-via="JEEN_LEE" data-counturl="http://jeen.github.com/index.html" data-size="large">Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://jeen.github.com/blog/2013/04/28/more-rex/" data-via="JEEN_LEE" data-counturl="http://jeen.github.com/blog/2013/04/28/more-rex/" data-size="large">Tweet</a>
   
   
   
@@ -129,14 +126,10 @@
   
 </div>
 
-      
+  
   <header>
     
-      <h2 class="entry-title">
-        
-        <a href="/blog/2013/04/28/more-rex/">Rex Common Practice</a>
-        
-      </h2>
+      <h2 class="entry-title">Rex Common Practice</h2>
     
     
       <p class="meta">
@@ -154,14 +147,14 @@
 
 <time datetime="2013-04-28T18:32:00+09:00" pubdate data-updated="true">Apr 28<span>th</span>, 2013</time>
         
-         | <a href="/blog/2013/04/28/more-rex/#disqus_thread">Comments</a>
+         | <a href="#disqus_thread">Comments</a>
         
       </p>
     
   </header>
 
 
-  <h3>Parallelism 설정</h3>
+<h3>Parallelism 설정</h3>
 
 <p> 한 손에 셀 수 있을 정도의 서버규모라면 사실 특별하게 병렬처리를 하느니 하는 것은 별로 고려하지 않아도 되겠습니다만, 그 이상일 경우에는 한 작업을 수행함에 있어서 수십대의 서버에 순차적으로 접속하고 작업하고하는 것을 지켜보는 것은 상당히 고역이죠.
  이럴 경우에는 <code>parallelism</code> 을 지정합니다.</p>
@@ -225,107 +218,18 @@
 
 <p> 어떤 일을 하기에 필요한 도구를 찾아서 사용하는 것이 일반적인 접근일텐데, 때로는 어떤 도구를 사용하기 위해서 일부러 일을 그쪽방향으로 맞추는 경우를 주변에서 많이 접하게 됩니다. 저는 어떻게해서 Rex 를 알고 사용하게 되었는지 이미 까먹었지만, 하는 일에 대한 최적의 선택이었다고 생각합니다.</p>
 
-  
-  
 
 
-    </article>
-  
-  
-    <article class="post">
-      <div class="sharing-box">
-  
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://jeen.github.com/index.html" data-via="JEEN_LEE" data-counturl="http://jeen.github.com/index.html" data-size="large">Tweet</a>
-  
-  
-  
-  <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
-  
+</article>
+
+  <section class="comments">
+    <h2>Comments</h2>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 </div>
+  </section>
 
-      
-  <header>
-    
-      <h2 class="entry-title">
-        
-        <a href="/blog/2013/04/08/data-printer-vs-data-dump-er/">Data::Printer vs Data::Dump(er)</a>
-        
-      </h2>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-04-08T12:59:00+09:00" pubdate data-updated="true">Apr 8<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/04/08/data-printer-vs-data-dump-er/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <p> 여태껏 많은 Perl 코드에서 습관적으로 <code>Data::Dumper</code> 를 사용해왔습니다.</p>
-
-<blockquote><p>안되면 찍어봐라</p></blockquote>
-
-<p> 라는 가장 기본적인 디버깅 방법론을 <code>Data::Dumper</code> 와 함께 해왔었죠. 물론 코어모듈이기때문에 별다른 모듈 설치없이 그냥 사용할 수 있는 점이 가장 큰 매력이었습니다.</p>
-
-<p> 단순한 데이터구조에서는 빛을 발하지만, 이런저런 데이터들이 서로 어우러지고 구겨지고 하는 구조에 한글과 같은 멀티바이트문자가 들어갔을 때는 사정없이 깨져버리는 문제가 있습니다. 물론 회피책도 있기는 하지만 매번 그러기도 쉽지가 않죠. 기존의 많은 <code>Data::Printer</code> 에도 언급되었다시피, <code>DBIx::Class</code> 오브젝트를 찍어보는 것에 매우 효과적입니다. <code>DateTime</code> 도 마찬가지 입니다. 이는 <code>DBIx::Class</code> 나 <code>DateTime</code> 을 <code>Data::Dumper</code> 로 찍어본 사람이라면 누구나 느껴봤을 법한 것이죠.</p>
-
-<p> 아무튼 그래서 <code>Data::Printer</code> 를 사용하기 시작했습니다. 현재 회사에서는 이전과는 달리 웹개발에 메인으로 Perl 을 사용하지 않고 주로 여러가지 배치작업이나 스크래핑 작업 용도로 사용하고 있어서 주로 사용하는 모듈을 그냥 처음부터 집어넣고 시작하고 있습니다.</p>
-
-<p><img src="https://dl.dropboxusercontent.com/u/262117/blog-assets/screenshot-201304112.png" alt="https://dl.dropboxusercontent.com/u/262117/blog-assets/screenshot-201304112.png" /></p>
-
-<p> 그리고 결정적으로 키와 값의 색 구분이라든가, 배열의 인덱스 번호를 좌르륵 이라든가, 한글이 안깨진다든가…</p>
-
-<p> 단점은 없는 게 아닙니다. 그러니까 좀 규모가 있는 데이터를 <code>Data::Printer</code> 로 덤프하면 그 나름대로 치장하는 시간이 좌르르륵 올라갑니다. 근데 뭐 그런 규모있는 데이터를 <code>Data::Printer</code> 로 뽑는 것 자체가 이상한 일이라 -_-;;</p>
-
-<p> 아 그리고 <code>Data::Printer</code> 의 <code>p</code> 함수는 기본적으로 인자를 기본형만 받을 수 있습니다.</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>p [{ a =&gt; 1 }]</span></code></pre></td></tr></table></div></figure>
-
-
-<p>이라고 했을 때,</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>Type of arg 1 to Data::Printer::p must be one of [@$%&]</span></code></pre></td></tr></table></div></figure>
-
-
-<p>라는 에러메시지가 나옵니다.</p>
-
-<p> 아 그리고 <code>Data::Printer</code> 의 출력은 기본적으로 STDERR 로 나옵니다. 물론 뭐 하고 싶다면야 STDOUT 으로 지정할 수 있습니다.</p>
-
-<ul>
-<li><a href="https://metacpan.org/module/Data::Printer#Changing-output-targets">https://metacpan.org/module/Data::Printer#Changing-output-targets</a></li>
-</ul>
-
-
-<p> <code>Data::Printer</code> 와 함께 깔끔한 디버깅을&#8230;</p>
-
-  
-  
-
-
-    </article>
-  
 
     <nav role="navigation" id="pagination">
-  <span class="next">
-    <a href="/blog/page/2/" rel="next">Continue &rarr;</a>
-  </span>
-
 
 </nav>
   </section>
@@ -337,7 +241,10 @@
       var disqus_shortname = 'jeen';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://jeen.github.com/blog/2013/04/28/more-rex/';
+        var disqus_url = 'http://jeen.github.com/blog/2013/04/28/more-rex/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

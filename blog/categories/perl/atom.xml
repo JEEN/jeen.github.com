@@ -4,7 +4,7 @@
   <title><![CDATA[Category: perl | Jeen's techlog]]></title>
   <link href="http://jeen.github.com/blog/categories/perl/atom.xml" rel="self"/>
   <link href="http://jeen.github.com/"/>
-  <updated>2013-04-12T11:07:01+09:00</updated>
+  <updated>2013-04-28T19:05:55+09:00</updated>
   <id>http://jeen.github.com/</id>
   <author>
     <name><![CDATA[Jeen Lee]]></name>
@@ -12,6 +12,78 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Rex Common Practice]]></title>
+    <link href="http://jeen.github.com/blog/2013/04/28/more-rex/"/>
+    <updated>2013-04-28T18:32:00+09:00</updated>
+    <id>http://jeen.github.com/blog/2013/04/28/more-rex</id>
+    <content type="html"><![CDATA[<h3>Parallelism 설정</h3>
+
+<p> 한 손에 셀 수 있을 정도의 서버규모라면 사실 특별하게 병렬처리를 하느니 하는 것은 별로 고려하지 않아도 되겠습니다만, 그 이상일 경우에는 한 작업을 수행함에 있어서 수십대의 서버에 순차적으로 접속하고 작업하고하는 것을 지켜보는 것은 상당히 고역이죠.
+ 이럴 경우에는 <code>parallelism</code> 을 지정합니다.</p>
+
+<p> 방법은 <code>Rexfile</code> 에 다음과 같이 설정합니다.</p>
+
+<p><code>
+parallelism =&gt; 10;
+</code></p>
+
+<p> 이렇게 하면 한번에 10대의 서버에 대해서 병렬로 작업을 수행하게 됩니다. 어차피 작업은 원격지서버에서 하는 것이고, 로컬에서는 SSH 커넥션이 1개로 붙던 것들이 10개로 늘어나며, 물론 시간 또한 parallelism 설정갯수에 비례하게 됩니다. 하지만 로그는 이쁘게 남지는 않을 겁니다.</p>
+
+<p> 애시당초 CLI 옵션에 <code>parallelism</code> 옵션이 있었으면 좋겠는데...</p>
+
+<h3>Logging</h3>
+
+<p> 일단 작업 기록은 꾸준히 남기는 것이 좋겠다라고 생각하는 바, 매 작업분기마다 로그를 남기도록 합니다. 하지만 매뉴얼에는 마땅히 로그에 관한 설명은 보이지 않는 것 같았습니다.</p>
+
+<p> Rex 에서의 기본적인 로그를 쓰는 방법은 다음과 같습니다.</p>
+
+<p><code>
+Rex::Logger::info("MSG"[, "TYPE"]);
+</code></p>
+
+<p> 로그 메시지는 당연히 필수이며, TYPE 은 사실 안써도 됩니다만, error/warn 두가지 인수를 넣을 수 있습니다. 에러 상황시 확실하게 눈에 띄게 해주는 정도(노랑색, 빨강색)입니다.</p>
+
+<p> Parallelism 사용시에 병렬로 작업을 수행함으로 인해서 로그가 뒤죽박죽이 되기 마련인데, 이때 로그에 명기해주었으면 하는 것은 역시 각 서버의 호스트/IP입니다.</p>
+
+<ul>
+<li><a href="https://metacpan.org/module/Rex::Logger">https://metacpan.org/module/Rex::Logger</a></li>
+</ul>
+
+
+<p> <code>Rex::Logger</code> 에서 다음과 같은 사용법을 통해서 해결할 수 있습니다.</p>
+
+<p>```
+$Rex::Logger::format = '%h - %D - %s';</p>
+
+<h1>srv001 - 2012-04-12 18:35:12 - Installing package vim</h1>
+
+<p>```</p>
+
+<p> 각 포맷에 대한 자세한 설명은 위의 Metacpan 링크에서 확인할 수 있습니다.</p>
+
+<h3>CPAN 의존모듈 설치</h3>
+
+<p> 애시당초 처음에 Rex 를 사용하는 이유가 여러대의 서버에 CPAN 모듈을 설치해야할 필요가 있었기 때문이었습니다. 하지만 사용구조상 일일이 모든 서버에 대해서 <code>perlbrew</code> 를 설치한다거나, 하는 호화(?)를 누릴 수는 없었습니다. <code>perlbrew</code> 를 꺼내는 것 자체가 애시당초 핀트에 어긋나버리는 얘기가 되어버리지만… -_-;</p>
+
+<p> 뭐 네, 방법은 간단합니다.</p>
+
+<p><code>
+run("curl -L http://cpanmin.us | perl - --notest --mirror ftp://cpan.mirror.cdnetworks.com/CPAN/ --mirror-only Test::More LWP::UserAgent JSON Nagios::Plugin");
+</code></p>
+
+<p> 애시당초 Rex 의 접근은 <code>root</code> 로 이뤄지기 때문에 이와같은 설정으로 그냥 땜박질 할 수 있었지만, <code>sudo</code> 로 접근한다거나 하는 예외상황에서는 <code>--sudo</code> 옵션을 붙여주면 되겠습니다. 물론 <code>root</code> 로 접근했을 때 <code>--sudo</code> 옵션은 쓰면 오동작의 원인이 됩니다.</p>
+
+<p> <code>--notest</code> 는 물론 수많은 서버가 동일 구성이며, 처음 커맨드로 때려보고 한방에 된다고 했을 때, 테스트가 불필요하다는 판단아래에서 집어넣었구요.</p>
+
+<p> 좀 더 속도개선을 노려본다면 <code>--mirror</code> 옵션을 통해서 <code>CDNetworks</code> 같은 CPAN Mirror 를 이용해보는 것도 괜찮을 것 같습니다. 눈에 띄는 속도향상을 체감할 수 있을 겁니다.</p>
+
+<h3>결론</h3>
+
+<p> 어떤 일을 하기에 필요한 도구를 찾아서 사용하는 것이 일반적인 접근일텐데, 때로는 어떤 도구를 사용하기 위해서 일부러 일을 그쪽방향으로 맞추는 경우를 주변에서 많이 접하게 됩니다. 저는 어떻게해서 Rex 를 알고 사용하게 되었는지 이미 까먹었지만, 하는 일에 대한 최적의 선택이었다고 생각합니다.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Data::Printer vs Data::Dump(er)]]></title>
@@ -422,74 +494,6 @@ my %fatpacked;</p>
 
 
 <p>덩달아서 같이 참고하시면 좋을 것 같습니다.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[.proverc for less typing]]></title>
-    <link href="http://jeen.github.com/blog/2012/11/26/proverc-for-less-typing/"/>
-    <updated>2012-11-26T21:44:00+09:00</updated>
-    <id>http://jeen.github.com/blog/2012/11/26/proverc-for-less-typing</id>
-    <content type="html"><![CDATA[<ul>
-<li><a href="http://jeen.github.com/blog/2012/11/21/using-test-pretty/">http://jeen.github.com/blog/2012/11/21/using-test-pretty/</a></li>
-</ul>
-
-
-<p>그러고보니 앞전에 쓴 글에서</p>
-
-<p><code>bash
-$ prove -Ilib -Pretty -v -lr
-</code></p>
-
-<p>요렇게 길게 쓰고 있었는데, 문서도 제대로 안보고 이래저래 옵션들을 갖다붙이다보니 돌이켜보면 참 부끄럽기 그지 없습니다.</p>
-
-<ul>
-<li><a href="https://metacpan.org/module/prove#OPTIONS">https://metacpan.org/module/prove#OPTIONS</a></li>
-</ul>
-
-
-<p>위의 prove 문서를 참고로해서 제가 무엇을 잘못했는지 다시 한번 돌이켜봤습니다.</p>
-
-<h3>-Ilib 과 -l 은 같다.</h3>
-
-<p> 그러니까 위에서는 <code>-Ilib</code> 과 <code>-lr</code> 로 같이 쓰고 있었는데 -_-;;</p>
-
-<p><code>
--l,  --lib             Add 'lib' to the path for your tests (-Ilib).
-</code></p>
-
-<p><code>-l</code> 로 단순히 줄여서 표현할 수 있습니다. 해당 옵션이 무엇인지도 모르고 그냥 붙여쓰고 있었다니...</p>
-
-<h3>타이핑횟수를 줄인다.</h3>
-
-<p>그러니까 매번 테스트할 때마다</p>
-
-<p><code>
-$ prove -Pretty -lvr
-</code></p>
-
-<p>이렇게 쓰기 참 번거롭지요.</p>
-
-<p>그러고보니 해당 프로젝트 루트아래에 <code>.proverc</code> 를 만들어서 사용하는 방법이 있었습니다.</p>
-
-<p><code>
--l
--v
--r
--Pretty
-</code></p>
-
-<p>이렇게 해두면 이제 앞으로는</p>
-
-<p><code>
-$ prove
-</code></p>
-
-<p>만으로 위의 옵션을 활성화한 채로 테스트를 동작시킬 수 있습니다.</p>
-
-<h3>결론</h3>
-
-<p>똑같은 일을 3번, 4번하다 보면 가끔 내가 뭐하는 짓인가 하는 생각이 들 때가 있는데… 좀 더 빨리 깨달았으면 좋았을 것을 이라는 생각을 그때마다 하게 됩니다.</p>
 ]]></content>
   </entry>
   
