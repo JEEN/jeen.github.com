@@ -9,8 +9,7 @@
   <meta name="author" content="Jeen Lee">
 
   
-  <meta name="description" content="Tweet .proverc for Less Typing Nov 26th, 2012 | Comments http://jeen.github.com/blog/2012/11/21/using-test-pretty/ 그러고보니 앞전에 쓴 글에서 1
-$ prove -Ilib - &hellip;">
+  <meta name="description" content="Tweet Rex Common Practice Apr 28th, 2013 | Comments Parallelism 설정 한 손에 셀 수 있을 정도의 서버규모라면 사실 특별하게 병렬처리를 하느니 하는 것은 별로 고려하지 않아도 되겠습니다만, 그 이상일 경우에는 한 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -135,7 +134,7 @@ $ prove -Ilib - &hellip;">
     
       <h2 class="entry-title">
         
-        <a href="/blog/2012/11/26/proverc-for-less-typing/">.proverc for Less Typing</a>
+        <a href="/blog/2013/04/28/more-rex/">Rex Common Practice</a>
         
       </h2>
     
@@ -153,83 +152,78 @@ $ prove -Ilib - &hellip;">
   
 
 
-<time datetime="2012-11-26T21:44:00+09:00" pubdate data-updated="true">Nov 26<span>th</span>, 2012</time>
+<time datetime="2013-04-28T18:32:00+09:00" pubdate data-updated="true">Apr 28<span>th</span>, 2013</time>
         
-         | <a href="/blog/2012/11/26/proverc-for-less-typing/#disqus_thread">Comments</a>
+         | <a href="/blog/2013/04/28/more-rex/#disqus_thread">Comments</a>
         
       </p>
     
   </header>
 
 
-  <ul>
-<li><a href="">http://jeen.github.com/blog/2012/11/21/using-test-pretty/</a></li>
-</ul>
+  <h3>Parallelism 설정</h3>
+
+<p> 한 손에 셀 수 있을 정도의 서버규모라면 사실 특별하게 병렬처리를 하느니 하는 것은 별로 고려하지 않아도 되겠습니다만, 그 이상일 경우에는 한 작업을 수행함에 있어서 수십대의 서버에 순차적으로 접속하고 작업하고하는 것을 지켜보는 것은 상당히 고역이죠.
+ 이럴 경우에는 <code>parallelism</code> 을 지정합니다.</p>
+
+<p> 방법은 <code>Rexfile</code> 에 다음과 같이 설정합니다.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>parallelism =&gt; 10;</span></code></pre></td></tr></table></div></figure>
 
 
-<p>그러고보니 앞전에 쓴 글에서</p>
+<p> 이렇게 하면 한번에 10대의 서버에 대해서 병렬로 작업을 수행하게 됩니다. 어차피 작업은 원격지서버에서 하는 것이고, 로컬에서는 SSH 커넥션이 1개로 붙던 것들이 10개로 늘어나며, 물론 시간 또한 parallelism 설정갯수에 비례하게 됩니다. 하지만 로그는 이쁘게 남지는 않을 겁니다.</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>prove -Ilib -Pretty -v -lr
-</span></code></pre></td></tr></table></div></figure>
+<p> 애시당초 CLI 옵션에 <code>parallelism</code> 옵션이 있었으면 좋겠는데&#8230;</p>
+
+<h3>Logging</h3>
+
+<p> 일단 작업 기록은 꾸준히 남기는 것이 좋겠다라고 생각하는 바, 매 작업분기마다 로그를 남기도록 합니다. 하지만 매뉴얼에는 마땅히 로그에 관한 설명은 보이지 않는 것 같았습니다.</p>
+
+<p> Rex 에서의 기본적인 로그를 쓰는 방법은 다음과 같습니다.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Rex::Logger::info("MSG"[, "TYPE"]);</span></code></pre></td></tr></table></div></figure>
 
 
-<p>요렇게 길게 쓰고 있었는데, 문서도 제대로 안보고 이래저래 옵션들을 갖다붙이다보니 돌이켜보면 참 부끄럽기 그지 없습니다.</p>
+<p> 로그 메시지는 당연히 필수이며, TYPE 은 사실 안써도 됩니다만, error/warn 두가지 인수를 넣을 수 있습니다. 에러 상황시 확실하게 눈에 띄게 해주는 정도(노랑색, 빨강색)입니다.</p>
+
+<p> Parallelism 사용시에 병렬로 작업을 수행함으로 인해서 로그가 뒤죽박죽이 되기 마련인데, 이때 로그에 명기해주었으면 하는 것은 역시 각 서버의 호스트/IP입니다.</p>
 
 <ul>
-<li><a href="">https://metacpan.org/module/prove#OPTIONS</a></li>
+<li><a href="https://metacpan.org/module/Rex::Logger">https://metacpan.org/module/Rex::Logger</a></li>
 </ul>
 
 
-<p>위의 prove 문서를 참고로해서 제가 무엇을 잘못했는지 다시 한번 돌이켜봤습니다.</p>
+<p> <code>Rex::Logger</code> 에서 다음과 같은 사용법을 통해서 해결할 수 있습니다.</p>
 
-<h3>-Ilib 과 -l 은 같다.</h3>
-
-<p> 그러니까 위에서는 <code>-Ilib</code> 과 <code>-lr</code> 로 같이 쓰고 있었는데 -_-;;</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>-l,  --lib             Add <span class="s1">&#39;lib&#39;</span> to the path <span class="k">for </span>your tests <span class="o">(</span>-Ilib<span class="o">)</span>.
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><code>-l</code> 로 단순히 줄여서 표현할 수 있습니다. 해당 옵션이 무엇인지도 모르고 그냥 붙여쓰고 있었다니&#8230;</p>
-
-<h3>타이핑횟수를 줄인다.</h3>
-
-<p>그러니까 매번 테스트할 때마다</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>prove -Pretty -lvr
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>이렇게 쓰기 참 번거롭지요.</p>
-
-<p>그러고보니 해당 프로젝트 루트아래에 <code>.proverc</code> 를 만들어서 사용하는 방법이 있었습니다.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>-l
-</span><span class='line'>-v
-</span><span class='line'>-r
-</span><span class='line'>-Pretty
-</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$Rex::Logger::format = '%h - %D - %s';
+</span><span class='line'># srv001 - 2012-04-12 18:35:12 - Installing package vim</span></code></pre></td></tr></table></div></figure>
 
 
-<p>이렇게 해두면 이제 앞으로는</p>
+<p> 각 포맷에 대한 자세한 설명은 위의 Metacpan 링크에서 확인할 수 있습니다.</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>prove
-</span></code></pre></td></tr></table></div></figure>
+<h3>CPAN 의존모듈 설치</h3>
+
+<p> 애시당초 처음에 Rex 를 사용하는 이유가 여러대의 서버에 CPAN 모듈을 설치해야할 필요가 있었기 때문이었습니다. 하지만 사용구조상 일일이 모든 서버에 대해서 <code>perlbrew</code> 를 설치한다거나, 하는 호화(?)를 누릴 수는 없었습니다. <code>perlbrew</code> 를 꺼내는 것 자체가 애시당초 핀트에 어긋나버리는 얘기가 되어버리지만… -_-;</p>
+
+<p> 뭐 네, 방법은 간단합니다.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>run("curl -L http://cpanmin.us | perl - --notest --mirror ftp://cpan.mirror.cdnetworks.com/CPAN/ --mirror-only Test::More LWP::UserAgent JSON Nagios::Plugin");</span></code></pre></td></tr></table></div></figure>
 
 
-<p>만으로 위의 옵션을 활성화한 채로 테스트를 동작시킬 수 있습니다.</p>
+<p> 애시당초 Rex 의 접근은 <code>root</code> 로 이뤄지기 때문에 이와같은 설정으로 그냥 땜박질 할 수 있었지만, <code>sudo</code> 로 접근한다거나 하는 예외상황에서는 <code>--sudo</code> 옵션을 붙여주면 되겠습니다. 물론 <code>root</code> 로 접근했을 때 <code>--sudo</code> 옵션은 쓰면 오동작의 원인이 됩니다.</p>
+
+<p> <code>--notest</code> 는 물론 수많은 서버가 동일 구성이며, 처음 커맨드로 때려보고 한방에 된다고 했을 때, 테스트가 불필요하다는 판단아래에서 집어넣었구요.</p>
+
+<p> 좀 더 속도개선을 노려본다면 <code>--mirror</code> 옵션을 통해서 <code>CDNetworks</code> 같은 CPAN Mirror 를 이용해보는 것도 괜찮을 것 같습니다. 눈에 띄는 속도향상을 체감할 수 있을 겁니다.</p>
 
 <h3>결론</h3>
 
-<p>똑같은 일을 3번, 4번하다 보면 가끔 내가 뭐하는 짓인가 하는 생각이 들 때가 있는데… 좀 더 빨리 깨달았으면 좋았을 것을 이라는 생각을 그때마다 하게 됩니다.</p>
+<p> 어떤 일을 하기에 필요한 도구를 찾아서 사용하는 것이 일반적인 접근일텐데, 때로는 어떤 도구를 사용하기 위해서 일부러 일을 그쪽방향으로 맞추는 경우를 주변에서 많이 접하게 됩니다. 저는 어떻게해서 Rex 를 알고 사용하게 되었는지 이미 까먹었지만, 하는 일에 대한 최적의 선택이었다고 생각합니다.</p>
 
   
   
@@ -254,7 +248,7 @@ $ prove -Ilib - &hellip;">
     
       <h2 class="entry-title">
         
-        <a href="/blog/2012/11/21/using-test-pretty/">Using Test::Pretty</a>
+        <a href="/blog/2013/04/08/data-printer-vs-data-dump-er/">Data::Printer vs Data::Dump(er)</a>
         
       </h2>
     
@@ -272,59 +266,53 @@ $ prove -Ilib - &hellip;">
   
 
 
-<time datetime="2012-11-21T22:40:00+09:00" pubdate data-updated="true">Nov 21<span>st</span>, 2012</time>
+<time datetime="2013-04-08T12:59:00+09:00" pubdate data-updated="true">Apr 8<span>th</span>, 2013</time>
         
-         | <a href="/blog/2012/11/21/using-test-pretty/#disqus_thread">Comments</a>
+         | <a href="/blog/2013/04/08/data-printer-vs-data-dump-er/#disqus_thread">Comments</a>
         
       </p>
     
   </header>
 
 
-  <p> 사실 <code>TAP</code> 의 결과자체는 그렇게 이쁘장하지 않습니다.
-  이전에 <code>NHN Deview 2012</code> 에서 <code>Mocha</code> 로 돌렸을 때 나오는 이쁨직한 테스트 결과를 보고,</p>
+  <p> 여태껏 많은 Perl 코드에서 습관적으로 <code>Data::Dumper</code> 를 사용해왔습니다.</p>
 
-<blockquote><p>아, 저러면 왠지 테스트코드 쓰고, 돌릴 만하겠다</p></blockquote>
+<blockquote><p>안되면 찍어봐라</p></blockquote>
 
-<p> 라는 뻘생각이 들었습니다. 하지만 전 테스트코드를 그렇게 용의주도하게 쓰지 않는 편이어서 그냥 다른 세상 이야기라고 넘겼습니다.</p>
+<p> 라는 가장 기본적인 디버깅 방법론을 <code>Data::Dumper</code> 와 함께 해왔었죠. 물론 코어모듈이기때문에 별다른 모듈 설치없이 그냥 사용할 수 있는 점이 가장 큰 매력이었습니다.</p>
 
-<p> 그러는 와중에 일본의 Perl IRC 채널에서 <code>Test::*</code> 와 <code>TAP</code> 등에 대한 여러가지 회의론(?) 같은 이야기가 들려오다가 <code>BDD</code> 나 테스트 결과 자체가 하나의 <code>Spec</code> 으로 재이용되는 등의 이야기를 듣고는 많이 감화되었죠.</p>
+<p> 단순한 데이터구조에서는 빛을 발하지만, 이런저런 데이터들이 서로 어우러지고 구겨지고 하는 구조에 한글과 같은 멀티바이트문자가 들어갔을 때는 사정없이 깨져버리는 문제가 있습니다. 물론 회피책도 있기는 하지만 매번 그러기도 쉽지가 않죠. 기존의 많은 <code>Data::Printer</code> 에도 언급되었다시피, <code>DBIx::Class</code> 오브젝트를 찍어보는 것에 매우 효과적입니다. <code>DateTime</code> 도 마찬가지 입니다. 이는 <code>DBIx::Class</code> 나 <code>DateTime</code> 을 <code>Data::Dumper</code> 로 찍어본 사람이라면 누구나 느껴봤을 법한 것이죠.</p>
 
-<p> 그러는 중에 @tokuhirom 씨가 최근에 내놓은 <code>Test::Pretty</code> 와 <code>Test::Ika</code> 라는 모듈이 등장했습니다.</p>
+<p> 아무튼 그래서 <code>Data::Printer</code> 를 사용하기 시작했습니다. 현재 회사에서는 이전과는 달리 웹개발에 메인으로 Perl 을 사용하지 않고 주로 여러가지 배치작업이나 스크래핑 작업 용도로 사용하고 있어서 주로 사용하는 모듈을 그냥 처음부터 집어넣고 시작하고 있습니다.</p>
+
+<p><img src="https://dl.dropboxusercontent.com/u/262117/blog-assets/screenshot-201304112.png" alt="https://dl.dropboxusercontent.com/u/262117/blog-assets/screenshot-201304112.png" /></p>
+
+<p> 그리고 결정적으로 키와 값의 색 구분이라든가, 배열의 인덱스 번호를 좌르륵 이라든가, 한글이 안깨진다든가…</p>
+
+<p> 단점은 없는 게 아닙니다. 그러니까 좀 규모가 있는 데이터를 <code>Data::Printer</code> 로 덤프하면 그 나름대로 치장하는 시간이 좌르르륵 올라갑니다. 근데 뭐 그런 규모있는 데이터를 <code>Data::Printer</code> 로 뽑는 것 자체가 이상한 일이라 -_-;;</p>
+
+<p> 아 그리고 <code>Data::Printer</code> 의 <code>p</code> 함수는 기본적으로 인자를 기본형만 받을 수 있습니다.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>p [{ a =&gt; 1 }]</span></code></pre></td></tr></table></div></figure>
+
+
+<p>이라고 했을 때,</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Type of arg 1 to Data::Printer::p must be one of [@$%&]</span></code></pre></td></tr></table></div></figure>
+
+
+<p>라는 에러메시지가 나옵니다.</p>
+
+<p> 아 그리고 <code>Data::Printer</code> 의 출력은 기본적으로 STDERR 로 나옵니다. 물론 뭐 하고 싶다면야 STDOUT 으로 지정할 수 있습니다.</p>
 
 <ul>
-<li><a href="http://metacpan.org/module/Test::Pretty">Test::Pretty</a></li>
-<li><a href="http://metacpan.org/module/Test::Ika">Test::Ika</a></li>
+<li><a href="https://metacpan.org/module/Data::Printer#Changing-output-targets">https://metacpan.org/module/Data::Printer#Changing-output-targets</a></li>
 </ul>
 
 
-<p><code>Test::Ika</code> 의 경우는 Perl5 용 <code>BDD</code> Framework 의 자리를 노리는 그런 모듈입니다만.. 현재의 버젼(<code>0.02</code>)에서는 생각대로 결과가 나와주지 않기에 조금 아쉬웠습니다.</p>
-
-<p>그게 <code>describe</code>, <code>it</code> 등의 <code>BDD</code> 에서 사용하는 구문을 사용하고 있지만, <code>Test::Mojo</code> 처럼 <code>Test::More</code> 를 래핑한 모듈에서 사용할 때라든가… 좀 많이 아쉬운 장면들이 아직 있습니다. 뭐 물론 만든 지 얼마 안되기도 하고 그런 의미에서는 전도유망하다고할까요 :-)</p>
-
-<p><code>Test::Pretty</code> 의 경우는 크게 이를 고려하지 않고도 흔히  사용하는 <code>Test::More</code> 로  테스트코드를 쓰고, <code>prove</code> Plugin 으로 동작합니다. 이름 그대로 결과를 이쁘게 보여준다는 것이죠.</p>
-
-<p>다음처럼 말이죠.</p>
-
-<h3>일반적인 TAP 형식의 출력</h3>
-
-<p><img src="https://lh5.googleusercontent.com/-trTeNFoXQtU/UKzc4yghokI/AAAAAAAACFY/zaEbENGNHOQ/test-pretty-01.png" alt="일반적인 TAP 형식" /></p>
-
-<h3>Test::Pretty 를 이용한 출력</h3>
-
-<p><img src="https://lh3.googleusercontent.com/-okmAPP0EmC8/UKzc74KHsYI/AAAAAAAACFg/rthGC2gQn_E/test-pretty-02.png" alt="Test::Pretty 를 이용한 출력" /></p>
-
-<h3>어떻게 실행을?</h3>
-
-<p>Pretty 형식으로는 단일파일만 나오고, 전체 테스트코드를 한번에 돌렸을 때는 위처럼 나오지 않기에 왜 그럴까 고심해보다가 아래처럼 테스트코드를 실행하면 제대로 동작하는 것을 확인했습니다.</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ prove -Ilib -Pretty -v -lr </span></code></pre></td></tr></table></div></figure>
-
-
-<h3>결론</h3>
-
-<p> JS 테스트 프레임워크인 <a href="http://visionmedia.github.com/mocha/">Mocha</a> 를 들여다 봤는데 여러모로 베껴왔으면 하는 그런 세련됨이 있네요. :-)</p>
+<p> <code>Data::Printer</code> 와 함께 깔끔한 디버깅을&#8230;</p>
 
   
   

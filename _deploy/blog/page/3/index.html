@@ -9,7 +9,7 @@
   <meta name="author" content="Jeen Lee">
 
   
-  <meta name="description" content="Tweet Moving From Bash to Zsh Again Aug 9th, 2012 | Comments 밥벌이도구가 바뀌고 해서 다시 ZSH 로 돌아갔습니다. 레티나 맥북프로를 오늘 받은 게 자랑.txt jeen.tistory.com/560&mdash; &hellip;">
+  <meta name="description" content="Tweet A Usecase of App::Fatpacker - Nagios Plugin Dec 26th, 2012 | Comments 최근 업무때문에 Nagios Plugin 을 만져야 하는 일들이 빈번하게 있었고, 앞으로도 발생할 소지가 상당히 높습니다. 이런 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -134,7 +134,7 @@
     
       <h2 class="entry-title">
         
-        <a href="/blog/2012/08/09/moving-from-bash-to-zsh-again/">Moving From Bash to Zsh Again</a>
+        <a href="/blog/2012/12/26/a-usecase-of-app-fatpacker/">A Usecase of App::Fatpacker - Nagios Plugin</a>
         
       </h2>
     
@@ -152,207 +152,35 @@
   
 
 
-<time datetime="2012-08-09T16:30:00+09:00" pubdate data-updated="true">Aug 9<span>th</span>, 2012</time>
+<time datetime="2012-12-26T23:48:00+09:00" pubdate data-updated="true">Dec 26<span>th</span>, 2012</time>
         
-         | <a href="/blog/2012/08/09/moving-from-bash-to-zsh-again/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <p> 밥벌이도구가 바뀌고 해서 다시 ZSH 로 돌아갔습니다.</p>
-
-<blockquote class="twitter-tweet" lang="ko"><p>레티나 맥북프로를 오늘 받은 게 자랑.txt <a href="http://t.co/38oGVx7W" title="http://jeen.tistory.com/560">jeen.tistory.com/560</a></p>&mdash; JEEN (@JEEN_LEE) <a href="https://twitter.com/JEEN_LEE/status/232821768325300225" data-datetime="2012-08-07T12:53:29+00:00">8월 7, 2012</a></blockquote>
-
-
-<ul>
-<li><a href="https://github.com/skwp/dotfiles">https://github.com/skwp/dotfiles</a></li>
-</ul>
-
-
-<p>지난번에 MacBook Air 에 올리다가 뭐가 꼬인 <code>YADR</code> 을 썼습니다. <code>grep</code> 경고메시지가 없이 깔끔하게 돌아가는 군요.</p>
-
-<p> 이래저래 개발환경도 맞추고 그러다가 지난달에 zsh 5.0 이 릴리즈 된 것을 보고 Mt.LION 에 깔린 zsh 버젼을 확인하니..</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>zsh --version
-</span><span class='line'>zsh 4.3.11 <span class="o">(</span>i386-apple-darwin12.0<span class="o">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><code>4.3.11</code> 이었습니다. 그래서 zsh 5.0 으로 올려보려고 brew 로 일단 깔았죠.</p>
-
-<p>그리고 <code>chsh</code> 로 셸을 바꾸려고 하는 데…</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>chsh -s /usr/local/bin/zsh
-</span><span class='line'>Changing shell <span class="k">for </span>jeen.
-</span><span class='line'>Password <span class="k">for </span>jeen:
-</span><span class='line'>chsh: /usr/local/Cellar/zsh/5.0.0/bin/zsh: non-standard shell
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>이라고 뜨는 것이었지요.</p>
-
-<p>구글검색결과 <code>/etc/shells</code> 에 해당 셸의 패스를 추가하는 것으로 이 난관을 헤쳐나갈 수 있다고 합니다.</p>
-
-<p>그래서 네. zsh 5.0 쓰고 있는데 뭐가 좋은지는 써보면서 느끼게 되려나요.</p>
-
-<ul>
-<li><a href="https://github.com/zsh-users/zsh/blob/master/NEWS">https://github.com/zsh-users/zsh/blob/master/NEWS</a></li>
-</ul>
-
-
-<p>이런 CHANGELOG 도 일단 보고 있지만요&#8230;</p>
-
-  
-  
-
-
-    </article>
-  
-  
-    <article class="post">
-      <div class="sharing-box">
-  
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://jeen.github.com/blog/page/3/index.html" data-via="JEEN_LEE" data-counturl="http://jeen.github.com/blog/page/3/index.html" data-size="large">Tweet</a>
-  
-  
-  
-  <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
-  
-</div>
-
-      
-  <header>
-    
-      <h2 class="entry-title">
-        
-        <a href="/blog/2012/08/09/app-zamakist-dot-dot-dot/">App::Zamakist&#8230;</a>
-        
-      </h2>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-08-09T13:33:00+09:00" pubdate data-updated="true">Aug 9<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/08/09/app-zamakist-dot-dot-dot/#disqus_thread">Comments</a>
+         | <a href="/blog/2012/12/26/a-usecase-of-app-fatpacker/#disqus_thread">Comments</a>
         
       </p>
     
   </header>
 
 
-  <p>취미라고 할 것이 있다면 잠, 책, 드라마감상 정도라고 할까요.</p>
+  <p> 최근 업무때문에 Nagios Plugin 을 만져야 하는 일들이 빈번하게 있었고, 앞으로도 발생할 소지가 상당히 높습니다. 이런 Nagios Plugin 을 만들거나 기존에 만들어 진 것들을 간편하게 다른 복수의 서버에 배포하는 일도 필요합니다.</p>
 
-<p>걔중에 몇몇 미드들을 아직까지 꾸준하게 시간을 내면서 보고 있습니다.</p>
+<p> Nagios Plugin 이야 굳이 언어를 가리지 않는다고 치더라도, 언어의 특정 라이브러리에 의존을 가지는 경우가 많습니다. MongoDB 용 Nagios Plugin 에는 Python 의 pymongo 라이브러리를 설치해야하는 경우가 있지요.</p>
 
-<p>걔중에는 가끔보면 자막이 없어서 일일이 자막찾으러 들어가고 받고 해야하는 지루한 클릭이 필요한 경우도 있습니다.</p>
+<p> 일례로 Redis 용 Nagios Plugin 을 설치할 시에는 Redis CPAN 모듈을 필요로 합니다. 그런데 Redis 서버가 여러대이고, 이 여러대의 서버에 매번 Redis 모듈을 깔고, Redis 모니터링용 Nagios Plugin 도 설치를 해야하는 경우가 있습니다. 그냥 뭐 시간을 좀 허비해서라도 그렇게 번거로운 일을 하면 일이야 끝나겠지만, 현인(@aer0 님)의 조언을 빌어서 <a href="http://metacpan.org/module/App::FatPacker">App::FatPacker</a> 를 사용해서 단일 스크립트에 우겨넣는 방향으로 돌리도록 합니다.</p>
 
-<p>윈도라면 <code>곰플레이어</code> 로 이런 부분의 수고가 조금 줄어들기는 하지만 Mac 에서 <code>Movist</code> 를 통해서 주로 영상을 감상하려면 심히 신경쓰이지 않을리 없습니다.</p>
+<p> 우선은 <code>App::FatPacker</code> 를 설치하면 <code>fatpack</code> 이라는 커맨드를 사용할 수 있습니다.</p>
 
-<blockquote class="twitter-tweet" lang="ko"><p>멘탈리스트 4기를 볼려고 했는데, 자막이 없네&#8230; 그래서 자막을 세팅하는 스크립트를 깨작거려서 만들어봤다. 좀 더 브러쉬 업해야 되지만서도&#8230; <a href="https://t.co/jeXVNTnI" title="https://gist.github.com/3150026">gist.github.com/3150026</a></p>&mdash; JEEN (@JEEN_LEE) <a href="https://twitter.com/JEEN_LEE/status/226260944597180417" data-datetime="2012-07-20T10:23:07+00:00">7월 20, 2012</a></blockquote>
+<p> <a href="http://exchange.nagios.org">Nagios Exchange</a> 에서 찾아낸 <a href="http://exchange.nagios.org/directory/Plugins/Databases/check_redis-2Epl/details">check_redis</a> 중에 <code>check_redis.pl</code> 파일이 위에 말한대로 Redis 모듈에 의존이 걸린 상황입니다.</p>
 
-
-<p>그러니까 7월 20일경에 일단 이런 문제를 겪어서 잠깐 깨작거려서 만들어보기는 했지만 대놓고 앞에 내놓기도 그렇고해서 그냥 보류했었는데요. 뭐 물론 여전히 앞에 내놓는 게 좀 그렇기는 합니다.</p>
-
-<ul>
-<li><a href="https://github.com/JEEN/p5-App-Zamakist">https://github.com/JEEN/p5-App-Zamakist</a></li>
-</ul>
-
-
-<p>일련의 과정을 말하자면…</p>
+<p> 그럼 우선 <code>fatpack</code> 커맨드로 다음과 같이 입력을 합니다.</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>ls -la
-</span><span class='line'>total 0
-</span><span class='line'>drwxr-xr-x  12 jeen  staff   408  8  9 13:45 .
-</span><span class='line'>drwxr-xr-x+ 52 jeen  staff  1768  8  9 13:45 ..
-</span><span class='line'>-rw-r--r--   1 jeen  staff     0  8  9 13:45 NCIS.Los.Angeles.S03E01.720p.HDTV.X264-DIMENSION.avi
-</span><span class='line'>-rw-r--r--   1 jeen  staff     0  8  9 13:45 NCIS.Los.Angeles.S03E02.720p.HDTV.X264-DIMENSION.avi
-</span><span class='line'>-rw-r--r--   1 jeen  staff     0  8  9 13:45 NCIS.Los.Angeles.S03E03.720p.HDTV.X264-DIMENSION.avi
-</span><span class='line'>-rw-r--r--   1 jeen  staff     0  8  9 13:45 NCIS.Los.Angeles.S03E04.720p.HDTV.X264-DIMENSION.avi
-</span><span class='line'>-rw-r--r--   1 jeen  staff     0  8  9 13:45 NCIS.Los.Angeles.S03E05.720p.HDTV.X264-DIMENSION.avi
-</span><span class='line'>-rw-r--r--   1 jeen  staff     0  8  9 13:45 NCIS.Los.Angeles.S03E06.720p.HDTV.X264-DIMENSION.avi
-</span><span class='line'>-rw-r--r--   1 jeen  staff     0  8  9 13:45 NCIS.Los.Angeles.S03E07.720p.HDTV.X264-DIMENSION.avi
-</span><span class='line'>-rw-r--r--   1 jeen  staff     0  8  9 13:45 NCIS.Los.Angeles.S03E08.720p.HDTV.X264-DIMENSION.avi
-</span><span class='line'>-rw-r--r--   1 jeen  staff     0  8  9 11:44 NCIS.Los.Angeles.S03E09.720p.HDTV.X264-DIMENSION.avi
-</span><span class='line'>-rw-r--r--   1 jeen  staff     0  8  9 09:29 NCIS.Los.Angeles.S03E10.720p.HDTV.X264-DIMENSION.avi
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>fatpack trace check_redis.pl
+</span><span class='line'>check_redis.pl syntax OK
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>이렇게 뭐 디렉토리에 영상자료들이 널부러져 있습니다. 하지만 자막은 없죠.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>zamakist --dir .
-</span><span class='line'>Found 10 subscriptions
-</span><span class='line'>┌────┬──────────────────────────────────────────────────────┐
-</span><span class='line'>│ id │ filename                                             │
-</span><span class='line'>├────┼──────────────────────────────────────────────────────┤
-</span><span class='line'>│  1 │ NCIS.Los.Angeles.S03E01.720p.HDTV.X264-DIMENSION.avi │
-</span><span class='line'>│  2 │ NCIS.Los.Angeles.S03E02.720p.HDTV.X264-DIMENSION.avi │
-</span><span class='line'>│  3 │ NCIS.Los.Angeles.S03E03.720p.HDTV.X264-DIMENSION.avi │
-</span><span class='line'>│  4 │ NCIS.Los.Angeles.S03E04.720p.HDTV.X264-DIMENSION.avi │
-</span><span class='line'>│  5 │ NCIS.Los.Angeles.S03E05.720p.HDTV.X264-DIMENSION.avi │
-</span><span class='line'>│  6 │ NCIS.Los.Angeles.S03E06.720p.HDTV.X264-DIMENSION.avi │
-</span><span class='line'>│  7 │ NCIS.Los.Angeles.S03E07.720p.HDTV.X264-DIMENSION.avi │
-</span><span class='line'>│  8 │ NCIS.Los.Angeles.S03E08.720p.HDTV.X264-DIMENSION.avi │
-</span><span class='line'>│  9 │ NCIS.Los.Angeles.S03E09.720p.HDTV.X264-DIMENSION.avi │
-</span><span class='line'>│ 10 │ NCIS.Los.Angeles.S03E10.720p.HDTV.X264-DIMENSION.avi │
-</span><span class='line'>└────┴──────────────────────────────────────────────────────┘
-</span><span class='line'>Continue to download? <span class="o">[</span>y/n<span class="o">]</span> y
-</span><span class='line'>Downloaded 10 subscriptions
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>그래서 뭐 <code>App::Zamakist</code> 라는 모듈을 사용하면 뭐 이렇게 자막을 한꺼번에 다운받을 수 있다 뭐 이런 거죠.</p>
+<p> 결과 <code>syntax OK</code> 가 뜨고 해당 디렉토리에 <code>fatpacker.trace</code> 라는 파일이 생성됩니다.</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -378,40 +206,285 @@
 <span class='line-number'>22</span>
 <span class='line-number'>23</span>
 <span class='line-number'>24</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>ls -la
-</span><span class='line'>total 1592
-</span><span class='line'>drwxr-xr-x  22 jeen  staff    748  8  9 13:46 .
-</span><span class='line'>drwxr-xr-x+ 52 jeen  staff   1768  8  9 13:46 ..
-</span><span class='line'>-rw-r--r--   1 jeen  staff      0  8  9 13:45 NCIS.Los.Angeles.S03E01.720p.HDTV.X264-DIMENSION.avi
-</span><span class='line'>-rw-r--r--   1 jeen  staff  63779  8  9 13:46 NCIS.Los.Angeles.S03E01.720p.HDTV.X264-DIMENSION.smi
-</span><span class='line'>-rw-r--r--   1 jeen  staff      0  8  9 13:45 NCIS.Los.Angeles.S03E02.720p.HDTV.X264-DIMENSION.avi
-</span><span class='line'>-rw-r--r--   1 jeen  staff  75041  8  9 13:46 NCIS.Los.Angeles.S03E02.720p.HDTV.X264-DIMENSION.smi
-</span><span class='line'>-rw-r--r--   1 jeen  staff      0  8  9 13:45 NCIS.Los.Angeles.S03E03.720p.HDTV.X264-DIMENSION.avi
-</span><span class='line'>-rw-r--r--   1 jeen  staff  84915  8  9 13:46 NCIS.Los.Angeles.S03E03.720p.HDTV.X264-DIMENSION.smi
-</span><span class='line'>-rw-r--r--   1 jeen  staff      0  8  9 13:45 NCIS.Los.Angeles.S03E04.720p.HDTV.X264-DIMENSION.avi
-</span><span class='line'>-rw-r--r--   1 jeen  staff  78550  8  9 13:46 NCIS.Los.Angeles.S03E04.720p.HDTV.X264-DIMENSION.smi
-</span><span class='line'>-rw-r--r--   1 jeen  staff      0  8  9 13:45 NCIS.Los.Angeles.S03E05.720p.HDTV.X264-DIMENSION.avi
-</span><span class='line'>-rw-r--r--   1 jeen  staff  94809  8  9 13:46 NCIS.Los.Angeles.S03E05.720p.HDTV.X264-DIMENSION.smi
-</span><span class='line'>-rw-r--r--   1 jeen  staff      0  8  9 13:45 NCIS.Los.Angeles.S03E06.720p.HDTV.X264-DIMENSION.avi
-</span><span class='line'>-rw-r--r--   1 jeen  staff  98759  8  9 13:46 NCIS.Los.Angeles.S03E06.720p.HDTV.X264-DIMENSION.smi
-</span><span class='line'>-rw-r--r--   1 jeen  staff      0  8  9 13:45 NCIS.Los.Angeles.S03E07.720p.HDTV.X264-DIMENSION.avi
-</span><span class='line'>-rw-r--r--   1 jeen  staff  76016  8  9 13:46 NCIS.Los.Angeles.S03E07.720p.HDTV.X264-DIMENSION.smi
-</span><span class='line'>-rw-r--r--   1 jeen  staff      0  8  9 13:45 NCIS.Los.Angeles.S03E08.720p.HDTV.X264-DIMENSION.avi
-</span><span class='line'>-rw-r--r--   1 jeen  staff  94320  8  9 13:46 NCIS.Los.Angeles.S03E08.720p.HDTV.X264-DIMENSION.smi
-</span><span class='line'>-rw-r--r--   1 jeen  staff      0  8  9 11:44 NCIS.Los.Angeles.S03E09.720p.HDTV.X264-DIMENSION.avi
-</span><span class='line'>-rw-r--r--   1 jeen  staff  69537  8  9 13:46 NCIS.Los.Angeles.S03E09.720p.HDTV.X264-DIMENSION.smi
-</span><span class='line'>-rw-r--r--   1 jeen  staff      0  8  9 09:29 NCIS.Los.Angeles.S03E10.720p.HDTV.X264-DIMENSION.avi
-</span><span class='line'>-rw-r--r--   1 jeen  staff  55905  8  9 13:46 NCIS.Los.Angeles.S03E10.720p.HDTV.X264-DIMENSION.smi
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>cat fatpacker.trace
+</span><span class='line'>IO/Handle.pm
+</span><span class='line'>List/Util.pm
+</span><span class='line'>Getopt/Long.pm
+</span><span class='line'>SelectSaver.pm
+</span><span class='line'>IO/Socket.pm
+</span><span class='line'>Fcntl.pm
+</span><span class='line'>Text/ParseWords.pm
+</span><span class='line'>Symbol.pm
+</span><span class='line'>Scalar/Util.pm
+</span><span class='line'>IO/Socket/INET.pm
+</span><span class='line'>Errno.pm
+</span><span class='line'>fields.pm
+</span><span class='line'>warnings/register.pm
+</span><span class='line'>Encode/Alias.pm
+</span><span class='line'>Time/HiRes.pm
+</span><span class='line'>Encode/Config.pm
+</span><span class='line'>Encode/Encoding.pm
+</span><span class='line'>Redis.pm
+</span><span class='line'>Encode.pm
+</span><span class='line'>base.pm
+</span><span class='line'>Config.pm
+</span><span class='line'>IO.pm
+</span><span class='line'>IO/Socket/UNIX.pm
+</span><span class='line'>Carp.pm
+</span><span class='line'>bytes.pm
+</span><span class='line'>Exporter/Heavy.pm
+</span><span class='line'>vars.pm
+</span><span class='line'>constant.pm
+</span><span class='line'>Socket.pm
+</span><span class='line'>Try/Tiny.pm
+</span><span class='line'>IO/Select.pm
+</span><span class='line'>overload.pm
+</span><span class='line'>lib.pm
+</span><span class='line'>DynaLoader.pm
+</span><span class='line'>Data/Dumper.pm
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>뭐 일단 CPAN 에 올릴 생각도 없는 토이모듈 겸 생활용품 모듈이라서…</p>
+<p>내용을 보면 말 그대로 해당 모듈이 가지고 있는 의존 모듈이 좌르르륵 표시됩니다. 물론 걔중에는 Core 모듈도 있기도 합니다.</p>
 
-<p>아 물론 자막검색은 GOM 자막을 애용하고 있습니다.</p>
+<p> 일단 <code>App::FatPacker</code> SYNOPSIS 대로 진행을 해보면…</p>
 
-<p>검색방식은 뭐 파일이름에서 확장자만 떼서 검색날려서 뭐 여차저차해서 파일다운로드 하는 링크 빼서 일괄 다운로드 하는 것이죠.</p>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>fatpack packlists-for <span class="sb">`</span>cat fatpacker.trace<span class="sb">`</span>  &gt; packlists
+</span></code></pre></td></tr></table></div></figure>
 
-<p>이제 시작하려는 미드가 있는데 자막이 없다면 이거 한번만 돌려주면 앞으로 자막찾는 수고없어지겠습니다. :-)</p>
+
+<p>위 결과로 생긴 <code>packlists</code> 는 파일은 다음과 같은 내용을 가집니다.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>cat packlists
+</span><span class='line'>/home/jeen/perl5/perlbrew/perls/perl-5.14.0/lib/5.14.0/x86_64-linux-thread-multi/auto/Time/HiRes/.packlist
+</span><span class='line'>/home/jeen/perl5/perlbrew/perls/perl-5.14.0/lib/site_perl/5.14.0/x86_64-linux-thread-multi/auto/Redis/.packlist
+</span><span class='line'>/home/jeen/perl5/perlbrew/perls/perl-5.14.0/lib/site_perl/5.14.0/x86_64-linux-thread-multi/auto/Try/Tiny/.packlist
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>각 의존 모듈 위치에 맞춰서 <code>.packlist</code> 파일이 생성되고, 그 내용은…</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>cat /home/jeen/perl5/perlbrew/perls/perl-5.14.0/lib/site_perl/5.14.0/x86_64-linux-thread-multi/auto/Redis/.packlist
+</span><span class='line'>/home/jeen/perl5/perlbrew/perls/perl-5.14.0/lib/site_perl/5.14.0/Redis.pm
+</span><span class='line'>/home/jeen/perl5/perlbrew/perls/perl-5.14.0/lib/site_perl/5.14.0/Redis/Hash.pm
+</span><span class='line'>/home/jeen/perl5/perlbrew/perls/perl-5.14.0/lib/site_perl/5.14.0/Redis/List.pm
+</span><span class='line'>/home/jeen/perl5/perlbrew/perls/perl-5.14.0/man/man3/Redis.3
+</span><span class='line'>/home/jeen/perl5/perlbrew/perls/perl-5.14.0/man/man3/Redis::Hash.3
+</span><span class='line'>/home/jeen/perl5/perlbrew/perls/perl-5.14.0/man/man3/Redis::List.3
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>위와 같습니다.</p>
+
+<p>그리고 다음 커맨드를 입력해봅니다.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>fatpack tree <span class="sb">`</span>cat packlists<span class="sb">`</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>그 결과 현재 디렉토리에서 <code>fatlib</code> 이라는 디렉토리가 생성되고 그 안에 관련 의존모듈들이 복사됩니다.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>tree
+</span><span class='line'>…
+</span><span class='line'>├── fatlib
+</span><span class='line'>│   ├── Redis
+</span><span class='line'>│   │   ├── Hash.pm
+</span><span class='line'>│   │   └── List.pm
+</span><span class='line'>│   ├── Redis.pm
+</span><span class='line'>│   ├── Try
+</span><span class='line'>│   │   └── Tiny.pm
+</span><span class='line'>│   └── x86_64-linux-thread-multi
+</span><span class='line'>│       ├── Time
+</span><span class='line'>│       │   └── HiRes.pm
+</span><span class='line'>│       └── auto
+</span><span class='line'>│           └── Time
+</span><span class='line'>│               └── HiRes
+</span><span class='line'>│                   ├── HiRes.bs
+</span><span class='line'>│                   └── HiRes.so
+</span><span class='line'>…
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>그럼 다음 커맨드를 입력해보면…</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span><span class="o">(</span>fatpack file; cat check_redis.pl <span class="o">)</span> &gt; check_redis.packed.pl
+</span><span class='line'>Can<span class="err">&#39;</span>t stat /home/jeen/fp/tt/lib: 그런 파일이나 디렉터리가 없습니다
+</span><span class='line'> at /home/jeen/perl5/perlbrew/perls/perl-5.14.0/lib/site_perl/5.14.0/App/FatPacker.pm line 200
+</span><span class='line'>BEGIN failed--compilation aborted at /home/jeen/perl5/perlbrew/perls/perl-5.14.0/bin/fatpack line 3.
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>제대로 동작하지 않습니다. 에러가 발생하네요. 정답은 에러메시지에 있습니다. <code>App::FatPacker</code> 자체는 Perl Library 규칙에 정형화된 디렉토리 구조를 가정하고 있습니다. 즉 <code>lib</code> 디렉토리가 존재하지 않기 때문에 발생하는 것이죠. 뭐 물론 다운받은 <code>check_redis.pl</code> 파일 하나만 있는 데 <code>lib</code> 디렉토리를 가지고 뭐 더 넣고 자시고 할 것도 아닌데…, 그래도 뭐 일단 사태해결을 위해서 아무것도 없어도 그냥 <code>lib</code> 디렉토리 하나는 만들어 줍니다.</p>
+
+<p>그리고 다시 실행해보면 <code>check_redis.packed.pl</code> 이라는 파일이 생성됩니다.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='perl'><span class='line'> <span class="c1"># This chunk of stuff was generated by App::FatPacker. To find the original</span>
+</span><span class='line'> <span class="c1"># file&#39;s code, look for the end of this BEGIN block or the string &#39;FATPACK&#39;</span>
+</span><span class='line'><span class="k">BEGIN</span> <span class="p">{</span>
+</span><span class='line'><span class="k">my</span> <span class="nv">%fatpacked</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">$fatpacked</span><span class="p">{</span><span class="s">&quot;Redis.pm&quot;</span><span class="p">}</span> <span class="o">=</span> <span class="o">&lt;&lt;</span><span class="s">&#39;REDIS&#39;</span><span class="p">;</span>
+</span><span class='line'>  <span class="nb">package</span> <span class="n">Redis</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1"># ABSTRACT: Perl binding for Redis database</span>
+</span><span class='line'>  <span class="k">our</span> <span class="nv">$VERSION</span> <span class="o">=</span> <span class="s">&#39;1.955&#39;</span><span class="p">;</span> <span class="c1"># VERSION</span>
+</span><span class='line'>  <span class="k">our</span> <span class="nv">$AUTHORITY</span> <span class="o">=</span> <span class="s">&#39;cpan:MELO&#39;</span><span class="p">;</span> <span class="c1"># AUTHORITY</span>
+</span><span class='line'>  <span class="err">…</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p> 일단 Nagios Plugin 은 기본 실행권한을 가지는 파일로 해두는 것이 여러모로 편합니다. 한가지 주의할 점은 일단 위처럼 생성된 파일에서 shebang line 이 존재하지 않기때문에 shebang line 을 추가해주면 됩니다. :-)</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='perl'><span class='line'> <span class="c1">#!/usr/bin/env perl</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p> 위의 내용을 <code>check_redis.packed.pl</code> 파일의 첫째줄에 추가해줍니다.</p>
+
+<p> 그리고 완성된 파일들을 Redis 서버에 붙여서 <code>check_nrpe</code> 등으로 동작을 확인하고 설정에 추가하는 것으로 관련된 작업은 끝이 났습니다.</p>
+
+<p> 파일 중앙배포와 관련해서도 다양한 이슈가 있지만 이에 관련해서는 추후 <code>Rex</code> 를 다루면서 이야기를 계속할 까 합니다.</p>
+
+<p> 다 쓰고 나서 검색을 해보니 예전에 @aer0 님께서 작성하신 블로그 기사가 있군요.</p>
+
+<ul>
+<li><a href="http://aero2blog.blogspot.kr/2010/09/perl-appfatpacker.html">Perl 스크립트에 필요한 모듈 같이 넣기 App::FatPacker</a></li>
+</ul>
+
+
+<p>덩달아서 같이 참고하시면 좋을 것 같습니다.</p>
+
+  
+  
+
+
+    </article>
+  
+  
+    <article class="post">
+      <div class="sharing-box">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://jeen.github.com/blog/page/3/index.html" data-via="JEEN_LEE" data-counturl="http://jeen.github.com/blog/page/3/index.html" data-size="large">Tweet</a>
+  
+  
+  
+  <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+      
+  <header>
+    
+      <h2 class="entry-title">
+        
+        <a href="/blog/2012/11/29/download-package-dir-slash-files-from-directory-index/">Download Package Dir/files From Directory Index</a>
+        
+      </h2>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-11-29T20:10:00+09:00" pubdate data-updated="true">Nov 29<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/11/29/download-package-dir-slash-files-from-directory-index/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <p> 최근에 모 오픈소스의 패키지 리포지트리가 조만간 닫힐 것이라는 뉴스가 있어서… 만일을 위해 거기 있는 패키지 파일들을 일단 긁어오기로 했습니다. -_-;</p>
+
+<p> 그래서 크롤러를 하나 만들까 하다가… 이런 류의 작업은 뭔가 만들어 놓은 툴이 있을 것이라는 생각에 이리저리 뒤져보고 찾아봤지만 마땅한 키워드를 얻지 못했습니다.</p>
+
+<p> 결국 지인들에게 수소문해본 결과 아래와 같은 커맨드를 통해서 Directory Index 구조를 취하는 페이지에서 파일들을 몽땅 긁어올 수 있다는 걸을 알게되었습니다.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>wget -e <span class="nv">robots</span><span class="o">=</span>off -k -r --no-parent --wait<span class="o">=</span>5 http://download.virtualbox.org/virtualbox/debian/
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p> <code>index.html</code> 등의 불필요한 파일들도 같이 다운로드 되기도 하지만… 일단 다 받고나서…</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>find . | grep index.html | xargs rm
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>으로 삭제…</p>
+
+<p>그리하여 조만간 끊어질지도 모르는 사태에 대비코자 미리 이렇게 준비를 끝냈습니다.</p>
 
   
   

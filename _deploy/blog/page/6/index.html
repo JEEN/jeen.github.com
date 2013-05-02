@@ -9,8 +9,7 @@
   <meta name="author" content="Jeen Lee">
 
   
-  <meta name="description" content="Tweet Regexp::Wildcards Jul 1st, 2012 | Comments 저같은 평범한 개발자야 어떤 패턴을 확인하고 정규표현식을 쓰면 되는데, 사실 일반 사용자들에게
-정규표현식을 어떤 설정의 입력값으로 밀어넣는 것은 일반 사용자에게 배려가 부족하지 &hellip;">
+  <meta name="description" content="Tweet Moving From Bash to Zsh Again Aug 9th, 2012 | Comments 밥벌이도구가 바뀌고 해서 다시 ZSH 로 돌아갔습니다. 레티나 맥북프로를 오늘 받은 게 자랑.txt jeen.tistory.com/560&mdash; &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -135,7 +134,7 @@
     
       <h2 class="entry-title">
         
-        <a href="/blog/2012/07/01/regexp-wildcards/">Regexp::Wildcards</a>
+        <a href="/blog/2012/08/09/moving-from-bash-to-zsh-again/">Moving From Bash to Zsh Again</a>
         
       </h2>
     
@@ -153,174 +152,63 @@
   
 
 
-<time datetime="2012-07-01T00:46:00+09:00" pubdate data-updated="true">Jul 1<span>st</span>, 2012</time>
+<time datetime="2012-08-09T16:30:00+09:00" pubdate data-updated="true">Aug 9<span>th</span>, 2012</time>
         
-         | <a href="/blog/2012/07/01/regexp-wildcards/#disqus_thread">Comments</a>
+         | <a href="/blog/2012/08/09/moving-from-bash-to-zsh-again/#disqus_thread">Comments</a>
         
       </p>
     
   </header>
 
 
-  <p> 저같은 평범한 개발자야 어떤 패턴을 확인하고 정규표현식을 쓰면 되는데, 사실 일반 사용자들에게
-정규표현식을 어떤 설정의 입력값으로 밀어넣는 것은 일반 사용자에게 배려가 부족하지 않나 하고 생각했었습니다.</p>
+  <p> 밥벌이도구가 바뀌고 해서 다시 ZSH 로 돌아갔습니다.</p>
+
+<blockquote class="twitter-tweet" lang="ko"><p>레티나 맥북프로를 오늘 받은 게 자랑.txt <a href="http://t.co/38oGVx7W" title="http://jeen.tistory.com/560">jeen.tistory.com/560</a></p>&mdash; JEEN (@JEEN_LEE) <a href="https://twitter.com/JEEN_LEE/status/232821768325300225" data-datetime="2012-08-07T12:53:29+00:00">8월 7, 2012</a></blockquote>
+
 
 <ul>
-<li><code>/path/a/b</code></li>
-<li><code>/path/a/c</code></li>
-<li><code>/path/a/d</code></li>
+<li><a href="https://github.com/skwp/dotfiles">https://github.com/skwp/dotfiles</a></li>
 </ul>
 
 
-<p><code>/path/a/</code> 디렉토리 아래의 b,c,d 파일들을 삭제한다고 합니다. 물론 b,c,d 밖에 없다고 합니다. 이럴때
-보통 모두가 대개 와일드카드를 사용하죠.</p>
+<p>지난번에 MacBook Air 에 올리다가 뭐가 꼬인 <code>YADR</code> 을 썼습니다. <code>grep</code> 경고메시지가 없이 깔끔하게 돌아가는 군요.</p>
+
+<p> 이래저래 개발환경도 맞추고 그러다가 지난달에 zsh 5.0 이 릴리즈 된 것을 보고 Mt.LION 에 깔린 zsh 버젼을 확인하니..</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>rm -rf /path/a/*
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>zsh --version
+</span><span class='line'>zsh 4.3.11 <span class="o">(</span>i386-apple-darwin12.0<span class="o">)</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>라고 말이죠.</p>
+<p><code>4.3.11</code> 이었습니다. 그래서 zsh 5.0 으로 올려보려고 brew 로 일단 깔았죠.</p>
 
-<p> 예를들어서 어떤 관리자페이지 아래에서 특정 유저그룹의 접속권한에 대해서 다룬다고 해봅니다. 특정그룹은 고정IP를 통해서 접근해올 수 있고, 또 다른 그룹은 특정 IP대역에서 찾아온다고 합니다. 이런 것들을 복잡한 설정파일을 통해서가 아니라 유저가 관리하기 쉬운 인터페이스를 제공해야 할 필요도 있죠.</p>
-
-<p> 일반적인 입력예는 아래와 같습니다.</p>
-
-<ul>
-<li><code>211.123.123.1-211.123.123.254</code></li>
-<li><code>211.123.122.5</code></li>
-<li><code>211.123.121.4, 211.123.121.8</code></li>
-</ul>
-
-
-<p> 적당한 IP대역이거나, 혹은 단일 IP라거나, 혹은 몇몇 패턴을 알 수 없는 복수개의 IP라거나&#8230;</p>
-
-<ul>
-<li><code>211.123.126.0/24</code></li>
-</ul>
-
-
-<p> 혹은 네트워크 관리자라면 CIDR 스타일을 사용할지도 모르겠습니다.</p>
-
-<ul>
-<li><code>211.123.128.*</code></li>
-<li><code>211.123.121.10*</code></li>
-</ul>
-
-
-<p> 아니면 위에서 말한 대로 와일드카드를 사용할 수 있겠죠.</p>
-
-<p> 우선 위의 네개째까지는 <code>Net::IPAddrRanges</code> 라는 모듈을 사용하면 편하게 이용할 수 있습니다.</p>
+<p>그리고 <code>chsh</code> 로 셸을 바꾸려고 하는 데…</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="k">use</span> <span class="n">strict</span><span class="p">;</span>
-</span><span class='line'><span class="k">use</span> <span class="n">warnings</span><span class="p">;</span>
-</span><span class='line'><span class="k">use</span> <span class="nn">Net::</span><span class="n">IPAddrRanges</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">my</span> <span class="nv">$ranges</span> <span class="o">=</span> <span class="nn">Net::</span><span class="n">IPAddrRanges</span><span class="o">-&gt;</span><span class="k">new</span><span class="p">;</span>
-</span><span class='line'><span class="nv">$ranges</span><span class="o">-&gt;</span><span class="n">add</span><span class="p">(</span><span class="sx">qw{</span>
-</span><span class='line'><span class="sx">    211.123.123.1-211.123.254</span>
-</span><span class='line'><span class="sx">    211.123.122.5</span>
-</span><span class='line'><span class="sx">    211.123.121.4 211.123.121.8</span>
-</span><span class='line'><span class="sx">    211.123.126.0/24</span>
-</span><span class='line'><span class="sx">}</span><span class="p">);</span>
-</span><span class='line'>
-</span><span class='line'><span class="nv">$ranges</span><span class="o">-&gt;</span><span class="n">find</span><span class="p">(</span><span class="s">&#39;211.123.123.5&#39;</span><span class="p">);</span> <span class="c1"># OK;</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>chsh -s /usr/local/bin/zsh
+</span><span class='line'>Changing shell <span class="k">for </span>jeen.
+</span><span class='line'>Password <span class="k">for </span>jeen:
+</span><span class='line'>chsh: /usr/local/Cellar/zsh/5.0.0/bin/zsh: non-standard shell
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p> 이런저런 다양한 입력값들을 받아서 <code>Net::IPAddrRanges</code> 모듈에 넘겨주고 <code>-&gt;find</code> 메소드를 통해서 접속해온 IP(211.123.123.5)가 접속가능한 IP인지를 위처럼 간단하게 확인할 수 있죠.</p>
+<p>이라고 뜨는 것이었지요.</p>
 
-<p> 와일드카드 사용시에는 이와는 좀 다릅니다.</p>
+<p>구글검색결과 <code>/etc/shells</code> 에 해당 셸의 패스를 추가하는 것으로 이 난관을 헤쳐나갈 수 있다고 합니다.</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="k">use</span> <span class="n">strict</span><span class="p">;</span>
-</span><span class='line'><span class="k">use</span> <span class="n">warnings</span><span class="p">;</span>
-</span><span class='line'><span class="k">use</span> <span class="nn">Regexp::</span><span class="n">Wildcards</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">my</span> <span class="nv">$rw</span> <span class="o">=</span> <span class="nn">Regexp::</span><span class="n">Wildcards</span><span class="o">-&gt;</span><span class="k">new</span><span class="p">(</span> <span class="n">type</span> <span class="o">=&gt;</span> <span class="s">&#39;unix&#39;</span> <span class="p">);</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">my</span> <span class="nv">$user_ip</span> <span class="o">=</span> <span class="s">&#39;211.123.121.108&#39;</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">if</span> <span class="p">(</span><span class="nb">scalar</span> <span class="nb">grep</span> <span class="p">{</span> <span class="nv">$user_ip</span> <span class="o">=~</span> <span class="nv">$_</span> <span class="p">}</span>
-</span><span class='line'>           <span class="nb">map</span> <span class="p">{</span> <span class="nv">$rw</span><span class="o">-&gt;</span><span class="n">convert</span><span class="p">(</span><span class="nv">$_</span><span class="p">)</span> <span class="p">}</span> <span class="sx">qw{ 211.123.128.* 211.123.121.10* }</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">print</span> <span class="s">&quot;OK&quot;</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
+<p>그래서 네. zsh 5.0 쓰고 있는데 뭐가 좋은지는 써보면서 느끼게 되려나요.</p>
+
+<ul>
+<li><a href="https://github.com/zsh-users/zsh/blob/master/NEWS">https://github.com/zsh-users/zsh/blob/master/NEWS</a></li>
+</ul>
 
 
-<p> 뭐 사실 이런 코드를 적당한 메소드로 만들어서 사용하고 있습니다. IP제한같은 시나리오에는 사실 Net::IPAddrRanges 를 사용하는 게 좋아보이기는 합니다만&#8230; 최근에 <code>Regexp::Wildcards</code> 를 사용하는 경우가 있었는데&#8230;</p>
-
-<p> 유저의 권한별로 페이지의 접근을 제어하고 싶다라는 것이었죠.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='yaml'><span class='line'>  <span class="l-Scalar-Plain">ROLE1</span><span class="p-Indicator">:</span> <span class="p-Indicator">[</span> <span class="nv">/admin/user/list</span><span class="p-Indicator">,</span> <span class="nv">/admin/user/*/download</span> <span class="p-Indicator">]</span>
-</span><span class='line'>  <span class="l-Scalar-Plain">ROLE2</span><span class="p-Indicator">:</span> <span class="p-Indicator">[</span> <span class="nv">/admin/user/*</span> <span class="p-Indicator">]</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p> ROLE1 의 경우에는 admin/user 라는 컨트롤러중에 유저 리스트(/admin/user/list) 와 각 유저별로 관련정보를 다운로드를 할 수 있습니다. 그 이외에는 전부 접근을 차단한다는 것이구요.</p>
-
-<p> ROLE2 의 경우에는 admin/user 의 모든 액션에 접근을 가능하게 합니다.</p>
-
-<p> 이때는 카탈리스트를 사용하고 있다는 전제아래, Admin.pm 이라는 컨드롤러파일의 <code>auto</code> 아래 다음과 같은 코드를 추가했습니다.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="k">sub </span><span class="nf">auto</span> <span class="p">:Private {</span>
-</span><span class='line'><span class="o">....</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="k">my</span> <span class="nv">$rw</span> <span class="o">=</span> <span class="nn">Regexp::</span><span class="n">Wildcards</span><span class="o">-&gt;</span><span class="k">new</span><span class="p">(</span> <span class="n">type</span> <span class="o">=&gt;</span> <span class="s">&#39;unix&#39;</span> <span class="p">);</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="k">my</span> <span class="nv">$ACL</span> <span class="o">=</span> <span class="o">...</span><span class="p">;</span> <span class="c1"># 어떻게 샤바샤바해서 유저권한에 따른 접근가능 목록을 뽑아옵니다</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="k">unless</span> <span class="p">(</span><span class="nb">scalar</span> <span class="nb">grep</span> <span class="p">{</span> <span class="nv">$c</span><span class="o">-&gt;</span><span class="n">action</span> <span class="o">=~</span> <span class="nv">$_</span> <span class="p">}</span> <span class="nb">map</span> <span class="p">{</span> <span class="nv">$rw</span><span class="o">-&gt;</span><span class="n">convert</span><span class="p">(</span><span class="nv">$_</span><span class="p">);</span> <span class="p">}</span> <span class="nv">@</span><span class="p">{</span> <span class="nv">$ACL</span> <span class="p">})</span> <span class="p">{</span>
-</span><span class='line'>        <span class="nv">$c</span><span class="o">-&gt;</span><span class="n">flash</span><span class="p">(</span> <span class="n">warn_messages</span> <span class="o">=&gt;</span> <span class="p">[</span> <span class="s">&#39;접속할 수 없어요.&#39;</span> <span class="p">]</span> <span class="p">);</span>
-</span><span class='line'>        <span class="nv">$c</span><span class="o">-&gt;</span><span class="n">res</span><span class="o">-&gt;</span><span class="n">redirect</span><span class="p">(</span><span class="nv">$c</span><span class="o">-&gt;</span><span class="n">uri_for</span><span class="p">(</span><span class="s">&quot;/admin&quot;</span><span class="p">));</span>
-</span><span class='line'>        <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'><span class="o">....</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p> 네 아무튼 뭐 사실 결론은 굳이 할 수 있다면 간단하게 설정할 수 있는데, 왜 설정파일에까지 정규표현식이 끼어들어야 하느냐 라는 생각아래에서 시작했었지요. 정규표현식으로 난무할 이런저런 상황들을 적당하게 와일드카드로 커버할 수 있다면 더 직관적으로 이해하고 사용할 수 있지 않을까 하는 생각이 듭니다.</p>
+<p>이런 CHANGELOG 도 일단 보고 있지만요&#8230;</p>
 
   
   
@@ -345,7 +233,7 @@
     
       <h2 class="entry-title">
         
-        <a href="/blog/2012/06/19/dbix-class-and-replication-ii/">DBIx::Class and Replication - II</a>
+        <a href="/blog/2012/08/09/app-zamakist-dot-dot-dot/">App::Zamakist&#8230;</a>
         
       </h2>
     
@@ -363,39 +251,34 @@
   
 
 
-<time datetime="2012-06-19T15:35:00+09:00" pubdate data-updated="true">Jun 19<span>th</span>, 2012</time>
+<time datetime="2012-08-09T13:33:00+09:00" pubdate data-updated="true">Aug 9<span>th</span>, 2012</time>
         
-         | <a href="/blog/2012/06/19/dbix-class-and-replication-ii/#disqus_thread">Comments</a>
+         | <a href="/blog/2012/08/09/app-zamakist-dot-dot-dot/#disqus_thread">Comments</a>
         
       </p>
     
   </header>
 
 
-  <ul>
-<li><a href="http://jeen.github.com/blog/2012/06/17/dbix-class-and-replication/">DBIx::Class + Replication</a></li>
+  <p>취미라고 할 것이 있다면 잠, 책, 드라마감상 정도라고 할까요.</p>
+
+<p>걔중에 몇몇 미드들을 아직까지 꾸준하게 시간을 내면서 보고 있습니다.</p>
+
+<p>걔중에는 가끔보면 자막이 없어서 일일이 자막찾으러 들어가고 받고 해야하는 지루한 클릭이 필요한 경우도 있습니다.</p>
+
+<p>윈도라면 <code>곰플레이어</code> 로 이런 부분의 수고가 조금 줄어들기는 하지만 Mac 에서 <code>Movist</code> 를 통해서 주로 영상을 감상하려면 심히 신경쓰이지 않을리 없습니다.</p>
+
+<blockquote class="twitter-tweet" lang="ko"><p>멘탈리스트 4기를 볼려고 했는데, 자막이 없네&#8230; 그래서 자막을 세팅하는 스크립트를 깨작거려서 만들어봤다. 좀 더 브러쉬 업해야 되지만서도&#8230; <a href="https://t.co/jeXVNTnI" title="https://gist.github.com/3150026">gist.github.com/3150026</a></p>&mdash; JEEN (@JEEN_LEE) <a href="https://twitter.com/JEEN_LEE/status/226260944597180417" data-datetime="2012-07-20T10:23:07+00:00">7월 20, 2012</a></blockquote>
+
+
+<p>그러니까 7월 20일경에 일단 이런 문제를 겪어서 잠깐 깨작거려서 만들어보기는 했지만 대놓고 앞에 내놓기도 그렇고해서 그냥 보류했었는데요. 뭐 물론 여전히 앞에 내놓는 게 좀 그렇기는 합니다.</p>
+
+<ul>
+<li><a href="https://github.com/JEEN/p5-App-Zamakist">https://github.com/JEEN/p5-App-Zamakist</a></li>
 </ul>
 
 
-<p>그러니까 17일이죠.</p>
-
-<blockquote><p>이렇게 몇줄만의 설정으로 간단하게 어플리케이션단에서 Replication 설정을 수행할 수 있습니다…만, 여러가지 운용이슈가 발생할 테고 그에 맞춰서 적당하게 답을 내야할 경우가 생기겠죠. 네, 뭐 그건 그때 가서…</p></blockquote>
-
-<p>라고 지난 글의 말미에서 얘기했습니다만, 네 금방 운용이슈가 발생했습니다.</p>
-
-<p> 넘겨준대로 설정해서 돌리려고 하는 데 이런 에러가 떴다는 것입니다.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>Class::MOP::Class:::around<span class="o">()</span>: DBI Exception: DBD::mysql::db selectrow_hashref failed: Access denied; you need the SUPER,REPLICATION CLIENT privilege <span class="k">for </span>this operation <span class="o">[</span><span class="k">for </span>Statement <span class="s2">&quot;show slave status&quot;</span><span class="o">]</span> at /home/*/perl5/perlbrew/perls/perl-5.14.2/lib/site_perl/5.14.2/i686-linux/Class/MOP/Method/Wrapped.pm line 162
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p> 딱 봐도 DB 접속계정의 권한문제인데, 가장 간단한 답은 접속계정에 해당 권한을 부여하면 되는 것이었는데요.
- 하지만 접속 계정을 추가해서 어떻게 하기에는 다른 운용이슈가 발생할 여지가 있다고 생각하기에(그럴리가&#8230;) 수정을 요구받았습니다.</p>
-
-<p> 결국 DBIx::Class::Storage::DBI::Replicated::* 아래의 소스를 파보도록 했습니다. 관련 동작은 <code>connect_replicants</code> 시에 <code>validate_replicants</code> 에서 각 Replicant 마다 <code>is_replicating</code> 체크를 하게 되는 것입니다.</p>
-
-<p> 일단 뭐 예, DBI::Replicated 시에는 기본적으로 그냥 뭐 자동 fail-over 까지 슥샥슥샥 해줄 수 있는데&#8230; 그냥 이런 거 다 필요없다라는 합의점에 이르러 결국은 해당부분을 회피하도록 했습니다.</p>
+<p>일련의 과정을 말하자면…</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -405,20 +288,71 @@
 <span class='line-number'>6</span>
 <span class='line-number'>7</span>
 <span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="k">BEGIN</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">use</span> <span class="nn">DBIx::Class::Storage::DBI::Replicated::</span><span class="n">Pool</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="nb">no</span> <span class="n">warnings</span> <span class="s">&#39;redefine&#39;</span><span class="p">;</span>
-</span><span class='line'>    <span class="o">*</span><span class="nn">DBIx::Class::Storage::DBI::Replicated::Pool::</span><span class="n">validate_replicants</span> <span class="o">=</span> <span class="k">sub </span><span class="p">{</span>
-</span><span class='line'>        <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
-</span><span class='line'>    <span class="p">};</span>
-</span><span class='line'><span class="p">};</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>ls -la
+</span><span class='line'>total 0
+</span><span class='line'>drwxr-xr-x  12 jeen  staff   408  8  9 13:45 .
+</span><span class='line'>drwxr-xr-x+ 52 jeen  staff  1768  8  9 13:45 ..
+</span><span class='line'>-rw-r--r--   1 jeen  staff     0  8  9 13:45 NCIS.Los.Angeles.S03E01.720p.HDTV.X264-DIMENSION.avi
+</span><span class='line'>-rw-r--r--   1 jeen  staff     0  8  9 13:45 NCIS.Los.Angeles.S03E02.720p.HDTV.X264-DIMENSION.avi
+</span><span class='line'>-rw-r--r--   1 jeen  staff     0  8  9 13:45 NCIS.Los.Angeles.S03E03.720p.HDTV.X264-DIMENSION.avi
+</span><span class='line'>-rw-r--r--   1 jeen  staff     0  8  9 13:45 NCIS.Los.Angeles.S03E04.720p.HDTV.X264-DIMENSION.avi
+</span><span class='line'>-rw-r--r--   1 jeen  staff     0  8  9 13:45 NCIS.Los.Angeles.S03E05.720p.HDTV.X264-DIMENSION.avi
+</span><span class='line'>-rw-r--r--   1 jeen  staff     0  8  9 13:45 NCIS.Los.Angeles.S03E06.720p.HDTV.X264-DIMENSION.avi
+</span><span class='line'>-rw-r--r--   1 jeen  staff     0  8  9 13:45 NCIS.Los.Angeles.S03E07.720p.HDTV.X264-DIMENSION.avi
+</span><span class='line'>-rw-r--r--   1 jeen  staff     0  8  9 13:45 NCIS.Los.Angeles.S03E08.720p.HDTV.X264-DIMENSION.avi
+</span><span class='line'>-rw-r--r--   1 jeen  staff     0  8  9 11:44 NCIS.Los.Angeles.S03E09.720p.HDTV.X264-DIMENSION.avi
+</span><span class='line'>-rw-r--r--   1 jeen  staff     0  8  9 09:29 NCIS.Los.Angeles.S03E10.720p.HDTV.X264-DIMENSION.avi
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p> 추가한 부분은 위와 같습니다. 컴파일시에 미리 <code>validate_replicants</code> 를 재정의해버리는 것이었습니다.</p>
+<p>이렇게 뭐 디렉토리에 영상자료들이 널부러져 있습니다. 하지만 자막은 없죠.</p>
 
-<p> 전체 소스는 아래와 같습니다.</p>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>zamakist --dir .
+</span><span class='line'>Found 10 subscriptions
+</span><span class='line'>┌────┬──────────────────────────────────────────────────────┐
+</span><span class='line'>│ id │ filename                                             │
+</span><span class='line'>├────┼──────────────────────────────────────────────────────┤
+</span><span class='line'>│  1 │ NCIS.Los.Angeles.S03E01.720p.HDTV.X264-DIMENSION.avi │
+</span><span class='line'>│  2 │ NCIS.Los.Angeles.S03E02.720p.HDTV.X264-DIMENSION.avi │
+</span><span class='line'>│  3 │ NCIS.Los.Angeles.S03E03.720p.HDTV.X264-DIMENSION.avi │
+</span><span class='line'>│  4 │ NCIS.Los.Angeles.S03E04.720p.HDTV.X264-DIMENSION.avi │
+</span><span class='line'>│  5 │ NCIS.Los.Angeles.S03E05.720p.HDTV.X264-DIMENSION.avi │
+</span><span class='line'>│  6 │ NCIS.Los.Angeles.S03E06.720p.HDTV.X264-DIMENSION.avi │
+</span><span class='line'>│  7 │ NCIS.Los.Angeles.S03E07.720p.HDTV.X264-DIMENSION.avi │
+</span><span class='line'>│  8 │ NCIS.Los.Angeles.S03E08.720p.HDTV.X264-DIMENSION.avi │
+</span><span class='line'>│  9 │ NCIS.Los.Angeles.S03E09.720p.HDTV.X264-DIMENSION.avi │
+</span><span class='line'>│ 10 │ NCIS.Los.Angeles.S03E10.720p.HDTV.X264-DIMENSION.avi │
+</span><span class='line'>└────┴──────────────────────────────────────────────────────┘
+</span><span class='line'>Continue to download? <span class="o">[</span>y/n<span class="o">]</span> y
+</span><span class='line'>Downloaded 10 subscriptions
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>그래서 뭐 <code>App::Zamakist</code> 라는 모듈을 사용하면 뭐 이렇게 자막을 한꺼번에 다운받을 수 있다 뭐 이런 거죠.</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -444,66 +378,40 @@
 <span class='line-number'>22</span>
 <span class='line-number'>23</span>
 <span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-<span class='line-number'>40</span>
-</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="k">BEGIN</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">use</span> <span class="nn">DBIx::Class::Storage::DBI::Replicated::</span><span class="n">Pool</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="nb">no</span> <span class="n">warnings</span> <span class="s">&#39;redefine&#39;</span><span class="p">;</span>
-</span><span class='line'>    <span class="o">*</span><span class="nn">DBIx::Class::Storage::DBI::Replicated::Pool::</span><span class="n">validate_replicants</span> <span class="o">=</span> <span class="k">sub </span><span class="p">{</span>
-</span><span class='line'>        <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
-</span><span class='line'>    <span class="p">};</span>
-</span><span class='line'><span class="p">};</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">my</span> <span class="nv">$schema</span> <span class="o">=</span> <span class="nn">MyApp::</span><span class="n">Schema</span><span class="o">-&gt;</span><span class="n">clone</span><span class="p">;</span>
-</span><span class='line'><span class="nv">$schema</span><span class="o">-&gt;</span><span class="n">storage_type</span><span class="p">([</span>
-</span><span class='line'>    <span class="s">&#39;::DBI::Replicated&#39;</span> <span class="o">=&gt;</span> <span class="p">{</span>
-</span><span class='line'>        <span class="n">balancer_type</span> <span class="o">=&gt;</span> <span class="s">&#39;::Random&#39;</span><span class="p">,</span>
-</span><span class='line'>        <span class="n">balancer_args</span> <span class="o">=&gt;</span> <span class="p">{</span>
-</span><span class='line'>            <span class="n">auto_validate_every</span> <span class="o">=&gt;</span> <span class="mi">10</span><span class="p">,</span>
-</span><span class='line'>            <span class="n">master_read_weight</span>  <span class="o">=&gt;</span> <span class="mi">0</span><span class="p">,</span>
-</span><span class='line'>        <span class="p">},</span>
-</span><span class='line'>        <span class="n">pool_args</span> <span class="o">=&gt;</span> <span class="p">{</span>
-</span><span class='line'>            <span class="n">maximum_lag</span> <span class="o">=&gt;</span> <span class="mi">2</span><span class="p">,</span>
-</span><span class='line'>        <span class="p">}</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'><span class="p">]);</span>
-</span><span class='line'><span class="nv">$schema</span><span class="o">-&gt;</span><span class="n">connection</span><span class="p">({</span>
-</span><span class='line'>    <span class="n">dsn</span>      <span class="o">=&gt;</span> <span class="s">&quot;dbi:mysql:myapp:127.0.0.50&quot;</span><span class="p">,</span>
-</span><span class='line'>    <span class="n">user</span>     <span class="o">=&gt;</span> <span class="s">&quot;user&quot;</span><span class="p">,</span>
-</span><span class='line'>    <span class="n">password</span> <span class="o">=&gt;</span> <span class="s">&quot;whatthehell&quot;</span><span class="p">,</span>
-</span><span class='line'>    <span class="n">RaiseError</span>        <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">,</span>
-</span><span class='line'>    <span class="n">AutoCommit</span>        <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">,</span>
-</span><span class='line'>    <span class="n">mysql_enable_utf8</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">,</span>
-</span><span class='line'>    <span class="n">on_connect_do</span>     <span class="o">=&gt;</span> <span class="p">[</span><span class="s">&quot;SET NAMES utf8&quot;</span><span class="p">],</span>
-</span><span class='line'>    <span class="n">quote_char</span>        <span class="o">=&gt;</span> <span class="sx">q{`}</span><span class="p">,</span>
-</span><span class='line'><span class="p">});</span>
-</span><span class='line'><span class="nv">$schema</span><span class="o">-&gt;</span><span class="n">storage</span><span class="o">-&gt;</span><span class="n">connect_replicants</span><span class="p">([</span>
-</span><span class='line'>    <span class="p">{</span>
-</span><span class='line'>        <span class="n">dsn</span>      <span class="o">=&gt;</span> <span class="s">&quot;dbi:mysql:myapp:192.168.0.51&quot;</span><span class="p">,</span>
-</span><span class='line'>        <span class="n">user</span>     <span class="o">=&gt;</span> <span class="s">&quot;user&quot;</span><span class="p">,</span>
-</span><span class='line'>        <span class="n">password</span> <span class="o">=&gt;</span> <span class="s">&quot;whatthehell&quot;</span><span class="p">,</span>
-</span><span class='line'>    <span class="p">},</span>
-</span><span class='line'>    <span class="o">....</span>
-</span><span class='line'><span class="p">]);</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>ls -la
+</span><span class='line'>total 1592
+</span><span class='line'>drwxr-xr-x  22 jeen  staff    748  8  9 13:46 .
+</span><span class='line'>drwxr-xr-x+ 52 jeen  staff   1768  8  9 13:46 ..
+</span><span class='line'>-rw-r--r--   1 jeen  staff      0  8  9 13:45 NCIS.Los.Angeles.S03E01.720p.HDTV.X264-DIMENSION.avi
+</span><span class='line'>-rw-r--r--   1 jeen  staff  63779  8  9 13:46 NCIS.Los.Angeles.S03E01.720p.HDTV.X264-DIMENSION.smi
+</span><span class='line'>-rw-r--r--   1 jeen  staff      0  8  9 13:45 NCIS.Los.Angeles.S03E02.720p.HDTV.X264-DIMENSION.avi
+</span><span class='line'>-rw-r--r--   1 jeen  staff  75041  8  9 13:46 NCIS.Los.Angeles.S03E02.720p.HDTV.X264-DIMENSION.smi
+</span><span class='line'>-rw-r--r--   1 jeen  staff      0  8  9 13:45 NCIS.Los.Angeles.S03E03.720p.HDTV.X264-DIMENSION.avi
+</span><span class='line'>-rw-r--r--   1 jeen  staff  84915  8  9 13:46 NCIS.Los.Angeles.S03E03.720p.HDTV.X264-DIMENSION.smi
+</span><span class='line'>-rw-r--r--   1 jeen  staff      0  8  9 13:45 NCIS.Los.Angeles.S03E04.720p.HDTV.X264-DIMENSION.avi
+</span><span class='line'>-rw-r--r--   1 jeen  staff  78550  8  9 13:46 NCIS.Los.Angeles.S03E04.720p.HDTV.X264-DIMENSION.smi
+</span><span class='line'>-rw-r--r--   1 jeen  staff      0  8  9 13:45 NCIS.Los.Angeles.S03E05.720p.HDTV.X264-DIMENSION.avi
+</span><span class='line'>-rw-r--r--   1 jeen  staff  94809  8  9 13:46 NCIS.Los.Angeles.S03E05.720p.HDTV.X264-DIMENSION.smi
+</span><span class='line'>-rw-r--r--   1 jeen  staff      0  8  9 13:45 NCIS.Los.Angeles.S03E06.720p.HDTV.X264-DIMENSION.avi
+</span><span class='line'>-rw-r--r--   1 jeen  staff  98759  8  9 13:46 NCIS.Los.Angeles.S03E06.720p.HDTV.X264-DIMENSION.smi
+</span><span class='line'>-rw-r--r--   1 jeen  staff      0  8  9 13:45 NCIS.Los.Angeles.S03E07.720p.HDTV.X264-DIMENSION.avi
+</span><span class='line'>-rw-r--r--   1 jeen  staff  76016  8  9 13:46 NCIS.Los.Angeles.S03E07.720p.HDTV.X264-DIMENSION.smi
+</span><span class='line'>-rw-r--r--   1 jeen  staff      0  8  9 13:45 NCIS.Los.Angeles.S03E08.720p.HDTV.X264-DIMENSION.avi
+</span><span class='line'>-rw-r--r--   1 jeen  staff  94320  8  9 13:46 NCIS.Los.Angeles.S03E08.720p.HDTV.X264-DIMENSION.smi
+</span><span class='line'>-rw-r--r--   1 jeen  staff      0  8  9 11:44 NCIS.Los.Angeles.S03E09.720p.HDTV.X264-DIMENSION.avi
+</span><span class='line'>-rw-r--r--   1 jeen  staff  69537  8  9 13:46 NCIS.Los.Angeles.S03E09.720p.HDTV.X264-DIMENSION.smi
+</span><span class='line'>-rw-r--r--   1 jeen  staff      0  8  9 09:29 NCIS.Los.Angeles.S03E10.720p.HDTV.X264-DIMENSION.avi
+</span><span class='line'>-rw-r--r--   1 jeen  staff  55905  8  9 13:46 NCIS.Los.Angeles.S03E10.720p.HDTV.X264-DIMENSION.smi
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p> 그리고 그들은 행복하게 오래오래 살았답니다~. 끝.</p>
+<p>뭐 일단 CPAN 에 올릴 생각도 없는 토이모듈 겸 생활용품 모듈이라서…</p>
+
+<p>아 물론 자막검색은 GOM 자막을 애용하고 있습니다.</p>
+
+<p>검색방식은 뭐 파일이름에서 확장자만 떼서 검색날려서 뭐 여차저차해서 파일다운로드 하는 링크 빼서 일괄 다운로드 하는 것이죠.</p>
+
+<p>이제 시작하려는 미드가 있는데 자막이 없다면 이거 한번만 돌려주면 앞으로 자막찾는 수고없어지겠습니다. :-)</p>
 
   
   

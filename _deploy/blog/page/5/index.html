@@ -9,7 +9,7 @@
   <meta name="author" content="Jeen Lee">
 
   
-  <meta name="description" content="Tweet Export Github Issues Jul 18th, 2012 | Comments 회사에서는 한달에 $20 인가 지불하면서 Github 을 쓰고 있습니다. $20 플랜에서는 한정적인 Private Repo 밖에 만들지 못합니다. 그래서 완료가 된 &hellip;">
+  <meta name="description" content="Tweet Building a Perl Project on Travis CI Aug 28th, 2012 | Comments Travis CI - Distributed build platform for the open source community Travis CI은 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -134,7 +134,7 @@
     
       <h2 class="entry-title">
         
-        <a href="/blog/2012/07/18/export-github-issues/">Export Github Issues</a>
+        <a href="/blog/2012/08/28/building-a-perl-project-on-travis-ci/">Building a Perl Project on Travis CI</a>
         
       </h2>
     
@@ -152,30 +152,42 @@
   
 
 
-<time datetime="2012-07-18T15:44:00+09:00" pubdate data-updated="true">Jul 18<span>th</span>, 2012</time>
+<time datetime="2012-08-28T14:25:00+09:00" pubdate data-updated="true">Aug 28<span>th</span>, 2012</time>
         
-         | <a href="/blog/2012/07/18/export-github-issues/#disqus_thread">Comments</a>
+         | <a href="/blog/2012/08/28/building-a-perl-project-on-travis-ci/#disqus_thread">Comments</a>
         
       </p>
     
   </header>
 
 
-  <p> 회사에서는 한달에 $20 인가 지불하면서 Github 을 쓰고 있습니다.
- $20 플랜에서는 한정적인 Private Repo 밖에 만들지 못합니다. 그래서 완료가 된 프로젝트에 대해서는
-Github Repo 를 닫고 사내 Git Repo 로 옮기는 방식으로 사용하고 있습니다.</p>
+  <ul>
+<li><a href="http://travis-ci.org/">Travis CI - Distributed build platform for the open source community</a></li>
+</ul>
 
-<p> 그럴거면 그냥 사내 Git Repo 를 사용할 것이지 왜 돈내가면서 Github 를 쓰느냐고 물으신다면,
-Github 에서 제공해주는 Issue 관리라든가, Wiki 라든가 여러모로 통합이 잘되어 있고 깔끔해서
-사용하기 편하다고 그냥 그렇게 말하렵니다.</p>
 
-<p> 아무튼 그러면서, 프로젝트 뿐 아니라 회사내에 발생하는 다양한 이슈들은 Bugzilla 에 기록해놓습니다.</p>
+<p><code>Travis CI</code>은 이전에 얘기를 들었을 때는 별  관심이 없었는데(처음에는 확실히 Perl 을 지원하지 않아서), 언제부턴가 Perl 을 지원한다는 얘기를 듣고 Perl 커뮤니티에서 움직임이 조금씩 있더라구요. <code>Dist::Zilla::TravisCI</code> 같은 모듈들도 나오는 걸로 봐서…</p>
 
-<p> 다 끝나서 닫아야할 프로젝트들을 사내 Repo 로 옮기는 것은 좋지만, Issues 안에 적어둔 깨알같은 내용들과 코멘트들 등등을 고스란히 다 허공으로 날려버려야 된다는 것은 뼈아픈 일입니다.</p>
+<p>사용하는 방법은 아주 간단합니다. <code>Github</code> 계정에 연결되고, 그리고 Github 의 Public 상태의 프로젝트를 고르고… 그 프로젝트에 <code>.travis.yml</code> 파일을 놓아주면 됩니다.</p>
 
-<p> 그래서 잠깐 시간을 내서 Issues 에 있는 내용(이슈타이틀,내용,코멘트, Git commit, 이슈 참조 등등)을 뽑아서 Bugzilla 에 담아놓기 좋게 코드를 써봤습니다.</p>
+<ul>
+<li><a href="http://about.travis-ci.org/docs/user/languages/perl/">Travis CI - Building a Perl Project</a></li>
+</ul>
 
-<figure class='code'><figcaption><span>export-github-issues.pl</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+
+<p>자세한 건 위의 설명페이지를 참고해서 이전에 살짝 만들어 놓은 <code>Zamakist</code> 를 <code>Travis CI</code> 에서 돌려보게 해봤습니다.</p>
+
+<p><img src="https://lh5.googleusercontent.com/-EUnpasmILzs/UDxYWf7j2WI/AAAAAAAACBg/y1EdG7zFKoM/%2525C3%2525A1%2525C2%252584%2525C2%252589%2525C3%2525A1%2525C2%252585%2525C2%2525B3%2525C3%2525A1%2525C2%252584%2525C2%25258F%2525C3%2525A1%2525C2%252585%2525C2%2525B3%2525C3%2525A1%2525C2%252584%2525C2%252585%2525C3%2525A1%2525C2%252585%2525C2%2525B5%2525C3%2525A1%2525C2%252586%2525C2%2525AB%2525C3%2525A1%2525C2%252584%2525C2%252589%2525C3%2525A1%2525C2%252585%2525C2%2525A3%2525C3%2525A1%2525C2%252586%2525C2%2525BA%2525202012-08-28%252520%2525C3%2525A1%2525C2%252584%2525C2%25258B%2525C3%2525A1%2525C2%252585%2525C2%2525A9%2525C3%2525A1%2525C2%252584%2525C2%252592%2525C3%2525A1%2525C2%252585%2525C2%2525AE%2525202.33.19.png" alt="img-failed" /></p>
+
+<p> 처음에야 뭐 물론 <code>.travis.yml</code> 파일이 없어서 실패했다는 메일이 날라왔구요.</p>
+
+<p> <code>.travis.yml</code> 을 추가해준 결과로는 다시 이렇게 제대로 돌아간다는 메일이 옵니다.</p>
+
+<p><img src="https://lh5.googleusercontent.com/-ub5BrJZrXPw/UDxYT_Xl7JI/AAAAAAAACBY/CtHCGYNaJcY/%2525C3%2525A1%2525C2%252584%2525C2%252589%2525C3%2525A1%2525C2%252585%2525C2%2525B3%2525C3%2525A1%2525C2%252584%2525C2%25258F%2525C3%2525A1%2525C2%252585%2525C2%2525B3%2525C3%2525A1%2525C2%252584%2525C2%252585%2525C3%2525A1%2525C2%252585%2525C2%2525B5%2525C3%2525A1%2525C2%252586%2525C2%2525AB%2525C3%2525A1%2525C2%252584%2525C2%252589%2525C3%2525A1%2525C2%252585%2525C2%2525A3%2525C3%2525A1%2525C2%252586%2525C2%2525BA%2525202012-08-28%252520%2525C3%2525A1%2525C2%252584%2525C2%25258B%2525C3%2525A1%2525C2%252585%2525C2%2525A9%2525C3%2525A1%2525C2%252584%2525C2%252592%2525C3%2525A1%2525C2%252585%2525C2%2525AE%2525202.33.13.png" alt="Img1" /></p>
+
+<p> <code>Travis CI</code> 에서 출력되는 빌드 내용은 아래와 같습니다.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -236,86 +248,88 @@ Github 에서 제공해주는 Issue 관리라든가, Wiki 라든가 여러모로
 <span class='line-number'>59</span>
 <span class='line-number'>60</span>
 <span class='line-number'>61</span>
-</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="k">use</span> <span class="n">strict</span><span class="p">;</span>
-</span><span class='line'><span class="k">use</span> <span class="n">warnings</span><span class="p">;</span>
-</span><span class='line'><span class="k">use</span> <span class="nn">Text::</span><span class="n">Xslate</span><span class="p">;</span>
-</span><span class='line'><span class="k">use</span> <span class="nn">Data::Section::</span><span class="n">Simple</span><span class="p">;</span>
-</span><span class='line'><span class="k">use</span> <span class="nn">Net::GitHub::</span><span class="n">V3</span><span class="p">;</span>
-</span><span class='line'><span class="k">use</span> <span class="nn">Config::</span><span class="n">Pit</span><span class="p">;</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>Using worker: ppp3.worker.travis-ci.org:php-1
 </span><span class='line'>
-</span><span class='line'><span class="k">my</span> <span class="nv">$pit</span> <span class="o">=</span> <span class="n">pit_get</span><span class="p">(</span><span class="s">&#39;github.com&#39;</span><span class="p">,</span> <span class="nb">require</span> <span class="o">=&gt;</span> <span class="p">{</span>
-</span><span class='line'>    <span class="n">login</span> <span class="o">=&gt;</span> <span class="s">&quot;Your login&quot;</span><span class="p">,</span>
-</span><span class='line'>    <span class="n">pass</span>  <span class="o">=&gt;</span> <span class="s">&quot;Your pass&quot;</span><span class="p">,</span>
-</span><span class='line'><span class="p">});</span>
+</span><span class='line'><span class="nv">$ </span><span class="nb">cd</span> ~/builds
+</span><span class='line'><span class="nv">$ </span>git clone --depth<span class="o">=</span>100 --quiet git://github.com/JEEN/p5-App-Zamakist.git JEEN/p5-App-Zamakist
+</span><span class='line'><span class="nv">$ </span><span class="nb">cd </span>JEEN/p5-App-Zamakist
+</span><span class='line'><span class="nv">$ </span>git checkout -qf df10bdfea286c9933c345c84206eaa90b8f298a6
+</span><span class='line'><span class="nv">$ </span>perlbrew use 5.16
+</span><span class='line'><span class="nv">$ </span>perl --version
 </span><span class='line'>
-</span><span class='line'><span class="k">my</span> <span class="nv">$github</span> <span class="o">=</span> <span class="nn">Net::GitHub::</span><span class="n">V3</span><span class="o">-&gt;</span><span class="k">new</span><span class="p">(</span>
-</span><span class='line'>    <span class="n">login</span> <span class="o">=&gt;</span> <span class="nv">$pit</span><span class="o">-&gt;</span><span class="p">{</span><span class="n">login</span><span class="p">},</span>
-</span><span class='line'>    <span class="n">pass</span>  <span class="o">=&gt;</span> <span class="nv">$pit</span><span class="o">-&gt;</span><span class="p">{</span><span class="n">pass</span><span class="p">},</span>
-</span><span class='line'><span class="p">);</span>
+</span><span class='line'>This is perl 5, version 16, subversion 0 <span class="o">(</span>v5.16.0<span class="o">)</span> built <span class="k">for </span>i686-linux
 </span><span class='line'>
-</span><span class='line'><span class="k">my</span> <span class="p">(</span><span class="nv">$user</span><span class="p">,</span> <span class="nv">$repo</span><span class="p">)</span> <span class="o">=</span> <span class="nv">@ARGV</span><span class="p">;</span>
-</span><span class='line'><span class="k">unless</span> <span class="p">(</span><span class="nv">$user</span> <span class="o">&amp;&amp;</span> <span class="nv">$repo</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">print</span> <span class="s">&quot;Usage: perl p.pl silexkr Donnenwa\n&quot;</span><span class="p">;</span>
-</span><span class='line'>    <span class="nb">exit</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
+</span><span class='line'>Copyright 1987-2012, Larry Wall
 </span><span class='line'>
-</span><span class='line'><span class="k">my</span> <span class="nv">$tx</span>  <span class="o">=</span> <span class="nn">Text::</span><span class="n">Xslate</span><span class="o">-&gt;</span><span class="k">new</span><span class="p">(</span>
-</span><span class='line'>    <span class="n">syntax</span> <span class="o">=&gt;</span> <span class="s">&#39;TTerse&#39;</span><span class="p">,</span>
-</span><span class='line'>    <span class="n">module</span> <span class="o">=&gt;</span> <span class="p">[</span> <span class="s">&#39;Text::Xslate::Bridge::TT2Like&#39;</span> <span class="p">],</span>
-</span><span class='line'>    <span class="n">path</span> <span class="o">=&gt;</span> <span class="p">[</span>
-</span><span class='line'>        <span class="nn">Data::Section::</span><span class="n">Simple</span><span class="o">-&gt;</span><span class="k">new</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">get_data_section</span><span class="p">()</span>
-</span><span class='line'>    <span class="p">],</span>
-</span><span class='line'><span class="p">);</span>
+</span><span class='line'>Perl may be copied only under the terms of either the Artistic License or the
+</span><span class='line'>GNU General Public License, which may be found in the Perl 5 <span class="nb">source </span>kit.
 </span><span class='line'>
-</span><span class='line'><span class="k">my</span> <span class="nv">$issue</span> <span class="o">=</span> <span class="nv">$github</span><span class="o">-&gt;</span><span class="n">issue</span><span class="p">;</span>
-</span><span class='line'><span class="k">my</span> <span class="nv">@issues</span> <span class="o">=</span> <span class="nv">$issue</span><span class="o">-&gt;</span><span class="n">repos_issues</span><span class="p">(</span><span class="nv">$user</span><span class="p">,</span> <span class="nv">$repo</span><span class="p">,</span> <span class="p">{</span> <span class="n">state</span> <span class="o">=&gt;</span> <span class="s">&#39;closed&#39;</span> <span class="p">});</span>
-</span><span class='line'><span class="k">while</span><span class="p">(</span><span class="nv">$issue</span><span class="o">-&gt;</span><span class="n">has_next_page</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>    <span class="nb">push</span> <span class="nv">@issues</span><span class="p">,</span> <span class="nv">$issue</span><span class="o">-&gt;</span><span class="n">next_page</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
+</span><span class='line'>Complete documentation <span class="k">for </span>Perl, including FAQ lists, should be found on
+</span><span class='line'>this system using <span class="s2">&quot;man perl&quot;</span> or <span class="s2">&quot;perldoc perl&quot;</span>.  If you have access to the
+</span><span class='line'>Internet, point your browser at http://www.perl.org/, the Perl Home Page.
 </span><span class='line'>
-</span><span class='line'><span class="k">for</span> <span class="k">my</span> <span class="nv">$iss</span> <span class="p">(</span><span class="nv">@issues</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">my</span> <span class="nv">@comments</span> <span class="o">=</span> <span class="p">();</span>
-</span><span class='line'>    <span class="k">my</span> <span class="nv">@events</span>   <span class="o">=</span> <span class="p">();</span>
-</span><span class='line'>    <span class="nb">eval</span> <span class="p">{</span> <span class="nv">@comments</span> <span class="o">=</span> <span class="nv">$issue</span><span class="o">-&gt;</span><span class="n">comments</span><span class="p">(</span><span class="s">&#39;silexkr&#39;</span><span class="p">,</span> <span class="nv">$repo</span><span class="p">,</span> <span class="nv">$iss</span><span class="o">-&gt;</span><span class="p">{</span><span class="n">number</span><span class="p">})</span> <span class="p">};</span>
-</span><span class='line'>    <span class="nb">eval</span> <span class="p">{</span> <span class="nv">@events</span>   <span class="o">=</span> <span class="nv">$issue</span><span class="o">-&gt;</span><span class="n">events</span><span class="p">(</span><span class="s">&#39;silexkr&#39;</span><span class="p">,</span> <span class="nv">$repo</span><span class="p">,</span> <span class="nv">$iss</span><span class="o">-&gt;</span><span class="p">{</span><span class="n">number</span><span class="p">})</span> <span class="p">};</span>
-</span><span class='line'>    <span class="k">print</span> <span class="nv">$tx</span><span class="o">-&gt;</span><span class="n">render</span><span class="p">(</span><span class="s">&#39;text.tx&#39;</span><span class="p">,</span> <span class="p">{</span> <span class="nv">%</span><span class="p">{</span> <span class="nv">$iss</span> <span class="p">},</span> <span class="n">comments</span> <span class="o">=&gt;</span> <span class="o">\</span><span class="nv">@comments</span><span class="p">,</span> <span class="n">events</span> <span class="o">=&gt;</span> <span class="o">\</span><span class="nv">@events</span> <span class="p">});</span>
-</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="nv">$ </span>cpanm --version
+</span><span class='line'>cpanm <span class="o">(</span>App::cpanminus<span class="o">)</span> version 1.5017
+</span><span class='line'><span class="nv">$ </span>cpanm --quiet --installdeps --notest .
+</span><span class='line'>Successfully installed Text-CharWidth-0.04
+</span><span class='line'>Successfully installed Text-UnicodeBox-0.03
+</span><span class='line'>Successfully installed XML-XPathEngine-0.13
+</span><span class='line'>Successfully installed HTML-Tree-5.02
+</span><span class='line'>Successfully installed HTML-TreeBuilder-XPath-0.14
+</span><span class='line'>Successfully installed HTML-Selector-XPath-0.14
+</span><span class='line'>Successfully installed Web-Query-0.08
+</span><span class='line'>Successfully installed Term-ReadLine-Zoid-0.07
+</span><span class='line'>8 distributions installed
+</span><span class='line'><span class="nv">$ </span>perl Makefile.PL <span class="o">&amp;&amp;</span> make <span class="nb">test</span>
+</span><span class='line'>include /home/travis/builds/JEEN/p5-App-Zamakist/inc/Module/Install.pm
+</span><span class='line'>include inc/Module/Install/Metadata.pm
+</span><span class='line'>include inc/Module/Install/Base.pm
+</span><span class='line'>include inc/Module/Install/Makefile.pm
+</span><span class='line'>Cannot determine perl version info from lib/App/Zamakist.pm
+</span><span class='line'>include inc/Module/Install/Scripts.pm
+</span><span class='line'>include inc/Module/Install/Include.pm
+</span><span class='line'>include inc/Test/More.pm
+</span><span class='line'>include inc/Module/Install/WriteAll.pm
+</span><span class='line'>include inc/Module/Install/Win32.pm
+</span><span class='line'>include inc/Module/Install/Can.pm
+</span><span class='line'>include inc/Module/Install/Fetch.pm
+</span><span class='line'>Writing Makefile <span class="k">for </span>App::Zamakist
+</span><span class='line'>Writing MYMETA.yml and MYMETA.json
+</span><span class='line'>Writing META.yml
+</span><span class='line'>cp lib/App/Zamakist/Media.pm blib/lib/App/Zamakist/Media.pm
+</span><span class='line'>cp lib/App/Zamakist.pm blib/lib/App/Zamakist.pm
+</span><span class='line'>cp lib/App/Zamakist/Role/Reportable.pm blib/lib/App/Zamakist/Role/Reportable.pm
+</span><span class='line'>cp lib/App/Zamakist/Handler/GOM.pm blib/lib/App/Zamakist/Handler/GOM.pm
+</span><span class='line'>cp bin/zamakist blib/script/zamakist
+</span><span class='line'>/home/travis/perl5/perlbrew/perls/5.16/bin/perl <span class="s2">&quot;-Iinc&quot;</span> -MExtUtils::MY -e <span class="s1">&#39;MY-&gt;fixin(shift)&#39;</span> -- blib/script/zamakist
+</span><span class='line'><span class="nv">PERL_DL_NONLAZY</span><span class="o">=</span>1 /home/travis/perl5/perlbrew/perls/5.16/bin/perl <span class="s2">&quot;-MExtUtils::Command::MM&quot;</span> <span class="s2">&quot;-e&quot;</span> <span class="s2">&quot;test_harness(0, &#39;inc&#39;, &#39;blib/lib&#39;, &#39;blib/arch&#39;)&quot;</span> t/*.t
+</span><span class='line'>t/00_compile.t ......... ok
+</span><span class='line'>t/01_find_permalink.t .. 5/7 <span class="c"># http://search.gomtv.com/searchjm.gom?key=The.Mentalist.S04E01.HDTV.XviD-ASAP.%5BVTV%5D.Scarlet.Ribbons&amp;preface=0</span>
+</span><span class='line'><span class="c"># http://gom.gomtv.com/jmdb/view.html?intSeq=808364&amp;preface=0&amp;spage=1</span>
+</span><span class='line'>Wide character in print at /home/travis/perl5/perlbrew/perls/5.16/lib/5.16.0/Test/Builder.pm line 1759.
+</span><span class='line'><span class="c"># [통합] The.Mentalist.S04E01.HDTV.XviD-ASAP</span>
+</span><span class='line'>t/01_find_permalink.t .. ok
+</span><span class='line'>All tests successful.
+</span><span class='line'><span class="nv">Files</span><span class="o">=</span>2, <span class="nv">Tests</span><span class="o">=</span>8, 10 wallclock secs <span class="o">(</span> 0.03 usr  0.01 sys +  1.79 cusr  0.10 <span class="nv">csys</span> <span class="o">=</span>  1.93 CPU<span class="o">)</span>
+</span><span class='line'>Result: PASS
 </span><span class='line'>
-</span><span class='line'><span class="bp">__DATA__</span>
-</span><span class='line'>
-</span><span class='line'><span class="nv">@@</span> <span class="nv">text</span><span class="o">.</span><span class="n">tx</span>
-</span><span class='line'>
-</span><span class='line'><span class="p">[</span><span class="nv">%</span> <span class="nv">number</span> <span class="nv">%</span><span class="err">].[%</span> <span class="nv">title</span> <span class="nv">%</span><span class="err">]</span> <span class="err">[%</span> <span class="nv">FOREACH</span> <span class="n">label</span> <span class="n">IN</span> <span class="n">labels</span> <span class="nv">%</span><span class="err">][%</span> <span class="nv">label</span><span class="o">.</span><span class="n">name</span> <span class="nv">%</span><span class="err">]</span> <span class="err">[%</span> <span class="nv">END</span> <span class="nv">%</span><span class="err">]</span>
-</span><span class='line'>  <span class="err">-</span> <span class="err">[%</span> <span class="nv">user</span><span class="o">.</span><span class="n">login</span> <span class="nv">%</span><span class="err">]</span>
-</span><span class='line'>  <span class="err">-</span> <span class="err">[%</span> <span class="nv">created_at</span> <span class="nv">%</span><span class="err">]</span> <span class="err">~</span> <span class="err">[%</span> <span class="nv">closed_at</span> <span class="nv">%</span><span class="err">]</span>
-</span><span class='line'><span class="err">[%</span> <span class="nv">IF</span> <span class="n">body</span> <span class="nv">%</span><span class="err">]</span>
-</span><span class='line'><span class="err">//</span> <span class="err">[%</span> <span class="nv">body</span> <span class="nv">%</span><span class="err">]</span>
-</span><span class='line'><span class="err">[%</span> <span class="nv">END</span> <span class="nv">%</span><span class="err">]</span>
-</span><span class='line'><span class="err">[%</span> <span class="nv">FOREACH</span> <span class="n">comment</span> <span class="n">IN</span> <span class="n">comments</span> <span class="nv">%</span><span class="err">]</span>
-</span><span class='line'><span class="err">=</span> <span class="err">[%</span> <span class="nv">comment</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">login</span> <span class="nv">%</span><span class="err">]</span> <span class="err">@</span> <span class="err">[%</span> <span class="nv">comment</span><span class="o">.</span><span class="n">updated_at</span> <span class="nv">%</span><span class="err">]</span>
-</span><span class='line'><span class="err">--</span> <span class="err">[%</span> <span class="nv">comment</span><span class="o">.</span><span class="n">body</span> <span class="nv">%</span><span class="err">]</span>
-</span><span class='line'><span class="err">[%</span> <span class="nv">END</span> <span class="nv">%</span><span class="err">]</span>
-</span><span class='line'><span class="err">[%</span> <span class="nv">FOREACH</span> <span class="n">event</span> <span class="n">IN</span> <span class="n">events</span> <span class="nv">%</span><span class="err">][%</span> <span class="nv">NEXT</span> <span class="n">UNLESS</span> <span class="n">event</span><span class="o">.</span><span class="n">commit_id</span> <span class="nv">%</span><span class="err">]</span>
-</span><span class='line'><span class="err">=</span> <span class="err">[%</span> <span class="nv">event</span><span class="o">.</span><span class="n">commit_id</span> <span class="nv">%</span><span class="err">][%</span> <span class="nv">END</span> <span class="nv">%</span><span class="err">]</span>
+</span><span class='line'>Done. Build script exited with: 0
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>  <a href="http://metacpan.org/module/Net::GitHub">Net::GitHub</a> 모듈에서 뭔가 코멘트를 뽑아내려는 데 없으면 계속 죽어버리는 문제 등등이 있어서 뭐 그냥 <code>eval {}</code> 로 묶어버렸구요.</p>
+<p>좀 더 뭐 욕심이 있다면 Jenkins 에서 처럼 정적분석이나 테스트 케이스에 대해서 좀 더 자세한 내용이 나와줬으면 좋겠다 싶지만… 사실 그건 뽀대의 문제라…</p>
 
-<p>  <a href="http://metacpan.org/module/Text::Xslate">Text::Xslate</a> 에서 <code>path</code> 를</p>
+<p>위의 빌드 내용에 대한 자세한 내용은 아래의 링크를 참고하세요.</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="nn">Data::Section::</span><span class="n">Simple</span><span class="o">-&gt;</span><span class="k">new</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">get_data_section</span><span class="p">();</span>
-</span></code></pre></td></tr></table></div></figure>
+<ul>
+<li><a href="http://travis-ci.org/#!/JEEN/p5-App-Zamakist/builds/2257622">Travis CI : p5-App-Zamakist</a></li>
+</ul>
 
-
-<p></p>
-
-<p> 으로 해서 쉽게 <code>-&gt;render()</code> 의 첫번째 인수를 템플릿이름으로 지정할 수 있더군요.</p>
-
-<p> <code>Net::GitHub</code> 의 <code>-&gt;next_page</code> 가 최근 최근에 사용된 API 기준으로 동작을 하다보니, <code>while()</code> 안에서 <code>events</code>, <code>comments</code> 를 혼용해서 사용해버리면 의도한 대로 동작을 하지 않아서, <code>@issues</code> 안에 일단 전체 이슈를 뽑고서 시작을 했습니다.</p>
-
-<p> 아무튼 뭐 얼기설기 그냥 놔두기도 그렇고 혹여나 해서 일단 올려봅니다.</p>
 
   
   
@@ -340,7 +354,7 @@ Github 에서 제공해주는 Issue 관리라든가, Wiki 라든가 여러모로
     
       <h2 class="entry-title">
         
-        <a href="/blog/2012/07/02/https-ssl-lwp-soap-and-perl/">HTTPS-SSL-LWP-SOAP and Perl</a>
+        <a href="/blog/2012/08/25/dbix-class-and-json/">DBIx::Class and JSON</a>
         
       </h2>
     
@@ -358,24 +372,107 @@ Github 에서 제공해주는 Issue 관리라든가, Wiki 라든가 여러모로
   
 
 
-<time datetime="2012-07-02T15:23:00+09:00" pubdate data-updated="true">Jul 2<span>nd</span>, 2012</time>
+<time datetime="2012-08-25T12:44:00+09:00" pubdate data-updated="true">Aug 25<span>th</span>, 2012</time>
         
-         | <a href="/blog/2012/07/02/https-ssl-lwp-soap-and-perl/#disqus_thread">Comments</a>
+         | <a href="/blog/2012/08/25/dbix-class-and-json/#disqus_thread">Comments</a>
         
       </p>
     
   </header>
 
 
-  <blockquote><p>tl;dr: I hate Java and SOAP, use Perl</p></blockquote>
+  <p> 흔한 웹서비스의 흔한 AJAX 나 흔한 RESTful API 를 제공하기 위해서, 대개 JSON 포맷의 데이터를 서버에서 뿜어내고는 합니다.</p>
 
-<p> 지난 주에 고객으로부터 요구를 받았는데, DB특정 항목에 대치되는 어떤 값을 가지고 모 API를 통해서 결과를 받아서 뿌려주는 간단한 것이었습니다.</p>
+<p> 하지만 누구나가 Catalyst + DBIx::Class 조합에서 이렇게 하면 되는 게 아닐까 하고 접근했다가…</p>
 
-<p> 그 API 제공회사에서 날라온 API 명세서는 뭘 해도 자바였었죠. 샘플이라고 널려놓은 두세네개 코드도 전부 자바였습니다. 해야하는 건 결국 뭐 SOAP 정도였죠.</p>
+<blockquote><p>… encountered object &#8216;..&#8217;, but neither allow_blessed nor convert_blessed settings are enabled …</p></blockquote>
 
-<p> 명세서에는 Axis 라는 것을 깔아서 뭐 붙여서 어떻게 뭐 wsdl 붙이고 어쩌고 복잡하게 써놨는데&#8230;</p>
+<p> 라는 에러를 접하게 됩니다. bless 된 오브젝트를 어떻게든 JSON 인코딩을 시도하려고 했을 때는 위와 같은 에러를 쉬이 접할 수 있습니다.</p>
 
-<p> 결론부터 말하면 endpoint 와 보낼 값들만 필요하면 자바가 무슨 소용이냐 싶어서 집어냈습니다.</p>
+<p> 이것을 푸는 방법은 사실 여러가지가 있습니다.</p>
+
+<p> 이것저것 신경쓰지 말고 한번에 가자고 할 때는 Catalyst::View::JSON 에서 인코딩하게 되는 stash 된 값들을 전부 ArrayRef 나 HashRef 로 변환해서 넘기는 방법입니다.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='perl'><span class='line'>   <span class="k">my</span> <span class="nv">@data</span><span class="p">;</span>
+</span><span class='line'>   <span class="k">my</span> <span class="nv">$rs</span> <span class="o">=</span> <span class="nv">$c</span><span class="o">-&gt;</span><span class="n">model</span><span class="p">(</span><span class="s">&#39;DB&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">resultset</span><span class="p">(</span><span class="s">&#39;User&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">search</span><span class="p">();</span>
+</span><span class='line'>   <span class="k">while</span><span class="p">(</span><span class="k">my</span> <span class="nv">$row</span> <span class="o">=</span> <span class="nv">$rs</span><span class="o">-&gt;</span><span class="k">next</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>       <span class="nb">push</span> <span class="nv">@data</span><span class="p">,</span> <span class="p">{</span>
+</span><span class='line'>           <span class="n">id</span> <span class="o">=&gt;</span> <span class="nv">$row</span><span class="o">-&gt;</span><span class="n">id</span><span class="p">,</span>
+</span><span class='line'>           <span class="n">name</span> <span class="o">=&gt;</span> <span class="nv">$row</span><span class="o">-&gt;</span><span class="n">name</span><span class="p">,</span>
+</span><span class='line'>           <span class="n">created_at</span> <span class="o">=&gt;</span> <span class="nv">$row</span><span class="o">-&gt;</span><span class="n">created_at</span><span class="p">,</span>
+</span><span class='line'>       <span class="p">};</span>
+</span><span class='line'>   <span class="p">}</span>
+</span><span class='line'>   <span class="nv">$c</span><span class="o">-&gt;</span><span class="n">stash</span><span class="o">-&gt;</span><span class="p">{</span><span class="n">people</span><span class="p">}</span> <span class="o">=</span> <span class="o">\</span><span class="nv">@data</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p> 위처럼 특정컬럼을 선별해서 넣어주는 방법이 있겠지요. 좀 더 단순화한다면, 각  스키마테이블 별로 HashRef 를 반환하는 메소드를 넣어두는 것도 좋습니다.</p>
+
+<figure class='code'><figcaption><span>lib/MyApp/Schema/Result/User.pm</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="k">sub </span><span class="nf">to_hashref</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">my</span> <span class="nv">$self</span> <span class="o">=</span> <span class="nb">shift</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">return</span> <span class="p">{</span>
+</span><span class='line'>        <span class="n">id</span> <span class="o">=&gt;</span> <span class="nv">$self</span><span class="o">-&gt;</span><span class="n">id</span><span class="p">,</span>
+</span><span class='line'>        <span class="n">name</span> <span class="o">=&gt;</span> <span class="nv">$self</span><span class="o">-&gt;</span><span class="n">name</span><span class="p">,</span>
+</span><span class='line'>        <span class="n">created_at</span> <span class="o">=&gt;</span> <span class="nv">$self</span><span class="o">-&gt;</span><span class="n">created_at</span><span class="p">,</span>
+</span><span class='line'>    <span class="p">};</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>   <span class="c1"># Controller</span>
+</span><span class='line'>   <span class="k">my</span> <span class="nv">@data</span><span class="p">;</span>
+</span><span class='line'>   <span class="k">my</span> <span class="nv">$rs</span> <span class="o">=</span> <span class="nv">$c</span><span class="o">-&gt;</span><span class="n">model</span><span class="p">(</span><span class="s">&#39;DB&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">resultset</span><span class="p">(</span><span class="s">&#39;User&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">search</span><span class="p">();</span>
+</span><span class='line'>   <span class="k">while</span><span class="p">(</span><span class="k">my</span> <span class="nv">$row</span> <span class="o">=</span> <span class="nv">$rs</span><span class="o">-&gt;</span><span class="k">next</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>       <span class="nb">push</span> <span class="nv">@data</span><span class="p">,</span> <span class="nv">$row</span><span class="o">-&gt;</span><span class="n">to_hashref</span><span class="p">;</span>
+</span><span class='line'>   <span class="p">}</span>
+</span><span class='line'>   <span class="nv">$c</span><span class="o">-&gt;</span><span class="n">stash</span><span class="o">-&gt;</span><span class="p">{</span><span class="n">people</span><span class="p">}</span> <span class="o">=</span> <span class="o">\</span><span class="nv">@data</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='perl'><span class='line'>  <span class="k">my</span> <span class="nv">$person</span> <span class="o">=</span> <span class="nv">$c</span><span class="o">-&gt;</span><span class="n">model</span><span class="p">(</span><span class="s">&#39;DB&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">resultset</span><span class="p">(</span><span class="s">&#39;User&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">search</span><span class="p">(</span><span class="nv">$cond</span><span class="p">,</span> <span class="p">{</span>
+</span><span class='line'>      <span class="n">result_class</span> <span class="o">=&gt;</span> <span class="s">&#39;DBIx::Class::ResultClass::HashRefInflator&#39;</span><span class="p">,</span>
+</span><span class='line'>  <span class="p">})</span><span class="o">-&gt;</span><span class="n">first</span><span class="p">;</span>
+</span><span class='line'>  <span class="nv">$c</span><span class="o">-&gt;</span><span class="n">stash</span><span class="o">-&gt;</span><span class="p">{</span><span class="n">person</span><span class="p">}</span> <span class="o">=</span> <span class="nv">$person</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p> 그럴 필요가 없다면 위처럼 <code>result_class</code> 를 지정해줌으로써 결과를 무조건 HashRef 로 반환하게끔 합니다.</p>
+
+<p> 사실 <code>DBIx::Class::ResultClass::HashRefInflator</code> 를 적용하면 일일이 오브젝트를 만들어내지 않기 때문에 퍼포먼스 측면에서 매우 좋습니다만, 그냥 HashRef 일 따름인지라Resultset 에서 정의한 각종 메소드를 참조할 수 없습니다.
+ 그러니 이런저런 경우에는 가려서 사용하는 것이 좋습니다.</p>
+
+<p> 이제 본질적으로 좀 더 접근해보면…
+ JSON::XS 는 인코딩할 시에, 오브젝트가 대상인 경우에는 해당 오브젝트의 TO_JSON 메소드를 참조하여 결과를 뽑아낼 수 있습니다. 물론 <code>allow_blessed</code>, <code>convert_blessed</code> 플래그를 지정할 필요가 있지요.</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -396,53 +493,29 @@ Github 에서 제공해주는 Issue 관리라든가, Wiki 라든가 여러모로
 <span class='line-number'>17</span>
 <span class='line-number'>18</span>
 <span class='line-number'>19</span>
-<span class='line-number'>20</span>
-</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="k">use</span> <span class="n">strict</span><span class="p">;</span>
-</span><span class='line'><span class="k">use</span> <span class="n">warnings</span><span class="p">;</span>
-</span><span class='line'><span class="k">use</span> <span class="nn">LWP::</span><span class="n">UserAgent</span><span class="p">;</span>
-</span><span class='line'><span class="k">use</span> <span class="nn">Data::</span><span class="n">Dumper</span><span class="p">;</span>
+</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="c1"># lib/MyApp/View/JSON.pm</span>
+</span><span class='line'><span class="nb">package</span> <span class="nn">MyApp::View::</span><span class="n">JSON</span><span class="p">;</span>
+</span><span class='line'><span class="k">use</span> <span class="nn">JSON::</span><span class="n">XS</span> <span class="p">();</span>
 </span><span class='line'>
-</span><span class='line'><span class="k">my</span> <span class="nv">$q</span> <span class="o">=</span> <span class="p">{</span>
-</span><span class='line'><span class="o">&lt;</span><span class="p">?</span><span class="n">xml</span> <span class="n">version</span><span class="o">=</span><span class="s">&quot;1.0&quot;</span> <span class="n">encoding</span><span class="o">=</span><span class="s">&quot;UTF-8&quot;</span><span class="p">?</span><span class="o">&gt;</span>
-</span><span class='line'><span class="o">&lt;</span><span class="n">soapenv:Envelope</span> <span class="n">xmlns:soapenv</span><span class="o">=</span><span class="s">&quot;http://schemas.xmlsoap.org/soap/envelope/&quot;</span> <span class="n">xmlns:xsd</span><span class="o">=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema&quot;</span> <span class="n">xmlns:xsi</span><span class="o">=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span><span class="o">&gt;</span>
-</span><span class='line'> <span class="sr">&lt;soapenv:Body&gt;</span>
-</span><span class='line'> <span class="o">.........</span>
-</span><span class='line'> <span class="sr">&lt;/soapenv:Body&gt;</span>
-</span><span class='line'><span class="p">};</span>
+</span><span class='line'><span class="k">use</span> <span class="n">parent</span> <span class="sx">qw(Catalyst::View::JSON)</span><span class="p">;</span>
 </span><span class='line'>
-</span><span class='line'><span class="k">my</span> <span class="nv">$ua</span> <span class="o">=</span> <span class="nn">LWP::</span><span class="n">UserAgent</span><span class="o">-&gt;</span><span class="k">new</span><span class="p">;</span>
-</span><span class='line'><span class="k">my</span> <span class="nv">$res</span> <span class="o">=</span> <span class="nv">$ua</span><span class="o">-&gt;</span><span class="n">post</span><span class="p">(</span><span class="s">&#39;https://........&#39;</span><span class="p">,</span>
-</span><span class='line'>  <span class="s">&#39;Content-Type&#39;</span> <span class="o">=&gt;</span> <span class="s">&#39;text/xml; charset=utf-8&#39;</span><span class="p">,</span>
-</span><span class='line'>  <span class="n">Content</span> <span class="o">=&gt;</span> <span class="nv">$q</span><span class="p">,</span>
-</span><span class='line'><span class="p">);</span>
+</span><span class='line'><span class="k">my</span> <span class="nv">$encoder</span> <span class="o">=</span> <span class="nn">JSON::</span><span class="n">XS</span><span class="o">-&gt;</span><span class="k">new</span>
+</span><span class='line'>              <span class="o">-&gt;</span><span class="n">utf8</span>
+</span><span class='line'>                          <span class="o">-&gt;</span><span class="n">pretty</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</span><span class='line'>                          <span class="o">-&gt;</span><span class="n">indent</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</span><span class='line'>                          <span class="o">-&gt;</span><span class="n">allow_blessed</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</span><span class='line'>                          <span class="o">-&gt;</span><span class="n">convert_blessed</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
 </span><span class='line'>
-</span><span class='line'><span class="k">print</span> <span class="n">Dumper</span> <span class="nv">$res</span><span class="o">-&gt;</span><span class="n">content</span><span class="p">;</span>
+</span><span class='line'><span class="k">sub </span><span class="nf">encode_json</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">my</span> <span class="p">(</span><span class="nv">$self</span><span class="p">,</span> <span class="nv">$c</span><span class="p">,</span> <span class="nv">$data</span><span class="p">)</span> <span class="o">=</span> <span class="nv">@_</span><span class="p">;</span>
+</span><span class='line'>    <span class="nv">$encoder</span><span class="o">-&gt;</span><span class="n">encode</span><span class="p">(</span><span class="nv">$data</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="mi">1</span><span class="p">;</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p> 우선 SOAP XML 내용 및 endpoint 는 해당업체 비밀자료이기에 표시하지 않습니다.</p>
-
-<p> 위의 코드의 결과는</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>Can<span class="se">\&#39;</span>t connect to demo-asp.ysdasp-service.ne.jp:443 <span class="o">(</span>certificate verify failed<span class="o">)</span>
-</span><span class='line'>
-</span><span class='line'>LWP::Protocol::https::Socket: SSL connect attempt failed with unknown error error:14090086:SSL routines:SSL3_GET_SERVER_CERTIFICATE:certificate verify failed at .../perl-5.14.2-llvm/lib/site_perl/5.14.2/LWP/Protocol/http.pm line 51.
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>이라고 나온 것이었습니다. 유효하지 않은 인증서라는 데, 브라우저에서는 그냥 무시하고 지나가버리면 되는 데, Perl 의 경우에서는 어떻게 할까&#8230; 결론은 구글해봤습니다.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="nv">$ENV</span><span class="p">{</span><span class="s">&#39;PERL_LWP_SSL_VERIFY_HOSTNAME&#39;</span><span class="p">}</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p> <code>PERL_LWP_SSL_VERIFY_HOSTNAME</code> 이라는 환경변수의 값을 0으로 지정함으로써 LWP 가 인증서의 유효성 체크를 생략시켜버립니다.</p>
-
-<p> 이제는 되겠지 하고 실행을 시켜보니&#8230;</p>
+<p> 그러면 위처럼 <code>encode_json</code> 을 오버라이드 합니다. <code>allow_blessed</code> 와 <code>convert_blessed</code>  플래그를 켜주는 것이죠.</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -450,83 +523,34 @@ Github 에서 제공해주는 Issue 관리라든가, Wiki 라든가 여러모로
 <span class='line-number'>4</span>
 <span class='line-number'>5</span>
 <span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
-</span><span class='line'><span class="nt">&lt;soapenv:Envelope</span> <span class="na">xmlns:soapenv=</span><span class="s">&quot;http://schemas.xmlsoap.org/soap/envelope/&quot;</span> <span class="na">xmlns:xsd=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema&quot;</span> <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'> <span class="nt">&lt;soapenv:Body&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;soapenv:Fault&gt;</span>
-</span><span class='line'>   <span class="nt">&lt;faultcode</span> <span class="na">xmlns:ns1=</span><span class="s">&quot;http://xml.apache.org/axis/&quot;</span><span class="nt">&gt;</span>ns1:Client.NoSOAPAction<span class="nt">&lt;/faultcode&gt;</span>
-</span><span class='line'>   <span class="nt">&lt;faultstring&gt;</span>no SOAPAction header!<span class="nt">&lt;/faultstring&gt;</span>
-</span><span class='line'>   <span class="nt">&lt;detail/&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;/soapenv:Fault&gt;</span>
-</span><span class='line'> <span class="nt">&lt;/soapenv:Body&gt;</span>
-</span><span class='line'><span class="nt">&lt;/soapenv:Envelope&gt;</span>
+</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="c1"># lib/MyApp/Schema/Result/User.pm</span>
+</span><span class='line'><span class="o">..</span>
+</span><span class='line'><span class="k">sub </span><span class="nf">TO_JSON</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">return</span> <span class="p">{</span> <span class="nv">$_</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">get_inflated_columns</span> <span class="p">};</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="o">..</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p> 이라는 결과가 나옵니다. <code>SOAPAction</code> 이라는 헤더가 없다고 하는데&#8230; SOAP 통신에는 SOAPAction 이라는 헤더를 넣는다고&#8230; 그냥 해보니 <code>SOAPAction</code> 에 그냥 빈값이라도 헤더이름만 넣고 돌려보면 되겠구나 라는 생각이 들었습니다.</p>
+<p>그리고 위처럼 User Result 에 대해서 TO_JSON 를 지정합니다.</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="k">my</span> <span class="nv">$res</span> <span class="o">=</span> <span class="nv">$ua</span><span class="o">-&gt;</span><span class="n">post</span><span class="p">(</span><span class="s">&#39;https://........&#39;</span><span class="p">,</span>
-</span><span class='line'>  <span class="s">&#39;Content-Type&#39;</span> <span class="o">=&gt;</span> <span class="s">&#39;text/xml; charset=utf-8&#39;</span><span class="p">,</span>
-</span><span class='line'>  <span class="n">SOAPAction</span> <span class="o">=&gt;</span> <span class="s">&#39;&quot;&quot;&#39;</span><span class="p">,</span>
-</span><span class='line'>  <span class="n">Content</span> <span class="o">=&gt;</span> <span class="nv">$q</span><span class="p">,</span>
-</span><span class='line'><span class="p">);</span>
+</pre></td><td class='code'><pre><code class='perl'><span class='line'>   <span class="nv">$c</span><span class="o">-&gt;</span><span class="n">stash</span><span class="o">-&gt;</span><span class="p">{</span><span class="n">people</span><span class="p">}</span> <span class="o">=</span> <span class="p">[</span>  <span class="nv">$c</span><span class="o">-&gt;</span><span class="n">model</span><span class="p">(</span><span class="s">&#39;DB&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">resultset</span><span class="p">(</span><span class="s">&#39;User&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">search</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">all</span> <span class="p">];</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p> POST 시에 <code>SOAPAction</code> 헤더를 넣어주고 다시 돌려보았습니다.</p>
+<p>그러면 이제는 아무런 걱정없이 그냥 생짜 DBIC Resultset 을 날려버려도 이제는 알아서 문제해결이 됩니다. :-)</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
-</span><span class='line'><span class="nt">&lt;soapenv:Envelope</span> <span class="na">xmlns:soapenv=</span><span class="s">&quot;http://schemas.xmlsoap.org/soap/envelope/&quot;</span> <span class="na">xmlns:xsd=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema&quot;</span> <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'> <span class="nt">&lt;soapenv:Body&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;soapenv:Fault&gt;</span>
-</span><span class='line'>   <span class="nt">&lt;faultcode&gt;</span>soapenv:Server.userException<span class="nt">&lt;/faultcode&gt;</span>
-</span><span class='line'>   <span class="nt">&lt;faultstring&gt;</span>org.xml.sax.SAXParseException: The processing instruction target matching <span class="ni">&amp;quot;</span>[xX][mM][lL]<span class="ni">&amp;quot;</span> is not allowed.<span class="nt">&lt;/faultstring&gt;</span>
-</span><span class='line'>   <span class="nt">&lt;detail/&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;/soapenv:Fault&gt;</span>
-</span><span class='line'> <span class="nt">&lt;/soapenv:Body&gt;</span>
-</span><span class='line'><span class="nt">&lt;/soapenv:Envelope&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
+<p> 각 Resultset 마다 <code>TO_JSON</code> 을 지정하기가 벅차다면…</p>
+
+<ul>
+<li><a href="http://advent.perl.kr/2011/2011-12-17.html">Seoul.pm Advent Calendar 2011 - 열일곱번째 날 : DBIx::Class로 스키마 관리하기</a></li>
+</ul>
 
 
-<p> 다시 해당 <code>faultstring</code> 으로 검색을 해본 결과, 이유는 &lt;?xml &#8230;?> 앞에 빈 공백값이 있으면 안된다는 것이었습니다.</p>
+<p>위의 글에서 <code>ResultBase</code> 를 참고해주세요.</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="k">my</span> <span class="nv">$q</span> <span class="o">=</span> <span class="sx">q{&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
-</span><span class='line'><span class="sx">&lt;soapenv:Envelope xmlns:soapenv=&quot;http://schemas.xmlsoap.org/soap/envelope/&quot; xmlns:xsd=&quot;http://www.w3.org/2001/XMLSchema&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;&gt;</span>
-</span><span class='line'><span class="sx"> &lt;soapenv:Body&gt;</span>
-</span><span class='line'><span class="sx"> .........</span>
-</span><span class='line'><span class="sx"> &lt;/soapenv:Body&gt;</span>
-</span><span class='line'><span class="sx">}</span><span class="p">;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p> 맨 위의 코드에서 <code>q{</code> 다음에 개행을 넣은 게 문제가 되어서 다시 지우고 돌려본 결과 좌르르르륵 펴쳐져 나오는 기나긴 XML의 향연&#8230;</p>
-
-<p> 아무튼 이걸로 API 제공업체에서 JAVA 를 기준으로 작성된 길고 긴 명세서들과 설치요령 등등의 문서들을 제쳐두고 해야할 일에만 집중할 수 있게 되었습니다.</p>
+<p> <code>MyApp::Schema::ResultBase</code> 를 상속받은 각 Result 테이블들은 <code>TO_JSON</code> 을 오버라이드 해서 빼놓고 싶은 컬럼(예를 들어 <code>password</code> 같은 컬럼) 을 배제해서 출력할 수 있지 않을까요?</p>
 
   
   

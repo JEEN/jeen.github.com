@@ -9,7 +9,34 @@
   <meta name="author" content="Jeen Lee">
 
   
-  <meta name="description" content="Tweet Perl and Continuous Integration With Jenkins - I Jan 3rd, 2012 | Comments Jenkins 를 사용하기 까지 사실 지난주에 NHN 에서 주최하는 공개개발자 교육에 갔다왔었습니다. 평소 Jenkins &hellip;">
+  <meta name="description" content="Tweet Picasa Upload Script II Jan 13th, 2012 | Comments picasa-uploader.pl1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -134,7 +161,7 @@
     
       <h2 class="entry-title">
         
-        <a href="/blog/2012/01/03/perl-and-continuous-integration-with-jenkins-1/">Perl and Continuous Integration With Jenkins - I</a>
+        <a href="/blog/2012/01/13/picasa-upload-script-ii/">Picasa Upload Script II</a>
         
       </h2>
     
@@ -152,160 +179,16 @@
   
 
 
-<time datetime="2012-01-03T11:45:00+09:00" pubdate data-updated="true">Jan 3<span>rd</span>, 2012</time>
+<time datetime="2012-01-13T18:36:00+09:00" pubdate data-updated="true">Jan 13<span>th</span>, 2012</time>
         
-         | <a href="/blog/2012/01/03/perl-and-continuous-integration-with-jenkins-1/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <h3>Jenkins 를 사용하기 까지</h3>
-
-<p>  사실 지난주에 NHN 에서 주최하는 공개개발자 교육에  갔다왔었습니다. 평소 Jenkins 에 대해서 약간 환상 같은 게 있다고 할까, 필요성이 있다고 할까요. 좀 더 프로젝트의 품질이 나아지고 있다는 환상, 그런 걸 보면서 나름 보람을 느끼고 싶다라는 생각도 있었습니다.</p>
-
-<p>  아무튼 Jenkins 교육은 Java 위주의 프로젝트에 적용하는 얘기였지만, 다른 언어에서도 충분히 지원된다라는 얘기를 익히들어왔기에 대강 실습을 따라하면서 감을 익히고 회사에 와서 본격적으로 Jenkins 를 만지기 시작했습니다.</p>
-
-<h3>Perl &amp; Jenkins</h3>
-
-<p>  Jenkins 교육에서는 Maven 을 위주로 여러가지 옵션(?) 을 추가하는 것으로 간단하게 각종 Report 를 뽑아내기 위한 xml 들을 생성할 수 있었습니다. 아쉽게도 Perl 로는 Maven 만큼 쉽게 그렇게 만들기는 어려웠지요.</p>
-
-<p>  일단 Perl 에는 기본적으로 TAP 형식을 따르고 있기 때문에 Java 류의 JUnit 으로 결과를 뽑아낼 필요가 있었습니다. 그래서 TAP 를 JUnit 으로 쉽게 바꿔줄 수 있는 방법이 필요했죠.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>prove --formatter --timer TAP::Formatter::JUnit t
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>  위와 같은 형식으로 <code>t</code> 디렉토리 아래의 테스트파일들을 테스트하며 결과는 <code>TAP::Formatter::JUnit</code> 에 의해서 xml 파일로 나오게 됩니다.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="nt">&lt;testsuites&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;testsuite</span> <span class="na">failures=</span><span class="s">&quot;0&quot;</span>
-</span><span class='line'>             <span class="na">errors=</span><span class="s">&quot;0&quot;</span>
-</span><span class='line'>             <span class="na">time=</span><span class="s">&quot;25.6525909900665&quot;</span>
-</span><span class='line'>             <span class="na">tests=</span><span class="s">&quot;1&quot;</span>
-</span><span class='line'>             <span class="na">name=</span><span class="s">&quot;Catalyst_controller_Admin-Activity_t&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;testcase</span> <span class="na">time=</span><span class="s">&quot;0&quot;</span>
-</span><span class='line'>              <span class="na">name=</span><span class="s">&quot;1 - Request should succeed&quot;</span><span class="nt">&gt;&lt;/testcase&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;system-out&gt;</span><span class="cp">&lt;![CDATA[ok 1 - Request should succeed</span>
-</span><span class='line'><span class="cp">1..1</span>
-</span><span class='line'><span class="cp">]]&gt;</span><span class="nt">&lt;/system-out&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;system-err&gt;&lt;/system-err&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;/testsuite&gt;</span>
-</span><span class='line'><span class="nt">&lt;/testsuites&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>Task::Jenkins</h3>
-
-<p>  사실은 Jenkins 에서 Perl 프로젝트를 올릴 때의 주요한 모듈의 묶음은 <a href="http://search.cpan.org/perldoc?Task::Jenkins">Task::Jenkins</a> 모듈로 제공되고 있습니다. Task::Jenkins 에 있는 모듈들은,</p>
-
-<ul>
-<li><a href="http://search.cpan.org/perldoc?TAP::Formatter::JUnit">TAP::Formatter::JUnit</a></li>
-<li><a href="http://search.cpan.org/perldoc?App::Prove">App::Prove</a></li>
-<li><p><a href="http://search.cpan.org/perldoc?Devel::Cover">Devel::Cover</a></p>
-
-<p>입니다.</p>
-
-<p><code>TAP::Formatter::JUnit</code> 의 경우는 위에서 설명했고, <code>App::Prove</code> 는 위의 테스트코드를 실행하는 커맨드인 <code>prove</code> 를 사용하기 위한 모듈입니다. <code>Devel::Cover</code> 는 Code Coverage 를 확인할 수 있는 모듈이구요.</p>
-
-<p>일단 Jenkins 에서 Perl 프로젝트를 적용하는 준비는 기본적으로 위의 <code>Task::Jenkins</code> 를 설치함으로 어느 정도 끝났다고 볼 수 있습니다.</p></li>
-</ul>
-
-
-<h3>Jenkins 설치</h3>
-
-<p>  회사내의 서버에 Jenkins 를 설치했습니다. Ubuntu 10.10 Server 버젼이며, Jenkins 의 설치는 그렇게 어렵지 않습니다.</p>
-
-<p>  쉽게 Google 에서 <em>Jenkins Ubuntu</em> 로 검색해서 나온 것들 중 첫번째를 골라봤습니다.</p>
-
-<ul>
-<li><a href="https://wiki.jenkins-ci.org/display/JENKINS/Installing+Jenkins+on+Ubuntu">Installing Jenkins on Ubuntu</a></li>
-</ul>
-
-
-<p>  <code>apt</code> source 추가하고 <code>aptitude</code> 로 설치하고, Apache 에서 Proxy 설정해주고, 이에 대한 자세한 이야기는 위의 링크에 자세히 나와 있으니 참고하시길 바랍니다.</p>
-
-<p>  NHN 공개개발자 교육에서는 보안상의 문제로 Tomcat 위에다가 얹어놓기를 권하셨지만, Jenkins 자체의 Standalone Server 로 충분하지 않나 생각됩니다. 뭐 어차피 사내 네트워크 안에서 사용할 것인데&#8230; 라며&#8230; =3</p>
-
-<p>  아무튼 이렇게 띄워서 실제로 사내에서 사용하고 있는 Jenkins Top Page 는 아래와 같습니다.</p>
-
-<p><img src="http://lh6.googleusercontent.com/--lGDWehSz5k/TwKGZAtvsUI/AAAAAAAAA9w/tRFttK10-wg/jenkins-top-page.png" alt="Jenkins Top" /></p>
-
-<p>  한번에 적으려니 좀 길고 해서, 일단 밑밥깔기부터 하고 다음 글부터는 좀 더 자세한 Jenkins 에서 Perl 프로젝트 적용에 대해서 상세한 캡쳐와 함께 설명하고자 합니다.</p>
-
-  
-  
-
-
-    </article>
-  
-  
-    <article class="post">
-      <div class="sharing-box">
-  
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://jeen.github.com/blog/page/16/index.html" data-via="JEEN_LEE" data-counturl="http://jeen.github.com/blog/page/16/index.html" data-size="large">Tweet</a>
-  
-  
-  
-  <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
-  
-</div>
-
-      
-  <header>
-    
-      <h2 class="entry-title">
-        
-        <a href="/blog/2011/12/29/perl-email-send/">Perl - Email Send</a>
-        
-      </h2>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-12-29T17:45:00+09:00" pubdate data-updated="true">Dec 29<span>th</span>, 2011</time>
-        
-         | <a href="/blog/2011/12/29/perl-email-send/#disqus_thread">Comments</a>
+         | <a href="/blog/2012/01/13/picasa-upload-script-ii/#disqus_thread">Comments</a>
         
       </p>
     
   </header>
 
 
-  <p>  회사 선배이신 <a href="http://twitter.com/mintegrals">@mintegrals</a> 께서 최근에 사내 버그질라에 올려놓은 내용을 보고 약간 코드를 수정해봤습니다.
-  내용인즉슨, 파일 첨부한 메일을 어떻게 보낼 수 있냐라는 것이었지요.
-  기존에 써놨던 메일송신을 하는 모듈이 파일첨부를 고려하지 않았던 것이었는데, 그런 상황등을 고려해서 좀 더 수정해봤습니다.</p>
-
-<h3>MyApp::Mail</h3>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+  <figure class='code'><figcaption><span>picasa-uploader.pl</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -411,124 +294,229 @@
 <span class='line-number'>104</span>
 <span class='line-number'>105</span>
 <span class='line-number'>106</span>
-</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="nb">package</span> <span class="nn">MyApp::</span><span class="n">Mail</span><span class="p">;</span>
-</span><span class='line'><span class="k">use</span> <span class="n">Moose</span><span class="p">;</span>
+<span class='line-number'>107</span>
+</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="c1">#!/usr/bin/env perl</span>
+</span><span class='line'><span class="nb">package</span> <span class="n">PicasaUploader</span><span class="p">;</span>
+</span><span class='line'><span class="k">use</span> <span class="nn">Any::</span><span class="n">Moose</span><span class="p">;</span>
 </span><span class='line'><span class="k">use</span> <span class="nn">namespace::</span><span class="n">autoclean</span><span class="p">;</span>
-</span><span class='line'><span class="k">use</span> <span class="nn">Email::</span><span class="n">MIME</span><span class="p">;</span>
-</span><span class='line'><span class="k">use</span> <span class="nn">Email::Sender::</span><span class="n">Simple</span> <span class="s">&#39;sendmail&#39;</span><span class="p">;</span>
-</span><span class='line'><span class="k">use</span> <span class="nn">Email::Sender::Transport::</span><span class="n">SMTP</span><span class="p">;</span>
-</span><span class='line'><span class="k">use</span> <span class="n">Encode</span><span class="p">;</span>
+</span><span class='line'><span class="k">use</span> <span class="nn">Config::</span><span class="n">Pit</span><span class="p">;</span>
+</span><span class='line'><span class="k">use</span> <span class="nn">LWP::</span><span class="n">UserAgent</span><span class="p">;</span>
+</span><span class='line'><span class="k">use</span> <span class="nn">Net::Google::</span><span class="n">AuthSub</span><span class="p">;</span>
 </span><span class='line'><span class="k">use</span> <span class="nn">MIME::</span><span class="n">Types</span> <span class="p">();</span>
 </span><span class='line'>
-</span><span class='line'><span class="n">has</span> <span class="n">to</span> <span class="o">=&gt;</span> <span class="p">(</span>
+</span><span class='line'><span class="n">has</span> <span class="n">user_id</span> <span class="o">=&gt;</span> <span class="p">(</span>
 </span><span class='line'>    <span class="n">is</span>      <span class="o">=&gt;</span> <span class="s">&#39;ro&#39;</span><span class="p">,</span>
-</span><span class='line'>    <span class="n">isa</span>     <span class="o">=&gt;</span> <span class="s">&#39;Str&#39;</span><span class="p">,</span>
-</span><span class='line'>    <span class="n">default</span> <span class="o">=&gt;</span> <span class="k">sub </span><span class="p">{</span>
-</span><span class='line'>        <span class="nn">Encode::</span><span class="n">encode</span><span class="p">(</span> <span class="s">&quot;MIME-Header&quot;</span><span class="p">,</span> <span class="nv">$_</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="p">);</span>
-</span><span class='line'>    <span class="p">},</span>
-</span><span class='line'>    <span class="n">required</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">,</span>
+</span><span class='line'>    <span class="n">default</span> <span class="o">=&gt;</span> <span class="s">&#39;default&#39;</span><span class="p">,</span>
 </span><span class='line'><span class="p">);</span>
 </span><span class='line'>
-</span><span class='line'><span class="n">has</span> <span class="n">from</span> <span class="o">=&gt;</span> <span class="p">(</span>
+</span><span class='line'><span class="n">has</span> <span class="n">album_id</span> <span class="o">=&gt;</span> <span class="p">(</span>
 </span><span class='line'>    <span class="n">is</span>      <span class="o">=&gt;</span> <span class="s">&#39;ro&#39;</span><span class="p">,</span>
-</span><span class='line'>    <span class="n">isa</span>     <span class="o">=&gt;</span> <span class="s">&#39;Str&#39;</span><span class="p">,</span>
-</span><span class='line'>    <span class="n">default</span> <span class="o">=&gt;</span> <span class="k">sub </span><span class="p">{</span>
-</span><span class='line'>        <span class="nn">Encode::</span><span class="n">encode</span><span class="p">(</span> <span class="s">&quot;MIME-Header&quot;</span><span class="p">,</span> <span class="nv">$_</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="p">);</span>
-</span><span class='line'>    <span class="p">},</span>
-</span><span class='line'>    <span class="n">required</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">,</span>
+</span><span class='line'>    <span class="n">default</span> <span class="o">=&gt;</span> <span class="s">&#39;default&#39;</span><span class="p">,</span>
 </span><span class='line'><span class="p">);</span>
 </span><span class='line'>
-</span><span class='line'><span class="n">has</span> <span class="n">subject</span> <span class="o">=&gt;</span> <span class="p">(</span>
+</span><span class='line'><span class="n">has</span> <span class="n">files</span> <span class="o">=&gt;</span> <span class="p">(</span>
 </span><span class='line'>    <span class="n">is</span>      <span class="o">=&gt;</span> <span class="s">&#39;ro&#39;</span><span class="p">,</span>
-</span><span class='line'>    <span class="n">isa</span>     <span class="o">=&gt;</span> <span class="s">&#39;Str&#39;</span><span class="p">,</span>
+</span><span class='line'>    <span class="n">isa</span>     <span class="o">=&gt;</span> <span class="s">&#39;ArrayRef&#39;</span><span class="p">,</span>
+</span><span class='line'>    <span class="n">default</span> <span class="o">=&gt;</span> <span class="k">sub </span><span class="p">{</span> <span class="o">[]</span> <span class="p">}</span>
+</span><span class='line'><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">has</span> <span class="n">google_auth</span> <span class="o">=&gt;</span> <span class="p">(</span>
+</span><span class='line'>    <span class="n">is</span>      <span class="o">=&gt;</span> <span class="s">&#39;rw&#39;</span><span class="p">,</span>
+</span><span class='line'>    <span class="n">isa</span>     <span class="o">=&gt;</span> <span class="s">&#39;Net::Google::AuthSub&#39;</span><span class="p">,</span>
 </span><span class='line'>    <span class="n">default</span> <span class="o">=&gt;</span> <span class="k">sub </span><span class="p">{</span>
-</span><span class='line'>        <span class="nn">Encode::</span><span class="n">encode</span><span class="p">(</span> <span class="s">&quot;MIME-Header&quot;</span><span class="p">,</span> <span class="nv">$_</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="p">);</span>
-</span><span class='line'>    <span class="p">},</span>
-</span><span class='line'>    <span class="n">required</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">,</span>
-</span><span class='line'><span class="p">);</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">has</span> <span class="n">body</span> <span class="o">=&gt;</span> <span class="p">(</span>
-</span><span class='line'>    <span class="n">is</span>  <span class="o">=&gt;</span> <span class="s">&#39;ro&#39;</span><span class="p">,</span>
-</span><span class='line'>    <span class="n">isa</span> <span class="o">=&gt;</span> <span class="s">&#39;Str&#39;</span><span class="p">,</span>
-</span><span class='line'><span class="p">);</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">has</span> <span class="n">transport</span> <span class="o">=&gt;</span> <span class="p">(</span>
-</span><span class='line'>    <span class="n">is</span>  <span class="o">=&gt;</span> <span class="s">&#39;ro&#39;</span><span class="p">,</span>
-</span><span class='line'>    <span class="n">isa</span> <span class="o">=&gt;</span> <span class="s">&#39;HashRef&#39;</span>
-</span><span class='line'><span class="p">);</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">has</span> <span class="n">attachments</span> <span class="o">=&gt;</span> <span class="p">(</span>
-</span><span class='line'>    <span class="n">is</span> <span class="o">=&gt;</span> <span class="s">&#39;ro&#39;</span><span class="p">,</span>
-</span><span class='line'>    <span class="n">isa</span> <span class="o">=&gt;</span> <span class="s">&#39;ArrayRef[Path::Class::File]&#39;</span><span class="p">,</span>
-</span><span class='line'>    <span class="n">default</span> <span class="o">=&gt;</span> <span class="k">sub </span><span class="p">{</span> <span class="o">[]</span> <span class="p">},</span>
-</span><span class='line'><span class="p">);</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">sub </span><span class="nf">_get_parts</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">my</span> <span class="nv">$self</span> <span class="o">=</span> <span class="nb">shift</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="k">my</span> <span class="nv">@parts</span><span class="p">;</span>
-</span><span class='line'>    <span class="nb">push</span> <span class="nv">@parts</span><span class="p">,</span>
-</span><span class='line'>        <span class="nn">Email::</span><span class="n">MIME</span><span class="o">-&gt;</span><span class="n">create</span><span class="p">(</span>
-</span><span class='line'>            <span class="n">attributes</span> <span class="o">=&gt;</span> <span class="p">{</span>
-</span><span class='line'>                <span class="n">content_type</span> <span class="o">=&gt;</span> <span class="s">&#39;text/plain&#39;</span><span class="p">,</span>
-</span><span class='line'>                <span class="n">charset</span>      <span class="o">=&gt;</span> <span class="s">&#39;utf8&#39;</span><span class="p">,</span>
-</span><span class='line'>            <span class="p">},</span>
-</span><span class='line'>            <span class="n">body</span> <span class="o">=&gt;</span> <span class="nn">Encode::</span><span class="n">encode_utf8</span><span class="p">(</span><span class="nv">$self</span><span class="o">-&gt;</span><span class="n">body</span><span class="p">),</span>
-</span><span class='line'>        <span class="p">);</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="k">for</span> <span class="k">my</span> <span class="nv">$attachment</span> <span class="p">(</span><span class="nv">@</span><span class="p">{</span> <span class="nv">$self</span><span class="o">-&gt;</span><span class="n">attachments</span> <span class="p">})</span> <span class="p">{</span>
-</span><span class='line'>        <span class="n">confess</span> <span class="s">&quot;File Not Found : $attachment&quot;</span> <span class="k">unless</span> <span class="o">-</span><span class="n">f</span> <span class="nv">$attachment</span><span class="p">;</span>
-</span><span class='line'>        <span class="k">my</span> <span class="p">(</span><span class="nv">$mime_type</span><span class="p">,</span> <span class="nv">$encoding</span><span class="p">)</span> <span class="o">=</span> <span class="nn">MIME::Types::</span><span class="n">by_suffix</span><span class="p">(</span><span class="nv">$attachment</span><span class="o">-&gt;</span><span class="n">basename</span><span class="p">);</span>
-</span><span class='line'>        <span class="nv">$mime_type</span> <span class="o">||=</span> <span class="s">&#39;multipart/mixed&#39;</span><span class="p">;</span>
-</span><span class='line'>        <span class="k">my</span> <span class="nv">$file_body</span> <span class="o">=</span> <span class="nv">$attachment</span><span class="o">-&gt;</span><span class="n">slurp</span><span class="p">;</span>
-</span><span class='line'>        <span class="nb">push</span> <span class="nv">@parts</span><span class="p">,</span> <span class="nn">Email::</span><span class="n">MIME</span><span class="o">-&gt;</span><span class="n">create</span><span class="p">(</span>
-</span><span class='line'>            <span class="n">attributes</span> <span class="o">=&gt;</span> <span class="p">{</span>
-</span><span class='line'>                <span class="n">content_type</span> <span class="o">=&gt;</span> <span class="nv">$mime_type</span><span class="p">,</span>
-</span><span class='line'>                <span class="n">name</span>         <span class="o">=&gt;</span> <span class="nv">$attachment</span><span class="o">-&gt;</span><span class="n">basename</span><span class="p">,</span>
-</span><span class='line'>                <span class="n">filename</span>     <span class="o">=&gt;</span> <span class="nv">$attachment</span><span class="o">-&gt;</span><span class="n">basename</span><span class="p">,</span>
-</span><span class='line'>                <span class="n">encoding</span>     <span class="o">=&gt;</span> <span class="s">&#39;base64&#39;</span><span class="p">,</span>
-</span><span class='line'>                <span class="n">disposition</span>  <span class="o">=&gt;</span> <span class="s">&#39;attachment&#39;</span><span class="p">,</span>
-</span><span class='line'>            <span class="p">},</span>
-</span><span class='line'>            <span class="n">body</span> <span class="o">=&gt;</span> <span class="nv">$file_body</span><span class="p">,</span>
+</span><span class='line'>        <span class="nn">Net::Google::</span><span class="n">AuthSub</span><span class="o">-&gt;</span><span class="k">new</span><span class="p">(</span>
+</span><span class='line'>            <span class="n">service</span> <span class="o">=&gt;</span> <span class="s">&#39;lh2&#39;</span><span class="p">,</span>
+</span><span class='line'>            <span class="n">source</span>  <span class="o">=&gt;</span> <span class="s">&#39;my-picasauploader-0.1&#39;</span>
 </span><span class='line'>        <span class="p">);</span>
 </span><span class='line'>    <span class="p">}</span>
-</span><span class='line'>    <span class="o">\</span><span class="nv">@parts</span><span class="p">;</span>
+</span><span class='line'><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">has</span> <span class="s">&#39;_ua&#39;</span> <span class="o">=&gt;</span> <span class="p">(</span>
+</span><span class='line'>    <span class="n">is</span>      <span class="o">=&gt;</span> <span class="s">&#39;rw&#39;</span><span class="p">,</span>
+</span><span class='line'>    <span class="n">isa</span>     <span class="o">=&gt;</span> <span class="s">&#39;LWP::UserAgent&#39;</span><span class="p">,</span>
+</span><span class='line'>    <span class="n">default</span> <span class="o">=&gt;</span> <span class="k">sub </span><span class="p">{</span>
+</span><span class='line'>        <span class="nn">LWP::</span><span class="n">UserAgent</span><span class="o">-&gt;</span><span class="k">new</span><span class="p">(</span> <span class="n">cookie_jar</span> <span class="o">=&gt;</span> <span class="p">{}</span> <span class="p">);</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">has</span> <span class="s">&#39;config&#39;</span> <span class="o">=&gt;</span> <span class="p">(</span>
+</span><span class='line'>    <span class="n">is</span>          <span class="o">=&gt;</span> <span class="s">&#39;ro&#39;</span><span class="p">,</span>
+</span><span class='line'>    <span class="n">isa</span>         <span class="o">=&gt;</span> <span class="s">&#39;HashRef&#39;</span><span class="p">,</span>
+</span><span class='line'>    <span class="n">lazy_build</span>  <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">,</span>
+</span><span class='line'><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">sub </span><span class="nf">BUILD</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">my</span> <span class="nv">$self</span> <span class="o">=</span> <span class="nb">shift</span><span class="p">;</span>
+</span><span class='line'>    <span class="nv">$self</span><span class="o">-&gt;</span><span class="n">auth</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
 </span><span class='line'><span class="p">}</span>
 </span><span class='line'>
-</span><span class='line'><span class="k">sub </span><span class="nf">send</span> <span class="p">{</span>
+</span><span class='line'><span class="k">sub </span><span class="nf">_build_config</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nn">Config::Pit::</span><span class="n">pit_get</span><span class="p">(</span><span class="s">&#39;google.com&#39;</span><span class="p">,</span> <span class="nb">require</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span><span class='line'>       <span class="n">username</span> <span class="o">=&gt;</span> <span class="s">&#39;your username on google.com&#39;</span><span class="p">,</span>
+</span><span class='line'>       <span class="n">password</span> <span class="o">=&gt;</span> <span class="s">&#39;your password on google.com&#39;</span>
+</span><span class='line'>    <span class="p">});</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">sub </span><span class="nf">auth</span> <span class="p">{</span>
 </span><span class='line'>    <span class="k">my</span> <span class="nv">$self</span> <span class="o">=</span> <span class="nb">shift</span><span class="p">;</span>
 </span><span class='line'>
-</span><span class='line'>    <span class="k">my</span> <span class="nv">$opt</span> <span class="o">=</span> <span class="p">{};</span>
-</span><span class='line'>    <span class="k">if</span> <span class="p">(</span><span class="nv">$self</span><span class="o">-&gt;</span><span class="n">transport</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>        <span class="nv">$opt</span><span class="o">-&gt;</span><span class="p">{</span><span class="n">transport</span><span class="p">}</span> <span class="o">=</span> <span class="nn">Email::Sender::Transport::</span><span class="n">SMTP</span><span class="o">-&gt;</span><span class="k">new</span><span class="p">(</span> <span class="nv">$self</span><span class="o">-&gt;</span><span class="n">transport</span> <span class="p">);</span>
-</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>    <span class="k">my</span> <span class="nv">$res</span> <span class="o">=</span> <span class="nv">$self</span><span class="o">-&gt;</span><span class="n">google_auth</span><span class="o">-&gt;</span><span class="n">login</span><span class="p">(</span><span class="nv">$self</span><span class="o">-&gt;</span><span class="n">config</span><span class="o">-&gt;</span><span class="p">{</span><span class="n">username</span><span class="p">},</span> <span class="nv">$self</span><span class="o">-&gt;</span><span class="n">config</span><span class="o">-&gt;</span><span class="p">{</span><span class="n">password</span><span class="p">});</span>
+</span><span class='line'>    <span class="nb">die</span> <span class="s">&quot;Login Failed: &quot;</span><span class="o">.</span> <span class="nv">$res</span><span class="o">-&gt;</span><span class="n">error</span> <span class="k">unless</span> <span class="nv">$res</span><span class="o">-&gt;</span><span class="n">is_success</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
 </span><span class='line'>
-</span><span class='line'>    <span class="k">my</span> <span class="nv">$email</span> <span class="o">=</span> <span class="nn">Email::</span><span class="n">MIME</span><span class="o">-&gt;</span><span class="n">create</span><span class="p">(</span>
-</span><span class='line'>        <span class="n">header</span> <span class="o">=&gt;</span> <span class="p">[</span>
-</span><span class='line'>            <span class="n">From</span>    <span class="o">=&gt;</span> <span class="nv">$self</span><span class="o">-&gt;</span><span class="n">from</span><span class="p">,</span>
-</span><span class='line'>            <span class="n">To</span>      <span class="o">=&gt;</span> <span class="nv">$self</span><span class="o">-&gt;</span><span class="n">to</span><span class="p">,</span>
-</span><span class='line'>            <span class="n">Subject</span> <span class="o">=&gt;</span> <span class="nv">$self</span><span class="o">-&gt;</span><span class="n">subject</span>
-</span><span class='line'>        <span class="p">],</span>
-</span><span class='line'>        <span class="n">parts</span> <span class="o">=&gt;</span> <span class="nv">$self</span><span class="o">-&gt;</span><span class="n">_get_parts</span><span class="p">,</span>
+</span><span class='line'><span class="k">sub </span><span class="nf">upload_files</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">my</span> <span class="nv">$self</span> <span class="o">=</span> <span class="nb">shift</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">for</span> <span class="k">my</span> <span class="nv">$file_path</span> <span class="p">(</span><span class="nv">@</span><span class="p">{</span> <span class="nv">$self</span><span class="o">-&gt;</span><span class="n">files</span> <span class="p">})</span> <span class="p">{</span>
+</span><span class='line'>        <span class="k">my</span> <span class="nv">$link</span> <span class="o">=</span> <span class="nv">$self</span><span class="o">-&gt;</span><span class="n">upload_file</span><span class="p">(</span><span class="nv">$file_path</span><span class="p">);</span>
+</span><span class='line'>        <span class="k">print</span> <span class="nv">$link</span><span class="o">.</span><span class="s">&quot;\n&quot;</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">sub </span><span class="nf">upload_file</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">my</span> <span class="p">(</span><span class="nv">$self</span><span class="p">,</span> <span class="nv">$file_path</span><span class="p">)</span> <span class="o">=</span> <span class="nv">@_</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">my</span> <span class="nv">$file</span> <span class="o">=</span> <span class="nn">Path::Class::</span><span class="n">File</span><span class="o">-&gt;</span><span class="k">new</span><span class="p">(</span><span class="nv">$file_path</span><span class="p">);</span>
+</span><span class='line'>    <span class="nb">die</span> <span class="s">&quot;File Not Found : $file&quot;</span> <span class="k">unless</span> <span class="o">-</span><span class="n">f</span> <span class="nv">$file</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">my</span> <span class="nv">$post_url</span> <span class="o">=</span> <span class="nb">sprintf</span> <span class="s">&#39;https://picasaweb.google.com/data/feed/api/user/%s/albumid/%s&#39;</span><span class="p">,</span> <span class="nv">$self</span><span class="o">-&gt;</span><span class="n">user_id</span><span class="p">,</span> <span class="nv">$self</span><span class="o">-&gt;</span><span class="n">album_id</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">my</span> <span class="p">(</span><span class="nv">$mime_type</span><span class="p">,</span> <span class="nv">$encoding</span><span class="p">)</span> <span class="o">=</span> <span class="nn">MIME::Types::</span><span class="n">by_suffix</span><span class="p">(</span><span class="nv">$file</span><span class="o">-&gt;</span><span class="n">basename</span><span class="p">);</span>
+</span><span class='line'>    <span class="k">my</span> <span class="nv">$content</span> <span class="o">=</span> <span class="nv">$file</span><span class="o">-&gt;</span><span class="n">slurp</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">my</span> <span class="nv">$res</span> <span class="o">=</span> <span class="nv">$self</span><span class="o">-&gt;</span><span class="n">_ua</span><span class="o">-&gt;</span><span class="n">post</span><span class="p">(</span><span class="nv">$post_url</span><span class="p">,</span>
+</span><span class='line'>        <span class="nv">$self</span><span class="o">-&gt;</span><span class="n">google_auth</span><span class="o">-&gt;</span><span class="n">auth_params</span><span class="p">,</span>
+</span><span class='line'>        <span class="n">Content_Type</span>   <span class="o">=&gt;</span> <span class="nv">$mime_type</span><span class="p">,</span>
+</span><span class='line'>        <span class="n">Slug</span>           <span class="o">=&gt;</span> <span class="nv">$file</span><span class="o">-&gt;</span><span class="n">basename</span><span class="p">,</span>
+</span><span class='line'>        <span class="n">Content</span>        <span class="o">=&gt;</span> <span class="nv">$content</span><span class="p">,</span>
 </span><span class='line'>    <span class="p">);</span>
-</span><span class='line'>    <span class="n">sendmail</span><span class="p">(</span><span class="nv">$email</span><span class="p">,</span> <span class="nv">$opt</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="nb">die</span> <span class="s">&#39;UPLOAD Failed : &#39;</span><span class="o">.</span><span class="nv">$res</span><span class="o">-&gt;</span><span class="n">status_line</span> <span class="k">unless</span> <span class="nv">$res</span><span class="o">-&gt;</span><span class="n">is_success</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">my</span> <span class="p">(</span><span class="nv">$link</span><span class="p">)</span> <span class="o">=</span> <span class="p">(</span><span class="nv">$res</span><span class="o">-&gt;</span><span class="n">decoded_content</span><span class="o">=~</span><span class="sr">/content type.*?src=&#39;(.*?)&#39;/gsm</span><span class="p">);</span>
+</span><span class='line'>    <span class="nv">$link</span><span class="p">;</span>
 </span><span class='line'><span class="p">}</span>
 </span><span class='line'>
 </span><span class='line'><span class="n">__PACKAGE__</span><span class="o">-&gt;</span><span class="n">meta</span><span class="o">-&gt;</span><span class="n">make_immutable</span><span class="p">;</span>
 </span><span class='line'>
-</span><span class='line'><span class="mi">1</span><span class="p">;</span>
+</span><span class='line'><span class="nb">package</span> <span class="n">main</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">my</span> <span class="nv">$uploader</span> <span class="o">=</span> <span class="n">PicasaUploader</span><span class="o">-&gt;</span><span class="k">new</span><span class="p">(</span> <span class="n">files</span> <span class="o">=&gt;</span> <span class="o">\</span><span class="nv">@ARGV</span> <span class="p">);</span>
+</span><span class='line'><span class="nv">$uploader</span><span class="o">-&gt;</span><span class="n">upload_files</span><span class="p">;</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>  파일첨부를 위한 <code>attachments</code> 접근자를 추가로 지정합니다. 첨부파일은 하나가 아닌 여러개가 가능하기에 <code>ArrayRef</code> 를 기본형식으로 합니다. 각 요소는 반드시 <code>Path::Class::File</code> 로 받도록 했습니다.</p>
+<p>  <a href="http://aanoaa.github.com/blog/2012/01/03/picasa-upload-script/">@aanoaa 님의 글</a>에서 Picasa Uploader 스크립트를 소개했었는데요. <code>PicasaUploader</code> 라고 package 로 정의해서 쓰도록 했습니다.
+  거기에 <a href="https://metacpan.org/module/Config::Pit">Config::Pit</a> 을 써서 계정정보를 다루도록 했구요.
+  심심해서 그냥 약간 개량해봤습니다.</p>
 
-<p>  <code>MIME::Types</code> 로 첨부파일의 확장자를 통해서 MIME-TYPE 을 뽑아내도록 하고, 알 수 없다면 <code>multipart/mixed</code> 로 지정했습니다.</p>
+  
+  
 
-<p>  <code>transport</code> 레이어를 별도로 지정할 수 있으며, <code>transport</code> 의 지정이 없을 경우는 당연히 로컬호스트의 <code>smtp</code> 를 이용하도록 합니다.</p>
 
-<h3>Using MyApp::Mail</h3>
+    </article>
+  
+  
+    <article class="post">
+      <div class="sharing-box">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://jeen.github.com/blog/page/16/index.html" data-via="JEEN_LEE" data-counturl="http://jeen.github.com/blog/page/16/index.html" data-size="large">Tweet</a>
+  
+  
+  
+  <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
 
-<p>  위의 <code>MyApp::Mail</code> 을 이용하기 위해서 아래와 같이 <code>sendmail.pl</code> 이라는 스크립트를 준비했습니다.</p>
+      
+  <header>
+    
+      <h2 class="entry-title">
+        
+        <a href="/blog/2012/01/05/freebsd-8-dot-2-stable-cpan-error/">FreeBSD 8.2 STABLE - CPAN Error</a>
+        
+      </h2>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-01-05T22:32:00+09:00" pubdate data-updated="true">Jan 5<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/01/05/freebsd-8-dot-2-stable-cpan-error/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <p>  회사업무차 <code>FreeBSD 8.2 STABLE</code> OS 를 사용하는 서버에서 CPAN 사용시 에러가 발생했습니다.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>cpan Module::Install
+</span><span class='line'>Reading <span class="s1">&#39;/home/jeen/.cpan/sources/authors/01mailrc.txt.gz&#39;</span>
+</span><span class='line'>............................................................................DONE
+</span><span class='line'>Reading <span class="s1">&#39;/home/jeen/.cpan/sources/modules/02packages.details.txt.gz&#39;</span>
+</span><span class='line'>  Database was generated on Thu, 05 Jan 2012 05:12:02 GMT
+</span><span class='line'>............................................................................DONE
+</span><span class='line'>Reading <span class="s1">&#39;/home/jeen/.cpan/sources/modules/03modlist.data.gz&#39;</span>
+</span><span class='line'>Can<span class="s1">&#39;t locate object method &quot;data&quot; via package &quot;CPAN::Modulelist&quot; (perhaps you forgot to load &quot;CPAN::Modulelist&quot;?) at (eval 24) line 1.</span>
+</span><span class='line'><span class="s1"> at /home/jeen/perl5/perlbrew/perls/perl-5.14.2/lib/5.14.2/CPAN/Index.pm line 524</span>
+</span><span class='line'><span class="s1"> CPAN::Index::rd_modlist(&#39;</span>CPAN::Index<span class="s1">&#39;, &#39;</span>/home/jeen/.cpan/sources/modules/03modlist.data.gz<span class="s1">&#39;) called at /home/jeen/perl5/perlbrew/perls/perl-5.14.2/lib/5.14.2/CPAN/Index.pm line 85</span>
+</span><span class='line'><span class="s1"> CPAN::Index::reload(&#39;</span>CPAN::Index<span class="s1">&#39;) called at /home/jeen/perl5/perlbrew/perls/perl-5.14.2/lib/5.14.2/CPAN.pm line 976</span>
+</span><span class='line'><span class="s1"> CPAN::exists(&#39;</span><span class="nv">CPAN</span><span class="o">=</span>HASH<span class="o">(</span>0x801fe27f8<span class="o">)</span><span class="s1">&#39;, &#39;</span>CPAN::Module<span class="s1">&#39;, &#39;</span>Module::Install<span class="s1">&#39;) called at /home/jeen/perl5/perlbrew/perls/perl-5.14.2/lib/5.14.2/CPAN/Shell.pm line 1256</span>
+</span><span class='line'><span class="s1"> CPAN::Shell::expandany(&#39;</span>CPAN::Shell<span class="s1">&#39;, &#39;</span>Module::Install<span class="s1">&#39;) called at /home/jeen/perl5/perlbrew/perls/perl-5.14.2/lib/5.14.2/CPAN/Shell.pm line 1681</span>
+</span><span class='line'><span class="s1"> CPAN::Shell::rematein(&#39;</span>CPAN::Shell<span class="s1">&#39;, &#39;</span>install<span class="s1">&#39;, &#39;</span>Module::Install<span class="s1">&#39;) called at /home/jeen/perl5/perlbrew/perls/perl-5.14.2/lib/5.14.2/CPAN/Shell.pm line 1977</span>
+</span><span class='line'><span class="s1"> CPAN::Shell::__ANON__(&#39;</span>CPAN::Shell<span class="s1">&#39;, &#39;</span>Module::Install<span class="s1">&#39;) called at /home/jeen/perl5/perlbrew/perls/perl-5.14.2/lib/5.14.2/App/Cpan.pm line 459</span>
+</span><span class='line'><span class="s1"> App::Cpan::__ANON__(&#39;</span>Module::Install<span class="s1">&#39;) called at /home/jeen/perl5/perlbrew/perls/perl-5.14.2/lib/5.14.2/App/Cpan.pm line 468</span>
+</span><span class='line'><span class="s1"> App::Cpan::_default(&#39;</span>ARRAY<span class="o">(</span>0x800e92780<span class="o">)</span><span class="s1">&#39;, &#39;</span>HASH<span class="o">(</span>0x801fe7d38<span class="o">)</span><span class="s1">&#39;) called at /home/jeen/perl5/perlbrew/perls/perl-5.14.2/lib/5.14.2/App/Cpan.pm line 386</span>
+</span><span class='line'><span class="s1"> App::Cpan::run(&#39;</span>App::Cpan<span class="s1">&#39;, &#39;</span>Module::Install<span class="err">&#39;</span><span class="o">)</span> called at /home/jeen/perl5/perlbrew/perls/perl-5.14.2/bin/cpan line 11
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>  마땅히 어떻게 <code>cpan</code> 자체가 안되니, 다른 CPAN 모듈 설치도 안되고&#8230;</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>curl -L http://cpanmin.us | perl - --self-upgrade
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>  그래서 일단은 그냥 <code>cpanm</code> 을 설치하고 필요한 모듈들을 설치했습니다. 하지만 여전히 <code>cpan</code> 으로 모듈을 설치하려면 위처럼 에러가 뜨니 아직도 찜찜하기 그지 없네요.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>uname -a
+</span><span class='line'>FreeBSD xxx.xxxxx.kr 8.2-STABLE FreeBSD 8.2-STABLE <span class="c">#1: Wed Apr 13 13:10:49 KST 2011     root@xxx.xxxx.kr:/usr/obj/usr/src/sys/GENERIC  amd64</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p></p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -560,90 +548,123 @@
 <span class='line-number'>28</span>
 <span class='line-number'>29</span>
 <span class='line-number'>30</span>
-</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="c1"># sendmail.pl</span>
-</span><span class='line'><span class="k">use</span> <span class="n">strict</span><span class="p">;</span>
-</span><span class='line'><span class="k">use</span> <span class="n">warnings</span><span class="p">;</span>
-</span><span class='line'><span class="k">use</span> <span class="nn">MyApp::</span><span class="n">Mail</span><span class="p">;</span>
-</span><span class='line'><span class="k">use</span> <span class="nn">Path::Class::</span><span class="n">File</span><span class="p">;</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>perl -V
+</span><span class='line'>Summary of my perl5 <span class="o">(</span>revision 5 version 14 subversion 2<span class="o">)</span> configuration:
 </span><span class='line'>
-</span><span class='line'><span class="k">my</span> <span class="nv">$to</span>    <span class="o">=</span> <span class="s">&#39;your@email.com&#39;</span><span class="p">;</span>
-</span><span class='line'><span class="k">my</span> <span class="nv">$from</span>  <span class="o">=</span> <span class="s">&#39;my@email.com&#39;</span><span class="p">;</span>
-</span><span class='line'><span class="k">my</span> <span class="nv">$subject</span> <span class="o">=</span> <span class="s">&#39;MailSender Test Subject&#39;</span><span class="p">;</span>
-</span><span class='line'><span class="k">my</span> <span class="nv">$body</span>    <span class="o">=</span> <span class="s">&#39;MailSender Test Body&#39;</span><span class="p">;</span>
+</span><span class='line'>  Platform:
+</span><span class='line'>    <span class="nv">osname</span><span class="o">=</span>freebsd, <span class="nv">osvers</span><span class="o">=</span>8.2-stable, <span class="nv">archname</span><span class="o">=</span>amd64-freebsd
+</span><span class='line'>    <span class="nv">uname</span><span class="o">=</span><span class="s1">&#39;freebsd xxx.xxxxx.kr 8.2-stable freebsd 8.2-stable #1: wed apr 13 13:10:49 kst 2011 root@xxx.xxxx.kr:usrobjusrsrcsysgeneric amd64 &#39;</span>
+</span><span class='line'>    <span class="nv">config_args</span><span class="o">=</span><span class="s1">&#39;-de -Dprefix=/home/jeen/perl5/perlbrew/perls/perl-5.14.2&#39;</span>
+</span><span class='line'>    <span class="nv">hint</span><span class="o">=</span>recommended, <span class="nv">useposix</span><span class="o">=</span><span class="nb">true</span>, <span class="nv">d_sigaction</span><span class="o">=</span>define
+</span><span class='line'>    <span class="nv">useithreads</span><span class="o">=</span>undef, <span class="nv">usemultiplicity</span><span class="o">=</span>undef
+</span><span class='line'>    <span class="nv">useperlio</span><span class="o">=</span>define, <span class="nv">d_sfio</span><span class="o">=</span>undef, <span class="nv">uselargefiles</span><span class="o">=</span>define, <span class="nv">usesocks</span><span class="o">=</span>undef
+</span><span class='line'>    <span class="nv">use64bitint</span><span class="o">=</span>define, <span class="nv">use64bitall</span><span class="o">=</span>define, <span class="nv">uselongdouble</span><span class="o">=</span>undef
+</span><span class='line'>    <span class="nv">usemymalloc</span><span class="o">=</span>n, <span class="nv">bincompat5005</span><span class="o">=</span>undef
+</span><span class='line'>  Compiler:
+</span><span class='line'>    <span class="nv">cc</span><span class="o">=</span><span class="s1">&#39;cc&#39;</span>, <span class="nv">ccflags</span> <span class="o">=</span><span class="s1">&#39;-DHAS_FPSETMASK -DHAS_FLOATINGPOINT_H -fno-strict-aliasing -pipe -fstack-protector -I/usr/local/include&#39;</span>,
+</span><span class='line'>    <span class="nv">optimize</span><span class="o">=</span><span class="s1">&#39;-O&#39;</span>,
+</span><span class='line'>    <span class="nv">cppflags</span><span class="o">=</span><span class="s1">&#39;-DHAS_FPSETMASK -DHAS_FLOATINGPOINT_H -fno-strict-aliasing -pipe -fstack-protector -I/usr/local/include&#39;</span>
+</span><span class='line'>    <span class="nv">ccversion</span><span class="o">=</span><span class="s1">&#39;&#39;</span>, <span class="nv">gccversion</span><span class="o">=</span><span class="s1">&#39;4.2.1 20070719  [FreeBSD]&#39;</span>, <span class="nv">gccosandvers</span><span class="o">=</span><span class="s1">&#39;&#39;</span>
+</span><span class='line'>    <span class="nv">intsize</span><span class="o">=</span>4, <span class="nv">longsize</span><span class="o">=</span>8, <span class="nv">ptrsize</span><span class="o">=</span>8, <span class="nv">doublesize</span><span class="o">=</span>8, <span class="nv">byteorder</span><span class="o">=</span>12345678
+</span><span class='line'>    <span class="nv">d_longlong</span><span class="o">=</span>define, <span class="nv">longlongsize</span><span class="o">=</span>8, <span class="nv">d_longdbl</span><span class="o">=</span>define, <span class="nv">longdblsize</span><span class="o">=</span>16
+</span><span class='line'>    <span class="nv">ivtype</span><span class="o">=</span><span class="s1">&#39;long&#39;</span>, <span class="nv">ivsize</span><span class="o">=</span>8, <span class="nv">nvtype</span><span class="o">=</span><span class="s1">&#39;double&#39;</span>, <span class="nv">nvsize</span><span class="o">=</span>8, <span class="nv">Off_t</span><span class="o">=</span><span class="s1">&#39;off_t&#39;</span>, <span class="nv">lseeksize</span><span class="o">=</span>8
+</span><span class='line'>    <span class="nv">alignbytes</span><span class="o">=</span>8, <span class="nv">prototype</span><span class="o">=</span>define
+</span><span class='line'>  Linker and Libraries:
+</span><span class='line'>    <span class="nv">ld</span><span class="o">=</span><span class="s1">&#39;cc&#39;</span>, <span class="nv">ldflags</span> <span class="o">=</span><span class="s1">&#39;-Wl,-E  -fstack-protector -L/usr/local/lib&#39;</span>
+</span><span class='line'>    <span class="nv">libpth</span><span class="o">=</span>/usr/lib /usr/local/lib
+</span><span class='line'>    <span class="nv">libs</span><span class="o">=</span>-lm -lcrypt -lutil -lc
+</span><span class='line'>    <span class="nv">perllibs</span><span class="o">=</span>-lm -lcrypt -lutil -lc
+</span><span class='line'>    <span class="nv">libc</span><span class="o">=</span>, <span class="nv">so</span><span class="o">=</span>so, <span class="nv">useshrplib</span><span class="o">=</span><span class="nb">false</span>, <span class="nv">libperl</span><span class="o">=</span>libperl.a
+</span><span class='line'>    <span class="nv">gnulibc_version</span><span class="o">=</span><span class="s1">&#39;&#39;</span>
+</span><span class='line'>  Dynamic Linking:
+</span><span class='line'>    <span class="nv">dlsrc</span><span class="o">=</span>dl_dlopen.xs, <span class="nv">dlext</span><span class="o">=</span>so, <span class="nv">d_dlsymun</span><span class="o">=</span>undef, <span class="nv">ccdlflags</span><span class="o">=</span><span class="s1">&#39; &#39;</span>
+</span><span class='line'>    <span class="nv">cccdlflags</span><span class="o">=</span><span class="s1">&#39;-DPIC -fPIC&#39;</span>, <span class="nv">lddlflags</span><span class="o">=</span><span class="s1">&#39;-shared  -L/usr/local/lib -fstack-protector&#39;</span>
 </span><span class='line'>
-</span><span class='line'><span class="k">my</span> <span class="nv">$mailer</span> <span class="o">=</span> <span class="nn">MyApp::</span><span class="n">Mail</span><span class="o">-&gt;</span><span class="k">new</span><span class="p">(</span>
-</span><span class='line'>    <span class="n">to</span> <span class="o">=&gt;</span> <span class="nv">$to</span><span class="p">,</span>
-</span><span class='line'>    <span class="n">from</span> <span class="o">=&gt;</span> <span class="nv">$from</span><span class="p">,</span>
-</span><span class='line'>    <span class="n">subject</span> <span class="o">=&gt;</span> <span class="nv">$subject</span><span class="p">,</span>
-</span><span class='line'>    <span class="n">body</span>    <span class="o">=&gt;</span> <span class="nv">$body</span><span class="p">,</span>
-</span><span class='line'>    <span class="n">attachments</span> <span class="o">=&gt;</span> <span class="p">[</span>
-</span><span class='line'>      <span class="nn">Path::Class::</span><span class="n">File</span><span class="o">-&gt;</span><span class="k">new</span><span class="p">(</span><span class="s">&#39;test.doc&#39;</span><span class="p">),</span>
-</span><span class='line'>      <span class="nn">Path::Class::</span><span class="n">File</span><span class="o">-&gt;</span><span class="k">new</span><span class="p">(</span><span class="s">&#39;text.pdf&#39;</span><span class="p">)</span>
-</span><span class='line'>    <span class="p">],</span>
-</span><span class='line'>    <span class="n">transport</span> <span class="o">=&gt;</span> <span class="p">{</span>
-</span><span class='line'>        <span class="n">host</span> <span class="o">=&gt;</span> <span class="s">&#39;smtp.gmail.com&#39;</span><span class="p">,</span>
-</span><span class='line'>        <span class="n">port</span> <span class="o">=&gt;</span> <span class="mi">465</span><span class="p">,</span>
-</span><span class='line'>        <span class="n">sasl_username</span> <span class="o">=&gt;</span> <span class="s">&#39;YOUR_GOOGLE EMAIL&#39;</span><span class="p">,</span>
-</span><span class='line'>        <span class="n">sasl_password</span> <span class="o">=&gt;</span> <span class="s">&#39;YOUR_GOOGLE_PASS&#39;</span><span class="p">,</span>
-</span><span class='line'>        <span class="n">ssl</span>  <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">,</span>
-</span><span class='line'>    <span class="p">},</span>
-</span><span class='line'><span class="p">);</span>
 </span><span class='line'>
-</span><span class='line'><span class="nv">$mailer</span><span class="o">-&gt;</span><span class="nb">send</span><span class="p">;</span>
+</span><span class='line'>Characteristics of this binary <span class="o">(</span>from libperl<span class="o">)</span>:
+</span><span class='line'>  Compile-time options: PERL_DONT_CREATE_GVSV PERL_MALLOC_WRAP
+</span><span class='line'>                        PERL_PRESERVE_IVUV USE_64_BIT_ALL USE_64_BIT_INT
+</span><span class='line'>                        USE_LARGE_FILES USE_PERLIO USE_PERL_ATOF
+</span><span class='line'>  Built under freebsd
+</span><span class='line'>  Compiled at Jan  5 2012 15:51:41
+</span><span class='line'>  %ENV:
+</span><span class='line'>    <span class="nv">PERLBREW_BASHRC_VERSION</span><span class="o">=</span><span class="s2">&quot;0.39&quot;</span>
+</span><span class='line'>    <span class="nv">PERLBREW_HOME</span><span class="o">=</span><span class="s2">&quot;/home/jeen/.perlbrew&quot;</span>
+</span><span class='line'>    <span class="nv">PERLBREW_MANPATH</span><span class="o">=</span><span class="s2">&quot;/home/jeen/perl5/perlbrew/perls/perl-5.14.2/man&quot;</span>
+</span><span class='line'>    <span class="nv">PERLBREW_PATH</span><span class="o">=</span><span class="s2">&quot;/home/jeen/perl5/perlbrew/bin:/home/jeen/perl5/perlbrew/perls/perl-5.14.2/bin&quot;</span>
+</span><span class='line'>    <span class="nv">PERLBREW_PERL</span><span class="o">=</span><span class="s2">&quot;perl-5.14.2&quot;</span>
+</span><span class='line'>    <span class="nv">PERLBREW_ROOT</span><span class="o">=</span><span class="s2">&quot;/home/jeen/perl5/perlbrew&quot;</span>
+</span><span class='line'>    <span class="nv">PERLBREW_VERSION</span><span class="o">=</span><span class="s2">&quot;0.39&quot;</span>
+</span><span class='line'>  @INC:
+</span><span class='line'>    /home/jeen/perl5/perlbrew/perls/perl-5.14.2/lib/site_perl/5.14.2/amd64-freebsd
+</span><span class='line'>    /home/jeen/perl5/perlbrew/perls/perl-5.14.2/lib/site_perl/5.14.2
+</span><span class='line'>    /home/jeen/perl5/perlbrew/perls/perl-5.14.2/lib/5.14.2/amd64-freebsd
+</span><span class='line'>    /home/jeen/perl5/perlbrew/perls/perl-5.14.2/lib/5.14.2
+</span><span class='line'>    .
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>  위에서 언급한 <code>transport</code> 레이어에 지메일의 <code>smtp</code> 를 사용하도록 합니다. 이를 위해서 물론 Google 계정정보를 입력할 필요가 있습니다.</p>
 
-<h3>How to Test?</h3>
-
-<p>  <a href="http://search.cpan.org/~rjbs/Email-Sender-0.110001/lib/Email/Sender/Manual/QuickStart.pm#Testing">Email::Sender::Manual::QuickStart</a> 문서를 확인 해보면 Testing 관련 내용이 나옵니다.</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='perl'><span class='line'>  <span class="k">use</span> <span class="nn">Test::</span><span class="n">More</span><span class="p">;</span>
-</span><span class='line'>  <span class="k">BEGIN</span> <span class="p">{</span> <span class="nv">$ENV</span><span class="p">{</span><span class="n">EMAIL_SENDER_TRANSPORT</span><span class="p">}</span> <span class="o">=</span> <span class="s">&#39;Test&#39;</span> <span class="p">}</span>
-</span><span class='line'>  <span class="k">use</span> <span class="n">YourCode</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="n">YourCode</span><span class="o">-&gt;</span><span class="n">run</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">my</span> <span class="nv">@deliveries</span> <span class="o">=</span> <span class="nn">Email::Sender::</span><span class="n">Simple</span><span class="o">-&gt;</span><span class="n">default_transport</span><span class="o">-&gt;</span><span class="n">deliveries</span><span class="p">;</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>df -Th .
+</span><span class='line'>Filesystem   Type    Size    Used   Avail Capacity  Mounted on
+</span><span class='line'>/dev/ar0s1f  ufs      43G    5.1G     35G    13%    /usr
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>  위와같은 샘플코드가 제시되어 있는데,</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="k">BEGIN</span> <span class="p">{</span> <span class="nv">$ENV</span><span class="p">{</span><span class="n">EMAIL_SENDER_TRANSPORT</span><span class="p">}</span> <span class="o">=</span> <span class="s">&#39;Test&#39;</span> <span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p> 가 지정되면, 실제로 메일 송신이 이뤄지지 않습니다.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='perl'><span class='line'>  <span class="k">my</span> <span class="nv">@deliveries</span> <span class="o">=</span> <span class="nn">Email::Sender::</span><span class="n">Simple</span><span class="o">-&gt;</span><span class="n">default_transport</span><span class="o">-&gt;</span><span class="n">deliveries</span><span class="p">;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>  에서 그동안 송신한 메일건수당 성공실패를 판별할 수 있고, 작성된 메일 내용 또한 확인이 가능합니다. 테스트코드를 작성함에 있어서 위의 두 부분이 절대적으로 필요합니다.</p>
-
-<p>  위처럼 테스트 코드를 작성할 시에는 실제로 메일 송신을 하지 않았기에 <code>transport</code> 레이어에서 발생하는 어떤 불상사는 감지할 수 없습니다.</p>
+<p>  일단 사건해결에 도움이 될 만한 정보들은 모조리 뽑아봤습니다.
+  천천히 살펴보며 구원을 요청해야 되겠네요.</p>
 
 <h3>Conclusion</h3>
 
+<p>  <a href="http://webchat.freenode.net?channels=perl-kr">#perl-kr</a> 에서 위에 정리한 내용들로 <a href="http://twitter.com/aer0">@aer0</a> 님께 질문을 날렸습니다. @aer0 님께서 제안하신 방법으로</p>
+
 <ul>
-<li><a href="http://jeen.tistory.com/entry/Perl-Perl-%EB%A1%9C-%EB%A9%94%EC%9D%BC%EB%B3%B4%EB%82%B4%EA%B8%B0-SSMTP-%EC%99%80-MIMELite-%EB%A5%BC-%EC%82%AC%EC%9A%A9%ED%95%B4%EC%84%9C">Perl 로 메일보내기 &#8230; SSMTP 와 MIME::Lite 를 사용해서!</a></li>
+<li><code>Bundle::CPAN</code> 을 설치</li>
+<li><p><code>~/.cpan</code> 디렉토리를 삭제 후 다시 <code>cpan</code> 실행</p>
+
+<p>이었습니다.</p>
+
+<p><code>Bundle::CPAN</code> 을 설치해도 사태가 해결되지 않아서, 결국은 <code>~/.cpan</code> 디렉토리를 삭제한 후 다시 <code>cpan</code> 을 실행했습니다.</p></li>
+<li><p>~/.cpan/sources/modules/02packages.details.txt.gz</p></li>
+<li><p>~/.cpan/sources/modules/03modlist.data.gz</p>
+
+<p>같은 CPAN 미러에서 가져오는 인덱스 파일이 이상해서 꼬인 것 같다라는 @aer0 님의 총평이었습니다.</p>
+
+<p>역시 이런 사건이 발생할 때는 <code>#perl-kr</code> 에 들러야 됩니다. :-)</p></li>
 </ul>
 
 
-<p>  이전에 메일보내기 관련해서 <code>SSMTP</code> + <code>MIME::Lite</code> 를 사용하는 그런 코드를 2008년쯤에 썼었네요. 부끄럽습니다. 2009년부터는 아마 <code>MIME::Lite</code> 를 안 썼던 것 같네요.</p>
+<blockquote class="twitter-tweet" data-in-reply-to="154824190581678081" lang="ko"><p>@<a href="https://twitter.com/JEEN_LEE">JEEN_LEE</a> 자문자답 <a href="http://t.co/hSGdHz9i" title="http://jeen.github.com/blog/2012/01/05/freebsd-8-dot-2-stable-cpan-error/">jeen.github.com/blog/2012/01/0…</a></p>&mdash; JEEN (@JEEN_LEE) <a href="https://twitter.com/JEEN_LEE/status/154930926294536192" data-datetime="2012-01-05T14:23:05+00:00">1월 5, 2012</a></blockquote>
 
-<p>  뭐 당장 필요로 하는 부분만 구현을 한 것일 뿐인지라, 차후에 다른 어떤 요구사항이 있다면 그에 맞춰서 다시 한번 소개를 해볼까 합니다.</p>
+
+
 
   
   

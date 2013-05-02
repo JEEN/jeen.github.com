@@ -144,7 +144,33 @@
     </url>
     <url>
         <loc>http://jeen.github.com/blog/2012/11/26/proverc-for-less-typing/</loc>
-        <lastmod>2012-11-26T21:58:50+09:00</lastmod>
+        <lastmod>2012-11-26T22:01:13+09:00</lastmod>
+    </url>
+    <url>
+        <loc>
+            http://jeen.github.com/blog/2012/11/29/download-package-dir-slash-files-from-directory-index/
+        </loc>
+        <lastmod>2012-12-27T00:35:31+09:00</lastmod>
+    </url>
+    <url>
+        <loc>http://jeen.github.com/blog/2012/12/26/a-usecase-of-app-fatpacker/</loc>
+        <lastmod>2012-12-27T00:28:29+09:00</lastmod>
+    </url>
+    <url>
+        <loc>http://jeen.github.com/blog/2013/02/28/cpanm-1-dot-6-is-here-for-you/</loc>
+        <lastmod>2013-02-28T11:16:29+09:00</lastmod>
+    </url>
+    <url>
+        <loc>http://jeen.github.com/blog/2013/04/04/using-rex-environment/</loc>
+        <lastmod>2013-04-04T13:00:29+09:00</lastmod>
+    </url>
+    <url>
+        <loc>http://jeen.github.com/blog/2013/04/08/data-printer-vs-data-dump-er/</loc>
+        <lastmod>2013-04-12T11:06:44+09:00</lastmod>
+    </url>
+    <url>
+        <loc>http://jeen.github.com/blog/2013/04/28/more-rex/</loc>
+        <lastmod>2013-04-28T19:05:33+09:00</lastmod>
     </url>
     <url>
         <loc>http://jeen.github.com/about/</loc>
@@ -152,10 +178,10 @@
     </url>
     <url>
         <loc>http://jeen.github.com/blog/archives/</loc>
-        <lastmod>2012-11-26T21:58:50+09:00</lastmod>
+        <lastmod>2013-04-28T19:05:33+09:00</lastmod>
     </url>
     <url>
         <loc>http://jeen.github.com/</loc>
-        <lastmod>2012-11-26T21:58:50+09:00</lastmod>
+        <lastmod>2013-04-28T19:05:33+09:00</lastmod>
     </url>
 </urlset>

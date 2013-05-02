@@ -9,34 +9,7 @@
   <meta name="author" content="Jeen Lee">
 
   
-  <meta name="description" content="Tweet Picasa Upload Script II Jan 13th, 2012 | Comments picasa-uploader.pl1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28 &hellip;">
+  <meta name="description" content="Tweet Rex Pull Request Feb 15th, 2012 | Comments (R)?ex - A simple framework to simplify systemadministration 최근에 여러 서버 일괄 작업을 위해서 Rex 로 이것저것 해보고 있는 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -161,7 +134,7 @@
     
       <h2 class="entry-title">
         
-        <a href="/blog/2012/01/13/picasa-upload-script-ii/">Picasa Upload Script II</a>
+        <a href="/blog/2012/02/15/rex-pull-request/">Rex Pull Request</a>
         
       </h2>
     
@@ -179,16 +152,48 @@
   
 
 
-<time datetime="2012-01-13T18:36:00+09:00" pubdate data-updated="true">Jan 13<span>th</span>, 2012</time>
+<time datetime="2012-02-15T23:21:00+09:00" pubdate data-updated="true">Feb 15<span>th</span>, 2012</time>
         
-         | <a href="/blog/2012/01/13/picasa-upload-script-ii/#disqus_thread">Comments</a>
+         | <a href="/blog/2012/02/15/rex-pull-request/#disqus_thread">Comments</a>
         
       </p>
     
   </header>
 
 
-  <figure class='code'><figcaption><span>picasa-uploader.pl</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+  <ul>
+<li><p><a href="http://rexify.org/">(R)?ex - A simple framework to simplify systemadministration</a></p>
+
+<p>최근에 여러 서버 일괄 작업을 위해서 <a href="http://metacpan.org/module/Rex">Rex</a> 로 이것저것 해보고 있는 중입니다. Rex 는 Ruby 쪽에서 많이 쓰인다는 Chef 같은 부류의 툴이랄까요, 아무튼 그런 류의 일을 Perl 로 할 수 있게 하는 툴입니다.</p>
+
+<p>Rex 에 속한 네임스페이스를 살펴보면 다양한 OS 의 경우에 상응하는 다양한  케이스를 고려하고 있는 것 같습니다.</p>
+
+<p>오늘 제가 쓴 Rex 의 가벼운 예제로는 다음과 같습니다.</p></li>
+</ul>
+
+
+<figure class='code'><figcaption><span>Rexfile</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="n">user</span> <span class="s">&#39;user&#39;</span><span class="p">;</span>
+</span><span class='line'><span class="n">password</span> <span class="s">&#39;password&#39;</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">pass_auth</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">group</span> <span class="o">=&gt;</span> <span class="s">&quot;sweet-vms&quot;</span> <span class="o">=&gt;</span> <span class="s">&quot;vm[01..10]&quot;</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nb">require</span> <span class="nn">Rex::</span><span class="n">Init</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span>Rex::Init</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -217,197 +222,84 @@
 <span class='line-number'>27</span>
 <span class='line-number'>28</span>
 <span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-<span class='line-number'>40</span>
-<span class='line-number'>41</span>
-<span class='line-number'>42</span>
-<span class='line-number'>43</span>
-<span class='line-number'>44</span>
-<span class='line-number'>45</span>
-<span class='line-number'>46</span>
-<span class='line-number'>47</span>
-<span class='line-number'>48</span>
-<span class='line-number'>49</span>
-<span class='line-number'>50</span>
-<span class='line-number'>51</span>
-<span class='line-number'>52</span>
-<span class='line-number'>53</span>
-<span class='line-number'>54</span>
-<span class='line-number'>55</span>
-<span class='line-number'>56</span>
-<span class='line-number'>57</span>
-<span class='line-number'>58</span>
-<span class='line-number'>59</span>
-<span class='line-number'>60</span>
-<span class='line-number'>61</span>
-<span class='line-number'>62</span>
-<span class='line-number'>63</span>
-<span class='line-number'>64</span>
-<span class='line-number'>65</span>
-<span class='line-number'>66</span>
-<span class='line-number'>67</span>
-<span class='line-number'>68</span>
-<span class='line-number'>69</span>
-<span class='line-number'>70</span>
-<span class='line-number'>71</span>
-<span class='line-number'>72</span>
-<span class='line-number'>73</span>
-<span class='line-number'>74</span>
-<span class='line-number'>75</span>
-<span class='line-number'>76</span>
-<span class='line-number'>77</span>
-<span class='line-number'>78</span>
-<span class='line-number'>79</span>
-<span class='line-number'>80</span>
-<span class='line-number'>81</span>
-<span class='line-number'>82</span>
-<span class='line-number'>83</span>
-<span class='line-number'>84</span>
-<span class='line-number'>85</span>
-<span class='line-number'>86</span>
-<span class='line-number'>87</span>
-<span class='line-number'>88</span>
-<span class='line-number'>89</span>
-<span class='line-number'>90</span>
-<span class='line-number'>91</span>
-<span class='line-number'>92</span>
-<span class='line-number'>93</span>
-<span class='line-number'>94</span>
-<span class='line-number'>95</span>
-<span class='line-number'>96</span>
-<span class='line-number'>97</span>
-<span class='line-number'>98</span>
-<span class='line-number'>99</span>
-<span class='line-number'>100</span>
-<span class='line-number'>101</span>
-<span class='line-number'>102</span>
-<span class='line-number'>103</span>
-<span class='line-number'>104</span>
-<span class='line-number'>105</span>
-<span class='line-number'>106</span>
-<span class='line-number'>107</span>
-</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="c1">#!/usr/bin/env perl</span>
-</span><span class='line'><span class="nb">package</span> <span class="n">PicasaUploader</span><span class="p">;</span>
-</span><span class='line'><span class="k">use</span> <span class="nn">Any::</span><span class="n">Moose</span><span class="p">;</span>
-</span><span class='line'><span class="k">use</span> <span class="nn">namespace::</span><span class="n">autoclean</span><span class="p">;</span>
-</span><span class='line'><span class="k">use</span> <span class="nn">Config::</span><span class="n">Pit</span><span class="p">;</span>
-</span><span class='line'><span class="k">use</span> <span class="nn">LWP::</span><span class="n">UserAgent</span><span class="p">;</span>
-</span><span class='line'><span class="k">use</span> <span class="nn">Net::Google::</span><span class="n">AuthSub</span><span class="p">;</span>
-</span><span class='line'><span class="k">use</span> <span class="nn">MIME::</span><span class="n">Types</span> <span class="p">();</span>
+</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="nb">package</span> <span class="nn">Rex::</span><span class="n">Init</span><span class="p">;</span>
+</span><span class='line'><span class="k">use</span> <span class="nn">Rex::</span><span class="n">Commands</span><span class="p">;</span>
+</span><span class='line'><span class="k">use</span> <span class="nn">Rex::Commands::</span><span class="n">Run</span><span class="p">;</span>
+</span><span class='line'><span class="k">use</span> <span class="nn">Rex::Commands::</span><span class="n">Pkg</span><span class="p">;</span>
+</span><span class='line'><span class="k">use</span> <span class="nn">Rex::Commands::</span><span class="n">Iptables</span><span class="p">;</span>
 </span><span class='line'>
-</span><span class='line'><span class="n">has</span> <span class="n">user_id</span> <span class="o">=&gt;</span> <span class="p">(</span>
-</span><span class='line'>    <span class="n">is</span>      <span class="o">=&gt;</span> <span class="s">&#39;ro&#39;</span><span class="p">,</span>
-</span><span class='line'>    <span class="n">default</span> <span class="o">=&gt;</span> <span class="s">&#39;default&#39;</span><span class="p">,</span>
-</span><span class='line'><span class="p">);</span>
+</span><span class='line'><span class="n">desc</span> <span class="s">&#39;Add yum repo&#39;</span><span class="p">;</span>
+</span><span class='line'><span class="n">task</span> <span class="s">&quot;add_yum_repo&quot;</span><span class="p">,</span> <span class="n">group</span> <span class="o">=&gt;</span> <span class="s">&quot;sweet-vms&quot;</span><span class="p">,</span> <span class="k">sub </span><span class="p">{</span>
+</span><span class='line'>    <span class="n">run</span><span class="p">(</span><span class="s">&quot;yum -y install http://pkgs.repoforge.org/rpmforge-release/rpmforge-release-0.5.2-2.el5.rf.x86_64.rpm&quot;</span><span class="p">);</span>
+</span><span class='line'>    <span class="k">print</span> <span class="s">&quot;Added RPMForge Repo on /etc/yum.repos.d/\n&quot;</span><span class="p">;</span>
 </span><span class='line'>
-</span><span class='line'><span class="n">has</span> <span class="n">album_id</span> <span class="o">=&gt;</span> <span class="p">(</span>
-</span><span class='line'>    <span class="n">is</span>      <span class="o">=&gt;</span> <span class="s">&#39;ro&#39;</span><span class="p">,</span>
-</span><span class='line'>    <span class="n">default</span> <span class="o">=&gt;</span> <span class="s">&#39;default&#39;</span><span class="p">,</span>
-</span><span class='line'><span class="p">);</span>
+</span><span class='line'>    <span class="n">repository</span> <span class="n">add</span> <span class="o">=&gt;</span> <span class="s">&quot;Opsview&quot;</span><span class="p">,</span>
+</span><span class='line'>        <span class="n">url</span> <span class="o">=&gt;</span> <span class="s">&#39;http://downloads.opsera.com/opsview-community/latest/yum/centos/$releasever/$basearch&#39;</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">print</span> <span class="s">&quot;Added OpsView Repo on /etc/yum.repos.d/\n&quot;</span><span class="p">;</span>
 </span><span class='line'>
-</span><span class='line'><span class="n">has</span> <span class="n">files</span> <span class="o">=&gt;</span> <span class="p">(</span>
-</span><span class='line'>    <span class="n">is</span>      <span class="o">=&gt;</span> <span class="s">&#39;ro&#39;</span><span class="p">,</span>
-</span><span class='line'>    <span class="n">isa</span>     <span class="o">=&gt;</span> <span class="s">&#39;ArrayRef&#39;</span><span class="p">,</span>
-</span><span class='line'>    <span class="n">default</span> <span class="o">=&gt;</span> <span class="k">sub </span><span class="p">{</span> <span class="o">[]</span> <span class="p">}</span>
-</span><span class='line'><span class="p">);</span>
+</span><span class='line'>    <span class="n">update_package_db</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">print</span> <span class="s">&quot;Updated yum package DB\n&quot;</span><span class="p">;</span>
+</span><span class='line'><span class="p">};</span>
 </span><span class='line'>
-</span><span class='line'><span class="n">has</span> <span class="n">google_auth</span> <span class="o">=&gt;</span> <span class="p">(</span>
-</span><span class='line'>    <span class="n">is</span>      <span class="o">=&gt;</span> <span class="s">&#39;rw&#39;</span><span class="p">,</span>
-</span><span class='line'>    <span class="n">isa</span>     <span class="o">=&gt;</span> <span class="s">&#39;Net::Google::AuthSub&#39;</span><span class="p">,</span>
-</span><span class='line'>    <span class="n">default</span> <span class="o">=&gt;</span> <span class="k">sub </span><span class="p">{</span>
-</span><span class='line'>        <span class="nn">Net::Google::</span><span class="n">AuthSub</span><span class="o">-&gt;</span><span class="k">new</span><span class="p">(</span>
-</span><span class='line'>            <span class="n">service</span> <span class="o">=&gt;</span> <span class="s">&#39;lh2&#39;</span><span class="p">,</span>
-</span><span class='line'>            <span class="n">source</span>  <span class="o">=&gt;</span> <span class="s">&#39;my-picasauploader-0.1&#39;</span>
-</span><span class='line'>        <span class="p">);</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'><span class="p">);</span>
+</span><span class='line'><span class="n">desc</span> <span class="s">&#39;Install OpsView-Agent&#39;</span><span class="p">;</span>
+</span><span class='line'><span class="n">task</span> <span class="s">&quot;install_opsview_agent&quot;</span><span class="p">,</span> <span class="n">group</span> <span class="o">=&gt;</span> <span class="s">&quot;sweet-vms&quot;</span><span class="p">,</span> <span class="k">sub </span><span class="p">{</span>
+</span><span class='line'>    <span class="n">install</span> <span class="nb">package</span> <span class="o">=&gt;</span> <span class="s">&#39;opsview-agent&#39;</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">print</span> <span class="s">&quot;Installed [opsview-agent]\n&quot;</span><span class="p">;</span>
+</span><span class='line'><span class="p">};</span>
 </span><span class='line'>
-</span><span class='line'><span class="n">has</span> <span class="s">&#39;_ua&#39;</span> <span class="o">=&gt;</span> <span class="p">(</span>
-</span><span class='line'>    <span class="n">is</span>      <span class="o">=&gt;</span> <span class="s">&#39;rw&#39;</span><span class="p">,</span>
-</span><span class='line'>    <span class="n">isa</span>     <span class="o">=&gt;</span> <span class="s">&#39;LWP::UserAgent&#39;</span><span class="p">,</span>
-</span><span class='line'>    <span class="n">default</span> <span class="o">=&gt;</span> <span class="k">sub </span><span class="p">{</span>
-</span><span class='line'>        <span class="nn">LWP::</span><span class="n">UserAgent</span><span class="o">-&gt;</span><span class="k">new</span><span class="p">(</span> <span class="n">cookie_jar</span> <span class="o">=&gt;</span> <span class="p">{}</span> <span class="p">);</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'><span class="p">);</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">has</span> <span class="s">&#39;config&#39;</span> <span class="o">=&gt;</span> <span class="p">(</span>
-</span><span class='line'>    <span class="n">is</span>          <span class="o">=&gt;</span> <span class="s">&#39;ro&#39;</span><span class="p">,</span>
-</span><span class='line'>    <span class="n">isa</span>         <span class="o">=&gt;</span> <span class="s">&#39;HashRef&#39;</span><span class="p">,</span>
-</span><span class='line'>    <span class="n">lazy_build</span>  <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">,</span>
-</span><span class='line'><span class="p">);</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">sub </span><span class="nf">BUILD</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">my</span> <span class="nv">$self</span> <span class="o">=</span> <span class="nb">shift</span><span class="p">;</span>
-</span><span class='line'>    <span class="nv">$self</span><span class="o">-&gt;</span><span class="n">auth</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">sub </span><span class="nf">_build_config</span> <span class="p">{</span>
-</span><span class='line'>    <span class="nn">Config::Pit::</span><span class="n">pit_get</span><span class="p">(</span><span class="s">&#39;google.com&#39;</span><span class="p">,</span> <span class="nb">require</span> <span class="o">=&gt;</span> <span class="p">{</span>
-</span><span class='line'>       <span class="n">username</span> <span class="o">=&gt;</span> <span class="s">&#39;your username on google.com&#39;</span><span class="p">,</span>
-</span><span class='line'>       <span class="n">password</span> <span class="o">=&gt;</span> <span class="s">&#39;your password on google.com&#39;</span>
-</span><span class='line'>    <span class="p">});</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">sub </span><span class="nf">auth</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">my</span> <span class="nv">$self</span> <span class="o">=</span> <span class="nb">shift</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="k">my</span> <span class="nv">$res</span> <span class="o">=</span> <span class="nv">$self</span><span class="o">-&gt;</span><span class="n">google_auth</span><span class="o">-&gt;</span><span class="n">login</span><span class="p">(</span><span class="nv">$self</span><span class="o">-&gt;</span><span class="n">config</span><span class="o">-&gt;</span><span class="p">{</span><span class="n">username</span><span class="p">},</span> <span class="nv">$self</span><span class="o">-&gt;</span><span class="n">config</span><span class="o">-&gt;</span><span class="p">{</span><span class="n">password</span><span class="p">});</span>
-</span><span class='line'>    <span class="nb">die</span> <span class="s">&quot;Login Failed: &quot;</span><span class="o">.</span> <span class="nv">$res</span><span class="o">-&gt;</span><span class="n">error</span> <span class="k">unless</span> <span class="nv">$res</span><span class="o">-&gt;</span><span class="n">is_success</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">sub </span><span class="nf">upload_files</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">my</span> <span class="nv">$self</span> <span class="o">=</span> <span class="nb">shift</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="k">for</span> <span class="k">my</span> <span class="nv">$file_path</span> <span class="p">(</span><span class="nv">@</span><span class="p">{</span> <span class="nv">$self</span><span class="o">-&gt;</span><span class="n">files</span> <span class="p">})</span> <span class="p">{</span>
-</span><span class='line'>        <span class="k">my</span> <span class="nv">$link</span> <span class="o">=</span> <span class="nv">$self</span><span class="o">-&gt;</span><span class="n">upload_file</span><span class="p">(</span><span class="nv">$file_path</span><span class="p">);</span>
-</span><span class='line'>        <span class="k">print</span> <span class="nv">$link</span><span class="o">.</span><span class="s">&quot;\n&quot;</span><span class="p">;</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">sub </span><span class="nf">upload_file</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">my</span> <span class="p">(</span><span class="nv">$self</span><span class="p">,</span> <span class="nv">$file_path</span><span class="p">)</span> <span class="o">=</span> <span class="nv">@_</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="k">my</span> <span class="nv">$file</span> <span class="o">=</span> <span class="nn">Path::Class::</span><span class="n">File</span><span class="o">-&gt;</span><span class="k">new</span><span class="p">(</span><span class="nv">$file_path</span><span class="p">);</span>
-</span><span class='line'>    <span class="nb">die</span> <span class="s">&quot;File Not Found : $file&quot;</span> <span class="k">unless</span> <span class="o">-</span><span class="n">f</span> <span class="nv">$file</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="k">my</span> <span class="nv">$post_url</span> <span class="o">=</span> <span class="nb">sprintf</span> <span class="s">&#39;https://picasaweb.google.com/data/feed/api/user/%s/albumid/%s&#39;</span><span class="p">,</span> <span class="nv">$self</span><span class="o">-&gt;</span><span class="n">user_id</span><span class="p">,</span> <span class="nv">$self</span><span class="o">-&gt;</span><span class="n">album_id</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="k">my</span> <span class="p">(</span><span class="nv">$mime_type</span><span class="p">,</span> <span class="nv">$encoding</span><span class="p">)</span> <span class="o">=</span> <span class="nn">MIME::Types::</span><span class="n">by_suffix</span><span class="p">(</span><span class="nv">$file</span><span class="o">-&gt;</span><span class="n">basename</span><span class="p">);</span>
-</span><span class='line'>    <span class="k">my</span> <span class="nv">$content</span> <span class="o">=</span> <span class="nv">$file</span><span class="o">-&gt;</span><span class="n">slurp</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">my</span> <span class="nv">$res</span> <span class="o">=</span> <span class="nv">$self</span><span class="o">-&gt;</span><span class="n">_ua</span><span class="o">-&gt;</span><span class="n">post</span><span class="p">(</span><span class="nv">$post_url</span><span class="p">,</span>
-</span><span class='line'>        <span class="nv">$self</span><span class="o">-&gt;</span><span class="n">google_auth</span><span class="o">-&gt;</span><span class="n">auth_params</span><span class="p">,</span>
-</span><span class='line'>        <span class="n">Content_Type</span>   <span class="o">=&gt;</span> <span class="nv">$mime_type</span><span class="p">,</span>
-</span><span class='line'>        <span class="n">Slug</span>           <span class="o">=&gt;</span> <span class="nv">$file</span><span class="o">-&gt;</span><span class="n">basename</span><span class="p">,</span>
-</span><span class='line'>        <span class="n">Content</span>        <span class="o">=&gt;</span> <span class="nv">$content</span><span class="p">,</span>
-</span><span class='line'>    <span class="p">);</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="nb">die</span> <span class="s">&#39;UPLOAD Failed : &#39;</span><span class="o">.</span><span class="nv">$res</span><span class="o">-&gt;</span><span class="n">status_line</span> <span class="k">unless</span> <span class="nv">$res</span><span class="o">-&gt;</span><span class="n">is_success</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">my</span> <span class="p">(</span><span class="nv">$link</span><span class="p">)</span> <span class="o">=</span> <span class="p">(</span><span class="nv">$res</span><span class="o">-&gt;</span><span class="n">decoded_content</span><span class="o">=~</span><span class="sr">/content type.*?src=&#39;(.*?)&#39;/gsm</span><span class="p">);</span>
-</span><span class='line'>    <span class="nv">$link</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">__PACKAGE__</span><span class="o">-&gt;</span><span class="n">meta</span><span class="o">-&gt;</span><span class="n">make_immutable</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'><span class="nb">package</span> <span class="n">main</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">my</span> <span class="nv">$uploader</span> <span class="o">=</span> <span class="n">PicasaUploader</span><span class="o">-&gt;</span><span class="k">new</span><span class="p">(</span> <span class="n">files</span> <span class="o">=&gt;</span> <span class="o">\</span><span class="nv">@ARGV</span> <span class="p">);</span>
-</span><span class='line'><span class="nv">$uploader</span><span class="o">-&gt;</span><span class="n">upload_files</span><span class="p">;</span>
+</span><span class='line'><span class="n">desc</span> <span class="s">&#39;Open NRPE(5666) Port&#39;</span><span class="p">;</span>
+</span><span class='line'><span class="n">task</span> <span class="s">&#39;open_nrpe_port&#39;</span><span class="p">,</span> <span class="n">group</span> <span class="o">=&gt;</span> <span class="s">&quot;sweet-vms&quot;</span><span class="p">,</span> <span class="k">sub </span><span class="p">{</span>
+</span><span class='line'>    <span class="n">open_port</span> <span class="mi">5666</span><span class="p">;</span>
+</span><span class='line'><span class="p">};</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>  <a href="http://aanoaa.github.com/blog/2012/01/03/picasa-upload-script/">@aanoaa 님의 글</a>에서 Picasa Uploader 스크립트를 소개했었는데요. <code>PicasaUploader</code> 라고 package 로 정의해서 쓰도록 했습니다.
-  거기에 <a href="https://metacpan.org/module/Config::Pit">Config::Pit</a> 을 써서 계정정보를 다루도록 했구요.
-  심심해서 그냥 약간 개량해봤습니다.</p>
+<p>이렇게 <code>Rexfile</code> 에 각 서버 그룹과 SSH 접속 계정, 그리고 <code>Rex::Init</code> 에 그 그룹에 대한 작업(Task) 를 정의합니다.</p>
+
+<p>  위처럼 정의한 작업에 대해서,</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>rex -T
+</span><span class='line'>Tasks
+</span><span class='line'>  Init:add_yum_repo              Add yum repo
+</span><span class='line'>  Init:install_opsview_agent     Install OpsView-Agent
+</span><span class='line'>  Init:open_nrpe_port            Open NRPE<span class="o">(</span>5666<span class="o">)</span> Port
+</span><span class='line'>Batches
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>  <code>rex -T</code> 를 통해서 작동할 수 있는 Task 의 리스트를 받을 수 있습니다.</p>
+
+<p>  그리고,</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>rex <span class="s1">&#39;Init:add_yum_repo&#39;</span> <span class="s1">&#39;Init:install_opsview_agent&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>  이런식으로 동작할 작업들을 지정해줌으로, 위의 <code>sweet-vms</code> 그룹의 vm01 부터 vm10 의 의 열대의 서버에 대해서 <code>RPMForge</code> 와 <code>OpsView</code> <code>yum repo</code> 를 추가하고, <code>opsview-agent</code> 를 설치합니다. <code>opsview-agent</code> 자체는 기본적인 yum package 에 없는 라이브러리를 참조하기에 <code>RPMForge</code> 를 우선 등록한 것입니다.</p>
+
+<p>  예, 뭐 아무튼 이런 식입니다. 아직 뭐 본격적으로 이런저런 상황에 부딪히면서 검증하고 있고, Rex 자체에서 어떻게 할 수 없으면 직접 패치를 써나가 볼 까합니다.</p>
+
+<p>  그런 의미에서, 오늘 Rex 에 Pull Request 를 하나 보내서 0.25 에 Merge 되었습니다. :-)</p>
+
+<ul>
+<li><a href="https://github.com/JEEN/Rex/commit/1d69a96ba4371dc9e030fab494c887b9126a2c9d">https://github.com/JEEN/Rex/commit/1d69a96ba4371dc9e030fab494c887b9126a2c9d</a></li>
+<li><p><a href="http://github.com/krimdomu/Rex/pull/12">http://github.com/krimdomu/Rex/pull/12</a></p>
+
+<p>사실 위에서 <code>opsview-agent</code> 는 제대로 설치되지 않습니다. 이유는 Pull Request 를 보내면서 봉착한 상황과 대처로 적어놨습니다.</p></li>
+</ul>
+
+
+<blockquote class="twitter-tweet"><p>Rex 무려 GPL v3 였구나&#8230;</p>&mdash; JEEN (@JEEN_LEE) <a href="https://twitter.com/JEEN_LEE/status/169724680612216832" data-datetime="2012-02-15T10:08:11+00:00">February 15, 2012</a></blockquote>
+
+
+
 
   
   
@@ -432,7 +324,7 @@
     
       <h2 class="entry-title">
         
-        <a href="/blog/2012/01/05/freebsd-8-dot-2-stable-cpan-error/">FreeBSD 8.2 STABLE - CPAN Error</a>
+        <a href="/blog/2012/02/09/cpan-module-update/">CPAN Module Update</a>
         
       </h2>
     
@@ -450,16 +342,39 @@
   
 
 
-<time datetime="2012-01-05T22:32:00+09:00" pubdate data-updated="true">Jan 5<span>th</span>, 2012</time>
+<time datetime="2012-02-09T01:06:00+09:00" pubdate data-updated="true">Feb 9<span>th</span>, 2012</time>
         
-         | <a href="/blog/2012/01/05/freebsd-8-dot-2-stable-cpan-error/#disqus_thread">Comments</a>
+         | <a href="/blog/2012/02/09/cpan-module-update/#disqus_thread">Comments</a>
         
       </p>
     
   </header>
 
 
-  <p>  회사업무차 <code>FreeBSD 8.2 STABLE</code> OS 를 사용하는 서버에서 CPAN 사용시 에러가 발생했습니다.</p>
+  <blockquote class="twitter-tweet" lang="ko"><p>Acme-CPANAuthors-Korean 0.08 by JEEN - <a href="http://t.co/CjlRnKEO" title="http://metacpan.org/release/JEEN/Acme-CPANAuthors-Korean-0.08/">metacpan.org/release/JEEN/A…</a></p>&mdash; CPAN New Modules (@cpan_new) <a href="https://twitter.com/cpan_new/status/167271503061200896" data-datetime="2012-02-08T15:40:08+00:00">2월 8, 2012</a></blockquote>
+
+
+
+
+<blockquote class="twitter-tweet" lang="ko"><p>Lingua-KO-TypoCorrector 0.03 by JEEN - <a href="http://t.co/b1Lp98PW" title="http://metacpan.org/release/JEEN/Lingua-KO-TypoCorrector-0.03/">metacpan.org/release/JEEN/L…</a></p>&mdash; CPAN New Modules (@cpan_new) <a href="https://twitter.com/cpan_new/status/167273895550922753" data-datetime="2012-02-08T15:49:39+00:00">2월 8, 2012</a></blockquote>
+
+
+
+
+<blockquote class="twitter-tweet" lang="ko"><p>Date-Holidays-KR 0.03 by JEEN - <a href="http://t.co/qAXrPO6f" title="http://metacpan.org/release/JEEN/Date-Holidays-KR-0.03/">metacpan.org/release/JEEN/D…</a></p>&mdash; CPAN New Modules (@cpan_new) <a href="https://twitter.com/cpan_new/status/167275532466143232" data-datetime="2012-02-08T15:56:09+00:00">2월 8, 2012</a></blockquote>
+
+
+
+
+<blockquote class="twitter-tweet" lang="ko"><p>WebService-Aladdin 0.0706 by JEEN - <a href="http://t.co/lyGpgk6W" title="http://metacpan.org/release/JEEN/WebService-Aladdin-0.0706/">metacpan.org/release/JEEN/W…</a></p>&mdash; CPAN New Modules (@cpan_new) <a href="https://twitter.com/cpan_new/status/167276286962704385" data-datetime="2012-02-08T15:59:09+00:00">2월 8, 2012</a></blockquote>
+
+
+
+
+<blockquote class="twitter-tweet" lang="ko"><p>WWW-Shorten-Durl 0.05 by JEEN - <a href="http://t.co/mtnX4oEn" title="http://metacpan.org/release/JEEN/WWW-Shorten-Durl-0.05/">metacpan.org/release/JEEN/W…</a></p>&mdash; CPAN New Modules (@cpan_new) <a href="https://twitter.com/cpan_new/status/167277296259055616" data-datetime="2012-02-08T16:03:09+00:00">2월 8, 2012</a></blockquote>
+
+
+<p>  이전 글에서 언급했듯, 제가 만든 CPAN Module 들의 Meta 정보중에 repository 가 누락된 것도 있었고, 이 중 몇몇은 Github Project 이름까지 p5-* 형식으로 바꿔놓아서 이왕 이렇게 된 거 전부 바꿔보자는 생각이 들어서 작업을 했습니다.</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -471,200 +386,22 @@
 <span class='line-number'>8</span>
 <span class='line-number'>9</span>
 <span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>cpan Module::Install
-</span><span class='line'>Reading <span class="s1">&#39;/home/jeen/.cpan/sources/authors/01mailrc.txt.gz&#39;</span>
-</span><span class='line'>............................................................................DONE
-</span><span class='line'>Reading <span class="s1">&#39;/home/jeen/.cpan/sources/modules/02packages.details.txt.gz&#39;</span>
-</span><span class='line'>  Database was generated on Thu, 05 Jan 2012 05:12:02 GMT
-</span><span class='line'>............................................................................DONE
-</span><span class='line'>Reading <span class="s1">&#39;/home/jeen/.cpan/sources/modules/03modlist.data.gz&#39;</span>
-</span><span class='line'>Can<span class="s1">&#39;t locate object method &quot;data&quot; via package &quot;CPAN::Modulelist&quot; (perhaps you forgot to load &quot;CPAN::Modulelist&quot;?) at (eval 24) line 1.</span>
-</span><span class='line'><span class="s1"> at /home/jeen/perl5/perlbrew/perls/perl-5.14.2/lib/5.14.2/CPAN/Index.pm line 524</span>
-</span><span class='line'><span class="s1"> CPAN::Index::rd_modlist(&#39;</span>CPAN::Index<span class="s1">&#39;, &#39;</span>/home/jeen/.cpan/sources/modules/03modlist.data.gz<span class="s1">&#39;) called at /home/jeen/perl5/perlbrew/perls/perl-5.14.2/lib/5.14.2/CPAN/Index.pm line 85</span>
-</span><span class='line'><span class="s1"> CPAN::Index::reload(&#39;</span>CPAN::Index<span class="s1">&#39;) called at /home/jeen/perl5/perlbrew/perls/perl-5.14.2/lib/5.14.2/CPAN.pm line 976</span>
-</span><span class='line'><span class="s1"> CPAN::exists(&#39;</span><span class="nv">CPAN</span><span class="o">=</span>HASH<span class="o">(</span>0x801fe27f8<span class="o">)</span><span class="s1">&#39;, &#39;</span>CPAN::Module<span class="s1">&#39;, &#39;</span>Module::Install<span class="s1">&#39;) called at /home/jeen/perl5/perlbrew/perls/perl-5.14.2/lib/5.14.2/CPAN/Shell.pm line 1256</span>
-</span><span class='line'><span class="s1"> CPAN::Shell::expandany(&#39;</span>CPAN::Shell<span class="s1">&#39;, &#39;</span>Module::Install<span class="s1">&#39;) called at /home/jeen/perl5/perlbrew/perls/perl-5.14.2/lib/5.14.2/CPAN/Shell.pm line 1681</span>
-</span><span class='line'><span class="s1"> CPAN::Shell::rematein(&#39;</span>CPAN::Shell<span class="s1">&#39;, &#39;</span>install<span class="s1">&#39;, &#39;</span>Module::Install<span class="s1">&#39;) called at /home/jeen/perl5/perlbrew/perls/perl-5.14.2/lib/5.14.2/CPAN/Shell.pm line 1977</span>
-</span><span class='line'><span class="s1"> CPAN::Shell::__ANON__(&#39;</span>CPAN::Shell<span class="s1">&#39;, &#39;</span>Module::Install<span class="s1">&#39;) called at /home/jeen/perl5/perlbrew/perls/perl-5.14.2/lib/5.14.2/App/Cpan.pm line 459</span>
-</span><span class='line'><span class="s1"> App::Cpan::__ANON__(&#39;</span>Module::Install<span class="s1">&#39;) called at /home/jeen/perl5/perlbrew/perls/perl-5.14.2/lib/5.14.2/App/Cpan.pm line 468</span>
-</span><span class='line'><span class="s1"> App::Cpan::_default(&#39;</span>ARRAY<span class="o">(</span>0x800e92780<span class="o">)</span><span class="s1">&#39;, &#39;</span>HASH<span class="o">(</span>0x801fe7d38<span class="o">)</span><span class="s1">&#39;) called at /home/jeen/perl5/perlbrew/perls/perl-5.14.2/lib/5.14.2/App/Cpan.pm line 386</span>
-</span><span class='line'><span class="s1"> App::Cpan::run(&#39;</span>App::Cpan<span class="s1">&#39;, &#39;</span>Module::Install<span class="err">&#39;</span><span class="o">)</span> called at /home/jeen/perl5/perlbrew/perls/perl-5.14.2/bin/cpan line 11
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>  마땅히 어떻게 <code>cpan</code> 자체가 안되니, 다른 CPAN 모듈 설치도 안되고&#8230;</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>curl -L http://cpanmin.us | perl - --self-upgrade
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>  그래서 일단은 그냥 <code>cpanm</code> 을 설치하고 필요한 모듈들을 설치했습니다. 하지만 여전히 <code>cpan</code> 으로 모듈을 설치하려면 위처럼 에러가 뜨니 아직도 찜찜하기 그지 없네요.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>uname -a
-</span><span class='line'>FreeBSD xxx.xxxxx.kr 8.2-STABLE FreeBSD 8.2-STABLE <span class="c">#1: Wed Apr 13 13:10:49 KST 2011     root@xxx.xxxx.kr:/usr/obj/usr/src/sys/GENERIC  amd64</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p></p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-<span class='line-number'>40</span>
-<span class='line-number'>41</span>
-<span class='line-number'>42</span>
-<span class='line-number'>43</span>
-<span class='line-number'>44</span>
-<span class='line-number'>45</span>
-<span class='line-number'>46</span>
-<span class='line-number'>47</span>
-<span class='line-number'>48</span>
-<span class='line-number'>49</span>
-<span class='line-number'>50</span>
-<span class='line-number'>51</span>
-<span class='line-number'>52</span>
-<span class='line-number'>53</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>perl -V
-</span><span class='line'>Summary of my perl5 <span class="o">(</span>revision 5 version 14 subversion 2<span class="o">)</span> configuration:
+</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="k">use</span> <span class="nn">inc::Module::</span><span class="n">Install</span><span class="p">;</span>
+</span><span class='line'><span class="n">name</span> <span class="s">&#39;Date-Holidays-KR&#39;</span><span class="p">;</span>
+</span><span class='line'><span class="n">all_from</span> <span class="s">&#39;lib/Date/Holidays/KR.pm&#39;</span><span class="p">;</span>
+</span><span class='line'><span class="n">requires</span> <span class="s">&#39;Date::Korean&#39;</span> <span class="o">=&gt;</span> <span class="mi">0</span><span class="p">;</span>
 </span><span class='line'>
-</span><span class='line'>  Platform:
-</span><span class='line'>    <span class="nv">osname</span><span class="o">=</span>freebsd, <span class="nv">osvers</span><span class="o">=</span>8.2-stable, <span class="nv">archname</span><span class="o">=</span>amd64-freebsd
-</span><span class='line'>    <span class="nv">uname</span><span class="o">=</span><span class="s1">&#39;freebsd xxx.xxxxx.kr 8.2-stable freebsd 8.2-stable #1: wed apr 13 13:10:49 kst 2011 root@xxx.xxxx.kr:usrobjusrsrcsysgeneric amd64 &#39;</span>
-</span><span class='line'>    <span class="nv">config_args</span><span class="o">=</span><span class="s1">&#39;-de -Dprefix=/home/jeen/perl5/perlbrew/perls/perl-5.14.2&#39;</span>
-</span><span class='line'>    <span class="nv">hint</span><span class="o">=</span>recommended, <span class="nv">useposix</span><span class="o">=</span><span class="nb">true</span>, <span class="nv">d_sigaction</span><span class="o">=</span>define
-</span><span class='line'>    <span class="nv">useithreads</span><span class="o">=</span>undef, <span class="nv">usemultiplicity</span><span class="o">=</span>undef
-</span><span class='line'>    <span class="nv">useperlio</span><span class="o">=</span>define, <span class="nv">d_sfio</span><span class="o">=</span>undef, <span class="nv">uselargefiles</span><span class="o">=</span>define, <span class="nv">usesocks</span><span class="o">=</span>undef
-</span><span class='line'>    <span class="nv">use64bitint</span><span class="o">=</span>define, <span class="nv">use64bitall</span><span class="o">=</span>define, <span class="nv">uselongdouble</span><span class="o">=</span>undef
-</span><span class='line'>    <span class="nv">usemymalloc</span><span class="o">=</span>n, <span class="nv">bincompat5005</span><span class="o">=</span>undef
-</span><span class='line'>  Compiler:
-</span><span class='line'>    <span class="nv">cc</span><span class="o">=</span><span class="s1">&#39;cc&#39;</span>, <span class="nv">ccflags</span> <span class="o">=</span><span class="s1">&#39;-DHAS_FPSETMASK -DHAS_FLOATINGPOINT_H -fno-strict-aliasing -pipe -fstack-protector -I/usr/local/include&#39;</span>,
-</span><span class='line'>    <span class="nv">optimize</span><span class="o">=</span><span class="s1">&#39;-O&#39;</span>,
-</span><span class='line'>    <span class="nv">cppflags</span><span class="o">=</span><span class="s1">&#39;-DHAS_FPSETMASK -DHAS_FLOATINGPOINT_H -fno-strict-aliasing -pipe -fstack-protector -I/usr/local/include&#39;</span>
-</span><span class='line'>    <span class="nv">ccversion</span><span class="o">=</span><span class="s1">&#39;&#39;</span>, <span class="nv">gccversion</span><span class="o">=</span><span class="s1">&#39;4.2.1 20070719  [FreeBSD]&#39;</span>, <span class="nv">gccosandvers</span><span class="o">=</span><span class="s1">&#39;&#39;</span>
-</span><span class='line'>    <span class="nv">intsize</span><span class="o">=</span>4, <span class="nv">longsize</span><span class="o">=</span>8, <span class="nv">ptrsize</span><span class="o">=</span>8, <span class="nv">doublesize</span><span class="o">=</span>8, <span class="nv">byteorder</span><span class="o">=</span>12345678
-</span><span class='line'>    <span class="nv">d_longlong</span><span class="o">=</span>define, <span class="nv">longlongsize</span><span class="o">=</span>8, <span class="nv">d_longdbl</span><span class="o">=</span>define, <span class="nv">longdblsize</span><span class="o">=</span>16
-</span><span class='line'>    <span class="nv">ivtype</span><span class="o">=</span><span class="s1">&#39;long&#39;</span>, <span class="nv">ivsize</span><span class="o">=</span>8, <span class="nv">nvtype</span><span class="o">=</span><span class="s1">&#39;double&#39;</span>, <span class="nv">nvsize</span><span class="o">=</span>8, <span class="nv">Off_t</span><span class="o">=</span><span class="s1">&#39;off_t&#39;</span>, <span class="nv">lseeksize</span><span class="o">=</span>8
-</span><span class='line'>    <span class="nv">alignbytes</span><span class="o">=</span>8, <span class="nv">prototype</span><span class="o">=</span>define
-</span><span class='line'>  Linker and Libraries:
-</span><span class='line'>    <span class="nv">ld</span><span class="o">=</span><span class="s1">&#39;cc&#39;</span>, <span class="nv">ldflags</span> <span class="o">=</span><span class="s1">&#39;-Wl,-E  -fstack-protector -L/usr/local/lib&#39;</span>
-</span><span class='line'>    <span class="nv">libpth</span><span class="o">=</span>/usr/lib /usr/local/lib
-</span><span class='line'>    <span class="nv">libs</span><span class="o">=</span>-lm -lcrypt -lutil -lc
-</span><span class='line'>    <span class="nv">perllibs</span><span class="o">=</span>-lm -lcrypt -lutil -lc
-</span><span class='line'>    <span class="nv">libc</span><span class="o">=</span>, <span class="nv">so</span><span class="o">=</span>so, <span class="nv">useshrplib</span><span class="o">=</span><span class="nb">false</span>, <span class="nv">libperl</span><span class="o">=</span>libperl.a
-</span><span class='line'>    <span class="nv">gnulibc_version</span><span class="o">=</span><span class="s1">&#39;&#39;</span>
-</span><span class='line'>  Dynamic Linking:
-</span><span class='line'>    <span class="nv">dlsrc</span><span class="o">=</span>dl_dlopen.xs, <span class="nv">dlext</span><span class="o">=</span>so, <span class="nv">d_dlsymun</span><span class="o">=</span>undef, <span class="nv">ccdlflags</span><span class="o">=</span><span class="s1">&#39; &#39;</span>
-</span><span class='line'>    <span class="nv">cccdlflags</span><span class="o">=</span><span class="s1">&#39;-DPIC -fPIC&#39;</span>, <span class="nv">lddlflags</span><span class="o">=</span><span class="s1">&#39;-shared  -L/usr/local/lib -fstack-protector&#39;</span>
-</span><span class='line'>
-</span><span class='line'>
-</span><span class='line'>Characteristics of this binary <span class="o">(</span>from libperl<span class="o">)</span>:
-</span><span class='line'>  Compile-time options: PERL_DONT_CREATE_GVSV PERL_MALLOC_WRAP
-</span><span class='line'>                        PERL_PRESERVE_IVUV USE_64_BIT_ALL USE_64_BIT_INT
-</span><span class='line'>                        USE_LARGE_FILES USE_PERLIO USE_PERL_ATOF
-</span><span class='line'>  Built under freebsd
-</span><span class='line'>  Compiled at Jan  5 2012 15:51:41
-</span><span class='line'>  %ENV:
-</span><span class='line'>    <span class="nv">PERLBREW_BASHRC_VERSION</span><span class="o">=</span><span class="s2">&quot;0.39&quot;</span>
-</span><span class='line'>    <span class="nv">PERLBREW_HOME</span><span class="o">=</span><span class="s2">&quot;/home/jeen/.perlbrew&quot;</span>
-</span><span class='line'>    <span class="nv">PERLBREW_MANPATH</span><span class="o">=</span><span class="s2">&quot;/home/jeen/perl5/perlbrew/perls/perl-5.14.2/man&quot;</span>
-</span><span class='line'>    <span class="nv">PERLBREW_PATH</span><span class="o">=</span><span class="s2">&quot;/home/jeen/perl5/perlbrew/bin:/home/jeen/perl5/perlbrew/perls/perl-5.14.2/bin&quot;</span>
-</span><span class='line'>    <span class="nv">PERLBREW_PERL</span><span class="o">=</span><span class="s2">&quot;perl-5.14.2&quot;</span>
-</span><span class='line'>    <span class="nv">PERLBREW_ROOT</span><span class="o">=</span><span class="s2">&quot;/home/jeen/perl5/perlbrew&quot;</span>
-</span><span class='line'>    <span class="nv">PERLBREW_VERSION</span><span class="o">=</span><span class="s2">&quot;0.39&quot;</span>
-</span><span class='line'>  @INC:
-</span><span class='line'>    /home/jeen/perl5/perlbrew/perls/perl-5.14.2/lib/site_perl/5.14.2/amd64-freebsd
-</span><span class='line'>    /home/jeen/perl5/perlbrew/perls/perl-5.14.2/lib/site_perl/5.14.2
-</span><span class='line'>    /home/jeen/perl5/perlbrew/perls/perl-5.14.2/lib/5.14.2/amd64-freebsd
-</span><span class='line'>    /home/jeen/perl5/perlbrew/perls/perl-5.14.2/lib/5.14.2
-</span><span class='line'>    .
+</span><span class='line'><span class="n">tests</span> <span class="s">&#39;t/*.t&#39;</span><span class="p">;</span>
+</span><span class='line'><span class="n">test_requires</span> <span class="s">&#39;Test::More&#39;</span><span class="p">;</span>
+</span><span class='line'><span class="n">resources</span> <span class="n">repository</span> <span class="o">=&gt;</span> <span class="s">&#39;git://github.com/JEEN/p5-Date-Holidays-KR.git&#39;</span><span class="p">;</span>
+</span><span class='line'><span class="n">auto_include</span><span class="p">;</span>
+</span><span class='line'><span class="n">WriteAll</span><span class="p">;</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
+<p>  위는 <a href="http://metacpan.org/module/Date::Holidays::KR">Date::Holidays::KR</a> 의 <code>Makefile.PL</code> 입니다. 몇몇 모듈은 <a href="http://metacpan.org/module/ExtUtils::MakeMaker">ExtUtils::MakeMaker</a> 를 사용하고 있었는데, 모두 <a href="http://metacpan.org/module/Module::Install">Module::Install</a> 을 사용하도록 교체하고, repository 를 각각의 github repository 를 지정한 것뿐입니다.</p>
 
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>df -Th .
-</span><span class='line'>Filesystem   Type    Size    Used   Avail Capacity  Mounted on
-</span><span class='line'>/dev/ar0s1f  ufs      43G    5.1G     35G    13%    /usr
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>  일단 사건해결에 도움이 될 만한 정보들은 모조리 뽑아봤습니다.
-  천천히 살펴보며 구원을 요청해야 되겠네요.</p>
-
-<h3>Conclusion</h3>
-
-<p>  <a href="http://webchat.freenode.net?channels=perl-kr">#perl-kr</a> 에서 위에 정리한 내용들로 <a href="http://twitter.com/aer0">@aer0</a> 님께 질문을 날렸습니다. @aer0 님께서 제안하신 방법으로</p>
-
-<ul>
-<li><code>Bundle::CPAN</code> 을 설치</li>
-<li><p><code>~/.cpan</code> 디렉토리를 삭제 후 다시 <code>cpan</code> 실행</p>
-
-<p>이었습니다.</p>
-
-<p><code>Bundle::CPAN</code> 을 설치해도 사태가 해결되지 않아서, 결국은 <code>~/.cpan</code> 디렉토리를 삭제한 후 다시 <code>cpan</code> 을 실행했습니다.</p></li>
-<li><p>~/.cpan/sources/modules/02packages.details.txt.gz</p></li>
-<li><p>~/.cpan/sources/modules/03modlist.data.gz</p>
-
-<p>같은 CPAN 미러에서 가져오는 인덱스 파일이 이상해서 꼬인 것 같다라는 @aer0 님의 총평이었습니다.</p>
-
-<p>역시 이런 사건이 발생할 때는 <code>#perl-kr</code> 에 들러야 됩니다. :-)</p></li>
-</ul>
-
-
-<blockquote class="twitter-tweet" data-in-reply-to="154824190581678081" lang="ko"><p>@<a href="https://twitter.com/JEEN_LEE">JEEN_LEE</a> 자문자답 <a href="http://t.co/hSGdHz9i" title="http://jeen.github.com/blog/2012/01/05/freebsd-8-dot-2-stable-cpan-error/">jeen.github.com/blog/2012/01/0…</a></p>&mdash; JEEN (@JEEN_LEE) <a href="https://twitter.com/JEEN_LEE/status/154930926294536192" data-datetime="2012-01-05T14:23:05+00:00">1월 5, 2012</a></blockquote>
-
-
-
+<p>  마음먹은 김에 이슈처리하고 저녁시간을 빌어서 CPAN 에 일괄 업로드했습니다. 완전 스팸이네요.</p>
 
   
   
