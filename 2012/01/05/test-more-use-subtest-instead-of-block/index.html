@@ -1,0 +1,373 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Test::More - use 'subtest' instead of {} block - JEEN's techlog</title>
+  <meta name="author" content="Jeen Lee">
+  
+  <meta name="Generator" content="Jekyll & Octopress (http://octopress.org)">
+
+  
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://jeen.github.io/2012/01/05/test-more-use-subtest-instead-of-block/">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="JEEN's techlog" type="application/atom+xml">
+  
+
+<!--Fonts from Google's Web font directory at http://google.com/webfonts -->
+<link href='//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
+<link href='//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
+
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="/javascripts/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/build/all-d6d9ba8d8ed93ba1e6156209462b4f6b.js"></script>
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-27958809-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+  
+
+   
+  <link href="/octopress-favicon.png" rel="icon">
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">JEEN's techlog</a></h1>
+  
+    <h2>Yet Another JEEN's Blog</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:jeen.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/archives/">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+
+
+
+
+
+
+
+
+
+
+
+<article class="hentry " role="article">
+  
+  <header>
+    <h1 class="entry-title">
+
+Test::More - Use 'Subtest' Instead of {} Block
+
+</h1>
+
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2012-01-05T20:33:00+09:00" pubdate data-updated="true">Jan 5<span>th</span>, 2012</time>
+         &bull; <a rel="bookmark" href="/2012/01/05/test-more-use-subtest-instead-of-block/">Permalink</a>
+      </p>
+    
+  </header>
+
+<div class="entry-content"><p>여태껏 테스트코드를 써나가면서 그냥 {} 블록안에 일정한 흐름의 테스트 코드를 적곤 했었습니다.</p>
+
+<figure class='code'><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div><div data-line='2' class='line-number'></div><div data-line='3' class='line-number'></div><div data-line='4' class='line-number'></div><div data-line='5' class='line-number'></div><div data-line='6' class='line-number'></div><div data-line='7' class='line-number'></div><div data-line='8' class='line-number'></div><div data-line='9' class='line-number'></div><div data-line='10' class='line-number'></div><div data-line='11' class='line-number'></div><div data-line='12' class='line-number'></div><div data-line='13' class='line-number'></div><div data-line='14' class='line-number'></div><div data-line='15' class='line-number'></div><div data-line='16' class='line-number'></div><div data-line='17' class='line-number'></div><div data-line='18' class='line-number'></div><div data-line='19' class='line-number'></div><div data-line='20' class='line-number'></div><div data-line='21' class='line-number'></div><div data-line='22' class='line-number'></div><div data-line='23' class='line-number'></div><div data-line='24' class='line-number'></div></pre></td><td class='main  perl'><pre><div class='line'><span class="k">use</span> <span class="nn">Test::</span><span class="n">More</span><span class="p">;</span>
+</div><div class='line'><span class="k">use</span> <span class="nn">HTTP::Request::</span><span class="n">Common</span><span class="p">;</span>
+</div><div class='line'><span class="k">use</span> <span class="nn">Catalyst::</span><span class="n">Test</span> <span class="s">&#39;MyApp::Web&#39;</span><span class="p">;</span>
+</div><div class='line'> </div><div class='line'><span class="c1"># Access /</span>
+</div><div class='line'><span class="p">{</span>
+</div><div class='line'>    <span class="k">my</span> <span class="nv">$res</span> <span class="o">=</span> <span class="n">request</span><span class="p">(</span><span class="s">&#39;/&#39;</span><span class="p">);</span>
+</div><div class='line'>    <span class="n">ok</span><span class="p">(</span><span class="nv">$res</span><span class="o">-&gt;</span><span class="n">is_success</span><span class="p">,</span> <span class="s">&quot;Request should be succeed&quot;</span><span class="p">);</span>
+</div><div class='line'>    <span class="n">ok</span><span class="p">(</span><span class="nv">$res</span><span class="o">-&gt;</span><span class="n">header</span><span class="p">(</span><span class="s">&#39;.......&#39;</span><span class="p">),</span> <span class="s">&#39;Header xxxxx exist&#39;</span><span class="p">);</span>
+</div><div class='line'>    <span class="n">like</span><span class="p">(</span><span class="nv">$res</span><span class="o">-&gt;</span><span class="n">content</span><span class="p">,</span> <span class="sx">qr|some sentences|</span><span class="p">,</span> <span class="s">&quot;Found some sentences&quot;</span><span class="p">)</span>
+</div><div class='line'><span class="p">}</span>
+</div><div class='line'> </div><div class='line'><span class="c1"># Login</span>
+</div><div class='line'><span class="p">{</span>
+</div><div class='line'>    <span class="k">my</span> <span class="nv">$req</span> <span class="o">=</span> <span class="n">POST</span><span class="p">(</span><span class="s">&#39;/login&#39;</span><span class="p">,</span> <span class="p">[</span> <span class="s">&#39;username&#39;</span> <span class="o">=&gt;</span> <span class="s">&#39;blahblah&#39;</span><span class="p">,</span> <span class="s">&#39;password&#39;</span> <span class="o">=&gt;</span> <span class="s">&#39;blahblah&#39;</span> <span class="p">]);</span>
+</div><div class='line'>    <span class="k">my</span> <span class="nv">$res</span> <span class="o">=</span> <span class="n">request</span><span class="p">(</span><span class="nv">$req</span><span class="p">);</span>
+</div><div class='line'>    <span class="n">ok</span><span class="p">(</span><span class="nv">$res</span><span class="o">-&gt;</span><span class="n">is_success</span><span class="p">,</span> <span class="s">&quot;Request should be suceed&quot;</span><span class="p">);</span>
+</div><div class='line'>    <span class="o">....</span>
+</div><div class='line'><span class="p">}</span>
+</div><div class='line'> </div><div class='line'><span class="c1"># some action</span>
+</div><div class='line'><span class="p">{</span>
+</div><div class='line'>    <span class="o">...</span><span class="p">;</span>
+</div><div class='line'><span class="p">}</span>
+</div></pre></td></tr></table></div></figure>
+
+<p>일단 뭐 {} 블록으로 각 action 에 대한 접근결과를 테스트하고, <code>#</code> 로 주석표시를 하면서 하나둘 하나둘 각 블록에 <code>$req</code>, <code>$res</code> 를 추가했었습니다. 일단 뭐 {} 블록으로 묶으면서 <code>$req</code>, <code>$res</code> 따위의 변수의 재정의 등에 관한 경고같은 것이 안나와서 좋고, 제대로 분류가 되는 느낌이기도 했습니다.</p>
+
+<h3>그냥 <code>subtest</code> 를 사용하면 어떨까?</h3>
+
+<p>그러는 도중에 <a href="http://search.cpan.org/perldoc?Test::More">Test::More 매뉴얼</a>을 읽어보다가 <code>subtest</code> 를 사용할 수 있다는 것을 알게 되었습니다.</p>
+
+<figure class='code'><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div><div data-line='2' class='line-number'></div><div data-line='3' class='line-number'></div><div data-line='4' class='line-number'></div><div data-line='5' class='line-number'></div><div data-line='6' class='line-number'></div><div data-line='7' class='line-number'></div><div data-line='8' class='line-number'></div><div data-line='9' class='line-number'></div><div data-line='10' class='line-number'></div><div data-line='11' class='line-number'></div><div data-line='12' class='line-number'></div><div data-line='13' class='line-number'></div><div data-line='14' class='line-number'></div><div data-line='15' class='line-number'></div><div data-line='16' class='line-number'></div><div data-line='17' class='line-number'></div></pre></td><td class='main  perl'><pre><div class='line'><span class="k">use</span> <span class="nn">HTTP::Request::</span><span class="n">Common</span><span class="p">;</span>
+</div><div class='line'><span class="k">use</span> <span class="nn">Catalyst::</span><span class="n">Test</span> <span class="s">&#39;MyApp::Web&#39;</span><span class="p">;</span>
+</div><div class='line'><span class="k">use</span> <span class="nn">Test::</span><span class="n">More</span><span class="p">;</span>
+</div><div class='line'> </div><div class='line'><span class="n">subtest</span> <span class="s">&#39;access to /&#39;</span> <span class="o">=&gt;</span> <span class="k">sub </span><span class="p">{</span>
+</div><div class='line'>    <span class="k">my</span> <span class="nv">$res</span> <span class="o">=</span> <span class="n">request</span><span class="p">(</span><span class="s">&#39;/&#39;</span><span class="p">);</span>
+</div><div class='line'>    <span class="n">ok</span><span class="p">(</span><span class="nv">$res</span><span class="o">-&gt;</span><span class="n">is_success</span><span class="p">,</span> <span class="s">&quot;Request should be succeed&quot;</span><span class="p">);</span>
+</div><div class='line'>    <span class="n">ok</span><span class="p">(</span><span class="nv">$res</span><span class="o">-&gt;</span><span class="n">header</span><span class="p">(</span><span class="s">&#39;.......&#39;</span><span class="p">),</span> <span class="s">&#39;Header xxxxx exist&#39;</span><span class="p">);</span>
+</div><div class='line'>    <span class="n">like</span><span class="p">(</span><span class="nv">$res</span><span class="o">-&gt;</span><span class="n">content</span><span class="p">,</span> <span class="sx">qr|some sentences|</span><span class="p">,</span> <span class="s">&quot;Found some sentences&quot;</span><span class="p">)</span>
+</div><div class='line'><span class="p">};</span>
+</div><div class='line'> </div><div class='line'><span class="n">subtest</span> <span class="s">&#39;Login&#39;</span> <span class="o">=&gt;</span> <span class="k">sub </span><span class="p">{</span>
+</div><div class='line'>    <span class="k">my</span> <span class="nv">$req</span> <span class="o">=</span> <span class="n">POST</span><span class="p">(</span><span class="s">&#39;/login&#39;</span><span class="p">,</span> <span class="p">[</span> <span class="s">&#39;username&#39;</span> <span class="o">=&gt;</span> <span class="s">&#39;blahblah&#39;</span><span class="p">,</span> <span class="s">&#39;password&#39;</span> <span class="o">=&gt;</span> <span class="s">&#39;blahblah&#39;</span> <span class="p">]);</span>
+</div><div class='line'>    <span class="k">my</span> <span class="nv">$res</span> <span class="o">=</span> <span class="n">request</span><span class="p">(</span><span class="nv">$req</span><span class="p">);</span>
+</div><div class='line'>    <span class="n">ok</span><span class="p">(</span><span class="nv">$res</span><span class="o">-&gt;</span><span class="n">is_success</span><span class="p">,</span> <span class="s">&quot;Request should be suceed&quot;</span><span class="p">);</span>
+</div><div class='line'>    <span class="o">....</span>
+</div><div class='line'><span class="p">};</span>
+</div></pre></td></tr></table></div></figure>
+
+<p><code>subtest</code> 를 사용하면서 코드는 위처럼 바뀌었습니다. <code>#</code> 로 주석처리를 할 필요도 없고, 해당 <code>subtest</code> 마다 명확하게 무엇을 하는 지 확실하게 의미있는 <code>subtest</code> 의 이름으로 정해줄 수 있었습니다.</p>
+
+<p><code>subtest</code> 로 테스트를 썼을 경우는 TAP 결과는 다음과 같습니다.</p>
+
+<figure class='code'><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div><div data-line='2' class='line-number'></div><div data-line='3' class='line-number'></div><div data-line='4' class='line-number'></div><div data-line='5' class='line-number'></div><div data-line='6' class='line-number'></div><div data-line='7' class='line-number'></div><div data-line='8' class='line-number'></div><div data-line='9' class='line-number'></div><div data-line='10' class='line-number'></div><div data-line='11' class='line-number'></div><div data-line='12' class='line-number'></div><div data-line='13' class='line-number'></div><div data-line='14' class='line-number'></div><div data-line='15' class='line-number'></div><div data-line='16' class='line-number'></div></pre></td><td class='main  bash'><pre><div class='line'><span class="nv">$ </span>prove t/myapp.t
+</div><div class='line'>ok 1 - access to /
+</div><div class='line'>    ok 1 - Request should be succeed
+</div><div class='line'>    ok 2 - Header xxxxx exist
+</div><div class='line'>    ok 3 - Found some sentences
+</div><div class='line'>    1..3
+</div><div class='line'>ok 2 - Login
+</div><div class='line'>    ok 1 - Request should be suceed
+</div><div class='line'>    ...
+</div><div class='line'>    1..3
+</div><div class='line'>....
+</div><div class='line'>1..3
+</div><div class='line'>ok
+</div><div class='line'>All tests successful.
+</div><div class='line'><span class="nv">Files</span><span class="o">=</span>1, <span class="nv">Tests</span><span class="o">=</span>3, 10 wallclock secs <span class="o">(</span> 0.07 usr  0.01 sys +  6.16 cusr  0.61 <span class="nv">csys</span> <span class="o">=</span>  6.85 CPU<span class="o">)</span>
+</div><div class='line'>Result: PASS
+</div></pre></td></tr></table></div></figure>
+
+<p>전체 테스트 횟수는 <code>subtest</code> 안의 테스트 항목이 아니라, <code>subtest</code> 의 갯수가 되는 것입니다.</p>
+
+<p>그리고 <code>subtest</code> 를 사용하지 않고 {} 블록을 이용해서 flat 하게 정의했을 때는 아래와 같습니다.</p>
+
+<figure class='code'><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div><div data-line='2' class='line-number'></div><div data-line='3' class='line-number'></div><div data-line='4' class='line-number'></div><div data-line='5' class='line-number'></div><div data-line='6' class='line-number'></div></pre></td><td class='main  bash'><pre><div class='line'>...
+</div><div class='line'>ok 1 - Request should be succeed
+</div><div class='line'>ok 2 - Header xxxxx exist
+</div><div class='line'>ok 3 - Found some sentences
+</div><div class='line'>ok 4 - Request should be suceed
+</div><div class='line'> ...
+</div></pre></td></tr></table></div></figure>
+
+<p>테스트 항목 1,4 번의 메시지가 같기 때문에 매번 달리 지정해줘야 되는 수고가 발생하죠. 그리고 각각의 테스트 항목 하나하나가 테스트 갯수가 되는 것입니다.</p>
+
+<p>사실은 위의 Jenkins 상의 <code>Test Result Trend</code> 의 그래프가 어느 순간 갑자기 뚝 떨어지길래, 어라 이상하다 싶어서 살펴본 결과, <code>subtest</code> 기준으로 카운트되어있는 것을 확인했습니다.</p>
+
+<p><img src="https://lh5.googleusercontent.com/-TSX-Kd5-fX4/TwWRjvHx2LI/AAAAAAAAA94/pYrEEgHBZic/test-result-trend.png" alt="Jenkins Test Result Trend 의 낙폭"></p>
+
+<p>대충 위의 <code>#58</code> 번 빌드가 그 쯤이 되겠네요.</p>
+
+<p>아무튼 Jenkins 도입이후에 좀 더 테스트코드에 더 신경을 쓰고 있는 요즘입니다.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Jeen Lee</span></span>
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2012-01-05T20:33:00+09:00" pubdate data-updated="true">Jan 5<span>th</span>, 2012</time>
+
+
+<span class="categories">
+  
+    <a class='category' href='/categories/jenkins/'>jenkins</a>, <a class='category' href='/categories/perl/'>perl</a>, <a class='category' href='/categories/test/'>test</a>
+  
+</span>
+
+
+
+      
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+    
+      
+        <div class="fb-like" data-href="http://jeen.github.io/2012/01/05/test-more-use-subtest-instead-of-block/" data-send="true" data-width="450" data-show-faces="false"></div>
+      
+    
+  
+  
+
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2012/01/04/perl-mail-send-ii/" title="Previous Post: Perl - Mail Send II">&laquo; Perl - Mail Send II</a>
+      
+      
+        <a class="basic-alignment right" href="/2012/01/05/freebsd-8-dot-2-stable-cpan-error/" title="Next Post: FreeBSD 8.2 STABLE - CPAN Error">FreeBSD 8.2 STABLE - CPAN Error &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2013/05/02/better-than-ack/">Better Than Ack</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/04/28/more-rex/">Rex Common Practice</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/04/08/data-printer-vs-data-dump-er/">Data::Printer vs Data::Dump(er)</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/04/04/using-rex-environment/">Using Rex - Environment</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/02/28/cpanm-1-dot-6-is-here-for-you/">cpanm 1.6 is here for you</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Jeen Lee -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'jeen';
+      var disqus_developer = '0';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://jeen.github.io/2012/01/05/test-more-use-subtest-instead-of-block/';
+        var disqus_url = 'http://jeen.github.io/2012/01/05/test-more-use-subtest-instead-of-block/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+  
+<div id="fb-root"></div>
+<script type="text/javascript">(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id; js.async = true;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+  
+
+  
+
+
+
+
+
+</body>
+</html>

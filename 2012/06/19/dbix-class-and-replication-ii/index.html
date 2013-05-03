@@ -1,0 +1,360 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>DBIx::Class and Replication - II - JEEN's techlog</title>
+  <meta name="author" content="Jeen Lee">
+  
+  <meta name="Generator" content="Jekyll & Octopress (http://octopress.org)">
+
+  
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://jeen.github.io/2012/06/19/dbix-class-and-replication-ii/">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="JEEN's techlog" type="application/atom+xml">
+  
+
+<!--Fonts from Google's Web font directory at http://google.com/webfonts -->
+<link href='//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
+<link href='//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
+
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="/javascripts/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/build/all-d6d9ba8d8ed93ba1e6156209462b4f6b.js"></script>
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-27958809-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+  
+
+   
+  <link href="/octopress-favicon.png" rel="icon">
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">JEEN's techlog</a></h1>
+  
+    <h2>Yet Another JEEN's Blog</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:jeen.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/archives/">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+
+
+
+
+
+
+
+
+
+
+
+<article class="hentry " role="article">
+  
+  <header>
+    <h1 class="entry-title">
+
+DBIx::Class and Replication - II
+
+</h1>
+
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2012-06-19T15:35:00+09:00" pubdate data-updated="true">Jun 19<span>th</span>, 2012</time>
+         &bull; <a rel="bookmark" href="/2012/06/19/dbix-class-and-replication-ii/">Permalink</a>
+      </p>
+    
+  </header>
+
+<div class="entry-content"><ul>
+<li><a href="http://jeen.github.com/blog/2012/06/17/dbix-class-and-replication/">DBIx::Class + Replication</a></li>
+</ul>
+
+<p>그러니까 17일이죠.</p>
+
+<blockquote>
+<p>이렇게 몇줄만의 설정으로 간단하게 어플리케이션단에서 Replication 설정을 수행할 수 있습니다…만, 여러가지 운용이슈가 발생할 테고 그에 맞춰서 적당하게 답을 내야할 경우가 생기겠죠. 네, 뭐 그건 그때 가서…</p>
+</blockquote>
+
+<p>라고 지난 글의 말미에서 얘기했습니다만, 네 금방 운용이슈가 발생했습니다.</p>
+
+<p>넘겨준대로 설정해서 돌리려고 하는 데 이런 에러가 떴다는 것입니다.</p>
+
+<figure class='code'><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div></pre></td><td class='main  bash'><pre><div class='line'>    Class::MOP::Class:::around<span class="o">()</span>: DBI Exception: DBD::mysql::db selectrow_hashref failed: Access denied; you need the SUPER,REPLICATION CLIENT privilege <span class="k">for </span>this operation <span class="o">[</span><span class="k">for </span>Statement <span class="s2">&quot;show slave status&quot;</span><span class="o">]</span> at /home/*/perl5/perlbrew/perls/perl-5.14.2/lib/site_perl/5.14.2/i686-linux/Class/MOP/Method/Wrapped.pm line 162
+</div></pre></td></tr></table></div></figure>
+
+<p>딱 봐도 DB 접속계정의 권한문제인데, 가장 간단한 답은 접속계정에 해당 권한을 부여하면 되는 것이었는데요.
+ 하지만 접속 계정을 추가해서 어떻게 하기에는 다른 운용이슈가 발생할 여지가 있다고 생각하기에(그럴리가&hellip;) 수정을 요구받았습니다. </p>
+
+<p>결국 DBIx::Class::Storage::DBI::Replicated::* 아래의 소스를 파보도록 했습니다. 관련 동작은 <code>connect_replicants</code> 시에 <code>validate_replicants</code> 에서 각 Replicant 마다 <code>is_replicating</code> 체크를 하게 되는 것입니다.</p>
+
+<p>일단 뭐 예, DBI::Replicated 시에는 기본적으로 그냥 뭐 자동 fail-over 까지 슥샥슥샥 해줄 수 있는데&hellip; 그냥 이런 거 다 필요없다라는 합의점에 이르러 결국은 해당부분을 회피하도록 했습니다.</p>
+
+<figure class='code'><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div><div data-line='2' class='line-number'></div><div data-line='3' class='line-number'></div><div data-line='4' class='line-number'></div><div data-line='5' class='line-number'></div><div data-line='6' class='line-number'></div><div data-line='7' class='line-number'></div><div data-line='8' class='line-number'></div></pre></td><td class='main  perl'><pre><div class='line'>    <span class="k">BEGIN</span> <span class="p">{</span>
+</div><div class='line'>        <span class="k">use</span> <span class="nn">DBIx::Class::Storage::DBI::Replicated::</span><span class="n">Pool</span><span class="p">;</span>
+</div><div class='line'> </div><div class='line'>        <span class="nb">no</span> <span class="n">warnings</span> <span class="s">&#39;redefine&#39;</span><span class="p">;</span>
+</div><div class='line'>        <span class="o">*</span><span class="nn">DBIx::Class::Storage::DBI::Replicated::Pool::</span><span class="n">validate_replicants</span> <span class="o">=</span> <span class="k">sub </span><span class="p">{</span>
+</div><div class='line'>            <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+</div><div class='line'>        <span class="p">};</span>
+</div><div class='line'>    <span class="p">};</span>
+</div></pre></td></tr></table></div></figure>
+
+<p>추가한 부분은 위와 같습니다. 컴파일시에 미리 <code>validate_replicants</code> 를 재정의해버리는 것이었습니다.</p>
+
+<p>전체 소스는 아래와 같습니다.</p>
+
+<figure class='code'><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div><div data-line='2' class='line-number'></div><div data-line='3' class='line-number'></div><div data-line='4' class='line-number'></div><div data-line='5' class='line-number'></div><div data-line='6' class='line-number'></div><div data-line='7' class='line-number'></div><div data-line='8' class='line-number'></div><div data-line='9' class='line-number'></div><div data-line='10' class='line-number'></div><div data-line='11' class='line-number'></div><div data-line='12' class='line-number'></div><div data-line='13' class='line-number'></div><div data-line='14' class='line-number'></div><div data-line='15' class='line-number'></div><div data-line='16' class='line-number'></div><div data-line='17' class='line-number'></div><div data-line='18' class='line-number'></div><div data-line='19' class='line-number'></div><div data-line='20' class='line-number'></div><div data-line='21' class='line-number'></div><div data-line='22' class='line-number'></div><div data-line='23' class='line-number'></div><div data-line='24' class='line-number'></div><div data-line='25' class='line-number'></div><div data-line='26' class='line-number'></div><div data-line='27' class='line-number'></div><div data-line='28' class='line-number'></div><div data-line='29' class='line-number'></div><div data-line='30' class='line-number'></div><div data-line='31' class='line-number'></div><div data-line='32' class='line-number'></div><div data-line='33' class='line-number'></div><div data-line='34' class='line-number'></div><div data-line='35' class='line-number'></div><div data-line='36' class='line-number'></div><div data-line='37' class='line-number'></div><div data-line='38' class='line-number'></div><div data-line='39' class='line-number'></div><div data-line='40' class='line-number'></div></pre></td><td class='main  perl'><pre><div class='line'>    <span class="k">BEGIN</span> <span class="p">{</span>
+</div><div class='line'>        <span class="k">use</span> <span class="nn">DBIx::Class::Storage::DBI::Replicated::</span><span class="n">Pool</span><span class="p">;</span>
+</div><div class='line'> </div><div class='line'>        <span class="nb">no</span> <span class="n">warnings</span> <span class="s">&#39;redefine&#39;</span><span class="p">;</span>
+</div><div class='line'>        <span class="o">*</span><span class="nn">DBIx::Class::Storage::DBI::Replicated::Pool::</span><span class="n">validate_replicants</span> <span class="o">=</span> <span class="k">sub </span><span class="p">{</span>
+</div><div class='line'>            <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+</div><div class='line'>        <span class="p">};</span>
+</div><div class='line'>    <span class="p">};</span>
+</div><div class='line'> </div><div class='line'>    <span class="k">my</span> <span class="nv">$schema</span> <span class="o">=</span> <span class="nn">MyApp::</span><span class="n">Schema</span><span class="o">-&gt;</span><span class="n">clone</span><span class="p">;</span>
+</div><div class='line'>    <span class="nv">$schema</span><span class="o">-&gt;</span><span class="n">storage_type</span><span class="p">([</span>
+</div><div class='line'>        <span class="s">&#39;::DBI::Replicated&#39;</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</div><div class='line'>            <span class="n">balancer_type</span> <span class="o">=&gt;</span> <span class="s">&#39;::Random&#39;</span><span class="p">,</span>
+</div><div class='line'>            <span class="n">balancer_args</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</div><div class='line'>                <span class="n">auto_validate_every</span> <span class="o">=&gt;</span> <span class="mi">10</span><span class="p">,</span>
+</div><div class='line'>                <span class="n">master_read_weight</span>  <span class="o">=&gt;</span> <span class="mi">0</span><span class="p">,</span>
+</div><div class='line'>            <span class="p">},</span>
+</div><div class='line'>            <span class="n">pool_args</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</div><div class='line'>                <span class="n">maximum_lag</span> <span class="o">=&gt;</span> <span class="mi">2</span><span class="p">,</span>
+</div><div class='line'>            <span class="p">}</span>
+</div><div class='line'>        <span class="p">}</span>
+</div><div class='line'>    <span class="p">]);</span>
+</div><div class='line'>    <span class="nv">$schema</span><span class="o">-&gt;</span><span class="n">connection</span><span class="p">({</span>
+</div><div class='line'>        <span class="n">dsn</span>      <span class="o">=&gt;</span> <span class="s">&quot;dbi:mysql:myapp:127.0.0.50&quot;</span><span class="p">,</span>
+</div><div class='line'>        <span class="n">user</span>     <span class="o">=&gt;</span> <span class="s">&quot;user&quot;</span><span class="p">,</span>
+</div><div class='line'>        <span class="n">password</span> <span class="o">=&gt;</span> <span class="s">&quot;whatthehell&quot;</span><span class="p">,</span>
+</div><div class='line'>        <span class="n">RaiseError</span>        <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">,</span>
+</div><div class='line'>        <span class="n">AutoCommit</span>        <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">,</span>
+</div><div class='line'>        <span class="n">mysql_enable_utf8</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">,</span>
+</div><div class='line'>        <span class="n">on_connect_do</span>     <span class="o">=&gt;</span> <span class="p">[</span><span class="s">&quot;SET NAMES utf8&quot;</span><span class="p">],</span>
+</div><div class='line'>        <span class="n">quote_char</span>        <span class="o">=&gt;</span> <span class="sx">q{`}</span><span class="p">,</span>
+</div><div class='line'>    <span class="p">});</span>
+</div><div class='line'>    <span class="nv">$schema</span><span class="o">-&gt;</span><span class="n">storage</span><span class="o">-&gt;</span><span class="n">connect_replicants</span><span class="p">([</span>
+</div><div class='line'>        <span class="p">{</span>
+</div><div class='line'>            <span class="n">dsn</span>      <span class="o">=&gt;</span> <span class="s">&quot;dbi:mysql:myapp:192.168.0.51&quot;</span><span class="p">,</span>
+</div><div class='line'>            <span class="n">user</span>     <span class="o">=&gt;</span> <span class="s">&quot;user&quot;</span><span class="p">,</span>
+</div><div class='line'>            <span class="n">password</span> <span class="o">=&gt;</span> <span class="s">&quot;whatthehell&quot;</span><span class="p">,</span>
+</div><div class='line'>        <span class="p">},</span>
+</div><div class='line'>        <span class="o">....</span>
+</div><div class='line'>    <span class="p">]);</span>
+</div></pre></td></tr></table></div></figure>
+
+<p>그리고 그들은 행복하게 오래오래 살았답니다~. 끝.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Jeen Lee</span></span>
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2012-06-19T15:35:00+09:00" pubdate data-updated="true">Jun 19<span>th</span>, 2012</time>
+
+
+<span class="categories">
+  
+    <a class='category' href='/categories/dbix-class/'>dbix-class</a>, <a class='category' href='/categories/perl/'>perl</a>
+  
+</span>
+
+
+
+      
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+    
+      
+        <div class="fb-like" data-href="http://jeen.github.io/2012/06/19/dbix-class-and-replication-ii/" data-send="true" data-width="450" data-show-faces="false"></div>
+      
+    
+  
+  
+
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2012/06/18/oh-my-zsh-bash-it/" title="Previous Post: oh-my-zsh → bash-it">&laquo; oh-my-zsh → bash-it</a>
+      
+      
+        <a class="basic-alignment right" href="/2012/07/01/regexp-wildcards/" title="Next Post: Regexp::Wildcards">Regexp::Wildcards &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2013/05/02/better-than-ack/">Better Than Ack</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/04/28/more-rex/">Rex Common Practice</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/04/08/data-printer-vs-data-dump-er/">Data::Printer vs Data::Dump(er)</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/04/04/using-rex-environment/">Using Rex - Environment</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/02/28/cpanm-1-dot-6-is-here-for-you/">cpanm 1.6 is here for you</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Jeen Lee -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'jeen';
+      var disqus_developer = '0';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://jeen.github.io/2012/06/19/dbix-class-and-replication-ii/';
+        var disqus_url = 'http://jeen.github.io/2012/06/19/dbix-class-and-replication-ii/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+  
+<div id="fb-root"></div>
+<script type="text/javascript">(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id; js.async = true;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+  
+
+  
+
+
+
+
+
+</body>
+</html>

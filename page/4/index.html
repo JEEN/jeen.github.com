@@ -1,0 +1,548 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>JEEN's techlog</title>
+  <meta name="author" content="Jeen Lee">
+  
+  <meta name="Generator" content="Jekyll & Octopress (http://octopress.org)">
+
+  
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://jeen.github.io/page/4/">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="JEEN's techlog" type="application/atom+xml">
+  
+
+<!--Fonts from Google's Web font directory at http://google.com/webfonts -->
+<link href='//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
+<link href='//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
+
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="/javascripts/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/build/all-d6d9ba8d8ed93ba1e6156209462b4f6b.js"></script>
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-27958809-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+  
+
+   
+  <link href="/octopress-favicon.png" rel="icon">
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">JEEN's techlog</a></h1>
+  
+    <h2>Yet Another JEEN's Blog</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:jeen.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/archives/">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+    
+
+
+
+
+
+
+
+
+
+
+    <article >
+      
+  <header>
+    <h1 class="entry-title">
+
+<a href="/2012/08/28/building-a-perl-project-on-travis-ci/">Building a Perl Project on Travis CI</a>
+
+</h1>
+
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2012-08-28T14:25:00+09:00" pubdate data-updated="true">Aug 28<span>th</span>, 2012</time>
+         &bull; <a rel="bookmark" href="/2012/08/28/building-a-perl-project-on-travis-ci/">Permalink</a>
+      </p>
+    
+  </header>
+
+<div class="entry-content"><ul>
+<li><a href="http://travis-ci.org/">Travis CI - Distributed build platform for the open source community</a></li>
+</ul>
+
+<p><code>Travis CI</code>은 이전에 얘기를 들었을 때는 별  관심이 없었는데(처음에는 확실히 Perl 을 지원하지 않아서), 언제부턴가 Perl 을 지원한다는 얘기를 듣고 Perl 커뮤니티에서 움직임이 조금씩 있더라구요. <code>Dist::Zilla::TravisCI</code> 같은 모듈들도 나오는 걸로 봐서…</p>
+
+<p>사용하는 방법은 아주 간단합니다. <code>Github</code> 계정에 연결되고, 그리고 Github 의 Public 상태의 프로젝트를 고르고… 그 프로젝트에 <code>.travis.yml</code> 파일을 놓아주면 됩니다.</p>
+
+<ul>
+<li><a href="http://about.travis-ci.org/docs/user/languages/perl/">Travis CI - Building a Perl Project</a><br></li>
+</ul>
+
+<p>자세한 건 위의 설명페이지를 참고해서 이전에 살짝 만들어 놓은 <code>Zamakist</code> 를 <code>Travis CI</code> 에서 돌려보게 해봤습니다.</p>
+
+<p><img src="https://lh5.googleusercontent.com/-EUnpasmILzs/UDxYWf7j2WI/AAAAAAAACBg/y1EdG7zFKoM/%2525C3%2525A1%2525C2%252584%2525C2%252589%2525C3%2525A1%2525C2%252585%2525C2%2525B3%2525C3%2525A1%2525C2%252584%2525C2%25258F%2525C3%2525A1%2525C2%252585%2525C2%2525B3%2525C3%2525A1%2525C2%252584%2525C2%252585%2525C3%2525A1%2525C2%252585%2525C2%2525B5%2525C3%2525A1%2525C2%252586%2525C2%2525AB%2525C3%2525A1%2525C2%252584%2525C2%252589%2525C3%2525A1%2525C2%252585%2525C2%2525A3%2525C3%2525A1%2525C2%252586%2525C2%2525BA%2525202012-08-28%252520%2525C3%2525A1%2525C2%252584%2525C2%25258B%2525C3%2525A1%2525C2%252585%2525C2%2525A9%2525C3%2525A1%2525C2%252584%2525C2%252592%2525C3%2525A1%2525C2%252585%2525C2%2525AE%2525202.33.19.png" alt="img-failed"></p>
+
+<p>처음에야 뭐 물론 <code>.travis.yml</code> 파일이 없어서 실패했다는 메일이 날라왔구요.</p>
+
+<p><code>.travis.yml</code> 을 추가해준 결과로는 다시 이렇게 제대로 돌아간다는 메일이 옵니다.</p>
+
+<p><img src="https://lh5.googleusercontent.com/-ub5BrJZrXPw/UDxYT_Xl7JI/AAAAAAAACBY/CtHCGYNaJcY/%2525C3%2525A1%2525C2%252584%2525C2%252589%2525C3%2525A1%2525C2%252585%2525C2%2525B3%2525C3%2525A1%2525C2%252584%2525C2%25258F%2525C3%2525A1%2525C2%252585%2525C2%2525B3%2525C3%2525A1%2525C2%252584%2525C2%252585%2525C3%2525A1%2525C2%252585%2525C2%2525B5%2525C3%2525A1%2525C2%252586%2525C2%2525AB%2525C3%2525A1%2525C2%252584%2525C2%252589%2525C3%2525A1%2525C2%252585%2525C2%2525A3%2525C3%2525A1%2525C2%252586%2525C2%2525BA%2525202012-08-28%252520%2525C3%2525A1%2525C2%252584%2525C2%25258B%2525C3%2525A1%2525C2%252585%2525C2%2525A9%2525C3%2525A1%2525C2%252584%2525C2%252592%2525C3%2525A1%2525C2%252585%2525C2%2525AE%2525202.33.13.png" alt="Img1"></p>
+
+<p><code>Travis CI</code> 에서 출력되는 빌드 내용은 아래와 같습니다.</p>
+
+<figure class='code'><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div><div data-line='2' class='line-number'></div><div data-line='3' class='line-number'></div><div data-line='4' class='line-number'></div><div data-line='5' class='line-number'></div><div data-line='6' class='line-number'></div><div data-line='7' class='line-number'></div><div data-line='8' class='line-number'></div><div data-line='9' class='line-number'></div><div data-line='10' class='line-number'></div><div data-line='11' class='line-number'></div><div data-line='12' class='line-number'></div><div data-line='13' class='line-number'></div><div data-line='14' class='line-number'></div><div data-line='15' class='line-number'></div><div data-line='16' class='line-number'></div><div data-line='17' class='line-number'></div><div data-line='18' class='line-number'></div><div data-line='19' class='line-number'></div><div data-line='20' class='line-number'></div><div data-line='21' class='line-number'></div><div data-line='22' class='line-number'></div><div data-line='23' class='line-number'></div><div data-line='24' class='line-number'></div><div data-line='25' class='line-number'></div><div data-line='26' class='line-number'></div><div data-line='27' class='line-number'></div><div data-line='28' class='line-number'></div><div data-line='29' class='line-number'></div><div data-line='30' class='line-number'></div><div data-line='31' class='line-number'></div><div data-line='32' class='line-number'></div><div data-line='33' class='line-number'></div><div data-line='34' class='line-number'></div><div data-line='35' class='line-number'></div><div data-line='36' class='line-number'></div><div data-line='37' class='line-number'></div><div data-line='38' class='line-number'></div><div data-line='39' class='line-number'></div><div data-line='40' class='line-number'></div><div data-line='41' class='line-number'></div><div data-line='42' class='line-number'></div><div data-line='43' class='line-number'></div><div data-line='44' class='line-number'></div><div data-line='45' class='line-number'></div><div data-line='46' class='line-number'></div><div data-line='47' class='line-number'></div><div data-line='48' class='line-number'></div><div data-line='49' class='line-number'></div><div data-line='50' class='line-number'></div><div data-line='51' class='line-number'></div><div data-line='52' class='line-number'></div><div data-line='53' class='line-number'></div><div data-line='54' class='line-number'></div><div data-line='55' class='line-number'></div><div data-line='56' class='line-number'></div><div data-line='57' class='line-number'></div><div data-line='58' class='line-number'></div><div data-line='59' class='line-number'></div><div data-line='60' class='line-number'></div><div data-line='61' class='line-number'></div><div data-line='62' class='line-number'></div><div data-line='63' class='line-number'></div><div data-line='64' class='line-number'></div><div data-line='65' class='line-number'></div><div data-line='66' class='line-number'></div></pre></td><td class='main  bash'><pre><div class='line'>Using worker: ppp3.worker.travis-ci.org:php-1
+</div><div class='line'> </div><div class='line'><span class="nv">$ </span><span class="nb">cd</span> ~/builds
+</div><div class='line'><span class="nv">$ </span>git clone --depth<span class="o">=</span>100 --quiet git://github.com/JEEN/p5-App-Zamakist.git JEEN/p5-App-Zamakist
+</div><div class='line'><span class="nv">$ </span><span class="nb">cd </span>JEEN/p5-App-Zamakist
+</div><div class='line'><span class="nv">$ </span>git checkout -qf df10bdfea286c9933c345c84206eaa90b8f298a6
+</div><div class='line'><span class="nv">$ </span>perlbrew use 5.16
+</div><div class='line'><span class="nv">$ </span>perl --version
+</div><div class='line'> </div><div class='line'>This is perl 5, version 16, subversion 0 <span class="o">(</span>v5.16.0<span class="o">)</span> built <span class="k">for </span>i686-linux
+</div><div class='line'> </div><div class='line'>Copyright 1987-2012, Larry Wall
+</div><div class='line'> </div><div class='line'>Perl may be copied only under the terms of either the Artistic License or the
+</div><div class='line'>GNU General Public License, which may be found in the Perl 5 <span class="nb">source </span>kit.
+</div><div class='line'> </div><div class='line'>Complete documentation <span class="k">for </span>Perl, including FAQ lists, should be found on
+</div><div class='line'>this system using <span class="s2">&quot;man perl&quot;</span> or <span class="s2">&quot;perldoc perl&quot;</span>.  If you have access to the
+</div><div class='line'>Internet, point your browser at http://www.perl.org/, the Perl Home Page.
+</div><div class='line'> </div><div class='line'><span class="nv">$ </span>cpanm --version
+</div><div class='line'>cpanm <span class="o">(</span>App::cpanminus<span class="o">)</span> version 1.5017
+</div><div class='line'><span class="nv">$ </span>cpanm --quiet --installdeps --notest .
+</div><div class='line'>Successfully installed Text-CharWidth-0.04
+</div><div class='line'>Successfully installed Text-UnicodeBox-0.03
+</div><div class='line'>Successfully installed XML-XPathEngine-0.13
+</div><div class='line'>Successfully installed HTML-Tree-5.02
+</div><div class='line'>Successfully installed HTML-TreeBuilder-XPath-0.14
+</div><div class='line'>Successfully installed HTML-Selector-XPath-0.14
+</div><div class='line'>Successfully installed Web-Query-0.08
+</div><div class='line'>Successfully installed Term-ReadLine-Zoid-0.07
+</div><div class='line'>8 distributions installed
+</div><div class='line'><span class="nv">$ </span>perl Makefile.PL <span class="o">&amp;&amp;</span> make <span class="nb">test</span>
+</div><div class='line'>include /home/travis/builds/JEEN/p5-App-Zamakist/inc/Module/Install.pm
+</div><div class='line'>include inc/Module/Install/Metadata.pm
+</div><div class='line'>include inc/Module/Install/Base.pm
+</div><div class='line'>include inc/Module/Install/Makefile.pm
+</div><div class='line'>Cannot determine perl version info from lib/App/Zamakist.pm
+</div><div class='line'>include inc/Module/Install/Scripts.pm
+</div><div class='line'>include inc/Module/Install/Include.pm
+</div><div class='line'>include inc/Test/More.pm
+</div><div class='line'>include inc/Module/Install/WriteAll.pm
+</div><div class='line'>include inc/Module/Install/Win32.pm
+</div><div class='line'>include inc/Module/Install/Can.pm
+</div><div class='line'>include inc/Module/Install/Fetch.pm
+</div><div class='line'>Writing Makefile <span class="k">for </span>App::Zamakist
+</div><div class='line'>Writing MYMETA.yml and MYMETA.json
+</div><div class='line'>Writing META.yml
+</div><div class='line'>cp lib/App/Zamakist/Media.pm blib/lib/App/Zamakist/Media.pm
+</div><div class='line'>cp lib/App/Zamakist.pm blib/lib/App/Zamakist.pm
+</div><div class='line'>cp lib/App/Zamakist/Role/Reportable.pm blib/lib/App/Zamakist/Role/Reportable.pm
+</div><div class='line'>cp lib/App/Zamakist/Handler/GOM.pm blib/lib/App/Zamakist/Handler/GOM.pm
+</div><div class='line'>cp bin/zamakist blib/script/zamakist
+</div><div class='line'>/home/travis/perl5/perlbrew/perls/5.16/bin/perl <span class="s2">&quot;-Iinc&quot;</span> -MExtUtils::MY -e <span class="s1">&#39;MY-&gt;fixin(shift)&#39;</span> -- blib/script/zamakist
+</div><div class='line'><span class="nv">PERL_DL_NONLAZY</span><span class="o">=</span>1 /home/travis/perl5/perlbrew/perls/5.16/bin/perl <span class="s2">&quot;-MExtUtils::Command::MM&quot;</span> <span class="s2">&quot;-e&quot;</span> <span class="s2">&quot;test_harness(0, &#39;inc&#39;, &#39;blib/lib&#39;, &#39;blib/arch&#39;)&quot;</span> t/*.t
+</div><div class='line'>t/00_compile.t ......... ok
+</div><div class='line'>t/01_find_permalink.t .. 5/7 <span class="c"># http://search.gomtv.com/searchjm.gom?key=The.Mentalist.S04E01.HDTV.XviD-ASAP.%5BVTV%5D.Scarlet.Ribbons&amp;preface=0</span>
+</div><div class='line'><span class="c"># http://gom.gomtv.com/jmdb/view.html?intSeq=808364&amp;preface=0&amp;spage=1</span>
+</div><div class='line'>Wide character in print at /home/travis/perl5/perlbrew/perls/5.16/lib/5.16.0/Test/Builder.pm line 1759.
+</div><div class='line'><span class="c"># [통합] The.Mentalist.S04E01.HDTV.XviD-ASAP</span>
+</div><div class='line'>t/01_find_permalink.t .. ok
+</div><div class='line'>All tests successful.
+</div><div class='line'><span class="nv">Files</span><span class="o">=</span>2, <span class="nv">Tests</span><span class="o">=</span>8, 10 wallclock secs <span class="o">(</span> 0.03 usr  0.01 sys +  1.79 cusr  0.10 <span class="nv">csys</span> <span class="o">=</span>  1.93 CPU<span class="o">)</span>
+</div><div class='line'>Result: PASS
+</div><div class='line'> </div><div class='line'>Done. Build script exited with: 0
+</div></pre></td></tr></table></div></figure>
+
+<p>좀 더 뭐 욕심이 있다면 Jenkins 에서 처럼 정적분석이나 테스트 케이스에 대해서 좀 더 자세한 내용이 나와줬으면 좋겠다 싶지만… 사실 그건 뽀대의 문제라…</p>
+
+<p>위의 빌드 내용에 대한 자세한 내용은 아래의 링크를 참고하세요.</p>
+
+<ul>
+<li><a href="http://travis-ci.org/#!/JEEN/p5-App-Zamakist/builds/2257622">Travis CI : p5-App-Zamakist</a></li>
+</ul>
+</div>
+
+  <footer>
+    
+    <p><a class="comments-link" href="/2012/08/28/building-a-perl-project-on-travis-ci/#disqus_thread" data-disqus-identifier="http://jeen.github.io/2012/08/28/building-a-perl-project-on-travis-ci/">View comments &raquo;</a></p>
+
+    
+    
+  </footer>
+
+
+    </article>
+  
+    
+
+
+
+
+
+
+
+
+
+
+    <article >
+      
+  <header>
+    <h1 class="entry-title">
+
+<a href="/2012/08/25/dbix-class-and-json/">DBIx::Class and JSON</a>
+
+</h1>
+
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2012-08-25T12:44:00+09:00" pubdate data-updated="true">Aug 25<span>th</span>, 2012</time>
+         &bull; <a rel="bookmark" href="/2012/08/25/dbix-class-and-json/">Permalink</a>
+      </p>
+    
+  </header>
+
+<div class="entry-content"><p>흔한 웹서비스의 흔한 AJAX 나 흔한 RESTful API 를 제공하기 위해서, 대개 JSON 포맷의 데이터를 서버에서 뿜어내고는 합니다.</p>
+
+<p>하지만 누구나가 Catalyst + DBIx::Class 조합에서 이렇게 하면 되는 게 아닐까 하고 접근했다가…</p>
+
+<blockquote>
+<p>… encountered object &#39;..&#39;, but neither allow_blessed nor convert_blessed settings are enabled …</p>
+</blockquote>
+
+<p>라는 에러를 접하게 됩니다. bless 된 오브젝트를 어떻게든 JSON 인코딩을 시도하려고 했을 때는 위와 같은 에러를 쉬이 접할 수 있습니다.</p>
+
+<p>이것을 푸는 방법은 사실 여러가지가 있습니다.</p>
+
+<p>이것저것 신경쓰지 말고 한번에 가자고 할 때는 Catalyst::View::JSON 에서 인코딩하게 되는 stash 된 값들을 전부 ArrayRef 나 HashRef 로 변환해서 넘기는 방법입니다.</p>
+
+<figure class='code'><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div><div data-line='2' class='line-number'></div><div data-line='3' class='line-number'></div><div data-line='4' class='line-number'></div><div data-line='5' class='line-number'></div><div data-line='6' class='line-number'></div><div data-line='7' class='line-number'></div><div data-line='8' class='line-number'></div><div data-line='9' class='line-number'></div><div data-line='10' class='line-number'></div></pre></td><td class='main  perl'><pre><div class='line'>   <span class="k">my</span> <span class="nv">@data</span><span class="p">;</span>
+</div><div class='line'>   <span class="k">my</span> <span class="nv">$rs</span> <span class="o">=</span> <span class="nv">$c</span><span class="o">-&gt;</span><span class="n">model</span><span class="p">(</span><span class="s">&#39;DB&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">resultset</span><span class="p">(</span><span class="s">&#39;User&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">search</span><span class="p">();</span>
+</div><div class='line'>   <span class="k">while</span><span class="p">(</span><span class="k">my</span> <span class="nv">$row</span> <span class="o">=</span> <span class="nv">$rs</span><span class="o">-&gt;</span><span class="k">next</span><span class="p">)</span> <span class="p">{</span>
+</div><div class='line'>       <span class="nb">push</span> <span class="nv">@data</span><span class="p">,</span> <span class="p">{</span>
+</div><div class='line'>           <span class="n">id</span> <span class="o">=&gt;</span> <span class="nv">$row</span><span class="o">-&gt;</span><span class="n">id</span><span class="p">,</span>
+</div><div class='line'>           <span class="n">name</span> <span class="o">=&gt;</span> <span class="nv">$row</span><span class="o">-&gt;</span><span class="n">name</span><span class="p">,</span>
+</div><div class='line'>           <span class="n">created_at</span> <span class="o">=&gt;</span> <span class="nv">$row</span><span class="o">-&gt;</span><span class="n">created_at</span><span class="p">,</span>
+</div><div class='line'>       <span class="p">};</span>
+</div><div class='line'>   <span class="p">}</span>
+</div><div class='line'>   <span class="nv">$c</span><span class="o">-&gt;</span><span class="n">stash</span><span class="o">-&gt;</span><span class="p">{</span><span class="n">people</span><span class="p">}</span> <span class="o">=</span> <span class="o">\</span><span class="nv">@data</span><span class="p">;</span>
+</div></pre></td></tr></table></div></figure>
+
+<p>위처럼 특정컬럼을 선별해서 넣어주는 방법이 있겠지요. 좀 더 단순화한다면, 각  스키마테이블 별로 HashRef 를 반환하는 메소드를 넣어두는 것도 좋습니다.</p>
+
+<figure class='code'><figcaption>lib/MyApp/Schema/Result/User.pm</figcaption><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div><div data-line='2' class='line-number'></div><div data-line='3' class='line-number'></div><div data-line='4' class='line-number'></div><div data-line='5' class='line-number'></div><div data-line='6' class='line-number'></div><div data-line='7' class='line-number'></div><div data-line='8' class='line-number'></div><div data-line='9' class='line-number'></div><div data-line='10' class='line-number'></div><div data-line='11' class='line-number'></div><div data-line='12' class='line-number'></div><div data-line='13' class='line-number'></div><div data-line='14' class='line-number'></div><div data-line='15' class='line-number'></div><div data-line='16' class='line-number'></div></pre></td><td class='main  perl'><pre><div class='line'><span class="k">sub </span><span class="nf">to_hashref</span> <span class="p">{</span>
+</div><div class='line'>    <span class="k">my</span> <span class="nv">$self</span> <span class="o">=</span> <span class="nb">shift</span><span class="p">;</span>
+</div><div class='line'>    <span class="k">return</span> <span class="p">{</span>
+</div><div class='line'>        <span class="n">id</span> <span class="o">=&gt;</span> <span class="nv">$self</span><span class="o">-&gt;</span><span class="n">id</span><span class="p">,</span>
+</div><div class='line'>        <span class="n">name</span> <span class="o">=&gt;</span> <span class="nv">$self</span><span class="o">-&gt;</span><span class="n">name</span><span class="p">,</span>
+</div><div class='line'>        <span class="n">created_at</span> <span class="o">=&gt;</span> <span class="nv">$self</span><span class="o">-&gt;</span><span class="n">created_at</span><span class="p">,</span>
+</div><div class='line'>    <span class="p">};</span>
+</div><div class='line'><span class="p">}</span>
+</div><div class='line'> </div><div class='line'>   <span class="c1"># Controller</span>
+</div><div class='line'>   <span class="k">my</span> <span class="nv">@data</span><span class="p">;</span>
+</div><div class='line'>   <span class="k">my</span> <span class="nv">$rs</span> <span class="o">=</span> <span class="nv">$c</span><span class="o">-&gt;</span><span class="n">model</span><span class="p">(</span><span class="s">&#39;DB&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">resultset</span><span class="p">(</span><span class="s">&#39;User&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">search</span><span class="p">();</span>
+</div><div class='line'>   <span class="k">while</span><span class="p">(</span><span class="k">my</span> <span class="nv">$row</span> <span class="o">=</span> <span class="nv">$rs</span><span class="o">-&gt;</span><span class="k">next</span><span class="p">)</span> <span class="p">{</span>
+</div><div class='line'>       <span class="nb">push</span> <span class="nv">@data</span><span class="p">,</span> <span class="nv">$row</span><span class="o">-&gt;</span><span class="n">to_hashref</span><span class="p">;</span>
+</div><div class='line'>   <span class="p">}</span>
+</div><div class='line'>   <span class="nv">$c</span><span class="o">-&gt;</span><span class="n">stash</span><span class="o">-&gt;</span><span class="p">{</span><span class="n">people</span><span class="p">}</span> <span class="o">=</span> <span class="o">\</span><span class="nv">@data</span><span class="p">;</span>
+</div></pre></td></tr></table></div></figure>
+
+<figure class='code'><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div><div data-line='2' class='line-number'></div><div data-line='3' class='line-number'></div><div data-line='4' class='line-number'></div></pre></td><td class='main  perl'><pre><div class='line'>  <span class="k">my</span> <span class="nv">$person</span> <span class="o">=</span> <span class="nv">$c</span><span class="o">-&gt;</span><span class="n">model</span><span class="p">(</span><span class="s">&#39;DB&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">resultset</span><span class="p">(</span><span class="s">&#39;User&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">search</span><span class="p">(</span><span class="nv">$cond</span><span class="p">,</span> <span class="p">{</span>
+</div><div class='line'>      <span class="n">result_class</span> <span class="o">=&gt;</span> <span class="s">&#39;DBIx::Class::ResultClass::HashRefInflator&#39;</span><span class="p">,</span>
+</div><div class='line'>  <span class="p">})</span><span class="o">-&gt;</span><span class="n">first</span><span class="p">;</span>
+</div><div class='line'>  <span class="nv">$c</span><span class="o">-&gt;</span><span class="n">stash</span><span class="o">-&gt;</span><span class="p">{</span><span class="n">person</span><span class="p">}</span> <span class="o">=</span> <span class="nv">$person</span><span class="p">;</span>
+</div></pre></td></tr></table></div></figure>
+
+<p>그럴 필요가 없다면 위처럼 <code>result_class</code> 를 지정해줌으로써 결과를 무조건 HashRef 로 반환하게끔 합니다.</p>
+
+<p>사실 <code>DBIx::Class::ResultClass::HashRefInflator</code> 를 적용하면 일일이 오브젝트를 만들어내지 않기 때문에 퍼포먼스 측면에서 매우 좋습니다만, 그냥 HashRef 일 따름인지라Resultset 에서 정의한 각종 메소드를 참조할 수 없습니다.
+ 그러니 이런저런 경우에는 가려서 사용하는 것이 좋습니다.</p>
+
+<p>이제 본질적으로 좀 더 접근해보면…
+ JSON::XS 는 인코딩할 시에, 오브젝트가 대상인 경우에는 해당 오브젝트의 TO_JSON 메소드를 참조하여 결과를 뽑아낼 수 있습니다. 물론 <code>allow_blessed</code>, <code>convert_blessed</code> 플래그를 지정할 필요가 있지요.</p>
+
+<figure class='code'><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div><div data-line='2' class='line-number'></div><div data-line='3' class='line-number'></div><div data-line='4' class='line-number'></div><div data-line='5' class='line-number'></div><div data-line='6' class='line-number'></div><div data-line='7' class='line-number'></div><div data-line='8' class='line-number'></div><div data-line='9' class='line-number'></div><div data-line='10' class='line-number'></div><div data-line='11' class='line-number'></div><div data-line='12' class='line-number'></div><div data-line='13' class='line-number'></div><div data-line='14' class='line-number'></div><div data-line='15' class='line-number'></div><div data-line='16' class='line-number'></div><div data-line='17' class='line-number'></div><div data-line='18' class='line-number'></div><div data-line='19' class='line-number'></div></pre></td><td class='main  perl'><pre><div class='line'><span class="c1"># lib/MyApp/View/JSON.pm</span>
+</div><div class='line'><span class="nb">package</span> <span class="nn">MyApp::View::</span><span class="n">JSON</span><span class="p">;</span>
+</div><div class='line'><span class="k">use</span> <span class="nn">JSON::</span><span class="n">XS</span> <span class="p">();</span>
+</div><div class='line'> </div><div class='line'><span class="k">use</span> <span class="n">parent</span> <span class="sx">qw(Catalyst::View::JSON)</span><span class="p">;</span>
+</div><div class='line'> </div><div class='line'><span class="k">my</span> <span class="nv">$encoder</span> <span class="o">=</span> <span class="nn">JSON::</span><span class="n">XS</span><span class="o">-&gt;</span><span class="k">new</span>
+</div><div class='line'>              <span class="o">-&gt;</span><span class="n">utf8</span>
+</div><div class='line'>                          <span class="o">-&gt;</span><span class="n">pretty</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</div><div class='line'>                          <span class="o">-&gt;</span><span class="n">indent</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</div><div class='line'>                          <span class="o">-&gt;</span><span class="n">allow_blessed</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</div><div class='line'>                          <span class="o">-&gt;</span><span class="n">convert_blessed</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+</div><div class='line'> </div><div class='line'><span class="k">sub </span><span class="nf">encode_json</span> <span class="p">{</span>
+</div><div class='line'>    <span class="k">my</span> <span class="p">(</span><span class="nv">$self</span><span class="p">,</span> <span class="nv">$c</span><span class="p">,</span> <span class="nv">$data</span><span class="p">)</span> <span class="o">=</span> <span class="nv">@_</span><span class="p">;</span>
+</div><div class='line'>    <span class="nv">$encoder</span><span class="o">-&gt;</span><span class="n">encode</span><span class="p">(</span><span class="nv">$data</span><span class="p">);</span>
+</div><div class='line'><span class="p">}</span>
+</div><div class='line'> </div><div class='line'><span class="mi">1</span><span class="p">;</span>
+</div></pre></td></tr></table></div></figure>
+
+<p>그러면 위처럼 <code>encode_json</code> 을 오버라이드 합니다. <code>allow_blessed</code> 와 <code>convert_blessed</code>  플래그를 켜주는 것이죠.</p>
+
+<figure class='code'><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div><div data-line='2' class='line-number'></div><div data-line='3' class='line-number'></div><div data-line='4' class='line-number'></div><div data-line='5' class='line-number'></div><div data-line='6' class='line-number'></div></pre></td><td class='main  perl'><pre><div class='line'><span class="c1"># lib/MyApp/Schema/Result/User.pm</span>
+</div><div class='line'><span class="o">..</span>
+</div><div class='line'><span class="k">sub </span><span class="nf">TO_JSON</span> <span class="p">{</span>
+</div><div class='line'>    <span class="k">return</span> <span class="p">{</span> <span class="nv">$_</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">get_inflated_columns</span> <span class="p">};</span>
+</div><div class='line'><span class="p">}</span>
+</div><div class='line'><span class="o">..</span>
+</div></pre></td></tr></table></div></figure>
+
+<p>그리고 위처럼 User Result 에 대해서 TO_JSON 를 지정합니다.</p>
+
+<figure class='code'><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div></pre></td><td class='main  perl'><pre><div class='line'>   <span class="nv">$c</span><span class="o">-&gt;</span><span class="n">stash</span><span class="o">-&gt;</span><span class="p">{</span><span class="n">people</span><span class="p">}</span> <span class="o">=</span> <span class="p">[</span>  <span class="nv">$c</span><span class="o">-&gt;</span><span class="n">model</span><span class="p">(</span><span class="s">&#39;DB&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">resultset</span><span class="p">(</span><span class="s">&#39;User&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">search</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">all</span> <span class="p">];</span>
+</div></pre></td></tr></table></div></figure>
+
+<p>그러면 이제는 아무런 걱정없이 그냥 생짜 DBIC Resultset 을 날려버려도 이제는 알아서 문제해결이 됩니다. :-)</p>
+
+<p>각 Resultset 마다 <code>TO_JSON</code> 을 지정하기가 벅차다면…</p>
+
+<ul>
+<li><a href="http://advent.perl.kr/2011/2011-12-17.html">Seoul.pm Advent Calendar 2011 - 열일곱번째 날 : DBIx::Class로 스키마 관리하기</a></li>
+</ul>
+
+<p>위의 글에서 <code>ResultBase</code> 를 참고해주세요.</p>
+
+<p><code>MyApp::Schema::ResultBase</code> 를 상속받은 각 Result 테이블들은 <code>TO_JSON</code> 을 오버라이드 해서 빼놓고 싶은 컬럼(예를 들어 <code>password</code> 같은 컬럼) 을 배제해서 출력할 수 있지 않을까요?</p>
+</div>
+
+  <footer>
+    
+    <p><a class="comments-link" href="/2012/08/25/dbix-class-and-json/#disqus_thread" data-disqus-identifier="http://jeen.github.io/2012/08/25/dbix-class-and-json/">View comments &raquo;</a></p>
+
+    
+    
+  </footer>
+
+
+    </article>
+  
+    
+
+
+
+
+
+
+
+
+
+
+    <article >
+      
+  <header>
+    <h1 class="entry-title">
+
+<a href="/2012/08/09/moving-from-bash-to-zsh-again/">Moving From Bash to Zsh Again</a>
+
+</h1>
+
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2012-08-09T16:30:00+09:00" pubdate data-updated="true">Aug 9<span>th</span>, 2012</time>
+         &bull; <a rel="bookmark" href="/2012/08/09/moving-from-bash-to-zsh-again/">Permalink</a>
+      </p>
+    
+  </header>
+
+<div class="entry-content"><p>밥벌이도구가 바뀌고 해서 다시 ZSH 로 돌아갔습니다.</p>
+
+<blockquote class="twitter-tweet" lang="ko"><p>레티나 맥북프로를 오늘 받은 게 자랑.txt <a href="http://t.co/38oGVx7W" title="http://jeen.tistory.com/560">jeen.tistory.com/560</a></p>&mdash; JEEN (@JEEN_LEE) <a href="https://twitter.com/JEEN_LEE/status/232821768325300225" data-datetime="2012-08-07T12:53:29+00:00">8월 7, 2012</a></blockquote>
+
+<ul>
+<li> <a href="https://github.com/skwp/dotfiles">https://github.com/skwp/dotfiles</a></li>
+</ul>
+
+<p>지난번에 MacBook Air 에 올리다가 뭐가 꼬인 <code>YADR</code> 을 썼습니다. <code>grep</code> 경고메시지가 없이 깔끔하게 돌아가는 군요.</p>
+
+<p>이래저래 개발환경도 맞추고 그러다가 지난달에 zsh 5.0 이 릴리즈 된 것을 보고 Mt.LION 에 깔린 zsh 버젼을 확인하니..</p>
+
+<figure class='code'><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div><div data-line='2' class='line-number'></div></pre></td><td class='main  bash'><pre><div class='line'><span class="nv">$ </span>zsh --version
+</div><div class='line'>zsh 4.3.11 <span class="o">(</span>i386-apple-darwin12.0<span class="o">)</span>
+</div></pre></td></tr></table></div></figure>
+
+<p><code>4.3.11</code> 이었습니다. 그래서 zsh 5.0 으로 올려보려고 brew 로 일단 깔았죠.</p>
+
+<p>그리고 <code>chsh</code> 로 셸을 바꾸려고 하는 데…</p>
+
+<figure class='code'><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div><div data-line='2' class='line-number'></div><div data-line='3' class='line-number'></div><div data-line='4' class='line-number'></div></pre></td><td class='main  bash'><pre><div class='line'><span class="nv">$ </span>chsh -s /usr/local/bin/zsh
+</div><div class='line'>Changing shell <span class="k">for </span>jeen.
+</div><div class='line'>Password <span class="k">for </span>jeen:
+</div><div class='line'>chsh: /usr/local/Cellar/zsh/5.0.0/bin/zsh: non-standard shell
+</div></pre></td></tr></table></div></figure>
+
+<p>이라고 뜨는 것이었지요.</p>
+
+<p>구글검색결과 <code>/etc/shells</code> 에 해당 셸의 패스를 추가하는 것으로 이 난관을 헤쳐나갈 수 있다고 합니다.</p>
+
+<p>그래서 네. zsh 5.0 쓰고 있는데 뭐가 좋은지는 써보면서 느끼게 되려나요.</p>
+
+<ul>
+<li><a href="https://github.com/zsh-users/zsh/blob/master/NEWS">https://github.com/zsh-users/zsh/blob/master/NEWS</a></li>
+</ul>
+
+<p>이런 CHANGELOG 도 일단 보고 있지만요&hellip;</p>
+</div>
+
+  <footer>
+    
+    <p><a class="comments-link" href="/2012/08/09/moving-from-bash-to-zsh-again/#disqus_thread" data-disqus-identifier="http://jeen.github.io/2012/08/09/moving-from-bash-to-zsh-again/">View comments &raquo;</a></p>
+
+    
+    
+  </footer>
+
+
+    </article>
+  
+  <div class="pagination">
+    
+      <a class="prev" href="/page/5">&larr; Older</a>
+    
+    <a href="/archives">Blog Archives</a>
+    
+      <a class="next" href="/page/3">Newer &rarr;</a>
+    
+  </div>
+</div>
+
+<aside class="sidebar">
+  
+    
+
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Jeen Lee -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'jeen';
+      var disqus_developer = '0';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+  
+<div id="fb-root"></div>
+<script type="text/javascript">(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id; js.async = true;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+  
+
+  
+
+
+
+
+
+</body>
+</html>

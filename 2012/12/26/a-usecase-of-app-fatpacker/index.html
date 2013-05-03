@@ -1,0 +1,435 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>A usecase of App::Fatpacker - Nagios Plugin - JEEN's techlog</title>
+  <meta name="author" content="Jeen Lee">
+  
+  <meta name="Generator" content="Jekyll & Octopress (http://octopress.org)">
+
+  
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://jeen.github.io/2012/12/26/a-usecase-of-app-fatpacker/">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="JEEN's techlog" type="application/atom+xml">
+  
+
+<!--Fonts from Google's Web font directory at http://google.com/webfonts -->
+<link href='//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
+<link href='//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
+
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="/javascripts/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/build/all-d6d9ba8d8ed93ba1e6156209462b4f6b.js"></script>
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-27958809-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+  
+
+   
+  <link href="/octopress-favicon.png" rel="icon">
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">JEEN's techlog</a></h1>
+  
+    <h2>Yet Another JEEN's Blog</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:jeen.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/archives/">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+
+
+
+
+
+
+
+
+
+
+
+<article class="hentry " role="article">
+  
+  <header>
+    <h1 class="entry-title">
+
+A Usecase of App::Fatpacker - Nagios Plugin
+
+</h1>
+
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2012-12-26T23:48:00+09:00" pubdate data-updated="true">Dec 26<span>th</span>, 2012</time>
+         &bull; <a rel="bookmark" href="/2012/12/26/a-usecase-of-app-fatpacker/">Permalink</a>
+      </p>
+    
+  </header>
+
+<div class="entry-content"><p>최근 업무때문에 Nagios Plugin 을 만져야 하는 일들이 빈번하게 있었고, 앞으로도 발생할 소지가 상당히 높습니다. 이런 Nagios Plugin 을 만들거나 기존에 만들어 진 것들을 간편하게 다른 복수의 서버에 배포하는 일도 필요합니다.</p>
+
+<p>Nagios Plugin 이야 굳이 언어를 가리지 않는다고 치더라도, 언어의 특정 라이브러리에 의존을 가지는 경우가 많습니다. MongoDB 용 Nagios Plugin 에는 Python 의 pymongo 라이브러리를 설치해야하는 경우가 있지요.</p>
+
+<p>일례로 Redis 용 Nagios Plugin 을 설치할 시에는 Redis CPAN 모듈을 필요로 합니다. 그런데 Redis 서버가 여러대이고, 이 여러대의 서버에 매번 Redis 모듈을 깔고, Redis 모니터링용 Nagios Plugin 도 설치를 해야하는 경우가 있습니다. 그냥 뭐 시간을 좀 허비해서라도 그렇게 번거로운 일을 하면 일이야 끝나겠지만, 현인(@aer0 님)의 조언을 빌어서 <a href="http://metacpan.org/module/App::FatPacker">App::FatPacker</a> 를 사용해서 단일 스크립트에 우겨넣는 방향으로 돌리도록 합니다.</p>
+
+<p>우선은 <code>App::FatPacker</code> 를 설치하면 <code>fatpack</code> 이라는 커맨드를 사용할 수 있습니다.</p>
+
+<p><a href="http://exchange.nagios.org">Nagios Exchange</a> 에서 찾아낸 <a href="http://exchange.nagios.org/directory/Plugins/Databases/check_redis-2Epl/details">check_redis</a> 중에 <code>check_redis.pl</code> 파일이 위에 말한대로 Redis 모듈에 의존이 걸린 상황입니다.</p>
+
+<p>그럼 우선 <code>fatpack</code> 커맨드로 다음과 같이 입력을 합니다.</p>
+
+<figure class='code'><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div><div data-line='2' class='line-number'></div></pre></td><td class='main  bash'><pre><div class='line'><span class="nv">$ </span>fatpack trace check_redis.pl
+</div><div class='line'>check_redis.pl syntax OK
+</div></pre></td></tr></table></div></figure>
+
+<p>결과 <code>syntax OK</code> 가 뜨고 해당 디렉토리에 <code>fatpacker.trace</code> 라는 파일이 생성됩니다.</p>
+
+<figure class='code'><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div><div data-line='2' class='line-number'></div><div data-line='3' class='line-number'></div><div data-line='4' class='line-number'></div><div data-line='5' class='line-number'></div><div data-line='6' class='line-number'></div><div data-line='7' class='line-number'></div><div data-line='8' class='line-number'></div><div data-line='9' class='line-number'></div><div data-line='10' class='line-number'></div><div data-line='11' class='line-number'></div><div data-line='12' class='line-number'></div><div data-line='13' class='line-number'></div><div data-line='14' class='line-number'></div><div data-line='15' class='line-number'></div><div data-line='16' class='line-number'></div><div data-line='17' class='line-number'></div><div data-line='18' class='line-number'></div><div data-line='19' class='line-number'></div><div data-line='20' class='line-number'></div><div data-line='21' class='line-number'></div><div data-line='22' class='line-number'></div><div data-line='23' class='line-number'></div><div data-line='24' class='line-number'></div><div data-line='25' class='line-number'></div><div data-line='26' class='line-number'></div><div data-line='27' class='line-number'></div><div data-line='28' class='line-number'></div><div data-line='29' class='line-number'></div><div data-line='30' class='line-number'></div><div data-line='31' class='line-number'></div><div data-line='32' class='line-number'></div><div data-line='33' class='line-number'></div><div data-line='34' class='line-number'></div><div data-line='35' class='line-number'></div><div data-line='36' class='line-number'></div></pre></td><td class='main  bash'><pre><div class='line'><span class="nv">$ </span>cat fatpacker.trace
+</div><div class='line'>IO/Handle.pm
+</div><div class='line'>List/Util.pm
+</div><div class='line'>Getopt/Long.pm
+</div><div class='line'>SelectSaver.pm
+</div><div class='line'>IO/Socket.pm
+</div><div class='line'>Fcntl.pm
+</div><div class='line'>Text/ParseWords.pm
+</div><div class='line'>Symbol.pm
+</div><div class='line'>Scalar/Util.pm
+</div><div class='line'>IO/Socket/INET.pm
+</div><div class='line'>Errno.pm
+</div><div class='line'>fields.pm
+</div><div class='line'>warnings/register.pm
+</div><div class='line'>Encode/Alias.pm
+</div><div class='line'>Time/HiRes.pm
+</div><div class='line'>Encode/Config.pm
+</div><div class='line'>Encode/Encoding.pm
+</div><div class='line'>Redis.pm
+</div><div class='line'>Encode.pm
+</div><div class='line'>base.pm
+</div><div class='line'>Config.pm
+</div><div class='line'>IO.pm
+</div><div class='line'>IO/Socket/UNIX.pm
+</div><div class='line'>Carp.pm
+</div><div class='line'>bytes.pm
+</div><div class='line'>Exporter/Heavy.pm
+</div><div class='line'>vars.pm
+</div><div class='line'>constant.pm
+</div><div class='line'>Socket.pm
+</div><div class='line'>Try/Tiny.pm
+</div><div class='line'>IO/Select.pm
+</div><div class='line'>overload.pm
+</div><div class='line'>lib.pm
+</div><div class='line'>DynaLoader.pm
+</div><div class='line'>Data/Dumper.pm
+</div></pre></td></tr></table></div></figure>
+
+<p>내용을 보면 말 그대로 해당 모듈이 가지고 있는 의존 모듈이 좌르르륵 표시됩니다. 물론 걔중에는 Core 모듈도 있기도 합니다.</p>
+
+<p>일단 <code>App::FatPacker</code> SYNOPSIS 대로 진행을 해보면…</p>
+
+<figure class='code'><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div></pre></td><td class='main  bash'><pre><div class='line'><span class="nv">$ </span>fatpack packlists-for <span class="sb">`</span>cat fatpacker.trace<span class="sb">`</span>  &gt; packlists
+</div></pre></td></tr></table></div></figure>
+
+<p>위 결과로 생긴 <code>packlists</code> 는 파일은 다음과 같은 내용을 가집니다.</p>
+
+<figure class='code'><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div><div data-line='2' class='line-number'></div><div data-line='3' class='line-number'></div><div data-line='4' class='line-number'></div></pre></td><td class='main  bash'><pre><div class='line'><span class="nv">$ </span>cat packlists
+</div><div class='line'>/home/jeen/perl5/perlbrew/perls/perl-5.14.0/lib/5.14.0/x86_64-linux-thread-multi/auto/Time/HiRes/.packlist
+</div><div class='line'>/home/jeen/perl5/perlbrew/perls/perl-5.14.0/lib/site_perl/5.14.0/x86_64-linux-thread-multi/auto/Redis/.packlist
+</div><div class='line'>/home/jeen/perl5/perlbrew/perls/perl-5.14.0/lib/site_perl/5.14.0/x86_64-linux-thread-multi/auto/Try/Tiny/.packlist
+</div></pre></td></tr></table></div></figure>
+
+<p>각 의존 모듈 위치에 맞춰서 <code>.packlist</code> 파일이 생성되고, 그 내용은…</p>
+
+<figure class='code'><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div><div data-line='2' class='line-number'></div><div data-line='3' class='line-number'></div><div data-line='4' class='line-number'></div><div data-line='5' class='line-number'></div><div data-line='6' class='line-number'></div><div data-line='7' class='line-number'></div></pre></td><td class='main  bash'><pre><div class='line'><span class="nv">$ </span>cat /home/jeen/perl5/perlbrew/perls/perl-5.14.0/lib/site_perl/5.14.0/x86_64-linux-thread-multi/auto/Redis/.packlist
+</div><div class='line'>/home/jeen/perl5/perlbrew/perls/perl-5.14.0/lib/site_perl/5.14.0/Redis.pm
+</div><div class='line'>/home/jeen/perl5/perlbrew/perls/perl-5.14.0/lib/site_perl/5.14.0/Redis/Hash.pm
+</div><div class='line'>/home/jeen/perl5/perlbrew/perls/perl-5.14.0/lib/site_perl/5.14.0/Redis/List.pm
+</div><div class='line'>/home/jeen/perl5/perlbrew/perls/perl-5.14.0/man/man3/Redis.3
+</div><div class='line'>/home/jeen/perl5/perlbrew/perls/perl-5.14.0/man/man3/Redis::Hash.3
+</div><div class='line'>/home/jeen/perl5/perlbrew/perls/perl-5.14.0/man/man3/Redis::List.3
+</div></pre></td></tr></table></div></figure>
+
+<p>위와 같습니다.</p>
+
+<p>그리고 다음 커맨드를 입력해봅니다.</p>
+
+<figure class='code'><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div></pre></td><td class='main  bash'><pre><div class='line'><span class="nv">$ </span>fatpack tree <span class="sb">`</span>cat packlists<span class="sb">`</span>
+</div></pre></td></tr></table></div></figure>
+
+<p>그 결과 현재 디렉토리에서 <code>fatlib</code> 이라는 디렉토리가 생성되고 그 안에 관련 의존모듈들이 복사됩니다.</p>
+
+<figure class='code'><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div><div data-line='2' class='line-number'></div><div data-line='3' class='line-number'></div><div data-line='4' class='line-number'></div><div data-line='5' class='line-number'></div><div data-line='6' class='line-number'></div><div data-line='7' class='line-number'></div><div data-line='8' class='line-number'></div><div data-line='9' class='line-number'></div><div data-line='10' class='line-number'></div><div data-line='11' class='line-number'></div><div data-line='12' class='line-number'></div><div data-line='13' class='line-number'></div><div data-line='14' class='line-number'></div><div data-line='15' class='line-number'></div><div data-line='16' class='line-number'></div><div data-line='17' class='line-number'></div><div data-line='18' class='line-number'></div></pre></td><td class='main  bash'><pre><div class='line'><span class="nv">$ </span>tree
+</div><div class='line'>…
+</div><div class='line'>├── fatlib
+</div><div class='line'>│   ├── Redis
+</div><div class='line'>│   │   ├── Hash.pm
+</div><div class='line'>│   │   └── List.pm
+</div><div class='line'>│   ├── Redis.pm
+</div><div class='line'>│   ├── Try
+</div><div class='line'>│   │   └── Tiny.pm
+</div><div class='line'>│   └── x86_64-linux-thread-multi
+</div><div class='line'>│       ├── Time
+</div><div class='line'>│       │   └── HiRes.pm
+</div><div class='line'>│       └── auto
+</div><div class='line'>│           └── Time
+</div><div class='line'>│               └── HiRes
+</div><div class='line'>│                   ├── HiRes.bs
+</div><div class='line'>│                   └── HiRes.so
+</div><div class='line'>…
+</div></pre></td></tr></table></div></figure>
+
+<p>그럼 다음 커맨드를 입력해보면…</p>
+
+<figure class='code'><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div><div data-line='2' class='line-number'></div><div data-line='3' class='line-number'></div><div data-line='4' class='line-number'></div></pre></td><td class='main  bash'><pre><div class='line'><span class="nv">$ </span><span class="o">(</span>fatpack file; cat check_redis.pl <span class="o">)</span> &gt; check_redis.packed.pl
+</div><div class='line'>Can<span class="err">&#39;</span>t stat /home/jeen/fp/tt/lib: 그런 파일이나 디렉터리가 없습니다
+</div><div class='line'> at /home/jeen/perl5/perlbrew/perls/perl-5.14.0/lib/site_perl/5.14.0/App/FatPacker.pm line 200
+</div><div class='line'>BEGIN failed--compilation aborted at /home/jeen/perl5/perlbrew/perls/perl-5.14.0/bin/fatpack line 3.
+</div></pre></td></tr></table></div></figure>
+
+<p>제대로 동작하지 않습니다. 에러가 발생하네요. 정답은 에러메시지에 있습니다. <code>App::FatPacker</code> 자체는 Perl Library 규칙에 정형화된 디렉토리 구조를 가정하고 있습니다. 즉 <code>lib</code> 디렉토리가 존재하지 않기 때문에 발생하는 것이죠. 뭐 물론 다운받은 <code>check_redis.pl</code> 파일 하나만 있는 데 <code>lib</code> 디렉토리를 가지고 뭐 더 넣고 자시고 할 것도 아닌데…, 그래도 뭐 일단 사태해결을 위해서 아무것도 없어도 그냥 <code>lib</code> 디렉토리 하나는 만들어 줍니다.</p>
+
+<p>그리고 다시 실행해보면 <code>check_redis.packed.pl</code> 이라는 파일이 생성됩니다.</p>
+
+<figure class='code'><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div><div data-line='2' class='line-number'></div><div data-line='3' class='line-number'></div><div data-line='4' class='line-number'></div><div data-line='5' class='line-number'></div><div data-line='6' class='line-number'></div><div data-line='7' class='line-number'></div><div data-line='8' class='line-number'></div><div data-line='9' class='line-number'></div><div data-line='10' class='line-number'></div><div data-line='11' class='line-number'></div><div data-line='12' class='line-number'></div></pre></td><td class='main  perl'><pre><div class='line'> <span class="c1"># This chunk of stuff was generated by App::FatPacker. To find the original</span>
+</div><div class='line'> <span class="c1"># file&#39;s code, look for the end of this BEGIN block or the string &#39;FATPACK&#39;</span>
+</div><div class='line'><span class="k">BEGIN</span> <span class="p">{</span>
+</div><div class='line'><span class="k">my</span> <span class="nv">%fatpacked</span><span class="p">;</span>
+</div><div class='line'> </div><div class='line'><span class="nv">$fatpacked</span><span class="p">{</span><span class="s">&quot;Redis.pm&quot;</span><span class="p">}</span> <span class="o">=</span> <span class="o">&lt;&lt;</span><span class="s">&#39;REDIS&#39;</span><span class="p">;</span>
+</div><div class='line'>  <span class="nb">package</span> <span class="n">Redis</span><span class="p">;</span>
+</div><div class='line'> </div><div class='line'>  <span class="c1"># ABSTRACT: Perl binding for Redis database</span>
+</div><div class='line'>  <span class="k">our</span> <span class="nv">$VERSION</span> <span class="o">=</span> <span class="s">&#39;1.955&#39;</span><span class="p">;</span> <span class="c1"># VERSION</span>
+</div><div class='line'>  <span class="k">our</span> <span class="nv">$AUTHORITY</span> <span class="o">=</span> <span class="s">&#39;cpan:MELO&#39;</span><span class="p">;</span> <span class="c1"># AUTHORITY</span>
+</div><div class='line'>  <span class="err">…</span>
+</div></pre></td></tr></table></div></figure>
+
+<p>일단 Nagios Plugin 은 기본 실행권한을 가지는 파일로 해두는 것이 여러모로 편합니다. 한가지 주의할 점은 일단 위처럼 생성된 파일에서 shebang line 이 존재하지 않기때문에 shebang line 을 추가해주면 됩니다. :-)</p>
+
+<figure class='code'><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div></pre></td><td class='main  perl'><pre><div class='line'> <span class="c1">#!/usr/bin/env perl</span>
+</div></pre></td></tr></table></div></figure>
+
+<p>위의 내용을 <code>check_redis.packed.pl</code> 파일의 첫째줄에 추가해줍니다.</p>
+
+<p>그리고 완성된 파일들을 Redis 서버에 붙여서 <code>check_nrpe</code> 등으로 동작을 확인하고 설정에 추가하는 것으로 관련된 작업은 끝이 났습니다.</p>
+
+<p>파일 중앙배포와 관련해서도 다양한 이슈가 있지만 이에 관련해서는 추후 <code>Rex</code> 를 다루면서 이야기를 계속할 까 합니다.</p>
+
+<p>다 쓰고 나서 검색을 해보니 예전에 @aer0 님께서 작성하신 블로그 기사가 있군요.</p>
+
+<ul>
+<li><a href="http://aero2blog.blogspot.kr/2010/09/perl-appfatpacker.html">Perl 스크립트에 필요한 모듈 같이 넣기 App::FatPacker</a></li>
+</ul>
+
+<p>덩달아서 같이 참고하시면 좋을 것 같습니다.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Jeen Lee</span></span>
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2012-12-26T23:48:00+09:00" pubdate data-updated="true">Dec 26<span>th</span>, 2012</time>
+
+
+<span class="categories">
+  
+    <a class='category' href='/categories/perl/'>perl</a>
+  
+</span>
+
+
+
+      
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+    
+      
+        <div class="fb-like" data-href="http://jeen.github.io/2012/12/26/a-usecase-of-app-fatpacker/" data-send="true" data-width="450" data-show-faces="false"></div>
+      
+    
+  
+  
+
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2012/11/29/download-package-dir-slash-files-from-directory-index/" title="Previous Post: Download package dir/files from Directory Index">&laquo; Download package dir/files from Directory Index</a>
+      
+      
+        <a class="basic-alignment right" href="/2013/02/28/cpanm-1-dot-6-is-here-for-you/" title="Next Post: cpanm 1.6 is here for you">cpanm 1.6 is here for you &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2013/05/02/better-than-ack/">Better Than Ack</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/04/28/more-rex/">Rex Common Practice</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/04/08/data-printer-vs-data-dump-er/">Data::Printer vs Data::Dump(er)</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/04/04/using-rex-environment/">Using Rex - Environment</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/02/28/cpanm-1-dot-6-is-here-for-you/">cpanm 1.6 is here for you</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Jeen Lee -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'jeen';
+      var disqus_developer = '0';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://jeen.github.io/2012/12/26/a-usecase-of-app-fatpacker/';
+        var disqus_url = 'http://jeen.github.io/2012/12/26/a-usecase-of-app-fatpacker/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+  
+<div id="fb-root"></div>
+<script type="text/javascript">(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id; js.async = true;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+  
+
+  
+
+
+
+
+
+</body>
+</html>

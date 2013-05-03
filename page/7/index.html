@@ -1,0 +1,483 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>JEEN's techlog</title>
+  <meta name="author" content="Jeen Lee">
+  
+  <meta name="Generator" content="Jekyll & Octopress (http://octopress.org)">
+
+  
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://jeen.github.io/page/7/">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="JEEN's techlog" type="application/atom+xml">
+  
+
+<!--Fonts from Google's Web font directory at http://google.com/webfonts -->
+<link href='//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
+<link href='//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
+
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="/javascripts/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/build/all-d6d9ba8d8ed93ba1e6156209462b4f6b.js"></script>
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-27958809-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+  
+
+   
+  <link href="/octopress-favicon.png" rel="icon">
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">JEEN's techlog</a></h1>
+  
+    <h2>Yet Another JEEN's Blog</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:jeen.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/archives/">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+    
+
+
+
+
+
+
+
+
+
+
+    <article >
+      
+  <header>
+    <h1 class="entry-title">
+
+<a href="/2012/06/19/dbix-class-and-replication-ii/">DBIx::Class and Replication - II</a>
+
+</h1>
+
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2012-06-19T15:35:00+09:00" pubdate data-updated="true">Jun 19<span>th</span>, 2012</time>
+         &bull; <a rel="bookmark" href="/2012/06/19/dbix-class-and-replication-ii/">Permalink</a>
+      </p>
+    
+  </header>
+
+<div class="entry-content"><ul>
+<li><a href="http://jeen.github.com/blog/2012/06/17/dbix-class-and-replication/">DBIx::Class + Replication</a></li>
+</ul>
+
+<p>그러니까 17일이죠.</p>
+
+<blockquote>
+<p>이렇게 몇줄만의 설정으로 간단하게 어플리케이션단에서 Replication 설정을 수행할 수 있습니다…만, 여러가지 운용이슈가 발생할 테고 그에 맞춰서 적당하게 답을 내야할 경우가 생기겠죠. 네, 뭐 그건 그때 가서…</p>
+</blockquote>
+
+<p>라고 지난 글의 말미에서 얘기했습니다만, 네 금방 운용이슈가 발생했습니다.</p>
+
+<p>넘겨준대로 설정해서 돌리려고 하는 데 이런 에러가 떴다는 것입니다.</p>
+
+<figure class='code'><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div></pre></td><td class='main  bash'><pre><div class='line'>    Class::MOP::Class:::around<span class="o">()</span>: DBI Exception: DBD::mysql::db selectrow_hashref failed: Access denied; you need the SUPER,REPLICATION CLIENT privilege <span class="k">for </span>this operation <span class="o">[</span><span class="k">for </span>Statement <span class="s2">&quot;show slave status&quot;</span><span class="o">]</span> at /home/*/perl5/perlbrew/perls/perl-5.14.2/lib/site_perl/5.14.2/i686-linux/Class/MOP/Method/Wrapped.pm line 162
+</div></pre></td></tr></table></div></figure>
+
+<p>딱 봐도 DB 접속계정의 권한문제인데, 가장 간단한 답은 접속계정에 해당 권한을 부여하면 되는 것이었는데요.
+ 하지만 접속 계정을 추가해서 어떻게 하기에는 다른 운용이슈가 발생할 여지가 있다고 생각하기에(그럴리가&hellip;) 수정을 요구받았습니다. </p>
+
+<p>결국 DBIx::Class::Storage::DBI::Replicated::* 아래의 소스를 파보도록 했습니다. 관련 동작은 <code>connect_replicants</code> 시에 <code>validate_replicants</code> 에서 각 Replicant 마다 <code>is_replicating</code> 체크를 하게 되는 것입니다.</p>
+
+<p>일단 뭐 예, DBI::Replicated 시에는 기본적으로 그냥 뭐 자동 fail-over 까지 슥샥슥샥 해줄 수 있는데&hellip; 그냥 이런 거 다 필요없다라는 합의점에 이르러 결국은 해당부분을 회피하도록 했습니다.</p>
+
+<figure class='code'><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div><div data-line='2' class='line-number'></div><div data-line='3' class='line-number'></div><div data-line='4' class='line-number'></div><div data-line='5' class='line-number'></div><div data-line='6' class='line-number'></div><div data-line='7' class='line-number'></div><div data-line='8' class='line-number'></div></pre></td><td class='main  perl'><pre><div class='line'>    <span class="k">BEGIN</span> <span class="p">{</span>
+</div><div class='line'>        <span class="k">use</span> <span class="nn">DBIx::Class::Storage::DBI::Replicated::</span><span class="n">Pool</span><span class="p">;</span>
+</div><div class='line'> </div><div class='line'>        <span class="nb">no</span> <span class="n">warnings</span> <span class="s">&#39;redefine&#39;</span><span class="p">;</span>
+</div><div class='line'>        <span class="o">*</span><span class="nn">DBIx::Class::Storage::DBI::Replicated::Pool::</span><span class="n">validate_replicants</span> <span class="o">=</span> <span class="k">sub </span><span class="p">{</span>
+</div><div class='line'>            <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+</div><div class='line'>        <span class="p">};</span>
+</div><div class='line'>    <span class="p">};</span>
+</div></pre></td></tr></table></div></figure>
+
+<p>추가한 부분은 위와 같습니다. 컴파일시에 미리 <code>validate_replicants</code> 를 재정의해버리는 것이었습니다.</p>
+
+<p>전체 소스는 아래와 같습니다.</p>
+
+<figure class='code'><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div><div data-line='2' class='line-number'></div><div data-line='3' class='line-number'></div><div data-line='4' class='line-number'></div><div data-line='5' class='line-number'></div><div data-line='6' class='line-number'></div><div data-line='7' class='line-number'></div><div data-line='8' class='line-number'></div><div data-line='9' class='line-number'></div><div data-line='10' class='line-number'></div><div data-line='11' class='line-number'></div><div data-line='12' class='line-number'></div><div data-line='13' class='line-number'></div><div data-line='14' class='line-number'></div><div data-line='15' class='line-number'></div><div data-line='16' class='line-number'></div><div data-line='17' class='line-number'></div><div data-line='18' class='line-number'></div><div data-line='19' class='line-number'></div><div data-line='20' class='line-number'></div><div data-line='21' class='line-number'></div><div data-line='22' class='line-number'></div><div data-line='23' class='line-number'></div><div data-line='24' class='line-number'></div><div data-line='25' class='line-number'></div><div data-line='26' class='line-number'></div><div data-line='27' class='line-number'></div><div data-line='28' class='line-number'></div><div data-line='29' class='line-number'></div><div data-line='30' class='line-number'></div><div data-line='31' class='line-number'></div><div data-line='32' class='line-number'></div><div data-line='33' class='line-number'></div><div data-line='34' class='line-number'></div><div data-line='35' class='line-number'></div><div data-line='36' class='line-number'></div><div data-line='37' class='line-number'></div><div data-line='38' class='line-number'></div><div data-line='39' class='line-number'></div><div data-line='40' class='line-number'></div></pre></td><td class='main  perl'><pre><div class='line'>    <span class="k">BEGIN</span> <span class="p">{</span>
+</div><div class='line'>        <span class="k">use</span> <span class="nn">DBIx::Class::Storage::DBI::Replicated::</span><span class="n">Pool</span><span class="p">;</span>
+</div><div class='line'> </div><div class='line'>        <span class="nb">no</span> <span class="n">warnings</span> <span class="s">&#39;redefine&#39;</span><span class="p">;</span>
+</div><div class='line'>        <span class="o">*</span><span class="nn">DBIx::Class::Storage::DBI::Replicated::Pool::</span><span class="n">validate_replicants</span> <span class="o">=</span> <span class="k">sub </span><span class="p">{</span>
+</div><div class='line'>            <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+</div><div class='line'>        <span class="p">};</span>
+</div><div class='line'>    <span class="p">};</span>
+</div><div class='line'> </div><div class='line'>    <span class="k">my</span> <span class="nv">$schema</span> <span class="o">=</span> <span class="nn">MyApp::</span><span class="n">Schema</span><span class="o">-&gt;</span><span class="n">clone</span><span class="p">;</span>
+</div><div class='line'>    <span class="nv">$schema</span><span class="o">-&gt;</span><span class="n">storage_type</span><span class="p">([</span>
+</div><div class='line'>        <span class="s">&#39;::DBI::Replicated&#39;</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</div><div class='line'>            <span class="n">balancer_type</span> <span class="o">=&gt;</span> <span class="s">&#39;::Random&#39;</span><span class="p">,</span>
+</div><div class='line'>            <span class="n">balancer_args</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</div><div class='line'>                <span class="n">auto_validate_every</span> <span class="o">=&gt;</span> <span class="mi">10</span><span class="p">,</span>
+</div><div class='line'>                <span class="n">master_read_weight</span>  <span class="o">=&gt;</span> <span class="mi">0</span><span class="p">,</span>
+</div><div class='line'>            <span class="p">},</span>
+</div><div class='line'>            <span class="n">pool_args</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</div><div class='line'>                <span class="n">maximum_lag</span> <span class="o">=&gt;</span> <span class="mi">2</span><span class="p">,</span>
+</div><div class='line'>            <span class="p">}</span>
+</div><div class='line'>        <span class="p">}</span>
+</div><div class='line'>    <span class="p">]);</span>
+</div><div class='line'>    <span class="nv">$schema</span><span class="o">-&gt;</span><span class="n">connection</span><span class="p">({</span>
+</div><div class='line'>        <span class="n">dsn</span>      <span class="o">=&gt;</span> <span class="s">&quot;dbi:mysql:myapp:127.0.0.50&quot;</span><span class="p">,</span>
+</div><div class='line'>        <span class="n">user</span>     <span class="o">=&gt;</span> <span class="s">&quot;user&quot;</span><span class="p">,</span>
+</div><div class='line'>        <span class="n">password</span> <span class="o">=&gt;</span> <span class="s">&quot;whatthehell&quot;</span><span class="p">,</span>
+</div><div class='line'>        <span class="n">RaiseError</span>        <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">,</span>
+</div><div class='line'>        <span class="n">AutoCommit</span>        <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">,</span>
+</div><div class='line'>        <span class="n">mysql_enable_utf8</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">,</span>
+</div><div class='line'>        <span class="n">on_connect_do</span>     <span class="o">=&gt;</span> <span class="p">[</span><span class="s">&quot;SET NAMES utf8&quot;</span><span class="p">],</span>
+</div><div class='line'>        <span class="n">quote_char</span>        <span class="o">=&gt;</span> <span class="sx">q{`}</span><span class="p">,</span>
+</div><div class='line'>    <span class="p">});</span>
+</div><div class='line'>    <span class="nv">$schema</span><span class="o">-&gt;</span><span class="n">storage</span><span class="o">-&gt;</span><span class="n">connect_replicants</span><span class="p">([</span>
+</div><div class='line'>        <span class="p">{</span>
+</div><div class='line'>            <span class="n">dsn</span>      <span class="o">=&gt;</span> <span class="s">&quot;dbi:mysql:myapp:192.168.0.51&quot;</span><span class="p">,</span>
+</div><div class='line'>            <span class="n">user</span>     <span class="o">=&gt;</span> <span class="s">&quot;user&quot;</span><span class="p">,</span>
+</div><div class='line'>            <span class="n">password</span> <span class="o">=&gt;</span> <span class="s">&quot;whatthehell&quot;</span><span class="p">,</span>
+</div><div class='line'>        <span class="p">},</span>
+</div><div class='line'>        <span class="o">....</span>
+</div><div class='line'>    <span class="p">]);</span>
+</div></pre></td></tr></table></div></figure>
+
+<p>그리고 그들은 행복하게 오래오래 살았답니다~. 끝.</p>
+</div>
+
+  <footer>
+    
+    <p><a class="comments-link" href="/2012/06/19/dbix-class-and-replication-ii/#disqus_thread" data-disqus-identifier="http://jeen.github.io/2012/06/19/dbix-class-and-replication-ii/">View comments &raquo;</a></p>
+
+    
+    
+  </footer>
+
+
+    </article>
+  
+    
+
+
+
+
+
+
+
+
+
+
+    <article >
+      
+  <header>
+    <h1 class="entry-title">
+
+<a href="/2012/06/18/oh-my-zsh-bash-it/">Oh-my-zsh → Bash-it</a>
+
+</h1>
+
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2012-06-18T17:42:00+09:00" pubdate data-updated="true">Jun 18<span>th</span>, 2012</time>
+         &bull; <a rel="bookmark" href="/2012/06/18/oh-my-zsh-bash-it/">Permalink</a>
+      </p>
+    
+  </header>
+
+<div class="entry-content"><p>한동안 zsh 을 사용하면서 oh-my-zsh 로 화려한 셸환경을 이용하고 있었는데요, 언제부턴가 grep warning 이 뜨기도 하고, bash 위주의 작업환경에 맞춘 기사들이 소개되기에 이르러 결국 zsh 을 버리고 다시 bash 로 돌아오게 되었습니다.</p>
+
+<ul>
+<li><p><a href="https://github.com/robbyrussell/oh-my-zsh">robbyrussell/oh-my-zsh•GitHub</a></p>
+
+<p>하지만 그래도 역시 oh-my-zsh 을 사용하면서 접한 경험들을 버릴 수가 없기에 bash 에서 그런 류의 확장이 없을까 검색해본 결과 bash-it 이라는 것이 있다는 것을 확인했습니다.</p></li>
+<li><p><a href="https://github.com/revans/bash-it">revans/bash-it•GitHub</a></p>
+
+<p>솔직히 oh-my-zsh 에 비해서는 그렇게 만족스럽지는 못합니다. :-(</p></li>
+</ul>
+</div>
+
+  <footer>
+    
+    <p><a class="comments-link" href="/2012/06/18/oh-my-zsh-bash-it/#disqus_thread" data-disqus-identifier="http://jeen.github.io/2012/06/18/oh-my-zsh-bash-it/">View comments &raquo;</a></p>
+
+    
+    
+  </footer>
+
+
+    </article>
+  
+    
+
+
+
+
+
+
+
+
+
+
+    <article >
+      
+  <header>
+    <h1 class="entry-title">
+
+<a href="/2012/06/17/dbix-class-and-replication/">DBIx::Class + Replication</a>
+
+</h1>
+
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2012-06-17T19:05:00+09:00" pubdate data-updated="true">Jun 17<span>th</span>, 2012</time>
+         &bull; <a rel="bookmark" href="/2012/06/17/dbix-class-and-replication/">Permalink</a>
+      </p>
+    
+  </header>
+
+<div class="entry-content"><p>일반적으로 회사에서 개발하는 규모에서는 Replication 을 크게 고려하지 않았었는데, 이번에 수주받은 프로젝트에서 DBIx::Class 사용시에 Replication 에 대해서 고려해야 할 부분이 있었습니다.</p>
+
+<p>이전 회사에서 MySQL Replication 을 설정할 때 slave 서버들의 앞단에 keepalived 를 놓아서 로드 밸런서 역할로 사용했던 적이 있습니다. 말그대로 부하분산의 목적도 있고, 많은 slave 서버들의 커넥션정보를 일일이 웹 어플리케이션에서 설정할 필요도 없었죠. 하지만 IDC 에 로드밸런서 서버 한대를 더 우겨넣어야 했었죠.</p>
+
+<p>뭐 그리고 어플리케이션 로직에서도 master, slave 를 명시적으로 지정해야할 필요도 있었습니다.</p>
+
+<p>최근에는 HAProxy 를 사용해서 이런 저런 구성을 하고 있다는 얘기를 들었지만 마땅히 실제업무에서는 사용해보지 못해서 뭐라 말도 못하겠군요.</p>
+
+<p>그나저나 DBIx::Class 에서는 0.081x 버젼부터 자체적으로 Replication 설정을 할 수 있게 되었습니다. 위에서 로드밸런서를 사용하는 것과는 달리 slave 서버들의 접속정보를 모두 적어야할 필요가 있습니다. 하지만 설정만으로 갱신/참조용 쿼리를 어플리케이션 로직에 상관없이 분리시킬 수 있습니다.</p>
+
+<ul>
+<li><p><a href="https://metacpan.org/module/DBIx::Class::Storage::DBI::Replicated">DBIx:Class::Storage::DBI::Replicated - metacpan.org</a></p>
+
+<p>DBIx::Class::Storage::DBI::Replicated 의 SYNOPSIS 에 나와있는 대로 하면 됩니다.</p>
+
+<p>&hellip;.
+my $schema = MyApp::Schema-&gt;clone;
+$schema-&gt;storage_type([
+    &#39;::DBI::Replicated&#39; =&gt; {
+        balancer_type =&gt; &#39;::Random&#39;,
+        balancer_args =&gt; {
+            auto_validate_every =&gt; 10,
+            master_read_weight  =&gt; 0,
+        },<br>
+        pool_args =&gt; {
+            maximum_lag =&gt; 2,
+        }<br>
+    }<br>
+]);
+$schema-&gt;connection({
+    dsn      =&gt; &ldquo;dbi:mysql:myapp:127.0.0.50&rdquo;,
+    user     =&gt; &ldquo;user&rdquo;,
+    password =&gt; &ldquo;whatthehell&rdquo;,
+    RaiseError        =&gt; 1,
+    AutoCommit        =&gt; 1,
+    mysql_enable_utf8 =&gt; 1,
+    on_connect_do     =&gt; [&ldquo;SET NAMES utf8&rdquo;],
+    quote_char        =&gt; q{},
+});
+$schema-&gt;storage-&gt;connect_replicants([
+    {
+        dsn      =&gt; &ldquo;dbi:mysql:myapp:192.168.0.51&rdquo;,
+        user     =&gt; &ldquo;user&rdquo;,
+        password =&gt; &ldquo;whatthehell&rdquo;,
+    },
+    &hellip;.
+]);</p>
+
+<p>DBIx::Class 에서 위처럼, -&gt;storage_type 에 DBI::Replicated 를 지정하고 그에 적합한 인수를 넘겨주면 됩니다. <code>balancer_type</code> 은 기본적으로 <code>First</code>, <code>Random</code> 이 있습니다. 일단 저는 <code>Random</code>을 사용하구요. </p>
+
+<p>balancer_args에서 <code>auto_validate_every</code> 를 통해서 매초당 Replication 의 유효성을 확인합니다. 0으로 지정되어 있을 경우에는 뭐 안하겠다고 생각할 수 있지만&hellip; 그게 아니라 매번 쿼리를 날릴때마다 체크를 하게 됩니다.</p>
+
+<p>pool_args 의 <code>maximum_lags</code> 는 Replication 서버에 대한 유효성 체크에서 해당 수치를 초과하면 자동으로 Replication Pool 에서 해당 서버에 대한 접속을 빼버리게 됩니다.</p>
+
+<p>-&gt;connection 에서 지정한 것은 master 서버, -&gt;storage-&gt;connect_replicants 에서 복수의 slave 서버들을 지정합니다.</p>
+
+<p>그럼 Replication 체크는 어떻게 하고 있을까요?</p>
+
+<p>sub is_replicating {
+    my $status = shift-&gt;<em>get_dbh-&gt;selectrow_hashref(&#39;show slave status&#39;);
+    return ($status-&gt;{Slave</em>IO_Running} eq &#39;Yes&#39;) &amp;&amp; ($status-&gt;{Slave_SQL_Running} eq &#39;Yes&#39;);
+}</p>
+
+<p><code>DBIx::Class::Storage::DBI::mysql</code> 에서 확인할 수 있습니다만, <code>show slave status</code> 를 날려서 Slave_IO_Running, Slave_SQL_Running 값을 보고 Replication 체크를 수행하고 있는 것이죠.  뭐 물론 mysql 의 경우입니다만, 만약 DBD::* 에서 is_replicating 이 정의가 되어 있지 않다면 master 로의 fail-over 같은 건 동작하지 않습니다.</p>
+
+<p>화면상에서 이뤄지는 각각의 쿼리들이 정말로 제대로 가고 있을까 확인해보고 싶을 경우도 있을 겁니다. 그때는&hellip;</p>
+
+<p>$schema-&gt;storage-&gt;debug(1);</p>
+
+<p>을 지정함으로, 어떤 쿼리가 어느 DB 서버로 향하는 지에 대한 정보가 화면에 뿌려지기에 눈으로 확인하기 좋겠죠.</p>
+
+<p>만약 Replication 이 제대로 설정되지 않으면 자동으로 모든 쿼리는 master 서버로 향하게 됩니다.</p>
+
+<p>Exception trying to -&gt;ensure_connected for replicant dbi:mysql:bto:localhost, error is Class::MOP::Class:::around(): DBI Connection failed: DBI connect(&#39;my app:localhost&#39;,&#39;user&#39;,&hellip;) failed: Access denied for user &#39;user&#39;@&#39;localhost&#39; (using password: YES) at /Users/jeen/perl5/perlbrew/perls/perl-5.14.2-llvm/lib/site_perl/5.14.2/DBIx/Class/Storage/DBI.pm line 1249. at /Users/jeen/perl5/perlbrew/perls/perl-5.14.2-llvm/lib/site_perl/5.14.2/darwin-2level/Class/MOP/Method/Wrapped.pm line 162
+No Replicants validate, falling back to master reads.</p>
+
+<p>이렇게 몇줄만의 설정으로 간단하게 어플리케이션단에서 Replication 설정을 수행할 수 있습니다&hellip;만, 여러가지 운용이슈가 발생할 테고 그에 맞춰서 적당하게 답을 내야할 경우가 생기겠죠. 네, 뭐 그건 그때 가서&hellip; </p></li>
+</ul>
+</div>
+
+  <footer>
+    
+    <p><a class="comments-link" href="/2012/06/17/dbix-class-and-replication/#disqus_thread" data-disqus-identifier="http://jeen.github.io/2012/06/17/dbix-class-and-replication/">View comments &raquo;</a></p>
+
+    
+    
+  </footer>
+
+
+    </article>
+  
+  <div class="pagination">
+    
+      <a class="prev" href="/page/8">&larr; Older</a>
+    
+    <a href="/archives">Blog Archives</a>
+    
+      <a class="next" href="/page/6">Newer &rarr;</a>
+    
+  </div>
+</div>
+
+<aside class="sidebar">
+  
+    
+
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Jeen Lee -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'jeen';
+      var disqus_developer = '0';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+  
+<div id="fb-root"></div>
+<script type="text/javascript">(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id; js.async = true;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+  
+
+  
+
+
+
+
+
+</body>
+</html>

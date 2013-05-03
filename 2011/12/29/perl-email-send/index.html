@@ -1,0 +1,457 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Perl - Email Send - JEEN's techlog</title>
+  <meta name="author" content="Jeen Lee">
+  
+  <meta name="Generator" content="Jekyll & Octopress (http://octopress.org)">
+
+  
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://jeen.github.io/2011/12/29/perl-email-send/">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="JEEN's techlog" type="application/atom+xml">
+  
+
+<!--Fonts from Google's Web font directory at http://google.com/webfonts -->
+<link href='//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
+<link href='//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
+
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="/javascripts/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/build/all-d6d9ba8d8ed93ba1e6156209462b4f6b.js"></script>
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-27958809-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+  
+
+   
+  <link href="/octopress-favicon.png" rel="icon">
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">JEEN's techlog</a></h1>
+  
+    <h2>Yet Another JEEN's Blog</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:jeen.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/archives/">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+
+
+
+
+
+
+
+
+
+
+
+<article class="hentry " role="article">
+  
+  <header>
+    <h1 class="entry-title">
+
+Perl - Email Send
+
+</h1>
+
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2011-12-29T17:45:00+09:00" pubdate data-updated="true">Dec 29<span>th</span>, 2011</time>
+         &bull; <a rel="bookmark" href="/2011/12/29/perl-email-send/">Permalink</a>
+      </p>
+    
+  </header>
+
+<div class="entry-content"><p>회사 선배이신 <a href="http://twitter.com/mintegrals">@mintegrals</a> 께서 최근에 사내 버그질라에 올려놓은 내용을 보고 약간 코드를 수정해봤습니다.
+  내용인즉슨, 파일 첨부한 메일을 어떻게 보낼 수 있냐라는 것이었지요.
+  기존에 써놨던 메일송신을 하는 모듈이 파일첨부를 고려하지 않았던 것이었는데, 그런 상황등을 고려해서 좀 더 수정해봤습니다.</p>
+
+<h3>MyApp::Mail</h3>
+
+<figure class='code'><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div><div data-line='2' class='line-number'></div><div data-line='3' class='line-number'></div><div data-line='4' class='line-number'></div><div data-line='5' class='line-number'></div><div data-line='6' class='line-number'></div><div data-line='7' class='line-number'></div><div data-line='8' class='line-number'></div><div data-line='9' class='line-number'></div><div data-line='10' class='line-number'></div><div data-line='11' class='line-number'></div><div data-line='12' class='line-number'></div><div data-line='13' class='line-number'></div><div data-line='14' class='line-number'></div><div data-line='15' class='line-number'></div><div data-line='16' class='line-number'></div><div data-line='17' class='line-number'></div><div data-line='18' class='line-number'></div><div data-line='19' class='line-number'></div><div data-line='20' class='line-number'></div><div data-line='21' class='line-number'></div><div data-line='22' class='line-number'></div><div data-line='23' class='line-number'></div><div data-line='24' class='line-number'></div><div data-line='25' class='line-number'></div><div data-line='26' class='line-number'></div><div data-line='27' class='line-number'></div><div data-line='28' class='line-number'></div><div data-line='29' class='line-number'></div><div data-line='30' class='line-number'></div><div data-line='31' class='line-number'></div><div data-line='32' class='line-number'></div><div data-line='33' class='line-number'></div><div data-line='34' class='line-number'></div><div data-line='35' class='line-number'></div><div data-line='36' class='line-number'></div><div data-line='37' class='line-number'></div><div data-line='38' class='line-number'></div><div data-line='39' class='line-number'></div><div data-line='40' class='line-number'></div><div data-line='41' class='line-number'></div><div data-line='42' class='line-number'></div><div data-line='43' class='line-number'></div><div data-line='44' class='line-number'></div><div data-line='45' class='line-number'></div><div data-line='46' class='line-number'></div><div data-line='47' class='line-number'></div><div data-line='48' class='line-number'></div><div data-line='49' class='line-number'></div><div data-line='50' class='line-number'></div><div data-line='51' class='line-number'></div><div data-line='52' class='line-number'></div><div data-line='53' class='line-number'></div><div data-line='54' class='line-number'></div><div data-line='55' class='line-number'></div><div data-line='56' class='line-number'></div><div data-line='57' class='line-number'></div><div data-line='58' class='line-number'></div><div data-line='59' class='line-number'></div><div data-line='60' class='line-number'></div><div data-line='61' class='line-number'></div><div data-line='62' class='line-number'></div><div data-line='63' class='line-number'></div><div data-line='64' class='line-number'></div><div data-line='65' class='line-number'></div><div data-line='66' class='line-number'></div><div data-line='67' class='line-number'></div><div data-line='68' class='line-number'></div><div data-line='69' class='line-number'></div><div data-line='70' class='line-number'></div><div data-line='71' class='line-number'></div><div data-line='72' class='line-number'></div><div data-line='73' class='line-number'></div><div data-line='74' class='line-number'></div><div data-line='75' class='line-number'></div><div data-line='76' class='line-number'></div><div data-line='77' class='line-number'></div><div data-line='78' class='line-number'></div><div data-line='79' class='line-number'></div><div data-line='80' class='line-number'></div><div data-line='81' class='line-number'></div><div data-line='82' class='line-number'></div><div data-line='83' class='line-number'></div><div data-line='84' class='line-number'></div><div data-line='85' class='line-number'></div><div data-line='86' class='line-number'></div><div data-line='87' class='line-number'></div><div data-line='88' class='line-number'></div><div data-line='89' class='line-number'></div><div data-line='90' class='line-number'></div><div data-line='91' class='line-number'></div><div data-line='92' class='line-number'></div><div data-line='93' class='line-number'></div><div data-line='94' class='line-number'></div><div data-line='95' class='line-number'></div><div data-line='96' class='line-number'></div><div data-line='97' class='line-number'></div><div data-line='98' class='line-number'></div><div data-line='99' class='line-number'></div><div data-line='100' class='line-number'></div><div data-line='101' class='line-number'></div><div data-line='102' class='line-number'></div><div data-line='103' class='line-number'></div><div data-line='104' class='line-number'></div><div data-line='105' class='line-number'></div><div data-line='106' class='line-number'></div></pre></td><td class='main  perl'><pre><div class='line'><span class="nb">package</span> <span class="nn">MyApp::</span><span class="n">Mail</span><span class="p">;</span>
+</div><div class='line'><span class="k">use</span> <span class="n">Moose</span><span class="p">;</span>
+</div><div class='line'><span class="k">use</span> <span class="nn">namespace::</span><span class="n">autoclean</span><span class="p">;</span>
+</div><div class='line'><span class="k">use</span> <span class="nn">Email::</span><span class="n">MIME</span><span class="p">;</span>
+</div><div class='line'><span class="k">use</span> <span class="nn">Email::Sender::</span><span class="n">Simple</span> <span class="s">&#39;sendmail&#39;</span><span class="p">;</span>
+</div><div class='line'><span class="k">use</span> <span class="nn">Email::Sender::Transport::</span><span class="n">SMTP</span><span class="p">;</span>
+</div><div class='line'><span class="k">use</span> <span class="n">Encode</span><span class="p">;</span>
+</div><div class='line'><span class="k">use</span> <span class="nn">MIME::</span><span class="n">Types</span> <span class="p">();</span>
+</div><div class='line'> </div><div class='line'><span class="n">has</span> <span class="n">to</span> <span class="o">=&gt;</span> <span class="p">(</span>
+</div><div class='line'>    <span class="n">is</span>      <span class="o">=&gt;</span> <span class="s">&#39;ro&#39;</span><span class="p">,</span>
+</div><div class='line'>    <span class="n">isa</span>     <span class="o">=&gt;</span> <span class="s">&#39;Str&#39;</span><span class="p">,</span>
+</div><div class='line'>    <span class="n">default</span> <span class="o">=&gt;</span> <span class="k">sub </span><span class="p">{</span>
+</div><div class='line'>        <span class="nn">Encode::</span><span class="n">encode</span><span class="p">(</span> <span class="s">&quot;MIME-Header&quot;</span><span class="p">,</span> <span class="nv">$_</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="p">);</span>
+</div><div class='line'>    <span class="p">},</span>
+</div><div class='line'>    <span class="n">required</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">,</span>
+</div><div class='line'><span class="p">);</span>
+</div><div class='line'> </div><div class='line'><span class="n">has</span> <span class="n">from</span> <span class="o">=&gt;</span> <span class="p">(</span>
+</div><div class='line'>    <span class="n">is</span>      <span class="o">=&gt;</span> <span class="s">&#39;ro&#39;</span><span class="p">,</span>
+</div><div class='line'>    <span class="n">isa</span>     <span class="o">=&gt;</span> <span class="s">&#39;Str&#39;</span><span class="p">,</span>
+</div><div class='line'>    <span class="n">default</span> <span class="o">=&gt;</span> <span class="k">sub </span><span class="p">{</span>
+</div><div class='line'>        <span class="nn">Encode::</span><span class="n">encode</span><span class="p">(</span> <span class="s">&quot;MIME-Header&quot;</span><span class="p">,</span> <span class="nv">$_</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="p">);</span>
+</div><div class='line'>    <span class="p">},</span>
+</div><div class='line'>    <span class="n">required</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">,</span>
+</div><div class='line'><span class="p">);</span>
+</div><div class='line'> </div><div class='line'><span class="n">has</span> <span class="n">subject</span> <span class="o">=&gt;</span> <span class="p">(</span>
+</div><div class='line'>    <span class="n">is</span>      <span class="o">=&gt;</span> <span class="s">&#39;ro&#39;</span><span class="p">,</span>
+</div><div class='line'>    <span class="n">isa</span>     <span class="o">=&gt;</span> <span class="s">&#39;Str&#39;</span><span class="p">,</span>
+</div><div class='line'>    <span class="n">default</span> <span class="o">=&gt;</span> <span class="k">sub </span><span class="p">{</span>
+</div><div class='line'>        <span class="nn">Encode::</span><span class="n">encode</span><span class="p">(</span> <span class="s">&quot;MIME-Header&quot;</span><span class="p">,</span> <span class="nv">$_</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="p">);</span>
+</div><div class='line'>    <span class="p">},</span>
+</div><div class='line'>    <span class="n">required</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">,</span>
+</div><div class='line'><span class="p">);</span>
+</div><div class='line'> </div><div class='line'><span class="n">has</span> <span class="n">body</span> <span class="o">=&gt;</span> <span class="p">(</span>
+</div><div class='line'>    <span class="n">is</span>  <span class="o">=&gt;</span> <span class="s">&#39;ro&#39;</span><span class="p">,</span>
+</div><div class='line'>    <span class="n">isa</span> <span class="o">=&gt;</span> <span class="s">&#39;Str&#39;</span><span class="p">,</span>
+</div><div class='line'><span class="p">);</span>
+</div><div class='line'> </div><div class='line'><span class="n">has</span> <span class="n">transport</span> <span class="o">=&gt;</span> <span class="p">(</span>
+</div><div class='line'>    <span class="n">is</span>  <span class="o">=&gt;</span> <span class="s">&#39;ro&#39;</span><span class="p">,</span>
+</div><div class='line'>    <span class="n">isa</span> <span class="o">=&gt;</span> <span class="s">&#39;HashRef&#39;</span>
+</div><div class='line'><span class="p">);</span>
+</div><div class='line'> </div><div class='line'><span class="n">has</span> <span class="n">attachments</span> <span class="o">=&gt;</span> <span class="p">(</span>
+</div><div class='line'>    <span class="n">is</span> <span class="o">=&gt;</span> <span class="s">&#39;ro&#39;</span><span class="p">,</span>
+</div><div class='line'>    <span class="n">isa</span> <span class="o">=&gt;</span> <span class="s">&#39;ArrayRef[Path::Class::File]&#39;</span><span class="p">,</span>
+</div><div class='line'>    <span class="n">default</span> <span class="o">=&gt;</span> <span class="k">sub </span><span class="p">{</span> <span class="o">[]</span> <span class="p">},</span>
+</div><div class='line'><span class="p">);</span>
+</div><div class='line'> </div><div class='line'><span class="k">sub </span><span class="nf">_get_parts</span> <span class="p">{</span>
+</div><div class='line'>    <span class="k">my</span> <span class="nv">$self</span> <span class="o">=</span> <span class="nb">shift</span><span class="p">;</span>
+</div><div class='line'> </div><div class='line'>    <span class="k">my</span> <span class="nv">@parts</span><span class="p">;</span>
+</div><div class='line'>    <span class="nb">push</span> <span class="nv">@parts</span><span class="p">,</span>
+</div><div class='line'>        <span class="nn">Email::</span><span class="n">MIME</span><span class="o">-&gt;</span><span class="n">create</span><span class="p">(</span>
+</div><div class='line'>            <span class="n">attributes</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</div><div class='line'>                <span class="n">content_type</span> <span class="o">=&gt;</span> <span class="s">&#39;text/plain&#39;</span><span class="p">,</span>
+</div><div class='line'>                <span class="n">charset</span>      <span class="o">=&gt;</span> <span class="s">&#39;utf8&#39;</span><span class="p">,</span>
+</div><div class='line'>            <span class="p">},</span>
+</div><div class='line'>            <span class="n">body</span> <span class="o">=&gt;</span> <span class="nn">Encode::</span><span class="n">encode_utf8</span><span class="p">(</span><span class="nv">$self</span><span class="o">-&gt;</span><span class="n">body</span><span class="p">),</span>
+</div><div class='line'>        <span class="p">);</span>
+</div><div class='line'> </div><div class='line'>    <span class="k">for</span> <span class="k">my</span> <span class="nv">$attachment</span> <span class="p">(</span><span class="nv">@</span><span class="p">{</span> <span class="nv">$self</span><span class="o">-&gt;</span><span class="n">attachments</span> <span class="p">})</span> <span class="p">{</span>
+</div><div class='line'>        <span class="n">confess</span> <span class="s">&quot;File Not Found : $attachment&quot;</span> <span class="k">unless</span> <span class="o">-</span><span class="n">f</span> <span class="nv">$attachment</span><span class="p">;</span>
+</div><div class='line'>        <span class="k">my</span> <span class="p">(</span><span class="nv">$mime_type</span><span class="p">,</span> <span class="nv">$encoding</span><span class="p">)</span> <span class="o">=</span> <span class="nn">MIME::Types::</span><span class="n">by_suffix</span><span class="p">(</span><span class="nv">$attachment</span><span class="o">-&gt;</span><span class="n">basename</span><span class="p">);</span>
+</div><div class='line'>        <span class="nv">$mime_type</span> <span class="o">||=</span> <span class="s">&#39;multipart/mixed&#39;</span><span class="p">;</span>
+</div><div class='line'>        <span class="k">my</span> <span class="nv">$file_body</span> <span class="o">=</span> <span class="nv">$attachment</span><span class="o">-&gt;</span><span class="n">slurp</span><span class="p">;</span>
+</div><div class='line'>        <span class="nb">push</span> <span class="nv">@parts</span><span class="p">,</span> <span class="nn">Email::</span><span class="n">MIME</span><span class="o">-&gt;</span><span class="n">create</span><span class="p">(</span>
+</div><div class='line'>            <span class="n">attributes</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</div><div class='line'>                <span class="n">content_type</span> <span class="o">=&gt;</span> <span class="nv">$mime_type</span><span class="p">,</span>
+</div><div class='line'>                <span class="n">name</span>         <span class="o">=&gt;</span> <span class="nv">$attachment</span><span class="o">-&gt;</span><span class="n">basename</span><span class="p">,</span>
+</div><div class='line'>                <span class="n">filename</span>     <span class="o">=&gt;</span> <span class="nv">$attachment</span><span class="o">-&gt;</span><span class="n">basename</span><span class="p">,</span>
+</div><div class='line'>                <span class="n">encoding</span>     <span class="o">=&gt;</span> <span class="s">&#39;base64&#39;</span><span class="p">,</span>
+</div><div class='line'>                <span class="n">disposition</span>  <span class="o">=&gt;</span> <span class="s">&#39;attachment&#39;</span><span class="p">,</span>
+</div><div class='line'>            <span class="p">},</span>
+</div><div class='line'>            <span class="n">body</span> <span class="o">=&gt;</span> <span class="nv">$file_body</span><span class="p">,</span>
+</div><div class='line'>        <span class="p">);</span>
+</div><div class='line'>    <span class="p">}</span>
+</div><div class='line'>    <span class="o">\</span><span class="nv">@parts</span><span class="p">;</span>
+</div><div class='line'><span class="p">}</span>
+</div><div class='line'> </div><div class='line'><span class="k">sub </span><span class="nf">send</span> <span class="p">{</span>
+</div><div class='line'>    <span class="k">my</span> <span class="nv">$self</span> <span class="o">=</span> <span class="nb">shift</span><span class="p">;</span>
+</div><div class='line'> </div><div class='line'>    <span class="k">my</span> <span class="nv">$opt</span> <span class="o">=</span> <span class="p">{};</span>
+</div><div class='line'>    <span class="k">if</span> <span class="p">(</span><span class="nv">$self</span><span class="o">-&gt;</span><span class="n">transport</span><span class="p">)</span> <span class="p">{</span>
+</div><div class='line'>        <span class="nv">$opt</span><span class="o">-&gt;</span><span class="p">{</span><span class="n">transport</span><span class="p">}</span> <span class="o">=</span> <span class="nn">Email::Sender::Transport::</span><span class="n">SMTP</span><span class="o">-&gt;</span><span class="k">new</span><span class="p">(</span> <span class="nv">$self</span><span class="o">-&gt;</span><span class="n">transport</span> <span class="p">);</span>
+</div><div class='line'>    <span class="p">}</span>
+</div><div class='line'> </div><div class='line'>    <span class="k">my</span> <span class="nv">$email</span> <span class="o">=</span> <span class="nn">Email::</span><span class="n">MIME</span><span class="o">-&gt;</span><span class="n">create</span><span class="p">(</span>
+</div><div class='line'>        <span class="n">header</span> <span class="o">=&gt;</span> <span class="p">[</span>
+</div><div class='line'>            <span class="n">From</span>    <span class="o">=&gt;</span> <span class="nv">$self</span><span class="o">-&gt;</span><span class="n">from</span><span class="p">,</span>
+</div><div class='line'>            <span class="n">To</span>      <span class="o">=&gt;</span> <span class="nv">$self</span><span class="o">-&gt;</span><span class="n">to</span><span class="p">,</span>
+</div><div class='line'>            <span class="n">Subject</span> <span class="o">=&gt;</span> <span class="nv">$self</span><span class="o">-&gt;</span><span class="n">subject</span>
+</div><div class='line'>        <span class="p">],</span>
+</div><div class='line'>        <span class="n">parts</span> <span class="o">=&gt;</span> <span class="nv">$self</span><span class="o">-&gt;</span><span class="n">_get_parts</span><span class="p">,</span>
+</div><div class='line'>    <span class="p">);</span>
+</div><div class='line'>    <span class="n">sendmail</span><span class="p">(</span><span class="nv">$email</span><span class="p">,</span> <span class="nv">$opt</span><span class="p">);</span>
+</div><div class='line'><span class="p">}</span>
+</div><div class='line'> </div><div class='line'><span class="n">__PACKAGE__</span><span class="o">-&gt;</span><span class="n">meta</span><span class="o">-&gt;</span><span class="n">make_immutable</span><span class="p">;</span>
+</div><div class='line'> </div><div class='line'><span class="mi">1</span><span class="p">;</span>
+</div></pre></td></tr></table></div></figure>
+
+<p>파일첨부를 위한 <code>attachments</code> 접근자를 추가로 지정합니다. 첨부파일은 하나가 아닌 여러개가 가능하기에 <code>ArrayRef</code> 를 기본형식으로 합니다. 각 요소는 반드시 <code>Path::Class::File</code> 로 받도록 했습니다.</p>
+
+<p><code>MIME::Types</code> 로 첨부파일의 확장자를 통해서 MIME-TYPE 을 뽑아내도록 하고, 알 수 없다면 <code>multipart/mixed</code> 로 지정했습니다.</p>
+
+<p><code>transport</code> 레이어를 별도로 지정할 수 있으며, <code>transport</code> 의 지정이 없을 경우는 당연히 로컬호스트의 <code>smtp</code> 를 이용하도록 합니다.</p>
+
+<h3>Using MyApp::Mail</h3>
+
+<p>위의 <code>MyApp::Mail</code> 을 이용하기 위해서 아래와 같이 <code>sendmail.pl</code> 이라는 스크립트를 준비했습니다.</p>
+
+<figure class='code'><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div><div data-line='2' class='line-number'></div><div data-line='3' class='line-number'></div><div data-line='4' class='line-number'></div><div data-line='5' class='line-number'></div><div data-line='6' class='line-number'></div><div data-line='7' class='line-number'></div><div data-line='8' class='line-number'></div><div data-line='9' class='line-number'></div><div data-line='10' class='line-number'></div><div data-line='11' class='line-number'></div><div data-line='12' class='line-number'></div><div data-line='13' class='line-number'></div><div data-line='14' class='line-number'></div><div data-line='15' class='line-number'></div><div data-line='16' class='line-number'></div><div data-line='17' class='line-number'></div><div data-line='18' class='line-number'></div><div data-line='19' class='line-number'></div><div data-line='20' class='line-number'></div><div data-line='21' class='line-number'></div><div data-line='22' class='line-number'></div><div data-line='23' class='line-number'></div><div data-line='24' class='line-number'></div><div data-line='25' class='line-number'></div><div data-line='26' class='line-number'></div><div data-line='27' class='line-number'></div><div data-line='28' class='line-number'></div><div data-line='29' class='line-number'></div><div data-line='30' class='line-number'></div></pre></td><td class='main  perl'><pre><div class='line'><span class="c1"># sendmail.pl</span>
+</div><div class='line'><span class="k">use</span> <span class="n">strict</span><span class="p">;</span>
+</div><div class='line'><span class="k">use</span> <span class="n">warnings</span><span class="p">;</span>
+</div><div class='line'><span class="k">use</span> <span class="nn">MyApp::</span><span class="n">Mail</span><span class="p">;</span>
+</div><div class='line'><span class="k">use</span> <span class="nn">Path::Class::</span><span class="n">File</span><span class="p">;</span>
+</div><div class='line'> </div><div class='line'><span class="k">my</span> <span class="nv">$to</span>    <span class="o">=</span> <span class="s">&#39;your@email.com&#39;</span><span class="p">;</span>
+</div><div class='line'><span class="k">my</span> <span class="nv">$from</span>  <span class="o">=</span> <span class="s">&#39;my@email.com&#39;</span><span class="p">;</span>
+</div><div class='line'><span class="k">my</span> <span class="nv">$subject</span> <span class="o">=</span> <span class="s">&#39;MailSender Test Subject&#39;</span><span class="p">;</span>
+</div><div class='line'><span class="k">my</span> <span class="nv">$body</span>    <span class="o">=</span> <span class="s">&#39;MailSender Test Body&#39;</span><span class="p">;</span>
+</div><div class='line'> </div><div class='line'><span class="k">my</span> <span class="nv">$mailer</span> <span class="o">=</span> <span class="nn">MyApp::</span><span class="n">Mail</span><span class="o">-&gt;</span><span class="k">new</span><span class="p">(</span>
+</div><div class='line'>    <span class="n">to</span> <span class="o">=&gt;</span> <span class="nv">$to</span><span class="p">,</span>
+</div><div class='line'>    <span class="n">from</span> <span class="o">=&gt;</span> <span class="nv">$from</span><span class="p">,</span>
+</div><div class='line'>    <span class="n">subject</span> <span class="o">=&gt;</span> <span class="nv">$subject</span><span class="p">,</span>
+</div><div class='line'>    <span class="n">body</span>    <span class="o">=&gt;</span> <span class="nv">$body</span><span class="p">,</span>
+</div><div class='line'>    <span class="n">attachments</span> <span class="o">=&gt;</span> <span class="p">[</span>
+</div><div class='line'>      <span class="nn">Path::Class::</span><span class="n">File</span><span class="o">-&gt;</span><span class="k">new</span><span class="p">(</span><span class="s">&#39;test.doc&#39;</span><span class="p">),</span>
+</div><div class='line'>      <span class="nn">Path::Class::</span><span class="n">File</span><span class="o">-&gt;</span><span class="k">new</span><span class="p">(</span><span class="s">&#39;text.pdf&#39;</span><span class="p">)</span>
+</div><div class='line'>    <span class="p">],</span>
+</div><div class='line'>    <span class="n">transport</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</div><div class='line'>        <span class="n">host</span> <span class="o">=&gt;</span> <span class="s">&#39;smtp.gmail.com&#39;</span><span class="p">,</span>
+</div><div class='line'>        <span class="n">port</span> <span class="o">=&gt;</span> <span class="mi">465</span><span class="p">,</span>
+</div><div class='line'>        <span class="n">sasl_username</span> <span class="o">=&gt;</span> <span class="s">&#39;YOUR_GOOGLE EMAIL&#39;</span><span class="p">,</span>
+</div><div class='line'>        <span class="n">sasl_password</span> <span class="o">=&gt;</span> <span class="s">&#39;YOUR_GOOGLE_PASS&#39;</span><span class="p">,</span>
+</div><div class='line'>        <span class="n">ssl</span>  <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">,</span>
+</div><div class='line'>    <span class="p">},</span>
+</div><div class='line'><span class="p">);</span>
+</div><div class='line'> </div><div class='line'><span class="nv">$mailer</span><span class="o">-&gt;</span><span class="nb">send</span><span class="p">;</span>
+</div></pre></td></tr></table></div></figure>
+
+<p>위에서 언급한 <code>transport</code> 레이어에 지메일의 <code>smtp</code> 를 사용하도록 합니다. 이를 위해서 물론 Google 계정정보를 입력할 필요가 있습니다.</p>
+
+<h3>How to Test?</h3>
+
+<p><a href="http://search.cpan.org/%7Erjbs/Email-Sender-0.110001/lib/Email/Sender/Manual/QuickStart.pm#Testing">Email::Sender::Manual::QuickStart</a> 문서를 확인 해보면 Testing 관련 내용이 나옵니다.</p>
+
+<figure class='code'><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div><div data-line='2' class='line-number'></div><div data-line='3' class='line-number'></div><div data-line='4' class='line-number'></div><div data-line='5' class='line-number'></div><div data-line='6' class='line-number'></div><div data-line='7' class='line-number'></div></pre></td><td class='main  perl'><pre><div class='line'>  <span class="k">use</span> <span class="nn">Test::</span><span class="n">More</span><span class="p">;</span>
+</div><div class='line'>  <span class="k">BEGIN</span> <span class="p">{</span> <span class="nv">$ENV</span><span class="p">{</span><span class="n">EMAIL_SENDER_TRANSPORT</span><span class="p">}</span> <span class="o">=</span> <span class="s">&#39;Test&#39;</span> <span class="p">}</span>
+</div><div class='line'>  <span class="k">use</span> <span class="n">YourCode</span><span class="p">;</span>
+</div><div class='line'> </div><div class='line'>  <span class="n">YourCode</span><span class="o">-&gt;</span><span class="n">run</span><span class="p">;</span>
+</div><div class='line'> </div><div class='line'>  <span class="k">my</span> <span class="nv">@deliveries</span> <span class="o">=</span> <span class="nn">Email::Sender::</span><span class="n">Simple</span><span class="o">-&gt;</span><span class="n">default_transport</span><span class="o">-&gt;</span><span class="n">deliveries</span><span class="p">;</span>
+</div></pre></td></tr></table></div></figure>
+
+<p>위와같은 샘플코드가 제시되어 있는데,</p>
+
+<figure class='code'><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div></pre></td><td class='main  perl'><pre><div class='line'><span class="k">BEGIN</span> <span class="p">{</span> <span class="nv">$ENV</span><span class="p">{</span><span class="n">EMAIL_SENDER_TRANSPORT</span><span class="p">}</span> <span class="o">=</span> <span class="s">&#39;Test&#39;</span> <span class="p">}</span>
+</div></pre></td></tr></table></div></figure>
+
+<p>가 지정되면, 실제로 메일 송신이 이뤄지지 않습니다.</p>
+
+<figure class='code'><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div></pre></td><td class='main  perl'><pre><div class='line'>  <span class="k">my</span> <span class="nv">@deliveries</span> <span class="o">=</span> <span class="nn">Email::Sender::</span><span class="n">Simple</span><span class="o">-&gt;</span><span class="n">default_transport</span><span class="o">-&gt;</span><span class="n">deliveries</span><span class="p">;</span>
+</div></pre></td></tr></table></div></figure>
+
+<p>에서 그동안 송신한 메일건수당 성공실패를 판별할 수 있고, 작성된 메일 내용 또한 확인이 가능합니다. 테스트코드를 작성함에 있어서 위의 두 부분이 절대적으로 필요합니다.</p>
+
+<p>위처럼 테스트 코드를 작성할 시에는 실제로 메일 송신을 하지 않았기에 <code>transport</code> 레이어에서 발생하는 어떤 불상사는 감지할 수 없습니다.</p>
+
+<h3>Conclusion</h3>
+
+<ul>
+<li><p><a href="http://jeen.tistory.com/entry/Perl-Perl-%EB%A1%9C-%EB%A9%94%EC%9D%BC%EB%B3%B4%EB%82%B4%EA%B8%B0-SSMTP-%EC%99%80-MIMELite-%EB%A5%BC-%EC%82%AC%EC%9A%A9%ED%95%B4%EC%84%9C">Perl 로 메일보내기 &hellip; SSMTP 와 MIME::Lite 를 사용해서!</a></p>
+
+<p>이전에 메일보내기 관련해서 <code>SSMTP</code> + <code>MIME::Lite</code> 를 사용하는 그런 코드를 2008년쯤에 썼었네요. 부끄럽습니다. 2009년부터는 아마 <code>MIME::Lite</code> 를 안 썼던 것 같네요.</p>
+
+<p>뭐 당장 필요로 하는 부분만 구현을 한 것일 뿐인지라, 차후에 다른 어떤 요구사항이 있다면 그에 맞춰서 다시 한번 소개를 해볼까 합니다.</p></li>
+</ul>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Jeen Lee</span></span>
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2011-12-29T17:45:00+09:00" pubdate data-updated="true">Dec 29<span>th</span>, 2011</time>
+
+
+<span class="categories">
+  
+    <a class='category' href='/categories/attachments/'>attachments</a>, <a class='category' href='/categories/email/'>email</a>, <a class='category' href='/categories/perl/'>perl</a>, <a class='category' href='/categories/rjbs/'>rjbs</a>
+  
+</span>
+
+
+
+      
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+    
+      
+        <div class="fb-like" data-href="http://jeen.github.io/2011/12/29/perl-email-send/" data-send="true" data-width="450" data-show-faces="false"></div>
+      
+    
+  
+  
+
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2011/12/27/catalyst-actionrole/" title="Previous Post: Catalyst - ActionRole">&laquo; Catalyst - ActionRole</a>
+      
+      
+        <a class="basic-alignment right" href="/2012/01/03/perl-and-continuous-integration-with-jenkins-1/" title="Next Post: Perl and Continuous Integration with Jenkins - I">Perl and Continuous Integration with Jenkins - I &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2013/05/02/better-than-ack/">Better Than Ack</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/04/28/more-rex/">Rex Common Practice</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/04/08/data-printer-vs-data-dump-er/">Data::Printer vs Data::Dump(er)</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/04/04/using-rex-environment/">Using Rex - Environment</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/02/28/cpanm-1-dot-6-is-here-for-you/">cpanm 1.6 is here for you</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Jeen Lee -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'jeen';
+      var disqus_developer = '0';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://jeen.github.io/2011/12/29/perl-email-send/';
+        var disqus_url = 'http://jeen.github.io/2011/12/29/perl-email-send/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+  
+<div id="fb-root"></div>
+<script type="text/javascript">(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id; js.async = true;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+  
+
+  
+
+
+
+
+
+</body>
+</html>
