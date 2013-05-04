@@ -98,6 +98,174 @@
   <header>
     <h1 class="entry-title">
 
+<a href="/2012/01/05/freebsd-8-dot-2-stable-cpan-error/">FreeBSD 8.2 STABLE - CPAN Error</a>
+
+</h1>
+
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2012-01-05T22:32:00+00:00" pubdate data-updated="true">Jan 5<span>th</span>, 2012</time>
+         &bull; <a rel="bookmark" href="/2012/01/05/freebsd-8-dot-2-stable-cpan-error/">Permalink</a>
+      </p>
+    
+  </header>
+
+<div class="entry-content"><p>회사업무차 <code>FreeBSD 8.2 STABLE</code> OS 를 사용하는 서버에서 CPAN 사용시 에러가 발생했습니다.</p>
+
+<figure class='code'><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div><div data-line='2' class='line-number'></div><div data-line='3' class='line-number'></div><div data-line='4' class='line-number'></div><div data-line='5' class='line-number'></div><div data-line='6' class='line-number'></div><div data-line='7' class='line-number'></div><div data-line='8' class='line-number'></div><div data-line='9' class='line-number'></div><div data-line='10' class='line-number'></div><div data-line='11' class='line-number'></div><div data-line='12' class='line-number'></div><div data-line='13' class='line-number'></div><div data-line='14' class='line-number'></div><div data-line='15' class='line-number'></div><div data-line='16' class='line-number'></div><div data-line='17' class='line-number'></div><div data-line='18' class='line-number'></div></pre></td><td class='main  bash'><pre><div class='line'><span class="nv">$ </span>cpan Module::Install
+</div><div class='line'>Reading <span class="s1">&#39;/home/jeen/.cpan/sources/authors/01mailrc.txt.gz&#39;</span>
+</div><div class='line'>............................................................................DONE
+</div><div class='line'>Reading <span class="s1">&#39;/home/jeen/.cpan/sources/modules/02packages.details.txt.gz&#39;</span>
+</div><div class='line'>  Database was generated on Thu, 05 Jan 2012 05:12:02 GMT
+</div><div class='line'>............................................................................DONE
+</div><div class='line'>Reading <span class="s1">&#39;/home/jeen/.cpan/sources/modules/03modlist.data.gz&#39;</span>
+</div><div class='line'>Can<span class="s1">&#39;t locate object method &quot;data&quot; via package &quot;CPAN::Modulelist&quot; (perhaps you forgot to load &quot;CPAN::Modulelist&quot;?) at (eval 24) line 1.</span>
+</div><div class='line'><span class="s1"> at /home/jeen/perl5/perlbrew/perls/perl-5.14.2/lib/5.14.2/CPAN/Index.pm line 524</span>
+</div><div class='line'><span class="s1">   CPAN::Index::rd_modlist(&#39;</span>CPAN::Index<span class="s1">&#39;, &#39;</span>/home/jeen/.cpan/sources/modules/03modlist.data.gz<span class="s1">&#39;) called at /home/jeen/perl5/perlbrew/perls/perl-5.14.2/lib/5.14.2/CPAN/Index.pm line 85</span>
+</div><div class='line'><span class="s1">   CPAN::Index::reload(&#39;</span>CPAN::Index<span class="s1">&#39;) called at /home/jeen/perl5/perlbrew/perls/perl-5.14.2/lib/5.14.2/CPAN.pm line 976</span>
+</div><div class='line'><span class="s1">   CPAN::exists(&#39;</span><span class="nv">CPAN</span><span class="o">=</span>HASH<span class="o">(</span>0x801fe27f8<span class="o">)</span><span class="s1">&#39;, &#39;</span>CPAN::Module<span class="s1">&#39;, &#39;</span>Module::Install<span class="s1">&#39;) called at /home/jeen/perl5/perlbrew/perls/perl-5.14.2/lib/5.14.2/CPAN/Shell.pm line 1256</span>
+</div><div class='line'><span class="s1">   CPAN::Shell::expandany(&#39;</span>CPAN::Shell<span class="s1">&#39;, &#39;</span>Module::Install<span class="s1">&#39;) called at /home/jeen/perl5/perlbrew/perls/perl-5.14.2/lib/5.14.2/CPAN/Shell.pm line 1681</span>
+</div><div class='line'><span class="s1">   CPAN::Shell::rematein(&#39;</span>CPAN::Shell<span class="s1">&#39;, &#39;</span>install<span class="s1">&#39;, &#39;</span>Module::Install<span class="s1">&#39;) called at /home/jeen/perl5/perlbrew/perls/perl-5.14.2/lib/5.14.2/CPAN/Shell.pm line 1977</span>
+</div><div class='line'><span class="s1">   CPAN::Shell::__ANON__(&#39;</span>CPAN::Shell<span class="s1">&#39;, &#39;</span>Module::Install<span class="s1">&#39;) called at /home/jeen/perl5/perlbrew/perls/perl-5.14.2/lib/5.14.2/App/Cpan.pm line 459</span>
+</div><div class='line'><span class="s1">   App::Cpan::__ANON__(&#39;</span>Module::Install<span class="s1">&#39;) called at /home/jeen/perl5/perlbrew/perls/perl-5.14.2/lib/5.14.2/App/Cpan.pm line 468</span>
+</div><div class='line'><span class="s1">   App::Cpan::_default(&#39;</span>ARRAY<span class="o">(</span>0x800e92780<span class="o">)</span><span class="s1">&#39;, &#39;</span>HASH<span class="o">(</span>0x801fe7d38<span class="o">)</span><span class="s1">&#39;) called at /home/jeen/perl5/perlbrew/perls/perl-5.14.2/lib/5.14.2/App/Cpan.pm line 386</span>
+</div><div class='line'><span class="s1">   App::Cpan::run(&#39;</span>App::Cpan<span class="s1">&#39;, &#39;</span>Module::Install<span class="err">&#39;</span><span class="o">)</span> called at /home/jeen/perl5/perlbrew/perls/perl-5.14.2/bin/cpan line 11
+</div></pre></td></tr></table></div></figure>
+
+<p>마땅히 어떻게 <code>cpan</code> 자체가 안되니, 다른 CPAN 모듈 설치도 안되고&hellip;</p>
+
+<figure class='code'><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div></pre></td><td class='main  bash'><pre><div class='line'><span class="nv">$ </span>curl -L http://cpanmin.us | perl - --self-upgrade
+</div></pre></td></tr></table></div></figure>
+
+<p>그래서 일단은 그냥 <code>cpanm</code> 을 설치하고 필요한 모듈들을 설치했습니다. 하지만 여전히 <code>cpan</code> 으로 모듈을 설치하려면 위처럼 에러가 뜨니 아직도 찜찜하기 그지 없네요.</p>
+
+<figure class='code'><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div><div data-line='2' class='line-number'></div></pre></td><td class='main  bash'><pre><div class='line'><span class="nv">$ </span>uname -a
+</div><div class='line'>FreeBSD xxx.xxxxx.kr 8.2-STABLE FreeBSD 8.2-STABLE <span class="c">#1: Wed Apr 13 13:10:49 KST 2011     root@xxx.xxxx.kr:/usr/obj/usr/src/sys/GENERIC  amd64</span>
+</div></pre></td></tr></table></div></figure>
+ 
+
+<figure class='code'><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div><div data-line='2' class='line-number'></div><div data-line='3' class='line-number'></div><div data-line='4' class='line-number'></div><div data-line='5' class='line-number'></div><div data-line='6' class='line-number'></div><div data-line='7' class='line-number'></div><div data-line='8' class='line-number'></div><div data-line='9' class='line-number'></div><div data-line='10' class='line-number'></div><div data-line='11' class='line-number'></div><div data-line='12' class='line-number'></div><div data-line='13' class='line-number'></div><div data-line='14' class='line-number'></div><div data-line='15' class='line-number'></div><div data-line='16' class='line-number'></div><div data-line='17' class='line-number'></div><div data-line='18' class='line-number'></div><div data-line='19' class='line-number'></div><div data-line='20' class='line-number'></div><div data-line='21' class='line-number'></div><div data-line='22' class='line-number'></div><div data-line='23' class='line-number'></div><div data-line='24' class='line-number'></div><div data-line='25' class='line-number'></div><div data-line='26' class='line-number'></div><div data-line='27' class='line-number'></div><div data-line='28' class='line-number'></div><div data-line='29' class='line-number'></div><div data-line='30' class='line-number'></div><div data-line='31' class='line-number'></div><div data-line='32' class='line-number'></div><div data-line='33' class='line-number'></div><div data-line='34' class='line-number'></div><div data-line='35' class='line-number'></div><div data-line='36' class='line-number'></div><div data-line='37' class='line-number'></div><div data-line='38' class='line-number'></div><div data-line='39' class='line-number'></div><div data-line='40' class='line-number'></div><div data-line='41' class='line-number'></div><div data-line='42' class='line-number'></div><div data-line='43' class='line-number'></div><div data-line='44' class='line-number'></div><div data-line='45' class='line-number'></div><div data-line='46' class='line-number'></div><div data-line='47' class='line-number'></div><div data-line='48' class='line-number'></div><div data-line='49' class='line-number'></div><div data-line='50' class='line-number'></div><div data-line='51' class='line-number'></div><div data-line='52' class='line-number'></div><div data-line='53' class='line-number'></div></pre></td><td class='main  bash'><pre><div class='line'><span class="nv">$ </span>perl -V
+</div><div class='line'>Summary of my perl5 <span class="o">(</span>revision 5 version 14 subversion 2<span class="o">)</span> configuration:
+</div><div class='line'> </div><div class='line'>  Platform:
+</div><div class='line'>    <span class="nv">osname</span><span class="o">=</span>freebsd, <span class="nv">osvers</span><span class="o">=</span>8.2-stable, <span class="nv">archname</span><span class="o">=</span>amd64-freebsd
+</div><div class='line'>    <span class="nv">uname</span><span class="o">=</span><span class="s1">&#39;freebsd xxx.xxxxx.kr 8.2-stable freebsd 8.2-stable #1: wed apr 13 13:10:49 kst 2011 root@xxx.xxxx.kr:usrobjusrsrcsysgeneric amd64 &#39;</span>
+</div><div class='line'>    <span class="nv">config_args</span><span class="o">=</span><span class="s1">&#39;-de -Dprefix=/home/jeen/perl5/perlbrew/perls/perl-5.14.2&#39;</span>
+</div><div class='line'>    <span class="nv">hint</span><span class="o">=</span>recommended, <span class="nv">useposix</span><span class="o">=</span><span class="nb">true</span>, <span class="nv">d_sigaction</span><span class="o">=</span>define
+</div><div class='line'>    <span class="nv">useithreads</span><span class="o">=</span>undef, <span class="nv">usemultiplicity</span><span class="o">=</span>undef
+</div><div class='line'>    <span class="nv">useperlio</span><span class="o">=</span>define, <span class="nv">d_sfio</span><span class="o">=</span>undef, <span class="nv">uselargefiles</span><span class="o">=</span>define, <span class="nv">usesocks</span><span class="o">=</span>undef
+</div><div class='line'>    <span class="nv">use64bitint</span><span class="o">=</span>define, <span class="nv">use64bitall</span><span class="o">=</span>define, <span class="nv">uselongdouble</span><span class="o">=</span>undef
+</div><div class='line'>    <span class="nv">usemymalloc</span><span class="o">=</span>n, <span class="nv">bincompat5005</span><span class="o">=</span>undef
+</div><div class='line'>  Compiler:
+</div><div class='line'>    <span class="nv">cc</span><span class="o">=</span><span class="s1">&#39;cc&#39;</span>, <span class="nv">ccflags</span> <span class="o">=</span><span class="s1">&#39;-DHAS_FPSETMASK -DHAS_FLOATINGPOINT_H -fno-strict-aliasing -pipe -fstack-protector -I/usr/local/include&#39;</span>,
+</div><div class='line'>    <span class="nv">optimize</span><span class="o">=</span><span class="s1">&#39;-O&#39;</span>,
+</div><div class='line'>    <span class="nv">cppflags</span><span class="o">=</span><span class="s1">&#39;-DHAS_FPSETMASK -DHAS_FLOATINGPOINT_H -fno-strict-aliasing -pipe -fstack-protector -I/usr/local/include&#39;</span>
+</div><div class='line'>    <span class="nv">ccversion</span><span class="o">=</span><span class="s1">&#39;&#39;</span>, <span class="nv">gccversion</span><span class="o">=</span><span class="s1">&#39;4.2.1 20070719  [FreeBSD]&#39;</span>, <span class="nv">gccosandvers</span><span class="o">=</span><span class="s1">&#39;&#39;</span>
+</div><div class='line'>    <span class="nv">intsize</span><span class="o">=</span>4, <span class="nv">longsize</span><span class="o">=</span>8, <span class="nv">ptrsize</span><span class="o">=</span>8, <span class="nv">doublesize</span><span class="o">=</span>8, <span class="nv">byteorder</span><span class="o">=</span>12345678
+</div><div class='line'>    <span class="nv">d_longlong</span><span class="o">=</span>define, <span class="nv">longlongsize</span><span class="o">=</span>8, <span class="nv">d_longdbl</span><span class="o">=</span>define, <span class="nv">longdblsize</span><span class="o">=</span>16
+</div><div class='line'>    <span class="nv">ivtype</span><span class="o">=</span><span class="s1">&#39;long&#39;</span>, <span class="nv">ivsize</span><span class="o">=</span>8, <span class="nv">nvtype</span><span class="o">=</span><span class="s1">&#39;double&#39;</span>, <span class="nv">nvsize</span><span class="o">=</span>8, <span class="nv">Off_t</span><span class="o">=</span><span class="s1">&#39;off_t&#39;</span>, <span class="nv">lseeksize</span><span class="o">=</span>8
+</div><div class='line'>    <span class="nv">alignbytes</span><span class="o">=</span>8, <span class="nv">prototype</span><span class="o">=</span>define
+</div><div class='line'>  Linker and Libraries:
+</div><div class='line'>    <span class="nv">ld</span><span class="o">=</span><span class="s1">&#39;cc&#39;</span>, <span class="nv">ldflags</span> <span class="o">=</span><span class="s1">&#39;-Wl,-E  -fstack-protector -L/usr/local/lib&#39;</span>
+</div><div class='line'>    <span class="nv">libpth</span><span class="o">=</span>/usr/lib /usr/local/lib
+</div><div class='line'>    <span class="nv">libs</span><span class="o">=</span>-lm -lcrypt -lutil -lc
+</div><div class='line'>    <span class="nv">perllibs</span><span class="o">=</span>-lm -lcrypt -lutil -lc
+</div><div class='line'>    <span class="nv">libc</span><span class="o">=</span>, <span class="nv">so</span><span class="o">=</span>so, <span class="nv">useshrplib</span><span class="o">=</span><span class="nb">false</span>, <span class="nv">libperl</span><span class="o">=</span>libperl.a
+</div><div class='line'>    <span class="nv">gnulibc_version</span><span class="o">=</span><span class="s1">&#39;&#39;</span>
+</div><div class='line'>  Dynamic Linking:
+</div><div class='line'>    <span class="nv">dlsrc</span><span class="o">=</span>dl_dlopen.xs, <span class="nv">dlext</span><span class="o">=</span>so, <span class="nv">d_dlsymun</span><span class="o">=</span>undef, <span class="nv">ccdlflags</span><span class="o">=</span><span class="s1">&#39; &#39;</span>
+</div><div class='line'>    <span class="nv">cccdlflags</span><span class="o">=</span><span class="s1">&#39;-DPIC -fPIC&#39;</span>, <span class="nv">lddlflags</span><span class="o">=</span><span class="s1">&#39;-shared  -L/usr/local/lib -fstack-protector&#39;</span>
+</div><div class='line'> </div><div class='line'> </div><div class='line'>Characteristics of this binary <span class="o">(</span>from libperl<span class="o">)</span>:
+</div><div class='line'>  Compile-time options: PERL_DONT_CREATE_GVSV PERL_MALLOC_WRAP
+</div><div class='line'>                        PERL_PRESERVE_IVUV USE_64_BIT_ALL USE_64_BIT_INT
+</div><div class='line'>                        USE_LARGE_FILES USE_PERLIO USE_PERL_ATOF
+</div><div class='line'>  Built under freebsd
+</div><div class='line'>  Compiled at Jan  5 2012 15:51:41
+</div><div class='line'>  %ENV:
+</div><div class='line'>    <span class="nv">PERLBREW_BASHRC_VERSION</span><span class="o">=</span><span class="s2">&quot;0.39&quot;</span>
+</div><div class='line'>    <span class="nv">PERLBREW_HOME</span><span class="o">=</span><span class="s2">&quot;/home/jeen/.perlbrew&quot;</span>
+</div><div class='line'>    <span class="nv">PERLBREW_MANPATH</span><span class="o">=</span><span class="s2">&quot;/home/jeen/perl5/perlbrew/perls/perl-5.14.2/man&quot;</span>
+</div><div class='line'>    <span class="nv">PERLBREW_PATH</span><span class="o">=</span><span class="s2">&quot;/home/jeen/perl5/perlbrew/bin:/home/jeen/perl5/perlbrew/perls/perl-5.14.2/bin&quot;</span>
+</div><div class='line'>    <span class="nv">PERLBREW_PERL</span><span class="o">=</span><span class="s2">&quot;perl-5.14.2&quot;</span>
+</div><div class='line'>    <span class="nv">PERLBREW_ROOT</span><span class="o">=</span><span class="s2">&quot;/home/jeen/perl5/perlbrew&quot;</span>
+</div><div class='line'>    <span class="nv">PERLBREW_VERSION</span><span class="o">=</span><span class="s2">&quot;0.39&quot;</span>
+</div><div class='line'>  @INC:
+</div><div class='line'>    /home/jeen/perl5/perlbrew/perls/perl-5.14.2/lib/site_perl/5.14.2/amd64-freebsd
+</div><div class='line'>    /home/jeen/perl5/perlbrew/perls/perl-5.14.2/lib/site_perl/5.14.2
+</div><div class='line'>    /home/jeen/perl5/perlbrew/perls/perl-5.14.2/lib/5.14.2/amd64-freebsd
+</div><div class='line'>    /home/jeen/perl5/perlbrew/perls/perl-5.14.2/lib/5.14.2
+</div><div class='line'>    .
+</div></pre></td></tr></table></div></figure>
+
+<figure class='code'><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div><div data-line='2' class='line-number'></div><div data-line='3' class='line-number'></div></pre></td><td class='main  bash'><pre><div class='line'><span class="nv">$ </span>df -Th .
+</div><div class='line'>Filesystem   Type    Size    Used   Avail Capacity  Mounted on
+</div><div class='line'>/dev/ar0s1f  ufs      43G    5.1G     35G    13%    /usr
+</div></pre></td></tr></table></div></figure>
+
+<p>일단 사건해결에 도움이 될 만한 정보들은 모조리 뽑아봤습니다.
+  천천히 살펴보며 구원을 요청해야 되겠네요.</p>
+
+<h3>Conclusion</h3>
+
+<p><a href="http://webchat.freenode.net?channels=perl-kr">#perl-kr</a> 에서 위에 정리한 내용들로 <a href="http://twitter.com/aer0">@aer0</a> 님께 질문을 날렸습니다. @aer0 님께서 제안하신 방법으로</p>
+
+<ul>
+<li><code>Bundle::CPAN</code> 을 설치</li>
+<li><p><code>~/.cpan</code> 디렉토리를 삭제 후 다시 <code>cpan</code> 실행</p>
+
+<p>이었습니다.</p>
+
+<p><code>Bundle::CPAN</code> 을 설치해도 사태가 해결되지 않아서, 결국은 <code>~/.cpan</code> 디렉토리를 삭제한 후 다시 <code>cpan</code> 을 실행했습니다.</p></li>
+<li><p>~/.cpan/sources/modules/02packages.details.txt.gz</p></li>
+<li><p>~/.cpan/sources/modules/03modlist.data.gz</p>
+
+<p>같은 CPAN 미러에서 가져오는 인덱스 파일이 이상해서 꼬인 것 같다라는 @aer0 님의 총평이었습니다.</p>
+
+<p>역시 이런 사건이 발생할 때는 <code>#perl-kr</code> 에 들러야 됩니다. :-)</p></li>
+</ul>
+
+<blockquote class="twitter-tweet" data-in-reply-to="154824190581678081" lang="ko"><p>@<a href="https://twitter.com/JEEN_LEE">JEEN_LEE</a> 자문자답 <a href="http://t.co/hSGdHz9i" title="http://jeen.github.com/blog/2012/01/05/freebsd-8-dot-2-stable-cpan-error/">jeen.github.com/blog/2012/01/0…</a></p>&mdash; JEEN (@JEEN_LEE) <a href="https://twitter.com/JEEN_LEE/status/154930926294536192" data-datetime="2012-01-05T14:23:05+00:00">1월 5, 2012</a></blockquote>
+</div>
+
+  <footer>
+    
+    <p><a class="comments-link" href="/2012/01/05/freebsd-8-dot-2-stable-cpan-error/#disqus_thread" data-disqus-identifier="http://jeen.github.io/2012/01/05/freebsd-8-dot-2-stable-cpan-error/">View comments &raquo;</a></p>
+
+    
+    
+  </footer>
+
+
+    </article>
+  
+    
+
+
+
+
+
+
+
+
+
+
+    <article >
+      
+  <header>
+    <h1 class="entry-title">
+
 <a href="/2012/01/05/test-more-use-subtest-instead-of-block/">Test::More - Use 'Subtest' Instead of {} Block</a>
 
 </h1>
@@ -468,78 +636,6 @@
   <footer>
     
     <p><a class="comments-link" href="/2012/01/04/perl-mail-send-ii/#disqus_thread" data-disqus-identifier="http://jeen.github.io/2012/01/04/perl-mail-send-ii/">View comments &raquo;</a></p>
-
-    
-    
-  </footer>
-
-
-    </article>
-  
-    
-
-
-
-
-
-
-
-
-
-
-    <article >
-      
-  <header>
-    <h1 class="entry-title">
-
-<a href="/2012/01/03/ea-pms-task-management/">[번역] PM's Task Management @ EA</a>
-
-</h1>
-
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-
-<time datetime="2012-01-03T20:53:00+00:00" pubdate data-updated="true">Jan 3<span>rd</span>, 2012</time>
-         &bull; <a rel="bookmark" href="/2012/01/03/ea-pms-task-management/">Permalink</a>
-      </p>
-    
-  </header>
-
-<div class="entry-content"><ul>
-<li><p>프로젝트의 두목은 두명으로 나뉜다. 한명은 Creative Director, 다른 한명은 Project Manager. PM 은 예산/외주관리/리소스 관리의 모든 권한을 가지고, CD 가 그 이외의 권한을 가진다.</p></li>
-<li><p>권력의 관계는 CD&gt;PM. CD 가 &ldquo;좀 늦어도 되니까 이것을 한다&rdquo; 라고 정하면 PM 은 그에 따라, 프로젝트를 짜맞춰야 한다. 단, CD 가 최종책임은 전부 덮어쓰는 것이 룰.</p></li>
-<li><p>PM 이 실제로 스케쥴을 진행하는 방법은 리소스 관리를 하면서, 2두 단위로 마일스톤을 내놓는다. 마일스톤에는 반드시 목적이 있고, 상황에 맞춰서 최종 스케쥴은 항상 바뀐다.</p></li>
-<li><p>마일스톤 6개에 하나 정도는 빅 마일스톤, 프로젝트의 진행상황을 외부(상층부)에 대해 나타내는 [알파] 를 내놓는다.</p></li>
-<li><p>최종 스케쥴은 필요한 리소스를 전부 나열해서, 팀원 스스로 골라서 맡게 된다. 다음은 PM 이 팀의 실적을 보고 속도를 CD 와 상층부에 알리고, 어디가 병목이 되는 지 등을 관리한다.</p></li>
-<li><p>프로젝트 팀원은 항상 마일스톤에서 당면한 목표를 알고 있어서 정말로 프로세스를 가지고 생각할 수 있으며, PM 이 항상 스케쥴을 쌓고, 속도를 계산해서 무엇이 늦어지고 있는 지 알려줄 수 있기 때문에 편하다</p></li>
-<li><p>내용과 진행 관리를 완전히 나눠서 최종적으로 내용관리로 정리한다. 처음은 내용을 전부 리스트로 만든다. 어떻게든 모든 요소라고 생각되는 것을 가시화 해서 리스트로 만들고 &ldquo;어느 정도의 작업이 있는가&quot;를 계산해낸다.</p></li>
-<li><p>그리고 그 내용중에 &quot;절대로 fun factor 에 빠질 수 없는 것&rdquo; 등을 CD 가 가르쳐 준다. 그 다음은 마일스톤에서 쌓아가면서 스케쥴을 보고, 일정 실적을 쌓을 즘에 실제로 가능한 것인지 전부 리스트로 만든다.</p></li>
-<li><p>그래서 PM 에게 질문하면 &ldquo;이 추가예산이 있다면 아웃소싱이 있다면 여기에 이것을 투입하면 이렇게 단축할 수 있다&rdquo; 라는 매우 구체적인 스케쥴을 항상 가질 수 있다.</p></li>
-<li><p>덧붙여 CD&gt;PM 이라는 권력관계가 되어 있는 것은 EA 의 게임 크리에이티브와 재미를 담보로 하는 것은 결국은 게임 디자이너가 아니면 안된다라는 생각을 가지고 있기 때문이다.</p></li>
-</ul>
-
-<h3>원문</h3>
-
-<ul>
-<li><a href="http://togetter.com/li/198059">EA流のPMのタスク管理の仕方 - Togetter</a></li>
-</ul>
-</div>
-
-  <footer>
-    
-    <p><a class="comments-link" href="/2012/01/03/ea-pms-task-management/#disqus_thread" data-disqus-identifier="http://jeen.github.io/2012/01/03/ea-pms-task-management/">View comments &raquo;</a></p>
 
     
     

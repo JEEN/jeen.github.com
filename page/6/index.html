@@ -98,6 +98,100 @@
   <header>
     <h1 class="entry-title">
 
+<a href="/2012/07/18/mysql-diff-a-vs-b/">MySQL::Diff - a vs B</a>
+
+</h1>
+
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2012-07-18T18:30:00+00:00" pubdate data-updated="true">Jul 18<span>th</span>, 2012</time>
+         &bull; <a rel="bookmark" href="/2012/07/18/mysql-diff-a-vs-b/">Permalink</a>
+      </p>
+    
+  </header>
+
+<div class="entry-content"><p>최근에 유지보수 관련 일로 골머리를 싸고 있다가 겨우겨우 마무리하고 있는 일이 하나 있었습니다.</p>
+
+<p>PHP 프로젝트였는데, 유지보수 관련해서 여러가지 이슈들이 나오기 마련이고, 그 때문에 잘 움직이던 기존의 DB구조를
+변경해줄 필요가 있었습니다.</p>
+
+<p>뭐 테이블을 추가하거나, 어떤 컬럼의 형식을 변경하거나, 혹은 인덱스를 추가하거나 하는 뭐 이런 경우 말이죠.</p>
+
+<p>처음에는 개발환경아래에서 기존의 product 환경에서 운용중인 DB를 dump 떠와서 진행하고, 프로젝트를 진행하면서
+변경되는 SQL 내용들을 일일이 적어주었습니다. 그러다가 뭐 이사람 저사람 손을 옮겨타다가 결국 최종 마무리단계에서 
+어떤 컬럼이 변경되었는지, 어떤 테이블이 추가되었는지에 대한 확신을 할 수 없었습니다.</p>
+
+<p>그래서 기록된 SQL 을 기반으로 눈과 손으로 검수를 해야하는 지경에서 결국 실수가 생기기 마련이죠. 그리고 클레임이 발생했습니다.</p>
+
+<p>자, 그럼 어떻게 하면 이런 상황에서 사태를 수습하느냐&hellip; 고심했습니다.</p>
+
+<p>그 결과 혹시 이거라면 해서 찔러본 것이 빙고 였던 것이 <a href="http://metacpan.org/module/MySQL::Diff">MySQL::Diff</a> 였습니다.</p>
+
+<p>맨처음 덤프떠온 DB 를 <code>DB_A</code> 로 지정하고, 최종적으로 개발이 종료된 DB 를 <code>DB_B</code> 라고 놓습니다.</p>
+
+<p>이 <code>DB_A</code> 와 <code>DB_B</code> 를 서로 비교하는 것이죠. 그걸을 위해서 <code>MySQL::Diff</code> 모듈이 사용됩니다.</p>
+
+<figure class='code'><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div><div data-line='2' class='line-number'></div><div data-line='3' class='line-number'></div><div data-line='4' class='line-number'></div><div data-line='5' class='line-number'></div><div data-line='6' class='line-number'></div><div data-line='7' class='line-number'></div><div data-line='8' class='line-number'></div><div data-line='9' class='line-number'></div><div data-line='10' class='line-number'></div><div data-line='11' class='line-number'></div><div data-line='12' class='line-number'></div><div data-line='13' class='line-number'></div><div data-line='14' class='line-number'></div><div data-line='15' class='line-number'></div></pre></td><td class='main  bash'><pre><div class='line'><span class="nv">$ </span>mysqldiff --host1 localhost --user1 root --password1 whatthehell --host2 localhost --user2 root --password2 whatthehell bto bto_test
+</div><div class='line'><span class="c">## mysqldiff 0.43</span>
+</div><div class='line'><span class="c">## </span>
+</div><div class='line'><span class="c">## Run on Wed Jul 18 18:26:39 2012</span>
+</div><div class='line'><span class="c">## Options: password2=whatthehell, password1=whatthehell, user1=root, host2=localhost, debug=0, host1=localhost, user2=root</span>
+</div><div class='line'><span class="c">##</span>
+</div><div class='line'><span class="c">## ---   db: bto (host=localhost user=root)</span>
+</div><div class='line'><span class="c">## +++   db: bto_test (host=localhost user=root)</span>
+</div><div class='line'> </div><div class='line'>ALTER TABLE auth DROP COLUMN updated_on; <span class="c"># was datetime NOT NULL DEFAULT &#39;0000-00-00 00:00:00&#39;</span>
+</div><div class='line'>ALTER TABLE auth DROP COLUMN created_on; <span class="c"># was datetime NOT NULL DEFAULT &#39;0000-00-00 00:00:00&#39;</span>
+</div><div class='line'>ALTER TABLE auth ADD UNIQUE passwd <span class="o">(</span>passwd<span class="o">)</span>;
+</div><div class='line'>CREATE TABLE test1 <span class="o">(</span>
+</div><div class='line'>  test1 int<span class="o">(</span>11<span class="o">)</span> NOT NULL
+</div><div class='line'><span class="o">)</span> <span class="nv">ENGINE</span><span class="o">=</span>MyISAM DEFAULT <span class="nv">CHARSET</span><span class="o">=</span>utf8;
+</div></pre></td></tr></table></div></figure>
+
+<p>위처럼 컬럼의 삭제, 인덱스의 추가, 테이블의 추가 등 모든 변경 내역들이 나오게 됩니다.</p>
+
+<p>다음부터는 이처럼 좀 더 간단하고 확실하게 할 수 있는 방법을 취해야 되겠습니다.</p>
+</div>
+
+  <footer>
+    
+    <p><a class="comments-link" href="/2012/07/18/mysql-diff-a-vs-b/#disqus_thread" data-disqus-identifier="http://jeen.github.io/2012/07/18/mysql-diff-a-vs-b/">View comments &raquo;</a></p>
+
+    
+    
+  </footer>
+
+
+    </article>
+  
+    
+
+
+
+
+
+
+
+
+
+
+    <article >
+      
+  <header>
+    <h1 class="entry-title">
+
 <a href="/2012/07/18/export-github-issues/">Export Github Issues</a>
 
 </h1>
@@ -359,154 +453,6 @@ Github 에서 제공해주는 Issue 관리라든가, Wiki 라든가 여러모로
   <footer>
     
     <p><a class="comments-link" href="/2012/07/02/https-ssl-lwp-soap-and-perl/#disqus_thread" data-disqus-identifier="http://jeen.github.io/2012/07/02/https-ssl-lwp-soap-and-perl/">View comments &raquo;</a></p>
-
-    
-    
-  </footer>
-
-
-    </article>
-  
-    
-
-
-
-
-
-
-
-
-
-
-    <article >
-      
-  <header>
-    <h1 class="entry-title">
-
-<a href="/2012/07/01/regexp-wildcards/">Regexp::Wildcards</a>
-
-</h1>
-
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-
-<time datetime="2012-07-01T00:46:00+00:00" pubdate data-updated="true">Jul 1<span>st</span>, 2012</time>
-         &bull; <a rel="bookmark" href="/2012/07/01/regexp-wildcards/">Permalink</a>
-      </p>
-    
-  </header>
-
-<div class="entry-content"><p>저같은 평범한 개발자야 어떤 패턴을 확인하고 정규표현식을 쓰면 되는데, 사실 일반 사용자들에게
-정규표현식을 어떤 설정의 입력값으로 밀어넣는 것은 일반 사용자에게 배려가 부족하지 않나 하고 생각했었습니다.</p>
-
-<ul>
-<li><code>/path/a/b</code></li>
-<li><code>/path/a/c</code></li>
-<li><code>/path/a/d</code></li>
-</ul>
-
-<p><code>/path/a/</code> 디렉토리 아래의 b,c,d 파일들을 삭제한다고 합니다. 물론 b,c,d 밖에 없다고 합니다. 이럴때
-보통 모두가 대개 와일드카드를 사용하죠.</p>
-
-<figure class='code'><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div></pre></td><td class='main  bash'><pre><div class='line'>rm -rf /path/a/*
-</div></pre></td></tr></table></div></figure>
-
-<p>라고 말이죠.</p>
-
-<p>예를들어서 어떤 관리자페이지 아래에서 특정 유저그룹의 접속권한에 대해서 다룬다고 해봅니다. 특정그룹은 고정IP를 통해서 접근해올 수 있고, 또 다른 그룹은 특정 IP대역에서 찾아온다고 합니다. 이런 것들을 복잡한 설정파일을 통해서가 아니라 유저가 관리하기 쉬운 인터페이스를 제공해야 할 필요도 있죠.</p>
-
-<p>일반적인 입력예는 아래와 같습니다.</p>
-
-<ul>
-<li><code>211.123.123.1-211.123.123.254</code></li>
-<li><code>211.123.122.5</code></li>
-<li><p><code>211.123.121.4, 211.123.121.8</code></p>
-
-<p>적당한 IP대역이거나, 혹은 단일 IP라거나, 혹은 몇몇 패턴을 알 수 없는 복수개의 IP라거나&hellip;</p></li>
-<li><p><code>211.123.126.0/24</code></p>
-
-<p>혹은 네트워크 관리자라면 CIDR 스타일을 사용할지도 모르겠습니다.</p></li>
-<li><p><code>211.123.128.*</code></p></li>
-<li><p><code>211.123.121.10*</code></p>
-
-<p>아니면 위에서 말한 대로 와일드카드를 사용할 수 있겠죠.</p>
-
-<p>우선 위의 네개째까지는 <code>Net::IPAddrRanges</code> 라는 모듈을 사용하면 편하게 이용할 수 있습니다.</p></li>
-</ul>
-
-<figure class='code'><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div><div data-line='2' class='line-number'></div><div data-line='3' class='line-number'></div><div data-line='4' class='line-number'></div><div data-line='5' class='line-number'></div><div data-line='6' class='line-number'></div><div data-line='7' class='line-number'></div><div data-line='8' class='line-number'></div><div data-line='9' class='line-number'></div><div data-line='10' class='line-number'></div><div data-line='11' class='line-number'></div><div data-line='12' class='line-number'></div><div data-line='13' class='line-number'></div></pre></td><td class='main  perl'><pre><div class='line'><span class="k">use</span> <span class="n">strict</span><span class="p">;</span>
-</div><div class='line'><span class="k">use</span> <span class="n">warnings</span><span class="p">;</span>
-</div><div class='line'><span class="k">use</span> <span class="nn">Net::</span><span class="n">IPAddrRanges</span><span class="p">;</span>
-</div><div class='line'> </div><div class='line'><span class="k">my</span> <span class="nv">$ranges</span> <span class="o">=</span> <span class="nn">Net::</span><span class="n">IPAddrRanges</span><span class="o">-&gt;</span><span class="k">new</span><span class="p">;</span>
-</div><div class='line'><span class="nv">$ranges</span><span class="o">-&gt;</span><span class="n">add</span><span class="p">(</span><span class="sx">qw{</span>
-</div><div class='line'><span class="sx">    211.123.123.1-211.123.254</span>
-</div><div class='line'><span class="sx">    211.123.122.5</span>
-</div><div class='line'><span class="sx">    211.123.121.4 211.123.121.8</span>
-</div><div class='line'><span class="sx">    211.123.126.0/24</span>
-</div><div class='line'><span class="sx">}</span><span class="p">);</span>
-</div><div class='line'> </div><div class='line'><span class="nv">$ranges</span><span class="o">-&gt;</span><span class="n">find</span><span class="p">(</span><span class="s">&#39;211.123.123.5&#39;</span><span class="p">);</span> <span class="c1"># OK;</span>
-</div></pre></td></tr></table></div></figure>
-
-<p>이런저런 다양한 입력값들을 받아서 <code>Net::IPAddrRanges</code> 모듈에 넘겨주고 <code>-&gt;find</code> 메소드를 통해서 접속해온 IP(211.123.123.5)가 접속가능한 IP인지를 위처럼 간단하게 확인할 수 있죠.</p>
-
-<p>와일드카드 사용시에는 이와는 좀 다릅니다.</p>
-
-<figure class='code'><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div><div data-line='2' class='line-number'></div><div data-line='3' class='line-number'></div><div data-line='4' class='line-number'></div><div data-line='5' class='line-number'></div><div data-line='6' class='line-number'></div><div data-line='7' class='line-number'></div><div data-line='8' class='line-number'></div><div data-line='9' class='line-number'></div><div data-line='10' class='line-number'></div><div data-line='11' class='line-number'></div><div data-line='12' class='line-number'></div></pre></td><td class='main  perl'><pre><div class='line'><span class="k">use</span> <span class="n">strict</span><span class="p">;</span>
-</div><div class='line'><span class="k">use</span> <span class="n">warnings</span><span class="p">;</span>
-</div><div class='line'><span class="k">use</span> <span class="nn">Regexp::</span><span class="n">Wildcards</span><span class="p">;</span>
-</div><div class='line'> </div><div class='line'><span class="k">my</span> <span class="nv">$rw</span> <span class="o">=</span> <span class="nn">Regexp::</span><span class="n">Wildcards</span><span class="o">-&gt;</span><span class="k">new</span><span class="p">(</span> <span class="n">type</span> <span class="o">=&gt;</span> <span class="s">&#39;unix&#39;</span> <span class="p">);</span>
-</div><div class='line'> </div><div class='line'><span class="k">my</span> <span class="nv">$user_ip</span> <span class="o">=</span> <span class="s">&#39;211.123.121.108&#39;</span><span class="p">;</span>
-</div><div class='line'> </div><div class='line'><span class="k">if</span> <span class="p">(</span><span class="nb">scalar</span> <span class="nb">grep</span> <span class="p">{</span> <span class="nv">$user_ip</span> <span class="o">=~</span> <span class="nv">$_</span> <span class="p">}</span>
-</div><div class='line'>           <span class="nb">map</span> <span class="p">{</span> <span class="nv">$rw</span><span class="o">-&gt;</span><span class="n">convert</span><span class="p">(</span><span class="nv">$_</span><span class="p">)</span> <span class="p">}</span> <span class="sx">qw{ 211.123.128.* 211.123.121.10* }</span><span class="p">)</span> <span class="p">{</span>
-</div><div class='line'>    <span class="k">print</span> <span class="s">&quot;OK&quot;</span><span class="p">;</span>
-</div><div class='line'><span class="p">}</span>
-</div></pre></td></tr></table></div></figure>
-
-<p>뭐 사실 이런 코드를 적당한 메소드로 만들어서 사용하고 있습니다. IP제한같은 시나리오에는 사실 Net::IPAddrRanges 를 사용하는 게 좋아보이기는 합니다만&hellip; 최근에 <code>Regexp::Wildcards</code> 를 사용하는 경우가 있었는데&hellip;</p>
-
-<p>유저의 권한별로 페이지의 접근을 제어하고 싶다라는 것이었죠.</p>
-
-<figure class='code'><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div><div data-line='2' class='line-number'></div></pre></td><td class='main  yaml'><pre><div class='line'>  <span class="l-Scalar-Plain">ROLE1</span><span class="p-Indicator">:</span> <span class="p-Indicator">[</span> <span class="nv">/admin/user/list</span><span class="p-Indicator">,</span> <span class="nv">/admin/user/*/download</span> <span class="p-Indicator">]</span>
-</div><div class='line'>  <span class="l-Scalar-Plain">ROLE2</span><span class="p-Indicator">:</span> <span class="p-Indicator">[</span> <span class="nv">/admin/user/*</span> <span class="p-Indicator">]</span>
-</div></pre></td></tr></table></div></figure>
-
-<p>ROLE1 의 경우에는 admin/user 라는 컨트롤러중에 유저 리스트(/admin/user/list) 와 각 유저별로 관련정보를 다운로드를 할 수 있습니다. 그 이외에는 전부 접근을 차단한다는 것이구요.</p>
-
-<p>ROLE2 의 경우에는 admin/user 의 모든 액션에 접근을 가능하게 합니다.</p>
-
-<p>이때는 카탈리스트를 사용하고 있다는 전제아래, Admin.pm 이라는 컨드롤러파일의 <code>auto</code> 아래 다음과 같은 코드를 추가했습니다.</p>
-
-<figure class='code'><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div><div data-line='2' class='line-number'></div><div data-line='3' class='line-number'></div><div data-line='4' class='line-number'></div><div data-line='5' class='line-number'></div><div data-line='6' class='line-number'></div><div data-line='7' class='line-number'></div><div data-line='8' class='line-number'></div><div data-line='9' class='line-number'></div><div data-line='10' class='line-number'></div><div data-line='11' class='line-number'></div><div data-line='12' class='line-number'></div><div data-line='13' class='line-number'></div><div data-line='14' class='line-number'></div></pre></td><td class='main  perl'><pre><div class='line'><span class="k">sub </span><span class="nf">auto</span> <span class="p">:Private {</span>
-</div><div class='line'><span class="o">....</span>
-</div><div class='line'> </div><div class='line'>    <span class="k">my</span> <span class="nv">$rw</span> <span class="o">=</span> <span class="nn">Regexp::</span><span class="n">Wildcards</span><span class="o">-&gt;</span><span class="k">new</span><span class="p">(</span> <span class="n">type</span> <span class="o">=&gt;</span> <span class="s">&#39;unix&#39;</span> <span class="p">);</span>
-</div><div class='line'> </div><div class='line'>    <span class="k">my</span> <span class="nv">$ACL</span> <span class="o">=</span> <span class="o">...</span><span class="p">;</span> <span class="c1"># 어떻게 샤바샤바해서 유저권한에 따른 접근가능 목록을 뽑아옵니다</span>
-</div><div class='line'> </div><div class='line'>    <span class="k">unless</span> <span class="p">(</span><span class="nb">scalar</span> <span class="nb">grep</span> <span class="p">{</span> <span class="nv">$c</span><span class="o">-&gt;</span><span class="n">action</span> <span class="o">=~</span> <span class="nv">$_</span> <span class="p">}</span> <span class="nb">map</span> <span class="p">{</span> <span class="nv">$rw</span><span class="o">-&gt;</span><span class="n">convert</span><span class="p">(</span><span class="nv">$_</span><span class="p">);</span> <span class="p">}</span> <span class="nv">@</span><span class="p">{</span> <span class="nv">$ACL</span> <span class="p">})</span> <span class="p">{</span>
-</div><div class='line'>        <span class="nv">$c</span><span class="o">-&gt;</span><span class="n">flash</span><span class="p">(</span> <span class="n">warn_messages</span> <span class="o">=&gt;</span> <span class="p">[</span> <span class="s">&#39;접속할 수 없어요.&#39;</span> <span class="p">]</span> <span class="p">);</span>
-</div><div class='line'>        <span class="nv">$c</span><span class="o">-&gt;</span><span class="n">res</span><span class="o">-&gt;</span><span class="n">redirect</span><span class="p">(</span><span class="nv">$c</span><span class="o">-&gt;</span><span class="n">uri_for</span><span class="p">(</span><span class="s">&quot;/admin&quot;</span><span class="p">));</span>
-</div><div class='line'>        <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
-</div><div class='line'>    <span class="p">}</span>
-</div><div class='line'><span class="o">....</span>
-</div><div class='line'><span class="p">}</span>
-</div></pre></td></tr></table></div></figure>
-
-<p>네 아무튼 뭐 사실 결론은 굳이 할 수 있다면 간단하게 설정할 수 있는데, 왜 설정파일에까지 정규표현식이 끼어들어야 하느냐 라는 생각아래에서 시작했었지요. 정규표현식으로 난무할 이런저런 상황들을 적당하게 와일드카드로 커버할 수 있다면 더 직관적으로 이해하고 사용할 수 있지 않을까 하는 생각이 듭니다.</p>
-</div>
-
-  <footer>
-    
-    <p><a class="comments-link" href="/2012/07/01/regexp-wildcards/#disqus_thread" data-disqus-identifier="http://jeen.github.io/2012/07/01/regexp-wildcards/">View comments &raquo;</a></p>
 
     
     
