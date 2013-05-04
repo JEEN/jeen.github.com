@@ -3,7 +3,7 @@
   <title><![CDATA[JEEN's techlog]]></title>
   <link href="http://jeen.github.io/atom.xml" rel="self"/>
   <link href="http://jeen.github.io/"/>
-  <updated>2013-05-04T17:14:45+09:00</updated>
+  <updated>2013-05-04T09:31:47+00:00</updated>
   <id>http://jeen.github.io/</id>
   <author>
     <name><![CDATA[Jeen Lee]]></name>
@@ -20,7 +20,7 @@
 
 <title type="html"><![CDATA[Better Than Ack]]></title>
 <link href="http://jeen.github.io/2013/05/02/better-than-ack/"/>
-<updated>2013-05-02T23:14:14+09:00</updated>
+<updated>2013-05-02T14:14:14+00:00</updated>
 <id>http://jeen.github.io/2013/05/02/better-than-ack</id>
 
 
@@ -82,7 +82,7 @@
 
 <title type="html"><![CDATA[Rex Common Practice]]></title>
 <link href="http://jeen.github.io/2013/04/28/more-rex/"/>
-<updated>2013-04-28T18:32:00+09:00</updated>
+<updated>2013-04-28T18:32:00+00:00</updated>
 <id>http://jeen.github.io/2013/04/28/more-rex</id>
 <category term="perl" /><category term="rex" />
 
@@ -150,7 +150,7 @@
 
 <title type="html"><![CDATA[Data::Printer vs Data::Dump(er)]]></title>
 <link href="http://jeen.github.io/2013/04/08/data-printer-vs-data-dump-er/"/>
-<updated>2013-04-08T12:59:00+09:00</updated>
+<updated>2013-04-08T12:59:00+00:00</updated>
 <id>http://jeen.github.io/2013/04/08/data-printer-vs-data-dump-er</id>
 <category term="perl" />
 
@@ -200,7 +200,7 @@
 
 <title type="html"><![CDATA[Using Rex - Environment]]></title>
 <link href="http://jeen.github.io/2013/04/04/using-rex-environment/"/>
-<updated>2013-04-04T12:28:00+09:00</updated>
+<updated>2013-04-04T12:28:00+00:00</updated>
 <id>http://jeen.github.io/2013/04/04/using-rex-environment</id>
 <category term="perl" /><category term="rex" />
 
@@ -277,7 +277,7 @@
 
 <title type="html"><![CDATA[cpanm 1.6 is here for you]]></title>
 <link href="http://jeen.github.io/2013/02/28/cpanm-1-dot-6-is-here-for-you/"/>
-<updated>2013-02-28T09:34:00+09:00</updated>
+<updated>2013-02-28T09:34:00+00:00</updated>
 <id>http://jeen.github.io/2013/02/28/cpanm-1-dot-6-is-here-for-you</id>
 <category term="cpanm" /><category term="perl" />
 
@@ -363,7 +363,7 @@
 
 <title type="html"><![CDATA[A usecase of App::Fatpacker - Nagios Plugin]]></title>
 <link href="http://jeen.github.io/2012/12/26/a-usecase-of-app-fatpacker/"/>
-<updated>2012-12-26T23:48:00+09:00</updated>
+<updated>2012-12-26T23:48:00+00:00</updated>
 <id>http://jeen.github.io/2012/12/26/a-usecase-of-app-fatpacker</id>
 <category term="perl" />
 
@@ -531,7 +531,7 @@
 
 <title type="html"><![CDATA[Download package dir/files from Directory Index]]></title>
 <link href="http://jeen.github.io/2012/11/29/download-package-dir-slash-files-from-directory-index/"/>
-<updated>2012-11-29T20:10:00+09:00</updated>
+<updated>2012-11-29T20:10:00+00:00</updated>
 <id>http://jeen.github.io/2012/11/29/download-package-dir-slash-files-from-directory-index</id>
 <category term="linux" />
 
@@ -563,7 +563,7 @@
 
 <title type="html"><![CDATA[.proverc for less typing]]></title>
 <link href="http://jeen.github.io/2012/11/26/proverc-for-less-typing/"/>
-<updated>2012-11-26T21:44:00+09:00</updated>
+<updated>2012-11-26T21:44:00+00:00</updated>
 <id>http://jeen.github.io/2012/11/26/proverc-for-less-typing</id>
 <category term="perl" /><category term="test" />
 
@@ -627,7 +627,7 @@
 
 <title type="html"><![CDATA[Using Test::Pretty]]></title>
 <link href="http://jeen.github.io/2012/11/21/using-test-pretty/"/>
-<updated>2012-11-21T22:40:00+09:00</updated>
+<updated>2012-11-21T22:40:00+00:00</updated>
 <id>http://jeen.github.io/2012/11/21/using-test-pretty</id>
 <category term="perl" /><category term="test" />
 
@@ -685,7 +685,7 @@
 
 <title type="html"><![CDATA[Building a perl project on Travis CI]]></title>
 <link href="http://jeen.github.io/2012/08/28/building-a-perl-project-on-travis-ci/"/>
-<updated>2012-08-28T14:25:00+09:00</updated>
+<updated>2012-08-28T14:25:00+00:00</updated>
 <id>http://jeen.github.io/2012/08/28/building-a-perl-project-on-travis-ci</id>
 <category term="ci" /><category term="perl" /><category term="travisci" />
 
@@ -792,7 +792,7 @@
 
 <title type="html"><![CDATA[DBIx::Class and JSON]]></title>
 <link href="http://jeen.github.io/2012/08/25/dbix-class-and-json/"/>
-<updated>2012-08-25T12:44:00+09:00</updated>
+<updated>2012-08-25T12:44:00+00:00</updated>
 <id>http://jeen.github.io/2012/08/25/dbix-class-and-json</id>
 <category term="catalyst" /><category term="dbic" /><category term="perl" />
 
@@ -909,7 +909,7 @@
 
 <title type="html"><![CDATA[Moving from bash to zsh again]]></title>
 <link href="http://jeen.github.io/2012/08/09/moving-from-bash-to-zsh-again/"/>
-<updated>2012-08-09T16:30:00+09:00</updated>
+<updated>2012-08-09T16:30:00+00:00</updated>
 <id>http://jeen.github.io/2012/08/09/moving-from-bash-to-zsh-again</id>
 <category term="zsh" />
 
@@ -961,7 +961,7 @@
 
 <title type="html"><![CDATA[App::Zamakist...]]></title>
 <link href="http://jeen.github.io/2012/08/09/app-zamakist-dot-dot-dot/"/>
-<updated>2012-08-09T13:33:00+09:00</updated>
+<updated>2012-08-09T13:33:00+00:00</updated>
 <id>http://jeen.github.io/2012/08/09/app-zamakist-dot-dot-dot</id>
 <category term="perl" />
 
@@ -1066,7 +1066,7 @@
 
 <title type="html"><![CDATA[Export Facebook Event Attending List - perl-kr TeaTime]]></title>
 <link href="http://jeen.github.io/2012/07/26/export-facebook-event-attending-list-perl-kr-teatime/"/>
-<updated>2012-07-26T14:22:00+09:00</updated>
+<updated>2012-07-26T14:22:00+00:00</updated>
 <id>http://jeen.github.io/2012/07/26/export-facebook-event-attending-list-perl-kr-teatime</id>
 <category term="facebook" /><category term="perl" />
 
@@ -1290,7 +1290,7 @@
 
 <title type="html"><![CDATA[MySQL::Diff - A vs B]]></title>
 <link href="http://jeen.github.io/2012/07/18/mysql-diff-a-vs-b/"/>
-<updated>2012-07-18T18:30:00+09:00</updated>
+<updated>2012-07-18T18:30:00+00:00</updated>
 <id>http://jeen.github.io/2012/07/18/mysql-diff-a-vs-b</id>
 <category term="mysql" /><category term="perl" />
 
@@ -1345,7 +1345,7 @@
 
 <title type="html"><![CDATA[Export Github Issues]]></title>
 <link href="http://jeen.github.io/2012/07/18/export-github-issues/"/>
-<updated>2012-07-18T15:44:00+09:00</updated>
+<updated>2012-07-18T15:44:00+00:00</updated>
 <id>http://jeen.github.io/2012/07/18/export-github-issues</id>
 <category term="github" /><category term="perl" />
 
@@ -1441,7 +1441,7 @@ Github 에서 제공해주는 Issue 관리라든가, Wiki 라든가 여러모로
 
 <title type="html"><![CDATA[HTTPS-SSL-LWP-SOAP and Perl]]></title>
 <link href="http://jeen.github.io/2012/07/02/https-ssl-lwp-soap-and-perl/"/>
-<updated>2012-07-02T15:23:00+09:00</updated>
+<updated>2012-07-02T15:23:00+00:00</updated>
 <id>http://jeen.github.io/2012/07/02/https-ssl-lwp-soap-and-perl</id>
 <category term="perl" />
 
@@ -1552,7 +1552,7 @@ Github 에서 제공해주는 Issue 관리라든가, Wiki 라든가 여러모로
 
 <title type="html"><![CDATA[Regexp::Wildcards]]></title>
 <link href="http://jeen.github.io/2012/07/01/regexp-wildcards/"/>
-<updated>2012-07-01T00:46:00+09:00</updated>
+<updated>2012-07-01T00:46:00+00:00</updated>
 <id>http://jeen.github.io/2012/07/01/regexp-wildcards</id>
 <category term="perl" />
 
@@ -1661,7 +1661,7 @@ Github 에서 제공해주는 Issue 관리라든가, Wiki 라든가 여러모로
 
 <title type="html"><![CDATA[DBIx::Class and Replication - II]]></title>
 <link href="http://jeen.github.io/2012/06/19/dbix-class-and-replication-ii/"/>
-<updated>2012-06-19T15:35:00+09:00</updated>
+<updated>2012-06-19T15:35:00+00:00</updated>
 <id>http://jeen.github.io/2012/06/19/dbix-class-and-replication-ii</id>
 <category term="dbix-class" /><category term="perl" />
 
@@ -1754,7 +1754,7 @@ Github 에서 제공해주는 Issue 관리라든가, Wiki 라든가 여러모로
 
 <title type="html"><![CDATA[oh-my-zsh → bash-it]]></title>
 <link href="http://jeen.github.io/2012/06/18/oh-my-zsh-bash-it/"/>
-<updated>2012-06-18T17:42:00+09:00</updated>
+<updated>2012-06-18T17:42:00+00:00</updated>
 <id>http://jeen.github.io/2012/06/18/oh-my-zsh-bash-it</id>
 <category term="bash" /><category term="zsh" />
 
