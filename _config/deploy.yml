@@ -1,6 +1,5 @@
 ---
-# -------------------------- #
-#      Deployment Config     #
-# -------------------------- #
-
-deploy_method: rsync
+deploy_branch: master
+deploy_dir: _deploy
+deploy_method: gh-pages
+deploy_default: push

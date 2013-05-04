@@ -538,7 +538,7 @@ task :setup_github_pages, :repo do |t, args|
     deploy_configuration = configurator.read_config('defaults/deploy/gh_pages.yml').deep_merge(deploy_configuration)
     configurator.write_config('deploy.yml', deploy_configuration)
     puts "\nYour deployment configuration (_config/deploy.yml) has been updated to:"
-    puts config_msg.yellow
+#    puts config_msg.yellow
   end
 
   # Configure published url

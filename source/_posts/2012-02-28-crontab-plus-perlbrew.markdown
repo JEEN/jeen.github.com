@@ -13,8 +13,6 @@ categories: [ perl, crontab ]
 
 <blockquote class="twitter-tweet" data-in-reply-to="172218904352010240"><p>@<a href="https://twitter.com/gypark">gypark</a> <a href="https://t.co/Q0yfoquc" title="https://gist.github.com/1882996">gist.github.com/1882996</a> 이런 식으로 하면 됩니다.</p>&mdash; envi (@nving) <a href="https://twitter.com/nving/status/172219600216399872" data-datetime="2012-02-22T07:22:07+00:00">February 22, 2012</a></blockquote>
 
-{% gist 1882996 example %}
-
 <blockquote class="twitter-tweet" data-in-reply-to="172219600216399872"><p>@<a href="https://twitter.com/nving">nving</a> 어... 그러면 다른 버전으로 switch 할 때마다 저 변수값을 바꿔줘야 해서...</p>&mdash; Raymundo (@gypark) <a href="https://twitter.com/gypark/status/172220146138611713" data-datetime="2012-02-22T07:24:17+00:00">February 22, 2012</a></blockquote>
 
 <blockquote class="twitter-tweet" data-in-reply-to="172221017534631936"><p>@<a href="https://twitter.com/nving">nving</a>perlbrew깔린디렉토리/perlbrew/bin/perlbrew exec 스크립트.pl이런 식으로 하니까 되네요~</p>&mdash; Raymundo (@gypark) <a href="https://twitter.com/gypark/status/172224703652564992" data-datetime="2012-02-22T07:42:23+00:00">February 22, 2012</a></blockquote>
