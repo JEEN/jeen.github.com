@@ -3,7 +3,7 @@
   <title><![CDATA[JEEN's techlog]]></title>
   <link href="http://jeen.github.io/atom.xml" rel="self"/>
   <link href="http://jeen.github.io/"/>
-  <updated>2013-05-04T09:42:37+00:00</updated>
+  <updated>2013-05-22T14:55:48+00:00</updated>
   <id>http://jeen.github.io/</id>
   <author>
     <name><![CDATA[Jeen Lee]]></name>
@@ -11,6 +11,80 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+    <entry>
+      
+
+
+
+
+<title type="html"><![CDATA[Using DBI Callbacks - Generate a SQLite file automatically]]></title>
+<link href="http://jeen.github.io/2013/05/20/using-dbi-callbacks-generate-sqlite-file-automatically/"/>
+<updated>2013-05-20T02:59:04+00:00</updated>
+<id>http://jeen.github.io/2013/05/20/using-dbi-callbacks-generate-sqlite-file-automatically</id>
+<category term="db" /><category term="perl" /><category term="sqlite" />
+
+      <content type="html"><![CDATA[<p>이런저런 임시데이터를 주고받고 하는 용도로 SQLite 파일을 덩어리채로 주고받는 경우가 있습니다.</p>
+
+<p>매일매일 그런 일이 일어나니 파일에는 날짜 정도는 집어넣어줘야 되구요.</p>
+
+<figure class='code'><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div><div data-line='2' class='line-number'></div><div data-line='3' class='line-number'></div><div data-line='4' class='line-number'></div><div data-line='5' class='line-number'></div><div data-line='6' class='line-number'></div><div data-line='7' class='line-number'></div><div data-line='8' class='line-number'></div><div data-line='9' class='line-number'></div></pre></td><td class='main  plain'><pre><div class='line'>DROP TABLE IF EXISTS item;
+</div><div class='line'>CREATE TABLE item (
+</div><div class='line'>  id    INTEGER NOT NULL PRIMARY KEY,
+</div><div class='line'>  name  VARCHAR(64),
+</div><div class='line'>  price INTEGER,
+</div><div class='line'>  maker VARCHAR(64),
+</div><div class='line'>  created_at INTEGER
+</div><div class='line'>);
+</div><div class='line'>...</div></pre></td></tr></table></div></figure>
+
+<p>대충 위와 같은 SQL 문을 이용해서 SQLite 파일안에 테이블도 만들어 줘야되고,</p>
+
+<p>이런저런 데이터들도 넣어줘야 되겠죠.</p>
+
+<figure class='code'><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div></pre></td><td class='main  plain'><pre><div class='line'>$ sqlite db/item.db3 &lt; sql/item.sql</div></pre></td></tr></table></div></figure>
+
+<p>일단은 요렇게 SQLite 를 만들고…</p>
+
+<figure class='code'><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div></pre></td><td class='main  plain'><pre><div class='line'>$ perl bin/generate_data.pl</div></pre></td></tr></table></div></figure>
+
+<p>뭐 요런 식으로 <code>item.db3</code> 에 있는 테이블들에 데이터를 쑤셔넣고 보내는 식입니다.</p>
+
+<figure class='code'><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div><div data-line='2' class='line-number'></div><div data-line='3' class='line-number'></div><div data-line='4' class='line-number'></div><div data-line='5' class='line-number'></div><div data-line='6' class='line-number'></div><div data-line='7' class='line-number'></div><div data-line='8' class='line-number'></div><div data-line='9' class='line-number'></div><div data-line='10' class='line-number'></div><div data-line='11' class='line-number'></div><div data-line='12' class='line-number'></div><div data-line='13' class='line-number'></div><div data-line='14' class='line-number'></div><div data-line='15' class='line-number'></div><div data-line='16' class='line-number'></div><div data-line='17' class='line-number'></div><div data-line='18' class='line-number'></div><div data-line='19' class='line-number'></div><div data-line='20' class='line-number'></div></pre></td><td class='main  plain'><pre><div class='line'>use MyApp::DB;
+</div><div class='line'> </div><div class='line'>my $db = MyApp::DB->new({ connect_info => [
+</div><div class='line'>    'dbi:SQLite:db/item.db3', "", "", {
+</div><div class='line'>        PrintError => 1,
+</div><div class='line'>        RaiseError => 1,
+</div><div class='line'>        Callbacks => {
+</div><div class='line'>            connected => sub {
+</div><div class='line'>                my $conn = shift;
+</div><div class='line'>                open my $fh, "&lt;", "sql/item.sql" or die "cannot found a sql file";
+</div><div class='line'>                my $sqls = do { local $/; &lt;$fh> };
+</div><div class='line'>                for (split /;\s+/, $sqls) {
+</div><div class='line'>                    $conn->do($_);
+</div><div class='line'>                }
+</div><div class='line'>                return;
+</div><div class='line'>            },
+</div><div class='line'>        },
+</div><div class='line'>    }
+</div><div class='line'>]})
+</div><div class='line'>….</div></pre></td></tr></table></div></figure>
+
+<p>SQLite 의 경우는 Connection정보를 지정해서 해당 DB파일이 지정 디렉토리에 위치해있으면 그 파일을 참조하고,
+없으면 0바이트의 파일을 만들어버립니다.</p>
+
+<p>이때 DBI Callbacks 를 이용해서 연결되었을 시(connected), <code>sql/item.sql</code> 에 위치한 SQL 문들을 실행합니다.</p>
+
+<p>DBI는 한 액션에 여러 SQL 문을 실행할 수 없기 때문에 &#39;;&#39; 를 구분자로해서 실행하면 각 쿼리별로 쪼개지게 됩니다.</p>
+
+<p>그렇게 해서 별다른 SQLite 파일 생성에 따른 외부적인 액션이 없이 스크립트 실행시마다 만들어지게 됩니다.
+(물론 저 위의 코드는 일부를 발췌해왔기 때문에 뭐 날마다 어쩌고 한다든가, 파일을 옮긴다든가 하는 부분의 코드는 생략했습니다)</p>
+
+<p>위처럼 DBI Callbacks 나 DBI Subclassing 을 이용해서 프로파일링이나 쿼리로그 같은 다양한 모듈들이 존재하니,</p>
+
+<p>그쪽도 한번 참고해보시면 도움이 되지 않을까 생각합니다.</p>
+]]></content>
+    </entry>
   
     <entry>
       
@@ -1854,99 +1928,6 @@ Github 에서 제공해주는 Issue 관리라든가, Wiki 라든가 여러모로
 </div></pre></td></tr></table></div></figure>
 
 <p>네 아무튼 뭐 사실 결론은 굳이 할 수 있다면 간단하게 설정할 수 있는데, 왜 설정파일에까지 정규표현식이 끼어들어야 하느냐 라는 생각아래에서 시작했었지요. 정규표현식으로 난무할 이런저런 상황들을 적당하게 와일드카드로 커버할 수 있다면 더 직관적으로 이해하고 사용할 수 있지 않을까 하는 생각이 듭니다.</p>
-]]></content>
-    </entry>
-  
-    <entry>
-      
-
-
-
-
-<title type="html"><![CDATA[DBIx::Class and Replication - II]]></title>
-<link href="http://jeen.github.io/2012/06/19/dbix-class-and-replication-ii/"/>
-<updated>2012-06-19T15:35:00+00:00</updated>
-<id>http://jeen.github.io/2012/06/19/dbix-class-and-replication-ii</id>
-<category term="dbix-class" /><category term="perl" />
-
-      <content type="html"><![CDATA[<ul>
-<li><a href="http://jeen.github.com/blog/2012/06/17/dbix-class-and-replication/">DBIx::Class + Replication</a></li>
-</ul>
-
-<p>그러니까 17일이죠.</p>
-
-<blockquote>
-<p>이렇게 몇줄만의 설정으로 간단하게 어플리케이션단에서 Replication 설정을 수행할 수 있습니다…만, 여러가지 운용이슈가 발생할 테고 그에 맞춰서 적당하게 답을 내야할 경우가 생기겠죠. 네, 뭐 그건 그때 가서…</p>
-</blockquote>
-
-<p>라고 지난 글의 말미에서 얘기했습니다만, 네 금방 운용이슈가 발생했습니다.</p>
-
-<p>넘겨준대로 설정해서 돌리려고 하는 데 이런 에러가 떴다는 것입니다.</p>
-
-<figure class='code'><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div></pre></td><td class='main  bash'><pre><div class='line'>    Class::MOP::Class:::around<span class="o">()</span>: DBI Exception: DBD::mysql::db selectrow_hashref failed: Access denied; you need the SUPER,REPLICATION CLIENT privilege <span class="k">for </span>this operation <span class="o">[</span><span class="k">for </span>Statement <span class="s2">&quot;show slave status&quot;</span><span class="o">]</span> at /home/*/perl5/perlbrew/perls/perl-5.14.2/lib/site_perl/5.14.2/i686-linux/Class/MOP/Method/Wrapped.pm line 162
-</div></pre></td></tr></table></div></figure>
-
-<p>딱 봐도 DB 접속계정의 권한문제인데, 가장 간단한 답은 접속계정에 해당 권한을 부여하면 되는 것이었는데요.
- 하지만 접속 계정을 추가해서 어떻게 하기에는 다른 운용이슈가 발생할 여지가 있다고 생각하기에(그럴리가&hellip;) 수정을 요구받았습니다. </p>
-
-<p>결국 DBIx::Class::Storage::DBI::Replicated::* 아래의 소스를 파보도록 했습니다. 관련 동작은 <code>connect_replicants</code> 시에 <code>validate_replicants</code> 에서 각 Replicant 마다 <code>is_replicating</code> 체크를 하게 되는 것입니다.</p>
-
-<p>일단 뭐 예, DBI::Replicated 시에는 기본적으로 그냥 뭐 자동 fail-over 까지 슥샥슥샥 해줄 수 있는데&hellip; 그냥 이런 거 다 필요없다라는 합의점에 이르러 결국은 해당부분을 회피하도록 했습니다.</p>
-
-<figure class='code'><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div><div data-line='2' class='line-number'></div><div data-line='3' class='line-number'></div><div data-line='4' class='line-number'></div><div data-line='5' class='line-number'></div><div data-line='6' class='line-number'></div><div data-line='7' class='line-number'></div><div data-line='8' class='line-number'></div></pre></td><td class='main  perl'><pre><div class='line'>    <span class="k">BEGIN</span> <span class="p">{</span>
-</div><div class='line'>        <span class="k">use</span> <span class="nn">DBIx::Class::Storage::DBI::Replicated::</span><span class="n">Pool</span><span class="p">;</span>
-</div><div class='line'> </div><div class='line'>        <span class="nb">no</span> <span class="n">warnings</span> <span class="s">&#39;redefine&#39;</span><span class="p">;</span>
-</div><div class='line'>        <span class="o">*</span><span class="nn">DBIx::Class::Storage::DBI::Replicated::Pool::</span><span class="n">validate_replicants</span> <span class="o">=</span> <span class="k">sub </span><span class="p">{</span>
-</div><div class='line'>            <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
-</div><div class='line'>        <span class="p">};</span>
-</div><div class='line'>    <span class="p">};</span>
-</div></pre></td></tr></table></div></figure>
-
-<p>추가한 부분은 위와 같습니다. 컴파일시에 미리 <code>validate_replicants</code> 를 재정의해버리는 것이었습니다.</p>
-
-<p>전체 소스는 아래와 같습니다.</p>
-
-<figure class='code'><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div><div data-line='2' class='line-number'></div><div data-line='3' class='line-number'></div><div data-line='4' class='line-number'></div><div data-line='5' class='line-number'></div><div data-line='6' class='line-number'></div><div data-line='7' class='line-number'></div><div data-line='8' class='line-number'></div><div data-line='9' class='line-number'></div><div data-line='10' class='line-number'></div><div data-line='11' class='line-number'></div><div data-line='12' class='line-number'></div><div data-line='13' class='line-number'></div><div data-line='14' class='line-number'></div><div data-line='15' class='line-number'></div><div data-line='16' class='line-number'></div><div data-line='17' class='line-number'></div><div data-line='18' class='line-number'></div><div data-line='19' class='line-number'></div><div data-line='20' class='line-number'></div><div data-line='21' class='line-number'></div><div data-line='22' class='line-number'></div><div data-line='23' class='line-number'></div><div data-line='24' class='line-number'></div><div data-line='25' class='line-number'></div><div data-line='26' class='line-number'></div><div data-line='27' class='line-number'></div><div data-line='28' class='line-number'></div><div data-line='29' class='line-number'></div><div data-line='30' class='line-number'></div><div data-line='31' class='line-number'></div><div data-line='32' class='line-number'></div><div data-line='33' class='line-number'></div><div data-line='34' class='line-number'></div><div data-line='35' class='line-number'></div><div data-line='36' class='line-number'></div><div data-line='37' class='line-number'></div><div data-line='38' class='line-number'></div><div data-line='39' class='line-number'></div><div data-line='40' class='line-number'></div></pre></td><td class='main  perl'><pre><div class='line'>    <span class="k">BEGIN</span> <span class="p">{</span>
-</div><div class='line'>        <span class="k">use</span> <span class="nn">DBIx::Class::Storage::DBI::Replicated::</span><span class="n">Pool</span><span class="p">;</span>
-</div><div class='line'> </div><div class='line'>        <span class="nb">no</span> <span class="n">warnings</span> <span class="s">&#39;redefine&#39;</span><span class="p">;</span>
-</div><div class='line'>        <span class="o">*</span><span class="nn">DBIx::Class::Storage::DBI::Replicated::Pool::</span><span class="n">validate_replicants</span> <span class="o">=</span> <span class="k">sub </span><span class="p">{</span>
-</div><div class='line'>            <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
-</div><div class='line'>        <span class="p">};</span>
-</div><div class='line'>    <span class="p">};</span>
-</div><div class='line'> </div><div class='line'>    <span class="k">my</span> <span class="nv">$schema</span> <span class="o">=</span> <span class="nn">MyApp::</span><span class="n">Schema</span><span class="o">-&gt;</span><span class="n">clone</span><span class="p">;</span>
-</div><div class='line'>    <span class="nv">$schema</span><span class="o">-&gt;</span><span class="n">storage_type</span><span class="p">([</span>
-</div><div class='line'>        <span class="s">&#39;::DBI::Replicated&#39;</span> <span class="o">=&gt;</span> <span class="p">{</span>
-</div><div class='line'>            <span class="n">balancer_type</span> <span class="o">=&gt;</span> <span class="s">&#39;::Random&#39;</span><span class="p">,</span>
-</div><div class='line'>            <span class="n">balancer_args</span> <span class="o">=&gt;</span> <span class="p">{</span>
-</div><div class='line'>                <span class="n">auto_validate_every</span> <span class="o">=&gt;</span> <span class="mi">10</span><span class="p">,</span>
-</div><div class='line'>                <span class="n">master_read_weight</span>  <span class="o">=&gt;</span> <span class="mi">0</span><span class="p">,</span>
-</div><div class='line'>            <span class="p">},</span>
-</div><div class='line'>            <span class="n">pool_args</span> <span class="o">=&gt;</span> <span class="p">{</span>
-</div><div class='line'>                <span class="n">maximum_lag</span> <span class="o">=&gt;</span> <span class="mi">2</span><span class="p">,</span>
-</div><div class='line'>            <span class="p">}</span>
-</div><div class='line'>        <span class="p">}</span>
-</div><div class='line'>    <span class="p">]);</span>
-</div><div class='line'>    <span class="nv">$schema</span><span class="o">-&gt;</span><span class="n">connection</span><span class="p">({</span>
-</div><div class='line'>        <span class="n">dsn</span>      <span class="o">=&gt;</span> <span class="s">&quot;dbi:mysql:myapp:127.0.0.50&quot;</span><span class="p">,</span>
-</div><div class='line'>        <span class="n">user</span>     <span class="o">=&gt;</span> <span class="s">&quot;user&quot;</span><span class="p">,</span>
-</div><div class='line'>        <span class="n">password</span> <span class="o">=&gt;</span> <span class="s">&quot;whatthehell&quot;</span><span class="p">,</span>
-</div><div class='line'>        <span class="n">RaiseError</span>        <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">,</span>
-</div><div class='line'>        <span class="n">AutoCommit</span>        <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">,</span>
-</div><div class='line'>        <span class="n">mysql_enable_utf8</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">,</span>
-</div><div class='line'>        <span class="n">on_connect_do</span>     <span class="o">=&gt;</span> <span class="p">[</span><span class="s">&quot;SET NAMES utf8&quot;</span><span class="p">],</span>
-</div><div class='line'>        <span class="n">quote_char</span>        <span class="o">=&gt;</span> <span class="sx">q{`}</span><span class="p">,</span>
-</div><div class='line'>    <span class="p">});</span>
-</div><div class='line'>    <span class="nv">$schema</span><span class="o">-&gt;</span><span class="n">storage</span><span class="o">-&gt;</span><span class="n">connect_replicants</span><span class="p">([</span>
-</div><div class='line'>        <span class="p">{</span>
-</div><div class='line'>            <span class="n">dsn</span>      <span class="o">=&gt;</span> <span class="s">&quot;dbi:mysql:myapp:192.168.0.51&quot;</span><span class="p">,</span>
-</div><div class='line'>            <span class="n">user</span>     <span class="o">=&gt;</span> <span class="s">&quot;user&quot;</span><span class="p">,</span>
-</div><div class='line'>            <span class="n">password</span> <span class="o">=&gt;</span> <span class="s">&quot;whatthehell&quot;</span><span class="p">,</span>
-</div><div class='line'>        <span class="p">},</span>
-</div><div class='line'>        <span class="o">....</span>
-</div><div class='line'>    <span class="p">]);</span>
-</div></pre></td></tr></table></div></figure>
-
-<p>그리고 그들은 행복하게 오래오래 살았답니다~. 끝.</p>
 ]]></content>
     </entry>
   

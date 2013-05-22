@@ -98,6 +98,89 @@
   <header>
     <h1 class="entry-title">
 
+<a href="/2012/02/07/date-holidays-kr-0-dot-01-released/">Date::Holidays::KR Released</a>
+
+</h1>
+
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2012-02-07T20:28:00+00:00" pubdate data-updated="true">Feb 7<span>th</span>, 2012</time>
+         &bull; <a rel="bookmark" href="/2012/02/07/date-holidays-kr-0-dot-01-released/">Permalink</a>
+      </p>
+    
+  </header>
+
+<div class="entry-content"><p>회사의 경영자 @y0ngbin 께서 <code>is_bizday</code> 라는 스크립트를 만들어서 쓰는 것을 보고 호오 했었는데&hellip;</p>
+
+<p><script src="https://gist.github.com/1646007.js?file=is_bizday.pl"></script></p>
+
+<p>알고보니 내용인즉슨 HTTP Request 를 날리고 그 결과를 파싱하는 일을 하고 있다는 것을 알고, 급히 <a href="http://metacpan.org/module/Date::Holidays::KR">Date::Holidays::KR</a> 이라는 모듈을 만들기로 했습니다&hellip; 랄까 사실은 작년부터 떠밀려온 <code>Things</code> 의 이슈 중 하나였습니다.</p>
+
+<p>사실 일본같은 경우에는 음력이 옛날에 없어져버렸고, 지금은 양력만으로 돌고 있고, 중국은 한국과 마찬가지로 음력을 사용하고 있습니다. 재미삼아서 여러나라의 공휴일을 살펴봤는데, 대개 정해진 날, 또는 몇 월의 몇번째 주의 월요일이라든가 하는 식으로 공휴일이 지정되어 있는 것을 봤습니다.
+  캐나다의 경우는 주마다 휴일이 다르더군요. :-)</p>
+
+<p>아무튼 같은 음력을 사용하는 중국, 그 중국용으로 만든 <a href="http://metacpan.org/module/Date::Holidays::CN">Date::Holidays::CN</a> 을 참고해서 <code>Date::Holidays::KR</code> 을 만들었습니다. 음력도 미묘하게 중국과는 다르다고 하는데, 이 부분은 @aer0 님께서 만드신 <a href="http://metacpan.org/module/Date::Korean">Date::Korean</a> 모듈을 사용해서 음력/양력 변환을 이용했구요. (설날,추석,석가탄신일의 경우는 음력)</p>
+
+<blockquote class="twitter-tweet"><p>Date-Holidays-KR 0.01 by JEEN - <a href="http://t.co/pHQVHLaJ" title="http://metacpan.org/release/JEEN/Date-Holidays-KR-0.01/">metacpan.org/release/JEEN/D…</a></p>&mdash; CPAN New Modules (@cpan_new) <a href="https://twitter.com/cpan_new/status/166840689223675904" data-datetime="2012-02-07T11:08:14+00:00">February 7, 2012</a></blockquote>
+
+<blockquote class="twitter-tweet"><p>Date-Holidays-KR 0.02 by JEEN - <a href="http://t.co/mgouifly" title="http://metacpan.org/release/JEEN/Date-Holidays-KR-0.02/">metacpan.org/release/JEEN/D…</a></p>&mdash; CPAN New Modules (@cpan_new) <a href="https://twitter.com/cpan_new/status/167066106622771200" data-datetime="2012-02-08T02:03:58+00:00">February 8, 2012</a></blockquote>
+
+<p>어제 0.01 올리다가 <code>Makefile.PL</code> 에 의존모듈을 안정해놨구나 해서 추가해서 다시 올려놨습니다. </p>
+
+<figure class='code'><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div><div data-line='2' class='line-number'></div><div data-line='3' class='line-number'></div><div data-line='4' class='line-number'></div><div data-line='5' class='line-number'></div><div data-line='6' class='line-number'></div><div data-line='7' class='line-number'></div><div data-line='8' class='line-number'></div><div data-line='9' class='line-number'></div><div data-line='10' class='line-number'></div><div data-line='11' class='line-number'></div><div data-line='12' class='line-number'></div><div data-line='13' class='line-number'></div></pre></td><td class='main  diff'><pre><div class='line'><span class="gh">diff --git a/Makefile.PL b/Makefile.PL</span>
+</div><div class='line'><span class="gh">index 7b27280..fef5219 100644</span>
+</div><div class='line'><span class="gd">--- a/Makefile.PL</span>
+</div><div class='line'><span class="gi">+++ b/Makefile.PL</span>
+</div><div class='line'><span class="gu">@@ -2,7 +2,7 @@ use inc::Module::Install;</span>
+</div><div class='line'> name &#39;Date-Holidays-KR&#39;;
+</div><div class='line'> all_from &#39;lib/Date/Holidays/KR.pm&#39;;
+</div><div class='line'> </div><div class='line'><span class="gd">-# requires &#39;&#39;;</span>
+</div><div class='line'><span class="gi">+requires &#39;Date::Korean&#39;;</span>
+</div><div class='line'> </div><div class='line'> tests &#39;t/*.t&#39;;
+</div><div class='line'> author_tests &#39;xt&#39;;
+</div></pre></td></tr></table></div></figure>
+</div>
+
+  <footer>
+    
+    <p><a class="comments-link" href="/2012/02/07/date-holidays-kr-0-dot-01-released/#disqus_thread" data-disqus-identifier="http://jeen.github.io/2012/02/07/date-holidays-kr-0-dot-01-released/">View comments &raquo;</a></p>
+
+    
+    
+  </footer>
+
+
+    </article>
+  
+    
+
+
+
+
+
+
+
+
+
+
+    <article >
+      
+  <header>
+    <h1 class="entry-title">
+
 <a href="/2012/02/01/perl-and-continuous-integration-with-jenkins-2/">Perl and Continuous Integration With Jenkins - II</a>
 
 </h1>
@@ -332,152 +415,6 @@
   <footer>
     
     <p><a class="comments-link" href="/2012/01/16/carton-cpan-dependencies-manager/#disqus_thread" data-disqus-identifier="http://jeen.github.io/2012/01/16/carton-cpan-dependencies-manager/">View comments &raquo;</a></p>
-
-    
-    
-  </footer>
-
-
-    </article>
-  
-    
-
-
-
-
-
-
-
-
-
-
-    <article >
-      
-  <header>
-    <h1 class="entry-title">
-
-<a href="/2012/01/13/picasa-upload-script-ii/">Picasa Upload Script II</a>
-
-</h1>
-
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-
-<time datetime="2012-01-13T18:36:00+00:00" pubdate data-updated="true">Jan 13<span>th</span>, 2012</time>
-         &bull; <a rel="bookmark" href="/2012/01/13/picasa-upload-script-ii/">Permalink</a>
-      </p>
-    
-  </header>
-
-<div class="entry-content"><figure class='code'><figcaption>picasa-uploader.pl</figcaption><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div><div data-line='2' class='line-number'></div><div data-line='3' class='line-number'></div><div data-line='4' class='line-number'></div><div data-line='5' class='line-number'></div><div data-line='6' class='line-number'></div><div data-line='7' class='line-number'></div><div data-line='8' class='line-number'></div><div data-line='9' class='line-number'></div><div data-line='10' class='line-number'></div><div data-line='11' class='line-number'></div><div data-line='12' class='line-number'></div><div data-line='13' class='line-number'></div><div data-line='14' class='line-number'></div><div data-line='15' class='line-number'></div><div data-line='16' class='line-number'></div><div data-line='17' class='line-number'></div><div data-line='18' class='line-number'></div><div data-line='19' class='line-number'></div><div data-line='20' class='line-number'></div><div data-line='21' class='line-number'></div><div data-line='22' class='line-number'></div><div data-line='23' class='line-number'></div><div data-line='24' class='line-number'></div><div data-line='25' class='line-number'></div><div data-line='26' class='line-number'></div><div data-line='27' class='line-number'></div><div data-line='28' class='line-number'></div><div data-line='29' class='line-number'></div><div data-line='30' class='line-number'></div><div data-line='31' class='line-number'></div><div data-line='32' class='line-number'></div><div data-line='33' class='line-number'></div><div data-line='34' class='line-number'></div><div data-line='35' class='line-number'></div><div data-line='36' class='line-number'></div><div data-line='37' class='line-number'></div><div data-line='38' class='line-number'></div><div data-line='39' class='line-number'></div><div data-line='40' class='line-number'></div><div data-line='41' class='line-number'></div><div data-line='42' class='line-number'></div><div data-line='43' class='line-number'></div><div data-line='44' class='line-number'></div><div data-line='45' class='line-number'></div><div data-line='46' class='line-number'></div><div data-line='47' class='line-number'></div><div data-line='48' class='line-number'></div><div data-line='49' class='line-number'></div><div data-line='50' class='line-number'></div><div data-line='51' class='line-number'></div><div data-line='52' class='line-number'></div><div data-line='53' class='line-number'></div><div data-line='54' class='line-number'></div><div data-line='55' class='line-number'></div><div data-line='56' class='line-number'></div><div data-line='57' class='line-number'></div><div data-line='58' class='line-number'></div><div data-line='59' class='line-number'></div><div data-line='60' class='line-number'></div><div data-line='61' class='line-number'></div><div data-line='62' class='line-number'></div><div data-line='63' class='line-number'></div><div data-line='64' class='line-number'></div><div data-line='65' class='line-number'></div><div data-line='66' class='line-number'></div><div data-line='67' class='line-number'></div><div data-line='68' class='line-number'></div><div data-line='69' class='line-number'></div><div data-line='70' class='line-number'></div><div data-line='71' class='line-number'></div><div data-line='72' class='line-number'></div><div data-line='73' class='line-number'></div><div data-line='74' class='line-number'></div><div data-line='75' class='line-number'></div><div data-line='76' class='line-number'></div><div data-line='77' class='line-number'></div><div data-line='78' class='line-number'></div><div data-line='79' class='line-number'></div><div data-line='80' class='line-number'></div><div data-line='81' class='line-number'></div><div data-line='82' class='line-number'></div><div data-line='83' class='line-number'></div><div data-line='84' class='line-number'></div><div data-line='85' class='line-number'></div><div data-line='86' class='line-number'></div><div data-line='87' class='line-number'></div><div data-line='88' class='line-number'></div><div data-line='89' class='line-number'></div><div data-line='90' class='line-number'></div><div data-line='91' class='line-number'></div><div data-line='92' class='line-number'></div><div data-line='93' class='line-number'></div><div data-line='94' class='line-number'></div><div data-line='95' class='line-number'></div><div data-line='96' class='line-number'></div><div data-line='97' class='line-number'></div><div data-line='98' class='line-number'></div><div data-line='99' class='line-number'></div><div data-line='100' class='line-number'></div><div data-line='101' class='line-number'></div><div data-line='102' class='line-number'></div><div data-line='103' class='line-number'></div><div data-line='104' class='line-number'></div><div data-line='105' class='line-number'></div><div data-line='106' class='line-number'></div><div data-line='107' class='line-number'></div></pre></td><td class='main  perl'><pre><div class='line'><span class="c1">#!/usr/bin/env perl</span>
-</div><div class='line'><span class="nb">package</span> <span class="n">PicasaUploader</span><span class="p">;</span>
-</div><div class='line'><span class="k">use</span> <span class="nn">Any::</span><span class="n">Moose</span><span class="p">;</span>
-</div><div class='line'><span class="k">use</span> <span class="nn">namespace::</span><span class="n">autoclean</span><span class="p">;</span>
-</div><div class='line'><span class="k">use</span> <span class="nn">Config::</span><span class="n">Pit</span><span class="p">;</span>
-</div><div class='line'><span class="k">use</span> <span class="nn">LWP::</span><span class="n">UserAgent</span><span class="p">;</span>
-</div><div class='line'><span class="k">use</span> <span class="nn">Net::Google::</span><span class="n">AuthSub</span><span class="p">;</span>
-</div><div class='line'><span class="k">use</span> <span class="nn">MIME::</span><span class="n">Types</span> <span class="p">();</span>
-</div><div class='line'> </div><div class='line'><span class="n">has</span> <span class="n">user_id</span> <span class="o">=&gt;</span> <span class="p">(</span>
-</div><div class='line'>    <span class="n">is</span>      <span class="o">=&gt;</span> <span class="s">&#39;ro&#39;</span><span class="p">,</span>
-</div><div class='line'>    <span class="n">default</span> <span class="o">=&gt;</span> <span class="s">&#39;default&#39;</span><span class="p">,</span>
-</div><div class='line'><span class="p">);</span>
-</div><div class='line'> </div><div class='line'><span class="n">has</span> <span class="n">album_id</span> <span class="o">=&gt;</span> <span class="p">(</span>
-</div><div class='line'>    <span class="n">is</span>      <span class="o">=&gt;</span> <span class="s">&#39;ro&#39;</span><span class="p">,</span>
-</div><div class='line'>    <span class="n">default</span> <span class="o">=&gt;</span> <span class="s">&#39;default&#39;</span><span class="p">,</span>
-</div><div class='line'><span class="p">);</span>
-</div><div class='line'> </div><div class='line'><span class="n">has</span> <span class="n">files</span> <span class="o">=&gt;</span> <span class="p">(</span>
-</div><div class='line'>    <span class="n">is</span>      <span class="o">=&gt;</span> <span class="s">&#39;ro&#39;</span><span class="p">,</span>
-</div><div class='line'>    <span class="n">isa</span>     <span class="o">=&gt;</span> <span class="s">&#39;ArrayRef&#39;</span><span class="p">,</span>
-</div><div class='line'>    <span class="n">default</span> <span class="o">=&gt;</span> <span class="k">sub </span><span class="p">{</span> <span class="o">[]</span> <span class="p">}</span>
-</div><div class='line'><span class="p">);</span>
-</div><div class='line'> </div><div class='line'><span class="n">has</span> <span class="n">google_auth</span> <span class="o">=&gt;</span> <span class="p">(</span>
-</div><div class='line'>    <span class="n">is</span>      <span class="o">=&gt;</span> <span class="s">&#39;rw&#39;</span><span class="p">,</span>
-</div><div class='line'>    <span class="n">isa</span>     <span class="o">=&gt;</span> <span class="s">&#39;Net::Google::AuthSub&#39;</span><span class="p">,</span>
-</div><div class='line'>    <span class="n">default</span> <span class="o">=&gt;</span> <span class="k">sub </span><span class="p">{</span>
-</div><div class='line'>        <span class="nn">Net::Google::</span><span class="n">AuthSub</span><span class="o">-&gt;</span><span class="k">new</span><span class="p">(</span>
-</div><div class='line'>            <span class="n">service</span> <span class="o">=&gt;</span> <span class="s">&#39;lh2&#39;</span><span class="p">,</span>
-</div><div class='line'>            <span class="n">source</span>  <span class="o">=&gt;</span> <span class="s">&#39;my-picasauploader-0.1&#39;</span>
-</div><div class='line'>        <span class="p">);</span>
-</div><div class='line'>    <span class="p">}</span>
-</div><div class='line'><span class="p">);</span>
-</div><div class='line'> </div><div class='line'><span class="n">has</span> <span class="s">&#39;_ua&#39;</span> <span class="o">=&gt;</span> <span class="p">(</span>
-</div><div class='line'>    <span class="n">is</span>      <span class="o">=&gt;</span> <span class="s">&#39;rw&#39;</span><span class="p">,</span>
-</div><div class='line'>    <span class="n">isa</span>     <span class="o">=&gt;</span> <span class="s">&#39;LWP::UserAgent&#39;</span><span class="p">,</span>
-</div><div class='line'>    <span class="n">default</span> <span class="o">=&gt;</span> <span class="k">sub </span><span class="p">{</span>
-</div><div class='line'>        <span class="nn">LWP::</span><span class="n">UserAgent</span><span class="o">-&gt;</span><span class="k">new</span><span class="p">(</span> <span class="n">cookie_jar</span> <span class="o">=&gt;</span> <span class="p">{}</span> <span class="p">);</span>
-</div><div class='line'>    <span class="p">}</span>
-</div><div class='line'><span class="p">);</span>
-</div><div class='line'> </div><div class='line'><span class="n">has</span> <span class="s">&#39;config&#39;</span> <span class="o">=&gt;</span> <span class="p">(</span>
-</div><div class='line'>    <span class="n">is</span>          <span class="o">=&gt;</span> <span class="s">&#39;ro&#39;</span><span class="p">,</span>
-</div><div class='line'>    <span class="n">isa</span>         <span class="o">=&gt;</span> <span class="s">&#39;HashRef&#39;</span><span class="p">,</span>
-</div><div class='line'>    <span class="n">lazy_build</span>  <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">,</span>
-</div><div class='line'><span class="p">);</span>
-</div><div class='line'> </div><div class='line'><span class="k">sub </span><span class="nf">BUILD</span> <span class="p">{</span>
-</div><div class='line'>    <span class="k">my</span> <span class="nv">$self</span> <span class="o">=</span> <span class="nb">shift</span><span class="p">;</span>
-</div><div class='line'>    <span class="nv">$self</span><span class="o">-&gt;</span><span class="n">auth</span><span class="p">;</span>
-</div><div class='line'>    <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
-</div><div class='line'><span class="p">}</span>
-</div><div class='line'> </div><div class='line'><span class="k">sub </span><span class="nf">_build_config</span> <span class="p">{</span>
-</div><div class='line'>    <span class="nn">Config::Pit::</span><span class="n">pit_get</span><span class="p">(</span><span class="s">&#39;google.com&#39;</span><span class="p">,</span> <span class="nb">require</span> <span class="o">=&gt;</span> <span class="p">{</span>
-</div><div class='line'>       <span class="n">username</span> <span class="o">=&gt;</span> <span class="s">&#39;your username on google.com&#39;</span><span class="p">,</span>
-</div><div class='line'>       <span class="n">password</span> <span class="o">=&gt;</span> <span class="s">&#39;your password on google.com&#39;</span>
-</div><div class='line'>    <span class="p">});</span>
-</div><div class='line'><span class="p">}</span>
-</div><div class='line'> </div><div class='line'><span class="k">sub </span><span class="nf">auth</span> <span class="p">{</span>
-</div><div class='line'>    <span class="k">my</span> <span class="nv">$self</span> <span class="o">=</span> <span class="nb">shift</span><span class="p">;</span>
-</div><div class='line'> </div><div class='line'>    <span class="k">my</span> <span class="nv">$res</span> <span class="o">=</span> <span class="nv">$self</span><span class="o">-&gt;</span><span class="n">google_auth</span><span class="o">-&gt;</span><span class="n">login</span><span class="p">(</span><span class="nv">$self</span><span class="o">-&gt;</span><span class="n">config</span><span class="o">-&gt;</span><span class="p">{</span><span class="n">username</span><span class="p">},</span> <span class="nv">$self</span><span class="o">-&gt;</span><span class="n">config</span><span class="o">-&gt;</span><span class="p">{</span><span class="n">password</span><span class="p">});</span>
-</div><div class='line'>    <span class="nb">die</span> <span class="s">&quot;Login Failed: &quot;</span><span class="o">.</span> <span class="nv">$res</span><span class="o">-&gt;</span><span class="n">error</span> <span class="k">unless</span> <span class="nv">$res</span><span class="o">-&gt;</span><span class="n">is_success</span><span class="p">;</span>
-</div><div class='line'><span class="p">}</span>
-</div><div class='line'> </div><div class='line'><span class="k">sub </span><span class="nf">upload_files</span> <span class="p">{</span>
-</div><div class='line'>    <span class="k">my</span> <span class="nv">$self</span> <span class="o">=</span> <span class="nb">shift</span><span class="p">;</span>
-</div><div class='line'> </div><div class='line'>    <span class="k">for</span> <span class="k">my</span> <span class="nv">$file_path</span> <span class="p">(</span><span class="nv">@</span><span class="p">{</span> <span class="nv">$self</span><span class="o">-&gt;</span><span class="n">files</span> <span class="p">})</span> <span class="p">{</span>
-</div><div class='line'>        <span class="k">my</span> <span class="nv">$link</span> <span class="o">=</span> <span class="nv">$self</span><span class="o">-&gt;</span><span class="n">upload_file</span><span class="p">(</span><span class="nv">$file_path</span><span class="p">);</span>
-</div><div class='line'>        <span class="k">print</span> <span class="nv">$link</span><span class="o">.</span><span class="s">&quot;\n&quot;</span><span class="p">;</span>
-</div><div class='line'>    <span class="p">}</span>
-</div><div class='line'><span class="p">}</span>
-</div><div class='line'> </div><div class='line'><span class="k">sub </span><span class="nf">upload_file</span> <span class="p">{</span>
-</div><div class='line'>    <span class="k">my</span> <span class="p">(</span><span class="nv">$self</span><span class="p">,</span> <span class="nv">$file_path</span><span class="p">)</span> <span class="o">=</span> <span class="nv">@_</span><span class="p">;</span>
-</div><div class='line'> </div><div class='line'>    <span class="k">my</span> <span class="nv">$file</span> <span class="o">=</span> <span class="nn">Path::Class::</span><span class="n">File</span><span class="o">-&gt;</span><span class="k">new</span><span class="p">(</span><span class="nv">$file_path</span><span class="p">);</span>
-</div><div class='line'>    <span class="nb">die</span> <span class="s">&quot;File Not Found : $file&quot;</span> <span class="k">unless</span> <span class="o">-</span><span class="n">f</span> <span class="nv">$file</span><span class="p">;</span>
-</div><div class='line'> </div><div class='line'>    <span class="k">my</span> <span class="nv">$post_url</span> <span class="o">=</span> <span class="nb">sprintf</span> <span class="s">&#39;https://picasaweb.google.com/data/feed/api/user/%s/albumid/%s&#39;</span><span class="p">,</span> <span class="nv">$self</span><span class="o">-&gt;</span><span class="n">user_id</span><span class="p">,</span> <span class="nv">$self</span><span class="o">-&gt;</span><span class="n">album_id</span><span class="p">;</span>
-</div><div class='line'> </div><div class='line'>    <span class="k">my</span> <span class="p">(</span><span class="nv">$mime_type</span><span class="p">,</span> <span class="nv">$encoding</span><span class="p">)</span> <span class="o">=</span> <span class="nn">MIME::Types::</span><span class="n">by_suffix</span><span class="p">(</span><span class="nv">$file</span><span class="o">-&gt;</span><span class="n">basename</span><span class="p">);</span>
-</div><div class='line'>    <span class="k">my</span> <span class="nv">$content</span> <span class="o">=</span> <span class="nv">$file</span><span class="o">-&gt;</span><span class="n">slurp</span><span class="p">;</span>
-</div><div class='line'>    <span class="k">my</span> <span class="nv">$res</span> <span class="o">=</span> <span class="nv">$self</span><span class="o">-&gt;</span><span class="n">_ua</span><span class="o">-&gt;</span><span class="n">post</span><span class="p">(</span><span class="nv">$post_url</span><span class="p">,</span>
-</div><div class='line'>        <span class="nv">$self</span><span class="o">-&gt;</span><span class="n">google_auth</span><span class="o">-&gt;</span><span class="n">auth_params</span><span class="p">,</span>
-</div><div class='line'>        <span class="n">Content_Type</span>   <span class="o">=&gt;</span> <span class="nv">$mime_type</span><span class="p">,</span>
-</div><div class='line'>        <span class="n">Slug</span>           <span class="o">=&gt;</span> <span class="nv">$file</span><span class="o">-&gt;</span><span class="n">basename</span><span class="p">,</span>
-</div><div class='line'>        <span class="n">Content</span>        <span class="o">=&gt;</span> <span class="nv">$content</span><span class="p">,</span>
-</div><div class='line'>    <span class="p">);</span>
-</div><div class='line'> </div><div class='line'>    <span class="nb">die</span> <span class="s">&#39;UPLOAD Failed : &#39;</span><span class="o">.</span><span class="nv">$res</span><span class="o">-&gt;</span><span class="n">status_line</span> <span class="k">unless</span> <span class="nv">$res</span><span class="o">-&gt;</span><span class="n">is_success</span><span class="p">;</span>
-</div><div class='line'>    <span class="k">my</span> <span class="p">(</span><span class="nv">$link</span><span class="p">)</span> <span class="o">=</span> <span class="p">(</span><span class="nv">$res</span><span class="o">-&gt;</span><span class="n">decoded_content</span><span class="o">=~</span><span class="sr">/content type.*?src=&#39;(.*?)&#39;/gsm</span><span class="p">);</span>
-</div><div class='line'>    <span class="nv">$link</span><span class="p">;</span>
-</div><div class='line'><span class="p">}</span>
-</div><div class='line'> </div><div class='line'><span class="n">__PACKAGE__</span><span class="o">-&gt;</span><span class="n">meta</span><span class="o">-&gt;</span><span class="n">make_immutable</span><span class="p">;</span>
-</div><div class='line'> </div><div class='line'><span class="nb">package</span> <span class="n">main</span><span class="p">;</span>
-</div><div class='line'> </div><div class='line'><span class="k">my</span> <span class="nv">$uploader</span> <span class="o">=</span> <span class="n">PicasaUploader</span><span class="o">-&gt;</span><span class="k">new</span><span class="p">(</span> <span class="n">files</span> <span class="o">=&gt;</span> <span class="o">\</span><span class="nv">@ARGV</span> <span class="p">);</span>
-</div><div class='line'><span class="nv">$uploader</span><span class="o">-&gt;</span><span class="n">upload_files</span><span class="p">;</span>
-</div></pre></td></tr></table></div></figure>
-
-<p><a href="http://aanoaa.github.com/blog/2012/01/03/picasa-upload-script/">@aanoaa 님의 글</a>에서 Picasa Uploader 스크립트를 소개했었는데요. <code>PicasaUploader</code> 라고 package 로 정의해서 쓰도록 했습니다. 
-  거기에 <a href="https://metacpan.org/module/Config::Pit">Config::Pit</a> 을 써서 계정정보를 다루도록 했구요.
-  심심해서 그냥 약간 개량해봤습니다. </p>
-</div>
-
-  <footer>
-    
-    <p><a class="comments-link" href="/2012/01/13/picasa-upload-script-ii/#disqus_thread" data-disqus-identifier="http://jeen.github.io/2012/01/13/picasa-upload-script-ii/">View comments &raquo;</a></p>
 
     
     
