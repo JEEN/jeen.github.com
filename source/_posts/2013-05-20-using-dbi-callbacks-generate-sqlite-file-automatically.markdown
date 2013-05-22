@@ -1,0 +1,77 @@
+---
+layout: post
+title: "Using DBI Callbacks - Generate a SQLite file automatically"
+date: 2013-05-20T11:59:04+09:00
+comments: true
+external-url: 
+categories: [ perl, sqlite, db ]
+---
+
+ 이런저런 임시데이터를 주고받고 하는 용도로 SQLite 파일을 덩어리채로 주고받는 경우가 있습니다.
+
+매일매일 그런 일이 일어나니 파일에는 날짜 정도는 집어넣어줘야 되구요.
+
+```
+DROP TABLE IF EXISTS item;
+CREATE TABLE item (
+  id    INTEGER NOT NULL PRIMARY KEY,
+  name  VARCHAR(64),
+  price INTEGER,
+  maker VARCHAR(64),
+  created_at INTEGER
+);
+...
+```
+
+대충 위와 같은 SQL 문을 이용해서 SQLite 파일안에 테이블도 만들어 줘야되고,
+
+이런저런 데이터들도 넣어줘야 되겠죠.
+
+```
+$ sqlite db/item.db3 < sql/item.sql
+```
+
+일단은 요렇게 SQLite 를 만들고…
+
+```
+$ perl bin/generate_data.pl
+```
+
+뭐 요런 식으로 `item.db3` 에 있는 테이블들에 데이터를 쑤셔넣고 보내는 식입니다.
+
+```
+use MyApp::DB;
+
+my $db = MyApp::DB->new({ connect_info => [
+    'dbi:SQLite:db/item.db3', "", "", {
+    	PrintError => 1,
+    	RaiseError => 1,
+    	Callbacks => {
+    		connected => sub {
+    			my $conn = shift;
+    			open my $fh, "<", "sql/item.sql" or die "cannot found a sql file";
+    			my $sqls = do { local $/; <$fh> };
+    			for (split /;\s+/, $sqls) {
+    				$conn->do($_);
+    			}
+    			return;
+    		},
+    	},
+    }
+]})
+….
+```
+
+SQLite 의 경우는 Connection정보를 지정해서 해당 DB파일이 지정 디렉토리에 위치해있으면 그 파일을 참조하고,
+없으면 0바이트의 파일을 만들어버립니다.
+
+이때 DBI Callbacks 를 이용해서 연결되었을 시(connected), `sql/item.sql` 에 위치한 SQL 문들을 실행합니다.
+
+DBI는 한 액션에 여러 SQL 문을 실행할 수 없기 때문에 ';' 를 구분자로해서 실행하면 각 쿼리별로 쪼개지게 됩니다.
+
+그렇게 해서 별다른 SQLite 파일 생성에 따른 외부적인 액션이 없이 스크립트 실행시마다 만들어지게 됩니다.
+(물론 저 위의 코드는 일부를 발췌해왔기 때문에 뭐 날마다 어쩌고 한다든가, 파일을 옮긴다든가 하는 부분의 코드는 생략했습니다)
+
+위처럼 DBI Callbacks 나 DBI Subclassing 을 이용해서 프로파일링이나 쿼리로그 같은 다양한 모듈들이 존재하니,
+
+그쪽도 한번 참고해보시면 도움이 되지 않을까 생각합니다.
