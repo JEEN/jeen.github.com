@@ -3,7 +3,7 @@
   <title><![CDATA[JEEN's techlog]]></title>
   <link href="http://jeen.github.io/atom.xml" rel="self"/>
   <link href="http://jeen.github.io/"/>
-  <updated>2013-05-04T09:42:37+00:00</updated>
+  <updated>2013-05-26T15:37:50+00:00</updated>
   <id>http://jeen.github.io/</id>
   <author>
     <name><![CDATA[Jeen Lee]]></name>
@@ -11,6 +11,426 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+    <entry>
+      
+
+
+
+
+<title type="html"><![CDATA[miyagawa's podcast ep12 - Korean Translation]]></title>
+<link href="http://jeen.github.io/2013/05/26/miyagawas-podcast-ep12/"/>
+<updated>2013-05-26T15:15:00+00:00</updated>
+<id>http://jeen.github.io/2013/05/26/miyagawas-podcast-ep12</id>
+<category term="perl" />
+
+      <content type="html"><![CDATA[<p>자주 챙겨듣는 podcast 중에 개인적으로 존경하는 개발자인 @miyagawa 씨가 운영하는 podcast 가 있습니다.</p>
+
+<ul>
+<li><p><a href="http://podcast.bulknews.net">Tatsuhiko Miyagawa&#39;s Podcast</a></p>
+
+<p>주제는 개발이나 각종 기기, 이벤트, 언어, 커뮤니티 등등의 IT와 관련된 다양한 이야기들을 다루고 있습니다.</p>
+
+<p>항상 사전녹화하는 것을 수정해서 올리곤 했는데 이번에는 Mixlr 라는 서비스를 이용해서 생방송으로 진행되었습니다.</p></li>
+<li><p><a href="http://mixlr.com">Mixlr makes broadcasting live audio simple. Share your sounds live&hellip;</a></p>
+
+<p>시간은 미리 공지된 대로 5.26 저녁 10시. 게스트들과의 대화는 스카이프로 이뤄진 것 같습니다. 대화는 1시간 분량입니다.</p>
+
+<p>아래의 내용은 IRC 채널 #perl-kr 에서 내용을 들으면서 옮겨적은 것이며, 부분적으로 빼먹은 부분이나 급작스런 컨텍스트 전환이 있습니다.</p></li>
+</ul>
+
+<h3>Intro</h3>
+
+<ul>
+<li>jeen__ : 미역 팟캐스트 12회는 라이브라고 해서 이거 듣고 퇴근해야지&hellip; 퇴근이랄까..</li>
+<li>skyloader : 미역이 팟캐스트도 하나요?</li>
+<li>skyloader : 주제가 perl?</li>
+<li>jeen__ : ㅇㅇ</li>
+<li>skyloader : 오올</li>
+<li>skyloader : 하지만 일본어겠지..</li>
+<li>jeen__ : ㅇㅇ</li>
+<li>jeen__ : lestratt, tokuhirom 이 게스트</li>
+<li>jeen__ : 처음으로 펄만을 위한 주제인듯 -_-;</li>
+<li>jeen__ : tokuhirom TOEIC 쳤냐고 ㅋㅋ</li>
+<li>jeen__ : 쳤는데 점수 안나왔다고</li>
+<li>skyloader : 올 진사마의 실시간 통역</li>
+<li><p>jeen__ : tokuhirom 이 아마 YAPC::NA 2013 스피커로 나가니까</p>
+
+<ul>
+<li><a href="http://www.yapcna.org/yn2013/talk/4635">YAPC::NA 2013 - June 3-5, Austin, Texas</a></li>
+</ul></li>
+<li><p>jeen__ : 의식을 높이기 위해서 TOEIC 공부하면서 시험쳐봤다고</p></li>
+<li><p>jeen__ : ㅋㅋㅋ</p></li>
+<li><p>jeen__ : 이번에 NA 스피커로 lestratt 이랑 tokuhirom 이 가니까 그래서 그런가</p></li>
+<li><p>jeen__ : 호&hellip;</p></li>
+<li><p>jeen__ : Skype 에 봇이랄까 그런 거 들어가서</p></li>
+<li><p>jeen__ : Skype 대화내용을 리다이렉트 시키고 있다고</p></li>
+<li><p>jeen__ : 물론 대화내용은 음성이지만</p></li>
+<li><p>skyloader : 딱히 perl내용 같지 않..</p></li>
+<li><p>jeen__ : 뭐 아직은&hellip;</p></li>
+<li><p>jeen__ : 사담만 있을 뿐</p></li>
+<li><p>jeen__ : Perl, YAPC 얘기</p></li>
+<li><p>jeen__ : &hellip;</p></li>
+</ul>
+
+<h3>Perl 5.18 에 대해서</h3>
+
+<ul>
+<li>jeen__ : Perl 5.18
+
+<ul>
+<li><a href="http://www.nntp.perl.org/group/perl.perl5.porters/2013/05/msg201940.html">perl 5.18.0 is now available!</a></li>
+</ul></li>
+<li>skyloader : 흠</li>
+<li>jeen__ : Jesse 에서 RJBS 로 매니저가 바뀌고 나서</li>
+<li>jeen__ : 매년 5월에 나오게 되었다고</li>
+<li>jeen__ : 하지만 뭔가 매년 서두르고 있는 건 아닌가라는 느낌으로 서둘러 내고 있는 느낌.</li>
+<li>skyloader : 아니 그럼 일년에 한번만 release한다는 것?</li>
+<li>jeen__ : 매년 이틀씩 늦춰지고 있다고…</li>
+<li>jeen__ : 메이저 업데이트는 1년에 한번</li>
+<li>skyloader : 음</li>
+<li>jeen__ : 5.12-&gt;5.14-&gt;5.16-&gt;5.18</li>
+<li>skyloader : 오키</li>
+<li>jeen__ : Hash Randomization</li>
+<li>jeen__ : 덕분에 테스트 개박살 났다</li>
+<li>jeen__ : 미역도 꽤 테스트 실패하는 모듈이 여럿 있었는데</li>
+<li>jeen__ : 5.17.x 시절에 고쳐놔서</li>
+<li>jeen__ : 그래도 몇개는 아직 그대로 라고</li>
+<li>jeen__ : TT2 도 아직 못 고쳤다고</li>
+<li>jeen__ : 5.18 용 보고는 누군가 일괄적으로 RT 에 리포트 해주고 있다고</li>
+<li>jeen__ : (그래서 나한테도 왔구나&hellip;)</li>
+<li>jeen__ : JSON::XS 가 가장 큰 문제</li>
+<li>skyloader : Hash randomization이 뭐길래</li>
+<li>jeen__ : 메일링 리스트에 지적되었는데</li>
+<li>jeen__ : 이런 수정은 의미가 없다고 레만이 지적</li>
+<li>jeen__ : 오히려 Perl 문서에 적혀 있는대로 했으니까</li>
+<li>jeen__ : 니들이 고쳐라!</li>
+<li>jeen__ : 라고 했지만&hellip;</li>
+<li>jeen__ : 최근에 관련 수정을 업데이트 ㅋㅋㅋ</li>
+<li>jeen__ : 츤데레</li>
+<li>jeen__ : 이걸로 얻을 수 있는 시큐리티 메리트는 거의 없다는 게 레만의 의견</li>
+<li>jeen__ : 실제 Perl 에 대한 해쉬 공격방법은 제대로 보고되지 않아서</li>
+<li>jeen__ : 5.16.2 취약점에서 한번 그런 게 보고 되었지만&hellip;</li>
+<li>jeen__ : 보고자의 보고내용으로는 특정값을 넣어서 메모리가 붕붕 먹었던 그런 경우가 있었다고</li>
+<li>jeen__ : HTTP Query Parameters 의 경우는 거의 대개 Hash 에 넣어서 하기 때문에</li>
+<li>jeen__ : 그런 경우에 해쉬관련 공격의 대상이 될 수 있는데</li>
+<li>jeen__ : 하지만 Perl 5 Porters 에 관련 내용이 올라오지 않아서</li>
+<li>jeen__ : 그다지 의논되지 않은 내용이라고</li>
+<li>jeen__ : 5.16 에서 변경된 패치와 5.18 에서 변경된 내용은&hellip;</li>
+<li>jeen__ : 5.16에서는 같은 해쉬를 복사하면 &hellip; 블라블라</li>
+<li>skyloader : 제 수준에서는 심오한 내용이라 이해가 안됨 ㅠ</li>
+<li>jeen__ : 레만은 5.5 Perldoc 까지 되집어 올라갔는데</li>
+<li>jeen__ : 스펙대로 했다고</li>
+<li>jeen__ : 그런 내용을&hellip;</li>
+<li>jeen__ : perldoc 관련 표현이 애매했다라는 의견도 있고</li>
+<li>jeen__ : 5.8 에서 해쉬를 복사해서</li>
+<li>jeen__ : 몇번이나 돌려봤을 때</li>
+<li>jeen__ : 그 중에 한번은 값의 순서가 바뀌는 경우가 있었다고</li>
+<li>jeen__ : given-when, smart match…</li>
+<li>jeen__ : experimental 로 격이 내려갔다 라는 것은</li>
+<li>jeen__ : 거의 deprecated 라는 상태와 같다고</li>
+<li>jeen__ : given-when, smart match 의 경우는 그다지 와닫는 표현과 퍼포먼스도 그다지 좋지 않았다고</li>
+<li>jeen__ : 너무 어정쩡한 상태로 5.10 에 넣어버려서</li>
+<li>jeen__ : 그게 계속 문제가 되고 해서 5.18 에서 experimental 로</li>
+<li>jeen__ : subroutine signature ?</li>
+<li>jeen__ : 5.20 대상으로 subroutine signature 를&hellip;</li>
+<li>jeen__ : sub asda($&hellip;) { }</li>
+<li>jeen__ : 아직 스펙이 정의되지는 않았다고</li>
+<li>skyloader : prototype?</li>
+<li>jeen__ : MOP 도 5.20 릴리즈 대상으로 &hellip;</li>
+<li>jeen__ : 하지만 아직&hellip; -_-;</li>
+<li>jeen__ : XS 방방하지 않아도 적절한 퍼포먼스가 나왔으면..</li>
+<li>jeen__ : 5만줄 정도의 코드가 삭제 되었는데</li>
+<li>jeen__ : CPANPLUS + 거기에 의존되었던 코드들</li>
+<li>jeen__ : (5.19에서)</li>
+<li>jeen__ : Module::Build, CGI 를 5.20 에서 deprecated 로 만들려고</li>
+<li>jeen__ : 하고 있다고</li>
+<li>jeen__ : 옛 버젼에서 빌드시에 문제가 ..</li>
+<li>jeen__ : 어차피 Module::Build 가 없어져도 CPAN 클라이언트가 알아서 감지해서 잡아주기 때문에 별 문제가 없을 거라고</li>
+<li>jeen__ : CGI.pm 의 경우는 &hellip;.</li>
+<li>jeen__ : 표준모듈로 해 줄 필요는 없지 않냐 라고&hellip;</li>
+<li>jeen__ : CGI.pm 용 보안패치도 여러번 나오기도 해서</li>
+<li>jeen__ : CGI 를 CPAN 에서 넣을려고 하면</li>
+<li>jeen__ : FCGI 를 인스톨하려고 하고</li>
+<li>jeen__ : 그게 XS 의존이라서 C컴파일 환경이 없는 곳에서는 대개 실패</li>
+<li>jeen__ : 그래서 CGI 에서 FCGI 의존을 없애려고</li>
+<li>jeen__ : 지금 CGI 가 FCGI 의 경우까지 고려한 코드가 들어가 있어서
+jaker has joined (~<a href="mailto:jaker@36.39.50.37">jaker@36.39.50.37</a>)</li>
+<li>jeen__ : tokuhirom 은 5.18.1 까지 기다릴 거라고</li>
+<li>jeen__ : 아직 상용서버에 넣어 돌리기는 괜히 걱정된다나&hellip;</li>
+<li>jeen__ : 특별히 써보고 싶다라는 기능도 없고 해서</li>
+<li>jeen__ : 5.16.3 이 가장 좋은 선택지가 아닌가 하고</li>
+<li>jeen__ : 10-20% 정도 퍼포먼스 향상은 있다고 하는데</li>
+<li>jeen__ : 어떤 경유로 퍼포먼스 향상이 있었는지 그걸 몰라서</li>
+<li>jeen__ : taint support 를 없애는 걸로 퍼포먼스가 올라가는 것은 아닌가 하고 생각</li>
+</ul>
+
+<h3>plenv</h3>
+
+<ul>
+<li>jeen__ : 미역이 perlbrew -&gt; plenv 로 바꾸</li>
+<li><p>jeen__ : plenv 의 차이점은?</p>
+
+<ul>
+<li><a href="https://metacpan.org/module/plenv">plenv - perl binary manager - metacpan.org</a></li>
+</ul></li>
+<li><p>jeen__ : perlbrew 는 환경변수 PATH 를 열심히 변경하고 있는데</p></li>
+<li><p>jeen__ : plenv 는 중간에 PATH 를 직접건드리지 않고 하고 있다고</p></li>
+<li><p>jeen__ : perlbrew 에서 너무 많은 펄 버젼을 지원하기 위햇 어런저런 마법같은 구문들을 집어넣어서</p></li>
+<li><p>jeen__ : 그걸 심플하게 하기 위해서 plenv 를 만들었다고</p></li>
+<li><p>jeen__ : 테스트를 위해서 perlbrew switch 하지 않고</p></li>
+<li><p>jeen__ : 좀 더 간단하게 가능하다고</p></li>
+<li><p>jeen__ : plenv 를 production 에서 쓰는 건 필요이상의 오버헤드가 들어가서 스스로도 권장하지 않는다고</p></li>
+<li><p>jeen__ : travis ci, dotcloud 도 perlbrew 를 사용하고 있</p>
+
+<ul>
+<li><a href="https://www.dotcloud.com">dotCloud - One home for all your apps</a></li>
+<li><a href="https://travis-ci.org">Travis CI - Free Hosted Continuous Integration Platform for the Open Source Community</a></li>
+</ul></li>
+<li><p>jeen__ : .rvmrc 같은 표기처럼 해당 프로젝트 루트에서 버젼표기를 하는 방식으로 하는 게 편리하지 않은가 라든가</p></li>
+<li><p>jeen__ : plenv 는 yapc::na 에서 발표할 예정이라고</p></li>
+<li><p>jeen__ : perlbrew 쪽이 압도적으로 지명도가 높고, 문서도 별로고</p></li>
+<li><p>jeen__ : 그래서 사용할 메리트가 별로 없으니</p></li>
+<li><p>jeen__ : 문서에 집중하는 게 좋지 않겠느냐</p></li>
+<li><p>jeen__ : plenv 는 이런 부분에서 압도적으로 좋다라는 부분이 없어서</p></li>
+<li><p>jeen__ : 뭘 강조해야할지 망설이고 있다</p></li>
+</ul>
+
+<h3>YAPC::Asia Tokyo 2013</h3>
+
+<ul>
+<li>jeen__ : YAPC::Asia 이야기
+
+<ul>
+<li><a href="http://yapcasia.org/2013/05/yapcasia-2013-venue.html">YAPC::Asia 2013 会場を紹介します | YAPC::Asia Tokyo 2013</a></li>
+</ul></li>
+<li>jaker : 끝났나요?</li>
+<li>jeen__ : 스피커 모집은 아무 문제가 없으면 내일 시작</li>
+<li>jeen__ : 미역 뱅기 티켓 끊어야 되니까 빨리 뭐 해달라고</li>
+<li>jeen__ : 4트랙으로 진행한다고 ㄷㄷㄷ</li>
+<li>jeen__ : 여태껏 3트랙으로 했는데</li>
+<li>jeen__ : 일수는 2일로</li>
+<li>jeen__ : 전야제는 여느때처럼 하고</li>
+<li>jeen__ : JPA 주최로 이번이 5회째</li>
+<li>jeen__ : 흙</li>
+<li>jeen__ : 누군가 해준다면 넘겨주고 싶다고</li>
+<li>jeen__ : 컨퍼런스 운영자 모임에서 먹거리 얘기가 나와서..</li>
+<li>jeen__ : 맥주랑 닭튀김은 있어야 된다고&hellip;</li>
+<li>jeen__ : 매년 와인/일본주는 남는데</li>
+<li>jeen__ : 맥주는 추가주문해야된다고</li>
+<li>jeen__ : 모두들 감자튀김이랑 닭튀김이랑 맥주 정도만 있으면 되는 건 아닌가..</li>
+<li>jeen__ : 동공대 스시 가 매우 좋았다고</li>
+<li>jeen__ : 결혼식 피로연 하는 그런 공간이 있어서</li>
+<li>jeen__ : 300명 정도 들어가고</li>
+<li>jeen__ : 컨퍼런스 파티 참가비는 무료</li>
+<li>jeen__ : 컨퍼런스 참가자는 1000명 목표</li>
+<li>luzluna : 실시간번역 감사..</li>
+<li>jeen__ : 작년이 860명이었으니</li>
+<li>luzluna : 치맥은 어느나라를 가든 진리&hellip;</li>
+<li>jeen__ : 941 가 말하기를 컨퍼런스를 확대하느냐 포커스를 맞춰서 집중하느냐</li>
+<li>jeen__ : 하지만 아직 마키는 좀 더 확대노선으로 갔으면 한다고</li>
+<li>jeen__ : 지금까지 오지 못한 사람들을 조금 더 오게 하도록</li>
+<li>jeen__ : 미역이 미국의 Railsconf 에서는 1500명 정도 왔다고</li>
+<li>jeen__ : 장소는 OSCON 과 같은 장소</li>
+<li>jeen__ : 실제 사용규모는 절반</li>
+<li>jeen__ : 트랙은 3-4 밖에 없어서</li>
+<li>jeen__ : 제일 작은 방에 들어가도 한 방에</li>
+<li>jeen__ : 200-300 들어가야 되니까</li>
+<li>jeen__ : 니치한 이야기를 하기에는 좀 어려웠다고</li>
+<li>jeen__ : 모두가 재미있어 하는 토크는 별로 재미있지 않다</li>
+<li>jeen__ : 그래서 대상이 20-50명 정도로 하면 굉장히 재미있고 남은 참가자들의 모티베이션도 생긴다고</li>
+<li>jeen__ : YAPC::ASIA 는 제일 큰곳은 450명 들어가는 곳이고, 작은 곳이 60명</li>
+<li>jeen__ : YAPC::ASIA Closed Talk 같은 공간을 준비한다고</li>
+<li>jeen__ : ㅋㅋㅋ</li>
+<li>jeen__ : 뒷얘기 위주</li>
+<li>jeen__ : 예전에 perl 관련 설문을 했는데</li>
+<li>jeen__ : 의외인 부분은 의외로 많은 사람들이 perl6 얘기를 듣고 싶어한다</li>
+<li>jeen__ : 그리고 레거시 시스템을 어떻게 끌고 가느냐</li>
+<li>jeen__ : 그리고 관련 사례를 소개시켜줬으면 한다 라든가</li>
+<li>jeen__ :미국쪽에는 그런 사례소개가 많았는데</li>
+<li>jeen__ : 근데 레거시 관련 얘기는 미국에서는 별로 없어서</li>
+<li>jeen__ : Big Data</li>
+<li>jeen__ : 수치 계산</li>
+<li>jeen__ : 이런 거 좀 해줬으면 한다고</li>
+<li>jeen__ : 4-5년 전에는 Bio 에서 많이 썼는데</li>
+<li>jeen__ : 이런 게 전부 Python 으로 가버린 거 같다고</li>
+<li><p>jeen__ : USA Today 가 Perl 로 되어 있다고</p>
+
+<ul>
+<li><a href="http://www.usatoday.com">USA TODAY: Latest World and US News  - USATODAY.com</a></li>
+</ul></li>
+<li><p>jeen__ : 근데 YAPC::NA 라든가 이런 곳에서 사례 소개로 안나온다고</p></li>
+<li><p>jeen__ : RubyKaigi 는 이번주 하는데</p></li>
+<li><p>jeen__ : 더이상 규모를 확대하지 않고</p></li>
+<li><p>jeen__ : 좀 더 참가비를 올리고</p></li>
+<li><p>jeen__ : 진짜 오고 싶어하는 사람들을 오게 하겠다는데&hellip;</p></li>
+<li><p>jeen__ : 전체 크기를 크게 해버리면 아무래도 예산관리가 힘들다고</p></li>
+<li><p>jeen__ : 매번 장소 찾는 것도 피똥흘리면서 하고</p></li>
+<li><p>jeen__ : 일본 국내 첫 영국식 허브 컨퍼런스 회장이라고&hellip;</p></li>
+<li><p>jeen__ : YAPC::ASIA 는</p></li>
+<li><p>jeen__ : 작년은 앉을 공간이 별로 없었는데</p></li>
+<li><p>jeen__ : 올해는 좀 나아질 거 같다고</p></li>
+<li><p>jeen__ : LTthon 트랙이라고 작년은 하루종일 LT 만 하는 트랙이 있었는데</p></li>
+<li><p>jeen__ : 올해는 좀 힘들겠다고</p></li>
+<li><p>skyloader : 앉아 있던 카페가 문닫아서 전 이만 이동..</p></li>
+<li><p>jeen__ : 모두들 Perl 에 대한 사랑이 없고, Perl 커뮤니티에 대한 사랑만 있는 것인가&hellip;</p></li>
+<li><p>jeen__ : 그래서 Perl 커뮤니티에서 딴 얘기만 하는 건 아닌가</p></li>
+<li><p>jeen__ : …</p></li>
+<li><p>jeen__ : RubyKaigi 에 가는 사람은 정말로 초 Ruby Lover인데</p></li>
+<li><p>jeen__ : Perl 컨퍼런스는 Perl 아니고도 다른 거 많이 쓰고 그런 경우가 있어서</p></li>
+<li><p>jeen__ : 거리감이 먼 것은 아닌가
+skyloader has left IRC (Remote host closed the connection)</p></li>
+<li><p>jeen__ : YAPC 말고 좀 더 Core 한 얘기를 하는 컨퍼런스가 좋지 않겠는가 하고</p></li>
+<li><p>jeen__ : Hackathon 인가..</p></li>
+<li><p>jeen__ : Official 로는 아직 YAPC Hackathon 은 못하고</p></li>
+<li><p>jeen__ : 전날에 장소가 정해지거나</p></li>
+<li><p>jeen__ : 그런 경우가 많아서&hellip;</p></li>
+<li><p>jeen__ : QA Hackathon 에서는 50명 정도라면 대개 장소 정도는 빌릴 수 있지 않을까</p></li>
+<li><p>jeen__ : NHN 이라든가, Mixi 라든가, DeNA 라든가 … 라고</p></li>
+<li><p>jeen__ : Hallaway hackathon</p></li>
+<li><p>jeen__ : 이라고 트랙에서 얘기듣지 않고</p></li>
+<li><p>jeen__ : 밖에서 서로 떠들고 하는 게 있어서</p></li>
+<li><p>jeen__ : 오히려 그런 공간을 마련해주는 것도 좋지 않겠는가 라고</p></li>
+<li><p>jeen__ : 운영쪽에서 ~~한다가 아니라</p></li>
+<li><p>jeen__ : 다른쪽에서 오히려 ~~한다!</p></li>
+<li><p>jeen__ : 라고 정하고 덤벼들었으면 좋겠다고</p></li>
+<li><p>jeen__ : 작년에는 NA 에서 토크 스트리밍을 했는데 , 작년 유러피언컵 보면서 NA 토크를 봤다고 (미역)</p></li>
+<li><p>jeen__ : 대만의 OSDCTW 장소는  국제회의장이라서</p></li>
+<li><p>jeen__ : 자리마다 마이크가 붙어있다고</p></li>
+<li><p>jeen__ : 질문 있으면 버튼 누르고 마이크로 말하면 된다고&hellip;</p></li>
+<li><p>jeen__ : 이번 YAPC::Asia 초청스피커인 pjf 는 생각 외로 커뮤니티에서 별로 유명하지 않다고</p></li>
+<li><p>jeen__ : 그래도 발표는 재미있다나</p></li>
+<li><p>luzluna : pjf가 누구에요?</p></li>
+<li><p>jeen__ : <a href="http://yapcasia.org/2013/">http://yapcasia.org/2013/</a></p></li>
+<li><p>hongbot : [YAPC::Asia Tokyo 2013] - <a href="http://yapcasia.org/2013/">http://yapcasia.org/2013/</a></p></li>
+<li><p>jeen__ : autodie 만든사람이요</p></li>
+<li><p>luzluna : 아..</p></li>
+<li><p>jeen__ : 작년 White Camel Award</p></li>
+<li><p>jeen__ : <a href="https://twitter.com/JEEN_LEE/status/338657107895259136">https://twitter.com/JEEN_LEE/status/338657107895259136</a></p></li>
+<li><p>jeen__ : ㅋㅋㅋ</p></li>
+<li><p>hongbot : JEEN_LEE: このpodcast、同時翻訳してるんですけど… #bulknews <a href="http://t.co/BGrK6qtBaX">http://t.co/BGrK6qtBaX</a></p></li>
+<li><p>jeen_ : 방송 도중에 언급 ㅋㅋㅋㅋ</p></li>
+</ul>
+
+<blockquote class="twitter-tweet"><p>このpodcast、同時翻訳してるんですけど… <a href="https://twitter.com/search/%23bulknews">#bulknews</a> <a href="http://t.co/BGrK6qtBaX" title="http://twitter.com/JEEN_LEE/status/338657107895259136/photo/1">twitter.com/JEEN_LEE/statu…</a></p>&mdash; JEEN (@JEEN_LEE) <a href="https://twitter.com/JEEN_LEE/status/338657107895259136">May 26, 2013</a></blockquote>
+
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+]]></content>
+    </entry>
+  
+    <entry>
+      
+
+
+
+
+<title type="html"><![CDATA[Download Percona MySQL Expo 2013 Slides]]></title>
+<link href="http://jeen.github.io/2013/05/25/download-percona-mysql-expo-2013-slides/"/>
+<updated>2013-05-25T10:27:42+00:00</updated>
+<id>http://jeen.github.io/2013/05/25/download-percona-mysql-expo-2013-slides</id>
+
+
+      <content type="html"><![CDATA[<blockquote class="twitter-tweet" lang="ko"><p>Percona Live : MySQL Conference And Expo 2013 의 슬라이드를 다 긁어오는 스크립트 슥샥. 모두 60개정도. <a href="http://t.co/fpmNe0leud" title="http://www.percona.com/live/mysql-conference-2013/slides">percona.com/live/mysql-con…</a> <a href="https://t.co/32IBvl2KBk" title="https://gist.github.com/JEEN/5581298">gist.github.com/JEEN/5581298</a></p>&mdash; JEEN (@JEEN_LEE) <a href="https://twitter.com/JEEN_LEE/status/334498408838598656">2013년 5월 15일</a></blockquote>
+
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+<script src="https://gist.github.com/JEEN/5581298.js"></script>
+
+<p><a href="http://metacpan.org/module/AnyEvent::HTTP::LWP::UserAgent">AnyEvent::HTTP::LWP::UserAgent</a> 의 SYNOPSIS 의 내용을 참고해서 그냥 한번 깨작거려 봤습니다.</p>
+
+<p>대상이 되는 사이트는</p>
+
+<ul>
+<li><p><a href="http://www.percona.com/live/mysql-conference-2013/slides">http://www.percona.com/live/mysql-conference-2013/slides</a></p>
+
+<p>입니다.</p>
+
+<p>여기에 페이지가 3개 정도 되고, 사람 손으로 그 만한 슬라이드 파일들을 받아오는 건 시간의 낭비라는 생각인데…</p>
+
+<p>물론 10일 전에 받아놓고 아직 제대로 슬라이드를 지긋하게 쳐다본 적은 없다는 것이 함정이라면 함정입니다.</p></li>
+</ul>
+]]></content>
+    </entry>
+  
+    <entry>
+      
+
+
+
+
+<title type="html"><![CDATA[Using DBI Callbacks - Generate a SQLite file automatically]]></title>
+<link href="http://jeen.github.io/2013/05/20/using-dbi-callbacks-generate-sqlite-file-automatically/"/>
+<updated>2013-05-20T02:59:04+00:00</updated>
+<id>http://jeen.github.io/2013/05/20/using-dbi-callbacks-generate-sqlite-file-automatically</id>
+<category term="db" /><category term="perl" /><category term="sqlite" />
+
+      <content type="html"><![CDATA[<p>이런저런 임시데이터를 주고받고 하는 용도로 SQLite 파일을 덩어리채로 주고받는 경우가 있습니다.</p>
+
+<p>매일매일 그런 일이 일어나니 파일에는 날짜 정도는 집어넣어줘야 되구요.</p>
+
+<figure class='code'><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div><div data-line='2' class='line-number'></div><div data-line='3' class='line-number'></div><div data-line='4' class='line-number'></div><div data-line='5' class='line-number'></div><div data-line='6' class='line-number'></div><div data-line='7' class='line-number'></div><div data-line='8' class='line-number'></div><div data-line='9' class='line-number'></div></pre></td><td class='main  plain'><pre><div class='line'>DROP TABLE IF EXISTS item;
+</div><div class='line'>CREATE TABLE item (
+</div><div class='line'>  id    INTEGER NOT NULL PRIMARY KEY,
+</div><div class='line'>  name  VARCHAR(64),
+</div><div class='line'>  price INTEGER,
+</div><div class='line'>  maker VARCHAR(64),
+</div><div class='line'>  created_at INTEGER
+</div><div class='line'>);
+</div><div class='line'>...</div></pre></td></tr></table></div></figure>
+
+<p>대충 위와 같은 SQL 문을 이용해서 SQLite 파일안에 테이블도 만들어 줘야되고,</p>
+
+<p>이런저런 데이터들도 넣어줘야 되겠죠.</p>
+
+<figure class='code'><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div></pre></td><td class='main  plain'><pre><div class='line'>$ sqlite db/item.db3 &lt; sql/item.sql</div></pre></td></tr></table></div></figure>
+
+<p>일단은 요렇게 SQLite 를 만들고…</p>
+
+<figure class='code'><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div></pre></td><td class='main  plain'><pre><div class='line'>$ perl bin/generate_data.pl</div></pre></td></tr></table></div></figure>
+
+<p>뭐 요런 식으로 <code>item.db3</code> 에 있는 테이블들에 데이터를 쑤셔넣고 보내는 식입니다.</p>
+
+<figure class='code'><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div><div data-line='2' class='line-number'></div><div data-line='3' class='line-number'></div><div data-line='4' class='line-number'></div><div data-line='5' class='line-number'></div><div data-line='6' class='line-number'></div><div data-line='7' class='line-number'></div><div data-line='8' class='line-number'></div><div data-line='9' class='line-number'></div><div data-line='10' class='line-number'></div><div data-line='11' class='line-number'></div><div data-line='12' class='line-number'></div><div data-line='13' class='line-number'></div><div data-line='14' class='line-number'></div><div data-line='15' class='line-number'></div><div data-line='16' class='line-number'></div><div data-line='17' class='line-number'></div><div data-line='18' class='line-number'></div><div data-line='19' class='line-number'></div><div data-line='20' class='line-number'></div></pre></td><td class='main  plain'><pre><div class='line'>use MyApp::DB;
+</div><div class='line'> </div><div class='line'>my $db = MyApp::DB->new({ connect_info => [
+</div><div class='line'>    'dbi:SQLite:db/item.db3', "", "", {
+</div><div class='line'>        PrintError => 1,
+</div><div class='line'>        RaiseError => 1,
+</div><div class='line'>        Callbacks => {
+</div><div class='line'>            connected => sub {
+</div><div class='line'>                my $conn = shift;
+</div><div class='line'>                open my $fh, "&lt;", "sql/item.sql" or die "cannot found a sql file";
+</div><div class='line'>                my $sqls = do { local $/; &lt;$fh> };
+</div><div class='line'>                for (split /;\s+/, $sqls) {
+</div><div class='line'>                    $conn->do($_);
+</div><div class='line'>                }
+</div><div class='line'>                return;
+</div><div class='line'>            },
+</div><div class='line'>        },
+</div><div class='line'>    }
+</div><div class='line'>]})
+</div><div class='line'>….</div></pre></td></tr></table></div></figure>
+
+<p>SQLite 의 경우는 Connection정보를 지정해서 해당 DB파일이 지정 디렉토리에 위치해있으면 그 파일을 참조하고,
+없으면 0바이트의 파일을 만들어버립니다.</p>
+
+<p>이때 DBI Callbacks 를 이용해서 연결되었을 시(connected), <code>sql/item.sql</code> 에 위치한 SQL 문들을 실행합니다.</p>
+
+<p>DBI는 한 액션에 여러 SQL 문을 실행할 수 없기 때문에 &#39;;&#39; 를 구분자로해서 실행하면 각 쿼리별로 쪼개지게 됩니다.</p>
+
+<p>그렇게 해서 별다른 SQLite 파일 생성에 따른 외부적인 액션이 없이 스크립트 실행시마다 만들어지게 됩니다.
+(물론 저 위의 코드는 일부를 발췌해왔기 때문에 뭐 날마다 어쩌고 한다든가, 파일을 옮긴다든가 하는 부분의 코드는 생략했습니다)</p>
+
+<p>위처럼 DBI Callbacks 나 DBI Subclassing 을 이용해서 프로파일링이나 쿼리로그 같은 다양한 모듈들이 존재하니,</p>
+
+<p>그쪽도 한번 참고해보시면 도움이 되지 않을까 생각합니다.</p>
+
+<h3>참고</h3>
+
+<ul>
+<li><a href="http://search.cpan.org/%7Etimb/DBI-1.611/DBI.pm#Callbacks_(hash_ref)">http://search.cpan.org/~timb/DBI-1.611/DBI.pm#Callbacks_(hash_ref)</a></li>
+</ul>
+]]></content>
+    </entry>
   
     <entry>
       
@@ -1634,319 +2054,6 @@ Github 에서 제공해주는 Issue 관리라든가, Wiki 라든가 여러모로
 <p><code>Net::GitHub</code> 의 <code>-&gt;next_page</code> 가 최근 최근에 사용된 API 기준으로 동작을 하다보니, <code>while()</code> 안에서 <code>events</code>, <code>comments</code> 를 혼용해서 사용해버리면 의도한 대로 동작을 하지 않아서, <code>@issues</code> 안에 일단 전체 이슈를 뽑고서 시작을 했습니다.</p>
 
 <p>아무튼 뭐 얼기설기 그냥 놔두기도 그렇고 혹여나 해서 일단 올려봅니다.</p>
-]]></content>
-    </entry>
-  
-    <entry>
-      
-
-
-
-
-<title type="html"><![CDATA[HTTPS-SSL-LWP-SOAP and Perl]]></title>
-<link href="http://jeen.github.io/2012/07/02/https-ssl-lwp-soap-and-perl/"/>
-<updated>2012-07-02T15:23:00+00:00</updated>
-<id>http://jeen.github.io/2012/07/02/https-ssl-lwp-soap-and-perl</id>
-<category term="perl" />
-
-      <content type="html"><![CDATA[<blockquote>
-<p>tl;dr: I hate Java and SOAP, use Perl</p>
-</blockquote>
-
-<p>지난 주에 고객으로부터 요구를 받았는데, DB특정 항목에 대치되는 어떤 값을 가지고 모 API를 통해서 결과를 받아서 뿌려주는 간단한 것이었습니다.</p>
-
-<p>그 API 제공회사에서 날라온 API 명세서는 뭘 해도 자바였었죠. 샘플이라고 널려놓은 두세네개 코드도 전부 자바였습니다. 해야하는 건 결국 뭐 SOAP 정도였죠.</p>
-
-<p>명세서에는 Axis 라는 것을 깔아서 뭐 붙여서 어떻게 뭐 wsdl 붙이고 어쩌고 복잡하게 써놨는데&hellip;</p>
-
-<p>결론부터 말하면 endpoint 와 보낼 값들만 필요하면 자바가 무슨 소용이냐 싶어서 집어냈습니다.</p>
-
-<figure class='code'><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div><div data-line='2' class='line-number'></div><div data-line='3' class='line-number'></div><div data-line='4' class='line-number'></div><div data-line='5' class='line-number'></div><div data-line='6' class='line-number'></div><div data-line='7' class='line-number'></div><div data-line='8' class='line-number'></div><div data-line='9' class='line-number'></div><div data-line='10' class='line-number'></div><div data-line='11' class='line-number'></div><div data-line='12' class='line-number'></div><div data-line='13' class='line-number'></div><div data-line='14' class='line-number'></div><div data-line='15' class='line-number'></div><div data-line='16' class='line-number'></div><div data-line='17' class='line-number'></div><div data-line='18' class='line-number'></div><div data-line='19' class='line-number'></div><div data-line='20' class='line-number'></div></pre></td><td class='main  perl'><pre><div class='line'><span class="k">use</span> <span class="n">strict</span><span class="p">;</span>
-</div><div class='line'><span class="k">use</span> <span class="n">warnings</span><span class="p">;</span>
-</div><div class='line'><span class="k">use</span> <span class="nn">LWP::</span><span class="n">UserAgent</span><span class="p">;</span>
-</div><div class='line'><span class="k">use</span> <span class="nn">Data::</span><span class="n">Dumper</span><span class="p">;</span>
-</div><div class='line'> </div><div class='line'><span class="k">my</span> <span class="nv">$q</span> <span class="o">=</span> <span class="p">{</span>
-</div><div class='line'><span class="o">&lt;</span><span class="p">?</span><span class="n">xml</span> <span class="n">version</span><span class="o">=</span><span class="s">&quot;1.0&quot;</span> <span class="n">encoding</span><span class="o">=</span><span class="s">&quot;UTF-8&quot;</span><span class="p">?</span><span class="o">&gt;</span>
-</div><div class='line'><span class="o">&lt;</span><span class="n">soapenv:Envelope</span> <span class="n">xmlns:soapenv</span><span class="o">=</span><span class="s">&quot;http://schemas.xmlsoap.org/soap/envelope/&quot;</span> <span class="n">xmlns:xsd</span><span class="o">=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema&quot;</span> <span class="n">xmlns:xsi</span><span class="o">=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span><span class="o">&gt;</span>
-</div><div class='line'> <span class="sr">&lt;soapenv:Body&gt;</span>
-</div><div class='line'> <span class="o">.........</span>
-</div><div class='line'> <span class="sr">&lt;/soapenv:Body&gt;</span>
-</div><div class='line'><span class="p">};</span>
-</div><div class='line'> </div><div class='line'><span class="k">my</span> <span class="nv">$ua</span> <span class="o">=</span> <span class="nn">LWP::</span><span class="n">UserAgent</span><span class="o">-&gt;</span><span class="k">new</span><span class="p">;</span>
-</div><div class='line'><span class="k">my</span> <span class="nv">$res</span> <span class="o">=</span> <span class="nv">$ua</span><span class="o">-&gt;</span><span class="n">post</span><span class="p">(</span><span class="s">&#39;https://........&#39;</span><span class="p">,</span>
-</div><div class='line'>  <span class="s">&#39;Content-Type&#39;</span> <span class="o">=&gt;</span> <span class="s">&#39;text/xml; charset=utf-8&#39;</span><span class="p">,</span>
-</div><div class='line'>  <span class="n">Content</span> <span class="o">=&gt;</span> <span class="nv">$q</span><span class="p">,</span>
-</div><div class='line'><span class="p">);</span>
-</div><div class='line'> </div><div class='line'><span class="k">print</span> <span class="n">Dumper</span> <span class="nv">$res</span><span class="o">-&gt;</span><span class="n">content</span><span class="p">;</span>
-</div></pre></td></tr></table></div></figure>
-
-<p>우선 SOAP XML 내용 및 endpoint 는 해당업체 비밀자료이기에 표시하지 않습니다.</p>
-
-<p>위의 코드의 결과는</p>
-
-<figure class='code'><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div><div data-line='2' class='line-number'></div><div data-line='3' class='line-number'></div></pre></td><td class='main  bash'><pre><div class='line'>Can<span class="se">\&#39;</span>t connect to demo-asp.ysdasp-service.ne.jp:443 <span class="o">(</span>certificate verify failed<span class="o">)</span>
-</div><div class='line'> </div><div class='line'>LWP::Protocol::https::Socket: SSL connect attempt failed with unknown error error:14090086:SSL routines:SSL3_GET_SERVER_CERTIFICATE:certificate verify failed at .../perl-5.14.2-llvm/lib/site_perl/5.14.2/LWP/Protocol/http.pm line 51.
-</div></pre></td></tr></table></div></figure>
-
-<p>이라고 나온 것이었습니다. 유효하지 않은 인증서라는 데, 브라우저에서는 그냥 무시하고 지나가버리면 되는 데, Perl 의 경우에서는 어떻게 할까&hellip; 결론은 구글해봤습니다.</p>
-
-<figure class='code'><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div></pre></td><td class='main  perl'><pre><div class='line'><span class="nv">$ENV</span><span class="p">{</span><span class="s">&#39;PERL_LWP_SSL_VERIFY_HOSTNAME&#39;</span><span class="p">}</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-</div></pre></td></tr></table></div></figure>
-
-<p><code>PERL_LWP_SSL_VERIFY_HOSTNAME</code> 이라는 환경변수의 값을 0으로 지정함으로써 LWP 가 인증서의 유효성 체크를 생략시켜버립니다.</p>
-
-<p>이제는 되겠지 하고 실행을 시켜보니&hellip;</p>
-
-<figure class='code'><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div><div data-line='2' class='line-number'></div><div data-line='3' class='line-number'></div><div data-line='4' class='line-number'></div><div data-line='5' class='line-number'></div><div data-line='6' class='line-number'></div><div data-line='7' class='line-number'></div><div data-line='8' class='line-number'></div><div data-line='9' class='line-number'></div><div data-line='10' class='line-number'></div></pre></td><td class='main  xml'><pre><div class='line'><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
-</div><div class='line'><span class="nt">&lt;soapenv:Envelope</span> <span class="na">xmlns:soapenv=</span><span class="s">&quot;http://schemas.xmlsoap.org/soap/envelope/&quot;</span> <span class="na">xmlns:xsd=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema&quot;</span> <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span><span class="nt">&gt;</span>
-</div><div class='line'> <span class="nt">&lt;soapenv:Body&gt;</span>
-</div><div class='line'>  <span class="nt">&lt;soapenv:Fault&gt;</span>
-</div><div class='line'>   <span class="nt">&lt;faultcode</span> <span class="na">xmlns:ns1=</span><span class="s">&quot;http://xml.apache.org/axis/&quot;</span><span class="nt">&gt;</span>ns1:Client.NoSOAPAction<span class="nt">&lt;/faultcode&gt;</span>
-</div><div class='line'>   <span class="nt">&lt;faultstring&gt;</span>no SOAPAction header!<span class="nt">&lt;/faultstring&gt;</span>
-</div><div class='line'>   <span class="nt">&lt;detail/&gt;</span>
-</div><div class='line'>  <span class="nt">&lt;/soapenv:Fault&gt;</span>
-</div><div class='line'> <span class="nt">&lt;/soapenv:Body&gt;</span>
-</div><div class='line'><span class="nt">&lt;/soapenv:Envelope&gt;</span>
-</div></pre></td></tr></table></div></figure>
-
-<p>이라는 결과가 나옵니다. <code>SOAPAction</code> 이라는 헤더가 없다고 하는데&hellip; SOAP 통신에는 SOAPAction 이라는 헤더를 넣는다고&hellip; 그냥 해보니 <code>SOAPAction</code> 에 그냥 빈값이라도 헤더이름만 넣고 돌려보면 되겠구나 라는 생각이 들었습니다.</p>
-
-<figure class='code'><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div><div data-line='2' class='line-number'></div><div data-line='3' class='line-number'></div><div data-line='4' class='line-number'></div><div data-line='5' class='line-number'></div></pre></td><td class='main  perl'><pre><div class='line'><span class="k">my</span> <span class="nv">$res</span> <span class="o">=</span> <span class="nv">$ua</span><span class="o">-&gt;</span><span class="n">post</span><span class="p">(</span><span class="s">&#39;https://........&#39;</span><span class="p">,</span>
-</div><div class='line'>  <span class="s">&#39;Content-Type&#39;</span> <span class="o">=&gt;</span> <span class="s">&#39;text/xml; charset=utf-8&#39;</span><span class="p">,</span>
-</div><div class='line'>  <span class="n">SOAPAction</span> <span class="o">=&gt;</span> <span class="s">&#39;&quot;&quot;&#39;</span><span class="p">,</span>
-</div><div class='line'>  <span class="n">Content</span> <span class="o">=&gt;</span> <span class="nv">$q</span><span class="p">,</span>
-</div><div class='line'><span class="p">);</span>
-</div></pre></td></tr></table></div></figure>
-
-<p>POST 시에 <code>SOAPAction</code> 헤더를 넣어주고 다시 돌려보았습니다.</p>
-
-<figure class='code'><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div><div data-line='2' class='line-number'></div><div data-line='3' class='line-number'></div><div data-line='4' class='line-number'></div><div data-line='5' class='line-number'></div><div data-line='6' class='line-number'></div><div data-line='7' class='line-number'></div><div data-line='8' class='line-number'></div><div data-line='9' class='line-number'></div><div data-line='10' class='line-number'></div></pre></td><td class='main  xml'><pre><div class='line'><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
-</div><div class='line'><span class="nt">&lt;soapenv:Envelope</span> <span class="na">xmlns:soapenv=</span><span class="s">&quot;http://schemas.xmlsoap.org/soap/envelope/&quot;</span> <span class="na">xmlns:xsd=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema&quot;</span> <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span><span class="nt">&gt;</span>
-</div><div class='line'> <span class="nt">&lt;soapenv:Body&gt;</span>
-</div><div class='line'>  <span class="nt">&lt;soapenv:Fault&gt;</span>
-</div><div class='line'>   <span class="nt">&lt;faultcode&gt;</span>soapenv:Server.userException<span class="nt">&lt;/faultcode&gt;</span>
-</div><div class='line'>   <span class="nt">&lt;faultstring&gt;</span>org.xml.sax.SAXParseException: The processing instruction target matching <span class="ni">&amp;quot;</span>[xX][mM][lL]<span class="ni">&amp;quot;</span> is not allowed.<span class="nt">&lt;/faultstring&gt;</span>
-</div><div class='line'>   <span class="nt">&lt;detail/&gt;</span>
-</div><div class='line'>  <span class="nt">&lt;/soapenv:Fault&gt;</span>
-</div><div class='line'> <span class="nt">&lt;/soapenv:Body&gt;</span>
-</div><div class='line'><span class="nt">&lt;/soapenv:Envelope&gt;</span>
-</div></pre></td></tr></table></div></figure>
-
-<p>다시 해당 <code>faultstring</code> 으로 검색을 해본 결과, 이유는 &lt;?xml &hellip;?&gt; 앞에 빈 공백값이 있으면 안된다는 것이었습니다.</p>
-
-<figure class='code'><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div><div data-line='2' class='line-number'></div><div data-line='3' class='line-number'></div><div data-line='4' class='line-number'></div><div data-line='5' class='line-number'></div><div data-line='6' class='line-number'></div></pre></td><td class='main  perl'><pre><div class='line'><span class="k">my</span> <span class="nv">$q</span> <span class="o">=</span> <span class="sx">q{&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
-</div><div class='line'><span class="sx">&lt;soapenv:Envelope xmlns:soapenv=&quot;http://schemas.xmlsoap.org/soap/envelope/&quot; xmlns:xsd=&quot;http://www.w3.org/2001/XMLSchema&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;&gt;</span>
-</div><div class='line'><span class="sx"> &lt;soapenv:Body&gt;</span>
-</div><div class='line'><span class="sx"> .........</span>
-</div><div class='line'><span class="sx"> &lt;/soapenv:Body&gt;</span>
-</div><div class='line'><span class="sx">}</span><span class="p">;</span>
-</div></pre></td></tr></table></div></figure>
-
-<p>맨 위의 코드에서 <code>q{</code> 다음에 개행을 넣은 게 문제가 되어서 다시 지우고 돌려본 결과 좌르르르륵 펴쳐져 나오는 기나긴 XML의 향연&hellip;</p>
-
-<p>아무튼 이걸로 API 제공업체에서 JAVA 를 기준으로 작성된 길고 긴 명세서들과 설치요령 등등의 문서들을 제쳐두고 해야할 일에만 집중할 수 있게 되었습니다.</p>
-]]></content>
-    </entry>
-  
-    <entry>
-      
-
-
-
-
-<title type="html"><![CDATA[Regexp::Wildcards]]></title>
-<link href="http://jeen.github.io/2012/07/01/regexp-wildcards/"/>
-<updated>2012-07-01T00:46:00+00:00</updated>
-<id>http://jeen.github.io/2012/07/01/regexp-wildcards</id>
-<category term="perl" />
-
-      <content type="html"><![CDATA[<p>저같은 평범한 개발자야 어떤 패턴을 확인하고 정규표현식을 쓰면 되는데, 사실 일반 사용자들에게
-정규표현식을 어떤 설정의 입력값으로 밀어넣는 것은 일반 사용자에게 배려가 부족하지 않나 하고 생각했었습니다.</p>
-
-<ul>
-<li><code>/path/a/b</code></li>
-<li><code>/path/a/c</code></li>
-<li><code>/path/a/d</code></li>
-</ul>
-
-<p><code>/path/a/</code> 디렉토리 아래의 b,c,d 파일들을 삭제한다고 합니다. 물론 b,c,d 밖에 없다고 합니다. 이럴때
-보통 모두가 대개 와일드카드를 사용하죠.</p>
-
-<figure class='code'><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div></pre></td><td class='main  bash'><pre><div class='line'>rm -rf /path/a/*
-</div></pre></td></tr></table></div></figure>
-
-<p>라고 말이죠.</p>
-
-<p>예를들어서 어떤 관리자페이지 아래에서 특정 유저그룹의 접속권한에 대해서 다룬다고 해봅니다. 특정그룹은 고정IP를 통해서 접근해올 수 있고, 또 다른 그룹은 특정 IP대역에서 찾아온다고 합니다. 이런 것들을 복잡한 설정파일을 통해서가 아니라 유저가 관리하기 쉬운 인터페이스를 제공해야 할 필요도 있죠.</p>
-
-<p>일반적인 입력예는 아래와 같습니다.</p>
-
-<ul>
-<li><code>211.123.123.1-211.123.123.254</code></li>
-<li><code>211.123.122.5</code></li>
-<li><p><code>211.123.121.4, 211.123.121.8</code></p>
-
-<p>적당한 IP대역이거나, 혹은 단일 IP라거나, 혹은 몇몇 패턴을 알 수 없는 복수개의 IP라거나&hellip;</p></li>
-<li><p><code>211.123.126.0/24</code></p>
-
-<p>혹은 네트워크 관리자라면 CIDR 스타일을 사용할지도 모르겠습니다.</p></li>
-<li><p><code>211.123.128.*</code></p></li>
-<li><p><code>211.123.121.10*</code></p>
-
-<p>아니면 위에서 말한 대로 와일드카드를 사용할 수 있겠죠.</p>
-
-<p>우선 위의 네개째까지는 <code>Net::IPAddrRanges</code> 라는 모듈을 사용하면 편하게 이용할 수 있습니다.</p></li>
-</ul>
-
-<figure class='code'><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div><div data-line='2' class='line-number'></div><div data-line='3' class='line-number'></div><div data-line='4' class='line-number'></div><div data-line='5' class='line-number'></div><div data-line='6' class='line-number'></div><div data-line='7' class='line-number'></div><div data-line='8' class='line-number'></div><div data-line='9' class='line-number'></div><div data-line='10' class='line-number'></div><div data-line='11' class='line-number'></div><div data-line='12' class='line-number'></div><div data-line='13' class='line-number'></div></pre></td><td class='main  perl'><pre><div class='line'><span class="k">use</span> <span class="n">strict</span><span class="p">;</span>
-</div><div class='line'><span class="k">use</span> <span class="n">warnings</span><span class="p">;</span>
-</div><div class='line'><span class="k">use</span> <span class="nn">Net::</span><span class="n">IPAddrRanges</span><span class="p">;</span>
-</div><div class='line'> </div><div class='line'><span class="k">my</span> <span class="nv">$ranges</span> <span class="o">=</span> <span class="nn">Net::</span><span class="n">IPAddrRanges</span><span class="o">-&gt;</span><span class="k">new</span><span class="p">;</span>
-</div><div class='line'><span class="nv">$ranges</span><span class="o">-&gt;</span><span class="n">add</span><span class="p">(</span><span class="sx">qw{</span>
-</div><div class='line'><span class="sx">    211.123.123.1-211.123.254</span>
-</div><div class='line'><span class="sx">    211.123.122.5</span>
-</div><div class='line'><span class="sx">    211.123.121.4 211.123.121.8</span>
-</div><div class='line'><span class="sx">    211.123.126.0/24</span>
-</div><div class='line'><span class="sx">}</span><span class="p">);</span>
-</div><div class='line'> </div><div class='line'><span class="nv">$ranges</span><span class="o">-&gt;</span><span class="n">find</span><span class="p">(</span><span class="s">&#39;211.123.123.5&#39;</span><span class="p">);</span> <span class="c1"># OK;</span>
-</div></pre></td></tr></table></div></figure>
-
-<p>이런저런 다양한 입력값들을 받아서 <code>Net::IPAddrRanges</code> 모듈에 넘겨주고 <code>-&gt;find</code> 메소드를 통해서 접속해온 IP(211.123.123.5)가 접속가능한 IP인지를 위처럼 간단하게 확인할 수 있죠.</p>
-
-<p>와일드카드 사용시에는 이와는 좀 다릅니다.</p>
-
-<figure class='code'><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div><div data-line='2' class='line-number'></div><div data-line='3' class='line-number'></div><div data-line='4' class='line-number'></div><div data-line='5' class='line-number'></div><div data-line='6' class='line-number'></div><div data-line='7' class='line-number'></div><div data-line='8' class='line-number'></div><div data-line='9' class='line-number'></div><div data-line='10' class='line-number'></div><div data-line='11' class='line-number'></div><div data-line='12' class='line-number'></div></pre></td><td class='main  perl'><pre><div class='line'><span class="k">use</span> <span class="n">strict</span><span class="p">;</span>
-</div><div class='line'><span class="k">use</span> <span class="n">warnings</span><span class="p">;</span>
-</div><div class='line'><span class="k">use</span> <span class="nn">Regexp::</span><span class="n">Wildcards</span><span class="p">;</span>
-</div><div class='line'> </div><div class='line'><span class="k">my</span> <span class="nv">$rw</span> <span class="o">=</span> <span class="nn">Regexp::</span><span class="n">Wildcards</span><span class="o">-&gt;</span><span class="k">new</span><span class="p">(</span> <span class="n">type</span> <span class="o">=&gt;</span> <span class="s">&#39;unix&#39;</span> <span class="p">);</span>
-</div><div class='line'> </div><div class='line'><span class="k">my</span> <span class="nv">$user_ip</span> <span class="o">=</span> <span class="s">&#39;211.123.121.108&#39;</span><span class="p">;</span>
-</div><div class='line'> </div><div class='line'><span class="k">if</span> <span class="p">(</span><span class="nb">scalar</span> <span class="nb">grep</span> <span class="p">{</span> <span class="nv">$user_ip</span> <span class="o">=~</span> <span class="nv">$_</span> <span class="p">}</span>
-</div><div class='line'>           <span class="nb">map</span> <span class="p">{</span> <span class="nv">$rw</span><span class="o">-&gt;</span><span class="n">convert</span><span class="p">(</span><span class="nv">$_</span><span class="p">)</span> <span class="p">}</span> <span class="sx">qw{ 211.123.128.* 211.123.121.10* }</span><span class="p">)</span> <span class="p">{</span>
-</div><div class='line'>    <span class="k">print</span> <span class="s">&quot;OK&quot;</span><span class="p">;</span>
-</div><div class='line'><span class="p">}</span>
-</div></pre></td></tr></table></div></figure>
-
-<p>뭐 사실 이런 코드를 적당한 메소드로 만들어서 사용하고 있습니다. IP제한같은 시나리오에는 사실 Net::IPAddrRanges 를 사용하는 게 좋아보이기는 합니다만&hellip; 최근에 <code>Regexp::Wildcards</code> 를 사용하는 경우가 있었는데&hellip;</p>
-
-<p>유저의 권한별로 페이지의 접근을 제어하고 싶다라는 것이었죠.</p>
-
-<figure class='code'><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div><div data-line='2' class='line-number'></div></pre></td><td class='main  yaml'><pre><div class='line'>  <span class="l-Scalar-Plain">ROLE1</span><span class="p-Indicator">:</span> <span class="p-Indicator">[</span> <span class="nv">/admin/user/list</span><span class="p-Indicator">,</span> <span class="nv">/admin/user/*/download</span> <span class="p-Indicator">]</span>
-</div><div class='line'>  <span class="l-Scalar-Plain">ROLE2</span><span class="p-Indicator">:</span> <span class="p-Indicator">[</span> <span class="nv">/admin/user/*</span> <span class="p-Indicator">]</span>
-</div></pre></td></tr></table></div></figure>
-
-<p>ROLE1 의 경우에는 admin/user 라는 컨트롤러중에 유저 리스트(/admin/user/list) 와 각 유저별로 관련정보를 다운로드를 할 수 있습니다. 그 이외에는 전부 접근을 차단한다는 것이구요.</p>
-
-<p>ROLE2 의 경우에는 admin/user 의 모든 액션에 접근을 가능하게 합니다.</p>
-
-<p>이때는 카탈리스트를 사용하고 있다는 전제아래, Admin.pm 이라는 컨드롤러파일의 <code>auto</code> 아래 다음과 같은 코드를 추가했습니다.</p>
-
-<figure class='code'><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div><div data-line='2' class='line-number'></div><div data-line='3' class='line-number'></div><div data-line='4' class='line-number'></div><div data-line='5' class='line-number'></div><div data-line='6' class='line-number'></div><div data-line='7' class='line-number'></div><div data-line='8' class='line-number'></div><div data-line='9' class='line-number'></div><div data-line='10' class='line-number'></div><div data-line='11' class='line-number'></div><div data-line='12' class='line-number'></div><div data-line='13' class='line-number'></div><div data-line='14' class='line-number'></div></pre></td><td class='main  perl'><pre><div class='line'><span class="k">sub </span><span class="nf">auto</span> <span class="p">:Private {</span>
-</div><div class='line'><span class="o">....</span>
-</div><div class='line'> </div><div class='line'>    <span class="k">my</span> <span class="nv">$rw</span> <span class="o">=</span> <span class="nn">Regexp::</span><span class="n">Wildcards</span><span class="o">-&gt;</span><span class="k">new</span><span class="p">(</span> <span class="n">type</span> <span class="o">=&gt;</span> <span class="s">&#39;unix&#39;</span> <span class="p">);</span>
-</div><div class='line'> </div><div class='line'>    <span class="k">my</span> <span class="nv">$ACL</span> <span class="o">=</span> <span class="o">...</span><span class="p">;</span> <span class="c1"># 어떻게 샤바샤바해서 유저권한에 따른 접근가능 목록을 뽑아옵니다</span>
-</div><div class='line'> </div><div class='line'>    <span class="k">unless</span> <span class="p">(</span><span class="nb">scalar</span> <span class="nb">grep</span> <span class="p">{</span> <span class="nv">$c</span><span class="o">-&gt;</span><span class="n">action</span> <span class="o">=~</span> <span class="nv">$_</span> <span class="p">}</span> <span class="nb">map</span> <span class="p">{</span> <span class="nv">$rw</span><span class="o">-&gt;</span><span class="n">convert</span><span class="p">(</span><span class="nv">$_</span><span class="p">);</span> <span class="p">}</span> <span class="nv">@</span><span class="p">{</span> <span class="nv">$ACL</span> <span class="p">})</span> <span class="p">{</span>
-</div><div class='line'>        <span class="nv">$c</span><span class="o">-&gt;</span><span class="n">flash</span><span class="p">(</span> <span class="n">warn_messages</span> <span class="o">=&gt;</span> <span class="p">[</span> <span class="s">&#39;접속할 수 없어요.&#39;</span> <span class="p">]</span> <span class="p">);</span>
-</div><div class='line'>        <span class="nv">$c</span><span class="o">-&gt;</span><span class="n">res</span><span class="o">-&gt;</span><span class="n">redirect</span><span class="p">(</span><span class="nv">$c</span><span class="o">-&gt;</span><span class="n">uri_for</span><span class="p">(</span><span class="s">&quot;/admin&quot;</span><span class="p">));</span>
-</div><div class='line'>        <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
-</div><div class='line'>    <span class="p">}</span>
-</div><div class='line'><span class="o">....</span>
-</div><div class='line'><span class="p">}</span>
-</div></pre></td></tr></table></div></figure>
-
-<p>네 아무튼 뭐 사실 결론은 굳이 할 수 있다면 간단하게 설정할 수 있는데, 왜 설정파일에까지 정규표현식이 끼어들어야 하느냐 라는 생각아래에서 시작했었지요. 정규표현식으로 난무할 이런저런 상황들을 적당하게 와일드카드로 커버할 수 있다면 더 직관적으로 이해하고 사용할 수 있지 않을까 하는 생각이 듭니다.</p>
-]]></content>
-    </entry>
-  
-    <entry>
-      
-
-
-
-
-<title type="html"><![CDATA[DBIx::Class and Replication - II]]></title>
-<link href="http://jeen.github.io/2012/06/19/dbix-class-and-replication-ii/"/>
-<updated>2012-06-19T15:35:00+00:00</updated>
-<id>http://jeen.github.io/2012/06/19/dbix-class-and-replication-ii</id>
-<category term="dbix-class" /><category term="perl" />
-
-      <content type="html"><![CDATA[<ul>
-<li><a href="http://jeen.github.com/blog/2012/06/17/dbix-class-and-replication/">DBIx::Class + Replication</a></li>
-</ul>
-
-<p>그러니까 17일이죠.</p>
-
-<blockquote>
-<p>이렇게 몇줄만의 설정으로 간단하게 어플리케이션단에서 Replication 설정을 수행할 수 있습니다…만, 여러가지 운용이슈가 발생할 테고 그에 맞춰서 적당하게 답을 내야할 경우가 생기겠죠. 네, 뭐 그건 그때 가서…</p>
-</blockquote>
-
-<p>라고 지난 글의 말미에서 얘기했습니다만, 네 금방 운용이슈가 발생했습니다.</p>
-
-<p>넘겨준대로 설정해서 돌리려고 하는 데 이런 에러가 떴다는 것입니다.</p>
-
-<figure class='code'><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div></pre></td><td class='main  bash'><pre><div class='line'>    Class::MOP::Class:::around<span class="o">()</span>: DBI Exception: DBD::mysql::db selectrow_hashref failed: Access denied; you need the SUPER,REPLICATION CLIENT privilege <span class="k">for </span>this operation <span class="o">[</span><span class="k">for </span>Statement <span class="s2">&quot;show slave status&quot;</span><span class="o">]</span> at /home/*/perl5/perlbrew/perls/perl-5.14.2/lib/site_perl/5.14.2/i686-linux/Class/MOP/Method/Wrapped.pm line 162
-</div></pre></td></tr></table></div></figure>
-
-<p>딱 봐도 DB 접속계정의 권한문제인데, 가장 간단한 답은 접속계정에 해당 권한을 부여하면 되는 것이었는데요.
- 하지만 접속 계정을 추가해서 어떻게 하기에는 다른 운용이슈가 발생할 여지가 있다고 생각하기에(그럴리가&hellip;) 수정을 요구받았습니다. </p>
-
-<p>결국 DBIx::Class::Storage::DBI::Replicated::* 아래의 소스를 파보도록 했습니다. 관련 동작은 <code>connect_replicants</code> 시에 <code>validate_replicants</code> 에서 각 Replicant 마다 <code>is_replicating</code> 체크를 하게 되는 것입니다.</p>
-
-<p>일단 뭐 예, DBI::Replicated 시에는 기본적으로 그냥 뭐 자동 fail-over 까지 슥샥슥샥 해줄 수 있는데&hellip; 그냥 이런 거 다 필요없다라는 합의점에 이르러 결국은 해당부분을 회피하도록 했습니다.</p>
-
-<figure class='code'><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div><div data-line='2' class='line-number'></div><div data-line='3' class='line-number'></div><div data-line='4' class='line-number'></div><div data-line='5' class='line-number'></div><div data-line='6' class='line-number'></div><div data-line='7' class='line-number'></div><div data-line='8' class='line-number'></div></pre></td><td class='main  perl'><pre><div class='line'>    <span class="k">BEGIN</span> <span class="p">{</span>
-</div><div class='line'>        <span class="k">use</span> <span class="nn">DBIx::Class::Storage::DBI::Replicated::</span><span class="n">Pool</span><span class="p">;</span>
-</div><div class='line'> </div><div class='line'>        <span class="nb">no</span> <span class="n">warnings</span> <span class="s">&#39;redefine&#39;</span><span class="p">;</span>
-</div><div class='line'>        <span class="o">*</span><span class="nn">DBIx::Class::Storage::DBI::Replicated::Pool::</span><span class="n">validate_replicants</span> <span class="o">=</span> <span class="k">sub </span><span class="p">{</span>
-</div><div class='line'>            <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
-</div><div class='line'>        <span class="p">};</span>
-</div><div class='line'>    <span class="p">};</span>
-</div></pre></td></tr></table></div></figure>
-
-<p>추가한 부분은 위와 같습니다. 컴파일시에 미리 <code>validate_replicants</code> 를 재정의해버리는 것이었습니다.</p>
-
-<p>전체 소스는 아래와 같습니다.</p>
-
-<figure class='code'><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div><div data-line='2' class='line-number'></div><div data-line='3' class='line-number'></div><div data-line='4' class='line-number'></div><div data-line='5' class='line-number'></div><div data-line='6' class='line-number'></div><div data-line='7' class='line-number'></div><div data-line='8' class='line-number'></div><div data-line='9' class='line-number'></div><div data-line='10' class='line-number'></div><div data-line='11' class='line-number'></div><div data-line='12' class='line-number'></div><div data-line='13' class='line-number'></div><div data-line='14' class='line-number'></div><div data-line='15' class='line-number'></div><div data-line='16' class='line-number'></div><div data-line='17' class='line-number'></div><div data-line='18' class='line-number'></div><div data-line='19' class='line-number'></div><div data-line='20' class='line-number'></div><div data-line='21' class='line-number'></div><div data-line='22' class='line-number'></div><div data-line='23' class='line-number'></div><div data-line='24' class='line-number'></div><div data-line='25' class='line-number'></div><div data-line='26' class='line-number'></div><div data-line='27' class='line-number'></div><div data-line='28' class='line-number'></div><div data-line='29' class='line-number'></div><div data-line='30' class='line-number'></div><div data-line='31' class='line-number'></div><div data-line='32' class='line-number'></div><div data-line='33' class='line-number'></div><div data-line='34' class='line-number'></div><div data-line='35' class='line-number'></div><div data-line='36' class='line-number'></div><div data-line='37' class='line-number'></div><div data-line='38' class='line-number'></div><div data-line='39' class='line-number'></div><div data-line='40' class='line-number'></div></pre></td><td class='main  perl'><pre><div class='line'>    <span class="k">BEGIN</span> <span class="p">{</span>
-</div><div class='line'>        <span class="k">use</span> <span class="nn">DBIx::Class::Storage::DBI::Replicated::</span><span class="n">Pool</span><span class="p">;</span>
-</div><div class='line'> </div><div class='line'>        <span class="nb">no</span> <span class="n">warnings</span> <span class="s">&#39;redefine&#39;</span><span class="p">;</span>
-</div><div class='line'>        <span class="o">*</span><span class="nn">DBIx::Class::Storage::DBI::Replicated::Pool::</span><span class="n">validate_replicants</span> <span class="o">=</span> <span class="k">sub </span><span class="p">{</span>
-</div><div class='line'>            <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
-</div><div class='line'>        <span class="p">};</span>
-</div><div class='line'>    <span class="p">};</span>
-</div><div class='line'> </div><div class='line'>    <span class="k">my</span> <span class="nv">$schema</span> <span class="o">=</span> <span class="nn">MyApp::</span><span class="n">Schema</span><span class="o">-&gt;</span><span class="n">clone</span><span class="p">;</span>
-</div><div class='line'>    <span class="nv">$schema</span><span class="o">-&gt;</span><span class="n">storage_type</span><span class="p">([</span>
-</div><div class='line'>        <span class="s">&#39;::DBI::Replicated&#39;</span> <span class="o">=&gt;</span> <span class="p">{</span>
-</div><div class='line'>            <span class="n">balancer_type</span> <span class="o">=&gt;</span> <span class="s">&#39;::Random&#39;</span><span class="p">,</span>
-</div><div class='line'>            <span class="n">balancer_args</span> <span class="o">=&gt;</span> <span class="p">{</span>
-</div><div class='line'>                <span class="n">auto_validate_every</span> <span class="o">=&gt;</span> <span class="mi">10</span><span class="p">,</span>
-</div><div class='line'>                <span class="n">master_read_weight</span>  <span class="o">=&gt;</span> <span class="mi">0</span><span class="p">,</span>
-</div><div class='line'>            <span class="p">},</span>
-</div><div class='line'>            <span class="n">pool_args</span> <span class="o">=&gt;</span> <span class="p">{</span>
-</div><div class='line'>                <span class="n">maximum_lag</span> <span class="o">=&gt;</span> <span class="mi">2</span><span class="p">,</span>
-</div><div class='line'>            <span class="p">}</span>
-</div><div class='line'>        <span class="p">}</span>
-</div><div class='line'>    <span class="p">]);</span>
-</div><div class='line'>    <span class="nv">$schema</span><span class="o">-&gt;</span><span class="n">connection</span><span class="p">({</span>
-</div><div class='line'>        <span class="n">dsn</span>      <span class="o">=&gt;</span> <span class="s">&quot;dbi:mysql:myapp:127.0.0.50&quot;</span><span class="p">,</span>
-</div><div class='line'>        <span class="n">user</span>     <span class="o">=&gt;</span> <span class="s">&quot;user&quot;</span><span class="p">,</span>
-</div><div class='line'>        <span class="n">password</span> <span class="o">=&gt;</span> <span class="s">&quot;whatthehell&quot;</span><span class="p">,</span>
-</div><div class='line'>        <span class="n">RaiseError</span>        <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">,</span>
-</div><div class='line'>        <span class="n">AutoCommit</span>        <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">,</span>
-</div><div class='line'>        <span class="n">mysql_enable_utf8</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">,</span>
-</div><div class='line'>        <span class="n">on_connect_do</span>     <span class="o">=&gt;</span> <span class="p">[</span><span class="s">&quot;SET NAMES utf8&quot;</span><span class="p">],</span>
-</div><div class='line'>        <span class="n">quote_char</span>        <span class="o">=&gt;</span> <span class="sx">q{`}</span><span class="p">,</span>
-</div><div class='line'>    <span class="p">});</span>
-</div><div class='line'>    <span class="nv">$schema</span><span class="o">-&gt;</span><span class="n">storage</span><span class="o">-&gt;</span><span class="n">connect_replicants</span><span class="p">([</span>
-</div><div class='line'>        <span class="p">{</span>
-</div><div class='line'>            <span class="n">dsn</span>      <span class="o">=&gt;</span> <span class="s">&quot;dbi:mysql:myapp:192.168.0.51&quot;</span><span class="p">,</span>
-</div><div class='line'>            <span class="n">user</span>     <span class="o">=&gt;</span> <span class="s">&quot;user&quot;</span><span class="p">,</span>
-</div><div class='line'>            <span class="n">password</span> <span class="o">=&gt;</span> <span class="s">&quot;whatthehell&quot;</span><span class="p">,</span>
-</div><div class='line'>        <span class="p">},</span>
-</div><div class='line'>        <span class="o">....</span>
-</div><div class='line'>    <span class="p">]);</span>
-</div></pre></td></tr></table></div></figure>
-
-<p>그리고 그들은 행복하게 오래오래 살았답니다~. 끝.</p>
 ]]></content>
     </entry>
   

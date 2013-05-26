@@ -75,3 +75,9 @@ DBI는 한 액션에 여러 SQL 문을 실행할 수 없기 때문에 ';' 를 �
 위처럼 DBI Callbacks 나 DBI Subclassing 을 이용해서 프로파일링이나 쿼리로그 같은 다양한 모듈들이 존재하니,
 
 그쪽도 한번 참고해보시면 도움이 되지 않을까 생각합니다.
+
+### 참고
+
+- [http://search.cpan.org/~timb/DBI-1.611/DBI.pm#Callbacks_(hash_ref)][cpan-dbi-callbacks]
+
+[cpan-dbi-callbacks]: http://search.cpan.org/~timb/DBI-1.611/DBI.pm#Callbacks_(hash_ref)
