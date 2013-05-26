@@ -135,7 +135,10 @@
 
 <p>시간은 미리 공지된 대로 5.26 저녁 10시. 게스트들과의 대화는 스카이프로 이뤄진 것 같습니다. 대화는 1시간 분량입니다.</p>
 
-<p>아래의 내용은 IRC 채널 #perl-kr 에서 내용을 들으면서 옮겨적은 것이며, 부분적으로 빼먹은 부분이나 급작스런 컨텍스트 전환이 있습니다.</p>
+<p>아래의 내용은 IRC 채널 #perl-kr 에서 내용을 들으면서 옮겨적은 것이며, 부분적으로 빼먹은 부분이나 급작스런 컨텍스트 전환이 있습니다.</p></li>
+</ul>
+
+<h3>Intro</h3>
 
 <ul>
 <li>jeen__ : 미역 팟캐스트 12회는 라이브라고 해서 이거 듣고 퇴근해야지&hellip; 퇴근이랄까..</li>
@@ -150,22 +153,33 @@
 <li>jeen__ : tokuhirom TOEIC 쳤냐고 ㅋㅋ</li>
 <li>jeen__ : 쳤는데 점수 안나왔다고</li>
 <li>skyloader : 올 진사마의 실시간 통역</li>
-<li>jeen__ : tokuhirom 이 아마 YAPC::NA 2013 스피커로 나가니까</li>
+<li><p>jeen__ : tokuhirom 이 아마 YAPC::NA 2013 스피커로 나가니까</p>
+
+<ul>
 <li><a href="http://www.yapcna.org/yn2013/talk/4635">YAPC::NA 2013 - June 3-5, Austin, Texas</a></li>
-<li>jeen__ : 의식을 높이기 위해서 TOEIC 공부하면서 시험쳐봤다고</li>
-<li>jeen__ : ㅋㅋㅋ</li>
-<li>jeen__ : 이번에 NA 스피커로 lestratt 이랑 tokuhirom 이 가니까 그래서 그런가</li>
-<li>jeen__ : 호&hellip;</li>
-<li>jeen__ : Skype 에 봇이랄까 그런 거 들어가서</li>
-<li>jeen__ : Skype 대화내용을 리다이렉트 시키고 있다고</li>
-<li>jeen__ : 물론 대화내용은 음성이지만</li>
-<li>skyloader : 딱히 perl내용 같지 않..</li>
-<li>jeen__ : 뭐 아직은&hellip;</li>
-<li>jeen__ : 사담만 있을 뿐</li>
-<li>jeen__ : Perl, YAPC 얘기</li>
-<li>jeen__ : &hellip;</li>
-<li>jeen__ : Perl 5.18</li>
+</ul></li>
+<li><p>jeen__ : 의식을 높이기 위해서 TOEIC 공부하면서 시험쳐봤다고</p></li>
+<li><p>jeen__ : ㅋㅋㅋ</p></li>
+<li><p>jeen__ : 이번에 NA 스피커로 lestratt 이랑 tokuhirom 이 가니까 그래서 그런가</p></li>
+<li><p>jeen__ : 호&hellip;</p></li>
+<li><p>jeen__ : Skype 에 봇이랄까 그런 거 들어가서</p></li>
+<li><p>jeen__ : Skype 대화내용을 리다이렉트 시키고 있다고</p></li>
+<li><p>jeen__ : 물론 대화내용은 음성이지만</p></li>
+<li><p>skyloader : 딱히 perl내용 같지 않..</p></li>
+<li><p>jeen__ : 뭐 아직은&hellip;</p></li>
+<li><p>jeen__ : 사담만 있을 뿐</p></li>
+<li><p>jeen__ : Perl, YAPC 얘기</p></li>
+<li><p>jeen__ : &hellip;</p></li>
+</ul>
+
+<h3>Perl 5.18 에 대해서</h3>
+
+<ul>
+<li>jeen__ : Perl 5.18
+
+<ul>
 <li><a href="http://www.nntp.perl.org/group/perl.perl5.porters/2013/05/msg201940.html">perl 5.18.0 is now available!</a></li>
+</ul></li>
 <li>skyloader : 흠</li>
 <li>jeen__ : Jesse 에서 RJBS 로 매니저가 바뀌고 나서</li>
 <li>jeen__ : 매년 5월에 나오게 되었다고</li>
@@ -248,28 +262,47 @@ jaker has joined (~<a href="mailto:jaker@36.39.50.37">jaker@36.39.50.37</a>)</li
 <li>jeen__ : 10-20% 정도 퍼포먼스 향상은 있다고 하는데</li>
 <li>jeen__ : 어떤 경유로 퍼포먼스 향상이 있었는지 그걸 몰라서</li>
 <li>jeen__ : taint support 를 없애는 걸로 퍼포먼스가 올라가는 것은 아닌가 하고 생각</li>
+</ul>
+
+<h3>plenv</h3>
+
+<ul>
 <li>jeen__ : 미역이 perlbrew -&gt; plenv 로 바꾸</li>
-<li>jeen__ : plenv 의 차이점은?</li>
+<li><p>jeen__ : plenv 의 차이점은?</p>
+
+<ul>
 <li><a href="https://metacpan.org/module/plenv">plenv - perl binary manager - metacpan.org</a></li>
-<li>jeen__ : perlbrew 는 환경변수 PATH 를 열심히 변경하고 있는데</li>
-<li>jeen__ : plenv 는 중간에 PATH 를 직접건드리지 않고 하고 있다고</li>
-<li>jeen__ : perlbrew 에서 너무 많은 펄 버젼을 지원하기 위햇 어런저런 마법같은 구문들을 집어넣어서</li>
-<li>jeen__ : 그걸 심플하게 하기 위해서 plenv 를 만들었다고</li>
-<li>jeen__ : 테스트를 위해서 perlbrew switch 하지 않고</li>
-<li>jeen__ : 좀 더 간단하게 가능하다고</li>
-<li>jeen__ : plenv 를 production 에서 쓰는 건 필요이상의 오버헤드가 들어가서 스스로도 권장하지 않는다고</li>
-<li>jeen__ : travis ci, dotcloud 도 perlbrew 를 사용하고 있</li>
+</ul></li>
+<li><p>jeen__ : perlbrew 는 환경변수 PATH 를 열심히 변경하고 있는데</p></li>
+<li><p>jeen__ : plenv 는 중간에 PATH 를 직접건드리지 않고 하고 있다고</p></li>
+<li><p>jeen__ : perlbrew 에서 너무 많은 펄 버젼을 지원하기 위햇 어런저런 마법같은 구문들을 집어넣어서</p></li>
+<li><p>jeen__ : 그걸 심플하게 하기 위해서 plenv 를 만들었다고</p></li>
+<li><p>jeen__ : 테스트를 위해서 perlbrew switch 하지 않고</p></li>
+<li><p>jeen__ : 좀 더 간단하게 가능하다고</p></li>
+<li><p>jeen__ : plenv 를 production 에서 쓰는 건 필요이상의 오버헤드가 들어가서 스스로도 권장하지 않는다고</p></li>
+<li><p>jeen__ : travis ci, dotcloud 도 perlbrew 를 사용하고 있</p>
+
+<ul>
 <li><a href="https://www.dotcloud.com">dotCloud - One home for all your apps</a></li>
 <li><a href="https://travis-ci.org">Travis CI - Free Hosted Continuous Integration Platform for the Open Source Community</a></li>
-<li>jeen__ : .rvmrc 같은 표기처럼 해당 프로젝트 루트에서 버젼표기를 하는 방식으로 하는 게 편리하지 않은가 라든가</li>
-<li>jeen__ : plenv 는 yapc::na 에서 발표할 예정이라고</li>
-<li>jeen__ : perlbrew 쪽이 압도적으로 지명도가 높고, 문서도 별로고</li>
-<li>jeen__ : 그래서 사용할 메리트가 별로 없으니</li>
-<li>jeen__ : 문서에 집중하는 게 좋지 않겠느냐</li>
-<li>jeen__ : plenv 는 이런 부분에서 압도적으로 좋다라는 부분이 없어서</li>
-<li>jeen__ : 뭘 강조해야할지 망설이고 있다</li>
-<li>jeen__ : YAPC::Asia 이야기</li>
+</ul></li>
+<li><p>jeen__ : .rvmrc 같은 표기처럼 해당 프로젝트 루트에서 버젼표기를 하는 방식으로 하는 게 편리하지 않은가 라든가</p></li>
+<li><p>jeen__ : plenv 는 yapc::na 에서 발표할 예정이라고</p></li>
+<li><p>jeen__ : perlbrew 쪽이 압도적으로 지명도가 높고, 문서도 별로고</p></li>
+<li><p>jeen__ : 그래서 사용할 메리트가 별로 없으니</p></li>
+<li><p>jeen__ : 문서에 집중하는 게 좋지 않겠느냐</p></li>
+<li><p>jeen__ : plenv 는 이런 부분에서 압도적으로 좋다라는 부분이 없어서</p></li>
+<li><p>jeen__ : 뭘 강조해야할지 망설이고 있다</p></li>
+</ul>
+
+<h3>YAPC::Asia Tokyo 2013</h3>
+
+<ul>
+<li>jeen__ : YAPC::Asia 이야기
+
+<ul>
 <li><a href="http://yapcasia.org/2013/05/yapcasia-2013-venue.html">YAPC::Asia 2013 会場を紹介します | YAPC::Asia Tokyo 2013</a></li>
+</ul></li>
 <li>jaker : 끝났나요?</li>
 <li>jeen__ : 스피커 모집은 아무 문제가 없으면 내일 시작</li>
 <li>jeen__ : 미역 뱅기 티켓 끊어야 되니까 빨리 뭐 해달라고</li>
@@ -320,60 +353,62 @@ jaker has joined (~<a href="mailto:jaker@36.39.50.37">jaker@36.39.50.37</a>)</li
 <li>jeen__ : 이런 거 좀 해줬으면 한다고</li>
 <li>jeen__ : 4-5년 전에는 Bio 에서 많이 썼는데</li>
 <li>jeen__ : 이런 게 전부 Python 으로 가버린 거 같다고</li>
-<li>jeen__ : USA Today 가 Perl 로 되어 있다고</li>
+<li><p>jeen__ : USA Today 가 Perl 로 되어 있다고</p>
+
+<ul>
 <li><a href="http://www.usatoday.com">USA TODAY: Latest World and US News  - USATODAY.com</a></li>
-<li>jeen__ : 근데 YAPC::NA 라든가 이런 곳에서 사례 소개로 안나온다고</li>
-<li>jeen__ : RubyKaigi 는 이번주 하는데</li>
-<li>jeen__ : 더이상 규모를 확대하지 않고</li>
-<li>jeen__ : 좀 더 참가비를 올리고</li>
-<li>jeen__ : 진짜 오고 싶어하는 사람들을 오게 하겠다는데&hellip;</li>
-<li>jeen__ : 전체 크기를 크게 해버리면 아무래도 예산관리가 힘들다고</li>
-<li>jeen__ : 매번 장소 찾는 것도 피똥흘리면서 하고</li>
-<li>jeen__ : 일본 국내 첫 영국식 허브 컨퍼런스 회장이라고&hellip;</li>
-<li>jeen__ : YAPC::ASIA 는</li>
-<li>jeen__ : 작년은 앉을 공간이 별로 없었는데</li>
-<li>jeen__ : 올해는 좀 나아질 거 같다고</li>
-<li>jeen__ : LTthon 트랙이라고 작년은 하루종일 LT 만 하는 트랙이 있었는데</li>
-<li>jeen__ : 올해는 좀 힘들겠다고</li>
-<li>skyloader : 앉아 있던 카페가 문닫아서 전 이만 이동..</li>
-<li>jeen__ : 모두들 Perl 에 대한 사랑이 없고, Perl 커뮤니티에 대한 사랑만 있는 것인가&hellip;</li>
-<li>jeen__ : 그래서 Perl 커뮤니티에서 딴 얘기만 하는 건 아닌가</li>
-<li>jeen__ : …</li>
-<li>jeen__ : RubyKaigi 에 가는 사람은 정말로 초 Ruby Lover인데</li>
-<li>jeen__ : Perl 컨퍼런스는 Perl 아니고도 다른 거 많이 쓰고 그런 경우가 있어서</li>
-<li>jeen__ : 거리감이 먼 것은 아닌가
-skyloader has left IRC (Remote host closed the connection)</li>
-<li>jeen__ : YAPC 말고 좀 더 Core 한 얘기를 하는 컨퍼런스가 좋지 않겠는가 하고</li>
-<li>jeen__ : Hackathon 인가..</li>
-<li>jeen__ : Official 로는 아직 YAPC Hackathon 은 못하고</li>
-<li>jeen__ : 전날에 장소가 정해지거나</li>
-<li>jeen__ : 그런 경우가 많아서&hellip;</li>
-<li>jeen__ : QA Hackathon 에서는 50명 정도라면 대개 장소 정도는 빌릴 수 있지 않을까</li>
-<li>jeen__ : NHN 이라든가, Mixi 라든가, DeNA 라든가 … 라고</li>
-<li>jeen__ : Hallaway hackathon</li>
-<li>jeen__ : 이라고 트랙에서 얘기듣지 않고</li>
-<li>jeen__ : 밖에서 서로 떠들고 하는 게 있어서</li>
-<li>jeen__ : 오히려 그런 공간을 마련해주는 것도 좋지 않겠는가 라고</li>
-<li>jeen__ : 운영쪽에서 ~~한다가 아니라</li>
-<li>jeen__ : 다른쪽에서 오히려 ~~한다!</li>
-<li>jeen__ : 라고 정하고 덤벼들었으면 좋겠다고</li>
-<li>jeen__ : 작년에는 NA 에서 토크 스트리밍을 했는데 , 작년 유러피언컵 보면서 NA 토크를 봤다고 (미역)</li>
-<li>jeen__ : 대만의 OSDCTW 장소는  국제회의장이라서</li>
-<li>jeen__ : 자리마다 마이크가 붙어있다고</li>
-<li>jeen__ : 질문 있으면 버튼 누르고 마이크로 말하면 된다고&hellip;</li>
-<li>jeen__ : 이번 YAPC::Asia 초청스피커인 pjf 는 생각 외로 커뮤니티에서 별로 유명하지 않다고</li>
-<li>jeen__ : 그래도 발표는 재미있다나</li>
-<li>luzluna : pjf가 누구에요?</li>
-<li>jeen__ : <a href="http://yapcasia.org/2013/">http://yapcasia.org/2013/</a></li>
-<li>hongbot : [YAPC::Asia Tokyo 2013] - <a href="http://yapcasia.org/2013/">http://yapcasia.org/2013/</a></li>
-<li>jeen__ : autodie 만든사람이요</li>
-<li>luzluna : 아..</li>
-<li>jeen__ : 작년 White Camel Award</li>
-<li>jeen__ : <a href="https://twitter.com/JEEN_LEE/status/338657107895259136">https://twitter.com/JEEN_LEE/status/338657107895259136</a></li>
-<li>jeen__ : ㅋㅋㅋ</li>
-<li>hongbot : JEEN_LEE: このpodcast、同時翻訳してるんですけど… #bulknews <a href="http://t.co/BGrK6qtBaX">http://t.co/BGrK6qtBaX</a></li>
-<li>jeen_ : 방송 도중에 언급 ㅋㅋㅋㅋ</li>
 </ul></li>
+<li><p>jeen__ : 근데 YAPC::NA 라든가 이런 곳에서 사례 소개로 안나온다고</p></li>
+<li><p>jeen__ : RubyKaigi 는 이번주 하는데</p></li>
+<li><p>jeen__ : 더이상 규모를 확대하지 않고</p></li>
+<li><p>jeen__ : 좀 더 참가비를 올리고</p></li>
+<li><p>jeen__ : 진짜 오고 싶어하는 사람들을 오게 하겠다는데&hellip;</p></li>
+<li><p>jeen__ : 전체 크기를 크게 해버리면 아무래도 예산관리가 힘들다고</p></li>
+<li><p>jeen__ : 매번 장소 찾는 것도 피똥흘리면서 하고</p></li>
+<li><p>jeen__ : 일본 국내 첫 영국식 허브 컨퍼런스 회장이라고&hellip;</p></li>
+<li><p>jeen__ : YAPC::ASIA 는</p></li>
+<li><p>jeen__ : 작년은 앉을 공간이 별로 없었는데</p></li>
+<li><p>jeen__ : 올해는 좀 나아질 거 같다고</p></li>
+<li><p>jeen__ : LTthon 트랙이라고 작년은 하루종일 LT 만 하는 트랙이 있었는데</p></li>
+<li><p>jeen__ : 올해는 좀 힘들겠다고</p></li>
+<li><p>skyloader : 앉아 있던 카페가 문닫아서 전 이만 이동..</p></li>
+<li><p>jeen__ : 모두들 Perl 에 대한 사랑이 없고, Perl 커뮤니티에 대한 사랑만 있는 것인가&hellip;</p></li>
+<li><p>jeen__ : 그래서 Perl 커뮤니티에서 딴 얘기만 하는 건 아닌가</p></li>
+<li><p>jeen__ : …</p></li>
+<li><p>jeen__ : RubyKaigi 에 가는 사람은 정말로 초 Ruby Lover인데</p></li>
+<li><p>jeen__ : Perl 컨퍼런스는 Perl 아니고도 다른 거 많이 쓰고 그런 경우가 있어서</p></li>
+<li><p>jeen__ : 거리감이 먼 것은 아닌가
+skyloader has left IRC (Remote host closed the connection)</p></li>
+<li><p>jeen__ : YAPC 말고 좀 더 Core 한 얘기를 하는 컨퍼런스가 좋지 않겠는가 하고</p></li>
+<li><p>jeen__ : Hackathon 인가..</p></li>
+<li><p>jeen__ : Official 로는 아직 YAPC Hackathon 은 못하고</p></li>
+<li><p>jeen__ : 전날에 장소가 정해지거나</p></li>
+<li><p>jeen__ : 그런 경우가 많아서&hellip;</p></li>
+<li><p>jeen__ : QA Hackathon 에서는 50명 정도라면 대개 장소 정도는 빌릴 수 있지 않을까</p></li>
+<li><p>jeen__ : NHN 이라든가, Mixi 라든가, DeNA 라든가 … 라고</p></li>
+<li><p>jeen__ : Hallaway hackathon</p></li>
+<li><p>jeen__ : 이라고 트랙에서 얘기듣지 않고</p></li>
+<li><p>jeen__ : 밖에서 서로 떠들고 하는 게 있어서</p></li>
+<li><p>jeen__ : 오히려 그런 공간을 마련해주는 것도 좋지 않겠는가 라고</p></li>
+<li><p>jeen__ : 운영쪽에서 ~~한다가 아니라</p></li>
+<li><p>jeen__ : 다른쪽에서 오히려 ~~한다!</p></li>
+<li><p>jeen__ : 라고 정하고 덤벼들었으면 좋겠다고</p></li>
+<li><p>jeen__ : 작년에는 NA 에서 토크 스트리밍을 했는데 , 작년 유러피언컵 보면서 NA 토크를 봤다고 (미역)</p></li>
+<li><p>jeen__ : 대만의 OSDCTW 장소는  국제회의장이라서</p></li>
+<li><p>jeen__ : 자리마다 마이크가 붙어있다고</p></li>
+<li><p>jeen__ : 질문 있으면 버튼 누르고 마이크로 말하면 된다고&hellip;</p></li>
+<li><p>jeen__ : 이번 YAPC::Asia 초청스피커인 pjf 는 생각 외로 커뮤니티에서 별로 유명하지 않다고</p></li>
+<li><p>jeen__ : 그래도 발표는 재미있다나</p></li>
+<li><p>luzluna : pjf가 누구에요?</p></li>
+<li><p>jeen__ : <a href="http://yapcasia.org/2013/">http://yapcasia.org/2013/</a></p></li>
+<li><p>hongbot : [YAPC::Asia Tokyo 2013] - <a href="http://yapcasia.org/2013/">http://yapcasia.org/2013/</a></p></li>
+<li><p>jeen__ : autodie 만든사람이요</p></li>
+<li><p>luzluna : 아..</p></li>
+<li><p>jeen__ : 작년 White Camel Award</p></li>
+<li><p>jeen__ : <a href="https://twitter.com/JEEN_LEE/status/338657107895259136">https://twitter.com/JEEN_LEE/status/338657107895259136</a></p></li>
+<li><p>jeen__ : ㅋㅋㅋ</p></li>
+<li><p>hongbot : JEEN_LEE: このpodcast、同時翻訳してるんですけど… #bulknews <a href="http://t.co/BGrK6qtBaX">http://t.co/BGrK6qtBaX</a></p></li>
+<li><p>jeen_ : 방송 도중에 언급 ㅋㅋㅋㅋ</p></li>
 </ul>
 
 <blockquote class="twitter-tweet"><p>このpodcast、同時翻訳してるんですけど… <a href="https://twitter.com/search/%23bulknews">#bulknews</a> <a href="http://t.co/BGrK6qtBaX" title="http://twitter.com/JEEN_LEE/status/338657107895259136/photo/1">twitter.com/JEEN_LEE/statu…</a></p>&mdash; JEEN (@JEEN_LEE) <a href="https://twitter.com/JEEN_LEE/status/338657107895259136">May 26, 2013</a></blockquote>
