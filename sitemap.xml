@@ -184,7 +184,11 @@
         <loc>
             http://jeen.github.io/2013/05/20/using-dbi-callbacks-generate-sqlite-file-automatically/
         </loc>
-        <lastmod>2013-05-22T14:54:37+00:00</lastmod>
+        <lastmod>2013-05-23T07:07:51+00:00</lastmod>
+    </url>
+    <url>
+        <loc>http://jeen.github.io/2013/05/25/download-percona-mysql-expo-2013-slides/</loc>
+        <lastmod>2013-05-26T04:12:42+00:00</lastmod>
     </url>
     <url>
         <loc>http://jeen.github.io/about/about/</loc>
@@ -192,11 +196,11 @@
     </url>
     <url>
         <loc>http://jeen.github.io/archives/archives/</loc>
-        <lastmod>2013-05-22T14:54:37+00:00</lastmod>
+        <lastmod>2013-05-26T04:12:42+00:00</lastmod>
     </url>
     <url>
         <loc>http://jeen.github.io/</loc>
-        <lastmod>2013-05-22T14:54:37+00:00</lastmod>
+        <lastmod>2013-05-26T04:12:42+00:00</lastmod>
     </url>
     <url>
         <loc>http://jeen.github.io/robots.txt</loc>

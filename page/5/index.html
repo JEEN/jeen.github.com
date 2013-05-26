@@ -98,6 +98,152 @@
   <header>
     <h1 class="entry-title">
 
+<a href="/2012/08/28/building-a-perl-project-on-travis-ci/">Building a Perl Project on Travis CI</a>
+
+</h1>
+
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2012-08-28T14:25:00+00:00" pubdate data-updated="true">Aug 28<span>th</span>, 2012</time>
+         &bull; <a rel="bookmark" href="/2012/08/28/building-a-perl-project-on-travis-ci/">Permalink</a>
+      </p>
+    
+  </header>
+
+<div class="entry-content"><ul>
+<li><a href="http://travis-ci.org/">Travis CI - Distributed build platform for the open source community</a></li>
+</ul>
+
+<p><code>Travis CI</code>은 이전에 얘기를 들었을 때는 별  관심이 없었는데(처음에는 확실히 Perl 을 지원하지 않아서), 언제부턴가 Perl 을 지원한다는 얘기를 듣고 Perl 커뮤니티에서 움직임이 조금씩 있더라구요. <code>Dist::Zilla::TravisCI</code> 같은 모듈들도 나오는 걸로 봐서…</p>
+
+<p>사용하는 방법은 아주 간단합니다. <code>Github</code> 계정에 연결되고, 그리고 Github 의 Public 상태의 프로젝트를 고르고… 그 프로젝트에 <code>.travis.yml</code> 파일을 놓아주면 됩니다.</p>
+
+<ul>
+<li><a href="http://about.travis-ci.org/docs/user/languages/perl/">Travis CI - Building a Perl Project</a><br></li>
+</ul>
+
+<p>자세한 건 위의 설명페이지를 참고해서 이전에 살짝 만들어 놓은 <code>Zamakist</code> 를 <code>Travis CI</code> 에서 돌려보게 해봤습니다.</p>
+
+<p><img src="https://lh5.googleusercontent.com/-EUnpasmILzs/UDxYWf7j2WI/AAAAAAAACBg/y1EdG7zFKoM/%2525C3%2525A1%2525C2%252584%2525C2%252589%2525C3%2525A1%2525C2%252585%2525C2%2525B3%2525C3%2525A1%2525C2%252584%2525C2%25258F%2525C3%2525A1%2525C2%252585%2525C2%2525B3%2525C3%2525A1%2525C2%252584%2525C2%252585%2525C3%2525A1%2525C2%252585%2525C2%2525B5%2525C3%2525A1%2525C2%252586%2525C2%2525AB%2525C3%2525A1%2525C2%252584%2525C2%252589%2525C3%2525A1%2525C2%252585%2525C2%2525A3%2525C3%2525A1%2525C2%252586%2525C2%2525BA%2525202012-08-28%252520%2525C3%2525A1%2525C2%252584%2525C2%25258B%2525C3%2525A1%2525C2%252585%2525C2%2525A9%2525C3%2525A1%2525C2%252584%2525C2%252592%2525C3%2525A1%2525C2%252585%2525C2%2525AE%2525202.33.19.png" alt="img-failed"></p>
+
+<p>처음에야 뭐 물론 <code>.travis.yml</code> 파일이 없어서 실패했다는 메일이 날라왔구요.</p>
+
+<p><code>.travis.yml</code> 을 추가해준 결과로는 다시 이렇게 제대로 돌아간다는 메일이 옵니다.</p>
+
+<p><img src="https://lh5.googleusercontent.com/-ub5BrJZrXPw/UDxYT_Xl7JI/AAAAAAAACBY/CtHCGYNaJcY/%2525C3%2525A1%2525C2%252584%2525C2%252589%2525C3%2525A1%2525C2%252585%2525C2%2525B3%2525C3%2525A1%2525C2%252584%2525C2%25258F%2525C3%2525A1%2525C2%252585%2525C2%2525B3%2525C3%2525A1%2525C2%252584%2525C2%252585%2525C3%2525A1%2525C2%252585%2525C2%2525B5%2525C3%2525A1%2525C2%252586%2525C2%2525AB%2525C3%2525A1%2525C2%252584%2525C2%252589%2525C3%2525A1%2525C2%252585%2525C2%2525A3%2525C3%2525A1%2525C2%252586%2525C2%2525BA%2525202012-08-28%252520%2525C3%2525A1%2525C2%252584%2525C2%25258B%2525C3%2525A1%2525C2%252585%2525C2%2525A9%2525C3%2525A1%2525C2%252584%2525C2%252592%2525C3%2525A1%2525C2%252585%2525C2%2525AE%2525202.33.13.png" alt="Img1"></p>
+
+<p><code>Travis CI</code> 에서 출력되는 빌드 내용은 아래와 같습니다.</p>
+
+<figure class='code'><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div><div data-line='2' class='line-number'></div><div data-line='3' class='line-number'></div><div data-line='4' class='line-number'></div><div data-line='5' class='line-number'></div><div data-line='6' class='line-number'></div><div data-line='7' class='line-number'></div><div data-line='8' class='line-number'></div><div data-line='9' class='line-number'></div><div data-line='10' class='line-number'></div><div data-line='11' class='line-number'></div><div data-line='12' class='line-number'></div><div data-line='13' class='line-number'></div><div data-line='14' class='line-number'></div><div data-line='15' class='line-number'></div><div data-line='16' class='line-number'></div><div data-line='17' class='line-number'></div><div data-line='18' class='line-number'></div><div data-line='19' class='line-number'></div><div data-line='20' class='line-number'></div><div data-line='21' class='line-number'></div><div data-line='22' class='line-number'></div><div data-line='23' class='line-number'></div><div data-line='24' class='line-number'></div><div data-line='25' class='line-number'></div><div data-line='26' class='line-number'></div><div data-line='27' class='line-number'></div><div data-line='28' class='line-number'></div><div data-line='29' class='line-number'></div><div data-line='30' class='line-number'></div><div data-line='31' class='line-number'></div><div data-line='32' class='line-number'></div><div data-line='33' class='line-number'></div><div data-line='34' class='line-number'></div><div data-line='35' class='line-number'></div><div data-line='36' class='line-number'></div><div data-line='37' class='line-number'></div><div data-line='38' class='line-number'></div><div data-line='39' class='line-number'></div><div data-line='40' class='line-number'></div><div data-line='41' class='line-number'></div><div data-line='42' class='line-number'></div><div data-line='43' class='line-number'></div><div data-line='44' class='line-number'></div><div data-line='45' class='line-number'></div><div data-line='46' class='line-number'></div><div data-line='47' class='line-number'></div><div data-line='48' class='line-number'></div><div data-line='49' class='line-number'></div><div data-line='50' class='line-number'></div><div data-line='51' class='line-number'></div><div data-line='52' class='line-number'></div><div data-line='53' class='line-number'></div><div data-line='54' class='line-number'></div><div data-line='55' class='line-number'></div><div data-line='56' class='line-number'></div><div data-line='57' class='line-number'></div><div data-line='58' class='line-number'></div><div data-line='59' class='line-number'></div><div data-line='60' class='line-number'></div><div data-line='61' class='line-number'></div><div data-line='62' class='line-number'></div><div data-line='63' class='line-number'></div><div data-line='64' class='line-number'></div><div data-line='65' class='line-number'></div><div data-line='66' class='line-number'></div></pre></td><td class='main  bash'><pre><div class='line'>Using worker: ppp3.worker.travis-ci.org:php-1
+</div><div class='line'> </div><div class='line'><span class="nv">$ </span><span class="nb">cd</span> ~/builds
+</div><div class='line'><span class="nv">$ </span>git clone --depth<span class="o">=</span>100 --quiet git://github.com/JEEN/p5-App-Zamakist.git JEEN/p5-App-Zamakist
+</div><div class='line'><span class="nv">$ </span><span class="nb">cd </span>JEEN/p5-App-Zamakist
+</div><div class='line'><span class="nv">$ </span>git checkout -qf df10bdfea286c9933c345c84206eaa90b8f298a6
+</div><div class='line'><span class="nv">$ </span>perlbrew use 5.16
+</div><div class='line'><span class="nv">$ </span>perl --version
+</div><div class='line'> </div><div class='line'>This is perl 5, version 16, subversion 0 <span class="o">(</span>v5.16.0<span class="o">)</span> built <span class="k">for </span>i686-linux
+</div><div class='line'> </div><div class='line'>Copyright 1987-2012, Larry Wall
+</div><div class='line'> </div><div class='line'>Perl may be copied only under the terms of either the Artistic License or the
+</div><div class='line'>GNU General Public License, which may be found in the Perl 5 <span class="nb">source </span>kit.
+</div><div class='line'> </div><div class='line'>Complete documentation <span class="k">for </span>Perl, including FAQ lists, should be found on
+</div><div class='line'>this system using <span class="s2">&quot;man perl&quot;</span> or <span class="s2">&quot;perldoc perl&quot;</span>.  If you have access to the
+</div><div class='line'>Internet, point your browser at http://www.perl.org/, the Perl Home Page.
+</div><div class='line'> </div><div class='line'><span class="nv">$ </span>cpanm --version
+</div><div class='line'>cpanm <span class="o">(</span>App::cpanminus<span class="o">)</span> version 1.5017
+</div><div class='line'><span class="nv">$ </span>cpanm --quiet --installdeps --notest .
+</div><div class='line'>Successfully installed Text-CharWidth-0.04
+</div><div class='line'>Successfully installed Text-UnicodeBox-0.03
+</div><div class='line'>Successfully installed XML-XPathEngine-0.13
+</div><div class='line'>Successfully installed HTML-Tree-5.02
+</div><div class='line'>Successfully installed HTML-TreeBuilder-XPath-0.14
+</div><div class='line'>Successfully installed HTML-Selector-XPath-0.14
+</div><div class='line'>Successfully installed Web-Query-0.08
+</div><div class='line'>Successfully installed Term-ReadLine-Zoid-0.07
+</div><div class='line'>8 distributions installed
+</div><div class='line'><span class="nv">$ </span>perl Makefile.PL <span class="o">&amp;&amp;</span> make <span class="nb">test</span>
+</div><div class='line'>include /home/travis/builds/JEEN/p5-App-Zamakist/inc/Module/Install.pm
+</div><div class='line'>include inc/Module/Install/Metadata.pm
+</div><div class='line'>include inc/Module/Install/Base.pm
+</div><div class='line'>include inc/Module/Install/Makefile.pm
+</div><div class='line'>Cannot determine perl version info from lib/App/Zamakist.pm
+</div><div class='line'>include inc/Module/Install/Scripts.pm
+</div><div class='line'>include inc/Module/Install/Include.pm
+</div><div class='line'>include inc/Test/More.pm
+</div><div class='line'>include inc/Module/Install/WriteAll.pm
+</div><div class='line'>include inc/Module/Install/Win32.pm
+</div><div class='line'>include inc/Module/Install/Can.pm
+</div><div class='line'>include inc/Module/Install/Fetch.pm
+</div><div class='line'>Writing Makefile <span class="k">for </span>App::Zamakist
+</div><div class='line'>Writing MYMETA.yml and MYMETA.json
+</div><div class='line'>Writing META.yml
+</div><div class='line'>cp lib/App/Zamakist/Media.pm blib/lib/App/Zamakist/Media.pm
+</div><div class='line'>cp lib/App/Zamakist.pm blib/lib/App/Zamakist.pm
+</div><div class='line'>cp lib/App/Zamakist/Role/Reportable.pm blib/lib/App/Zamakist/Role/Reportable.pm
+</div><div class='line'>cp lib/App/Zamakist/Handler/GOM.pm blib/lib/App/Zamakist/Handler/GOM.pm
+</div><div class='line'>cp bin/zamakist blib/script/zamakist
+</div><div class='line'>/home/travis/perl5/perlbrew/perls/5.16/bin/perl <span class="s2">&quot;-Iinc&quot;</span> -MExtUtils::MY -e <span class="s1">&#39;MY-&gt;fixin(shift)&#39;</span> -- blib/script/zamakist
+</div><div class='line'><span class="nv">PERL_DL_NONLAZY</span><span class="o">=</span>1 /home/travis/perl5/perlbrew/perls/5.16/bin/perl <span class="s2">&quot;-MExtUtils::Command::MM&quot;</span> <span class="s2">&quot;-e&quot;</span> <span class="s2">&quot;test_harness(0, &#39;inc&#39;, &#39;blib/lib&#39;, &#39;blib/arch&#39;)&quot;</span> t/*.t
+</div><div class='line'>t/00_compile.t ......... ok
+</div><div class='line'>t/01_find_permalink.t .. 5/7 <span class="c"># http://search.gomtv.com/searchjm.gom?key=The.Mentalist.S04E01.HDTV.XviD-ASAP.%5BVTV%5D.Scarlet.Ribbons&amp;preface=0</span>
+</div><div class='line'><span class="c"># http://gom.gomtv.com/jmdb/view.html?intSeq=808364&amp;preface=0&amp;spage=1</span>
+</div><div class='line'>Wide character in print at /home/travis/perl5/perlbrew/perls/5.16/lib/5.16.0/Test/Builder.pm line 1759.
+</div><div class='line'><span class="c"># [통합] The.Mentalist.S04E01.HDTV.XviD-ASAP</span>
+</div><div class='line'>t/01_find_permalink.t .. ok
+</div><div class='line'>All tests successful.
+</div><div class='line'><span class="nv">Files</span><span class="o">=</span>2, <span class="nv">Tests</span><span class="o">=</span>8, 10 wallclock secs <span class="o">(</span> 0.03 usr  0.01 sys +  1.79 cusr  0.10 <span class="nv">csys</span> <span class="o">=</span>  1.93 CPU<span class="o">)</span>
+</div><div class='line'>Result: PASS
+</div><div class='line'> </div><div class='line'>Done. Build script exited with: 0
+</div></pre></td></tr></table></div></figure>
+
+<p>좀 더 뭐 욕심이 있다면 Jenkins 에서 처럼 정적분석이나 테스트 케이스에 대해서 좀 더 자세한 내용이 나와줬으면 좋겠다 싶지만… 사실 그건 뽀대의 문제라…</p>
+
+<p>위의 빌드 내용에 대한 자세한 내용은 아래의 링크를 참고하세요.</p>
+
+<ul>
+<li><a href="http://travis-ci.org/#!/JEEN/p5-App-Zamakist/builds/2257622">Travis CI : p5-App-Zamakist</a></li>
+</ul>
+</div>
+
+  <footer>
+    
+    <p><a class="comments-link" href="/2012/08/28/building-a-perl-project-on-travis-ci/#disqus_thread" data-disqus-identifier="http://jeen.github.io/2012/08/28/building-a-perl-project-on-travis-ci/">View comments &raquo;</a></p>
+
+    
+    
+  </footer>
+
+
+    </article>
+  
+    
+
+
+
+
+
+
+
+
+
+
+    <article >
+      
+  <header>
+    <h1 class="entry-title">
+
 <a href="/2012/08/25/dbix-class-and-json/">DBIx::Class and JSON</a>
 
 </h1>
@@ -321,150 +467,6 @@
   <footer>
     
     <p><a class="comments-link" href="/2012/08/09/moving-from-bash-to-zsh-again/#disqus_thread" data-disqus-identifier="http://jeen.github.io/2012/08/09/moving-from-bash-to-zsh-again/">View comments &raquo;</a></p>
-
-    
-    
-  </footer>
-
-
-    </article>
-  
-    
-
-
-
-
-
-
-
-
-
-
-    <article >
-      
-  <header>
-    <h1 class="entry-title">
-
-<a href="/2012/08/09/app-zamakist-dot-dot-dot/">App::Zamakist...</a>
-
-</h1>
-
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-
-<time datetime="2012-08-09T13:33:00+00:00" pubdate data-updated="true">Aug 9<span>th</span>, 2012</time>
-         &bull; <a rel="bookmark" href="/2012/08/09/app-zamakist-dot-dot-dot/">Permalink</a>
-      </p>
-    
-  </header>
-
-<div class="entry-content"><p>취미라고 할 것이 있다면 잠, 책, 드라마감상 정도라고 할까요.</p>
-
-<p>걔중에 몇몇 미드들을 아직까지 꾸준하게 시간을 내면서 보고 있습니다.</p>
-
-<p>걔중에는 가끔보면 자막이 없어서 일일이 자막찾으러 들어가고 받고 해야하는 지루한 클릭이 필요한 경우도 있습니다.</p>
-
-<p>윈도라면 <code>곰플레이어</code> 로 이런 부분의 수고가 조금 줄어들기는 하지만 Mac 에서 <code>Movist</code> 를 통해서 주로 영상을 감상하려면 심히 신경쓰이지 않을리 없습니다.</p>
-
-<blockquote class="twitter-tweet" lang="ko"><p>멘탈리스트 4기를 볼려고 했는데, 자막이 없네&hellip; 그래서 자막을 세팅하는 스크립트를 깨작거려서 만들어봤다. 좀 더 브러쉬 업해야 되지만서도&hellip; <a href="https://t.co/jeXVNTnI" title="https://gist.github.com/3150026">gist.github.com/3150026</a></p>&mdash; JEEN (@JEEN_LEE) <a href="https://twitter.com/JEEN_LEE/status/226260944597180417" data-datetime="2012-07-20T10:23:07+00:00">7월 20, 2012</a></blockquote>
-
-<p>그러니까 7월 20일경에 일단 이런 문제를 겪어서 잠깐 깨작거려서 만들어보기는 했지만 대놓고 앞에 내놓기도 그렇고해서 그냥 보류했었는데요. 뭐 물론 여전히 앞에 내놓는 게 좀 그렇기는 합니다.</p>
-
-<ul>
-<li><a href="https://github.com/JEEN/p5-App-Zamakist">https://github.com/JEEN/p5-App-Zamakist</a></li>
-</ul>
-
-<p>일련의 과정을 말하자면…</p>
-
-<figure class='code'><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div><div data-line='2' class='line-number'></div><div data-line='3' class='line-number'></div><div data-line='4' class='line-number'></div><div data-line='5' class='line-number'></div><div data-line='6' class='line-number'></div><div data-line='7' class='line-number'></div><div data-line='8' class='line-number'></div><div data-line='9' class='line-number'></div><div data-line='10' class='line-number'></div><div data-line='11' class='line-number'></div><div data-line='12' class='line-number'></div><div data-line='13' class='line-number'></div><div data-line='14' class='line-number'></div></pre></td><td class='main  bash'><pre><div class='line'><span class="nv">$ </span>ls -la
-</div><div class='line'>total 0
-</div><div class='line'>drwxr-xr-x  12 jeen  staff   408  8  9 13:45 .
-</div><div class='line'>drwxr-xr-x+ 52 jeen  staff  1768  8  9 13:45 ..
-</div><div class='line'>-rw-r--r--   1 jeen  staff     0  8  9 13:45 NCIS.Los.Angeles.S03E01.720p.HDTV.X264-DIMENSION.avi
-</div><div class='line'>-rw-r--r--   1 jeen  staff     0  8  9 13:45 NCIS.Los.Angeles.S03E02.720p.HDTV.X264-DIMENSION.avi
-</div><div class='line'>-rw-r--r--   1 jeen  staff     0  8  9 13:45 NCIS.Los.Angeles.S03E03.720p.HDTV.X264-DIMENSION.avi
-</div><div class='line'>-rw-r--r--   1 jeen  staff     0  8  9 13:45 NCIS.Los.Angeles.S03E04.720p.HDTV.X264-DIMENSION.avi
-</div><div class='line'>-rw-r--r--   1 jeen  staff     0  8  9 13:45 NCIS.Los.Angeles.S03E05.720p.HDTV.X264-DIMENSION.avi
-</div><div class='line'>-rw-r--r--   1 jeen  staff     0  8  9 13:45 NCIS.Los.Angeles.S03E06.720p.HDTV.X264-DIMENSION.avi
-</div><div class='line'>-rw-r--r--   1 jeen  staff     0  8  9 13:45 NCIS.Los.Angeles.S03E07.720p.HDTV.X264-DIMENSION.avi
-</div><div class='line'>-rw-r--r--   1 jeen  staff     0  8  9 13:45 NCIS.Los.Angeles.S03E08.720p.HDTV.X264-DIMENSION.avi
-</div><div class='line'>-rw-r--r--   1 jeen  staff     0  8  9 11:44 NCIS.Los.Angeles.S03E09.720p.HDTV.X264-DIMENSION.avi
-</div><div class='line'>-rw-r--r--   1 jeen  staff     0  8  9 09:29 NCIS.Los.Angeles.S03E10.720p.HDTV.X264-DIMENSION.avi
-</div></pre></td></tr></table></div></figure>
-
-<p>이렇게 뭐 디렉토리에 영상자료들이 널부러져 있습니다. 하지만 자막은 없죠.</p>
-
-<figure class='code'><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div><div data-line='2' class='line-number'></div><div data-line='3' class='line-number'></div><div data-line='4' class='line-number'></div><div data-line='5' class='line-number'></div><div data-line='6' class='line-number'></div><div data-line='7' class='line-number'></div><div data-line='8' class='line-number'></div><div data-line='9' class='line-number'></div><div data-line='10' class='line-number'></div><div data-line='11' class='line-number'></div><div data-line='12' class='line-number'></div><div data-line='13' class='line-number'></div><div data-line='14' class='line-number'></div><div data-line='15' class='line-number'></div><div data-line='16' class='line-number'></div><div data-line='17' class='line-number'></div><div data-line='18' class='line-number'></div></pre></td><td class='main  plain'><pre><div class='line'>$ zamakist --dir .
-</div><div class='line'>Found 10 subscriptions
-</div><div class='line'>┌────┬──────────────────────────────────────────────────────┐
-</div><div class='line'>│ id │ filename                                             │
-</div><div class='line'>├────┼──────────────────────────────────────────────────────┤
-</div><div class='line'>│  1 │ NCIS.Los.Angeles.S03E01.720p.HDTV.X264-DIMENSION.avi │
-</div><div class='line'>│  2 │ NCIS.Los.Angeles.S03E02.720p.HDTV.X264-DIMENSION.avi │
-</div><div class='line'>│  3 │ NCIS.Los.Angeles.S03E03.720p.HDTV.X264-DIMENSION.avi │
-</div><div class='line'>│  4 │ NCIS.Los.Angeles.S03E04.720p.HDTV.X264-DIMENSION.avi │
-</div><div class='line'>│  5 │ NCIS.Los.Angeles.S03E05.720p.HDTV.X264-DIMENSION.avi │
-</div><div class='line'>│  6 │ NCIS.Los.Angeles.S03E06.720p.HDTV.X264-DIMENSION.avi │
-</div><div class='line'>│  7 │ NCIS.Los.Angeles.S03E07.720p.HDTV.X264-DIMENSION.avi │
-</div><div class='line'>│  8 │ NCIS.Los.Angeles.S03E08.720p.HDTV.X264-DIMENSION.avi │
-</div><div class='line'>│  9 │ NCIS.Los.Angeles.S03E09.720p.HDTV.X264-DIMENSION.avi │
-</div><div class='line'>│ 10 │ NCIS.Los.Angeles.S03E10.720p.HDTV.X264-DIMENSION.avi │
-</div><div class='line'>└────┴──────────────────────────────────────────────────────┘
-</div><div class='line'>Continue to download? [y/n] y
-</div><div class='line'>Downloaded 10 subscriptions</div></pre></td></tr></table></div></figure>
-
-<p>그래서 뭐 <code>App::Zamakist</code> 라는 모듈을 사용하면 뭐 이렇게 자막을 한꺼번에 다운받을 수 있다 뭐 이런 거죠.</p>
-
-<figure class='code'><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div><div data-line='2' class='line-number'></div><div data-line='3' class='line-number'></div><div data-line='4' class='line-number'></div><div data-line='5' class='line-number'></div><div data-line='6' class='line-number'></div><div data-line='7' class='line-number'></div><div data-line='8' class='line-number'></div><div data-line='9' class='line-number'></div><div data-line='10' class='line-number'></div><div data-line='11' class='line-number'></div><div data-line='12' class='line-number'></div><div data-line='13' class='line-number'></div><div data-line='14' class='line-number'></div><div data-line='15' class='line-number'></div><div data-line='16' class='line-number'></div><div data-line='17' class='line-number'></div><div data-line='18' class='line-number'></div><div data-line='19' class='line-number'></div><div data-line='20' class='line-number'></div><div data-line='21' class='line-number'></div><div data-line='22' class='line-number'></div><div data-line='23' class='line-number'></div><div data-line='24' class='line-number'></div></pre></td><td class='main  bash'><pre><div class='line'><span class="nv">$ </span>ls -la
-</div><div class='line'>total 1592
-</div><div class='line'>drwxr-xr-x  22 jeen  staff    748  8  9 13:46 .
-</div><div class='line'>drwxr-xr-x+ 52 jeen  staff   1768  8  9 13:46 ..
-</div><div class='line'>-rw-r--r--   1 jeen  staff      0  8  9 13:45 NCIS.Los.Angeles.S03E01.720p.HDTV.X264-DIMENSION.avi
-</div><div class='line'>-rw-r--r--   1 jeen  staff  63779  8  9 13:46 NCIS.Los.Angeles.S03E01.720p.HDTV.X264-DIMENSION.smi
-</div><div class='line'>-rw-r--r--   1 jeen  staff      0  8  9 13:45 NCIS.Los.Angeles.S03E02.720p.HDTV.X264-DIMENSION.avi
-</div><div class='line'>-rw-r--r--   1 jeen  staff  75041  8  9 13:46 NCIS.Los.Angeles.S03E02.720p.HDTV.X264-DIMENSION.smi
-</div><div class='line'>-rw-r--r--   1 jeen  staff      0  8  9 13:45 NCIS.Los.Angeles.S03E03.720p.HDTV.X264-DIMENSION.avi
-</div><div class='line'>-rw-r--r--   1 jeen  staff  84915  8  9 13:46 NCIS.Los.Angeles.S03E03.720p.HDTV.X264-DIMENSION.smi
-</div><div class='line'>-rw-r--r--   1 jeen  staff      0  8  9 13:45 NCIS.Los.Angeles.S03E04.720p.HDTV.X264-DIMENSION.avi
-</div><div class='line'>-rw-r--r--   1 jeen  staff  78550  8  9 13:46 NCIS.Los.Angeles.S03E04.720p.HDTV.X264-DIMENSION.smi
-</div><div class='line'>-rw-r--r--   1 jeen  staff      0  8  9 13:45 NCIS.Los.Angeles.S03E05.720p.HDTV.X264-DIMENSION.avi
-</div><div class='line'>-rw-r--r--   1 jeen  staff  94809  8  9 13:46 NCIS.Los.Angeles.S03E05.720p.HDTV.X264-DIMENSION.smi
-</div><div class='line'>-rw-r--r--   1 jeen  staff      0  8  9 13:45 NCIS.Los.Angeles.S03E06.720p.HDTV.X264-DIMENSION.avi
-</div><div class='line'>-rw-r--r--   1 jeen  staff  98759  8  9 13:46 NCIS.Los.Angeles.S03E06.720p.HDTV.X264-DIMENSION.smi
-</div><div class='line'>-rw-r--r--   1 jeen  staff      0  8  9 13:45 NCIS.Los.Angeles.S03E07.720p.HDTV.X264-DIMENSION.avi
-</div><div class='line'>-rw-r--r--   1 jeen  staff  76016  8  9 13:46 NCIS.Los.Angeles.S03E07.720p.HDTV.X264-DIMENSION.smi
-</div><div class='line'>-rw-r--r--   1 jeen  staff      0  8  9 13:45 NCIS.Los.Angeles.S03E08.720p.HDTV.X264-DIMENSION.avi
-</div><div class='line'>-rw-r--r--   1 jeen  staff  94320  8  9 13:46 NCIS.Los.Angeles.S03E08.720p.HDTV.X264-DIMENSION.smi
-</div><div class='line'>-rw-r--r--   1 jeen  staff      0  8  9 11:44 NCIS.Los.Angeles.S03E09.720p.HDTV.X264-DIMENSION.avi
-</div><div class='line'>-rw-r--r--   1 jeen  staff  69537  8  9 13:46 NCIS.Los.Angeles.S03E09.720p.HDTV.X264-DIMENSION.smi
-</div><div class='line'>-rw-r--r--   1 jeen  staff      0  8  9 09:29 NCIS.Los.Angeles.S03E10.720p.HDTV.X264-DIMENSION.avi
-</div><div class='line'>-rw-r--r--   1 jeen  staff  55905  8  9 13:46 NCIS.Los.Angeles.S03E10.720p.HDTV.X264-DIMENSION.smi
-</div></pre></td></tr></table></div></figure>
-
-<p>뭐 일단 CPAN 에 올릴 생각도 없는 토이모듈 겸 생활용품 모듈이라서…</p>
-
-<p>아 물론 자막검색은 GOM 자막을 애용하고 있습니다.</p>
-
-<p>검색방식은 뭐 파일이름에서 확장자만 떼서 검색날려서 뭐 여차저차해서 파일다운로드 하는 링크 빼서 일괄 다운로드 하는 것이죠.</p>
-
-<p>이제 시작하려는 미드가 있는데 자막이 없다면 이거 한번만 돌려주면 앞으로 자막찾는 수고없어지겠습니다. :-)</p>
-</div>
-
-  <footer>
-    
-    <p><a class="comments-link" href="/2012/08/09/app-zamakist-dot-dot-dot/#disqus_thread" data-disqus-identifier="http://jeen.github.io/2012/08/09/app-zamakist-dot-dot-dot/">View comments &raquo;</a></p>
 
     
     
