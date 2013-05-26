@@ -98,6 +98,97 @@
   <header>
     <h1 class="entry-title">
 
+<a href="/2012/08/09/moving-from-bash-to-zsh-again/">Moving From Bash to Zsh Again</a>
+
+</h1>
+
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2012-08-09T16:30:00+00:00" pubdate data-updated="true">Aug 9<span>th</span>, 2012</time>
+         &bull; <a rel="bookmark" href="/2012/08/09/moving-from-bash-to-zsh-again/">Permalink</a>
+      </p>
+    
+  </header>
+
+<div class="entry-content"><p>밥벌이도구가 바뀌고 해서 다시 ZSH 로 돌아갔습니다.</p>
+
+<blockquote class="twitter-tweet" lang="ko"><p>레티나 맥북프로를 오늘 받은 게 자랑.txt <a href="http://t.co/38oGVx7W" title="http://jeen.tistory.com/560">jeen.tistory.com/560</a></p>&mdash; JEEN (@JEEN_LEE) <a href="https://twitter.com/JEEN_LEE/status/232821768325300225" data-datetime="2012-08-07T12:53:29+00:00">8월 7, 2012</a></blockquote>
+
+<ul>
+<li> <a href="https://github.com/skwp/dotfiles">https://github.com/skwp/dotfiles</a></li>
+</ul>
+
+<p>지난번에 MacBook Air 에 올리다가 뭐가 꼬인 <code>YADR</code> 을 썼습니다. <code>grep</code> 경고메시지가 없이 깔끔하게 돌아가는 군요.</p>
+
+<p>이래저래 개발환경도 맞추고 그러다가 지난달에 zsh 5.0 이 릴리즈 된 것을 보고 Mt.LION 에 깔린 zsh 버젼을 확인하니..</p>
+
+<figure class='code'><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div><div data-line='2' class='line-number'></div></pre></td><td class='main  bash'><pre><div class='line'><span class="nv">$ </span>zsh --version
+</div><div class='line'>zsh 4.3.11 <span class="o">(</span>i386-apple-darwin12.0<span class="o">)</span>
+</div></pre></td></tr></table></div></figure>
+
+<p><code>4.3.11</code> 이었습니다. 그래서 zsh 5.0 으로 올려보려고 brew 로 일단 깔았죠.</p>
+
+<p>그리고 <code>chsh</code> 로 셸을 바꾸려고 하는 데…</p>
+
+<figure class='code'><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div><div data-line='2' class='line-number'></div><div data-line='3' class='line-number'></div><div data-line='4' class='line-number'></div></pre></td><td class='main  bash'><pre><div class='line'><span class="nv">$ </span>chsh -s /usr/local/bin/zsh
+</div><div class='line'>Changing shell <span class="k">for </span>jeen.
+</div><div class='line'>Password <span class="k">for </span>jeen:
+</div><div class='line'>chsh: /usr/local/Cellar/zsh/5.0.0/bin/zsh: non-standard shell
+</div></pre></td></tr></table></div></figure>
+
+<p>이라고 뜨는 것이었지요.</p>
+
+<p>구글검색결과 <code>/etc/shells</code> 에 해당 셸의 패스를 추가하는 것으로 이 난관을 헤쳐나갈 수 있다고 합니다.</p>
+
+<p>그래서 네. zsh 5.0 쓰고 있는데 뭐가 좋은지는 써보면서 느끼게 되려나요.</p>
+
+<ul>
+<li><a href="https://github.com/zsh-users/zsh/blob/master/NEWS">https://github.com/zsh-users/zsh/blob/master/NEWS</a></li>
+</ul>
+
+<p>이런 CHANGELOG 도 일단 보고 있지만요&hellip;</p>
+</div>
+
+  <footer>
+    
+    <p><a class="comments-link" href="/2012/08/09/moving-from-bash-to-zsh-again/#disqus_thread" data-disqus-identifier="http://jeen.github.io/2012/08/09/moving-from-bash-to-zsh-again/">View comments &raquo;</a></p>
+
+    
+    
+  </footer>
+
+
+    </article>
+  
+    
+
+
+
+
+
+
+
+
+
+
+    <article >
+      
+  <header>
+    <h1 class="entry-title">
+
 <a href="/2012/08/09/app-zamakist-dot-dot-dot/">App::Zamakist...</a>
 
 </h1>
@@ -481,100 +572,6 @@
   <footer>
     
     <p><a class="comments-link" href="/2012/07/26/export-facebook-event-attending-list-perl-kr-teatime/#disqus_thread" data-disqus-identifier="http://jeen.github.io/2012/07/26/export-facebook-event-attending-list-perl-kr-teatime/">View comments &raquo;</a></p>
-
-    
-    
-  </footer>
-
-
-    </article>
-  
-    
-
-
-
-
-
-
-
-
-
-
-    <article >
-      
-  <header>
-    <h1 class="entry-title">
-
-<a href="/2012/07/18/mysql-diff-a-vs-b/">MySQL::Diff - a vs B</a>
-
-</h1>
-
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-
-<time datetime="2012-07-18T18:30:00+00:00" pubdate data-updated="true">Jul 18<span>th</span>, 2012</time>
-         &bull; <a rel="bookmark" href="/2012/07/18/mysql-diff-a-vs-b/">Permalink</a>
-      </p>
-    
-  </header>
-
-<div class="entry-content"><p>최근에 유지보수 관련 일로 골머리를 싸고 있다가 겨우겨우 마무리하고 있는 일이 하나 있었습니다.</p>
-
-<p>PHP 프로젝트였는데, 유지보수 관련해서 여러가지 이슈들이 나오기 마련이고, 그 때문에 잘 움직이던 기존의 DB구조를
-변경해줄 필요가 있었습니다.</p>
-
-<p>뭐 테이블을 추가하거나, 어떤 컬럼의 형식을 변경하거나, 혹은 인덱스를 추가하거나 하는 뭐 이런 경우 말이죠.</p>
-
-<p>처음에는 개발환경아래에서 기존의 product 환경에서 운용중인 DB를 dump 떠와서 진행하고, 프로젝트를 진행하면서
-변경되는 SQL 내용들을 일일이 적어주었습니다. 그러다가 뭐 이사람 저사람 손을 옮겨타다가 결국 최종 마무리단계에서 
-어떤 컬럼이 변경되었는지, 어떤 테이블이 추가되었는지에 대한 확신을 할 수 없었습니다.</p>
-
-<p>그래서 기록된 SQL 을 기반으로 눈과 손으로 검수를 해야하는 지경에서 결국 실수가 생기기 마련이죠. 그리고 클레임이 발생했습니다.</p>
-
-<p>자, 그럼 어떻게 하면 이런 상황에서 사태를 수습하느냐&hellip; 고심했습니다.</p>
-
-<p>그 결과 혹시 이거라면 해서 찔러본 것이 빙고 였던 것이 <a href="http://metacpan.org/module/MySQL::Diff">MySQL::Diff</a> 였습니다.</p>
-
-<p>맨처음 덤프떠온 DB 를 <code>DB_A</code> 로 지정하고, 최종적으로 개발이 종료된 DB 를 <code>DB_B</code> 라고 놓습니다.</p>
-
-<p>이 <code>DB_A</code> 와 <code>DB_B</code> 를 서로 비교하는 것이죠. 그걸을 위해서 <code>MySQL::Diff</code> 모듈이 사용됩니다.</p>
-
-<figure class='code'><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div><div data-line='2' class='line-number'></div><div data-line='3' class='line-number'></div><div data-line='4' class='line-number'></div><div data-line='5' class='line-number'></div><div data-line='6' class='line-number'></div><div data-line='7' class='line-number'></div><div data-line='8' class='line-number'></div><div data-line='9' class='line-number'></div><div data-line='10' class='line-number'></div><div data-line='11' class='line-number'></div><div data-line='12' class='line-number'></div><div data-line='13' class='line-number'></div><div data-line='14' class='line-number'></div><div data-line='15' class='line-number'></div></pre></td><td class='main  bash'><pre><div class='line'><span class="nv">$ </span>mysqldiff --host1 localhost --user1 root --password1 whatthehell --host2 localhost --user2 root --password2 whatthehell bto bto_test
-</div><div class='line'><span class="c">## mysqldiff 0.43</span>
-</div><div class='line'><span class="c">## </span>
-</div><div class='line'><span class="c">## Run on Wed Jul 18 18:26:39 2012</span>
-</div><div class='line'><span class="c">## Options: password2=whatthehell, password1=whatthehell, user1=root, host2=localhost, debug=0, host1=localhost, user2=root</span>
-</div><div class='line'><span class="c">##</span>
-</div><div class='line'><span class="c">## ---   db: bto (host=localhost user=root)</span>
-</div><div class='line'><span class="c">## +++   db: bto_test (host=localhost user=root)</span>
-</div><div class='line'> </div><div class='line'>ALTER TABLE auth DROP COLUMN updated_on; <span class="c"># was datetime NOT NULL DEFAULT &#39;0000-00-00 00:00:00&#39;</span>
-</div><div class='line'>ALTER TABLE auth DROP COLUMN created_on; <span class="c"># was datetime NOT NULL DEFAULT &#39;0000-00-00 00:00:00&#39;</span>
-</div><div class='line'>ALTER TABLE auth ADD UNIQUE passwd <span class="o">(</span>passwd<span class="o">)</span>;
-</div><div class='line'>CREATE TABLE test1 <span class="o">(</span>
-</div><div class='line'>  test1 int<span class="o">(</span>11<span class="o">)</span> NOT NULL
-</div><div class='line'><span class="o">)</span> <span class="nv">ENGINE</span><span class="o">=</span>MyISAM DEFAULT <span class="nv">CHARSET</span><span class="o">=</span>utf8;
-</div></pre></td></tr></table></div></figure>
-
-<p>위처럼 컬럼의 삭제, 인덱스의 추가, 테이블의 추가 등 모든 변경 내역들이 나오게 됩니다.</p>
-
-<p>다음부터는 이처럼 좀 더 간단하고 확실하게 할 수 있는 방법을 취해야 되겠습니다.</p>
-</div>
-
-  <footer>
-    
-    <p><a class="comments-link" href="/2012/07/18/mysql-diff-a-vs-b/#disqus_thread" data-disqus-identifier="http://jeen.github.io/2012/07/18/mysql-diff-a-vs-b/">View comments &raquo;</a></p>
 
     
     
