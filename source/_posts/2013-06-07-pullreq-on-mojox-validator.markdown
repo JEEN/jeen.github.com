@@ -1,0 +1,38 @@
+---
+layout: post
+title: "PullReq on MojoX::Validator"
+date: 2013-06-07T17:53:47+09:00
+comments: true
+external-url: 
+categories: [ perl, mojolicious ]
+---
+
+ 지난 수요일에 잠깐 이번 서버 구현에 쓸 Validator 를 물색하던 중에 [Mojolicious::Plugin::Validator](http://metacpan.org/module/Mojolicious::Plugin::Validator) 를 보고는 참 Validation 코드쓰기 쉽다라는 생각에 덜컥 채용해버렸습니다.
+ 
+ 모듈은 2011년이 마지막으로 업뎃되었구요. 근데 깔아보니까 안깔립니다. 이것도 설마 5.18 의 Hash Randomization 문제때문인가 하면서 실패한 테스트코드를 살펴본 결과 Mojolicious API 가 바뀐 것때문이었습니다. 그러니까 1년 반안에 프레임워크 테스트 모듈의 근간 API 가 바뀌어버리는 바람에 테스트가 실패한 것이지요.
+
+ 일단 이 모듈이 맘에 들었고, 이 모듈을 만든 @vtivti 의 여러가지 결과물들을 보고 재미있는 사람이구나 하고 생각하기도 했었죠.
+
+- [https://github.com/vti/mojox-validator/pull/17](https://github.com/vti/mojox-validator/pull/17)
+
+ 그래서 그냥 뭐 테스트코드 하나 패치해서 Pull Req 를 보냈습니다. 내용을 보면 알겠지만 정말 별거 없습니다. `post_form_ok` 가 없어지고, `post_ok` 의 사용법이 아마 3.x ~ 4.x 버젼으로 넘어오면서 바뀌지 않았나 합니다. 남은 건 서버에 올리는 데 carton 으로 깔면 … 아 물론 cpanm 1.6 부터 git 프로토콜을 지원하기는 해서 그냥 git repo 를 집어넣으면 되니까…. // 하지만 그냥 CPAN 을 통해서 받고싶었기에 빨리 패치된 걸로 CPAN 에 올려달라고 독촉했습니다.
+ 
+<blockquote class="twitter-tweet" lang="ko"><p>@<a href="https://twitter.com/vtivti">vtivti</a> oh, please release it please. Now it is the only one problem I had to deploy on my servers. @__@</p>&mdash; JEEN (@JEEN_LEE) <a href="https://twitter.com/JEEN_LEE/status/342088628903759872">2013년 6월 5일</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+ 서버에 Deploy 한다는 건 Jenkins 에 올려놓고 빌드할 때 제대로 돌아가지 않으니까요… 뭐 밀린 숙제 같은 것이었습니다.
+ 
+ <blockquote class="twitter-tweet" lang="ko"><p>MojoX-Validator 0.0014 by VTI - <a href="http://t.co/1rKxxY9yQh" title="http://metacpan.org/release/VTI/MojoX-Validator-0.0014/">metacpan.org/release/VTI/Mo…</a></p>&mdash; CPAN New Modules (@cpan_new) <a href="https://twitter.com/cpan_new/status/342201018127372288">2013년 6월 5일</a></blockquote>
+
+ 그래서 오늘에서야 6.5일에 업데이트된 것을 확인하고 Jenkins 설정을 하고 제대로 동작하는 것을 확인했습니다.
+ 
+- [https://metacpan.org/source/VTI/MojoX-Validator-0.0014/Changes](https://metacpan.org/source/VTI/MojoX-Validator-0.0014/Changes)
+
+ Changes 날짜는 뭐 다르지만 이름이 콕하고 박혀있는 걸 보니… 뭔가 깨작거렸구나 하는 생각이 들기는 합니다.
+ 
+### 결론
+
+매번 CPAN Recents 의 내용을 봐도 그렇지만 Mojolicious 의 잦은 업데이트가 반갑기도 합니다. 실제로 Catalyst 에서 테스트코드를 쓸려면 좀 이래저래 손이 많이 가는 부분도 Mojolicious 의 `Test::Mojo` 를 통해서 뭔가 쉽고 직관적이게 테스트코드를 슥샥슥샥 쓸 수 있습니다. 오히려 감동을 받은 부분입니다.
+
+하지만 너무 잦은 업데이트는 이에 의존한 모듈들이 제대로 따라가주지 못하니 저같은 일반 사용자의 입장에서는 이런 경우처럼 예상이외의 수고가 들어가버릴 수도 있구나 ( 모듈을 만든 사람도 물론이거니와… ) 하는 생각도 듭니다.
+
