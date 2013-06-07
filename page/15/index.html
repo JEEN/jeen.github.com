@@ -98,6 +98,128 @@
   <header>
     <h1 class="entry-title">
 
+<a href="/2012/01/03/perl-and-continuous-integration-with-jenkins-1/">Perl and Continuous Integration With Jenkins - I</a>
+
+</h1>
+
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2012-01-03T11:45:00+00:00" pubdate data-updated="true">Jan 3<span>rd</span>, 2012</time>
+         &bull; <a rel="bookmark" href="/2012/01/03/perl-and-continuous-integration-with-jenkins-1/">Permalink</a>
+      </p>
+    
+  </header>
+
+<div class="entry-content"><h3>Jenkins 를 사용하기 까지</h3>
+
+<p>사실 지난주에 NHN 에서 주최하는 공개개발자 교육에  갔다왔었습니다. 평소 Jenkins 에 대해서 약간 환상 같은 게 있다고 할까, 필요성이 있다고 할까요. 좀 더 프로젝트의 품질이 나아지고 있다는 환상, 그런 걸 보면서 나름 보람을 느끼고 싶다라는 생각도 있었습니다.</p>
+
+<p>아무튼 Jenkins 교육은 Java 위주의 프로젝트에 적용하는 얘기였지만, 다른 언어에서도 충분히 지원된다라는 얘기를 익히들어왔기에 대강 실습을 따라하면서 감을 익히고 회사에 와서 본격적으로 Jenkins 를 만지기 시작했습니다.</p>
+
+<h3>Perl &amp; Jenkins</h3>
+
+<p>Jenkins 교육에서는 Maven 을 위주로 여러가지 옵션(?) 을 추가하는 것으로 간단하게 각종 Report 를 뽑아내기 위한 xml 들을 생성할 수 있었습니다. 아쉽게도 Perl 로는 Maven 만큼 쉽게 그렇게 만들기는 어려웠지요.</p>
+
+<p>일단 Perl 에는 기본적으로 TAP 형식을 따르고 있기 때문에 Java 류의 JUnit 으로 결과를 뽑아낼 필요가 있었습니다. 그래서 TAP 를 JUnit 으로 쉽게 바꿔줄 수 있는 방법이 필요했죠.</p>
+
+<figure class='code'><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div></pre></td><td class='main  bash'><pre><div class='line'><span class="nv">$ </span>prove --formatter --timer TAP::Formatter::JUnit t
+</div></pre></td></tr></table></div></figure>
+
+<p>위와 같은 형식으로 <code>t</code> 디렉토리 아래의 테스트파일들을 테스트하며 결과는 <code>TAP::Formatter::JUnit</code> 에 의해서 xml 파일로 나오게 됩니다.</p>
+
+<figure class='code'><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div><div data-line='2' class='line-number'></div><div data-line='3' class='line-number'></div><div data-line='4' class='line-number'></div><div data-line='5' class='line-number'></div><div data-line='6' class='line-number'></div><div data-line='7' class='line-number'></div><div data-line='8' class='line-number'></div><div data-line='9' class='line-number'></div><div data-line='10' class='line-number'></div><div data-line='11' class='line-number'></div><div data-line='12' class='line-number'></div><div data-line='13' class='line-number'></div><div data-line='14' class='line-number'></div></pre></td><td class='main  xml'><pre><div class='line'><span class="nt">&lt;testsuites&gt;</span>
+</div><div class='line'>  <span class="nt">&lt;testsuite</span> <span class="na">failures=</span><span class="s">&quot;0&quot;</span>
+</div><div class='line'>             <span class="na">errors=</span><span class="s">&quot;0&quot;</span>
+</div><div class='line'>             <span class="na">time=</span><span class="s">&quot;25.6525909900665&quot;</span>
+</div><div class='line'>             <span class="na">tests=</span><span class="s">&quot;1&quot;</span>
+</div><div class='line'>             <span class="na">name=</span><span class="s">&quot;Catalyst_controller_Admin-Activity_t&quot;</span><span class="nt">&gt;</span>
+</div><div class='line'>    <span class="nt">&lt;testcase</span> <span class="na">time=</span><span class="s">&quot;0&quot;</span>
+</div><div class='line'>              <span class="na">name=</span><span class="s">&quot;1 - Request should succeed&quot;</span><span class="nt">&gt;&lt;/testcase&gt;</span>
+</div><div class='line'>    <span class="nt">&lt;system-out&gt;</span><span class="cp">&lt;![CDATA[ok 1 - Request should succeed</span>
+</div><div class='line'><span class="cp">1..1</span>
+</div><div class='line'><span class="cp">]]&gt;</span><span class="nt">&lt;/system-out&gt;</span>
+</div><div class='line'>    <span class="nt">&lt;system-err&gt;&lt;/system-err&gt;</span>
+</div><div class='line'>    <span class="nt">&lt;/testsuite&gt;</span>
+</div><div class='line'><span class="nt">&lt;/testsuites&gt;</span>
+</div></pre></td></tr></table></div></figure>
+
+<h3>Task::Jenkins</h3>
+
+<p>사실은 Jenkins 에서 Perl 프로젝트를 올릴 때의 주요한 모듈의 묶음은 <a href="http://search.cpan.org/perldoc?Task::Jenkins">Task::Jenkins</a> 모듈로 제공되고 있습니다. Task::Jenkins 에 있는 모듈들은,</p>
+
+<ul>
+<li><a href="http://search.cpan.org/perldoc?TAP::Formatter::JUnit">TAP::Formatter::JUnit</a></li>
+<li><a href="http://search.cpan.org/perldoc?App::Prove">App::Prove</a></li>
+<li><p><a href="http://search.cpan.org/perldoc?Devel::Cover">Devel::Cover</a></p>
+
+<p>입니다.</p>
+
+<p><code>TAP::Formatter::JUnit</code> 의 경우는 위에서 설명했고, <code>App::Prove</code> 는 위의 테스트코드를 실행하는 커맨드인 <code>prove</code> 를 사용하기 위한 모듈입니다. <code>Devel::Cover</code> 는 Code Coverage 를 확인할 수 있는 모듈이구요.</p>
+
+<p>일단 Jenkins 에서 Perl 프로젝트를 적용하는 준비는 기본적으로 위의 <code>Task::Jenkins</code> 를 설치함으로 어느 정도 끝났다고 볼 수 있습니다.</p></li>
+</ul>
+
+<h3>Jenkins 설치</h3>
+
+<p>회사내의 서버에 Jenkins 를 설치했습니다. Ubuntu 10.10 Server 버젼이며, Jenkins 의 설치는 그렇게 어렵지 않습니다.</p>
+
+<p>쉽게 Google 에서 <em>Jenkins Ubuntu</em> 로 검색해서 나온 것들 중 첫번째를 골라봤습니다.</p>
+
+<ul>
+<li><p><a href="https://wiki.jenkins-ci.org/display/JENKINS/Installing+Jenkins+on+Ubuntu">Installing Jenkins on Ubuntu</a></p>
+
+<p><code>apt</code> source 추가하고 <code>aptitude</code> 로 설치하고, Apache 에서 Proxy 설정해주고, 이에 대한 자세한 이야기는 위의 링크에 자세히 나와 있으니 참고하시길 바랍니다.</p>
+
+<p>NHN 공개개발자 교육에서는 보안상의 문제로 Tomcat 위에다가 얹어놓기를 권하셨지만, Jenkins 자체의 Standalone Server 로 충분하지 않나 생각됩니다. 뭐 어차피 사내 네트워크 안에서 사용할 것인데&hellip; 라며&hellip; =3</p>
+
+<p>아무튼 이렇게 띄워서 실제로 사내에서 사용하고 있는 Jenkins Top Page 는 아래와 같습니다.</p></li>
+</ul>
+
+<p><img src="http://lh6.googleusercontent.com/--lGDWehSz5k/TwKGZAtvsUI/AAAAAAAAA9w/tRFttK10-wg/jenkins-top-page.png" alt="Jenkins Top"></p>
+
+<p>한번에 적으려니 좀 길고 해서, 일단 밑밥깔기부터 하고 다음 글부터는 좀 더 자세한 Jenkins 에서 Perl 프로젝트 적용에 대해서 상세한 캡쳐와 함께 설명하고자 합니다.</p>
+</div>
+
+  <footer>
+    
+    <p><a class="comments-link" href="/2012/01/03/perl-and-continuous-integration-with-jenkins-1/#disqus_thread" data-disqus-identifier="http://jeen.github.io/2012/01/03/perl-and-continuous-integration-with-jenkins-1/">View comments &raquo;</a></p>
+
+    
+    
+  </footer>
+
+
+    </article>
+  
+    
+
+
+
+
+
+
+
+
+
+
+    <article >
+      
+  <header>
+    <h1 class="entry-title">
+
 <a href="/2011/12/29/perl-email-send/">Perl - Email Send</a>
 
 </h1>
@@ -424,161 +546,6 @@
   <footer>
     
     <p><a class="comments-link" href="/2011/12/27/catalyst-actionrole/#disqus_thread" data-disqus-identifier="http://jeen.github.io/2011/12/27/catalyst-actionrole/">View comments &raquo;</a></p>
-
-    
-    
-  </footer>
-
-
-    </article>
-  
-    
-
-
-
-
-
-
-
-
-
-
-    <article >
-      
-  <header>
-    <h1 class="entry-title">
-
-<a href="/2011/12/27/using-plack-middleware-oauth/">Using Plack::Middleware::OAuth</a>
-
-</h1>
-
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-
-<time datetime="2011-12-27T13:24:00+00:00" pubdate data-updated="true">Dec 27<span>th</span>, 2011</time>
-         &bull; <a rel="bookmark" href="/2011/12/27/using-plack-middleware-oauth/">Permalink</a>
-      </p>
-    
-  </header>
-
-<div class="entry-content"><h3>Before Using Plack::Middleware::OAuth</h3>
-
-<p>사실은 <a href="http://search.cpan.org/perldoc?Plack::Middleware::OAuth">Plack::Middleware::OAuth</a> 를 사용하기 이전에는 OAuth 관련 callback 처리등을 직접 파라메터를 확인해가면서 해당 액션을 처리했었습니다. 그게 P::M::OAuth 를 사용해서 각 OAuth Provider 들을 좀 더 유연하게 다룰 수 있게 되지 않았나 합니다.</p>
-
-<figure class='code'><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div><div data-line='2' class='line-number'></div><div data-line='3' class='line-number'></div><div data-line='4' class='line-number'></div><div data-line='5' class='line-number'></div><div data-line='6' class='line-number'></div><div data-line='7' class='line-number'></div><div data-line='8' class='line-number'></div><div data-line='9' class='line-number'></div><div data-line='10' class='line-number'></div><div data-line='11' class='line-number'></div><div data-line='12' class='line-number'></div><div data-line='13' class='line-number'></div></pre></td><td class='main  perl'><pre><div class='line'>    <span class="k">sub </span><span class="nf">redirect_to_foursquare</span> <span class="p">{</span>
-</div><div class='line'>        <span class="k">my</span> <span class="nv">$self</span> <span class="o">=</span> <span class="nb">shift</span><span class="p">;</span>
-</div><div class='line'> </div><div class='line'>        <span class="c1"># redirect to foursquare authentication url</span>
-</div><div class='line'>        <span class="nv">$self</span><span class="o">-&gt;</span><span class="n">response</span><span class="o">-&gt;</span><span class="n">redirect</span><span class="p">(</span><span class="s">&quot;https://foursquare.com/oauth2/authenticate?client_id=$client_id&amp;response_type=code&amp;redirect_uri=$callback_url&quot;</span><span class="p">);</span>
-</div><div class='line'>    <span class="p">}</span>
-</div><div class='line'> </div><div class='line'>  <span class="k">sub </span><span class="nf">receive_token_foursquare</span> <span class="p">{</span>
-</div><div class='line'>      <span class="k">my</span> <span class="nv">$self</span> <span class="o">=</span> <span class="nb">shift</span><span class="p">;</span>
-</div><div class='line'> </div><div class='line'>      <span class="k">my</span> <span class="nv">$res</span> <span class="o">=</span> <span class="n">Furl</span><span class="o">-&gt;</span><span class="k">new</span><span class="o">-&gt;</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;https://foursquare.com/oauth2/access_token?client_id=$client_id&amp;client_secret=$client_secret&amp;grant_type=authorization_code&amp;redirect_uri=$redirect_url&amp;code=&quot;</span><span class="o">.</span><span class="nv">$self</span><span class="o">-&gt;</span><span class="n">request</span><span class="o">-&gt;</span><span class="n">param</span><span class="p">(</span><span class="s">&#39;code&#39;</span><span class="p">));</span>
-</div><div class='line'>      <span class="o">...</span>
-</div><div class='line'>  <span class="p">}</span>
-</div></pre></td></tr></table></div></figure>
-
-<p>예, 뭐 위처럼 OAuth 인증시에 <code>client_id</code> 랑 <code>client_secret</code> 그리고 <code>grant_type</code> 등 여러가지 파라메터의 지정이나 인증 URL 등등이 Provider 마다 다르고 이러니 뭐 일일이 Provider 마다 매번 어플리케이션 단에서 코드를 써나가는 것이 참 불쾌하기 마련이었습니다.
-  나름 플러거블하게 만든다고 해봤지만 역시 이런 부분은 Middleware 단에서 처리하는 게 좋지 않을까 생각하고 있었지요.
-  그런의미에서 P::M::OAuth 를 사용하게 되었습니다.</p>
-
-<h3>Custom Provider</h3>
-
-<p>P::M::OAuth 는 OAuth v1/v2 를 지원합니다. OAuth 버젼마다 파라메터가 바뀌기 때문에 사용하고자 하는 OAuth Provider 가 어떤 버젼을 지원하는 지 확인해봐야 합니다.
-   P::M::OAuth 는 기본적으로 <em>Github</em>, <em>Twitter</em>, <em>Facebook</em>, <em>Live</em>, <em>Google</em> 의 다섯가지 OAuth Provider 를 지원합니다.</p>
-
-<p>저는 <em>FourSquare</em> 의 OAuth 를 사용하려고 하는 데, 기본적으로 제공해주지 않으니, 약간 손질을 해줘야 되겠죠.</p>
-
-<figure class='code'><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div><div data-line='2' class='line-number'></div><div data-line='3' class='line-number'></div><div data-line='4' class='line-number'></div><div data-line='5' class='line-number'></div><div data-line='6' class='line-number'></div><div data-line='7' class='line-number'></div><div data-line='8' class='line-number'></div><div data-line='9' class='line-number'></div><div data-line='10' class='line-number'></div><div data-line='11' class='line-number'></div><div data-line='12' class='line-number'></div><div data-line='13' class='line-number'></div><div data-line='14' class='line-number'></div><div data-line='15' class='line-number'></div></pre></td><td class='main  perl'><pre><div class='line'><span class="nb">package</span> <span class="nn">Plack::Middleware::OAuth::</span><span class="n">Foursquare</span><span class="p">;</span>
-</div><div class='line'><span class="k">use</span> <span class="n">strict</span><span class="p">;</span>
-</div><div class='line'><span class="k">use</span> <span class="n">warnings</span><span class="p">;</span>
-</div><div class='line'> </div><div class='line'><span class="k">sub </span><span class="nf">config</span> <span class="p">{</span>
-</div><div class='line'>    <span class="o">+</span><span class="p">{</span>
-</div><div class='line'>        <span class="n">version</span>          <span class="o">=&gt;</span> <span class="mi">2</span><span class="p">,</span>
-</div><div class='line'>        <span class="n">authorize_url</span>    <span class="o">=&gt;</span> <span class="s">&#39;https://foursquare.com/oauth2/authenticate&#39;</span><span class="p">,</span>
-</div><div class='line'>        <span class="n">access_token_url</span> <span class="o">=&gt;</span> <span class="s">&#39;https://foursquare.com/oauth2/access_token&#39;</span><span class="p">,</span>
-</div><div class='line'>        <span class="n">response_type</span>    <span class="o">=&gt;</span> <span class="s">&#39;code&#39;</span><span class="p">,</span>
-</div><div class='line'>        <span class="n">grant_type</span>       <span class="o">=&gt;</span> <span class="s">&#39;authorization_code&#39;</span><span class="p">,</span>
-</div><div class='line'>    <span class="p">};</span>
-</div><div class='line'><span class="p">}</span>
-</div><div class='line'> </div><div class='line'><span class="mi">1</span><span class="p">;</span>
-</div></pre></td></tr></table></div></figure>
-
-<p>위처럼 <code>Plack::Middleware::OAuth::Foursquare</code> 와,</p>
-
-<figure class='code'><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div><div data-line='2' class='line-number'></div><div data-line='3' class='line-number'></div><div data-line='4' class='line-number'></div><div data-line='5' class='line-number'></div><div data-line='6' class='line-number'></div><div data-line='7' class='line-number'></div><div data-line='8' class='line-number'></div><div data-line='9' class='line-number'></div><div data-line='10' class='line-number'></div><div data-line='11' class='line-number'></div><div data-line='12' class='line-number'></div><div data-line='13' class='line-number'></div><div data-line='14' class='line-number'></div><div data-line='15' class='line-number'></div><div data-line='16' class='line-number'></div><div data-line='17' class='line-number'></div><div data-line='18' class='line-number'></div><div data-line='19' class='line-number'></div><div data-line='20' class='line-number'></div><div data-line='21' class='line-number'></div><div data-line='22' class='line-number'></div><div data-line='23' class='line-number'></div></pre></td><td class='main  perl'><pre><div class='line'><span class="nb">package</span> <span class="nn">Plack::Middleware::OAuth::UserInfo::</span><span class="n">Foursquare</span><span class="p">;</span>
-</div><div class='line'><span class="k">use</span> <span class="n">strict</span><span class="p">;</span>
-</div><div class='line'><span class="k">use</span> <span class="n">warnings</span><span class="p">;</span>
-</div><div class='line'><span class="k">use</span> <span class="n">parent</span> <span class="sx">qw(Plack::Middleware::OAuth::UserInfo)</span><span class="p">;</span>
-</div><div class='line'><span class="k">use</span> <span class="nn">LWP::</span><span class="n">UserAgent</span><span class="p">;</span>
-</div><div class='line'><span class="k">use</span> <span class="n">JSON</span><span class="p">;</span>
-</div><div class='line'> </div><div class='line'><span class="k">sub </span><span class="nf">create_handle</span> <span class="p">{}</span>
-</div><div class='line'> </div><div class='line'><span class="k">sub </span><span class="nf">query</span> <span class="p">{</span>
-</div><div class='line'>    <span class="k">my</span> <span class="nv">$self</span> <span class="o">=</span> <span class="nb">shift</span><span class="p">;</span>
-</div><div class='line'> </div><div class='line'>    <span class="k">my</span> <span class="nv">$uri</span> <span class="o">=</span> <span class="n">URI</span><span class="o">-&gt;</span><span class="k">new</span><span class="p">(</span><span class="s">&#39;https://api.foursquare.com/v2/users/self&#39;</span><span class="p">);</span>
-</div><div class='line'>    <span class="nv">$uri</span><span class="o">-&gt;</span><span class="n">query_form</span><span class="p">(</span> <span class="n">oauth_token</span> <span class="o">=&gt;</span> <span class="nv">$self</span><span class="o">-&gt;</span><span class="n">token</span><span class="o">-&gt;</span><span class="n">access_token</span> <span class="p">);</span>
-</div><div class='line'>    <span class="k">my</span> <span class="nv">$res</span> <span class="o">=</span> <span class="nn">LWP::</span><span class="n">UserAgent</span><span class="o">-&gt;</span><span class="k">new</span><span class="o">-&gt;</span><span class="n">get</span><span class="p">(</span><span class="nv">$uri</span><span class="p">);</span>
-</div><div class='line'>    <span class="k">my</span> <span class="nv">$body</span> <span class="o">=</span> <span class="nv">$res</span><span class="o">-&gt;</span><span class="n">decoded_content</span><span class="p">;</span>
-</div><div class='line'>    <span class="k">return</span> <span class="k">unless</span> <span class="nv">$body</span><span class="p">;</span>
-</div><div class='line'> </div><div class='line'>    <span class="k">my</span> <span class="nv">$obj</span> <span class="o">=</span> <span class="n">decode_json</span><span class="p">(</span><span class="nv">$body</span><span class="p">)</span> <span class="o">||</span> <span class="p">{};</span>
-</div><div class='line'>    <span class="k">return</span> <span class="nv">$obj</span><span class="o">-&gt;</span><span class="p">{</span><span class="n">response</span><span class="p">}</span><span class="o">-&gt;</span><span class="p">{</span><span class="n">user</span><span class="p">};</span>
-</div><div class='line'><span class="p">}</span>
-</div><div class='line'> </div><div class='line'><span class="mi">1</span><span class="p">;</span>
-</div></pre></td></tr></table></div></figure>
-
-<p><code>Plack::Middleware::OAuth::UserInfo::Foursquare</code> 를 추가합니다.</p>
-
-<p>이렇게 쉽게 OAuth Provider 마다 해당 네임스페이스 맞는 모듈을 추가해줍니다.</p>
-
-<h3>MyApp</h3>
-
-<figure class='code'><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div><div data-line='2' class='line-number'></div><div data-line='3' class='line-number'></div><div data-line='4' class='line-number'></div><div data-line='5' class='line-number'></div><div data-line='6' class='line-number'></div><div data-line='7' class='line-number'></div><div data-line='8' class='line-number'></div><div data-line='9' class='line-number'></div><div data-line='10' class='line-number'></div><div data-line='11' class='line-number'></div><div data-line='12' class='line-number'></div><div data-line='13' class='line-number'></div><div data-line='14' class='line-number'></div><div data-line='15' class='line-number'></div><div data-line='16' class='line-number'></div><div data-line='17' class='line-number'></div><div data-line='18' class='line-number'></div><div data-line='19' class='line-number'></div><div data-line='20' class='line-number'></div><div data-line='21' class='line-number'></div><div data-line='22' class='line-number'></div><div data-line='23' class='line-number'></div><div data-line='24' class='line-number'></div><div data-line='25' class='line-number'></div></pre></td><td class='main  perl'><pre><div class='line'><span class="c1"># ...</span>
-</div><div class='line'><span class="k">my</span> <span class="nv">$app</span> <span class="o">=</span> <span class="n">MyApp</span><span class="o">-&gt;</span><span class="n">psgi_app</span><span class="p">;</span>
-</div><div class='line'><span class="n">builder</span> <span class="p">{</span>
-</div><div class='line'>    <span class="n">mount</span> <span class="s">&#39;/oauth&#39;</span> <span class="o">=&gt;</span> <span class="n">builder</span> <span class="p">{</span>
-</div><div class='line'>        <span class="n">enable</span> <span class="s">&#39;OAuth&#39;</span><span class="p">,</span>
-</div><div class='line'>            <span class="n">on_success</span> <span class="o">=&gt;</span> <span class="k">sub </span><span class="p">{</span>
-</div><div class='line'>                <span class="k">my</span> <span class="p">(</span><span class="nv">$mw</span><span class="p">,</span> <span class="nv">$token</span><span class="p">)</span> <span class="o">=</span> <span class="nv">@_</span><span class="p">;</span>
-</div><div class='line'> </div><div class='line'>                <span class="c1"># get Foursquare&#39;s UserInfo</span>
-</div><div class='line'>                <span class="k">my</span> <span class="nv">$info</span> <span class="o">=</span> <span class="nn">Plack::Middleware::OAuth::</span><span class="n">UserInfo</span><span class="o">-&gt;</span><span class="k">new</span><span class="p">(</span> <span class="n">config</span> <span class="o">=&gt;</span> <span class="nv">$mw</span><span class="o">-&gt;</span><span class="n">config</span><span class="p">,</span> <span class="n">token</span> <span class="o">=&gt;</span> <span class="nv">$token</span> <span class="p">);</span>
-</div><div class='line'> </div><div class='line'>                <span class="k">if</span> <span class="p">(</span><span class="nv">$token</span><span class="o">-&gt;</span><span class="n">is_provider</span><span class="p">(</span><span class="s">&#39;Foursquare&#39;</span><span class="p">))</span> <span class="p">{</span>
-</div><div class='line'>                <span class="k">return</span> <span class="nv">$mw</span><span class="o">-&gt;</span><span class="n">redirect</span><span class="p">(</span><span class="s">&#39;/&#39;</span><span class="p">);</span>
-</div><div class='line'>              <span class="p">}</span>
-</div><div class='line'>              <span class="n">on_error</span> <span class="o">=&gt;</span> <span class="k">sub </span><span class="p">{</span> <span class="c1">#... },</span>
-</div><div class='line'>              <span class="n">providers</span> <span class="o">=&gt;</span> <span class="p">{</span>
-</div><div class='line'>                  <span class="s">&#39;Foursquare&#39;</span> <span class="o">=&gt;</span> <span class="p">{</span>
-</div><div class='line'>                      <span class="n">client_id</span> <span class="o">=&gt;</span> <span class="s">&#39;YOUR CLIENT_ID&#39;</span><span class="p">,</span>
-</div><div class='line'>                      <span class="n">client_secret</span> <span class="o">=&gt;</span> <span class="s">&#39;YOUR CLIENT_SECRET&#39;</span><span class="p">,</span>
-</div><div class='line'>                  <span class="p">},</span>
-</div><div class='line'>              <span class="p">};</span>
-</div><div class='line'>            <span class="p">}</span>
-</div><div class='line'>    <span class="p">};</span>
-</div><div class='line'>    <span class="n">mount</span> <span class="s">&#39;/&#39;</span> <span class="o">=&gt;</span> <span class="nv">$app</span><span class="p">;</span>
-</div><div class='line'><span class="p">};</span>
-</div></pre></td></tr></table></div></figure>
-
-<p>대충 위처럼 사용을 합니다.
-  좀 더 자세한 예제는 <a href="https://github.com/c9s/Plack-Middleware-OAuth/blob/develop/eg/app.psgi">P::M::OAuth 모듈의 예제 psgi 파일</a> 또는 , 이 모듈을 사용한 제 프로젝트 <a href="https://github.com/JEEN/Bobby-Akawa/blob/develop/lib/Bobby.pm#L46">Bobby-Akawa 의 특정 모듈</a>에서 찾아볼 수 있습니다.</p>
-
-<h3>Conclusion</h3>
-
-<p>이로써 간략하게나마 Plack::Middleware::OAuth 를 이용해서 OAuth 인증을 Plack Middleware 단에서 구현할 수 있게 되었습니다. 조금 설명이 빈약해서 차후에 좀 더 구현단으로 들어가서 좀 더 깊게 파고들어가 볼까 합니다.</p>
-</div>
-
-  <footer>
-    
-    <p><a class="comments-link" href="/2011/12/27/using-plack-middleware-oauth/#disqus_thread" data-disqus-identifier="http://jeen.github.io/2011/12/27/using-plack-middleware-oauth/">View comments &raquo;</a></p>
 
     
     

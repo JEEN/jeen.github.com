@@ -98,6 +98,156 @@
   <header>
     <h1 class="entry-title">
 
+<a href="/2012/07/02/https-ssl-lwp-soap-and-perl/">HTTPS-SSL-LWP-SOAP and Perl</a>
+
+</h1>
+
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2012-07-02T15:23:00+00:00" pubdate data-updated="true">Jul 2<span>nd</span>, 2012</time>
+         &bull; <a rel="bookmark" href="/2012/07/02/https-ssl-lwp-soap-and-perl/">Permalink</a>
+      </p>
+    
+  </header>
+
+<div class="entry-content"><blockquote>
+<p>tl;dr: I hate Java and SOAP, use Perl</p>
+</blockquote>
+
+<p>지난 주에 고객으로부터 요구를 받았는데, DB특정 항목에 대치되는 어떤 값을 가지고 모 API를 통해서 결과를 받아서 뿌려주는 간단한 것이었습니다.</p>
+
+<p>그 API 제공회사에서 날라온 API 명세서는 뭘 해도 자바였었죠. 샘플이라고 널려놓은 두세네개 코드도 전부 자바였습니다. 해야하는 건 결국 뭐 SOAP 정도였죠.</p>
+
+<p>명세서에는 Axis 라는 것을 깔아서 뭐 붙여서 어떻게 뭐 wsdl 붙이고 어쩌고 복잡하게 써놨는데&hellip;</p>
+
+<p>결론부터 말하면 endpoint 와 보낼 값들만 필요하면 자바가 무슨 소용이냐 싶어서 집어냈습니다.</p>
+
+<figure class='code'><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div><div data-line='2' class='line-number'></div><div data-line='3' class='line-number'></div><div data-line='4' class='line-number'></div><div data-line='5' class='line-number'></div><div data-line='6' class='line-number'></div><div data-line='7' class='line-number'></div><div data-line='8' class='line-number'></div><div data-line='9' class='line-number'></div><div data-line='10' class='line-number'></div><div data-line='11' class='line-number'></div><div data-line='12' class='line-number'></div><div data-line='13' class='line-number'></div><div data-line='14' class='line-number'></div><div data-line='15' class='line-number'></div><div data-line='16' class='line-number'></div><div data-line='17' class='line-number'></div><div data-line='18' class='line-number'></div><div data-line='19' class='line-number'></div><div data-line='20' class='line-number'></div></pre></td><td class='main  perl'><pre><div class='line'><span class="k">use</span> <span class="n">strict</span><span class="p">;</span>
+</div><div class='line'><span class="k">use</span> <span class="n">warnings</span><span class="p">;</span>
+</div><div class='line'><span class="k">use</span> <span class="nn">LWP::</span><span class="n">UserAgent</span><span class="p">;</span>
+</div><div class='line'><span class="k">use</span> <span class="nn">Data::</span><span class="n">Dumper</span><span class="p">;</span>
+</div><div class='line'> </div><div class='line'><span class="k">my</span> <span class="nv">$q</span> <span class="o">=</span> <span class="p">{</span>
+</div><div class='line'><span class="o">&lt;</span><span class="p">?</span><span class="n">xml</span> <span class="n">version</span><span class="o">=</span><span class="s">&quot;1.0&quot;</span> <span class="n">encoding</span><span class="o">=</span><span class="s">&quot;UTF-8&quot;</span><span class="p">?</span><span class="o">&gt;</span>
+</div><div class='line'><span class="o">&lt;</span><span class="n">soapenv:Envelope</span> <span class="n">xmlns:soapenv</span><span class="o">=</span><span class="s">&quot;http://schemas.xmlsoap.org/soap/envelope/&quot;</span> <span class="n">xmlns:xsd</span><span class="o">=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema&quot;</span> <span class="n">xmlns:xsi</span><span class="o">=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span><span class="o">&gt;</span>
+</div><div class='line'> <span class="sr">&lt;soapenv:Body&gt;</span>
+</div><div class='line'> <span class="o">.........</span>
+</div><div class='line'> <span class="sr">&lt;/soapenv:Body&gt;</span>
+</div><div class='line'><span class="p">};</span>
+</div><div class='line'> </div><div class='line'><span class="k">my</span> <span class="nv">$ua</span> <span class="o">=</span> <span class="nn">LWP::</span><span class="n">UserAgent</span><span class="o">-&gt;</span><span class="k">new</span><span class="p">;</span>
+</div><div class='line'><span class="k">my</span> <span class="nv">$res</span> <span class="o">=</span> <span class="nv">$ua</span><span class="o">-&gt;</span><span class="n">post</span><span class="p">(</span><span class="s">&#39;https://........&#39;</span><span class="p">,</span>
+</div><div class='line'>  <span class="s">&#39;Content-Type&#39;</span> <span class="o">=&gt;</span> <span class="s">&#39;text/xml; charset=utf-8&#39;</span><span class="p">,</span>
+</div><div class='line'>  <span class="n">Content</span> <span class="o">=&gt;</span> <span class="nv">$q</span><span class="p">,</span>
+</div><div class='line'><span class="p">);</span>
+</div><div class='line'> </div><div class='line'><span class="k">print</span> <span class="n">Dumper</span> <span class="nv">$res</span><span class="o">-&gt;</span><span class="n">content</span><span class="p">;</span>
+</div></pre></td></tr></table></div></figure>
+
+<p>우선 SOAP XML 내용 및 endpoint 는 해당업체 비밀자료이기에 표시하지 않습니다.</p>
+
+<p>위의 코드의 결과는</p>
+
+<figure class='code'><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div><div data-line='2' class='line-number'></div><div data-line='3' class='line-number'></div></pre></td><td class='main  bash'><pre><div class='line'>Can<span class="se">\&#39;</span>t connect to demo-asp.ysdasp-service.ne.jp:443 <span class="o">(</span>certificate verify failed<span class="o">)</span>
+</div><div class='line'> </div><div class='line'>LWP::Protocol::https::Socket: SSL connect attempt failed with unknown error error:14090086:SSL routines:SSL3_GET_SERVER_CERTIFICATE:certificate verify failed at .../perl-5.14.2-llvm/lib/site_perl/5.14.2/LWP/Protocol/http.pm line 51.
+</div></pre></td></tr></table></div></figure>
+
+<p>이라고 나온 것이었습니다. 유효하지 않은 인증서라는 데, 브라우저에서는 그냥 무시하고 지나가버리면 되는 데, Perl 의 경우에서는 어떻게 할까&hellip; 결론은 구글해봤습니다.</p>
+
+<figure class='code'><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div></pre></td><td class='main  perl'><pre><div class='line'><span class="nv">$ENV</span><span class="p">{</span><span class="s">&#39;PERL_LWP_SSL_VERIFY_HOSTNAME&#39;</span><span class="p">}</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</div></pre></td></tr></table></div></figure>
+
+<p><code>PERL_LWP_SSL_VERIFY_HOSTNAME</code> 이라는 환경변수의 값을 0으로 지정함으로써 LWP 가 인증서의 유효성 체크를 생략시켜버립니다.</p>
+
+<p>이제는 되겠지 하고 실행을 시켜보니&hellip;</p>
+
+<figure class='code'><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div><div data-line='2' class='line-number'></div><div data-line='3' class='line-number'></div><div data-line='4' class='line-number'></div><div data-line='5' class='line-number'></div><div data-line='6' class='line-number'></div><div data-line='7' class='line-number'></div><div data-line='8' class='line-number'></div><div data-line='9' class='line-number'></div><div data-line='10' class='line-number'></div></pre></td><td class='main  xml'><pre><div class='line'><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+</div><div class='line'><span class="nt">&lt;soapenv:Envelope</span> <span class="na">xmlns:soapenv=</span><span class="s">&quot;http://schemas.xmlsoap.org/soap/envelope/&quot;</span> <span class="na">xmlns:xsd=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema&quot;</span> <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span><span class="nt">&gt;</span>
+</div><div class='line'> <span class="nt">&lt;soapenv:Body&gt;</span>
+</div><div class='line'>  <span class="nt">&lt;soapenv:Fault&gt;</span>
+</div><div class='line'>   <span class="nt">&lt;faultcode</span> <span class="na">xmlns:ns1=</span><span class="s">&quot;http://xml.apache.org/axis/&quot;</span><span class="nt">&gt;</span>ns1:Client.NoSOAPAction<span class="nt">&lt;/faultcode&gt;</span>
+</div><div class='line'>   <span class="nt">&lt;faultstring&gt;</span>no SOAPAction header!<span class="nt">&lt;/faultstring&gt;</span>
+</div><div class='line'>   <span class="nt">&lt;detail/&gt;</span>
+</div><div class='line'>  <span class="nt">&lt;/soapenv:Fault&gt;</span>
+</div><div class='line'> <span class="nt">&lt;/soapenv:Body&gt;</span>
+</div><div class='line'><span class="nt">&lt;/soapenv:Envelope&gt;</span>
+</div></pre></td></tr></table></div></figure>
+
+<p>이라는 결과가 나옵니다. <code>SOAPAction</code> 이라는 헤더가 없다고 하는데&hellip; SOAP 통신에는 SOAPAction 이라는 헤더를 넣는다고&hellip; 그냥 해보니 <code>SOAPAction</code> 에 그냥 빈값이라도 헤더이름만 넣고 돌려보면 되겠구나 라는 생각이 들었습니다.</p>
+
+<figure class='code'><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div><div data-line='2' class='line-number'></div><div data-line='3' class='line-number'></div><div data-line='4' class='line-number'></div><div data-line='5' class='line-number'></div></pre></td><td class='main  perl'><pre><div class='line'><span class="k">my</span> <span class="nv">$res</span> <span class="o">=</span> <span class="nv">$ua</span><span class="o">-&gt;</span><span class="n">post</span><span class="p">(</span><span class="s">&#39;https://........&#39;</span><span class="p">,</span>
+</div><div class='line'>  <span class="s">&#39;Content-Type&#39;</span> <span class="o">=&gt;</span> <span class="s">&#39;text/xml; charset=utf-8&#39;</span><span class="p">,</span>
+</div><div class='line'>  <span class="n">SOAPAction</span> <span class="o">=&gt;</span> <span class="s">&#39;&quot;&quot;&#39;</span><span class="p">,</span>
+</div><div class='line'>  <span class="n">Content</span> <span class="o">=&gt;</span> <span class="nv">$q</span><span class="p">,</span>
+</div><div class='line'><span class="p">);</span>
+</div></pre></td></tr></table></div></figure>
+
+<p>POST 시에 <code>SOAPAction</code> 헤더를 넣어주고 다시 돌려보았습니다.</p>
+
+<figure class='code'><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div><div data-line='2' class='line-number'></div><div data-line='3' class='line-number'></div><div data-line='4' class='line-number'></div><div data-line='5' class='line-number'></div><div data-line='6' class='line-number'></div><div data-line='7' class='line-number'></div><div data-line='8' class='line-number'></div><div data-line='9' class='line-number'></div><div data-line='10' class='line-number'></div></pre></td><td class='main  xml'><pre><div class='line'><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+</div><div class='line'><span class="nt">&lt;soapenv:Envelope</span> <span class="na">xmlns:soapenv=</span><span class="s">&quot;http://schemas.xmlsoap.org/soap/envelope/&quot;</span> <span class="na">xmlns:xsd=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema&quot;</span> <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span><span class="nt">&gt;</span>
+</div><div class='line'> <span class="nt">&lt;soapenv:Body&gt;</span>
+</div><div class='line'>  <span class="nt">&lt;soapenv:Fault&gt;</span>
+</div><div class='line'>   <span class="nt">&lt;faultcode&gt;</span>soapenv:Server.userException<span class="nt">&lt;/faultcode&gt;</span>
+</div><div class='line'>   <span class="nt">&lt;faultstring&gt;</span>org.xml.sax.SAXParseException: The processing instruction target matching <span class="ni">&amp;quot;</span>[xX][mM][lL]<span class="ni">&amp;quot;</span> is not allowed.<span class="nt">&lt;/faultstring&gt;</span>
+</div><div class='line'>   <span class="nt">&lt;detail/&gt;</span>
+</div><div class='line'>  <span class="nt">&lt;/soapenv:Fault&gt;</span>
+</div><div class='line'> <span class="nt">&lt;/soapenv:Body&gt;</span>
+</div><div class='line'><span class="nt">&lt;/soapenv:Envelope&gt;</span>
+</div></pre></td></tr></table></div></figure>
+
+<p>다시 해당 <code>faultstring</code> 으로 검색을 해본 결과, 이유는 &lt;?xml &hellip;?&gt; 앞에 빈 공백값이 있으면 안된다는 것이었습니다.</p>
+
+<figure class='code'><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div><div data-line='2' class='line-number'></div><div data-line='3' class='line-number'></div><div data-line='4' class='line-number'></div><div data-line='5' class='line-number'></div><div data-line='6' class='line-number'></div></pre></td><td class='main  perl'><pre><div class='line'><span class="k">my</span> <span class="nv">$q</span> <span class="o">=</span> <span class="sx">q{&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+</div><div class='line'><span class="sx">&lt;soapenv:Envelope xmlns:soapenv=&quot;http://schemas.xmlsoap.org/soap/envelope/&quot; xmlns:xsd=&quot;http://www.w3.org/2001/XMLSchema&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;&gt;</span>
+</div><div class='line'><span class="sx"> &lt;soapenv:Body&gt;</span>
+</div><div class='line'><span class="sx"> .........</span>
+</div><div class='line'><span class="sx"> &lt;/soapenv:Body&gt;</span>
+</div><div class='line'><span class="sx">}</span><span class="p">;</span>
+</div></pre></td></tr></table></div></figure>
+
+<p>맨 위의 코드에서 <code>q{</code> 다음에 개행을 넣은 게 문제가 되어서 다시 지우고 돌려본 결과 좌르르르륵 펴쳐져 나오는 기나긴 XML의 향연&hellip;</p>
+
+<p>아무튼 이걸로 API 제공업체에서 JAVA 를 기준으로 작성된 길고 긴 명세서들과 설치요령 등등의 문서들을 제쳐두고 해야할 일에만 집중할 수 있게 되었습니다.</p>
+</div>
+
+  <footer>
+    
+    <p><a class="comments-link" href="/2012/07/02/https-ssl-lwp-soap-and-perl/#disqus_thread" data-disqus-identifier="http://jeen.github.io/2012/07/02/https-ssl-lwp-soap-and-perl/">View comments &raquo;</a></p>
+
+    
+    
+  </footer>
+
+
+    </article>
+  
+    
+
+
+
+
+
+
+
+
+
+
+    <article >
+      
+  <header>
+    <h1 class="entry-title">
+
 <a href="/2012/07/01/regexp-wildcards/">Regexp::Wildcards</a>
 
 </h1>
@@ -354,70 +504,6 @@
   <footer>
     
     <p><a class="comments-link" href="/2012/06/19/dbix-class-and-replication-ii/#disqus_thread" data-disqus-identifier="http://jeen.github.io/2012/06/19/dbix-class-and-replication-ii/">View comments &raquo;</a></p>
-
-    
-    
-  </footer>
-
-
-    </article>
-  
-    
-
-
-
-
-
-
-
-
-
-
-    <article >
-      
-  <header>
-    <h1 class="entry-title">
-
-<a href="/2012/06/18/oh-my-zsh-bash-it/">Oh-my-zsh → Bash-it</a>
-
-</h1>
-
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-
-<time datetime="2012-06-18T17:42:00+00:00" pubdate data-updated="true">Jun 18<span>th</span>, 2012</time>
-         &bull; <a rel="bookmark" href="/2012/06/18/oh-my-zsh-bash-it/">Permalink</a>
-      </p>
-    
-  </header>
-
-<div class="entry-content"><p>한동안 zsh 을 사용하면서 oh-my-zsh 로 화려한 셸환경을 이용하고 있었는데요, 언제부턴가 grep warning 이 뜨기도 하고, bash 위주의 작업환경에 맞춘 기사들이 소개되기에 이르러 결국 zsh 을 버리고 다시 bash 로 돌아오게 되었습니다.</p>
-
-<ul>
-<li><p><a href="https://github.com/robbyrussell/oh-my-zsh">robbyrussell/oh-my-zsh•GitHub</a></p>
-
-<p>하지만 그래도 역시 oh-my-zsh 을 사용하면서 접한 경험들을 버릴 수가 없기에 bash 에서 그런 류의 확장이 없을까 검색해본 결과 bash-it 이라는 것이 있다는 것을 확인했습니다.</p></li>
-<li><p><a href="https://github.com/revans/bash-it">revans/bash-it•GitHub</a></p>
-
-<p>솔직히 oh-my-zsh 에 비해서는 그렇게 만족스럽지는 못합니다. :-(</p></li>
-</ul>
-</div>
-
-  <footer>
-    
-    <p><a class="comments-link" href="/2012/06/18/oh-my-zsh-bash-it/#disqus_thread" data-disqus-identifier="http://jeen.github.io/2012/06/18/oh-my-zsh-bash-it/">View comments &raquo;</a></p>
 
     
     
