@@ -3,7 +3,7 @@
   <title><![CDATA[JEEN's techlog]]></title>
   <link href="http://jeen.github.io/atom.xml" rel="self"/>
   <link href="http://jeen.github.io/"/>
-  <updated>2013-06-07T09:08:07+00:00</updated>
+  <updated>2013-06-18T13:35:19+00:00</updated>
   <id>http://jeen.github.io/</id>
   <author>
     <name><![CDATA[Jeen Lee]]></name>
@@ -11,6 +11,24 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+    <entry>
+      
+
+
+
+
+<title type="html"><![CDATA[Using MSSQL in Perl(Linux)]]></title>
+<link href="http://jeen.github.io/2013/06/18/using-mssql-in-perl-linux/"/>
+<updated>2013-06-18T13:33:40+00:00</updated>
+<id>http://jeen.github.io/2013/06/18/using-mssql-in-perl-linux</id>
+<category term="db" /><category term="perl" />
+
+      <content type="html"><![CDATA[<p>오늘은 IRC 상에서 리눅스 환경에서 Perl 로 MS-SQL 에 접속하는 최선의 방법에 대한 이야기가 있었습니다. 그냥 흘리기에는 아쉬운 얘기들이 많아서 긁어서 정리해봅니다. </p>
+
+<p><script src="//storify.com/jeen_lee/using-mssql-in-perl-linux.js" type="text/javascript" language="javascript"></script><noscript>[<a href="//storify.com/jeen_lee/using-mssql-in-perl-linux" target="_blank">View the story &ldquo;Using MSSQL in Perl(Linux)&rdquo; on Storify</a>]</noscript></p>
+]]></content>
+    </entry>
   
     <entry>
       
@@ -1951,61 +1969,6 @@ skyloader has left IRC (Remote host closed the connection)</p></li>
 <p><code>Facebook::Graph</code> 모듈은 생각보다 좀 변태같습니다. 그 이유는 Facebook Graph API 도 변태같다는 근본적인 &hellip;. 그리고 Access Token 은 뭐 적당하게 Developer 페이지 가서 줏어서 넣었습니다. :-)</p>
 
 <p><img src="https://lh6.googleusercontent.com/-GrgEvhNP0d0/UBDW9W-YzLI/AAAAAAAACAQ/5G48cMzvryY/w389-h521-k/list.jpg" alt=""></p>
-]]></content>
-    </entry>
-  
-    <entry>
-      
-
-
-
-
-<title type="html"><![CDATA[MySQL::Diff - A vs B]]></title>
-<link href="http://jeen.github.io/2012/07/18/mysql-diff-a-vs-b/"/>
-<updated>2012-07-18T18:30:00+00:00</updated>
-<id>http://jeen.github.io/2012/07/18/mysql-diff-a-vs-b</id>
-<category term="mysql" /><category term="perl" />
-
-      <content type="html"><![CDATA[<p>최근에 유지보수 관련 일로 골머리를 싸고 있다가 겨우겨우 마무리하고 있는 일이 하나 있었습니다.</p>
-
-<p>PHP 프로젝트였는데, 유지보수 관련해서 여러가지 이슈들이 나오기 마련이고, 그 때문에 잘 움직이던 기존의 DB구조를
-변경해줄 필요가 있었습니다.</p>
-
-<p>뭐 테이블을 추가하거나, 어떤 컬럼의 형식을 변경하거나, 혹은 인덱스를 추가하거나 하는 뭐 이런 경우 말이죠.</p>
-
-<p>처음에는 개발환경아래에서 기존의 product 환경에서 운용중인 DB를 dump 떠와서 진행하고, 프로젝트를 진행하면서
-변경되는 SQL 내용들을 일일이 적어주었습니다. 그러다가 뭐 이사람 저사람 손을 옮겨타다가 결국 최종 마무리단계에서 
-어떤 컬럼이 변경되었는지, 어떤 테이블이 추가되었는지에 대한 확신을 할 수 없었습니다.</p>
-
-<p>그래서 기록된 SQL 을 기반으로 눈과 손으로 검수를 해야하는 지경에서 결국 실수가 생기기 마련이죠. 그리고 클레임이 발생했습니다.</p>
-
-<p>자, 그럼 어떻게 하면 이런 상황에서 사태를 수습하느냐&hellip; 고심했습니다.</p>
-
-<p>그 결과 혹시 이거라면 해서 찔러본 것이 빙고 였던 것이 <a href="http://metacpan.org/module/MySQL::Diff">MySQL::Diff</a> 였습니다.</p>
-
-<p>맨처음 덤프떠온 DB 를 <code>DB_A</code> 로 지정하고, 최종적으로 개발이 종료된 DB 를 <code>DB_B</code> 라고 놓습니다.</p>
-
-<p>이 <code>DB_A</code> 와 <code>DB_B</code> 를 서로 비교하는 것이죠. 그걸을 위해서 <code>MySQL::Diff</code> 모듈이 사용됩니다.</p>
-
-<figure class='code'><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div><div data-line='2' class='line-number'></div><div data-line='3' class='line-number'></div><div data-line='4' class='line-number'></div><div data-line='5' class='line-number'></div><div data-line='6' class='line-number'></div><div data-line='7' class='line-number'></div><div data-line='8' class='line-number'></div><div data-line='9' class='line-number'></div><div data-line='10' class='line-number'></div><div data-line='11' class='line-number'></div><div data-line='12' class='line-number'></div><div data-line='13' class='line-number'></div><div data-line='14' class='line-number'></div><div data-line='15' class='line-number'></div></pre></td><td class='main  bash'><pre><div class='line'><span class="nv">$ </span>mysqldiff --host1 localhost --user1 root --password1 whatthehell --host2 localhost --user2 root --password2 whatthehell bto bto_test
-</div><div class='line'><span class="c">## mysqldiff 0.43</span>
-</div><div class='line'><span class="c">## </span>
-</div><div class='line'><span class="c">## Run on Wed Jul 18 18:26:39 2012</span>
-</div><div class='line'><span class="c">## Options: password2=whatthehell, password1=whatthehell, user1=root, host2=localhost, debug=0, host1=localhost, user2=root</span>
-</div><div class='line'><span class="c">##</span>
-</div><div class='line'><span class="c">## ---   db: bto (host=localhost user=root)</span>
-</div><div class='line'><span class="c">## +++   db: bto_test (host=localhost user=root)</span>
-</div><div class='line'> </div><div class='line'>ALTER TABLE auth DROP COLUMN updated_on; <span class="c"># was datetime NOT NULL DEFAULT &#39;0000-00-00 00:00:00&#39;</span>
-</div><div class='line'>ALTER TABLE auth DROP COLUMN created_on; <span class="c"># was datetime NOT NULL DEFAULT &#39;0000-00-00 00:00:00&#39;</span>
-</div><div class='line'>ALTER TABLE auth ADD UNIQUE passwd <span class="o">(</span>passwd<span class="o">)</span>;
-</div><div class='line'>CREATE TABLE test1 <span class="o">(</span>
-</div><div class='line'>  test1 int<span class="o">(</span>11<span class="o">)</span> NOT NULL
-</div><div class='line'><span class="o">)</span> <span class="nv">ENGINE</span><span class="o">=</span>MyISAM DEFAULT <span class="nv">CHARSET</span><span class="o">=</span>utf8;
-</div></pre></td></tr></table></div></figure>
-
-<p>위처럼 컬럼의 삭제, 인덱스의 추가, 테이블의 추가 등 모든 변경 내역들이 나오게 됩니다.</p>
-
-<p>다음부터는 이처럼 좀 더 간단하고 확실하게 할 수 있는 방법을 취해야 되겠습니다.</p>
 ]]></content>
     </entry>
   
