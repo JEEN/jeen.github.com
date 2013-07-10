@@ -98,6 +98,93 @@
   <header>
     <h1 class="entry-title">
 
+<a href="/2013/06/07/pullreq-on-mojox-validator/">PullReq on MojoX::Validator</a>
+
+</h1>
+
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2013-06-07T08:53:47+00:00" pubdate data-updated="true">Jun 7<span>th</span>, 2013</time>
+         &bull; <a rel="bookmark" href="/2013/06/07/pullreq-on-mojox-validator/">Permalink</a>
+      </p>
+    
+  </header>
+
+<div class="entry-content"><p>지난 수요일에 잠깐 이번 서버 구현에 쓸 Validator 를 물색하던 중에 <a href="http://metacpan.org/module/Mojolicious::Plugin::Validator">Mojolicious::Plugin::Validator</a> 를 보고는 참 Validation 코드쓰기 쉽다라는 생각에 덜컥 채용해버렸습니다.</p>
+
+<p>모듈은 2011년이 마지막으로 업뎃되었구요. 근데 깔아보니까 안깔립니다. 이것도 설마 5.18 의 Hash Randomization 문제때문인가 하면서 실패한 테스트코드를 살펴본 결과 Mojolicious API 가 바뀐 것때문이었습니다. 그러니까 1년 반안에 프레임워크 테스트 모듈의 근간 API 가 바뀌어버리는 바람에 테스트가 실패한 것이지요.</p>
+
+<p>일단 이 모듈이 맘에 들었고, 이 모듈을 만든 @vtivti 의 여러가지 결과물들을 보고 재미있는 사람이구나 하고 생각하기도 했었죠.</p>
+
+<ul>
+<li><p><a href="https://github.com/vti/mojox-validator/pull/17">https://github.com/vti/mojox-validator/pull/17</a></p>
+
+<p>그래서 그냥 뭐 테스트코드 하나 패치해서 Pull Req 를 보냈습니다. 내용을 보면 알겠지만 정말 별거 없습니다. <code>post_form_ok</code> 가 없어지고, <code>post_ok</code> 의 사용법이 아마 3.x ~ 4.x 버젼으로 넘어오면서 바뀌지 않았나 합니다. 남은 건 서버에 올리는 데 carton 으로 깔면 … 아 물론 cpanm 1.6 부터 git 프로토콜을 지원하기는 해서 그냥 git repo 를 집어넣으면 되니까…. // 하지만 그냥 CPAN 을 통해서 받고싶었기에 빨리 패치된 걸로 CPAN 에 올려달라고 독촉했습니다.</p></li>
+</ul>
+
+<blockquote class="twitter-tweet" lang="ko"><p>@<a href="https://twitter.com/vtivti">vtivti</a> oh, please release it please. Now it is the only one problem I had to deploy on my servers. @__@</p>&mdash; JEEN (@JEEN_LEE) <a href="https://twitter.com/JEEN_LEE/status/342088628903759872">2013년 6월 5일</a></blockquote>
+
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+<p>서버에 Deploy 한다는 건 Jenkins 에 올려놓고 빌드할 때 제대로 돌아가지 않으니까요… 뭐 밀린 숙제 같은 것이었습니다.</p>
+
+<p><blockquote class="twitter-tweet" lang="ko"><p>MojoX-Validator 0.0014 by VTI - <a href="http://t.co/1rKxxY9yQh" title="http://metacpan.org/release/VTI/MojoX-Validator-0.0014/">metacpan.org/release/VTI/Mo…</a></p>&mdash; CPAN New Modules (@cpan_new) <a href="https://twitter.com/cpan_new/status/342201018127372288">2013년 6월 5일</a></blockquote></p>
+
+<p>그래서 오늘에서야 6.5일에 업데이트된 것을 확인하고 Jenkins 설정을 하고 제대로 동작하는 것을 확인했습니다.</p>
+
+<ul>
+<li><p><a href="https://metacpan.org/source/VTI/MojoX-Validator-0.0014/Changes">https://metacpan.org/source/VTI/MojoX-Validator-0.0014/Changes</a></p>
+
+<p>Changes 날짜는 뭐 다르지만 이름이 콕하고 박혀있는 걸 보니… 뭔가 깨작거렸구나 하는 생각이 들기는 합니다.</p></li>
+</ul>
+
+<h3>결론</h3>
+
+<p>매번 CPAN Recents 의 내용을 봐도 그렇지만 Mojolicious 의 잦은 업데이트가 반갑기도 합니다. 실제로 Catalyst 에서 테스트코드를 쓸려면 좀 이래저래 손이 많이 가는 부분도 Mojolicious 의 <code>Test::Mojo</code> 를 통해서 뭔가 쉽고 직관적이게 테스트코드를 슥샥슥샥 쓸 수 있습니다. 오히려 감동을 받은 부분입니다.</p>
+
+<p>하지만 너무 잦은 업데이트는 이에 의존한 모듈들이 제대로 따라가주지 못하니 저같은 일반 사용자의 입장에서는 이런 경우처럼 예상이외의 수고가 들어가버릴 수도 있구나 ( 모듈을 만든 사람도 물론이거니와… ) 하는 생각도 듭니다.</p>
+</div>
+
+  <footer>
+    
+    <p><a class="comments-link" href="/2013/06/07/pullreq-on-mojox-validator/#disqus_thread" data-disqus-identifier="http://jeen.github.io/2013/06/07/pullreq-on-mojox-validator/">View comments &raquo;</a></p>
+
+    
+    
+  </footer>
+
+
+    </article>
+  
+    
+
+
+
+
+
+
+
+
+
+
+    <article >
+      
+  <header>
+    <h1 class="entry-title">
+
 <a href="/2013/05/26/miyagawas-podcast-ep12/">Miyagawa's Podcast Ep12 - Korean Translation</a>
 
 </h1>
@@ -492,125 +579,6 @@ skyloader has left IRC (Remote host closed the connection)</p></li>
   <footer>
     
     <p><a class="comments-link" href="/2013/05/25/download-percona-mysql-expo-2013-slides/#disqus_thread" data-disqus-identifier="http://jeen.github.io/2013/05/25/download-percona-mysql-expo-2013-slides/">View comments &raquo;</a></p>
-
-    
-    
-  </footer>
-
-
-    </article>
-  
-    
-
-
-
-
-
-
-
-
-
-
-    <article >
-      
-  <header>
-    <h1 class="entry-title">
-
-<a href="/2013/05/20/using-dbi-callbacks-generate-sqlite-file-automatically/">Using DBI Callbacks - Generate a SQLite File Automatically</a>
-
-</h1>
-
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-
-<time datetime="2013-05-20T02:59:04+00:00" pubdate data-updated="true">May 20<span>th</span>, 2013</time>
-         &bull; <a rel="bookmark" href="/2013/05/20/using-dbi-callbacks-generate-sqlite-file-automatically/">Permalink</a>
-      </p>
-    
-  </header>
-
-<div class="entry-content"><p>이런저런 임시데이터를 주고받고 하는 용도로 SQLite 파일을 덩어리채로 주고받는 경우가 있습니다.</p>
-
-<p>매일매일 그런 일이 일어나니 파일에는 날짜 정도는 집어넣어줘야 되구요.</p>
-
-<figure class='code'><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div><div data-line='2' class='line-number'></div><div data-line='3' class='line-number'></div><div data-line='4' class='line-number'></div><div data-line='5' class='line-number'></div><div data-line='6' class='line-number'></div><div data-line='7' class='line-number'></div><div data-line='8' class='line-number'></div><div data-line='9' class='line-number'></div></pre></td><td class='main  plain'><pre><div class='line'>DROP TABLE IF EXISTS item;
-</div><div class='line'>CREATE TABLE item (
-</div><div class='line'>  id    INTEGER NOT NULL PRIMARY KEY,
-</div><div class='line'>  name  VARCHAR(64),
-</div><div class='line'>  price INTEGER,
-</div><div class='line'>  maker VARCHAR(64),
-</div><div class='line'>  created_at INTEGER
-</div><div class='line'>);
-</div><div class='line'>...</div></pre></td></tr></table></div></figure>
-
-<p>대충 위와 같은 SQL 문을 이용해서 SQLite 파일안에 테이블도 만들어 줘야되고,</p>
-
-<p>이런저런 데이터들도 넣어줘야 되겠죠.</p>
-
-<figure class='code'><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div></pre></td><td class='main  plain'><pre><div class='line'>$ sqlite db/item.db3 &lt; sql/item.sql</div></pre></td></tr></table></div></figure>
-
-<p>일단은 요렇게 SQLite 를 만들고…</p>
-
-<figure class='code'><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div></pre></td><td class='main  plain'><pre><div class='line'>$ perl bin/generate_data.pl</div></pre></td></tr></table></div></figure>
-
-<p>뭐 요런 식으로 <code>item.db3</code> 에 있는 테이블들에 데이터를 쑤셔넣고 보내는 식입니다.</p>
-
-<figure class='code'><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div><div data-line='2' class='line-number'></div><div data-line='3' class='line-number'></div><div data-line='4' class='line-number'></div><div data-line='5' class='line-number'></div><div data-line='6' class='line-number'></div><div data-line='7' class='line-number'></div><div data-line='8' class='line-number'></div><div data-line='9' class='line-number'></div><div data-line='10' class='line-number'></div><div data-line='11' class='line-number'></div><div data-line='12' class='line-number'></div><div data-line='13' class='line-number'></div><div data-line='14' class='line-number'></div><div data-line='15' class='line-number'></div><div data-line='16' class='line-number'></div><div data-line='17' class='line-number'></div><div data-line='18' class='line-number'></div><div data-line='19' class='line-number'></div><div data-line='20' class='line-number'></div></pre></td><td class='main  plain'><pre><div class='line'>use MyApp::DB;
-</div><div class='line'> </div><div class='line'>my $db = MyApp::DB->new({ connect_info => [
-</div><div class='line'>    'dbi:SQLite:db/item.db3', "", "", {
-</div><div class='line'>        PrintError => 1,
-</div><div class='line'>        RaiseError => 1,
-</div><div class='line'>        Callbacks => {
-</div><div class='line'>            connected => sub {
-</div><div class='line'>                my $conn = shift;
-</div><div class='line'>                open my $fh, "&lt;", "sql/item.sql" or die "cannot found a sql file";
-</div><div class='line'>                my $sqls = do { local $/; &lt;$fh> };
-</div><div class='line'>                for (split /;\s+/, $sqls) {
-</div><div class='line'>                    $conn->do($_);
-</div><div class='line'>                }
-</div><div class='line'>                return;
-</div><div class='line'>            },
-</div><div class='line'>        },
-</div><div class='line'>    }
-</div><div class='line'>]})
-</div><div class='line'>….</div></pre></td></tr></table></div></figure>
-
-<p>SQLite 의 경우는 Connection정보를 지정해서 해당 DB파일이 지정 디렉토리에 위치해있으면 그 파일을 참조하고,
-없으면 0바이트의 파일을 만들어버립니다.</p>
-
-<p>이때 DBI Callbacks 를 이용해서 연결되었을 시(connected), <code>sql/item.sql</code> 에 위치한 SQL 문들을 실행합니다.</p>
-
-<p>DBI는 한 액션에 여러 SQL 문을 실행할 수 없기 때문에 &#39;;&#39; 를 구분자로해서 실행하면 각 쿼리별로 쪼개지게 됩니다.</p>
-
-<p>그렇게 해서 별다른 SQLite 파일 생성에 따른 외부적인 액션이 없이 스크립트 실행시마다 만들어지게 됩니다.
-(물론 저 위의 코드는 일부를 발췌해왔기 때문에 뭐 날마다 어쩌고 한다든가, 파일을 옮긴다든가 하는 부분의 코드는 생략했습니다)</p>
-
-<p>위처럼 DBI Callbacks 나 DBI Subclassing 을 이용해서 프로파일링이나 쿼리로그 같은 다양한 모듈들이 존재하니,</p>
-
-<p>그쪽도 한번 참고해보시면 도움이 되지 않을까 생각합니다.</p>
-
-<h3>참고</h3>
-
-<ul>
-<li><a href="http://search.cpan.org/%7Etimb/DBI-1.611/DBI.pm#Callbacks_(hash_ref)">http://search.cpan.org/~timb/DBI-1.611/DBI.pm#Callbacks_(hash_ref)</a></li>
-</ul>
-</div>
-
-  <footer>
-    
-    <p><a class="comments-link" href="/2013/05/20/using-dbi-callbacks-generate-sqlite-file-automatically/#disqus_thread" data-disqus-identifier="http://jeen.github.io/2013/05/20/using-dbi-callbacks-generate-sqlite-file-automatically/">View comments &raquo;</a></p>
 
     
     
