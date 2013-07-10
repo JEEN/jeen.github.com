@@ -98,6 +98,213 @@
   <header>
     <h1 class="entry-title">
 
+<a href="/2012/12/26/a-usecase-of-app-fatpacker/">A Usecase of App::Fatpacker - Nagios Plugin</a>
+
+</h1>
+
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2012-12-26T23:48:00+00:00" pubdate data-updated="true">Dec 26<span>th</span>, 2012</time>
+         &bull; <a rel="bookmark" href="/2012/12/26/a-usecase-of-app-fatpacker/">Permalink</a>
+      </p>
+    
+  </header>
+
+<div class="entry-content"><p>최근 업무때문에 Nagios Plugin 을 만져야 하는 일들이 빈번하게 있었고, 앞으로도 발생할 소지가 상당히 높습니다. 이런 Nagios Plugin 을 만들거나 기존에 만들어 진 것들을 간편하게 다른 복수의 서버에 배포하는 일도 필요합니다.</p>
+
+<p>Nagios Plugin 이야 굳이 언어를 가리지 않는다고 치더라도, 언어의 특정 라이브러리에 의존을 가지는 경우가 많습니다. MongoDB 용 Nagios Plugin 에는 Python 의 pymongo 라이브러리를 설치해야하는 경우가 있지요.</p>
+
+<p>일례로 Redis 용 Nagios Plugin 을 설치할 시에는 Redis CPAN 모듈을 필요로 합니다. 그런데 Redis 서버가 여러대이고, 이 여러대의 서버에 매번 Redis 모듈을 깔고, Redis 모니터링용 Nagios Plugin 도 설치를 해야하는 경우가 있습니다. 그냥 뭐 시간을 좀 허비해서라도 그렇게 번거로운 일을 하면 일이야 끝나겠지만, 현인(@aer0 님)의 조언을 빌어서 <a href="http://metacpan.org/module/App::FatPacker">App::FatPacker</a> 를 사용해서 단일 스크립트에 우겨넣는 방향으로 돌리도록 합니다.</p>
+
+<p>우선은 <code>App::FatPacker</code> 를 설치하면 <code>fatpack</code> 이라는 커맨드를 사용할 수 있습니다.</p>
+
+<p><a href="http://exchange.nagios.org">Nagios Exchange</a> 에서 찾아낸 <a href="http://exchange.nagios.org/directory/Plugins/Databases/check_redis-2Epl/details">check_redis</a> 중에 <code>check_redis.pl</code> 파일이 위에 말한대로 Redis 모듈에 의존이 걸린 상황입니다.</p>
+
+<p>그럼 우선 <code>fatpack</code> 커맨드로 다음과 같이 입력을 합니다.</p>
+
+<figure class='code'><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div><div data-line='2' class='line-number'></div></pre></td><td class='main  bash'><pre><div class='line'><span class="nv">$ </span>fatpack trace check_redis.pl
+</div><div class='line'>check_redis.pl syntax OK
+</div></pre></td></tr></table></div></figure>
+
+<p>결과 <code>syntax OK</code> 가 뜨고 해당 디렉토리에 <code>fatpacker.trace</code> 라는 파일이 생성됩니다.</p>
+
+<figure class='code'><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div><div data-line='2' class='line-number'></div><div data-line='3' class='line-number'></div><div data-line='4' class='line-number'></div><div data-line='5' class='line-number'></div><div data-line='6' class='line-number'></div><div data-line='7' class='line-number'></div><div data-line='8' class='line-number'></div><div data-line='9' class='line-number'></div><div data-line='10' class='line-number'></div><div data-line='11' class='line-number'></div><div data-line='12' class='line-number'></div><div data-line='13' class='line-number'></div><div data-line='14' class='line-number'></div><div data-line='15' class='line-number'></div><div data-line='16' class='line-number'></div><div data-line='17' class='line-number'></div><div data-line='18' class='line-number'></div><div data-line='19' class='line-number'></div><div data-line='20' class='line-number'></div><div data-line='21' class='line-number'></div><div data-line='22' class='line-number'></div><div data-line='23' class='line-number'></div><div data-line='24' class='line-number'></div><div data-line='25' class='line-number'></div><div data-line='26' class='line-number'></div><div data-line='27' class='line-number'></div><div data-line='28' class='line-number'></div><div data-line='29' class='line-number'></div><div data-line='30' class='line-number'></div><div data-line='31' class='line-number'></div><div data-line='32' class='line-number'></div><div data-line='33' class='line-number'></div><div data-line='34' class='line-number'></div><div data-line='35' class='line-number'></div><div data-line='36' class='line-number'></div></pre></td><td class='main  bash'><pre><div class='line'><span class="nv">$ </span>cat fatpacker.trace
+</div><div class='line'>IO/Handle.pm
+</div><div class='line'>List/Util.pm
+</div><div class='line'>Getopt/Long.pm
+</div><div class='line'>SelectSaver.pm
+</div><div class='line'>IO/Socket.pm
+</div><div class='line'>Fcntl.pm
+</div><div class='line'>Text/ParseWords.pm
+</div><div class='line'>Symbol.pm
+</div><div class='line'>Scalar/Util.pm
+</div><div class='line'>IO/Socket/INET.pm
+</div><div class='line'>Errno.pm
+</div><div class='line'>fields.pm
+</div><div class='line'>warnings/register.pm
+</div><div class='line'>Encode/Alias.pm
+</div><div class='line'>Time/HiRes.pm
+</div><div class='line'>Encode/Config.pm
+</div><div class='line'>Encode/Encoding.pm
+</div><div class='line'>Redis.pm
+</div><div class='line'>Encode.pm
+</div><div class='line'>base.pm
+</div><div class='line'>Config.pm
+</div><div class='line'>IO.pm
+</div><div class='line'>IO/Socket/UNIX.pm
+</div><div class='line'>Carp.pm
+</div><div class='line'>bytes.pm
+</div><div class='line'>Exporter/Heavy.pm
+</div><div class='line'>vars.pm
+</div><div class='line'>constant.pm
+</div><div class='line'>Socket.pm
+</div><div class='line'>Try/Tiny.pm
+</div><div class='line'>IO/Select.pm
+</div><div class='line'>overload.pm
+</div><div class='line'>lib.pm
+</div><div class='line'>DynaLoader.pm
+</div><div class='line'>Data/Dumper.pm
+</div></pre></td></tr></table></div></figure>
+
+<p>내용을 보면 말 그대로 해당 모듈이 가지고 있는 의존 모듈이 좌르르륵 표시됩니다. 물론 걔중에는 Core 모듈도 있기도 합니다.</p>
+
+<p>일단 <code>App::FatPacker</code> SYNOPSIS 대로 진행을 해보면…</p>
+
+<figure class='code'><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div></pre></td><td class='main  bash'><pre><div class='line'><span class="nv">$ </span>fatpack packlists-for <span class="sb">`</span>cat fatpacker.trace<span class="sb">`</span>  &gt; packlists
+</div></pre></td></tr></table></div></figure>
+
+<p>위 결과로 생긴 <code>packlists</code> 는 파일은 다음과 같은 내용을 가집니다.</p>
+
+<figure class='code'><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div><div data-line='2' class='line-number'></div><div data-line='3' class='line-number'></div><div data-line='4' class='line-number'></div></pre></td><td class='main  bash'><pre><div class='line'><span class="nv">$ </span>cat packlists
+</div><div class='line'>/home/jeen/perl5/perlbrew/perls/perl-5.14.0/lib/5.14.0/x86_64-linux-thread-multi/auto/Time/HiRes/.packlist
+</div><div class='line'>/home/jeen/perl5/perlbrew/perls/perl-5.14.0/lib/site_perl/5.14.0/x86_64-linux-thread-multi/auto/Redis/.packlist
+</div><div class='line'>/home/jeen/perl5/perlbrew/perls/perl-5.14.0/lib/site_perl/5.14.0/x86_64-linux-thread-multi/auto/Try/Tiny/.packlist
+</div></pre></td></tr></table></div></figure>
+
+<p>각 의존 모듈 위치에 맞춰서 <code>.packlist</code> 파일이 생성되고, 그 내용은…</p>
+
+<figure class='code'><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div><div data-line='2' class='line-number'></div><div data-line='3' class='line-number'></div><div data-line='4' class='line-number'></div><div data-line='5' class='line-number'></div><div data-line='6' class='line-number'></div><div data-line='7' class='line-number'></div></pre></td><td class='main  bash'><pre><div class='line'><span class="nv">$ </span>cat /home/jeen/perl5/perlbrew/perls/perl-5.14.0/lib/site_perl/5.14.0/x86_64-linux-thread-multi/auto/Redis/.packlist
+</div><div class='line'>/home/jeen/perl5/perlbrew/perls/perl-5.14.0/lib/site_perl/5.14.0/Redis.pm
+</div><div class='line'>/home/jeen/perl5/perlbrew/perls/perl-5.14.0/lib/site_perl/5.14.0/Redis/Hash.pm
+</div><div class='line'>/home/jeen/perl5/perlbrew/perls/perl-5.14.0/lib/site_perl/5.14.0/Redis/List.pm
+</div><div class='line'>/home/jeen/perl5/perlbrew/perls/perl-5.14.0/man/man3/Redis.3
+</div><div class='line'>/home/jeen/perl5/perlbrew/perls/perl-5.14.0/man/man3/Redis::Hash.3
+</div><div class='line'>/home/jeen/perl5/perlbrew/perls/perl-5.14.0/man/man3/Redis::List.3
+</div></pre></td></tr></table></div></figure>
+
+<p>위와 같습니다.</p>
+
+<p>그리고 다음 커맨드를 입력해봅니다.</p>
+
+<figure class='code'><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div></pre></td><td class='main  bash'><pre><div class='line'><span class="nv">$ </span>fatpack tree <span class="sb">`</span>cat packlists<span class="sb">`</span>
+</div></pre></td></tr></table></div></figure>
+
+<p>그 결과 현재 디렉토리에서 <code>fatlib</code> 이라는 디렉토리가 생성되고 그 안에 관련 의존모듈들이 복사됩니다.</p>
+
+<figure class='code'><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div><div data-line='2' class='line-number'></div><div data-line='3' class='line-number'></div><div data-line='4' class='line-number'></div><div data-line='5' class='line-number'></div><div data-line='6' class='line-number'></div><div data-line='7' class='line-number'></div><div data-line='8' class='line-number'></div><div data-line='9' class='line-number'></div><div data-line='10' class='line-number'></div><div data-line='11' class='line-number'></div><div data-line='12' class='line-number'></div><div data-line='13' class='line-number'></div><div data-line='14' class='line-number'></div><div data-line='15' class='line-number'></div><div data-line='16' class='line-number'></div><div data-line='17' class='line-number'></div><div data-line='18' class='line-number'></div></pre></td><td class='main  bash'><pre><div class='line'><span class="nv">$ </span>tree
+</div><div class='line'>…
+</div><div class='line'>├── fatlib
+</div><div class='line'>│   ├── Redis
+</div><div class='line'>│   │   ├── Hash.pm
+</div><div class='line'>│   │   └── List.pm
+</div><div class='line'>│   ├── Redis.pm
+</div><div class='line'>│   ├── Try
+</div><div class='line'>│   │   └── Tiny.pm
+</div><div class='line'>│   └── x86_64-linux-thread-multi
+</div><div class='line'>│       ├── Time
+</div><div class='line'>│       │   └── HiRes.pm
+</div><div class='line'>│       └── auto
+</div><div class='line'>│           └── Time
+</div><div class='line'>│               └── HiRes
+</div><div class='line'>│                   ├── HiRes.bs
+</div><div class='line'>│                   └── HiRes.so
+</div><div class='line'>…
+</div></pre></td></tr></table></div></figure>
+
+<p>그럼 다음 커맨드를 입력해보면…</p>
+
+<figure class='code'><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div><div data-line='2' class='line-number'></div><div data-line='3' class='line-number'></div><div data-line='4' class='line-number'></div></pre></td><td class='main  bash'><pre><div class='line'><span class="nv">$ </span><span class="o">(</span>fatpack file; cat check_redis.pl <span class="o">)</span> &gt; check_redis.packed.pl
+</div><div class='line'>Can<span class="err">&#39;</span>t stat /home/jeen/fp/tt/lib: 그런 파일이나 디렉터리가 없습니다
+</div><div class='line'> at /home/jeen/perl5/perlbrew/perls/perl-5.14.0/lib/site_perl/5.14.0/App/FatPacker.pm line 200
+</div><div class='line'>BEGIN failed--compilation aborted at /home/jeen/perl5/perlbrew/perls/perl-5.14.0/bin/fatpack line 3.
+</div></pre></td></tr></table></div></figure>
+
+<p>제대로 동작하지 않습니다. 에러가 발생하네요. 정답은 에러메시지에 있습니다. <code>App::FatPacker</code> 자체는 Perl Library 규칙에 정형화된 디렉토리 구조를 가정하고 있습니다. 즉 <code>lib</code> 디렉토리가 존재하지 않기 때문에 발생하는 것이죠. 뭐 물론 다운받은 <code>check_redis.pl</code> 파일 하나만 있는 데 <code>lib</code> 디렉토리를 가지고 뭐 더 넣고 자시고 할 것도 아닌데…, 그래도 뭐 일단 사태해결을 위해서 아무것도 없어도 그냥 <code>lib</code> 디렉토리 하나는 만들어 줍니다.</p>
+
+<p>그리고 다시 실행해보면 <code>check_redis.packed.pl</code> 이라는 파일이 생성됩니다.</p>
+
+<figure class='code'><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div><div data-line='2' class='line-number'></div><div data-line='3' class='line-number'></div><div data-line='4' class='line-number'></div><div data-line='5' class='line-number'></div><div data-line='6' class='line-number'></div><div data-line='7' class='line-number'></div><div data-line='8' class='line-number'></div><div data-line='9' class='line-number'></div><div data-line='10' class='line-number'></div><div data-line='11' class='line-number'></div><div data-line='12' class='line-number'></div></pre></td><td class='main  perl'><pre><div class='line'> <span class="c1"># This chunk of stuff was generated by App::FatPacker. To find the original</span>
+</div><div class='line'> <span class="c1"># file&#39;s code, look for the end of this BEGIN block or the string &#39;FATPACK&#39;</span>
+</div><div class='line'><span class="k">BEGIN</span> <span class="p">{</span>
+</div><div class='line'><span class="k">my</span> <span class="nv">%fatpacked</span><span class="p">;</span>
+</div><div class='line'> </div><div class='line'><span class="nv">$fatpacked</span><span class="p">{</span><span class="s">&quot;Redis.pm&quot;</span><span class="p">}</span> <span class="o">=</span> <span class="o">&lt;&lt;</span><span class="s">&#39;REDIS&#39;</span><span class="p">;</span>
+</div><div class='line'>  <span class="nb">package</span> <span class="n">Redis</span><span class="p">;</span>
+</div><div class='line'> </div><div class='line'>  <span class="c1"># ABSTRACT: Perl binding for Redis database</span>
+</div><div class='line'>  <span class="k">our</span> <span class="nv">$VERSION</span> <span class="o">=</span> <span class="s">&#39;1.955&#39;</span><span class="p">;</span> <span class="c1"># VERSION</span>
+</div><div class='line'>  <span class="k">our</span> <span class="nv">$AUTHORITY</span> <span class="o">=</span> <span class="s">&#39;cpan:MELO&#39;</span><span class="p">;</span> <span class="c1"># AUTHORITY</span>
+</div><div class='line'>  <span class="err">…</span>
+</div></pre></td></tr></table></div></figure>
+
+<p>일단 Nagios Plugin 은 기본 실행권한을 가지는 파일로 해두는 것이 여러모로 편합니다. 한가지 주의할 점은 일단 위처럼 생성된 파일에서 shebang line 이 존재하지 않기때문에 shebang line 을 추가해주면 됩니다. :-)</p>
+
+<figure class='code'><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div></pre></td><td class='main  perl'><pre><div class='line'> <span class="c1">#!/usr/bin/env perl</span>
+</div></pre></td></tr></table></div></figure>
+
+<p>위의 내용을 <code>check_redis.packed.pl</code> 파일의 첫째줄에 추가해줍니다.</p>
+
+<p>그리고 완성된 파일들을 Redis 서버에 붙여서 <code>check_nrpe</code> 등으로 동작을 확인하고 설정에 추가하는 것으로 관련된 작업은 끝이 났습니다.</p>
+
+<p>파일 중앙배포와 관련해서도 다양한 이슈가 있지만 이에 관련해서는 추후 <code>Rex</code> 를 다루면서 이야기를 계속할 까 합니다.</p>
+
+<p>다 쓰고 나서 검색을 해보니 예전에 @aer0 님께서 작성하신 블로그 기사가 있군요.</p>
+
+<ul>
+<li><a href="http://aero2blog.blogspot.kr/2010/09/perl-appfatpacker.html">Perl 스크립트에 필요한 모듈 같이 넣기 App::FatPacker</a></li>
+</ul>
+
+<p>덩달아서 같이 참고하시면 좋을 것 같습니다.</p>
+</div>
+
+  <footer>
+    
+    <p><a class="comments-link" href="/2012/12/26/a-usecase-of-app-fatpacker/#disqus_thread" data-disqus-identifier="http://jeen.github.io/2012/12/26/a-usecase-of-app-fatpacker/">View comments &raquo;</a></p>
+
+    
+    
+  </footer>
+
+
+    </article>
+  
+    
+
+
+
+
+
+
+
+
+
+
+    <article >
+      
+  <header>
+    <h1 class="entry-title">
+
 <a href="/2012/11/29/download-package-dir-slash-files-from-directory-index/">Download Package Dir/files From Directory Index</a>
 
 </h1>
@@ -248,103 +455,6 @@
   <footer>
     
     <p><a class="comments-link" href="/2012/11/26/proverc-for-less-typing/#disqus_thread" data-disqus-identifier="http://jeen.github.io/2012/11/26/proverc-for-less-typing/">View comments &raquo;</a></p>
-
-    
-    
-  </footer>
-
-
-    </article>
-  
-    
-
-
-
-
-
-
-
-
-
-
-    <article >
-      
-  <header>
-    <h1 class="entry-title">
-
-<a href="/2012/11/21/using-test-pretty/">Using Test::Pretty</a>
-
-</h1>
-
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-
-<time datetime="2012-11-21T22:40:00+00:00" pubdate data-updated="true">Nov 21<span>st</span>, 2012</time>
-         &bull; <a rel="bookmark" href="/2012/11/21/using-test-pretty/">Permalink</a>
-      </p>
-    
-  </header>
-
-<div class="entry-content"><p>사실 <code>TAP</code> 의 결과자체는 그렇게 이쁘장하지 않습니다.
-  이전에 <code>NHN Deview 2012</code> 에서 <code>Mocha</code> 로 돌렸을 때 나오는 이쁨직한 테스트 결과를 보고, </p>
-
-<blockquote>
-<p>아, 저러면 왠지 테스트코드 쓰고, 돌릴 만하겠다</p>
-</blockquote>
-
-<p>라는 뻘생각이 들었습니다. 하지만 전 테스트코드를 그렇게 용의주도하게 쓰지 않는 편이어서 그냥 다른 세상 이야기라고 넘겼습니다.</p>
-
-<p>그러는 와중에 일본의 Perl IRC 채널에서 <code>Test::*</code> 와 <code>TAP</code> 등에 대한 여러가지 회의론(?) 같은 이야기가 들려오다가 <code>BDD</code> 나 테스트 결과 자체가 하나의 <code>Spec</code> 으로 재이용되는 등의 이야기를 듣고는 많이 감화되었죠.</p>
-
-<p>그러는 중에 @tokuhirom 씨가 최근에 내놓은 <code>Test::Pretty</code> 와 <code>Test::Ika</code> 라는 모듈이 등장했습니다.</p>
-
-<ul>
-<li><a href="http://metacpan.org/module/Test::Pretty">Test::Pretty</a></li>
-<li><a href="http://metacpan.org/module/Test::Ika">Test::Ika</a></li>
-</ul>
-
-<p><code>Test::Ika</code> 의 경우는 Perl5 용 <code>BDD</code> Framework 의 자리를 노리는 그런 모듈입니다만.. 현재의 버젼(<code>0.02</code>)에서는 생각대로 결과가 나와주지 않기에 조금 아쉬웠습니다.</p>
-
-<p>그게 <code>describe</code>, <code>it</code> 등의 <code>BDD</code> 에서 사용하는 구문을 사용하고 있지만, <code>Test::Mojo</code> 처럼 <code>Test::More</code> 를 래핑한 모듈에서 사용할 때라든가… 좀 많이 아쉬운 장면들이 아직 있습니다. 뭐 물론 만든 지 얼마 안되기도 하고 그런 의미에서는 전도유망하다고할까요 :-)</p>
-
-<p><code>Test::Pretty</code> 의 경우는 크게 이를 고려하지 않고도 흔히  사용하는 <code>Test::More</code> 로  테스트코드를 쓰고, <code>prove</code> Plugin 으로 동작합니다. 이름 그대로 결과를 이쁘게 보여준다는 것이죠.</p>
-
-<p>다음처럼 말이죠.</p>
-
-<h3>일반적인 TAP 형식의 출력</h3>
-
-<p><img src="https://lh5.googleusercontent.com/-trTeNFoXQtU/UKzc4yghokI/AAAAAAAACFY/zaEbENGNHOQ/test-pretty-01.png" alt="일반적인 TAP 형식"></p>
-
-<h3>Test::Pretty 를 이용한 출력</h3>
-
-<p><img src="https://lh3.googleusercontent.com/-okmAPP0EmC8/UKzc74KHsYI/AAAAAAAACFg/rthGC2gQn_E/test-pretty-02.png" alt="Test::Pretty 를 이용한 출력"></p>
-
-<h3>어떻게 실행을?</h3>
-
-<p>Pretty 형식으로는 단일파일만 나오고, 전체 테스트코드를 한번에 돌렸을 때는 위처럼 나오지 않기에 왜 그럴까 고심해보다가 아래처럼 테스트코드를 실행하면 제대로 동작하는 것을 확인했습니다.</p>
-
-<figure class='code'><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div></pre></td><td class='main  plain'><pre><div class='line'>$ prove -Ilib -Pretty -v -lr </div></pre></td></tr></table></div></figure>
-
-<h3>결론</h3>
-
-<p>JS 테스트 프레임워크인 <a href="http://visionmedia.github.com/mocha/">Mocha</a> 를 들여다 봤는데 여러모로 베껴왔으면 하는 그런 세련됨이 있네요. :-)</p>
-</div>
-
-  <footer>
-    
-    <p><a class="comments-link" href="/2012/11/21/using-test-pretty/#disqus_thread" data-disqus-identifier="http://jeen.github.io/2012/11/21/using-test-pretty/">View comments &raquo;</a></p>
 
     
     

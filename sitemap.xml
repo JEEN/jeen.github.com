@@ -203,16 +203,22 @@
         <lastmod>2013-06-18T13:35:06+00:00</lastmod>
     </url>
     <url>
+        <loc>
+            http://jeen.github.io/2013/07/07/released-dbix-class-inflatecolumn-serializer-hstore/
+        </loc>
+        <lastmod>2013-07-10T13:26:45+00:00</lastmod>
+    </url>
+    <url>
         <loc>http://jeen.github.io/about/about/</loc>
         <lastmod>2013-05-02T14:13:19+00:00</lastmod>
     </url>
     <url>
         <loc>http://jeen.github.io/archives/archives/</loc>
-        <lastmod>2013-06-18T13:35:06+00:00</lastmod>
+        <lastmod>2013-07-10T13:26:45+00:00</lastmod>
     </url>
     <url>
         <loc>http://jeen.github.io/</loc>
-        <lastmod>2013-06-18T13:35:06+00:00</lastmod>
+        <lastmod>2013-07-10T13:26:45+00:00</lastmod>
     </url>
     <url>
         <loc>http://jeen.github.io/robots.txt</loc>

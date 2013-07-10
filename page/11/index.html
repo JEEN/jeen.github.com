@@ -98,6 +98,79 @@
   <header>
     <h1 class="entry-title">
 
+<a href="/2012/02/28/crontab-plus-perlbrew/">Crontab + Perlbrew</a>
+
+</h1>
+
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2012-02-28T21:03:00+00:00" pubdate data-updated="true">Feb 28<span>th</span>, 2012</time>
+         &bull; <a rel="bookmark" href="/2012/02/28/crontab-plus-perlbrew/">Permalink</a>
+      </p>
+    
+  </header>
+
+<div class="entry-content"><p>이번 글은 성의가 매우 부족하게 트윗의 열거로 끝낼까 합니다.</p>
+
+<blockquote class="twitter-tweet"><p>질문. perlbrew 설정이 crontab에서도 적용되게 하려면 어떻게 적어줘야 할까요..? .bashrc 에서 perlbrew의 설정파일을 부르게 해 둔 상태인데 crontab으로 실행하는 스크립트에는 적용이 안 되어 시스템 펄을 부르네요.</p>&mdash; Raymundo (@gypark) <a href="https://twitter.com/gypark/status/172218904352010240" data-datetime="2012-02-22T07:19:21+00:00">February 22, 2012</a></blockquote>
+
+<blockquote class="twitter-tweet" data-in-reply-to="172218904352010240"><p>@<a href="https://twitter.com/gypark">gypark</a> <a href="https://t.co/Q0yfoquc" title="https://gist.github.com/1882996">gist.github.com/1882996</a> 이런 식으로 하면 됩니다.</p>&mdash; envi (@nving) <a href="https://twitter.com/nving/status/172219600216399872" data-datetime="2012-02-22T07:22:07+00:00">February 22, 2012</a></blockquote>
+
+<blockquote class="twitter-tweet" data-in-reply-to="172219600216399872"><p>@<a href="https://twitter.com/nving">nving</a> 어&hellip; 그러면 다른 버전으로 switch 할 때마다 저 변수값을 바꿔줘야 해서&hellip;</p>&mdash; Raymundo (@gypark) <a href="https://twitter.com/gypark/status/172220146138611713" data-datetime="2012-02-22T07:24:17+00:00">February 22, 2012</a></blockquote>
+
+<blockquote class="twitter-tweet" data-in-reply-to="172221017534631936"><p>@<a href="https://twitter.com/nving">nving</a>perlbrew깔린디렉토리/perlbrew/bin/perlbrew exec 스크립트.pl이런 식으로 하니까 되네요~</p>&mdash; Raymundo (@gypark) <a href="https://twitter.com/gypark/status/172224703652564992" data-datetime="2012-02-22T07:42:23+00:00">February 22, 2012</a></blockquote>
+
+<blockquote class="twitter-tweet" data-in-reply-to="172220146138611713"><p>@<a href="https://twitter.com/gypark">gypark</a> @<a href="https://twitter.com/nving">nving</a>님께서 알려주신 방법이 정석(perlbrew와 동일한 방식)이라고 보여집니다. 다만 저라면 환경 변수 설정 없이 명시적으로 실행할 펄 바이너리를 명시하고 실행할 스크립트를 적어줄 것 같습니다.</p>&mdash; keedi (@keedi) <a href="https://twitter.com/keedi/status/172228561166536704" data-datetime="2012-02-22T07:57:43+00:00">February 22, 2012</a></blockquote>
+
+<blockquote class="twitter-tweet"><p>@<a href="https://twitter.com/gypark">gypark</a> @<a href="https://twitter.com/nving">nving</a> 크론에서 돌린다면 사실 어떤 버전이든지 알아서(환경 변수에 따라) 실행되게 하는 것은 위험한 것 같습니다. 더불어 크론으로 돌릴 스크립트라면 환경 변수를 믿지 않도록 작성할 필요도 있을테구요.</p>&mdash; keedi (@keedi) <a href="https://twitter.com/keedi/status/172228854906228737" data-datetime="2012-02-22T07:58:53+00:00">February 22, 2012</a></blockquote>
+
+<blockquote class="twitter-tweet" data-in-reply-to="172227703838220289"><p>@<a href="https://twitter.com/nving">nving</a> @<a href="https://twitter.com/gypark">gypark</a> 그렇게 실행할 경우 지금 현재 자신이 switch 하는 perl 버전에 따라 cronᅟ으로 돌릴 스크립트가 영향을 받지 않나요? 그렇다면 어떤 버전에는 설치된 모듈이 있고 어떤 버전에는 없다면 문제가 생길 것 같아요.</p>&mdash; keedi (@keedi) <a href="https://twitter.com/keedi/status/172229942577336320" data-datetime="2012-02-22T08:03:12+00:00">February 22, 2012</a></blockquote>
+
+<blockquote class="twitter-tweet" data-in-reply-to="172234678059794432"><p>@<a href="https://twitter.com/keedi">keedi</a> @<a href="https://twitter.com/nving">nving</a> RSS만드는 스크립트들을, 5.14에서 테스트했더니 와장창 망가지더라고요. Mechanize쪽이 어느 순간부터 반환값을 디코드해서 반환하는 터라. 그래서 거기에 맞춰 고쳤더니 정작 크론에서는 5.8 상에서 도는 바람에 OTL</p>&mdash; Raymundo (@gypark) <a href="https://twitter.com/gypark/status/172237570988703745" data-datetime="2012-02-22T08:33:31+00:00">February 22, 2012</a></blockquote>
+
+<p>이상 날로먹는 crontab + perlbrew 끝.</p>
+</div>
+
+  <footer>
+    
+    <p><a class="comments-link" href="/2012/02/28/crontab-plus-perlbrew/#disqus_thread" data-disqus-identifier="http://jeen.github.io/2012/02/28/crontab-plus-perlbrew/">View comments &raquo;</a></p>
+
+    
+    
+  </footer>
+
+
+    </article>
+  
+    
+
+
+
+
+
+
+
+
+
+
+    <article >
+      
+  <header>
+    <h1 class="entry-title">
+
 <a href="/2012/02/15/date-holidays-kr-pull-requested/">Date::Holidays::KR Pull Requested</a>
 
 </h1>
@@ -287,86 +360,6 @@
   <footer>
     
     <p><a class="comments-link" href="/2012/02/15/rex-pull-request/#disqus_thread" data-disqus-identifier="http://jeen.github.io/2012/02/15/rex-pull-request/">View comments &raquo;</a></p>
-
-    
-    
-  </footer>
-
-
-    </article>
-  
-    
-
-
-
-
-
-
-
-
-
-
-    <article >
-      
-  <header>
-    <h1 class="entry-title">
-
-<a href="/2012/02/09/cpan-module-update/">CPAN Module Update</a>
-
-</h1>
-
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-
-<time datetime="2012-02-09T01:06:00+00:00" pubdate data-updated="true">Feb 9<span>th</span>, 2012</time>
-         &bull; <a rel="bookmark" href="/2012/02/09/cpan-module-update/">Permalink</a>
-      </p>
-    
-  </header>
-
-<div class="entry-content"><blockquote class="twitter-tweet" lang="ko"><p>Acme-CPANAuthors-Korean 0.08 by JEEN - <a href="http://t.co/CjlRnKEO" title="http://metacpan.org/release/JEEN/Acme-CPANAuthors-Korean-0.08/">metacpan.org/release/JEEN/A…</a></p>&mdash; CPAN New Modules (@cpan_new) <a href="https://twitter.com/cpan_new/status/167271503061200896" data-datetime="2012-02-08T15:40:08+00:00">2월 8, 2012</a></blockquote>
-
-<blockquote class="twitter-tweet" lang="ko"><p>Lingua-KO-TypoCorrector 0.03 by JEEN - <a href="http://t.co/b1Lp98PW" title="http://metacpan.org/release/JEEN/Lingua-KO-TypoCorrector-0.03/">metacpan.org/release/JEEN/L…</a></p>&mdash; CPAN New Modules (@cpan_new) <a href="https://twitter.com/cpan_new/status/167273895550922753" data-datetime="2012-02-08T15:49:39+00:00">2월 8, 2012</a></blockquote>
-
-<blockquote class="twitter-tweet" lang="ko"><p>Date-Holidays-KR 0.03 by JEEN - <a href="http://t.co/qAXrPO6f" title="http://metacpan.org/release/JEEN/Date-Holidays-KR-0.03/">metacpan.org/release/JEEN/D…</a></p>&mdash; CPAN New Modules (@cpan_new) <a href="https://twitter.com/cpan_new/status/167275532466143232" data-datetime="2012-02-08T15:56:09+00:00">2월 8, 2012</a></blockquote>
-
-<blockquote class="twitter-tweet" lang="ko"><p>WebService-Aladdin 0.0706 by JEEN - <a href="http://t.co/lyGpgk6W" title="http://metacpan.org/release/JEEN/WebService-Aladdin-0.0706/">metacpan.org/release/JEEN/W…</a></p>&mdash; CPAN New Modules (@cpan_new) <a href="https://twitter.com/cpan_new/status/167276286962704385" data-datetime="2012-02-08T15:59:09+00:00">2월 8, 2012</a></blockquote>
-
-<blockquote class="twitter-tweet" lang="ko"><p>WWW-Shorten-Durl 0.05 by JEEN - <a href="http://t.co/mtnX4oEn" title="http://metacpan.org/release/JEEN/WWW-Shorten-Durl-0.05/">metacpan.org/release/JEEN/W…</a></p>&mdash; CPAN New Modules (@cpan_new) <a href="https://twitter.com/cpan_new/status/167277296259055616" data-datetime="2012-02-08T16:03:09+00:00">2월 8, 2012</a></blockquote>
-
-<p>이전 글에서 언급했듯, 제가 만든 CPAN Module 들의 Meta 정보중에 repository 가 누락된 것도 있었고, 이 중 몇몇은 Github Project 이름까지 p5-* 형식으로 바꿔놓아서 이왕 이렇게 된 거 전부 바꿔보자는 생각이 들어서 작업을 했습니다.</p>
-
-<figure class='code'><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div><div data-line='2' class='line-number'></div><div data-line='3' class='line-number'></div><div data-line='4' class='line-number'></div><div data-line='5' class='line-number'></div><div data-line='6' class='line-number'></div><div data-line='7' class='line-number'></div><div data-line='8' class='line-number'></div><div data-line='9' class='line-number'></div><div data-line='10' class='line-number'></div></pre></td><td class='main  perl'><pre><div class='line'><span class="k">use</span> <span class="nn">inc::Module::</span><span class="n">Install</span><span class="p">;</span>
-</div><div class='line'><span class="n">name</span> <span class="s">&#39;Date-Holidays-KR&#39;</span><span class="p">;</span>
-</div><div class='line'><span class="n">all_from</span> <span class="s">&#39;lib/Date/Holidays/KR.pm&#39;</span><span class="p">;</span>
-</div><div class='line'><span class="n">requires</span> <span class="s">&#39;Date::Korean&#39;</span> <span class="o">=&gt;</span> <span class="mi">0</span><span class="p">;</span>
-</div><div class='line'> </div><div class='line'><span class="n">tests</span> <span class="s">&#39;t/*.t&#39;</span><span class="p">;</span>
-</div><div class='line'><span class="n">test_requires</span> <span class="s">&#39;Test::More&#39;</span><span class="p">;</span>
-</div><div class='line'><span class="n">resources</span> <span class="n">repository</span> <span class="o">=&gt;</span> <span class="s">&#39;git://github.com/JEEN/p5-Date-Holidays-KR.git&#39;</span><span class="p">;</span>
-</div><div class='line'><span class="n">auto_include</span><span class="p">;</span>
-</div><div class='line'><span class="n">WriteAll</span><span class="p">;</span>
-</div></pre></td></tr></table></div></figure>
-
-<p>위는 <a href="http://metacpan.org/module/Date::Holidays::KR">Date::Holidays::KR</a> 의 <code>Makefile.PL</code> 입니다. 몇몇 모듈은 <a href="http://metacpan.org/module/ExtUtils::MakeMaker">ExtUtils::MakeMaker</a> 를 사용하고 있었는데, 모두 <a href="http://metacpan.org/module/Module::Install">Module::Install</a> 을 사용하도록 교체하고, repository 를 각각의 github repository 를 지정한 것뿐입니다.</p>
-
-<p>마음먹은 김에 이슈처리하고 저녁시간을 빌어서 CPAN 에 일괄 업로드했습니다. 완전 스팸이네요.</p>
-</div>
-
-  <footer>
-    
-    <p><a class="comments-link" href="/2012/02/09/cpan-module-update/#disqus_thread" data-disqus-identifier="http://jeen.github.io/2012/02/09/cpan-module-update/">View comments &raquo;</a></p>
 
     
     
