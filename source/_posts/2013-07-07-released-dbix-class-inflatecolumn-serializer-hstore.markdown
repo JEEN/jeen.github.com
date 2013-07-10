@@ -25,3 +25,11 @@ categories: [ perl, pg ]
  UTF8 을 포함한 hstore 컬럼과 그렇지 않은 것들을 구분해서 사용하면 되지 않을까 싶습니다만... 
  
  뭐 아무튼 결론은 요 1주일 정도 Pg 로 옮기면서 되던 게 안된다든가, 이런게 된다든가 하는 다양한 문제를 접하며 즐거운 비명을 지르고 있습니다.
+ 
+ <blockquote class="twitter-tweet"><p>Pg::hstore w/ pg_enable_utf8 = oops</p>&mdash; JEEN (@JEEN_LEE) <a href="https://twitter.com/JEEN_LEE/statuses/353168251531956225">July 5, 2013</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+
+<blockquote class="twitter-tweet"><p>Pg 의 ㅅㅂ함을 만끽하고 있음 :-)</p>&mdash; JEEN (@JEEN_LEE) <a href="https://twitter.com/JEEN_LEE/statuses/353050682095443969">July 5, 2013</a></blockquote>
+
+<blockquote class="twitter-tweet"><p>신비함.. 신비함..</p>&mdash; JEEN (@JEEN_LEE) <a href="https://twitter.com/JEEN_LEE/statuses/353050712432840704">July 5, 2013</a></blockquote>

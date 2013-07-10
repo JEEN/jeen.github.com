@@ -3,7 +3,7 @@
   <title><![CDATA[JEEN's techlog]]></title>
   <link href="http://jeen.github.io/atom.xml" rel="self"/>
   <link href="http://jeen.github.io/"/>
-  <updated>2013-06-18T13:35:19+00:00</updated>
+  <updated>2013-07-10T13:27:07+00:00</updated>
   <id>http://jeen.github.io/</id>
   <author>
     <name><![CDATA[Jeen Lee]]></name>
@@ -11,6 +11,46 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+    <entry>
+      
+
+
+
+
+<title type="html"><![CDATA[Released DBIx::Class::InflateColumn::Serializer::Hstore]]></title>
+<link href="http://jeen.github.io/2013/07/07/released-dbix-class-inflatecolumn-serializer-hstore/"/>
+<updated>2013-07-07T10:05:31+00:00</updated>
+<id>http://jeen.github.io/2013/07/07/released-dbix-class-inflatecolumn-serializer-hstore</id>
+<category term="perl" /><category term="pg" />
+
+      <content type="html"><![CDATA[<p>예전에는 그냥 Pg 를 사용한 만들어진 웹서비스를 유지보수하는 수준에서 밖에 Pg 를 접하지 않았는데&hellip;
+ 최근의 한 프로젝트에서 Postgres 를 도입하기로 결정이 났습니다. </p>
+
+<p>이전부터 Pg 의 hstore나 Array 타입이라든가 이런저런 유의미한 기능에 대해서는 기대하고 있었고, 약간 설레임이 있었습니다.</p>
+
+<p>작업을 하면서 살펴보니 hstore 의 경우는 Postgre Extension 으로 존재하며, DBIx::Class 는 아마도 DB 의 특정 Extension 까지 보살펴주지는 않겠지 하고 생각했습니다.</p>
+
+<p>결국 기본적으로 DBIx::Class에서 컬럼의 참조/등록시에 Serialization/Deserialization 하면서 쓰고, hstore 에 대해서 참조쿼리를 발생시킬 때는 적절한 스칼라레퍼런스로 사용할 수 밖에 없지 않겠는가 싶었습니다.</p>
+
+<p>그래서 뭐 결국은 DBIx::Class::InflateColumn::Serializer 모듈에 그냥 끼워넣기로 DBIx::Class::InflateColumn::Serializer::Hstore 라는 모듈을 추가해서 CPAN 에 올렸습니다.</p>
+
+<p>사용법은 CPAN 문서의 SYNOPSIS 를 참조하면 됩니다. :-)</p>
+
+<p>DBD::Pg 에서 UTF8 사용을 위해서 <code>pg_enable_utf8</code> 과 <code>Pg::hstore</code> 를 병용할 때 UTF8 표시문제가 있어서 기존 <code>DBIx::Class::InflateColumn::Serializer</code> 에는 없던 옵션인 <code>recursive_encode</code> 를 추가했습니다.</p>
+
+<p>UTF8 을 포함한 hstore 컬럼과 그렇지 않은 것들을 구분해서 사용하면 되지 않을까 싶습니다만&hellip; </p>
+
+<p>뭐 아무튼 결론은 요 1주일 정도 Pg 로 옮기면서 되던 게 안된다든가, 이런게 된다든가 하는 다양한 문제를 접하며 즐거운 비명을 지르고 있습니다.</p>
+
+<p><blockquote class="twitter-tweet"><p>Pg::hstore w/ pg_enable_utf8 = oops</p>&mdash; JEEN (@JEEN_LEE) <a href="https://twitter.com/JEEN_LEE/statuses/353168251531956225">July 5, 2013</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script></p>
+
+<blockquote class="twitter-tweet"><p>Pg 의 ㅅㅂ함을 만끽하고 있음 :-)</p>&mdash; JEEN (@JEEN_LEE) <a href="https://twitter.com/JEEN_LEE/statuses/353050682095443969">July 5, 2013</a></blockquote>
+
+<blockquote class="twitter-tweet"><p>신비함.. 신비함..</p>&mdash; JEEN (@JEEN_LEE) <a href="https://twitter.com/JEEN_LEE/statuses/353050712432840704">July 5, 2013</a></blockquote>
+]]></content>
+    </entry>
   
     <entry>
       
@@ -1745,230 +1785,6 @@ skyloader has left IRC (Remote host closed the connection)</p></li>
 <p>검색방식은 뭐 파일이름에서 확장자만 떼서 검색날려서 뭐 여차저차해서 파일다운로드 하는 링크 빼서 일괄 다운로드 하는 것이죠.</p>
 
 <p>이제 시작하려는 미드가 있는데 자막이 없다면 이거 한번만 돌려주면 앞으로 자막찾는 수고없어지겠습니다. :-)</p>
-]]></content>
-    </entry>
-  
-    <entry>
-      
-
-
-
-
-<title type="html"><![CDATA[Export Facebook Event Attending List - perl-kr TeaTime]]></title>
-<link href="http://jeen.github.io/2012/07/26/export-facebook-event-attending-list-perl-kr-teatime/"/>
-<updated>2012-07-26T14:22:00+00:00</updated>
-<id>http://jeen.github.io/2012/07/26/export-facebook-event-attending-list-perl-kr-teatime</id>
-<category term="facebook" /><category term="perl" />
-
-      <content type="html"><![CDATA[<p>지난번 1회 티타임때의 문제가 제대로 참가비 징수를 못해서 비용정산에 어려움이 있었는데,
-이 문제를 해결하기 위해서 간단하게 참가자 리스트를 A4 용지로 뽑아내서 체크하도록 하는 건 어떨까 하는 생각이 있었습니다.</p>
-
-<p><a href="http://jeen.tistory.com/entry/perlkr-%ED%8B%B0%ED%83%80%EC%9E%84-2-%EC%84%B1%ED%99%A9%EB%A6%AC%EC%97%90-%EB%81%9D%EB%82%AC%EC%8A%B5%EB%8B%88%EB%8B%A4">#perl-kr 티타임 Vol.2</a></p>
-
-<p>아무튼 그런 생각을 잠깐 했다가 해볼까 해서 아래처럼 코드를 써넣었습니다.</p>
-
-<figure class='code'><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div><div data-line='2' class='line-number'></div><div data-line='3' class='line-number'></div><div data-line='4' class='line-number'></div><div data-line='5' class='line-number'></div><div data-line='6' class='line-number'></div><div data-line='7' class='line-number'></div><div data-line='8' class='line-number'></div><div data-line='9' class='line-number'></div><div data-line='10' class='line-number'></div><div data-line='11' class='line-number'></div><div data-line='12' class='line-number'></div><div data-line='13' class='line-number'></div><div data-line='14' class='line-number'></div><div data-line='15' class='line-number'></div><div data-line='16' class='line-number'></div><div data-line='17' class='line-number'></div><div data-line='18' class='line-number'></div><div data-line='19' class='line-number'></div><div data-line='20' class='line-number'></div><div data-line='21' class='line-number'></div><div data-line='22' class='line-number'></div><div data-line='23' class='line-number'></div><div data-line='24' class='line-number'></div><div data-line='25' class='line-number'></div><div data-line='26' class='line-number'></div><div data-line='27' class='line-number'></div><div data-line='28' class='line-number'></div><div data-line='29' class='line-number'></div><div data-line='30' class='line-number'></div><div data-line='31' class='line-number'></div><div data-line='32' class='line-number'></div><div data-line='33' class='line-number'></div><div data-line='34' class='line-number'></div><div data-line='35' class='line-number'></div><div data-line='36' class='line-number'></div><div data-line='37' class='line-number'></div><div data-line='38' class='line-number'></div><div data-line='39' class='line-number'></div><div data-line='40' class='line-number'></div><div data-line='41' class='line-number'></div><div data-line='42' class='line-number'></div><div data-line='43' class='line-number'></div><div data-line='44' class='line-number'></div><div data-line='45' class='line-number'></div><div data-line='46' class='line-number'></div><div data-line='47' class='line-number'></div><div data-line='48' class='line-number'></div><div data-line='49' class='line-number'></div><div data-line='50' class='line-number'></div><div data-line='51' class='line-number'></div><div data-line='52' class='line-number'></div><div data-line='53' class='line-number'></div><div data-line='54' class='line-number'></div><div data-line='55' class='line-number'></div><div data-line='56' class='line-number'></div><div data-line='57' class='line-number'></div><div data-line='58' class='line-number'></div><div data-line='59' class='line-number'></div><div data-line='60' class='line-number'></div><div data-line='61' class='line-number'></div><div data-line='62' class='line-number'></div><div data-line='63' class='line-number'></div><div data-line='64' class='line-number'></div><div data-line='65' class='line-number'></div><div data-line='66' class='line-number'></div><div data-line='67' class='line-number'></div><div data-line='68' class='line-number'></div><div data-line='69' class='line-number'></div><div data-line='70' class='line-number'></div><div data-line='71' class='line-number'></div><div data-line='72' class='line-number'></div><div data-line='73' class='line-number'></div><div data-line='74' class='line-number'></div><div data-line='75' class='line-number'></div><div data-line='76' class='line-number'></div><div data-line='77' class='line-number'></div><div data-line='78' class='line-number'></div><div data-line='79' class='line-number'></div><div data-line='80' class='line-number'></div><div data-line='81' class='line-number'></div><div data-line='82' class='line-number'></div><div data-line='83' class='line-number'></div><div data-line='84' class='line-number'></div><div data-line='85' class='line-number'></div><div data-line='86' class='line-number'></div><div data-line='87' class='line-number'></div><div data-line='88' class='line-number'></div><div data-line='89' class='line-number'></div><div data-line='90' class='line-number'></div><div data-line='91' class='line-number'></div><div data-line='92' class='line-number'></div><div data-line='93' class='line-number'></div><div data-line='94' class='line-number'></div><div data-line='95' class='line-number'></div><div data-line='96' class='line-number'></div><div data-line='97' class='line-number'></div><div data-line='98' class='line-number'></div><div data-line='99' class='line-number'></div><div data-line='100' class='line-number'></div><div data-line='101' class='line-number'></div><div data-line='102' class='line-number'></div><div data-line='103' class='line-number'></div><div data-line='104' class='line-number'></div><div data-line='105' class='line-number'></div><div data-line='106' class='line-number'></div><div data-line='107' class='line-number'></div><div data-line='108' class='line-number'></div><div data-line='109' class='line-number'></div><div data-line='110' class='line-number'></div><div data-line='111' class='line-number'></div><div data-line='112' class='line-number'></div><div data-line='113' class='line-number'></div><div data-line='114' class='line-number'></div><div data-line='115' class='line-number'></div><div data-line='116' class='line-number'></div><div data-line='117' class='line-number'></div><div data-line='118' class='line-number'></div><div data-line='119' class='line-number'></div><div data-line='120' class='line-number'></div><div data-line='121' class='line-number'></div><div data-line='122' class='line-number'></div><div data-line='123' class='line-number'></div><div data-line='124' class='line-number'></div><div data-line='125' class='line-number'></div><div data-line='126' class='line-number'></div><div data-line='127' class='line-number'></div><div data-line='128' class='line-number'></div><div data-line='129' class='line-number'></div><div data-line='130' class='line-number'></div><div data-line='131' class='line-number'></div><div data-line='132' class='line-number'></div><div data-line='133' class='line-number'></div><div data-line='134' class='line-number'></div><div data-line='135' class='line-number'></div><div data-line='136' class='line-number'></div><div data-line='137' class='line-number'></div><div data-line='138' class='line-number'></div><div data-line='139' class='line-number'></div><div data-line='140' class='line-number'></div><div data-line='141' class='line-number'></div><div data-line='142' class='line-number'></div><div data-line='143' class='line-number'></div><div data-line='144' class='line-number'></div><div data-line='145' class='line-number'></div><div data-line='146' class='line-number'></div><div data-line='147' class='line-number'></div><div data-line='148' class='line-number'></div><div data-line='149' class='line-number'></div><div data-line='150' class='line-number'></div><div data-line='151' class='line-number'></div><div data-line='152' class='line-number'></div><div data-line='153' class='line-number'></div><div data-line='154' class='line-number'></div><div data-line='155' class='line-number'></div><div data-line='156' class='line-number'></div><div data-line='157' class='line-number'></div><div data-line='158' class='line-number'></div><div data-line='159' class='line-number'></div><div data-line='160' class='line-number'></div><div data-line='161' class='line-number'></div><div data-line='162' class='line-number'></div><div data-line='163' class='line-number'></div><div data-line='164' class='line-number'></div><div data-line='165' class='line-number'></div><div data-line='166' class='line-number'></div><div data-line='167' class='line-number'></div><div data-line='168' class='line-number'></div><div data-line='169' class='line-number'></div><div data-line='170' class='line-number'></div><div data-line='171' class='line-number'></div><div data-line='172' class='line-number'></div><div data-line='173' class='line-number'></div><div data-line='174' class='line-number'></div><div data-line='175' class='line-number'></div><div data-line='176' class='line-number'></div><div data-line='177' class='line-number'></div><div data-line='178' class='line-number'></div><div data-line='179' class='line-number'></div><div data-line='180' class='line-number'></div><div data-line='181' class='line-number'></div><div data-line='182' class='line-number'></div><div data-line='183' class='line-number'></div><div data-line='184' class='line-number'></div><div data-line='185' class='line-number'></div><div data-line='186' class='line-number'></div><div data-line='187' class='line-number'></div><div data-line='188' class='line-number'></div><div data-line='189' class='line-number'></div><div data-line='190' class='line-number'></div><div data-line='191' class='line-number'></div><div data-line='192' class='line-number'></div><div data-line='193' class='line-number'></div><div data-line='194' class='line-number'></div><div data-line='195' class='line-number'></div><div data-line='196' class='line-number'></div><div data-line='197' class='line-number'></div><div data-line='198' class='line-number'></div><div data-line='199' class='line-number'></div><div data-line='200' class='line-number'></div></pre></td><td class='main  perl'><pre><div class='line'><span class="k">use</span> <span class="n">strict</span><span class="p">;</span>
-</div><div class='line'><span class="k">use</span> <span class="n">warnings</span><span class="p">;</span>
-</div><div class='line'><span class="k">use</span> <span class="nn">Text::</span><span class="n">Xslate</span><span class="p">;</span>
-</div><div class='line'><span class="k">use</span> <span class="nn">Data::Section::</span><span class="n">Simple</span><span class="p">;</span>
-</div><div class='line'><span class="k">use</span> <span class="nn">Facebook::</span><span class="n">Graph</span><span class="p">;</span>
-</div><div class='line'> </div><div class='line'><span class="k">my</span> <span class="nv">$fb</span> <span class="o">=</span> <span class="nn">Facebook::</span><span class="n">Graph</span><span class="o">-&gt;</span><span class="k">new</span><span class="p">;</span>
-</div><div class='line'><span class="nv">$fb</span><span class="o">-&gt;</span><span class="n">access_token</span><span class="p">(</span><span class="s">&quot;YOUR ACCESS TOKEN&quot;</span><span class="p">);</span>
-</div><div class='line'><span class="k">my</span> <span class="nv">$r</span> <span class="o">=</span> <span class="nv">$fb</span><span class="o">-&gt;</span><span class="n">fetch</span><span class="p">(</span><span class="s">&#39;466164950078338/attending&#39;</span><span class="p">);</span>
-</div><div class='line'><span class="k">my</span> <span class="nv">@attendees</span><span class="p">;</span>
-</div><div class='line'><span class="k">for</span> <span class="k">my</span> <span class="nv">$person</span> <span class="p">(</span><span class="nv">@</span><span class="p">{</span> <span class="nv">$r</span><span class="o">-&gt;</span><span class="p">{</span><span class="n">data</span><span class="p">}</span> <span class="p">})</span> <span class="p">{</span>
-</div><div class='line'>    <span class="k">my</span> <span class="nv">$f</span> <span class="o">=</span> <span class="nv">$fb</span><span class="o">-&gt;</span><span class="n">fetch</span><span class="p">(</span><span class="nv">$person</span><span class="o">-&gt;</span><span class="p">{</span><span class="n">id</span><span class="p">});</span>
-</div><div class='line'>    <span class="nv">$f</span><span class="o">-&gt;</span><span class="p">{</span><span class="n">profile_image</span><span class="p">}</span> <span class="o">=</span> <span class="nv">$fb</span><span class="o">-&gt;</span><span class="n">picture</span><span class="p">(</span><span class="nv">$person</span><span class="o">-&gt;</span><span class="p">{</span><span class="n">id</span><span class="p">})</span><span class="o">-&gt;</span><span class="n">get_large</span><span class="o">-&gt;</span><span class="n">uri_as_string</span><span class="p">;</span>
-</div><div class='line'>    <span class="nb">push</span> <span class="nv">@attendees</span><span class="p">,</span> <span class="nv">$f</span><span class="p">;</span>
-</div><div class='line'><span class="p">}</span>
-</div><div class='line'><span class="nb">push</span> <span class="nv">@attendees</span><span class="p">,</span> <span class="p">{}</span> <span class="k">for</span> <span class="p">(</span><span class="mi">1</span><span class="o">..</span><span class="mi">3</span><span class="p">);</span>
-</div><div class='line'> </div><div class='line'><span class="k">my</span> <span class="nv">$tx</span>  <span class="o">=</span> <span class="nn">Text::</span><span class="n">Xslate</span><span class="o">-&gt;</span><span class="k">new</span><span class="p">(</span>
-</div><div class='line'>    <span class="n">syntax</span> <span class="o">=&gt;</span> <span class="s">&#39;TTerse&#39;</span><span class="p">,</span>
-</div><div class='line'>    <span class="n">module</span> <span class="o">=&gt;</span> <span class="p">[</span> <span class="s">&#39;Text::Xslate::Bridge::TT2Like&#39;</span> <span class="p">],</span>
-</div><div class='line'>    <span class="n">path</span> <span class="o">=&gt;</span> <span class="p">[</span>
-</div><div class='line'>        <span class="nn">Data::Section::</span><span class="n">Simple</span><span class="o">-&gt;</span><span class="k">new</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">get_data_section</span><span class="p">()</span>
-</div><div class='line'>    <span class="p">],</span>
-</div><div class='line'><span class="p">);</span>
-</div><div class='line'> </div><div class='line'><span class="k">print</span> <span class="nv">$tx</span><span class="o">-&gt;</span><span class="n">render</span><span class="p">(</span><span class="s">&#39;template.tx&#39;</span><span class="p">,</span> <span class="p">{</span> <span class="n">attendees</span> <span class="o">=&gt;</span> <span class="o">\</span><span class="nv">@attendees</span> <span class="p">});</span>
-</div><div class='line'> </div><div class='line'><span class="bp">__DATA__</span>
-</div><div class='line'> </div><div class='line'><span class="nv">@@</span> <span class="nv">template</span><span class="o">.</span><span class="n">tx</span>
-</div><div class='line'><span class="sr">&lt;html&gt;</span>
-</div><div class='line'> <span class="sr">&lt;head&gt;</span>
-</div><div class='line'>   <span class="sr">&lt;title&gt;</span><span class="c1">#perl-kr 티타임 #2&lt;/title&gt;</span>
-</div><div class='line'>   <span class="sr">&lt;style&gt;</span>
-</div><div class='line'>     <span class="p">[</span><span class="nv">%</span> <span class="nv">INCLUDE</span> <span class="s">&quot;css.tx&quot;</span> <span class="nv">%</span><span class="err">]</span>
-</div><div class='line'>   <span class="err">&lt;/</span><span class="nv">style</span><span class="o">&gt;</span>
-</div><div class='line'> <span class="sr">&lt;/head&gt;</span>
-</div><div class='line'> <span class="sr">&lt;body&gt;</span>
-</div><div class='line'>   <span class="sr">&lt;h1&gt;</span><span class="err">※</span> <span class="c1">#perl-kr 티타임 #2&lt;/h1&gt;</span>
-</div><div class='line'>   <span class="o">&lt;</span><span class="n">table</span> <span class="n">class</span><span class="o">=</span><span class="s">&quot;table table-striped table-bordered&quot;</span> <span class="n">style</span><span class="o">=</span><span class="s">&quot;width:50%&quot;</span><span class="o">&gt;</span>
-</div><div class='line'>     <span class="sr">&lt;thead&gt;</span>
-</div><div class='line'>       <span class="sr">&lt;tr&gt;</span>
-</div><div class='line'>         <span class="o">&lt;</span><span class="n">th</span> <span class="n">class</span><span class="o">=</span><span class="s">&quot;span1&quot;</span><span class="o">&gt;&amp;</span><span class="n">nbsp</span><span class="p">;</span><span class="sr">&lt;/th&gt;</span>
-</div><div class='line'>         <span class="o">&lt;</span><span class="n">th</span> <span class="n">class</span><span class="o">=</span><span class="s">&quot;span1&quot;</span><span class="o">&gt;&amp;</span><span class="n">nbsp</span><span class="p">;</span><span class="sr">&lt;/th&gt;</span>
-</div><div class='line'>         <span class="o">&lt;</span><span class="n">th</span> <span class="n">class</span><span class="o">=</span><span class="s">&quot;span2&quot;</span><span class="o">&gt;</span><span class="n">Name</span><span class="sr">&lt;/th&gt;</span>
-</div><div class='line'>         <span class="o">&lt;</span><span class="n">th</span> <span class="n">class</span><span class="o">=</span><span class="s">&quot;span1&quot;</span><span class="o">&gt;</span><span class="n">Attend</span><span class="p">?</span><span class="sr">&lt;/th&gt;</span>
-</div><div class='line'>       <span class="sr">&lt;/tr&gt;</span>
-</div><div class='line'>     <span class="sr">&lt;/thead&gt;</span>
-</div><div class='line'>     <span class="sr">&lt;tbody&gt;</span>
-</div><div class='line'>       <span class="p">[</span><span class="nv">%</span> <span class="nv">FOREACH</span> <span class="n">p</span> <span class="n">IN</span> <span class="n">attendees</span> <span class="nv">%</span><span class="err">]</span>
-</div><div class='line'>       <span class="err">&lt;</span><span class="nv">tr</span><span class="o">&gt;</span>
-</div><div class='line'>         <span class="sr">&lt;td&gt;</span><span class="p">[</span><span class="nv">%</span> <span class="nv">loop</span><span class="o">.</span><span class="n">count</span> <span class="nv">%</span><span class="err">]&lt;/</span><span class="nv">td</span><span class="o">&gt;</span>
-</div><div class='line'>         <span class="sr">&lt;td&gt;</span><span class="o">&lt;</span><span class="n">img</span> <span class="n">src</span><span class="o">=</span><span class="s">&quot;[% p.profile_image %]&quot;</span> <span class="n">width</span><span class="o">=</span><span class="s">&quot;30&quot;</span> <span class="n">height</span><span class="o">=</span><span class="s">&quot;30&quot;</span> <span class="sr">/&gt;&lt;/</span><span class="n">td</span><span class="o">&gt;</span>
-</div><div class='line'>         <span class="sr">&lt;td&gt;</span><span class="p">[</span><span class="nv">%</span> <span class="nv">p</span><span class="o">.</span><span class="n">name</span> <span class="nv">%</span><span class="err">][%</span> <span class="nv">IF</span> <span class="n">p</span><span class="o">.</span><span class="n">username</span> <span class="nv">%</span><span class="err">]([%</span> <span class="nv">p</span><span class="o">.</span><span class="n">username</span> <span class="nv">%</span><span class="err">]</span><span class="p">)[</span><span class="nv">%</span> <span class="nv">END</span> <span class="nv">%</span><span class="err">]&lt;/</span><span class="nv">td</span><span class="o">&gt;</span>
-</div><div class='line'>         <span class="sr">&lt;td&gt;&lt;/td&gt;</span>
-</div><div class='line'>       <span class="sr">&lt;/tr&gt;</span>
-</div><div class='line'>       <span class="p">[</span><span class="nv">%</span> <span class="nv">END</span> <span class="nv">%</span><span class="err">]</span>
-</div><div class='line'>     <span class="err">&lt;/</span><span class="nv">tbody</span><span class="o">&gt;</span>
-</div><div class='line'>   <span class="sr">&lt;/table&gt;</span>
-</div><div class='line'> <span class="sr">&lt;/body&gt;</span>
-</div><div class='line'><span class="sr">&lt;/html&gt;</span>
-</div><div class='line'> </div><div class='line'><span class="nv">@@</span> <span class="nv">css</span><span class="o">.</span><span class="n">tx</span>
-</div><div class='line'><span class="n">table</span> <span class="p">{</span>
-</div><div class='line'>  <span class="n">max</span><span class="o">-</span><span class="n">width:</span> <span class="mi">100</span><span class="nv">%</span><span class="err">;</span>
-</div><div class='line'>  <span class="nv">border</span><span class="o">-</span><span class="n">collapse:</span> <span class="n">collapse</span><span class="p">;</span>
-</div><div class='line'>  <span class="n">border</span><span class="o">-</span><span class="n">spacing:</span> <span class="mi">0</span><span class="p">;</span>
-</div><div class='line'><span class="p">}</span>
-</div><div class='line'> </div><div class='line'><span class="o">.</span><span class="n">table</span> <span class="p">{</span>
-</div><div class='line'>  <span class="n">width:</span> <span class="mi">100</span><span class="nv">%</span><span class="err">;</span>
-</div><div class='line'>  <span class="nv">margin</span><span class="o">-</span><span class="n">bottom:</span> <span class="mi">18</span><span class="n">px</span><span class="p">;</span>
-</div><div class='line'><span class="p">}</span>
-</div><div class='line'><span class="o">.</span><span class="n">table</span> <span class="n">th</span><span class="p">,</span> <span class="o">.</span><span class="n">table</span> <span class="n">td</span> <span class="p">{</span>
-</div><div class='line'>  <span class="n">padding:</span> <span class="mi">8</span><span class="n">px</span><span class="p">;</span>
-</div><div class='line'>  <span class="n">line</span><span class="o">-</span><span class="n">height:</span> <span class="mi">18</span><span class="n">px</span><span class="p">;</span>
-</div><div class='line'>  <span class="n">text</span><span class="o">-</span><span class="n">align:</span> <span class="n">left</span><span class="p">;</span>
-</div><div class='line'>  <span class="n">vertical</span><span class="o">-</span><span class="n">align:</span> <span class="n">top</span><span class="p">;</span>
-</div><div class='line'>  <span class="n">border</span><span class="o">-</span><span class="n">top:</span> <span class="mi">1</span><span class="n">px</span> <span class="n">solid</span> <span class="c1">#ddd;</span>
-</div><div class='line'><span class="p">}</span>
-</div><div class='line'><span class="o">.</span><span class="n">table</span> <span class="n">th</span> <span class="p">{</span>
-</div><div class='line'>  <span class="n">font</span><span class="o">-</span><span class="n">weight:</span> <span class="n">bold</span><span class="p">;</span>
-</div><div class='line'><span class="p">}</span>
-</div><div class='line'><span class="o">.</span><span class="n">table</span> <span class="n">thead</span> <span class="n">th</span> <span class="p">{</span>
-</div><div class='line'>  <span class="n">vertical</span><span class="o">-</span><span class="n">align:</span> <span class="n">bottom</span><span class="p">;</span>
-</div><div class='line'><span class="p">}</span>
-</div><div class='line'><span class="o">.</span><span class="n">table</span> <span class="n">thead:first</span><span class="o">-</span><span class="n">child</span> <span class="nb">tr</span> <span class="n">th</span><span class="p">,</span> <span class="o">.</span><span class="n">table</span> <span class="n">thead:first</span><span class="o">-</span><span class="n">child</span> <span class="nb">tr</span> <span class="n">td</span> <span class="p">{</span>
-</div><div class='line'>  <span class="n">border</span><span class="o">-</span><span class="n">top:</span> <span class="mi">0</span><span class="p">;</span>
-</div><div class='line'><span class="p">}</span>
-</div><div class='line'><span class="o">.</span><span class="n">table</span> <span class="n">tbody</span> <span class="o">+</span> <span class="n">tbody</span> <span class="p">{</span>
-</div><div class='line'>  <span class="n">border</span><span class="o">-</span><span class="n">top:</span> <span class="mi">2</span><span class="n">px</span> <span class="n">solid</span> <span class="c1">#ddd;</span>
-</div><div class='line'><span class="p">}</span>
-</div><div class='line'><span class="o">.</span><span class="n">table</span><span class="o">-</span><span class="n">condensed</span> <span class="n">th</span><span class="p">,</span> <span class="o">.</span><span class="n">table</span><span class="o">-</span><span class="n">condensed</span> <span class="n">td</span> <span class="p">{</span>
-</div><div class='line'>  <span class="n">padding:</span> <span class="mi">4</span><span class="n">px</span> <span class="mi">5</span><span class="n">px</span><span class="p">;</span>
-</div><div class='line'><span class="p">}</span>
-</div><div class='line'> </div><div class='line'><span class="o">.</span><span class="n">table</span><span class="o">-</span><span class="n">bordered</span> <span class="p">{</span>
-</div><div class='line'>  <span class="n">border:</span> <span class="mi">1</span><span class="n">px</span> <span class="n">solid</span> <span class="c1">#ddd;</span>
-</div><div class='line'>  <span class="n">border</span><span class="o">-</span><span class="n">collapse:</span> <span class="n">separate</span><span class="p">;</span>
-</div><div class='line'>  <span class="o">*</span><span class="n">border</span><span class="o">-</span><span class="n">collapse:</span> <span class="n">collapsed</span><span class="p">;</span>
-</div><div class='line'>  <span class="o">-</span><span class="n">webkit</span><span class="o">-</span><span class="n">border</span><span class="o">-</span><span class="n">radius:</span> <span class="mi">4</span><span class="n">px</span><span class="p">;</span>
-</div><div class='line'>  <span class="o">-</span><span class="n">moz</span><span class="o">-</span><span class="n">border</span><span class="o">-</span><span class="n">radius:</span> <span class="mi">4</span><span class="n">px</span><span class="p">;</span>
-</div><div class='line'>  <span class="n">border</span><span class="o">-</span><span class="n">radius:</span> <span class="mi">4</span><span class="n">px</span><span class="p">;</span>
-</div><div class='line'><span class="p">}</span>
-</div><div class='line'><span class="o">.</span><span class="n">table</span><span class="o">-</span><span class="n">bordered</span> <span class="n">th</span> <span class="o">+</span> <span class="n">th</span><span class="p">,</span> <span class="o">.</span><span class="n">table</span><span class="o">-</span><span class="n">bordered</span> <span class="n">td</span> <span class="o">+</span> <span class="n">td</span><span class="p">,</span> <span class="o">.</span><span class="n">table</span><span class="o">-</span><span class="n">bordered</span> <span class="n">th</span> <span class="o">+</span> <span class="n">td</span><span class="p">,</span> <span class="o">.</span><span class="n">table</span><span class="o">-</span><span class="n">bordered</span> <span class="n">td</span> <span class="o">+</span> <span class="n">th</span> <span class="p">{</span>
-</div><div class='line'>  <span class="n">border</span><span class="o">-</span><span class="n">left:</span> <span class="mi">1</span><span class="n">px</span> <span class="n">solid</span> <span class="c1">#ddd;</span>
-</div><div class='line'><span class="p">}</span>
-</div><div class='line'><span class="o">.</span><span class="n">table</span><span class="o">-</span><span class="n">bordered</span> <span class="n">thead:first</span><span class="o">-</span><span class="n">child</span> <span class="nb">tr</span><span class="p">:</span><span class="n">first</span><span class="o">-</span><span class="n">child</span> <span class="n">th</span><span class="p">,</span> <span class="o">.</span><span class="n">table</span><span class="o">-</span><span class="n">bordered</span> <span class="n">tbody:first</span><span class="o">-</span><span class="n">child</span> <span class="nb">tr</span><span class="p">:</span><span class="n">first</span><span class="o">-</span><span class="n">child</span> <span class="n">th</span><span class="p">,</span> <span class="o">.</span><span class="n">table</span><span class="o">-</span><span class="n">bordered</span> <span class="n">tbody:first</span><span class="o">-</span><span class="n">child</span> <span class="nb">tr</span><span class="p">:</span><span class="n">first</span><span class="o">-</span><span class="n">child</span> <span class="n">td</span> <span class="p">{</span>
-</div><div class='line'>  <span class="n">border</span><span class="o">-</span><span class="n">top:</span> <span class="mi">0</span><span class="p">;</span>
-</div><div class='line'><span class="p">}</span>
-</div><div class='line'><span class="sr">/* line 75, ../</span><span class="o">..</span><span class="sr">/../</span><span class="o">..</span><span class="sr">/../</span><span class="o">..</span><span class="sr">/.rvm/g</span><span class="n">ems</span><span class="sr">/ruby-1.9.2-p290/g</span><span class="n">ems</span><span class="sr">/bootstrap-sass-2.0.1/</span><span class="n">vendor</span><span class="sr">/assets/s</span><span class="n">tylesheets</span><span class="sr">/bootstrap/</span><span class="n">_tables</span><span class="o">.</span><span class="n">scss</span> <span class="o">*/</span>
-</div><div class='line'><span class="o">.</span><span class="n">table</span><span class="o">-</span><span class="n">bordered</span> <span class="n">thead:first</span><span class="o">-</span><span class="n">child</span> <span class="nb">tr</span><span class="p">:</span><span class="n">first</span><span class="o">-</span><span class="n">child</span> <span class="n">th:first</span><span class="o">-</span><span class="n">child</span><span class="p">,</span> <span class="o">.</span><span class="n">table</span><span class="o">-</span><span class="n">bordered</span> <span class="n">tbody:first</span><span class="o">-</span><span class="n">child</span> <span class="nb">tr</span><span class="p">:</span><span class="n">first</span><span class="o">-</span><span class="n">child</span> <span class="n">td:first</span><span class="o">-</span><span class="n">child</span> <span class="p">{</span>
-</div><div class='line'>  <span class="o">-</span><span class="n">webkit</span><span class="o">-</span><span class="n">border</span><span class="o">-</span><span class="n">radius:</span> <span class="mi">4</span><span class="n">px</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span><span class="p">;</span>
-</div><div class='line'>  <span class="o">-</span><span class="n">moz</span><span class="o">-</span><span class="n">border</span><span class="o">-</span><span class="n">radius:</span> <span class="mi">4</span><span class="n">px</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span><span class="p">;</span>
-</div><div class='line'>  <span class="n">border</span><span class="o">-</span><span class="n">radius:</span> <span class="mi">4</span><span class="n">px</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span><span class="p">;</span>
-</div><div class='line'><span class="p">}</span>
-</div><div class='line'><span class="o">.</span><span class="n">table</span><span class="o">-</span><span class="n">bordered</span> <span class="n">thead:first</span><span class="o">-</span><span class="n">child</span> <span class="nb">tr</span><span class="p">:</span><span class="n">first</span><span class="o">-</span><span class="n">child</span> <span class="n">th:last</span><span class="o">-</span><span class="n">child</span><span class="p">,</span> <span class="o">.</span><span class="n">table</span><span class="o">-</span><span class="n">bordered</span> <span class="n">tbody:first</span><span class="o">-</span><span class="n">child</span> <span class="nb">tr</span><span class="p">:</span><span class="n">first</span><span class="o">-</span><span class="n">child</span> <span class="n">td:last</span><span class="o">-</span><span class="n">child</span> <span class="p">{</span>
-</div><div class='line'>  <span class="o">-</span><span class="n">webkit</span><span class="o">-</span><span class="n">border</span><span class="o">-</span><span class="n">radius:</span> <span class="mi">0</span> <span class="mi">4</span><span class="n">px</span> <span class="mi">0</span> <span class="mi">0</span><span class="p">;</span>
-</div><div class='line'>  <span class="o">-</span><span class="n">moz</span><span class="o">-</span><span class="n">border</span><span class="o">-</span><span class="n">radius:</span> <span class="mi">0</span> <span class="mi">4</span><span class="n">px</span> <span class="mi">0</span> <span class="mi">0</span><span class="p">;</span>
-</div><div class='line'>  <span class="n">border</span><span class="o">-</span><span class="n">radius:</span> <span class="mi">0</span> <span class="mi">4</span><span class="n">px</span> <span class="mi">0</span> <span class="mi">0</span><span class="p">;</span>
-</div><div class='line'><span class="p">}</span>
-</div><div class='line'><span class="o">.</span><span class="n">table</span><span class="o">-</span><span class="n">bordered</span> <span class="n">thead:last</span><span class="o">-</span><span class="n">child</span> <span class="nb">tr</span><span class="p">:</span><span class="k">last</span><span class="o">-</span><span class="n">child</span> <span class="n">th:first</span><span class="o">-</span><span class="n">child</span><span class="p">,</span> <span class="o">.</span><span class="n">table</span><span class="o">-</span><span class="n">bordered</span> <span class="n">tbody:last</span><span class="o">-</span><span class="n">child</span> <span class="nb">tr</span><span class="p">:</span><span class="k">last</span><span class="o">-</span><span class="n">child</span> <span class="n">td:first</span><span class="o">-</span><span class="n">child</span> <span class="p">{</span>
-</div><div class='line'>  <span class="o">-</span><span class="n">webkit</span><span class="o">-</span><span class="n">border</span><span class="o">-</span><span class="n">radius:</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">4</span><span class="n">px</span><span class="p">;</span>
-</div><div class='line'>  <span class="o">-</span><span class="n">moz</span><span class="o">-</span><span class="n">border</span><span class="o">-</span><span class="n">radius:</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">4</span><span class="n">px</span><span class="p">;</span>
-</div><div class='line'>  <span class="n">border</span><span class="o">-</span><span class="n">radius:</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">4</span><span class="n">px</span><span class="p">;</span>
-</div><div class='line'><span class="p">}</span>
-</div><div class='line'><span class="o">.</span><span class="n">table</span><span class="o">-</span><span class="n">bordered</span> <span class="n">thead:last</span><span class="o">-</span><span class="n">child</span> <span class="nb">tr</span><span class="p">:</span><span class="k">last</span><span class="o">-</span><span class="n">child</span> <span class="n">th:last</span><span class="o">-</span><span class="n">child</span><span class="p">,</span> <span class="o">.</span><span class="n">table</span><span class="o">-</span><span class="n">bordered</span> <span class="n">tbody:last</span><span class="o">-</span><span class="n">child</span> <span class="nb">tr</span><span class="p">:</span><span class="k">last</span><span class="o">-</span><span class="n">child</span> <span class="n">td:last</span><span class="o">-</span><span class="n">child</span> <span class="p">{</span>
-</div><div class='line'>  <span class="o">-</span><span class="n">webkit</span><span class="o">-</span><span class="n">border</span><span class="o">-</span><span class="n">radius:</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">4</span><span class="n">px</span> <span class="mi">0</span><span class="p">;</span>
-</div><div class='line'>  <span class="o">-</span><span class="n">moz</span><span class="o">-</span><span class="n">border</span><span class="o">-</span><span class="n">radius:</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">4</span><span class="n">px</span> <span class="mi">0</span><span class="p">;</span>
-</div><div class='line'>  <span class="n">border</span><span class="o">-</span><span class="n">radius:</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">4</span><span class="n">px</span> <span class="mi">0</span><span class="p">;</span>
-</div><div class='line'><span class="p">}</span>
-</div><div class='line'><span class="o">.</span><span class="n">table</span><span class="o">-</span><span class="n">striped</span> <span class="n">tbody</span> <span class="nb">tr</span><span class="p">:</span><span class="n">nth</span><span class="o">-</span><span class="n">child</span><span class="p">(</span><span class="n">odd</span><span class="p">)</span> <span class="n">td</span><span class="p">,</span> <span class="o">.</span><span class="n">table</span><span class="o">-</span><span class="n">striped</span> <span class="n">tbody</span> <span class="nb">tr</span><span class="p">:</span><span class="n">nth</span><span class="o">-</span><span class="n">child</span><span class="p">(</span><span class="n">odd</span><span class="p">)</span> <span class="n">th</span> <span class="p">{</span>
-</div><div class='line'>  <span class="n">background</span><span class="o">-</span><span class="n">color:</span> <span class="c1">#f9f9f9;</span>
-</div><div class='line'><span class="p">}</span>
-</div><div class='line'> </div><div class='line'><span class="o">.</span><span class="n">table</span> <span class="n">tbody</span> <span class="nb">tr</span><span class="p">:</span><span class="n">hover</span> <span class="n">td</span><span class="p">,</span> <span class="o">.</span><span class="n">table</span> <span class="n">tbody</span> <span class="nb">tr</span><span class="p">:</span><span class="n">hover</span> <span class="n">th</span> <span class="p">{</span>
-</div><div class='line'>  <span class="n">background</span><span class="o">-</span><span class="n">color:</span> <span class="c1">#f5f5f5;</span>
-</div><div class='line'><span class="p">}</span>
-</div><div class='line'> </div><div class='line'><span class="n">table</span> <span class="o">.</span><span class="n">span1</span> <span class="p">{</span>
-</div><div class='line'>  <span class="n">float:</span> <span class="n">none</span><span class="p">;</span>
-</div><div class='line'>  <span class="n">width:</span> <span class="mi">44</span><span class="n">px</span><span class="p">;</span>
-</div><div class='line'>  <span class="n">margin</span><span class="o">-</span><span class="n">left:</span> <span class="mi">0</span><span class="p">;</span>
-</div><div class='line'><span class="p">}</span>
-</div><div class='line'><span class="n">table</span> <span class="o">.</span><span class="n">span2</span> <span class="p">{</span>
-</div><div class='line'>  <span class="n">float:</span> <span class="n">none</span><span class="p">;</span>
-</div><div class='line'>  <span class="n">width:</span> <span class="mi">124</span><span class="n">px</span><span class="p">;</span>
-</div><div class='line'>  <span class="n">margin</span><span class="o">-</span><span class="n">left:</span> <span class="mi">0</span><span class="p">;</span>
-</div><div class='line'><span class="p">}</span>
-</div><div class='line'><span class="n">table</span> <span class="o">.</span><span class="n">span3</span> <span class="p">{</span>
-</div><div class='line'>  <span class="n">float:</span> <span class="n">none</span><span class="p">;</span>
-</div><div class='line'>  <span class="n">width:</span> <span class="mi">204</span><span class="n">px</span><span class="p">;</span>
-</div><div class='line'>  <span class="n">margin</span><span class="o">-</span><span class="n">left:</span> <span class="mi">0</span><span class="p">;</span>
-</div><div class='line'><span class="p">}</span>
-</div><div class='line'><span class="n">table</span> <span class="o">.</span><span class="n">span4</span> <span class="p">{</span>
-</div><div class='line'>  <span class="n">float:</span> <span class="n">none</span><span class="p">;</span>
-</div><div class='line'>  <span class="n">width:</span> <span class="mi">284</span><span class="n">px</span><span class="p">;</span>
-</div><div class='line'>  <span class="n">margin</span><span class="o">-</span><span class="n">left:</span> <span class="mi">0</span><span class="p">;</span>
-</div><div class='line'><span class="p">}</span>
-</div><div class='line'><span class="n">table</span> <span class="o">.</span><span class="n">span5</span> <span class="p">{</span>
-</div><div class='line'>  <span class="n">float:</span> <span class="n">none</span><span class="p">;</span>
-</div><div class='line'>  <span class="n">width:</span> <span class="mi">364</span><span class="n">px</span><span class="p">;</span>
-</div><div class='line'>  <span class="n">margin</span><span class="o">-</span><span class="n">left:</span> <span class="mi">0</span><span class="p">;</span>
-</div><div class='line'><span class="p">}</span>
-</div><div class='line'><span class="n">table</span> <span class="o">.</span><span class="n">span6</span> <span class="p">{</span>
-</div><div class='line'>  <span class="n">float:</span> <span class="n">none</span><span class="p">;</span>
-</div><div class='line'>  <span class="n">width:</span> <span class="mi">444</span><span class="n">px</span><span class="p">;</span>
-</div><div class='line'>  <span class="n">margin</span><span class="o">-</span><span class="n">left:</span> <span class="mi">0</span><span class="p">;</span>
-</div><div class='line'><span class="p">}</span>
-</div><div class='line'><span class="n">table</span> <span class="o">.</span><span class="n">span7</span> <span class="p">{</span>
-</div><div class='line'>  <span class="n">float:</span> <span class="n">none</span><span class="p">;</span>
-</div><div class='line'>  <span class="n">width:</span> <span class="mi">524</span><span class="n">px</span><span class="p">;</span>
-</div><div class='line'>  <span class="n">margin</span><span class="o">-</span><span class="n">left:</span> <span class="mi">0</span><span class="p">;</span>
-</div><div class='line'><span class="p">}</span>
-</div><div class='line'><span class="n">table</span> <span class="o">.</span><span class="n">span8</span> <span class="p">{</span>
-</div><div class='line'>  <span class="n">float:</span> <span class="n">none</span><span class="p">;</span>
-</div><div class='line'>  <span class="n">width:</span> <span class="mi">604</span><span class="n">px</span><span class="p">;</span>
-</div><div class='line'>  <span class="n">margin</span><span class="o">-</span><span class="n">left:</span> <span class="mi">0</span><span class="p">;</span>
-</div><div class='line'><span class="p">}</span>
-</div><div class='line'><span class="n">table</span> <span class="o">.</span><span class="n">span9</span> <span class="p">{</span>
-</div><div class='line'>  <span class="n">float:</span> <span class="n">none</span><span class="p">;</span>
-</div><div class='line'>  <span class="n">width:</span> <span class="mi">684</span><span class="n">px</span><span class="p">;</span>
-</div><div class='line'>  <span class="n">margin</span><span class="o">-</span><span class="n">left:</span> <span class="mi">0</span><span class="p">;</span>
-</div><div class='line'><span class="p">}</span>
-</div><div class='line'><span class="n">table</span> <span class="o">.</span><span class="n">span10</span> <span class="p">{</span>
-</div><div class='line'>  <span class="n">float:</span> <span class="n">none</span><span class="p">;</span>
-</div><div class='line'>  <span class="n">width:</span> <span class="mi">764</span><span class="n">px</span><span class="p">;</span>
-</div><div class='line'>  <span class="n">margin</span><span class="o">-</span><span class="n">left:</span> <span class="mi">0</span><span class="p">;</span>
-</div><div class='line'><span class="p">}</span>
-</div><div class='line'><span class="n">table</span> <span class="o">.</span><span class="n">span11</span> <span class="p">{</span>
-</div><div class='line'>  <span class="n">float:</span> <span class="n">none</span><span class="p">;</span>
-</div><div class='line'>  <span class="n">width:</span> <span class="mi">844</span><span class="n">px</span><span class="p">;</span>
-</div><div class='line'>  <span class="n">margin</span><span class="o">-</span><span class="n">left:</span> <span class="mi">0</span><span class="p">;</span>
-</div><div class='line'><span class="p">}</span>
-</div><div class='line'> </div><div class='line'><span class="n">table</span> <span class="o">.</span><span class="n">span12</span> <span class="p">{</span>
-</div><div class='line'>  <span class="n">float:</span> <span class="n">none</span><span class="p">;</span>
-</div><div class='line'>  <span class="n">width:</span> <span class="mi">924</span><span class="n">px</span><span class="p">;</span>
-</div><div class='line'>  <span class="n">margin</span><span class="o">-</span><span class="n">left:</span> <span class="mi">0</span><span class="p">;</span>
-</div><div class='line'><span class="p">}</span>
-</div></pre></td></tr></table></div></figure>
-
-<p>급작스레 한 작업이라 그냥 간단히 HTML 로 뽑아버렸지만&hellip; 사실 꿈은 좀 더 아름다운 레이아웃으로 뙇하고 나와줬으면                                                                 했었지요.</p>
-
-<p>일단 예정 참가자 이외에 예상치못한 참가자가 있을 것을 염두해서 3개정도의 행을 더 추가해주었구요;;</p>
-
-<p><code>Text::Xslate</code> + <code>Data::Section::Simple</code> 의 조합은 파일하나에 우걱우걱 템플릿까지 끼워넣고 이럴 경우에는 아주 좋았습니다.</p>
-
-<p>CSS 도 그냥 별도의 섹션으로 나눠서 <code>INCLUDE</code> 해버릴 수도 있으니 :-)</p>
-
-<p><code>Facebook::Graph</code> 모듈은 생각보다 좀 변태같습니다. 그 이유는 Facebook Graph API 도 변태같다는 근본적인 &hellip;. 그리고 Access Token 은 뭐 적당하게 Developer 페이지 가서 줏어서 넣었습니다. :-)</p>
-
-<p><img src="https://lh6.googleusercontent.com/-GrgEvhNP0d0/UBDW9W-YzLI/AAAAAAAACAQ/5G48cMzvryY/w389-h521-k/list.jpg" alt=""></p>
 ]]></content>
     </entry>
   
