@@ -3,7 +3,7 @@
   <title><![CDATA[JEEN's techlog]]></title>
   <link href="http://jeen.github.io/atom.xml" rel="self"/>
   <link href="http://jeen.github.io/"/>
-  <updated>2013-07-10T13:44:30+00:00</updated>
+  <updated>2013-07-12T07:59:54+00:00</updated>
   <id>http://jeen.github.io/</id>
   <author>
     <name><![CDATA[Jeen Lee]]></name>
@@ -57,9 +57,9 @@
 
 <blockquote class="twitter-tweet"><p>이런 OL 이 된다는 것입니다. <a href="http://t.co/c3Wu2plYAT">pic.twitter.com/c3Wu2plYAT</a></p>&mdash; JEEN (@JEEN_LEE) <a href="https://twitter.com/JEEN_LEE/statuses/354939140883742720">July 10, 2013</a></blockquote>
 
-<p>이 플러그인은 각 Job 단위로 설정이 가능합니다. 플러그인을 설치하고 post-build action 에서 Moeemotional Hudson 을 추가해줍니다. 그러니까 Job 단위로 설정이 가능한게 Job A 페이지에서만 표시되고 해당 Job 의 빌드 결과에 따른 그림변화는 없었습니다.</p>
+<p>이 플러그인은 각 Job 단위로 설정이 가능합니다. 플러그인을 설치하고 post-build action 에서 Moeemotional Hudson 을 추가해줍니다. <strike>그러니까 Job 단위로 설정이 가능한게 Job A 페이지에서만 표시되고 해당 Job 의 빌드 결과에 따른 그림변화는 없었습니다.</strike> 아&hellip; 캐쉬에 의한 착각이었습니다. 각 빌드 페이지에서도 정상적으로 출력됩니다.</p>
 
-<p>그러니 플랫플랫하게 나올 결과물을 기대해봅니다.</p>
+<p>아무튼 플랫플랫하게 나올 결과물을 기대해봅니다.</p>
 
 <ul>
 <li><a href="https://github.com/lqez/flat-jenkins">Github - lqez/flat-jenkins</a></li>
