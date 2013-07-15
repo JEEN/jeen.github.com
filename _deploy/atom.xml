@@ -3,7 +3,7 @@
   <title><![CDATA[JEEN's techlog]]></title>
   <link href="http://jeen.github.io/atom.xml" rel="self"/>
   <link href="http://jeen.github.io/"/>
-  <updated>2013-07-10T13:27:07+00:00</updated>
+  <updated>2013-07-12T11:17:07+00:00</updated>
   <id>http://jeen.github.io/</id>
   <author>
     <name><![CDATA[Jeen Lee]]></name>
@@ -11,6 +11,61 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+    <entry>
+      
+
+
+
+
+<title type="html"><![CDATA[Apply MoeEmotional Hudson Plugin on Jenkins]]></title>
+<link href="http://jeen.github.io/2013/07/10/apply-moeemotional-hudson-plugin-on-jenkins/"/>
+<updated>2013-07-10T13:28:59+00:00</updated>
+<id>http://jeen.github.io/2013/07/10/apply-moeemotional-hudson-plugin-on-jenkins</id>
+<category term="jenkins" />
+
+      <content type="html"><![CDATA[<blockquote class="twitter-tweet"><p>젠킨스에서 대머리 아저씨 얼굴 보기가 싫어서, 급하게 테마 하나 제작했습니다. <a href="https://t.co/FcNPdqMjlO">https://t.co/FcNPdqMjlO</a> 앞으로 플랫플랫하게 해볼 예정.</p>&mdash; Park Hyun-woo (@lqez) <a href="https://twitter.com/lqez/statuses/354925228079579138">July 10, 2013</a></blockquote>
+
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+<p>이 모든 원인은 @lqez 님의 트윗에서 시작했습니다.</p>
+
+<p>이 트윗을 보고 예전에&hellip; 그러니까 일본에서 일하고 있을 당시 CI 에는 별로 신경도 쓰지도 않던 시절에 Hatena bookmark 에서 모에짙은 플러그인에 대한 기사를 떠올렸습니다.</p>
+
+<ul>
+<li><a href="http://d.hatena.ne.jp/kanu-orz/20090803/1249225200">Hudsonの萌え化、もしくは痛Hudson化</a></li>
+</ul>
+
+<p>　그러니까 당시 Jenkins 가 Hudson 이던 시절에 수염난 아저씨를 눈뜨고 쳐다볼 수 없었던 Hudson 사용자들은 <code>moeemotional-hudson</code> 이라는 플러그인을 만들어 냅니다.
+　그와 관련된 링크는 아래와 같습니다.</p>
+
+<ul>
+<li><a href="http://d.hatena.ne.jp/torazuka/20090731/1248970549">hud子「継続的インテグレーションを、あなたに」</a></li>
+<li><a href="http://d.hatena.ne.jp/torazuka/20090802/hudmis">RED_LAMP用のhud美を追加</a></li>
+<li><p><a href="http://d.hatena.ne.jp/kanu-orz/20090802/1249182957">萌えよHudson(hud子バージョン公開)</a></p>
+
+<p>그리고 모에말고 일반적인 Emotional Jenkins 플러그인도 존재합니다. -_-;</p>
+
+<ul>
+<li><a href="https://wiki.jenkins-ci.org/display/JENKINS/Emotional+Jenkins+Plugin">https://wiki.jenkins-ci.org/display/JENKINS/Emotional+Jenkins+Plugin</a></li>
+</ul>
+
+<p>뭐 결론은 Stable, Unstable 에 따라서 각각의 상황에 맞는 그림을 대신 표시해주는 것이지요.</p></li>
+</ul>
+
+<blockquote class="twitter-tweet"><p>그러니까 그런 노력의 결과로&hellip; 이런 아저씨가&hellip; <a href="http://t.co/1d1TuMWbJs">pic.twitter.com/1d1TuMWbJs</a></p>&mdash; JEEN (@JEEN_LEE) <a href="https://twitter.com/JEEN_LEE/statuses/354939083795083265">July 10, 2013</a></blockquote>
+
+<blockquote class="twitter-tweet"><p>이런 OL 이 된다는 것입니다. <a href="http://t.co/c3Wu2plYAT">pic.twitter.com/c3Wu2plYAT</a></p>&mdash; JEEN (@JEEN_LEE) <a href="https://twitter.com/JEEN_LEE/statuses/354939140883742720">July 10, 2013</a></blockquote>
+
+<p>이 플러그인은 각 Job 단위로 설정이 가능합니다. 플러그인을 설치하고 post-build action 에서 Moeemotional Hudson 을 추가해줍니다. <strike>그러니까 Job 단위로 설정이 가능한게 Job A 페이지에서만 표시되고 해당 Job 의 빌드 결과에 따른 그림변화는 없었습니다.</strike> 아&hellip; 캐쉬에 의한 착각이었습니다. 각 빌드 페이지에서도 정상적으로 출력됩니다.</p>
+
+<p>아무튼 플랫플랫하게 나올 결과물을 기대해봅니다.</p>
+
+<ul>
+<li><a href="https://github.com/lqez/flat-jenkins">Github - lqez/flat-jenkins</a></li>
+</ul>
+]]></content>
+    </entry>
   
     <entry>
       
@@ -1680,111 +1735,6 @@ skyloader has left IRC (Remote host closed the connection)</p></li>
 </ul>
 
 <p>이런 CHANGELOG 도 일단 보고 있지만요&hellip;</p>
-]]></content>
-    </entry>
-  
-    <entry>
-      
-
-
-
-
-<title type="html"><![CDATA[App::Zamakist...]]></title>
-<link href="http://jeen.github.io/2012/08/09/app-zamakist-dot-dot-dot/"/>
-<updated>2012-08-09T13:33:00+00:00</updated>
-<id>http://jeen.github.io/2012/08/09/app-zamakist-dot-dot-dot</id>
-<category term="perl" />
-
-      <content type="html"><![CDATA[<p>취미라고 할 것이 있다면 잠, 책, 드라마감상 정도라고 할까요.</p>
-
-<p>걔중에 몇몇 미드들을 아직까지 꾸준하게 시간을 내면서 보고 있습니다.</p>
-
-<p>걔중에는 가끔보면 자막이 없어서 일일이 자막찾으러 들어가고 받고 해야하는 지루한 클릭이 필요한 경우도 있습니다.</p>
-
-<p>윈도라면 <code>곰플레이어</code> 로 이런 부분의 수고가 조금 줄어들기는 하지만 Mac 에서 <code>Movist</code> 를 통해서 주로 영상을 감상하려면 심히 신경쓰이지 않을리 없습니다.</p>
-
-<blockquote class="twitter-tweet" lang="ko"><p>멘탈리스트 4기를 볼려고 했는데, 자막이 없네&hellip; 그래서 자막을 세팅하는 스크립트를 깨작거려서 만들어봤다. 좀 더 브러쉬 업해야 되지만서도&hellip; <a href="https://t.co/jeXVNTnI" title="https://gist.github.com/3150026">gist.github.com/3150026</a></p>&mdash; JEEN (@JEEN_LEE) <a href="https://twitter.com/JEEN_LEE/status/226260944597180417" data-datetime="2012-07-20T10:23:07+00:00">7월 20, 2012</a></blockquote>
-
-<p>그러니까 7월 20일경에 일단 이런 문제를 겪어서 잠깐 깨작거려서 만들어보기는 했지만 대놓고 앞에 내놓기도 그렇고해서 그냥 보류했었는데요. 뭐 물론 여전히 앞에 내놓는 게 좀 그렇기는 합니다.</p>
-
-<ul>
-<li><a href="https://github.com/JEEN/p5-App-Zamakist">https://github.com/JEEN/p5-App-Zamakist</a></li>
-</ul>
-
-<p>일련의 과정을 말하자면…</p>
-
-<figure class='code'><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div><div data-line='2' class='line-number'></div><div data-line='3' class='line-number'></div><div data-line='4' class='line-number'></div><div data-line='5' class='line-number'></div><div data-line='6' class='line-number'></div><div data-line='7' class='line-number'></div><div data-line='8' class='line-number'></div><div data-line='9' class='line-number'></div><div data-line='10' class='line-number'></div><div data-line='11' class='line-number'></div><div data-line='12' class='line-number'></div><div data-line='13' class='line-number'></div><div data-line='14' class='line-number'></div></pre></td><td class='main  bash'><pre><div class='line'><span class="nv">$ </span>ls -la
-</div><div class='line'>total 0
-</div><div class='line'>drwxr-xr-x  12 jeen  staff   408  8  9 13:45 .
-</div><div class='line'>drwxr-xr-x+ 52 jeen  staff  1768  8  9 13:45 ..
-</div><div class='line'>-rw-r--r--   1 jeen  staff     0  8  9 13:45 NCIS.Los.Angeles.S03E01.720p.HDTV.X264-DIMENSION.avi
-</div><div class='line'>-rw-r--r--   1 jeen  staff     0  8  9 13:45 NCIS.Los.Angeles.S03E02.720p.HDTV.X264-DIMENSION.avi
-</div><div class='line'>-rw-r--r--   1 jeen  staff     0  8  9 13:45 NCIS.Los.Angeles.S03E03.720p.HDTV.X264-DIMENSION.avi
-</div><div class='line'>-rw-r--r--   1 jeen  staff     0  8  9 13:45 NCIS.Los.Angeles.S03E04.720p.HDTV.X264-DIMENSION.avi
-</div><div class='line'>-rw-r--r--   1 jeen  staff     0  8  9 13:45 NCIS.Los.Angeles.S03E05.720p.HDTV.X264-DIMENSION.avi
-</div><div class='line'>-rw-r--r--   1 jeen  staff     0  8  9 13:45 NCIS.Los.Angeles.S03E06.720p.HDTV.X264-DIMENSION.avi
-</div><div class='line'>-rw-r--r--   1 jeen  staff     0  8  9 13:45 NCIS.Los.Angeles.S03E07.720p.HDTV.X264-DIMENSION.avi
-</div><div class='line'>-rw-r--r--   1 jeen  staff     0  8  9 13:45 NCIS.Los.Angeles.S03E08.720p.HDTV.X264-DIMENSION.avi
-</div><div class='line'>-rw-r--r--   1 jeen  staff     0  8  9 11:44 NCIS.Los.Angeles.S03E09.720p.HDTV.X264-DIMENSION.avi
-</div><div class='line'>-rw-r--r--   1 jeen  staff     0  8  9 09:29 NCIS.Los.Angeles.S03E10.720p.HDTV.X264-DIMENSION.avi
-</div></pre></td></tr></table></div></figure>
-
-<p>이렇게 뭐 디렉토리에 영상자료들이 널부러져 있습니다. 하지만 자막은 없죠.</p>
-
-<figure class='code'><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div><div data-line='2' class='line-number'></div><div data-line='3' class='line-number'></div><div data-line='4' class='line-number'></div><div data-line='5' class='line-number'></div><div data-line='6' class='line-number'></div><div data-line='7' class='line-number'></div><div data-line='8' class='line-number'></div><div data-line='9' class='line-number'></div><div data-line='10' class='line-number'></div><div data-line='11' class='line-number'></div><div data-line='12' class='line-number'></div><div data-line='13' class='line-number'></div><div data-line='14' class='line-number'></div><div data-line='15' class='line-number'></div><div data-line='16' class='line-number'></div><div data-line='17' class='line-number'></div><div data-line='18' class='line-number'></div></pre></td><td class='main  plain'><pre><div class='line'>$ zamakist --dir .
-</div><div class='line'>Found 10 subscriptions
-</div><div class='line'>┌────┬──────────────────────────────────────────────────────┐
-</div><div class='line'>│ id │ filename                                             │
-</div><div class='line'>├────┼──────────────────────────────────────────────────────┤
-</div><div class='line'>│  1 │ NCIS.Los.Angeles.S03E01.720p.HDTV.X264-DIMENSION.avi │
-</div><div class='line'>│  2 │ NCIS.Los.Angeles.S03E02.720p.HDTV.X264-DIMENSION.avi │
-</div><div class='line'>│  3 │ NCIS.Los.Angeles.S03E03.720p.HDTV.X264-DIMENSION.avi │
-</div><div class='line'>│  4 │ NCIS.Los.Angeles.S03E04.720p.HDTV.X264-DIMENSION.avi │
-</div><div class='line'>│  5 │ NCIS.Los.Angeles.S03E05.720p.HDTV.X264-DIMENSION.avi │
-</div><div class='line'>│  6 │ NCIS.Los.Angeles.S03E06.720p.HDTV.X264-DIMENSION.avi │
-</div><div class='line'>│  7 │ NCIS.Los.Angeles.S03E07.720p.HDTV.X264-DIMENSION.avi │
-</div><div class='line'>│  8 │ NCIS.Los.Angeles.S03E08.720p.HDTV.X264-DIMENSION.avi │
-</div><div class='line'>│  9 │ NCIS.Los.Angeles.S03E09.720p.HDTV.X264-DIMENSION.avi │
-</div><div class='line'>│ 10 │ NCIS.Los.Angeles.S03E10.720p.HDTV.X264-DIMENSION.avi │
-</div><div class='line'>└────┴──────────────────────────────────────────────────────┘
-</div><div class='line'>Continue to download? [y/n] y
-</div><div class='line'>Downloaded 10 subscriptions</div></pre></td></tr></table></div></figure>
-
-<p>그래서 뭐 <code>App::Zamakist</code> 라는 모듈을 사용하면 뭐 이렇게 자막을 한꺼번에 다운받을 수 있다 뭐 이런 거죠.</p>
-
-<figure class='code'><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div><div data-line='2' class='line-number'></div><div data-line='3' class='line-number'></div><div data-line='4' class='line-number'></div><div data-line='5' class='line-number'></div><div data-line='6' class='line-number'></div><div data-line='7' class='line-number'></div><div data-line='8' class='line-number'></div><div data-line='9' class='line-number'></div><div data-line='10' class='line-number'></div><div data-line='11' class='line-number'></div><div data-line='12' class='line-number'></div><div data-line='13' class='line-number'></div><div data-line='14' class='line-number'></div><div data-line='15' class='line-number'></div><div data-line='16' class='line-number'></div><div data-line='17' class='line-number'></div><div data-line='18' class='line-number'></div><div data-line='19' class='line-number'></div><div data-line='20' class='line-number'></div><div data-line='21' class='line-number'></div><div data-line='22' class='line-number'></div><div data-line='23' class='line-number'></div><div data-line='24' class='line-number'></div></pre></td><td class='main  bash'><pre><div class='line'><span class="nv">$ </span>ls -la
-</div><div class='line'>total 1592
-</div><div class='line'>drwxr-xr-x  22 jeen  staff    748  8  9 13:46 .
-</div><div class='line'>drwxr-xr-x+ 52 jeen  staff   1768  8  9 13:46 ..
-</div><div class='line'>-rw-r--r--   1 jeen  staff      0  8  9 13:45 NCIS.Los.Angeles.S03E01.720p.HDTV.X264-DIMENSION.avi
-</div><div class='line'>-rw-r--r--   1 jeen  staff  63779  8  9 13:46 NCIS.Los.Angeles.S03E01.720p.HDTV.X264-DIMENSION.smi
-</div><div class='line'>-rw-r--r--   1 jeen  staff      0  8  9 13:45 NCIS.Los.Angeles.S03E02.720p.HDTV.X264-DIMENSION.avi
-</div><div class='line'>-rw-r--r--   1 jeen  staff  75041  8  9 13:46 NCIS.Los.Angeles.S03E02.720p.HDTV.X264-DIMENSION.smi
-</div><div class='line'>-rw-r--r--   1 jeen  staff      0  8  9 13:45 NCIS.Los.Angeles.S03E03.720p.HDTV.X264-DIMENSION.avi
-</div><div class='line'>-rw-r--r--   1 jeen  staff  84915  8  9 13:46 NCIS.Los.Angeles.S03E03.720p.HDTV.X264-DIMENSION.smi
-</div><div class='line'>-rw-r--r--   1 jeen  staff      0  8  9 13:45 NCIS.Los.Angeles.S03E04.720p.HDTV.X264-DIMENSION.avi
-</div><div class='line'>-rw-r--r--   1 jeen  staff  78550  8  9 13:46 NCIS.Los.Angeles.S03E04.720p.HDTV.X264-DIMENSION.smi
-</div><div class='line'>-rw-r--r--   1 jeen  staff      0  8  9 13:45 NCIS.Los.Angeles.S03E05.720p.HDTV.X264-DIMENSION.avi
-</div><div class='line'>-rw-r--r--   1 jeen  staff  94809  8  9 13:46 NCIS.Los.Angeles.S03E05.720p.HDTV.X264-DIMENSION.smi
-</div><div class='line'>-rw-r--r--   1 jeen  staff      0  8  9 13:45 NCIS.Los.Angeles.S03E06.720p.HDTV.X264-DIMENSION.avi
-</div><div class='line'>-rw-r--r--   1 jeen  staff  98759  8  9 13:46 NCIS.Los.Angeles.S03E06.720p.HDTV.X264-DIMENSION.smi
-</div><div class='line'>-rw-r--r--   1 jeen  staff      0  8  9 13:45 NCIS.Los.Angeles.S03E07.720p.HDTV.X264-DIMENSION.avi
-</div><div class='line'>-rw-r--r--   1 jeen  staff  76016  8  9 13:46 NCIS.Los.Angeles.S03E07.720p.HDTV.X264-DIMENSION.smi
-</div><div class='line'>-rw-r--r--   1 jeen  staff      0  8  9 13:45 NCIS.Los.Angeles.S03E08.720p.HDTV.X264-DIMENSION.avi
-</div><div class='line'>-rw-r--r--   1 jeen  staff  94320  8  9 13:46 NCIS.Los.Angeles.S03E08.720p.HDTV.X264-DIMENSION.smi
-</div><div class='line'>-rw-r--r--   1 jeen  staff      0  8  9 11:44 NCIS.Los.Angeles.S03E09.720p.HDTV.X264-DIMENSION.avi
-</div><div class='line'>-rw-r--r--   1 jeen  staff  69537  8  9 13:46 NCIS.Los.Angeles.S03E09.720p.HDTV.X264-DIMENSION.smi
-</div><div class='line'>-rw-r--r--   1 jeen  staff      0  8  9 09:29 NCIS.Los.Angeles.S03E10.720p.HDTV.X264-DIMENSION.avi
-</div><div class='line'>-rw-r--r--   1 jeen  staff  55905  8  9 13:46 NCIS.Los.Angeles.S03E10.720p.HDTV.X264-DIMENSION.smi
-</div></pre></td></tr></table></div></figure>
-
-<p>뭐 일단 CPAN 에 올릴 생각도 없는 토이모듈 겸 생활용품 모듈이라서…</p>
-
-<p>아 물론 자막검색은 GOM 자막을 애용하고 있습니다.</p>
-
-<p>검색방식은 뭐 파일이름에서 확장자만 떼서 검색날려서 뭐 여차저차해서 파일다운로드 하는 링크 빼서 일괄 다운로드 하는 것이죠.</p>
-
-<p>이제 시작하려는 미드가 있는데 자막이 없다면 이거 한번만 돌려주면 앞으로 자막찾는 수고없어지겠습니다. :-)</p>
 ]]></content>
     </entry>
   
