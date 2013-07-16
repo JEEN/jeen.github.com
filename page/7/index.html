@@ -98,6 +98,77 @@
   <header>
     <h1 class="entry-title">
 
+<a href="/2012/11/29/download-package-dir-slash-files-from-directory-index/">Download Package Dir/files From Directory Index</a>
+
+</h1>
+
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2012-11-29T20:10:00+00:00" pubdate data-updated="true">Nov 29<span>th</span>, 2012</time>
+         &bull; <a rel="bookmark" href="/2012/11/29/download-package-dir-slash-files-from-directory-index/">Permalink</a>
+      </p>
+    
+  </header>
+
+<div class="entry-content"><p>최근에 모 오픈소스의 패키지 리포지트리가 조만간 닫힐 것이라는 뉴스가 있어서… 만일을 위해 거기 있는 패키지 파일들을 일단 긁어오기로 했습니다. -_-;</p>
+
+<p>그래서 크롤러를 하나 만들까 하다가… 이런 류의 작업은 뭔가 만들어 놓은 툴이 있을 것이라는 생각에 이리저리 뒤져보고 찾아봤지만 마땅한 키워드를 얻지 못했습니다.</p>
+
+<p>결국 지인들에게 수소문해본 결과 아래와 같은 커맨드를 통해서 Directory Index 구조를 취하는 페이지에서 파일들을 몽땅 긁어올 수 있다는 걸을 알게되었습니다.</p>
+
+<figure class='code'><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div></pre></td><td class='main  bash'><pre><div class='line'><span class="nv">$ </span>wget -e <span class="nv">robots</span><span class="o">=</span>off -k -r --no-parent --wait<span class="o">=</span>5 http://download.virtualbox.org/virtualbox/debian/
+</div></pre></td></tr></table></div></figure>
+
+<p><code>index.html</code> 등의 불필요한 파일들도 같이 다운로드 되기도 하지만… 일단 다 받고나서…</p>
+
+<figure class='code'><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div></pre></td><td class='main  bash'><pre><div class='line'><span class="nv">$ </span>find . | grep index.html | xargs rm
+</div></pre></td></tr></table></div></figure>
+
+<p>으로 삭제…</p>
+
+<p>그리하여 조만간 끊어질지도 모르는 사태에 대비코자 미리 이렇게 준비를 끝냈습니다.</p>
+</div>
+
+  <footer>
+    
+    <p><a class="comments-link" href="/2012/11/29/download-package-dir-slash-files-from-directory-index/#disqus_thread" data-disqus-identifier="http://jeen.github.io/2012/11/29/download-package-dir-slash-files-from-directory-index/">View comments &raquo;</a></p>
+
+    
+    
+  </footer>
+
+
+    </article>
+  
+    
+
+
+
+
+
+
+
+
+
+
+    <article >
+      
+  <header>
+    <h1 class="entry-title">
+
 <a href="/2012/11/26/proverc-for-less-typing/">.proverc for Less Typing</a>
 
 </h1>
@@ -274,152 +345,6 @@
   <footer>
     
     <p><a class="comments-link" href="/2012/11/21/using-test-pretty/#disqus_thread" data-disqus-identifier="http://jeen.github.io/2012/11/21/using-test-pretty/">View comments &raquo;</a></p>
-
-    
-    
-  </footer>
-
-
-    </article>
-  
-    
-
-
-
-
-
-
-
-
-
-
-    <article >
-      
-  <header>
-    <h1 class="entry-title">
-
-<a href="/2012/08/28/building-a-perl-project-on-travis-ci/">Building a Perl Project on Travis CI</a>
-
-</h1>
-
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-
-<time datetime="2012-08-28T14:25:00+00:00" pubdate data-updated="true">Aug 28<span>th</span>, 2012</time>
-         &bull; <a rel="bookmark" href="/2012/08/28/building-a-perl-project-on-travis-ci/">Permalink</a>
-      </p>
-    
-  </header>
-
-<div class="entry-content"><ul>
-<li><a href="http://travis-ci.org/">Travis CI - Distributed build platform for the open source community</a></li>
-</ul>
-
-<p><code>Travis CI</code>은 이전에 얘기를 들었을 때는 별  관심이 없었는데(처음에는 확실히 Perl 을 지원하지 않아서), 언제부턴가 Perl 을 지원한다는 얘기를 듣고 Perl 커뮤니티에서 움직임이 조금씩 있더라구요. <code>Dist::Zilla::TravisCI</code> 같은 모듈들도 나오는 걸로 봐서…</p>
-
-<p>사용하는 방법은 아주 간단합니다. <code>Github</code> 계정에 연결되고, 그리고 Github 의 Public 상태의 프로젝트를 고르고… 그 프로젝트에 <code>.travis.yml</code> 파일을 놓아주면 됩니다.</p>
-
-<ul>
-<li><a href="http://about.travis-ci.org/docs/user/languages/perl/">Travis CI - Building a Perl Project</a><br></li>
-</ul>
-
-<p>자세한 건 위의 설명페이지를 참고해서 이전에 살짝 만들어 놓은 <code>Zamakist</code> 를 <code>Travis CI</code> 에서 돌려보게 해봤습니다.</p>
-
-<p><img src="https://lh5.googleusercontent.com/-EUnpasmILzs/UDxYWf7j2WI/AAAAAAAACBg/y1EdG7zFKoM/%2525C3%2525A1%2525C2%252584%2525C2%252589%2525C3%2525A1%2525C2%252585%2525C2%2525B3%2525C3%2525A1%2525C2%252584%2525C2%25258F%2525C3%2525A1%2525C2%252585%2525C2%2525B3%2525C3%2525A1%2525C2%252584%2525C2%252585%2525C3%2525A1%2525C2%252585%2525C2%2525B5%2525C3%2525A1%2525C2%252586%2525C2%2525AB%2525C3%2525A1%2525C2%252584%2525C2%252589%2525C3%2525A1%2525C2%252585%2525C2%2525A3%2525C3%2525A1%2525C2%252586%2525C2%2525BA%2525202012-08-28%252520%2525C3%2525A1%2525C2%252584%2525C2%25258B%2525C3%2525A1%2525C2%252585%2525C2%2525A9%2525C3%2525A1%2525C2%252584%2525C2%252592%2525C3%2525A1%2525C2%252585%2525C2%2525AE%2525202.33.19.png" alt="img-failed"></p>
-
-<p>처음에야 뭐 물론 <code>.travis.yml</code> 파일이 없어서 실패했다는 메일이 날라왔구요.</p>
-
-<p><code>.travis.yml</code> 을 추가해준 결과로는 다시 이렇게 제대로 돌아간다는 메일이 옵니다.</p>
-
-<p><img src="https://lh5.googleusercontent.com/-ub5BrJZrXPw/UDxYT_Xl7JI/AAAAAAAACBY/CtHCGYNaJcY/%2525C3%2525A1%2525C2%252584%2525C2%252589%2525C3%2525A1%2525C2%252585%2525C2%2525B3%2525C3%2525A1%2525C2%252584%2525C2%25258F%2525C3%2525A1%2525C2%252585%2525C2%2525B3%2525C3%2525A1%2525C2%252584%2525C2%252585%2525C3%2525A1%2525C2%252585%2525C2%2525B5%2525C3%2525A1%2525C2%252586%2525C2%2525AB%2525C3%2525A1%2525C2%252584%2525C2%252589%2525C3%2525A1%2525C2%252585%2525C2%2525A3%2525C3%2525A1%2525C2%252586%2525C2%2525BA%2525202012-08-28%252520%2525C3%2525A1%2525C2%252584%2525C2%25258B%2525C3%2525A1%2525C2%252585%2525C2%2525A9%2525C3%2525A1%2525C2%252584%2525C2%252592%2525C3%2525A1%2525C2%252585%2525C2%2525AE%2525202.33.13.png" alt="Img1"></p>
-
-<p><code>Travis CI</code> 에서 출력되는 빌드 내용은 아래와 같습니다.</p>
-
-<figure class='code'><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div><div data-line='2' class='line-number'></div><div data-line='3' class='line-number'></div><div data-line='4' class='line-number'></div><div data-line='5' class='line-number'></div><div data-line='6' class='line-number'></div><div data-line='7' class='line-number'></div><div data-line='8' class='line-number'></div><div data-line='9' class='line-number'></div><div data-line='10' class='line-number'></div><div data-line='11' class='line-number'></div><div data-line='12' class='line-number'></div><div data-line='13' class='line-number'></div><div data-line='14' class='line-number'></div><div data-line='15' class='line-number'></div><div data-line='16' class='line-number'></div><div data-line='17' class='line-number'></div><div data-line='18' class='line-number'></div><div data-line='19' class='line-number'></div><div data-line='20' class='line-number'></div><div data-line='21' class='line-number'></div><div data-line='22' class='line-number'></div><div data-line='23' class='line-number'></div><div data-line='24' class='line-number'></div><div data-line='25' class='line-number'></div><div data-line='26' class='line-number'></div><div data-line='27' class='line-number'></div><div data-line='28' class='line-number'></div><div data-line='29' class='line-number'></div><div data-line='30' class='line-number'></div><div data-line='31' class='line-number'></div><div data-line='32' class='line-number'></div><div data-line='33' class='line-number'></div><div data-line='34' class='line-number'></div><div data-line='35' class='line-number'></div><div data-line='36' class='line-number'></div><div data-line='37' class='line-number'></div><div data-line='38' class='line-number'></div><div data-line='39' class='line-number'></div><div data-line='40' class='line-number'></div><div data-line='41' class='line-number'></div><div data-line='42' class='line-number'></div><div data-line='43' class='line-number'></div><div data-line='44' class='line-number'></div><div data-line='45' class='line-number'></div><div data-line='46' class='line-number'></div><div data-line='47' class='line-number'></div><div data-line='48' class='line-number'></div><div data-line='49' class='line-number'></div><div data-line='50' class='line-number'></div><div data-line='51' class='line-number'></div><div data-line='52' class='line-number'></div><div data-line='53' class='line-number'></div><div data-line='54' class='line-number'></div><div data-line='55' class='line-number'></div><div data-line='56' class='line-number'></div><div data-line='57' class='line-number'></div><div data-line='58' class='line-number'></div><div data-line='59' class='line-number'></div><div data-line='60' class='line-number'></div><div data-line='61' class='line-number'></div><div data-line='62' class='line-number'></div><div data-line='63' class='line-number'></div><div data-line='64' class='line-number'></div><div data-line='65' class='line-number'></div><div data-line='66' class='line-number'></div></pre></td><td class='main  bash'><pre><div class='line'>Using worker: ppp3.worker.travis-ci.org:php-1
-</div><div class='line'> </div><div class='line'><span class="nv">$ </span><span class="nb">cd</span> ~/builds
-</div><div class='line'><span class="nv">$ </span>git clone --depth<span class="o">=</span>100 --quiet git://github.com/JEEN/p5-App-Zamakist.git JEEN/p5-App-Zamakist
-</div><div class='line'><span class="nv">$ </span><span class="nb">cd </span>JEEN/p5-App-Zamakist
-</div><div class='line'><span class="nv">$ </span>git checkout -qf df10bdfea286c9933c345c84206eaa90b8f298a6
-</div><div class='line'><span class="nv">$ </span>perlbrew use 5.16
-</div><div class='line'><span class="nv">$ </span>perl --version
-</div><div class='line'> </div><div class='line'>This is perl 5, version 16, subversion 0 <span class="o">(</span>v5.16.0<span class="o">)</span> built <span class="k">for </span>i686-linux
-</div><div class='line'> </div><div class='line'>Copyright 1987-2012, Larry Wall
-</div><div class='line'> </div><div class='line'>Perl may be copied only under the terms of either the Artistic License or the
-</div><div class='line'>GNU General Public License, which may be found in the Perl 5 <span class="nb">source </span>kit.
-</div><div class='line'> </div><div class='line'>Complete documentation <span class="k">for </span>Perl, including FAQ lists, should be found on
-</div><div class='line'>this system using <span class="s2">&quot;man perl&quot;</span> or <span class="s2">&quot;perldoc perl&quot;</span>.  If you have access to the
-</div><div class='line'>Internet, point your browser at http://www.perl.org/, the Perl Home Page.
-</div><div class='line'> </div><div class='line'><span class="nv">$ </span>cpanm --version
-</div><div class='line'>cpanm <span class="o">(</span>App::cpanminus<span class="o">)</span> version 1.5017
-</div><div class='line'><span class="nv">$ </span>cpanm --quiet --installdeps --notest .
-</div><div class='line'>Successfully installed Text-CharWidth-0.04
-</div><div class='line'>Successfully installed Text-UnicodeBox-0.03
-</div><div class='line'>Successfully installed XML-XPathEngine-0.13
-</div><div class='line'>Successfully installed HTML-Tree-5.02
-</div><div class='line'>Successfully installed HTML-TreeBuilder-XPath-0.14
-</div><div class='line'>Successfully installed HTML-Selector-XPath-0.14
-</div><div class='line'>Successfully installed Web-Query-0.08
-</div><div class='line'>Successfully installed Term-ReadLine-Zoid-0.07
-</div><div class='line'>8 distributions installed
-</div><div class='line'><span class="nv">$ </span>perl Makefile.PL <span class="o">&amp;&amp;</span> make <span class="nb">test</span>
-</div><div class='line'>include /home/travis/builds/JEEN/p5-App-Zamakist/inc/Module/Install.pm
-</div><div class='line'>include inc/Module/Install/Metadata.pm
-</div><div class='line'>include inc/Module/Install/Base.pm
-</div><div class='line'>include inc/Module/Install/Makefile.pm
-</div><div class='line'>Cannot determine perl version info from lib/App/Zamakist.pm
-</div><div class='line'>include inc/Module/Install/Scripts.pm
-</div><div class='line'>include inc/Module/Install/Include.pm
-</div><div class='line'>include inc/Test/More.pm
-</div><div class='line'>include inc/Module/Install/WriteAll.pm
-</div><div class='line'>include inc/Module/Install/Win32.pm
-</div><div class='line'>include inc/Module/Install/Can.pm
-</div><div class='line'>include inc/Module/Install/Fetch.pm
-</div><div class='line'>Writing Makefile <span class="k">for </span>App::Zamakist
-</div><div class='line'>Writing MYMETA.yml and MYMETA.json
-</div><div class='line'>Writing META.yml
-</div><div class='line'>cp lib/App/Zamakist/Media.pm blib/lib/App/Zamakist/Media.pm
-</div><div class='line'>cp lib/App/Zamakist.pm blib/lib/App/Zamakist.pm
-</div><div class='line'>cp lib/App/Zamakist/Role/Reportable.pm blib/lib/App/Zamakist/Role/Reportable.pm
-</div><div class='line'>cp lib/App/Zamakist/Handler/GOM.pm blib/lib/App/Zamakist/Handler/GOM.pm
-</div><div class='line'>cp bin/zamakist blib/script/zamakist
-</div><div class='line'>/home/travis/perl5/perlbrew/perls/5.16/bin/perl <span class="s2">&quot;-Iinc&quot;</span> -MExtUtils::MY -e <span class="s1">&#39;MY-&gt;fixin(shift)&#39;</span> -- blib/script/zamakist
-</div><div class='line'><span class="nv">PERL_DL_NONLAZY</span><span class="o">=</span>1 /home/travis/perl5/perlbrew/perls/5.16/bin/perl <span class="s2">&quot;-MExtUtils::Command::MM&quot;</span> <span class="s2">&quot;-e&quot;</span> <span class="s2">&quot;test_harness(0, &#39;inc&#39;, &#39;blib/lib&#39;, &#39;blib/arch&#39;)&quot;</span> t/*.t
-</div><div class='line'>t/00_compile.t ......... ok
-</div><div class='line'>t/01_find_permalink.t .. 5/7 <span class="c"># http://search.gomtv.com/searchjm.gom?key=The.Mentalist.S04E01.HDTV.XviD-ASAP.%5BVTV%5D.Scarlet.Ribbons&amp;preface=0</span>
-</div><div class='line'><span class="c"># http://gom.gomtv.com/jmdb/view.html?intSeq=808364&amp;preface=0&amp;spage=1</span>
-</div><div class='line'>Wide character in print at /home/travis/perl5/perlbrew/perls/5.16/lib/5.16.0/Test/Builder.pm line 1759.
-</div><div class='line'><span class="c"># [통합] The.Mentalist.S04E01.HDTV.XviD-ASAP</span>
-</div><div class='line'>t/01_find_permalink.t .. ok
-</div><div class='line'>All tests successful.
-</div><div class='line'><span class="nv">Files</span><span class="o">=</span>2, <span class="nv">Tests</span><span class="o">=</span>8, 10 wallclock secs <span class="o">(</span> 0.03 usr  0.01 sys +  1.79 cusr  0.10 <span class="nv">csys</span> <span class="o">=</span>  1.93 CPU<span class="o">)</span>
-</div><div class='line'>Result: PASS
-</div><div class='line'> </div><div class='line'>Done. Build script exited with: 0
-</div></pre></td></tr></table></div></figure>
-
-<p>좀 더 뭐 욕심이 있다면 Jenkins 에서 처럼 정적분석이나 테스트 케이스에 대해서 좀 더 자세한 내용이 나와줬으면 좋겠다 싶지만… 사실 그건 뽀대의 문제라…</p>
-
-<p>위의 빌드 내용에 대한 자세한 내용은 아래의 링크를 참고하세요.</p>
-
-<ul>
-<li><a href="http://travis-ci.org/#!/JEEN/p5-App-Zamakist/builds/2257622">Travis CI : p5-App-Zamakist</a></li>
-</ul>
-</div>
-
-  <footer>
-    
-    <p><a class="comments-link" href="/2012/08/28/building-a-perl-project-on-travis-ci/#disqus_thread" data-disqus-identifier="http://jeen.github.io/2012/08/28/building-a-perl-project-on-travis-ci/">View comments &raquo;</a></p>
 
     
     

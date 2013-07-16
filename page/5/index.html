@@ -98,6 +98,107 @@
   <header>
     <h1 class="entry-title">
 
+<a href="/2013/05/02/better-than-ack/">Better Than Ack</a>
+
+</h1>
+
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2013-05-02T14:14:14+00:00" pubdate data-updated="true">May 2<span>nd</span>, 2013</time>
+         &bull; <a rel="bookmark" href="/2013/05/02/better-than-ack/">Permalink</a>
+      </p>
+    
+  </header>
+
+<div class="entry-content"><p>계속 쓰다보니 자연스레 손에 익은 이유도 있고, 여러 서버들에 <code>ack</code> 이 기본적으로 깔려 있지 않은 이유도 있습니다. 그것이 제게 있어서 <code>ack</code> 을 사용하지 않는 핑계가 되겠네요.</p>
+
+<p>그런 현실중에 <code>ag</code> 를 소개하는 것은 조심스러울 따름입니다.</p>
+
+<ul>
+<li><a href="https://github.com/ggreer/the_silver_searcher">https://github.com/ggreer/the_silver_searcher</a></li>
+</ul>
+
+<p>위 github 페이지에서 확인할 수 있는 내용대로,</p>
+
+<ul>
+<li><code>ack</code> 보다 3-5배 빠르고</li>
+<li>검색시에 <code>.gitignore</code>, <code>.hgignore</code> 를 참고하여 검색대상에서 제외해줍니다.</li>
+<li>그리고 <code>ack</code> 보다 한글자 더 적은 노력으로 검색할 수 있습니다. :-)</li>
+</ul>
+
+<p>제 Github Pages Repo 안에 속한 1566 개의 파일을 대상으로 각각의 성능을 비교해봤습니다.</p>
+
+<figure class='code'><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div><div data-line='2' class='line-number'></div><div data-line='3' class='line-number'></div><div data-line='4' class='line-number'></div><div data-line='5' class='line-number'></div><div data-line='6' class='line-number'></div><div data-line='7' class='line-number'></div><div data-line='8' class='line-number'></div><div data-line='9' class='line-number'></div><div data-line='10' class='line-number'></div><div data-line='11' class='line-number'></div><div data-line='12' class='line-number'></div></pre></td><td class='main  plain'><pre><div class='line'>$ time ag Perl
+</div><div class='line'>……
+</div><div class='line'>……
+</div><div class='line'>source.old/_posts/2012-08-28-building-a-perl-project-on-travis-ci.markdown
+</div><div class='line'>11:`Travis CI`은 이전에 얘기를 들었을 때는 별  관심이 없었는데(처음에는 확실히 Perl 을 지원하지 않아서), 언제부턴가 Perl 을 지원한다는 얘기를 듣고 Perl 커뮤니티에서 움직임이 조금씩 있더라구요. `Dist::Zilla::TravisCI` 같은 모듈들도 나오는 걸로 봐서…
+</div><div class='line'>15: - [Travis CI - Building a Perl Project](http://about.travis-ci.org/docs/user/languages/perl/)
+</div><div class='line'>43:Perl may be copied only under the terms of either the Artistic License or the
+</div><div class='line'>44:GNU General Public License, which may be found in the Perl 5 source kit.
+</div><div class='line'>46:Complete documentation for Perl, including FAQ lists, should be found on
+</div><div class='line'>48:Internet, point your browser at http://www.perl.org/, the Perl Home Page.
+</div><div class='line'>……
+</div><div class='line'>ag Perl  0.07s user 0.14s system 128% cpu 0.164 total</div></pre></td></tr></table></div></figure>
+
+<figure class='code'><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div><div data-line='2' class='line-number'></div><div data-line='3' class='line-number'></div><div data-line='4' class='line-number'></div><div data-line='5' class='line-number'></div></pre></td><td class='main  plain'><pre><div class='line'>$ time grep -R Perl .
+</div><div class='line'>……
+</div><div class='line'>./source.old/_posts/2012-12-26-a-usecase-of-app-fatpacker.markdown:  # ABSTRACT: Perl binding for Redis database
+</div><div class='line'>……
+</div><div class='line'>grep -R Perl .  1.13s user 0.09s system 77% cpu 1.573 total</div></pre></td></tr></table></div></figure>
+
+<figure class='code'><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div><div data-line='2' class='line-number'></div><div data-line='3' class='line-number'></div><div data-line='4' class='line-number'></div><div data-line='5' class='line-number'></div><div data-line='6' class='line-number'></div></pre></td><td class='main  plain'><pre><div class='line'>$ time ack Perl
+</div><div class='line'>……
+</div><div class='line'>public/page/5/index.html
+</div><div class='line'>245:&lt;a href="/2012/07/26/export-facebook-event-attending-list-perl-kr-teatime/">Export Facebook Event Attending List - Perl-kr TeaTime&lt;/a>
+</div><div class='line'>……
+</div><div class='line'>ack Perl  0.38s user 0.06s system 54% cpu 0.812 total</div></pre></td></tr></table></div></figure>
+
+<p>보시다시피 <code>ag</code> 의 위력은 대단합니다. 기본적으로 사용법도 <code>ack</code> 과 크게 다를 것도 없습니다.</p>
+
+<p>문제는 기본적으로 사용할 수 있냐는 것이겠는데… 요즘 세상에는 <code>Rex</code> 같은 걸로 그냥 뭐 한번만 수고해주면 뭐 사용할 서버들에 일괄적으로 설치하는 것은 일도 아니지 않냐라고 그냥 스스로 수긍해버리면 될 것 같습니다.</p>
+</div>
+
+  <footer>
+    
+    <p><a class="comments-link" href="/2013/05/02/better-than-ack/#disqus_thread" data-disqus-identifier="http://jeen.github.io/2013/05/02/better-than-ack/">View comments &raquo;</a></p>
+
+    
+    
+  </footer>
+
+
+    </article>
+  
+    
+
+
+
+
+
+
+
+
+
+
+    <article >
+      
+  <header>
+    <h1 class="entry-title">
+
 <a href="/2013/04/28/more-rex/">Rex Common Practice</a>
 
 </h1>
@@ -270,122 +371,6 @@
   <footer>
     
     <p><a class="comments-link" href="/2013/04/08/data-printer-vs-data-dump-er/#disqus_thread" data-disqus-identifier="http://jeen.github.io/2013/04/08/data-printer-vs-data-dump-er/">View comments &raquo;</a></p>
-
-    
-    
-  </footer>
-
-
-    </article>
-  
-    
-
-
-
-
-
-
-
-
-
-
-    <article >
-      
-  <header>
-    <h1 class="entry-title">
-
-<a href="/2013/04/04/using-rex-environment/">Using Rex - Environment</a>
-
-</h1>
-
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-
-<time datetime="2013-04-04T12:28:00+00:00" pubdate data-updated="true">Apr 4<span>th</span>, 2013</time>
-         &bull; <a rel="bookmark" href="/2013/04/04/using-rex-environment/">Permalink</a>
-      </p>
-    
-  </header>
-
-<div class="entry-content"><p>주위 사람들은 Chef나 Fabric 을 많이 쓴다고 하지만 ( 그보다 손으로 여전히 하는 사람들이 더 많은 것 같기도 ), Rex 에 그냥 적응하면서 여전히 <a href="http://rexify.org">Rex</a> 를 사용하고 있습니다. 회사를 옮기고 새로운 작업환경을 둘러보다가 이전의 패턴이 그대로 먹히지 않기에 기존에 사용하던 Rexfile 의 구조도 살며시 바꿔나가야 했습니다.</p>
-
-<h2>Rex 초기 설정</h2>
-
-<p>Rex 가 설치되어 있다면, <code>rexify</code> 커맨드를 사용할 수 있습니다. 이 커맨드를 이용해서 초기 뼈대를 만들어 봅니다.</p>
-
-<figure class='code'><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div></pre></td><td class='main  plain'><pre><div class='line'>$ rexify M</div></pre></td></tr></table></div></figure>
-
-<p>그러면 아래와 같은 구성으로 Rex 를 사용하기 위한 기본 구성이 마련됩니다.</p>
-
-<figure class='code'><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div><div data-line='2' class='line-number'></div><div data-line='3' class='line-number'></div><div data-line='4' class='line-number'></div><div data-line='5' class='line-number'></div></pre></td><td class='main  plain'><pre><div class='line'>$ tree
-</div><div class='line'>.
-</div><div class='line'>├── Rexfile
-</div><div class='line'>└── lib
-</div><div class='line'>    └── M.pm</div></pre></td></tr></table></div></figure>
-
-<p><code>Rexfile</code> 에는 온갖 설정 정보를 넣고, M.pm 에는 각 Task 를 정의해둡니다.</p>
-
-<h2>서버 그룹 위의 또 다른 그룹을 정의한다?</h2>
-
-<p>　지금까지는 서버의 목적, 그러니까 <code>DB</code> 서버 면 <code>DB</code> 그룹에 , <code>Web</code> 서버면 <code>Web</code> 그룹에 묶으면 되었는데요. 하지만 현재의 회사에서는 서비스그룹이 나뉘어져 있기도 하고, 계정정보도 좀 다르기도 하고 그런 게 있습니다. -_-;</p>
-
-<p>그래서 <code>environment</code> 로 각 그룹을 묶어서 별도로 관리하기로 했습니다.</p>
-
-<p>그런 것을 고려해서 써놓은 Rexfile 은 아래와 같습니다.</p>
-
-<figure class='code'><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div><div data-line='2' class='line-number'></div><div data-line='3' class='line-number'></div><div data-line='4' class='line-number'></div><div data-line='5' class='line-number'></div><div data-line='6' class='line-number'></div><div data-line='7' class='line-number'></div><div data-line='8' class='line-number'></div><div data-line='9' class='line-number'></div><div data-line='10' class='line-number'></div><div data-line='11' class='line-number'></div><div data-line='12' class='line-number'></div><div data-line='13' class='line-number'></div><div data-line='14' class='line-number'></div><div data-line='15' class='line-number'></div><div data-line='16' class='line-number'></div><div data-line='17' class='line-number'></div><div data-line='18' class='line-number'></div><div data-line='19' class='line-number'></div><div data-line='20' class='line-number'></div><div data-line='21' class='line-number'></div><div data-line='22' class='line-number'></div></pre></td><td class='main  plain'><pre><div class='line'>use Rex -feature => 0.40;
-</div><div class='line'> </div><div class='line'>environment sdt => sub {
-</div><div class='line'>    set user => "xxxx";
-</div><div class='line'>    set password => "xxxxxx";
-</div><div class='line'>    set -passauth;
-</div><div class='line'> </div><div class='line'>    set group => "all" => qw/1.2.3.51 1.2.3.52 1.2.3.53 1.2.3.54 1.2.3.55 1.2.3.56/;
-</div><div class='line'>    set group => "db"  => qw/1.2.3.53 1.2.3.54/;
-</div><div class='line'>    set group => "web" => qw/1.2.3.51 1.2.3.52 1.2.3.55 1.2.3.56/;
-</div><div class='line'>};
-</div><div class='line'> </div><div class='line'>environment pshd => sub {
-</div><div class='line'>    set user => "xxxx";
-</div><div class='line'>    set password => "xxxxxxxx";
-</div><div class='line'>    set -passauth;
-</div><div class='line'>    set group => "all" => qw/1.2.4.31 1.2.4.32 1.2.4.33 1.2.4.34 1.2.4.35 1.2.4.36/;
-</div><div class='line'>    set group => "db"  => qw/1.2.4.35 1.2.4.36/;
-</div><div class='line'>    set group => "web" => qw/1.2.4.31 1.2.4.32 1.2.4.33 1.2.4.34/;
-</div><div class='line'>};
-</div><div class='line'> </div><div class='line'>require M;</div></pre></td></tr></table></div></figure>
-
-<p>이렇게 <code>sdt</code> 와 <code>pshd</code> 라는 environment 를 따로 빼놓고 그 안에 각각 전체와 Web, DB 각각을 정의해둡니다.</p>
-
-<p><code>M.pm</code> 에는 <code>restart-opsview-agent</code>, <code>restart-munin-node</code>, <code>restart-apache</code>, <code>deploy-apps</code> 같은 뭐 이런저런 Task 들이 정의되어 있다고 치고…</p>
-
-<p>그런 것들을 각 environment 의 그룹단위로 실행시키도록 합니다.</p>
-
-<figure class='code'><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div></pre></td><td class='main  plain'><pre><div class='line'>$ rex -E sdt -G all M:restart-opsview-agent</div></pre></td></tr></table></div></figure>
-
-<p>위처럼 <code>-E</code> 의 인자값으로 environment 를 지정하고 <code>-G</code> 의 인자값으로 all 그룹을 지정해줌으로써, sdt 의 전체 서버에 대해서 <code>opsview-agent</code> 를 재시작하게끔 합니다.</p>
-
-<h2>결론</h2>
-
-<p>사실은 뭐 각 서버에 SSH Key 를 박아넣고 사용해야 좀 더 안심이 되기도 하지만, 여기에는 뜻모를 어른들의 사정이 숨어져 있는지라 쉽게 그럴수는 없기도 하답니다. -_-; 좀 더 시간을 두고 뭐 여러가지 불안요소와 편의성을 도모하기로 하고…</p>
-
-<p>터미널 사용에 익숙하지 않은 팀원들을 위해서 <code>Rex::WebUI</code> 도 살며시 검토해봤는데, 아직까지는 Task 에 기재된 정보를 기준으로 읽어들이는 것 밖에 되지 않는지라… 위처럼 그룹을 지정하거나 environment 를 지정하거나 하는 것은 불가능하군요. 뭐 어차피 서버 데몬을 아무나 만지게 하고 그러는 것도 조심스러운 지라… -_-;; 꼭 모두가 써야하는 것인가 하는 의문이 있어서, 이건 뭐 전제자체가 붕괴되는 군요.</p>
-
-<p>아무튼 Rex 괜찮습니다.</p>
-</div>
-
-  <footer>
-    
-    <p><a class="comments-link" href="/2013/04/04/using-rex-environment/#disqus_thread" data-disqus-identifier="http://jeen.github.io/2013/04/04/using-rex-environment/">View comments &raquo;</a></p>
 
     
     
