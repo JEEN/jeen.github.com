@@ -5,7 +5,7 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>[번역] Solr vs ElasticSearch - Part 1 - JEEN's techlog</title>
+  <title>[번역] Solr vs ElasticSearch - Part 1 : Overview - JEEN's techlog</title>
   <meta name="author" content="Jeen Lee">
   
   <meta name="Generator" content="Jekyll & Octopress (http://octopress.org)">
@@ -97,7 +97,7 @@
   <header>
     <h1 class="entry-title">
 
-[번역] Solr vs ElasticSearch - Part 1
+[번역] Solr vs ElasticSearch - Part 1 : Overview
 
 </h1>
 
@@ -122,9 +122,9 @@
     
   </header>
 
-<div class="entry-content"><h1>Solr vs. ElasticSearch: Part 1 – 개요</h1>
+<div class="entry-content"><h1>Solr vs. ElasticSearch: Part 1 – Overview</h1>
 
-<p>August 23, 2012 by <a href="http://blog.sematext.com/author/kucrafal/" title="http://blog.sematext.com/author/kucrafal/">Rafał Kuć</a></p>
+<p>August 23, 2012 by <a href="http://blog.sematext.com/author/kucrafal/">Rafał Kuć</a></p>
 
 <p>2012/08/23 원저자 Rafał Kuć</p>
 
@@ -134,11 +134,11 @@
 
 <p>As the Apache Lucene 4.0 release approaches and with it Solr 4.0 release as well, we thought it would be beneficial to take a deeper look and compare the two leading open source search engines built on top of Lucene – Apache Solr and ElasticSearch. Because the topic is very wide and can go deep, we are publishing our research as a series of blog posts starting with this post, which provides the general overview of the functionality provided by both search engines.</p>
 
-<p>Apache Lucene 4.0 의 릴리즈가 가까워 짐에 따라, 그와 함께 Solr 4.0 릴리즈도 가까워지고 있습니다. Apache Solr 와 ElasticSearch 라는 Luene 위에 구축된 2가지 검색엔진을 비교해서, 깊은 고찰을 얻으려고 하는 것은 매우 큰 의미가 있다고 생각합니다. 이 토픽은 매우 범위가 깊어서, 우리들의 연구결과를 이 기사를 시작으로 하는 일련의 블로그 포스트로 공개합니다. 이 기사에서는 2가지 검색 엔진이 제공하는 기능의 전체적인 개요를 나타냅니다.</p>
+<p>Apache Lucene 4.0 의 릴리즈가 가까워 짐에 따라, 그와 함께 Solr 4.0 릴리즈도 가까워지고 있습니다. Apache Solr 와 ElasticSearch 라는 Lucene 위에 구축된 2가지 검색엔진을 비교해서, 깊은 고찰을 얻으려고 하는 것은 매우 큰 의미가 있다고 생각합니다. 이 토픽은 매우 범위가 깊어서, 우리들의 연구결과를 이 기사를 시작으로 하는 일련의 블로그 포스트로 공개합니다. 이 기사에서는 2가지 검색 엔진이 제공하는 기능의 전체적인 개요를 나타냅니다.</p>
 
 <ol>
 <li>Solr vs. ElasticSearch: Part 1 – 개요</li>
-<li>Solr vs. ElasticSearch: Part 2 – 인덱스 작성과 언어의 비교</li>
+<li>Solr vs. ElasticSearch: Part 2 – 인덱싱과 언어 다루기</li>
 <li>Solr vs. ElasticSearch: Part 3 – 검색</li>
 <li>Solr vs. ElasticSearch: Part 4 – Faceting</li>
 <li>Solr vs. ElasticSearch: Part 5 - 관리API의 기능</li>
@@ -155,7 +155,7 @@
 
 <p>For indexing and searching both Solr and ElasticSearch use Lucene. As you may suspect, Solr 4.0 beta uses the 4.0 version of Lucene, while ElasticSearch 0.19.8 still uses version 3.6.  Of course, that doesn’t mean much when it comes to future versions of ElasticSearch because you can be sure that ElasticSearch will start using Lucene 4.0 once it’s GA release is ready, or maybe even before that.</p>
 
-<p>인덱스 작성과 검색에는 Solr 와 ElasticSearch 모두 Lucene 을 사용합니다. 눈치채셨겠지만 Solr4.0β는 Lucene 4.0을 사용하지만 ElasticSearch 0.19.8은 3.6 을 사용하고 있습니다. 물론 그것은 ElasticSearch 의 장래 버젼에 대해서는 많은 의미를 가지고 있을 것입니다. Lucene 4.0 의 GA 릴리즈의 준비가 끝났다면 당장(또는 그 이전부터) ElasticSearch 도 그것을 사용하기 시작할 것은 확실하기 때문입니다.</p>
+<p>인덱싱과 검색에는 Solr 와 ElasticSearch 모두 Lucene 을 사용합니다. 눈치채셨겠지만 Solr4.0β는 Lucene 4.0을 사용하지만 ElasticSearch 0.19.8은 3.6 을 사용하고 있습니다. 물론 그것은 ElasticSearch 의 장래 버젼에 대해서는 많은 의미를 가지고 있을 것입니다. Lucene 4.0 의 GA 릴리즈의 준비가 끝났다면 당장(또는 그 이전부터) ElasticSearch 도 그것을 사용하기 시작할 것은 확실하기 때문입니다.</p>
 
 <h2>기본</h2>
 
@@ -163,7 +163,7 @@
 
 <p>Solr 와 ElasticSearch에는 몇가지 컨셉에 대한 네이밍에 약간 차이가 있습니다. 기초부터 시작해봅시다.</p>
 
-<p>ElasticSearch 와 Solr 양쪽에 대해서, 많은 서버가 모여서 클러스터를 구성합니다. Solr 또는 ElasticSearch 의 하나의 인스턴스는 노드라고 부릅니다. 양쪽의 명명법이 겹치는 것은 그것뿐입니다.</p>
+<p>ElasticSearch 와 Solr 모두, 많은 서버를 모아 클러스터를 구성할 수 있습니다. Solr 또는 ElasticSearch 의 하나의 인스턴스는 노드라고 부릅니다. 양쪽의 명명법이 겹치는 것은 그것뿐입니다.</p>
 
 <p>The main logical data structure for Solr is called the Collection. A Collection is composed of Shards that are really Lucene indices. A single Collection can have multiple Shards and Shards can live on different Nodes. Because a Collection is composed of one or more Shards, a single Collection can be spread across multiple Nodes giving you a distributed environment. In addition to that, a Collection can have Replicas – basically an exact copy of the Shard whose main purpose is to enable scaling and data duplication in case of Node failures (i.e., High Availability).</p>
 
@@ -280,7 +280,7 @@
 
 <span class="categories">
   
-    <a class='category' href='/categories/elasticsearch/'>elasticsearch</a>, <a class='category' href='/categories/solr/'>solr</a>
+    <a class='category' href='/categories/elasticsearch/'>elasticsearch</a>, <a class='category' href='/categories/solr/'>solr</a>, <a class='category' href='/categories/translation/'>translation</a>
   
 </span>
 
@@ -310,6 +310,8 @@
         <a class="basic-alignment left" href="/2013/07/10/apply-moeemotional-hudson-plugin-on-jenkins/" title="Previous Post: Apply MoeEmotional Hudson Plugin on Jenkins">&laquo; Apply MoeEmotional Hudson Plugin on Jenkins</a>
       
       
+        <a class="basic-alignment right" href="/2013/07/16/solr-vs-elasticsearch-part-2-indexing-and-language-handling/" title="Next Post: [번역] Solr vs. ElasticSearch: Part 2 - Indexing and Language Handling">[번역] Solr vs. ElasticSearch: Part 2 - Indexing and Language Handling &raquo;</a>
+      
     </p>
   </footer>
 </article>
@@ -335,7 +337,11 @@
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/2013/07/15/solr-vs-elasticsearch-part-1/">[번역] Solr vs ElasticSearch - Part 1</a>
+        <a href="/2013/07/16/solr-vs-elasticsearch-part-2-indexing-and-language-handling/">[번역] Solr vs. ElasticSearch: Part 2 - Indexing and Language Handling</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/07/15/solr-vs-elasticsearch-part-1/">[번역] Solr vs ElasticSearch - Part 1 : Overview</a>
       </li>
     
       <li class="post">
@@ -348,10 +354,6 @@
     
       <li class="post">
         <a href="/2013/06/18/using-mssql-in-perl-linux/">Using MSSQL in Perl(Linux)</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2013/06/07/pullreq-on-mojox-validator/">PullReq on MojoX::Validator</a>
       </li>
     
   </ul>

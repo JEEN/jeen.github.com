@@ -3,7 +3,7 @@
   <title><![CDATA[JEEN's techlog]]></title>
   <link href="http://jeen.github.io/atom.xml" rel="self"/>
   <link href="http://jeen.github.io/"/>
-  <updated>2013-07-15T00:22:05+00:00</updated>
+  <updated>2013-07-16T12:32:23+00:00</updated>
   <id>http://jeen.github.io/</id>
   <author>
     <name><![CDATA[Jeen Lee]]></name>
@@ -18,15 +18,171 @@
 
 
 
-<title type="html"><![CDATA[[번역] Solr vs ElasticSearch - Part 1]]></title>
+<title type="html"><![CDATA[[번역] Solr vs. ElasticSearch: Part 2 - Indexing and Language Handling]]></title>
+<link href="http://jeen.github.io/2013/07/16/solr-vs-elasticsearch-part-2-indexing-and-language-handling/"/>
+<updated>2013-07-16T12:30:39+00:00</updated>
+<id>http://jeen.github.io/2013/07/16/solr-vs-elasticsearch-part-2-indexing-and-language-handling</id>
+<category term="elasticsearch" /><category term="solr" /><category term="translation" />
+
+      <content type="html"><![CDATA[<h1>Solr vs. ElasticSearch: Part 2 – Indexing and Language Handling</h1>
+
+<p>September 4, 2012 by Rafał Kuć</p>
+
+<p>In the previous part of Solr vs. ElasticSearch series we talked about general architecture of these two great search engines based on Apache Lucene. Today, we will look at their ability to handle your data and perform indexing and language analysis.</p>
+
+<p>전 편의 &ldquo;Solr vs. ElasticSearch&rdquo; Part1 기사에서 Apache Lucene 을 기반으로 하는 두가지 검색엔진의 전반적인 아키텍쳐에 대해서 이야기 했습니다. 오늘은 데이터의 취급과 인덱싱, 그리고 언어의 해석능력을 알아보도록 합니다.</p>
+
+<ol>
+<li>Solr vs. ElasticSearch: Part 1 - Overview</li>
+<li>Solr vs. ElasticSearch: Part 2 - Indexing and Language Handling</li>
+<li>Solr vs. ElasticSearch: Part 3 - Searching</li>
+<li>Solr vs. ElasticSearch: Part 4 - Faceting</li>
+<li>Solr vs. ElasticSearch: Part 5 - Management API Capabilities</li>
+<li>Solr vs. ElasticSearch: Part 6 – User &amp; Dev Communities Compared</li>
+</ol>
+
+<h2>데이터 인덱싱</h2>
+
+<p>Apart from using Java API exposed both by ElasticSearch and Apache Solr, you can index data using an HTTP call. To index data in ElasticSearch you need to prepare your data in JSON format. Solr also allows that, but in addition to that, it lets you to use other formats like the default XML or CSV. Importantly, indexing data in different formats has different performance characteristics, but that comes with some limitations. For example, indexing documents in CSV format is considered to be the fastest, but you can’t use field value boosting while using that format. Of course, one will usually use some kind of a library or Java API to index data as one doesn’t typically store data in a way that allows indexing of data straight into the search engine (at least in most cases that’s true).</p>
+
+<p>ElasticSearch와 Apache Solr 모두 공개되어 있는 Java API 가 아닌 HTTP 호출을 사용해서 데이터 인덱싱을 할 수 있습니다. ElasticSearch 에서 데이터를 인덱싱하기 위해서는 데이터를 JSON 포맷으로 준비할 필요가 있습니다. Solr 도 가능하지만, 그에 덧붙여 기본적으로는 XML 이나 CSV 등 다른 형식을 이용할 수 있습니다. 중요한 것은 다른 형식의 데이터를 인덱싱 하는 경우 다른 퍼포먼스 특성이 존재하며 이에 대해서는 몇 가지 제약이 따릅니다. 예를 들어 CSV 형식의 도큐먼트를 인덱싱하는 경우가 가장 빠르다고 볼 수 있는 데, 이 경우 필드값의 boosting 을 이용할 수 없습니다. 물론 일반적으로는 어떠한 종류의 라이브러리나 Java API 를 사용해서 데이터를 인덱싱할 것입니다. 일반적으로는 검색 엔진에 직접 들어가는 데이터의 인덱스를 만들면서 데이터를 저장하는 일은 없습니다. (적어도 대부분의 경우 그렇습니다)</p>
+
+<h2>ElasticSearch에 대해서 보충설명</h2>
+
+<p>It is worth noting that ElasticSearch supports two additional things, that Solr does not – nested documents and multiple document types inside a single index.</p>
+
+<p>Solr 가 지원하지 않는 ElasticSearch 의 두가지 추가기능에 대해서 다뤄볼 가치가 있는 데 그것은 중첩 도큐먼트와 단일 도큐먼 안에서의 복수도큐먼트 타입니다. </p>
+
+<p>The nested documents functionality lets you create more than a flat document structure. For example, imagine you index documents that are bound to some group of users. In addition to document contents, you would like to store which users can access that document.  And this is were we run into a little problem – this data changes over time. If you were to store document content and users inside a single index document, you would have to reindex the whole document every time the list of users who can access it changes in any way. Luckily, with ElasticSearch you don’t have to do that – you can use nested document types and then use appropriate queries for matching. In this example, a nested document would hold a lists of users with document access rights. Internally, nested documents are indexed as separate index documents stored inside the same index. ElasticSearch ensures they are indexed in a way that allows it to use fast join operations to get them. In addition to that, these documents are not shown when using standard queries and you have to use nested query to get them, a very handy feature.</p>
+
+<p>중첩 도큐먼트 기능은 평탄한 도큐먼트 구조를 넘은 것을 만들 수 있습니다. 이를테면 어떤 유저 그룹에 연결된 도큐먼트를 인덱싱한다고 생각해봅시다. 도큐먼트의 내용 뿐만 아니라 어느 유저가 그 문서에 접근할 수 있는 지를 넣고 싶다고 해둡니다. 만약 단일 인스턴스의 도큐먼트 안에서 도큐먼트의 내용과 유저를 넣을 경우, 그 도큐먼트에 접근할 수 있는 유저의 리스트를 변경할 때마다 도큐먼트 전체를 다시 인덱싱해야 합니다. 다행히도 ElasticSearch 를 사용하면 그런 일은 없습니다. 중첩 도큐먼트 타입을 사용해서 적절한 쿼리를 매칭에 사용할 수 있습니다. 이 예제에서는 중첩 도큐먼트는 유저 리스트와 도큐먼트의 접근권한을 가집니다. 내부적으로는 중첩 도큐먼트는 같은 인덱스 안에서 놓여진 분리된 인덱스 문서로 색인됩니다.</p>
+
+<p>ElasticSearch는 빠른 JOIN 명령을 사용해서 인덱싱할 수 있습니다. 덧붙여 이 도큐먼트들은 표준 쿼리를 사용한 경우는 보이지 않으며, 중첩 쿼리를 얻어내기 위해서는 사용할 수 있어 매우 편리한 기능입니다.</p>
+
+<p>Multiple types of documents per index allow just what the name says – you can index different types of documents inside the same index.  This is not possible with Solr, as you have only one schema in Solr per core.  In ElasticSearch you can filter, query, or facet on document types. You can make queries against all document types or just choose a single document type (both with Java API and REST).</p>
+
+<p>인덱스마다 복수타입의 도큐먼트는 이름 그대로의 행위를 할 수 있습니다.. 다른 타입의 도큐먼트를 같은 인덱스 안에서 인덱싱할 수 있는데, 이것은 Solr 에서는 코어당 하나의 스키마만을 가질 수 있기 때문에 불가능합니다.</p>
+
+<p>ElasticSearch에서는 도큐먼트타입에 의해 필터, 쿼리, 퍼셋(Facet) 을 할 수 있습니다. 모든 도큐먼트 타입에 대해서, 또는 하나의 도큐먼트 타입을 선택해서 쿼리를 날릴 수 있습니다. (Java API 와 REST 양쪽 모두 가능합니다)</p>
+
+<h2>인덱스 다루기</h2>
+
+<p>Let’s look at the ability to manage your indices/collections using the HTTP API of both Apache Solr and ElasticSearch.</p>
+
+<p>Apache Solr 와 ElasticSearch 에서의 인덱스/콜렉션을 HTTP API 를 사용해서 관리하는 방법을 보도록 합니다.</p>
+
+<h3>Solr</h3>
+
+<p>Solr let’s you control all cores that live inside your cluster with the CoreAdmin API – you can create cores, rename, reload, or even merge them into another core. In addition to the CoreAdmin API Solr enables you to use the collections API to create, delete or reload a collection. The collections API uses CoreAdmin API under the hood, but it’s a simpler way to control your collections. Remember that you need to have your configuration pushed into ZooKeeper ensemble in order to create a collection with a new configuration.</p>
+
+<p>Solr 는 운용중인 클래스 안에서 모든 코어를 CoreAdmin API 로 관리할 수 있습니다. 코어 작성, 이름 변경, 리로드, 또는 여러 코어들을 하나의 코어로 머지할 수 있습니다. 또한 Solr 는 Collections API 를 사용해서 콜렉션의 작성, 삭제, 그리고 리로드를 할 수 있습니다. Collections API 는 뒷단에서 CoreAdmin API 를 사용하며 간단하게 콜렉션을 다룰 수 있습니다. 새로운 설정의 콜렉션을 작성하기 위해서는 ZooKeeper ensemble 에 설정을 넣어 둘 필요가 있습니다. </p>
+
+<p>When it comes to Solr, there is additional functionality that is in early stages of work, although it’s functional – the ability to split your shards. After applying the patch available in SOLR-3755 you can use a SPLIT action to split your index and write it to two separate cores. If you look at the mentioned JIRA issue, you’ll see that once this is commited Solr will have the ability not only to create new replicas, but also to dynamically re-shard the indices.  This is huge!</p>
+
+<p>Solr 에는 아직 미성숙하지만 유효한 추가기능이 있습니다. 바로 Shard 의 분할입니다. SOLR-3755에 있는 패치를 적용한 다음에 인덱스를 분할해서 두개로 분할한 코어에 넣는 것이 SPLIT 액션을 사용해서 가능해집니다. 그 JIRA 이슈를 읽으면 이것이 커밋되면 Solr 는 새로운 레플리카를 작서아는 것뿐만 아니라, 동적으로 인덱스를 re-shard 하는 기능을 가지게 됩니다. 이것은 매우 큰 이점입니다!</p>
+
+<h3>ElasticSearch</h3>
+
+<p>One of the great things in ElasticSearch is the ability to control your indices using HTTP API. We will take about it extensively in the last part of the series, but I have to mention it ere, too. In ElasticSearch you can create indices on the live cluster and delete them. During creation you can specify the number of shards an index should have and you can decrease and increase the number of replicas without anything more than a single API call. You cannot change the number of shards yet.  Of course, you can also define mappings and analyzers during index creation, so you have all the control you need to index a new type of data into you cluster.</p>
+
+<p>ElasticSearch의 굉장한 기능 중 하나로 HTTP API를 사용해서 인덱스를 다루는 능력이 있습니다. 이 시리즈의 마지막 파트에서 이에 대해서 광범위하게 다룰 예정이지만, 일단 여기에서도 간단히 다룰 필요가 있을 것 같습니다. ElasticSearch에서는 운용중의 클러스터 위에서 인덱싱을 할 수 있고, 삭제할 수 있습니다. 인덱싱 하는 동안, 인덱스를 가져야할 Shard 의 수를 지정할 수 있으며, 단일 API 호출만으로 레플리카 수의 증감을 조정할 수 있습니다. Shard 수는 아직 변경할 수 없습니다. 물론 맵핑과 해석기를 인덱싱 시에 설정가능하고, 클러스터 안에서 새로운 형태의 데이터 인덱싱에 필요한 모든 컨트롤을 가지게 됩니다.</p>
+
+<h2>도큐먼트의 부분갱신</h2>
+
+<p>Both search engines support partial document update. This is not the true partial document update that everyone has been after for years – this is really just normal document reindexing, but performed on the search engine side, so it feels like a real update.</p>
+
+<p>두 검색엔진 모두 도큐먼트의 부분갱신을 지원합니다. 이것은 모두가 기대한 그런 도큐먼트 부분갱신이 아닙니다. 단지 일반적인 도큐먼트 의 재인덱싱일 뿐입니다. 그러나 검색엔진에서 실행되기에 진짜 갱신처럼 보이기도 합니다.</p>
+
+<h3>Solr</h3>
+
+<p>Let’s start from the requirements – because this functionality reconstructs the document on the server side you need to have your fields set as stored and you have to have the <em>version</em> field available in your index structure. Then you can update a document with a simple API call, for example:</p>
+
+<p>요건부터 시작하겠습니다. 이 기능은 서버측의 도큐먼트를 재구성하기에 필드의 집합이 격납되었고 _version_필드가 인덱스 구성에서 존재하지 않으면 안됩니다. 이렇게 하면 단일 API 호출에 의해 도큐먼트를 갱신할 수 있습니다.</p>
+
+<p>예：</p>
+<div class="highlight"><pre><code class="text">curl &#39;localhost:8983/solr/update&#39; -H &#39;Content-type:application/json&#39; -d &#39;[{&quot;id&quot;:&quot;1&quot;,&quot;price&quot;:{&quot;set&quot;:100}}]&#39;
+</code></pre></div>
+<h3>ElasticSearch</h3>
+
+<p>In case of ElasticSearch you need to have the _source field enabled for the partial update functionality to work. This _source is a special ElasticSearch field that stores the original JSON document.  Theis functionality doesn’t have add/set/delete command, but instead lets you use script to modify a document. For example, the following command updates the same document that we updated with the above Solr request:</p>
+
+<p>ElasticSearch 의 경우, 부분갱신 기능이 제대로 동작하기 위해서는 _source 필드가 허가되어 있을 필요가 있습니다. 이 _source는 특별한 ElasticSearch 필드에서 오리지널 JSON 도큐먼트를 저장합니다. 이 기능에는 add/set/delete 명령은 존재하지 않습니다. 그 대신에 도큐먼트를 변경하는 스크립트의 사용을 허가합니다. 예를 들어 다음의 명령어를 위의 Solr 리퀘스트에서 갱신한 것과 같은 문서를 갱신한다고 합니다.</p>
+<div class="highlight"><pre><code class="text">curl -XPOST &#39;localhost:9200/sematext/doc/1/_update&#39;-d &#39;{
+    &quot;script&quot; : &quot;ctx._source.price = price&quot;,
+    &quot;params&quot; : {
+        &quot;price&quot; : 100
+    }
+}&#39;
+</code></pre></div>
+<h2>다국어데이터의 취급</h2>
+
+<p>As we mentioned previously, and as you probably know, both ElasticSearch and Solr use Apache Lucene to index and search data. But, of course, each search engine has its own Java implementation that interacts with Lucene. This is also the case when it comes to language handling. Apache Solr 4.0 beta has the advantage over ElasticSearch because it can handle more languages out of the box. For example, my native language Polish is supported by Solr out of the box (with two different filters for stemming), but not by ElasticSearch. On the other hand, there are many plugins for ElasticSearch that enable support for languages not supported by default, though still not as many as we can find supported in Solr out of the box.  It’s also worth mentioning there are commercial analyzers that plug into Solr (and Lucene), but none that we are aware of work with ElasticSearch…. yet.</p>
+
+<p>이전 언급한 대로, ElasticSearch와 Solr 는 Apache Lucene 을 인덱싱 및 데이터의 검색에 이용하고 있습니다. 각 검색엔진은 그 자체가 Java 구현을 가지며 Lucene 과 상호작용합니다. 이것이 여러 나라의 언어취급에 있어서도 마찬가지 입니다. 이 부분에 있어서는 Apache Solr 4.0β가 ElasticSearch 에 대해서 우위입니다. Solr 그 자체로도 많은 언어를 다룰 수 있기 때문입니다. 예를 들어 저자의 네이티브 언어인 폴란드어는 Solr 에서는 처음부터 지원되었습니다. (두가지 다른 stemming용 필터를 포함한 채) 그러나 ElasticSearch는 그렇지 않습니다. ElasticSearch에서는 기본적으로는 지원하지 않는 언어를 지원하는 플러그인이 다수 존재합니다. 그래도 그 수는 Solr 가 처음부터 지원하고 있는 수만큼은 아닙니다. 또 하나 알아둘 가치가 있는 것은 Solr(와 Lucene)에는 상업해석기가 있습니다. 그러나 ElasticSearch 용은 아직 있는 지 모르겠습니다.</p>
+
+<h2>지원되는 자연언어</h2>
+
+<p>For the full list of languages supported by those two search engine please refer to the following pages:</p>
+
+<p>두 검색엔진에서 지원되는 언어의 완전한 리스트에 대해서는 다음 버젼을 참고해주세요.</p>
+
+<p>Apache Solr
+    <a href="http://wiki.apache.org/solr/LanguageAnalysis" ><a href="http://wiki.apache.org/solr/LanguageAnalysis">http://wiki.apache.org/solr/LanguageAnalysis</a></a></p>
+
+<p>ElasticSearch</p>
+
+<p>Analyzers: <a href="http://www.elasticsearch.org/guide/reference/index-modules/analysis/lang-analyzer.html">http://www.elasticsearch.org/guide/reference/index-modules/analysis/lang-analyzer.html</a>
+Stemming: <a href="http://www.elasticsearch.org/guide/reference/index-modules/analysis/stemmer-tokenfilter.html">http://www.elasticsearch.org/guide/reference/index-modules/analysis/stemmer-tokenfilter.html</a>,
+ <a href="http://www.elasticsearch.org/guide/reference/index-modules/analysis/snowball-tokenfilter.html">http://www.elasticsearch.org/guide/reference/index-modules/analysis/snowball-tokenfilter.html</a> 그리고 <a href="http://www.elasticsearch.org/guide/reference/index-modules/analysis/snowball-tokenfilter.html">http://www.elasticsearch.org/guide/reference/index-modules/analysis/kstem-tokenfilter.html</a></p>
+
+<h2>해석체인의 정의</h2>
+
+<p>Of course, both Apache Solr and ElasticSearch allow you to define a custom analysis chain by specifying your own analyzer/tokenizer and list of filters that should be used to process your data. However, the difference between ElasticSearch and Solr is not only in the list of supported languages. ElasticSearch allows one to specify the analyzer per document and per query. So, if you need to use a different analyzer for each document in the index you can do that in ElasticSearch. The same applies to queries – each query can use a different analyzer.</p>
+
+<p>물론, Apache Solr 와 ElasticSearch 양쪽 모두 커스텀 해석기 체인을 정의할 수 있습니다. 당신의 데이터 처리에 사용되는 해석기 및 토크나이저, 필터의 리스트를 지정합니다. 그러나, ElasticSearch 와 Solr 의 차이는 지원되는 언어의 리스트 뿐만이 아닙니다. ElasticSearch 는 도큐먼트 마다, 쿼리마다 해석기를 지정할 수 있습니다. 때문에 인덱스 안의 각각의 도큐먼트에 다른 해석기의 사용이 필요하다면 ElasticSearch 에서는 가능합니다. 쿼리도 마찬가지입니다. 각 쿼리는 다른 해석기를 사용할 수 있습니다.</p>
+
+<h2>결과의 그룹핑</h2>
+
+<p>One of the most requested features for Apache Solr was result grouping. It was highly anticipated for Solr and it is still anticipated for ElasticSearch, which doesn’t yet have field grouping as of this writing.  You can see the number of +1 votes in the following issue: <a href="https://github.com/elasticsearch/elasticsearch/issues/256">https://github.com/elasticsearch/elasticsearch/issues/256</a>.  You can expect grouping to be supported in ElasticSearch after changes introduced in 0.20. If you are not familiar with results grouping – it allows you to group results based on the value of a field, value of a query, or a function and return matching documents as  groups. You can imagine grouping results of restaurants on the value of the city field and returning only five restaurants for each city. A feature like this may be handy in some situations. Currently, for the search engines we are talking about, only Apache Solr supports results grouping out of the box.</p>
+
+<p>Apache Solr 에 가장 많이 요청된 기능 중 하나가 결과의 그룹핑입니다. Solr 에 있어서 가장 기대되어 온 기능이며, ElasticSearch 에 있어서도 지금도 기대를 머금고 있습니다. 이 글을 쓰고 있는 시점에서는 ElasticSearch 는 필드의 그룹핑을 가지고 있지 않습니다. 다음 이슈를 보면 이에 대한 여러 요청이 있는 것을 알 수 있을 것입니다. <a href="https://github.com/elasticsearch/elasticsearch/issues/256">https://github.com/elasticsearch/elasticsearch/issues/256</a></p>
+
+<p>ElasticSearch에서는 0.20 이 릴리즈 된 때에 지원될 것이라고 기대하고 있습니다. 결과의 그룹핑을 모르는 사람을 위해 설명하자면, 필드나 쿼리 또는 함수의 값에 의해 결과를 그룹으로 나눌 수 있습니다. 그리고 매치된 도큐먼트를 그룹으로 반환합니다. 예를들어 레스토랑의 결과를 마을의 필드로 그룹핑해서 각 거리의 다섯가지 레스토랑만 반환합니다. 이런 기능은 여러 상황에서 편리하겠죠. 지금은 Apache Solr 만이 기본적으로 결과의 그룹핑을 할 수 있습니다.</p>
+
+<h2>Prospective Search</h2>
+
+<p>One thing Apache Solr completely lacks when comparing to ElasticSearch is functionality called Percolator in ElasticSearch. Imagine a search engine that, instead of storing documents in the index, stores queries and lets you check which stored/indexed queries match each new document being indexed. Sound handy, right?  For example, this is useful when people want to watch out for any new documents (think Social Media, News, etc.) matching their topics of interest, as described through queries. This functionality is also called Prospective Search, some call it Pub-Sub as well as Stored Searches.  At Sematext we’ve implemented this a few times for our clients using Solr, but ElasticSearch has this functionality built-in.  If you want to know more about ElasticSearch Percolator see <a href="http://www.elasticsearch.org/blog/2011/02/08/percolator.html">http://www.elasticsearch.org/blog/2011/02/08/percolator.html</a>.</p>
+
+<p>Apache Solr 가 ElasticSearch와 비교해서 완전하게 결여된 것 중 하나는 ElasticSearch 에서 퍼컬레이터 라고 부르는 기능입니다. 예를들어 인덱스에 도큐먼트를 넣는 것이 아니라, 쿼리를 넣고 새로운 도큐먼트의 인덱싱 때마다 인덱스된 쿼리가 매치하는 지 어떤 지를 체크하는 것이죠. 좋지 않나요?
+ 편리한 점은 유저가 모든 새로운 도큐먼트(소셜미디어나 뉴스 같은 것을 생각해보세요)가 유저가 흥미를 가지는 토픽에 해당되는 지, 앞서 정의한 쿼리를 통해서 체크하고 싶은 경우에 유용합니다. 이 기능은 또 Prospective Search 라고도 불립니다. 또 어떤 사람은 Pub-Sub라고도 부르고, stored search 라고도 부릅니다. Sematext 에서는 Solr를 사용하는 고객을 위해서 이것을 몇 번인가 구현한 적이 있습니다. 하지만 ElasticSearch는 기본적으로 이 기능을 가지고 있죠. 만약 ElasticSearch의 퍼컬레이터에 대해서 좀 더 알아보고 싶으시다면 다음 URL 을 참고하세요.</p>
+
+<p><a href="http://www.elasticsearch.org/blog/2011/02/08/percolator.html">http://www.elasticsearch.org/blog/2011/02/08/percolator.html</a></p>
+
+<h2>다음회 예고</h2>
+
+<p>In the next part of the series we will focus on comparing the ability to query your indices and leverage the full text search capabilities of Apache Solr and ElasticSearch. We will also look at the possibility to influence Lucene scoring algorithms during query time. Till next time :)</p>
+
+<p>다음회에서는 Apache Solr 와 ElasticSearch 상의 인덱스에 대해서 쿼리의 능력과 전문검색의 능력에 대해서 알아보도록 합니다. 또 쿼리시에 Lucene 의 스코어링 알고리즘을 다루는 방법에 대해서도 알아볼 예정입니다. 그럼 다음회에서 봐요.</p>
+
+<p>@kucrafal, @sematext</p>
+]]></content>
+    </entry>
+  
+    <entry>
+      
+
+
+
+
+<title type="html"><![CDATA[[번역] Solr vs ElasticSearch - Part 1 : Overview]]></title>
 <link href="http://jeen.github.io/2013/07/15/solr-vs-elasticsearch-part-1/"/>
 <updated>2013-07-15T00:17:35+00:00</updated>
 <id>http://jeen.github.io/2013/07/15/solr-vs-elasticsearch-part-1</id>
-<category term="elasticsearch" /><category term="solr" />
+<category term="elasticsearch" /><category term="solr" /><category term="translation" />
 
-      <content type="html"><![CDATA[<h1>Solr vs. ElasticSearch: Part 1 – 개요</h1>
+      <content type="html"><![CDATA[<h1>Solr vs. ElasticSearch: Part 1 – Overview</h1>
 
-<p>August 23, 2012 by <a href="http://blog.sematext.com/author/kucrafal/" title="http://blog.sematext.com/author/kucrafal/">Rafał Kuć</a></p>
+<p>August 23, 2012 by <a href="http://blog.sematext.com/author/kucrafal/">Rafał Kuć</a></p>
 
 <p>2012/08/23 원저자 Rafał Kuć</p>
 
@@ -36,11 +192,11 @@
 
 <p>As the Apache Lucene 4.0 release approaches and with it Solr 4.0 release as well, we thought it would be beneficial to take a deeper look and compare the two leading open source search engines built on top of Lucene – Apache Solr and ElasticSearch. Because the topic is very wide and can go deep, we are publishing our research as a series of blog posts starting with this post, which provides the general overview of the functionality provided by both search engines.</p>
 
-<p>Apache Lucene 4.0 의 릴리즈가 가까워 짐에 따라, 그와 함께 Solr 4.0 릴리즈도 가까워지고 있습니다. Apache Solr 와 ElasticSearch 라는 Luene 위에 구축된 2가지 검색엔진을 비교해서, 깊은 고찰을 얻으려고 하는 것은 매우 큰 의미가 있다고 생각합니다. 이 토픽은 매우 범위가 깊어서, 우리들의 연구결과를 이 기사를 시작으로 하는 일련의 블로그 포스트로 공개합니다. 이 기사에서는 2가지 검색 엔진이 제공하는 기능의 전체적인 개요를 나타냅니다.</p>
+<p>Apache Lucene 4.0 의 릴리즈가 가까워 짐에 따라, 그와 함께 Solr 4.0 릴리즈도 가까워지고 있습니다. Apache Solr 와 ElasticSearch 라는 Lucene 위에 구축된 2가지 검색엔진을 비교해서, 깊은 고찰을 얻으려고 하는 것은 매우 큰 의미가 있다고 생각합니다. 이 토픽은 매우 범위가 깊어서, 우리들의 연구결과를 이 기사를 시작으로 하는 일련의 블로그 포스트로 공개합니다. 이 기사에서는 2가지 검색 엔진이 제공하는 기능의 전체적인 개요를 나타냅니다.</p>
 
 <ol>
 <li>Solr vs. ElasticSearch: Part 1 – 개요</li>
-<li>Solr vs. ElasticSearch: Part 2 – 인덱스 작성과 언어의 비교</li>
+<li>Solr vs. ElasticSearch: Part 2 – 인덱싱과 언어 다루기</li>
 <li>Solr vs. ElasticSearch: Part 3 – 검색</li>
 <li>Solr vs. ElasticSearch: Part 4 – Faceting</li>
 <li>Solr vs. ElasticSearch: Part 5 - 관리API의 기능</li>
@@ -57,7 +213,7 @@
 
 <p>For indexing and searching both Solr and ElasticSearch use Lucene. As you may suspect, Solr 4.0 beta uses the 4.0 version of Lucene, while ElasticSearch 0.19.8 still uses version 3.6.  Of course, that doesn’t mean much when it comes to future versions of ElasticSearch because you can be sure that ElasticSearch will start using Lucene 4.0 once it’s GA release is ready, or maybe even before that.</p>
 
-<p>인덱스 작성과 검색에는 Solr 와 ElasticSearch 모두 Lucene 을 사용합니다. 눈치채셨겠지만 Solr4.0β는 Lucene 4.0을 사용하지만 ElasticSearch 0.19.8은 3.6 을 사용하고 있습니다. 물론 그것은 ElasticSearch 의 장래 버젼에 대해서는 많은 의미를 가지고 있을 것입니다. Lucene 4.0 의 GA 릴리즈의 준비가 끝났다면 당장(또는 그 이전부터) ElasticSearch 도 그것을 사용하기 시작할 것은 확실하기 때문입니다.</p>
+<p>인덱싱과 검색에는 Solr 와 ElasticSearch 모두 Lucene 을 사용합니다. 눈치채셨겠지만 Solr4.0β는 Lucene 4.0을 사용하지만 ElasticSearch 0.19.8은 3.6 을 사용하고 있습니다. 물론 그것은 ElasticSearch 의 장래 버젼에 대해서는 많은 의미를 가지고 있을 것입니다. Lucene 4.0 의 GA 릴리즈의 준비가 끝났다면 당장(또는 그 이전부터) ElasticSearch 도 그것을 사용하기 시작할 것은 확실하기 때문입니다.</p>
 
 <h2>기본</h2>
 
@@ -65,7 +221,7 @@
 
 <p>Solr 와 ElasticSearch에는 몇가지 컨셉에 대한 네이밍에 약간 차이가 있습니다. 기초부터 시작해봅시다.</p>
 
-<p>ElasticSearch 와 Solr 양쪽에 대해서, 많은 서버가 모여서 클러스터를 구성합니다. Solr 또는 ElasticSearch 의 하나의 인스턴스는 노드라고 부릅니다. 양쪽의 명명법이 겹치는 것은 그것뿐입니다.</p>
+<p>ElasticSearch 와 Solr 모두, 많은 서버를 모아 클러스터를 구성할 수 있습니다. Solr 또는 ElasticSearch 의 하나의 인스턴스는 노드라고 부릅니다. 양쪽의 명명법이 겹치는 것은 그것뿐입니다.</p>
 
 <p>The main logical data structure for Solr is called the Collection. A Collection is composed of Shards that are really Lucene indices. A single Collection can have multiple Shards and Shards can live on different Nodes. Because a Collection is composed of one or more Shards, a single Collection can be spread across multiple Nodes giving you a distributed environment. In addition to that, a Collection can have Replicas – basically an exact copy of the Shard whose main purpose is to enable scaling and data duplication in case of Node failures (i.e., High Availability).</p>
 
@@ -1711,123 +1867,6 @@ skyloader has left IRC (Remote host closed the connection)</p></li>
 <ul>
 <li><a href="http://travis-ci.org/#!/JEEN/p5-App-Zamakist/builds/2257622">Travis CI : p5-App-Zamakist</a></li>
 </ul>
-]]></content>
-    </entry>
-  
-    <entry>
-      
-
-
-
-
-<title type="html"><![CDATA[DBIx::Class and JSON]]></title>
-<link href="http://jeen.github.io/2012/08/25/dbix-class-and-json/"/>
-<updated>2012-08-25T12:44:00+00:00</updated>
-<id>http://jeen.github.io/2012/08/25/dbix-class-and-json</id>
-<category term="catalyst" /><category term="dbic" /><category term="perl" />
-
-      <content type="html"><![CDATA[<p>흔한 웹서비스의 흔한 AJAX 나 흔한 RESTful API 를 제공하기 위해서, 대개 JSON 포맷의 데이터를 서버에서 뿜어내고는 합니다.</p>
-
-<p>하지만 누구나가 Catalyst + DBIx::Class 조합에서 이렇게 하면 되는 게 아닐까 하고 접근했다가…</p>
-
-<blockquote>
-<p>… encountered object &#39;..&#39;, but neither allow_blessed nor convert_blessed settings are enabled …</p>
-</blockquote>
-
-<p>라는 에러를 접하게 됩니다. bless 된 오브젝트를 어떻게든 JSON 인코딩을 시도하려고 했을 때는 위와 같은 에러를 쉬이 접할 수 있습니다.</p>
-
-<p>이것을 푸는 방법은 사실 여러가지가 있습니다.</p>
-
-<p>이것저것 신경쓰지 말고 한번에 가자고 할 때는 Catalyst::View::JSON 에서 인코딩하게 되는 stash 된 값들을 전부 ArrayRef 나 HashRef 로 변환해서 넘기는 방법입니다.</p>
-
-<figure class='code'><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div><div data-line='2' class='line-number'></div><div data-line='3' class='line-number'></div><div data-line='4' class='line-number'></div><div data-line='5' class='line-number'></div><div data-line='6' class='line-number'></div><div data-line='7' class='line-number'></div><div data-line='8' class='line-number'></div><div data-line='9' class='line-number'></div><div data-line='10' class='line-number'></div></pre></td><td class='main  perl'><pre><div class='line'>   <span class="k">my</span> <span class="nv">@data</span><span class="p">;</span>
-</div><div class='line'>   <span class="k">my</span> <span class="nv">$rs</span> <span class="o">=</span> <span class="nv">$c</span><span class="o">-&gt;</span><span class="n">model</span><span class="p">(</span><span class="s">&#39;DB&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">resultset</span><span class="p">(</span><span class="s">&#39;User&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">search</span><span class="p">();</span>
-</div><div class='line'>   <span class="k">while</span><span class="p">(</span><span class="k">my</span> <span class="nv">$row</span> <span class="o">=</span> <span class="nv">$rs</span><span class="o">-&gt;</span><span class="k">next</span><span class="p">)</span> <span class="p">{</span>
-</div><div class='line'>       <span class="nb">push</span> <span class="nv">@data</span><span class="p">,</span> <span class="p">{</span>
-</div><div class='line'>           <span class="n">id</span> <span class="o">=&gt;</span> <span class="nv">$row</span><span class="o">-&gt;</span><span class="n">id</span><span class="p">,</span>
-</div><div class='line'>           <span class="n">name</span> <span class="o">=&gt;</span> <span class="nv">$row</span><span class="o">-&gt;</span><span class="n">name</span><span class="p">,</span>
-</div><div class='line'>           <span class="n">created_at</span> <span class="o">=&gt;</span> <span class="nv">$row</span><span class="o">-&gt;</span><span class="n">created_at</span><span class="p">,</span>
-</div><div class='line'>       <span class="p">};</span>
-</div><div class='line'>   <span class="p">}</span>
-</div><div class='line'>   <span class="nv">$c</span><span class="o">-&gt;</span><span class="n">stash</span><span class="o">-&gt;</span><span class="p">{</span><span class="n">people</span><span class="p">}</span> <span class="o">=</span> <span class="o">\</span><span class="nv">@data</span><span class="p">;</span>
-</div></pre></td></tr></table></div></figure>
-
-<p>위처럼 특정컬럼을 선별해서 넣어주는 방법이 있겠지요. 좀 더 단순화한다면, 각  스키마테이블 별로 HashRef 를 반환하는 메소드를 넣어두는 것도 좋습니다.</p>
-
-<figure class='code'><figcaption>lib/MyApp/Schema/Result/User.pm</figcaption><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div><div data-line='2' class='line-number'></div><div data-line='3' class='line-number'></div><div data-line='4' class='line-number'></div><div data-line='5' class='line-number'></div><div data-line='6' class='line-number'></div><div data-line='7' class='line-number'></div><div data-line='8' class='line-number'></div><div data-line='9' class='line-number'></div><div data-line='10' class='line-number'></div><div data-line='11' class='line-number'></div><div data-line='12' class='line-number'></div><div data-line='13' class='line-number'></div><div data-line='14' class='line-number'></div><div data-line='15' class='line-number'></div><div data-line='16' class='line-number'></div></pre></td><td class='main  perl'><pre><div class='line'><span class="k">sub </span><span class="nf">to_hashref</span> <span class="p">{</span>
-</div><div class='line'>    <span class="k">my</span> <span class="nv">$self</span> <span class="o">=</span> <span class="nb">shift</span><span class="p">;</span>
-</div><div class='line'>    <span class="k">return</span> <span class="p">{</span>
-</div><div class='line'>        <span class="n">id</span> <span class="o">=&gt;</span> <span class="nv">$self</span><span class="o">-&gt;</span><span class="n">id</span><span class="p">,</span>
-</div><div class='line'>        <span class="n">name</span> <span class="o">=&gt;</span> <span class="nv">$self</span><span class="o">-&gt;</span><span class="n">name</span><span class="p">,</span>
-</div><div class='line'>        <span class="n">created_at</span> <span class="o">=&gt;</span> <span class="nv">$self</span><span class="o">-&gt;</span><span class="n">created_at</span><span class="p">,</span>
-</div><div class='line'>    <span class="p">};</span>
-</div><div class='line'><span class="p">}</span>
-</div><div class='line'> </div><div class='line'>   <span class="c1"># Controller</span>
-</div><div class='line'>   <span class="k">my</span> <span class="nv">@data</span><span class="p">;</span>
-</div><div class='line'>   <span class="k">my</span> <span class="nv">$rs</span> <span class="o">=</span> <span class="nv">$c</span><span class="o">-&gt;</span><span class="n">model</span><span class="p">(</span><span class="s">&#39;DB&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">resultset</span><span class="p">(</span><span class="s">&#39;User&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">search</span><span class="p">();</span>
-</div><div class='line'>   <span class="k">while</span><span class="p">(</span><span class="k">my</span> <span class="nv">$row</span> <span class="o">=</span> <span class="nv">$rs</span><span class="o">-&gt;</span><span class="k">next</span><span class="p">)</span> <span class="p">{</span>
-</div><div class='line'>       <span class="nb">push</span> <span class="nv">@data</span><span class="p">,</span> <span class="nv">$row</span><span class="o">-&gt;</span><span class="n">to_hashref</span><span class="p">;</span>
-</div><div class='line'>   <span class="p">}</span>
-</div><div class='line'>   <span class="nv">$c</span><span class="o">-&gt;</span><span class="n">stash</span><span class="o">-&gt;</span><span class="p">{</span><span class="n">people</span><span class="p">}</span> <span class="o">=</span> <span class="o">\</span><span class="nv">@data</span><span class="p">;</span>
-</div></pre></td></tr></table></div></figure>
-
-<figure class='code'><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div><div data-line='2' class='line-number'></div><div data-line='3' class='line-number'></div><div data-line='4' class='line-number'></div></pre></td><td class='main  perl'><pre><div class='line'>  <span class="k">my</span> <span class="nv">$person</span> <span class="o">=</span> <span class="nv">$c</span><span class="o">-&gt;</span><span class="n">model</span><span class="p">(</span><span class="s">&#39;DB&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">resultset</span><span class="p">(</span><span class="s">&#39;User&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">search</span><span class="p">(</span><span class="nv">$cond</span><span class="p">,</span> <span class="p">{</span>
-</div><div class='line'>      <span class="n">result_class</span> <span class="o">=&gt;</span> <span class="s">&#39;DBIx::Class::ResultClass::HashRefInflator&#39;</span><span class="p">,</span>
-</div><div class='line'>  <span class="p">})</span><span class="o">-&gt;</span><span class="n">first</span><span class="p">;</span>
-</div><div class='line'>  <span class="nv">$c</span><span class="o">-&gt;</span><span class="n">stash</span><span class="o">-&gt;</span><span class="p">{</span><span class="n">person</span><span class="p">}</span> <span class="o">=</span> <span class="nv">$person</span><span class="p">;</span>
-</div></pre></td></tr></table></div></figure>
-
-<p>그럴 필요가 없다면 위처럼 <code>result_class</code> 를 지정해줌으로써 결과를 무조건 HashRef 로 반환하게끔 합니다.</p>
-
-<p>사실 <code>DBIx::Class::ResultClass::HashRefInflator</code> 를 적용하면 일일이 오브젝트를 만들어내지 않기 때문에 퍼포먼스 측면에서 매우 좋습니다만, 그냥 HashRef 일 따름인지라Resultset 에서 정의한 각종 메소드를 참조할 수 없습니다.
- 그러니 이런저런 경우에는 가려서 사용하는 것이 좋습니다.</p>
-
-<p>이제 본질적으로 좀 더 접근해보면…
- JSON::XS 는 인코딩할 시에, 오브젝트가 대상인 경우에는 해당 오브젝트의 TO_JSON 메소드를 참조하여 결과를 뽑아낼 수 있습니다. 물론 <code>allow_blessed</code>, <code>convert_blessed</code> 플래그를 지정할 필요가 있지요.</p>
-
-<figure class='code'><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div><div data-line='2' class='line-number'></div><div data-line='3' class='line-number'></div><div data-line='4' class='line-number'></div><div data-line='5' class='line-number'></div><div data-line='6' class='line-number'></div><div data-line='7' class='line-number'></div><div data-line='8' class='line-number'></div><div data-line='9' class='line-number'></div><div data-line='10' class='line-number'></div><div data-line='11' class='line-number'></div><div data-line='12' class='line-number'></div><div data-line='13' class='line-number'></div><div data-line='14' class='line-number'></div><div data-line='15' class='line-number'></div><div data-line='16' class='line-number'></div><div data-line='17' class='line-number'></div><div data-line='18' class='line-number'></div><div data-line='19' class='line-number'></div></pre></td><td class='main  perl'><pre><div class='line'><span class="c1"># lib/MyApp/View/JSON.pm</span>
-</div><div class='line'><span class="nb">package</span> <span class="nn">MyApp::View::</span><span class="n">JSON</span><span class="p">;</span>
-</div><div class='line'><span class="k">use</span> <span class="nn">JSON::</span><span class="n">XS</span> <span class="p">();</span>
-</div><div class='line'> </div><div class='line'><span class="k">use</span> <span class="n">parent</span> <span class="sx">qw(Catalyst::View::JSON)</span><span class="p">;</span>
-</div><div class='line'> </div><div class='line'><span class="k">my</span> <span class="nv">$encoder</span> <span class="o">=</span> <span class="nn">JSON::</span><span class="n">XS</span><span class="o">-&gt;</span><span class="k">new</span>
-</div><div class='line'>              <span class="o">-&gt;</span><span class="n">utf8</span>
-</div><div class='line'>                          <span class="o">-&gt;</span><span class="n">pretty</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-</div><div class='line'>                          <span class="o">-&gt;</span><span class="n">indent</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-</div><div class='line'>                          <span class="o">-&gt;</span><span class="n">allow_blessed</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-</div><div class='line'>                          <span class="o">-&gt;</span><span class="n">convert_blessed</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
-</div><div class='line'> </div><div class='line'><span class="k">sub </span><span class="nf">encode_json</span> <span class="p">{</span>
-</div><div class='line'>    <span class="k">my</span> <span class="p">(</span><span class="nv">$self</span><span class="p">,</span> <span class="nv">$c</span><span class="p">,</span> <span class="nv">$data</span><span class="p">)</span> <span class="o">=</span> <span class="nv">@_</span><span class="p">;</span>
-</div><div class='line'>    <span class="nv">$encoder</span><span class="o">-&gt;</span><span class="n">encode</span><span class="p">(</span><span class="nv">$data</span><span class="p">);</span>
-</div><div class='line'><span class="p">}</span>
-</div><div class='line'> </div><div class='line'><span class="mi">1</span><span class="p">;</span>
-</div></pre></td></tr></table></div></figure>
-
-<p>그러면 위처럼 <code>encode_json</code> 을 오버라이드 합니다. <code>allow_blessed</code> 와 <code>convert_blessed</code>  플래그를 켜주는 것이죠.</p>
-
-<figure class='code'><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div><div data-line='2' class='line-number'></div><div data-line='3' class='line-number'></div><div data-line='4' class='line-number'></div><div data-line='5' class='line-number'></div><div data-line='6' class='line-number'></div></pre></td><td class='main  perl'><pre><div class='line'><span class="c1"># lib/MyApp/Schema/Result/User.pm</span>
-</div><div class='line'><span class="o">..</span>
-</div><div class='line'><span class="k">sub </span><span class="nf">TO_JSON</span> <span class="p">{</span>
-</div><div class='line'>    <span class="k">return</span> <span class="p">{</span> <span class="nv">$_</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">get_inflated_columns</span> <span class="p">};</span>
-</div><div class='line'><span class="p">}</span>
-</div><div class='line'><span class="o">..</span>
-</div></pre></td></tr></table></div></figure>
-
-<p>그리고 위처럼 User Result 에 대해서 TO_JSON 를 지정합니다.</p>
-
-<figure class='code'><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div></pre></td><td class='main  perl'><pre><div class='line'>   <span class="nv">$c</span><span class="o">-&gt;</span><span class="n">stash</span><span class="o">-&gt;</span><span class="p">{</span><span class="n">people</span><span class="p">}</span> <span class="o">=</span> <span class="p">[</span>  <span class="nv">$c</span><span class="o">-&gt;</span><span class="n">model</span><span class="p">(</span><span class="s">&#39;DB&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">resultset</span><span class="p">(</span><span class="s">&#39;User&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">search</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">all</span> <span class="p">];</span>
-</div></pre></td></tr></table></div></figure>
-
-<p>그러면 이제는 아무런 걱정없이 그냥 생짜 DBIC Resultset 을 날려버려도 이제는 알아서 문제해결이 됩니다. :-)</p>
-
-<p>각 Resultset 마다 <code>TO_JSON</code> 을 지정하기가 벅차다면…</p>
-
-<ul>
-<li><a href="http://advent.perl.kr/2011/2011-12-17.html">Seoul.pm Advent Calendar 2011 - 열일곱번째 날 : DBIx::Class로 스키마 관리하기</a></li>
-</ul>
-
-<p>위의 글에서 <code>ResultBase</code> 를 참고해주세요.</p>
-
-<p><code>MyApp::Schema::ResultBase</code> 를 상속받은 각 Result 테이블들은 <code>TO_JSON</code> 을 오버라이드 해서 빼놓고 싶은 컬럼(예를 들어 <code>password</code> 같은 컬럼) 을 배제해서 출력할 수 있지 않을까요?</p>
 ]]></content>
     </entry>
   
