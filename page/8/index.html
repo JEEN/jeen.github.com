@@ -98,6 +98,162 @@
   <header>
     <h1 class="entry-title">
 
+<a href="/2012/08/25/dbix-class-and-json/">DBIx::Class and JSON</a>
+
+</h1>
+
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2012-08-25T12:44:00+00:00" pubdate data-updated="true">Aug 25<span>th</span>, 2012</time>
+         &bull; <a rel="bookmark" href="/2012/08/25/dbix-class-and-json/">Permalink</a>
+      </p>
+    
+  </header>
+
+<div class="entry-content"><p>흔한 웹서비스의 흔한 AJAX 나 흔한 RESTful API 를 제공하기 위해서, 대개 JSON 포맷의 데이터를 서버에서 뿜어내고는 합니다.</p>
+
+<p>하지만 누구나가 Catalyst + DBIx::Class 조합에서 이렇게 하면 되는 게 아닐까 하고 접근했다가…</p>
+
+<blockquote>
+<p>… encountered object &#39;..&#39;, but neither allow_blessed nor convert_blessed settings are enabled …</p>
+</blockquote>
+
+<p>라는 에러를 접하게 됩니다. bless 된 오브젝트를 어떻게든 JSON 인코딩을 시도하려고 했을 때는 위와 같은 에러를 쉬이 접할 수 있습니다.</p>
+
+<p>이것을 푸는 방법은 사실 여러가지가 있습니다.</p>
+
+<p>이것저것 신경쓰지 말고 한번에 가자고 할 때는 Catalyst::View::JSON 에서 인코딩하게 되는 stash 된 값들을 전부 ArrayRef 나 HashRef 로 변환해서 넘기는 방법입니다.</p>
+
+<figure class='code'><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div><div data-line='2' class='line-number'></div><div data-line='3' class='line-number'></div><div data-line='4' class='line-number'></div><div data-line='5' class='line-number'></div><div data-line='6' class='line-number'></div><div data-line='7' class='line-number'></div><div data-line='8' class='line-number'></div><div data-line='9' class='line-number'></div><div data-line='10' class='line-number'></div></pre></td><td class='main  perl'><pre><div class='line'>   <span class="k">my</span> <span class="nv">@data</span><span class="p">;</span>
+</div><div class='line'>   <span class="k">my</span> <span class="nv">$rs</span> <span class="o">=</span> <span class="nv">$c</span><span class="o">-&gt;</span><span class="n">model</span><span class="p">(</span><span class="s">&#39;DB&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">resultset</span><span class="p">(</span><span class="s">&#39;User&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">search</span><span class="p">();</span>
+</div><div class='line'>   <span class="k">while</span><span class="p">(</span><span class="k">my</span> <span class="nv">$row</span> <span class="o">=</span> <span class="nv">$rs</span><span class="o">-&gt;</span><span class="k">next</span><span class="p">)</span> <span class="p">{</span>
+</div><div class='line'>       <span class="nb">push</span> <span class="nv">@data</span><span class="p">,</span> <span class="p">{</span>
+</div><div class='line'>           <span class="n">id</span> <span class="o">=&gt;</span> <span class="nv">$row</span><span class="o">-&gt;</span><span class="n">id</span><span class="p">,</span>
+</div><div class='line'>           <span class="n">name</span> <span class="o">=&gt;</span> <span class="nv">$row</span><span class="o">-&gt;</span><span class="n">name</span><span class="p">,</span>
+</div><div class='line'>           <span class="n">created_at</span> <span class="o">=&gt;</span> <span class="nv">$row</span><span class="o">-&gt;</span><span class="n">created_at</span><span class="p">,</span>
+</div><div class='line'>       <span class="p">};</span>
+</div><div class='line'>   <span class="p">}</span>
+</div><div class='line'>   <span class="nv">$c</span><span class="o">-&gt;</span><span class="n">stash</span><span class="o">-&gt;</span><span class="p">{</span><span class="n">people</span><span class="p">}</span> <span class="o">=</span> <span class="o">\</span><span class="nv">@data</span><span class="p">;</span>
+</div></pre></td></tr></table></div></figure>
+
+<p>위처럼 특정컬럼을 선별해서 넣어주는 방법이 있겠지요. 좀 더 단순화한다면, 각  스키마테이블 별로 HashRef 를 반환하는 메소드를 넣어두는 것도 좋습니다.</p>
+
+<figure class='code'><figcaption>lib/MyApp/Schema/Result/User.pm</figcaption><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div><div data-line='2' class='line-number'></div><div data-line='3' class='line-number'></div><div data-line='4' class='line-number'></div><div data-line='5' class='line-number'></div><div data-line='6' class='line-number'></div><div data-line='7' class='line-number'></div><div data-line='8' class='line-number'></div><div data-line='9' class='line-number'></div><div data-line='10' class='line-number'></div><div data-line='11' class='line-number'></div><div data-line='12' class='line-number'></div><div data-line='13' class='line-number'></div><div data-line='14' class='line-number'></div><div data-line='15' class='line-number'></div><div data-line='16' class='line-number'></div></pre></td><td class='main  perl'><pre><div class='line'><span class="k">sub </span><span class="nf">to_hashref</span> <span class="p">{</span>
+</div><div class='line'>    <span class="k">my</span> <span class="nv">$self</span> <span class="o">=</span> <span class="nb">shift</span><span class="p">;</span>
+</div><div class='line'>    <span class="k">return</span> <span class="p">{</span>
+</div><div class='line'>        <span class="n">id</span> <span class="o">=&gt;</span> <span class="nv">$self</span><span class="o">-&gt;</span><span class="n">id</span><span class="p">,</span>
+</div><div class='line'>        <span class="n">name</span> <span class="o">=&gt;</span> <span class="nv">$self</span><span class="o">-&gt;</span><span class="n">name</span><span class="p">,</span>
+</div><div class='line'>        <span class="n">created_at</span> <span class="o">=&gt;</span> <span class="nv">$self</span><span class="o">-&gt;</span><span class="n">created_at</span><span class="p">,</span>
+</div><div class='line'>    <span class="p">};</span>
+</div><div class='line'><span class="p">}</span>
+</div><div class='line'> </div><div class='line'>   <span class="c1"># Controller</span>
+</div><div class='line'>   <span class="k">my</span> <span class="nv">@data</span><span class="p">;</span>
+</div><div class='line'>   <span class="k">my</span> <span class="nv">$rs</span> <span class="o">=</span> <span class="nv">$c</span><span class="o">-&gt;</span><span class="n">model</span><span class="p">(</span><span class="s">&#39;DB&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">resultset</span><span class="p">(</span><span class="s">&#39;User&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">search</span><span class="p">();</span>
+</div><div class='line'>   <span class="k">while</span><span class="p">(</span><span class="k">my</span> <span class="nv">$row</span> <span class="o">=</span> <span class="nv">$rs</span><span class="o">-&gt;</span><span class="k">next</span><span class="p">)</span> <span class="p">{</span>
+</div><div class='line'>       <span class="nb">push</span> <span class="nv">@data</span><span class="p">,</span> <span class="nv">$row</span><span class="o">-&gt;</span><span class="n">to_hashref</span><span class="p">;</span>
+</div><div class='line'>   <span class="p">}</span>
+</div><div class='line'>   <span class="nv">$c</span><span class="o">-&gt;</span><span class="n">stash</span><span class="o">-&gt;</span><span class="p">{</span><span class="n">people</span><span class="p">}</span> <span class="o">=</span> <span class="o">\</span><span class="nv">@data</span><span class="p">;</span>
+</div></pre></td></tr></table></div></figure>
+
+<figure class='code'><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div><div data-line='2' class='line-number'></div><div data-line='3' class='line-number'></div><div data-line='4' class='line-number'></div></pre></td><td class='main  perl'><pre><div class='line'>  <span class="k">my</span> <span class="nv">$person</span> <span class="o">=</span> <span class="nv">$c</span><span class="o">-&gt;</span><span class="n">model</span><span class="p">(</span><span class="s">&#39;DB&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">resultset</span><span class="p">(</span><span class="s">&#39;User&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">search</span><span class="p">(</span><span class="nv">$cond</span><span class="p">,</span> <span class="p">{</span>
+</div><div class='line'>      <span class="n">result_class</span> <span class="o">=&gt;</span> <span class="s">&#39;DBIx::Class::ResultClass::HashRefInflator&#39;</span><span class="p">,</span>
+</div><div class='line'>  <span class="p">})</span><span class="o">-&gt;</span><span class="n">first</span><span class="p">;</span>
+</div><div class='line'>  <span class="nv">$c</span><span class="o">-&gt;</span><span class="n">stash</span><span class="o">-&gt;</span><span class="p">{</span><span class="n">person</span><span class="p">}</span> <span class="o">=</span> <span class="nv">$person</span><span class="p">;</span>
+</div></pre></td></tr></table></div></figure>
+
+<p>그럴 필요가 없다면 위처럼 <code>result_class</code> 를 지정해줌으로써 결과를 무조건 HashRef 로 반환하게끔 합니다.</p>
+
+<p>사실 <code>DBIx::Class::ResultClass::HashRefInflator</code> 를 적용하면 일일이 오브젝트를 만들어내지 않기 때문에 퍼포먼스 측면에서 매우 좋습니다만, 그냥 HashRef 일 따름인지라Resultset 에서 정의한 각종 메소드를 참조할 수 없습니다.
+ 그러니 이런저런 경우에는 가려서 사용하는 것이 좋습니다.</p>
+
+<p>이제 본질적으로 좀 더 접근해보면…
+ JSON::XS 는 인코딩할 시에, 오브젝트가 대상인 경우에는 해당 오브젝트의 TO_JSON 메소드를 참조하여 결과를 뽑아낼 수 있습니다. 물론 <code>allow_blessed</code>, <code>convert_blessed</code> 플래그를 지정할 필요가 있지요.</p>
+
+<figure class='code'><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div><div data-line='2' class='line-number'></div><div data-line='3' class='line-number'></div><div data-line='4' class='line-number'></div><div data-line='5' class='line-number'></div><div data-line='6' class='line-number'></div><div data-line='7' class='line-number'></div><div data-line='8' class='line-number'></div><div data-line='9' class='line-number'></div><div data-line='10' class='line-number'></div><div data-line='11' class='line-number'></div><div data-line='12' class='line-number'></div><div data-line='13' class='line-number'></div><div data-line='14' class='line-number'></div><div data-line='15' class='line-number'></div><div data-line='16' class='line-number'></div><div data-line='17' class='line-number'></div><div data-line='18' class='line-number'></div><div data-line='19' class='line-number'></div></pre></td><td class='main  perl'><pre><div class='line'><span class="c1"># lib/MyApp/View/JSON.pm</span>
+</div><div class='line'><span class="nb">package</span> <span class="nn">MyApp::View::</span><span class="n">JSON</span><span class="p">;</span>
+</div><div class='line'><span class="k">use</span> <span class="nn">JSON::</span><span class="n">XS</span> <span class="p">();</span>
+</div><div class='line'> </div><div class='line'><span class="k">use</span> <span class="n">parent</span> <span class="sx">qw(Catalyst::View::JSON)</span><span class="p">;</span>
+</div><div class='line'> </div><div class='line'><span class="k">my</span> <span class="nv">$encoder</span> <span class="o">=</span> <span class="nn">JSON::</span><span class="n">XS</span><span class="o">-&gt;</span><span class="k">new</span>
+</div><div class='line'>              <span class="o">-&gt;</span><span class="n">utf8</span>
+</div><div class='line'>                          <span class="o">-&gt;</span><span class="n">pretty</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</div><div class='line'>                          <span class="o">-&gt;</span><span class="n">indent</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</div><div class='line'>                          <span class="o">-&gt;</span><span class="n">allow_blessed</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</div><div class='line'>                          <span class="o">-&gt;</span><span class="n">convert_blessed</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+</div><div class='line'> </div><div class='line'><span class="k">sub </span><span class="nf">encode_json</span> <span class="p">{</span>
+</div><div class='line'>    <span class="k">my</span> <span class="p">(</span><span class="nv">$self</span><span class="p">,</span> <span class="nv">$c</span><span class="p">,</span> <span class="nv">$data</span><span class="p">)</span> <span class="o">=</span> <span class="nv">@_</span><span class="p">;</span>
+</div><div class='line'>    <span class="nv">$encoder</span><span class="o">-&gt;</span><span class="n">encode</span><span class="p">(</span><span class="nv">$data</span><span class="p">);</span>
+</div><div class='line'><span class="p">}</span>
+</div><div class='line'> </div><div class='line'><span class="mi">1</span><span class="p">;</span>
+</div></pre></td></tr></table></div></figure>
+
+<p>그러면 위처럼 <code>encode_json</code> 을 오버라이드 합니다. <code>allow_blessed</code> 와 <code>convert_blessed</code>  플래그를 켜주는 것이죠.</p>
+
+<figure class='code'><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div><div data-line='2' class='line-number'></div><div data-line='3' class='line-number'></div><div data-line='4' class='line-number'></div><div data-line='5' class='line-number'></div><div data-line='6' class='line-number'></div></pre></td><td class='main  perl'><pre><div class='line'><span class="c1"># lib/MyApp/Schema/Result/User.pm</span>
+</div><div class='line'><span class="o">..</span>
+</div><div class='line'><span class="k">sub </span><span class="nf">TO_JSON</span> <span class="p">{</span>
+</div><div class='line'>    <span class="k">return</span> <span class="p">{</span> <span class="nv">$_</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">get_inflated_columns</span> <span class="p">};</span>
+</div><div class='line'><span class="p">}</span>
+</div><div class='line'><span class="o">..</span>
+</div></pre></td></tr></table></div></figure>
+
+<p>그리고 위처럼 User Result 에 대해서 TO_JSON 를 지정합니다.</p>
+
+<figure class='code'><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div></pre></td><td class='main  perl'><pre><div class='line'>   <span class="nv">$c</span><span class="o">-&gt;</span><span class="n">stash</span><span class="o">-&gt;</span><span class="p">{</span><span class="n">people</span><span class="p">}</span> <span class="o">=</span> <span class="p">[</span>  <span class="nv">$c</span><span class="o">-&gt;</span><span class="n">model</span><span class="p">(</span><span class="s">&#39;DB&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">resultset</span><span class="p">(</span><span class="s">&#39;User&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">search</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">all</span> <span class="p">];</span>
+</div></pre></td></tr></table></div></figure>
+
+<p>그러면 이제는 아무런 걱정없이 그냥 생짜 DBIC Resultset 을 날려버려도 이제는 알아서 문제해결이 됩니다. :-)</p>
+
+<p>각 Resultset 마다 <code>TO_JSON</code> 을 지정하기가 벅차다면…</p>
+
+<ul>
+<li><a href="http://advent.perl.kr/2011/2011-12-17.html">Seoul.pm Advent Calendar 2011 - 열일곱번째 날 : DBIx::Class로 스키마 관리하기</a></li>
+</ul>
+
+<p>위의 글에서 <code>ResultBase</code> 를 참고해주세요.</p>
+
+<p><code>MyApp::Schema::ResultBase</code> 를 상속받은 각 Result 테이블들은 <code>TO_JSON</code> 을 오버라이드 해서 빼놓고 싶은 컬럼(예를 들어 <code>password</code> 같은 컬럼) 을 배제해서 출력할 수 있지 않을까요?</p>
+</div>
+
+  <footer>
+    
+    <p><a class="comments-link" href="/2012/08/25/dbix-class-and-json/#disqus_thread" data-disqus-identifier="http://jeen.github.io/2012/08/25/dbix-class-and-json/">View comments &raquo;</a></p>
+
+    
+    
+  </footer>
+
+
+    </article>
+  
+    
+
+
+
+
+
+
+
+
+
+
+    <article >
+      
+  <header>
+    <h1 class="entry-title">
+
 <a href="/2012/08/09/moving-from-bash-to-zsh-again/">Moving From Bash to Zsh Again</a>
 
 </h1>
@@ -309,269 +465,6 @@
   <footer>
     
     <p><a class="comments-link" href="/2012/08/09/app-zamakist-dot-dot-dot/#disqus_thread" data-disqus-identifier="http://jeen.github.io/2012/08/09/app-zamakist-dot-dot-dot/">View comments &raquo;</a></p>
-
-    
-    
-  </footer>
-
-
-    </article>
-  
-    
-
-
-
-
-
-
-
-
-
-
-    <article >
-      
-  <header>
-    <h1 class="entry-title">
-
-<a href="/2012/07/26/export-facebook-event-attending-list-perl-kr-teatime/">Export Facebook Event Attending List - Perl-kr TeaTime</a>
-
-</h1>
-
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-
-<time datetime="2012-07-26T14:22:00+00:00" pubdate data-updated="true">Jul 26<span>th</span>, 2012</time>
-         &bull; <a rel="bookmark" href="/2012/07/26/export-facebook-event-attending-list-perl-kr-teatime/">Permalink</a>
-      </p>
-    
-  </header>
-
-<div class="entry-content"><p>지난번 1회 티타임때의 문제가 제대로 참가비 징수를 못해서 비용정산에 어려움이 있었는데,
-이 문제를 해결하기 위해서 간단하게 참가자 리스트를 A4 용지로 뽑아내서 체크하도록 하는 건 어떨까 하는 생각이 있었습니다.</p>
-
-<p><a href="http://jeen.tistory.com/entry/perlkr-%ED%8B%B0%ED%83%80%EC%9E%84-2-%EC%84%B1%ED%99%A9%EB%A6%AC%EC%97%90-%EB%81%9D%EB%82%AC%EC%8A%B5%EB%8B%88%EB%8B%A4">#perl-kr 티타임 Vol.2</a></p>
-
-<p>아무튼 그런 생각을 잠깐 했다가 해볼까 해서 아래처럼 코드를 써넣었습니다.</p>
-
-<figure class='code'><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div><div data-line='2' class='line-number'></div><div data-line='3' class='line-number'></div><div data-line='4' class='line-number'></div><div data-line='5' class='line-number'></div><div data-line='6' class='line-number'></div><div data-line='7' class='line-number'></div><div data-line='8' class='line-number'></div><div data-line='9' class='line-number'></div><div data-line='10' class='line-number'></div><div data-line='11' class='line-number'></div><div data-line='12' class='line-number'></div><div data-line='13' class='line-number'></div><div data-line='14' class='line-number'></div><div data-line='15' class='line-number'></div><div data-line='16' class='line-number'></div><div data-line='17' class='line-number'></div><div data-line='18' class='line-number'></div><div data-line='19' class='line-number'></div><div data-line='20' class='line-number'></div><div data-line='21' class='line-number'></div><div data-line='22' class='line-number'></div><div data-line='23' class='line-number'></div><div data-line='24' class='line-number'></div><div data-line='25' class='line-number'></div><div data-line='26' class='line-number'></div><div data-line='27' class='line-number'></div><div data-line='28' class='line-number'></div><div data-line='29' class='line-number'></div><div data-line='30' class='line-number'></div><div data-line='31' class='line-number'></div><div data-line='32' class='line-number'></div><div data-line='33' class='line-number'></div><div data-line='34' class='line-number'></div><div data-line='35' class='line-number'></div><div data-line='36' class='line-number'></div><div data-line='37' class='line-number'></div><div data-line='38' class='line-number'></div><div data-line='39' class='line-number'></div><div data-line='40' class='line-number'></div><div data-line='41' class='line-number'></div><div data-line='42' class='line-number'></div><div data-line='43' class='line-number'></div><div data-line='44' class='line-number'></div><div data-line='45' class='line-number'></div><div data-line='46' class='line-number'></div><div data-line='47' class='line-number'></div><div data-line='48' class='line-number'></div><div data-line='49' class='line-number'></div><div data-line='50' class='line-number'></div><div data-line='51' class='line-number'></div><div data-line='52' class='line-number'></div><div data-line='53' class='line-number'></div><div data-line='54' class='line-number'></div><div data-line='55' class='line-number'></div><div data-line='56' class='line-number'></div><div data-line='57' class='line-number'></div><div data-line='58' class='line-number'></div><div data-line='59' class='line-number'></div><div data-line='60' class='line-number'></div><div data-line='61' class='line-number'></div><div data-line='62' class='line-number'></div><div data-line='63' class='line-number'></div><div data-line='64' class='line-number'></div><div data-line='65' class='line-number'></div><div data-line='66' class='line-number'></div><div data-line='67' class='line-number'></div><div data-line='68' class='line-number'></div><div data-line='69' class='line-number'></div><div data-line='70' class='line-number'></div><div data-line='71' class='line-number'></div><div data-line='72' class='line-number'></div><div data-line='73' class='line-number'></div><div data-line='74' class='line-number'></div><div data-line='75' class='line-number'></div><div data-line='76' class='line-number'></div><div data-line='77' class='line-number'></div><div data-line='78' class='line-number'></div><div data-line='79' class='line-number'></div><div data-line='80' class='line-number'></div><div data-line='81' class='line-number'></div><div data-line='82' class='line-number'></div><div data-line='83' class='line-number'></div><div data-line='84' class='line-number'></div><div data-line='85' class='line-number'></div><div data-line='86' class='line-number'></div><div data-line='87' class='line-number'></div><div data-line='88' class='line-number'></div><div data-line='89' class='line-number'></div><div data-line='90' class='line-number'></div><div data-line='91' class='line-number'></div><div data-line='92' class='line-number'></div><div data-line='93' class='line-number'></div><div data-line='94' class='line-number'></div><div data-line='95' class='line-number'></div><div data-line='96' class='line-number'></div><div data-line='97' class='line-number'></div><div data-line='98' class='line-number'></div><div data-line='99' class='line-number'></div><div data-line='100' class='line-number'></div><div data-line='101' class='line-number'></div><div data-line='102' class='line-number'></div><div data-line='103' class='line-number'></div><div data-line='104' class='line-number'></div><div data-line='105' class='line-number'></div><div data-line='106' class='line-number'></div><div data-line='107' class='line-number'></div><div data-line='108' class='line-number'></div><div data-line='109' class='line-number'></div><div data-line='110' class='line-number'></div><div data-line='111' class='line-number'></div><div data-line='112' class='line-number'></div><div data-line='113' class='line-number'></div><div data-line='114' class='line-number'></div><div data-line='115' class='line-number'></div><div data-line='116' class='line-number'></div><div data-line='117' class='line-number'></div><div data-line='118' class='line-number'></div><div data-line='119' class='line-number'></div><div data-line='120' class='line-number'></div><div data-line='121' class='line-number'></div><div data-line='122' class='line-number'></div><div data-line='123' class='line-number'></div><div data-line='124' class='line-number'></div><div data-line='125' class='line-number'></div><div data-line='126' class='line-number'></div><div data-line='127' class='line-number'></div><div data-line='128' class='line-number'></div><div data-line='129' class='line-number'></div><div data-line='130' class='line-number'></div><div data-line='131' class='line-number'></div><div data-line='132' class='line-number'></div><div data-line='133' class='line-number'></div><div data-line='134' class='line-number'></div><div data-line='135' class='line-number'></div><div data-line='136' class='line-number'></div><div data-line='137' class='line-number'></div><div data-line='138' class='line-number'></div><div data-line='139' class='line-number'></div><div data-line='140' class='line-number'></div><div data-line='141' class='line-number'></div><div data-line='142' class='line-number'></div><div data-line='143' class='line-number'></div><div data-line='144' class='line-number'></div><div data-line='145' class='line-number'></div><div data-line='146' class='line-number'></div><div data-line='147' class='line-number'></div><div data-line='148' class='line-number'></div><div data-line='149' class='line-number'></div><div data-line='150' class='line-number'></div><div data-line='151' class='line-number'></div><div data-line='152' class='line-number'></div><div data-line='153' class='line-number'></div><div data-line='154' class='line-number'></div><div data-line='155' class='line-number'></div><div data-line='156' class='line-number'></div><div data-line='157' class='line-number'></div><div data-line='158' class='line-number'></div><div data-line='159' class='line-number'></div><div data-line='160' class='line-number'></div><div data-line='161' class='line-number'></div><div data-line='162' class='line-number'></div><div data-line='163' class='line-number'></div><div data-line='164' class='line-number'></div><div data-line='165' class='line-number'></div><div data-line='166' class='line-number'></div><div data-line='167' class='line-number'></div><div data-line='168' class='line-number'></div><div data-line='169' class='line-number'></div><div data-line='170' class='line-number'></div><div data-line='171' class='line-number'></div><div data-line='172' class='line-number'></div><div data-line='173' class='line-number'></div><div data-line='174' class='line-number'></div><div data-line='175' class='line-number'></div><div data-line='176' class='line-number'></div><div data-line='177' class='line-number'></div><div data-line='178' class='line-number'></div><div data-line='179' class='line-number'></div><div data-line='180' class='line-number'></div><div data-line='181' class='line-number'></div><div data-line='182' class='line-number'></div><div data-line='183' class='line-number'></div><div data-line='184' class='line-number'></div><div data-line='185' class='line-number'></div><div data-line='186' class='line-number'></div><div data-line='187' class='line-number'></div><div data-line='188' class='line-number'></div><div data-line='189' class='line-number'></div><div data-line='190' class='line-number'></div><div data-line='191' class='line-number'></div><div data-line='192' class='line-number'></div><div data-line='193' class='line-number'></div><div data-line='194' class='line-number'></div><div data-line='195' class='line-number'></div><div data-line='196' class='line-number'></div><div data-line='197' class='line-number'></div><div data-line='198' class='line-number'></div><div data-line='199' class='line-number'></div><div data-line='200' class='line-number'></div></pre></td><td class='main  perl'><pre><div class='line'><span class="k">use</span> <span class="n">strict</span><span class="p">;</span>
-</div><div class='line'><span class="k">use</span> <span class="n">warnings</span><span class="p">;</span>
-</div><div class='line'><span class="k">use</span> <span class="nn">Text::</span><span class="n">Xslate</span><span class="p">;</span>
-</div><div class='line'><span class="k">use</span> <span class="nn">Data::Section::</span><span class="n">Simple</span><span class="p">;</span>
-</div><div class='line'><span class="k">use</span> <span class="nn">Facebook::</span><span class="n">Graph</span><span class="p">;</span>
-</div><div class='line'> </div><div class='line'><span class="k">my</span> <span class="nv">$fb</span> <span class="o">=</span> <span class="nn">Facebook::</span><span class="n">Graph</span><span class="o">-&gt;</span><span class="k">new</span><span class="p">;</span>
-</div><div class='line'><span class="nv">$fb</span><span class="o">-&gt;</span><span class="n">access_token</span><span class="p">(</span><span class="s">&quot;YOUR ACCESS TOKEN&quot;</span><span class="p">);</span>
-</div><div class='line'><span class="k">my</span> <span class="nv">$r</span> <span class="o">=</span> <span class="nv">$fb</span><span class="o">-&gt;</span><span class="n">fetch</span><span class="p">(</span><span class="s">&#39;466164950078338/attending&#39;</span><span class="p">);</span>
-</div><div class='line'><span class="k">my</span> <span class="nv">@attendees</span><span class="p">;</span>
-</div><div class='line'><span class="k">for</span> <span class="k">my</span> <span class="nv">$person</span> <span class="p">(</span><span class="nv">@</span><span class="p">{</span> <span class="nv">$r</span><span class="o">-&gt;</span><span class="p">{</span><span class="n">data</span><span class="p">}</span> <span class="p">})</span> <span class="p">{</span>
-</div><div class='line'>    <span class="k">my</span> <span class="nv">$f</span> <span class="o">=</span> <span class="nv">$fb</span><span class="o">-&gt;</span><span class="n">fetch</span><span class="p">(</span><span class="nv">$person</span><span class="o">-&gt;</span><span class="p">{</span><span class="n">id</span><span class="p">});</span>
-</div><div class='line'>    <span class="nv">$f</span><span class="o">-&gt;</span><span class="p">{</span><span class="n">profile_image</span><span class="p">}</span> <span class="o">=</span> <span class="nv">$fb</span><span class="o">-&gt;</span><span class="n">picture</span><span class="p">(</span><span class="nv">$person</span><span class="o">-&gt;</span><span class="p">{</span><span class="n">id</span><span class="p">})</span><span class="o">-&gt;</span><span class="n">get_large</span><span class="o">-&gt;</span><span class="n">uri_as_string</span><span class="p">;</span>
-</div><div class='line'>    <span class="nb">push</span> <span class="nv">@attendees</span><span class="p">,</span> <span class="nv">$f</span><span class="p">;</span>
-</div><div class='line'><span class="p">}</span>
-</div><div class='line'><span class="nb">push</span> <span class="nv">@attendees</span><span class="p">,</span> <span class="p">{}</span> <span class="k">for</span> <span class="p">(</span><span class="mi">1</span><span class="o">..</span><span class="mi">3</span><span class="p">);</span>
-</div><div class='line'> </div><div class='line'><span class="k">my</span> <span class="nv">$tx</span>  <span class="o">=</span> <span class="nn">Text::</span><span class="n">Xslate</span><span class="o">-&gt;</span><span class="k">new</span><span class="p">(</span>
-</div><div class='line'>    <span class="n">syntax</span> <span class="o">=&gt;</span> <span class="s">&#39;TTerse&#39;</span><span class="p">,</span>
-</div><div class='line'>    <span class="n">module</span> <span class="o">=&gt;</span> <span class="p">[</span> <span class="s">&#39;Text::Xslate::Bridge::TT2Like&#39;</span> <span class="p">],</span>
-</div><div class='line'>    <span class="n">path</span> <span class="o">=&gt;</span> <span class="p">[</span>
-</div><div class='line'>        <span class="nn">Data::Section::</span><span class="n">Simple</span><span class="o">-&gt;</span><span class="k">new</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">get_data_section</span><span class="p">()</span>
-</div><div class='line'>    <span class="p">],</span>
-</div><div class='line'><span class="p">);</span>
-</div><div class='line'> </div><div class='line'><span class="k">print</span> <span class="nv">$tx</span><span class="o">-&gt;</span><span class="n">render</span><span class="p">(</span><span class="s">&#39;template.tx&#39;</span><span class="p">,</span> <span class="p">{</span> <span class="n">attendees</span> <span class="o">=&gt;</span> <span class="o">\</span><span class="nv">@attendees</span> <span class="p">});</span>
-</div><div class='line'> </div><div class='line'><span class="bp">__DATA__</span>
-</div><div class='line'> </div><div class='line'><span class="nv">@@</span> <span class="nv">template</span><span class="o">.</span><span class="n">tx</span>
-</div><div class='line'><span class="sr">&lt;html&gt;</span>
-</div><div class='line'> <span class="sr">&lt;head&gt;</span>
-</div><div class='line'>   <span class="sr">&lt;title&gt;</span><span class="c1">#perl-kr 티타임 #2&lt;/title&gt;</span>
-</div><div class='line'>   <span class="sr">&lt;style&gt;</span>
-</div><div class='line'>     <span class="p">[</span><span class="nv">%</span> <span class="nv">INCLUDE</span> <span class="s">&quot;css.tx&quot;</span> <span class="nv">%</span><span class="err">]</span>
-</div><div class='line'>   <span class="err">&lt;/</span><span class="nv">style</span><span class="o">&gt;</span>
-</div><div class='line'> <span class="sr">&lt;/head&gt;</span>
-</div><div class='line'> <span class="sr">&lt;body&gt;</span>
-</div><div class='line'>   <span class="sr">&lt;h1&gt;</span><span class="err">※</span> <span class="c1">#perl-kr 티타임 #2&lt;/h1&gt;</span>
-</div><div class='line'>   <span class="o">&lt;</span><span class="n">table</span> <span class="n">class</span><span class="o">=</span><span class="s">&quot;table table-striped table-bordered&quot;</span> <span class="n">style</span><span class="o">=</span><span class="s">&quot;width:50%&quot;</span><span class="o">&gt;</span>
-</div><div class='line'>     <span class="sr">&lt;thead&gt;</span>
-</div><div class='line'>       <span class="sr">&lt;tr&gt;</span>
-</div><div class='line'>         <span class="o">&lt;</span><span class="n">th</span> <span class="n">class</span><span class="o">=</span><span class="s">&quot;span1&quot;</span><span class="o">&gt;&amp;</span><span class="n">nbsp</span><span class="p">;</span><span class="sr">&lt;/th&gt;</span>
-</div><div class='line'>         <span class="o">&lt;</span><span class="n">th</span> <span class="n">class</span><span class="o">=</span><span class="s">&quot;span1&quot;</span><span class="o">&gt;&amp;</span><span class="n">nbsp</span><span class="p">;</span><span class="sr">&lt;/th&gt;</span>
-</div><div class='line'>         <span class="o">&lt;</span><span class="n">th</span> <span class="n">class</span><span class="o">=</span><span class="s">&quot;span2&quot;</span><span class="o">&gt;</span><span class="n">Name</span><span class="sr">&lt;/th&gt;</span>
-</div><div class='line'>         <span class="o">&lt;</span><span class="n">th</span> <span class="n">class</span><span class="o">=</span><span class="s">&quot;span1&quot;</span><span class="o">&gt;</span><span class="n">Attend</span><span class="p">?</span><span class="sr">&lt;/th&gt;</span>
-</div><div class='line'>       <span class="sr">&lt;/tr&gt;</span>
-</div><div class='line'>     <span class="sr">&lt;/thead&gt;</span>
-</div><div class='line'>     <span class="sr">&lt;tbody&gt;</span>
-</div><div class='line'>       <span class="p">[</span><span class="nv">%</span> <span class="nv">FOREACH</span> <span class="n">p</span> <span class="n">IN</span> <span class="n">attendees</span> <span class="nv">%</span><span class="err">]</span>
-</div><div class='line'>       <span class="err">&lt;</span><span class="nv">tr</span><span class="o">&gt;</span>
-</div><div class='line'>         <span class="sr">&lt;td&gt;</span><span class="p">[</span><span class="nv">%</span> <span class="nv">loop</span><span class="o">.</span><span class="n">count</span> <span class="nv">%</span><span class="err">]&lt;/</span><span class="nv">td</span><span class="o">&gt;</span>
-</div><div class='line'>         <span class="sr">&lt;td&gt;</span><span class="o">&lt;</span><span class="n">img</span> <span class="n">src</span><span class="o">=</span><span class="s">&quot;[% p.profile_image %]&quot;</span> <span class="n">width</span><span class="o">=</span><span class="s">&quot;30&quot;</span> <span class="n">height</span><span class="o">=</span><span class="s">&quot;30&quot;</span> <span class="sr">/&gt;&lt;/</span><span class="n">td</span><span class="o">&gt;</span>
-</div><div class='line'>         <span class="sr">&lt;td&gt;</span><span class="p">[</span><span class="nv">%</span> <span class="nv">p</span><span class="o">.</span><span class="n">name</span> <span class="nv">%</span><span class="err">][%</span> <span class="nv">IF</span> <span class="n">p</span><span class="o">.</span><span class="n">username</span> <span class="nv">%</span><span class="err">]([%</span> <span class="nv">p</span><span class="o">.</span><span class="n">username</span> <span class="nv">%</span><span class="err">]</span><span class="p">)[</span><span class="nv">%</span> <span class="nv">END</span> <span class="nv">%</span><span class="err">]&lt;/</span><span class="nv">td</span><span class="o">&gt;</span>
-</div><div class='line'>         <span class="sr">&lt;td&gt;&lt;/td&gt;</span>
-</div><div class='line'>       <span class="sr">&lt;/tr&gt;</span>
-</div><div class='line'>       <span class="p">[</span><span class="nv">%</span> <span class="nv">END</span> <span class="nv">%</span><span class="err">]</span>
-</div><div class='line'>     <span class="err">&lt;/</span><span class="nv">tbody</span><span class="o">&gt;</span>
-</div><div class='line'>   <span class="sr">&lt;/table&gt;</span>
-</div><div class='line'> <span class="sr">&lt;/body&gt;</span>
-</div><div class='line'><span class="sr">&lt;/html&gt;</span>
-</div><div class='line'> </div><div class='line'><span class="nv">@@</span> <span class="nv">css</span><span class="o">.</span><span class="n">tx</span>
-</div><div class='line'><span class="n">table</span> <span class="p">{</span>
-</div><div class='line'>  <span class="n">max</span><span class="o">-</span><span class="n">width:</span> <span class="mi">100</span><span class="nv">%</span><span class="err">;</span>
-</div><div class='line'>  <span class="nv">border</span><span class="o">-</span><span class="n">collapse:</span> <span class="n">collapse</span><span class="p">;</span>
-</div><div class='line'>  <span class="n">border</span><span class="o">-</span><span class="n">spacing:</span> <span class="mi">0</span><span class="p">;</span>
-</div><div class='line'><span class="p">}</span>
-</div><div class='line'> </div><div class='line'><span class="o">.</span><span class="n">table</span> <span class="p">{</span>
-</div><div class='line'>  <span class="n">width:</span> <span class="mi">100</span><span class="nv">%</span><span class="err">;</span>
-</div><div class='line'>  <span class="nv">margin</span><span class="o">-</span><span class="n">bottom:</span> <span class="mi">18</span><span class="n">px</span><span class="p">;</span>
-</div><div class='line'><span class="p">}</span>
-</div><div class='line'><span class="o">.</span><span class="n">table</span> <span class="n">th</span><span class="p">,</span> <span class="o">.</span><span class="n">table</span> <span class="n">td</span> <span class="p">{</span>
-</div><div class='line'>  <span class="n">padding:</span> <span class="mi">8</span><span class="n">px</span><span class="p">;</span>
-</div><div class='line'>  <span class="n">line</span><span class="o">-</span><span class="n">height:</span> <span class="mi">18</span><span class="n">px</span><span class="p">;</span>
-</div><div class='line'>  <span class="n">text</span><span class="o">-</span><span class="n">align:</span> <span class="n">left</span><span class="p">;</span>
-</div><div class='line'>  <span class="n">vertical</span><span class="o">-</span><span class="n">align:</span> <span class="n">top</span><span class="p">;</span>
-</div><div class='line'>  <span class="n">border</span><span class="o">-</span><span class="n">top:</span> <span class="mi">1</span><span class="n">px</span> <span class="n">solid</span> <span class="c1">#ddd;</span>
-</div><div class='line'><span class="p">}</span>
-</div><div class='line'><span class="o">.</span><span class="n">table</span> <span class="n">th</span> <span class="p">{</span>
-</div><div class='line'>  <span class="n">font</span><span class="o">-</span><span class="n">weight:</span> <span class="n">bold</span><span class="p">;</span>
-</div><div class='line'><span class="p">}</span>
-</div><div class='line'><span class="o">.</span><span class="n">table</span> <span class="n">thead</span> <span class="n">th</span> <span class="p">{</span>
-</div><div class='line'>  <span class="n">vertical</span><span class="o">-</span><span class="n">align:</span> <span class="n">bottom</span><span class="p">;</span>
-</div><div class='line'><span class="p">}</span>
-</div><div class='line'><span class="o">.</span><span class="n">table</span> <span class="n">thead:first</span><span class="o">-</span><span class="n">child</span> <span class="nb">tr</span> <span class="n">th</span><span class="p">,</span> <span class="o">.</span><span class="n">table</span> <span class="n">thead:first</span><span class="o">-</span><span class="n">child</span> <span class="nb">tr</span> <span class="n">td</span> <span class="p">{</span>
-</div><div class='line'>  <span class="n">border</span><span class="o">-</span><span class="n">top:</span> <span class="mi">0</span><span class="p">;</span>
-</div><div class='line'><span class="p">}</span>
-</div><div class='line'><span class="o">.</span><span class="n">table</span> <span class="n">tbody</span> <span class="o">+</span> <span class="n">tbody</span> <span class="p">{</span>
-</div><div class='line'>  <span class="n">border</span><span class="o">-</span><span class="n">top:</span> <span class="mi">2</span><span class="n">px</span> <span class="n">solid</span> <span class="c1">#ddd;</span>
-</div><div class='line'><span class="p">}</span>
-</div><div class='line'><span class="o">.</span><span class="n">table</span><span class="o">-</span><span class="n">condensed</span> <span class="n">th</span><span class="p">,</span> <span class="o">.</span><span class="n">table</span><span class="o">-</span><span class="n">condensed</span> <span class="n">td</span> <span class="p">{</span>
-</div><div class='line'>  <span class="n">padding:</span> <span class="mi">4</span><span class="n">px</span> <span class="mi">5</span><span class="n">px</span><span class="p">;</span>
-</div><div class='line'><span class="p">}</span>
-</div><div class='line'> </div><div class='line'><span class="o">.</span><span class="n">table</span><span class="o">-</span><span class="n">bordered</span> <span class="p">{</span>
-</div><div class='line'>  <span class="n">border:</span> <span class="mi">1</span><span class="n">px</span> <span class="n">solid</span> <span class="c1">#ddd;</span>
-</div><div class='line'>  <span class="n">border</span><span class="o">-</span><span class="n">collapse:</span> <span class="n">separate</span><span class="p">;</span>
-</div><div class='line'>  <span class="o">*</span><span class="n">border</span><span class="o">-</span><span class="n">collapse:</span> <span class="n">collapsed</span><span class="p">;</span>
-</div><div class='line'>  <span class="o">-</span><span class="n">webkit</span><span class="o">-</span><span class="n">border</span><span class="o">-</span><span class="n">radius:</span> <span class="mi">4</span><span class="n">px</span><span class="p">;</span>
-</div><div class='line'>  <span class="o">-</span><span class="n">moz</span><span class="o">-</span><span class="n">border</span><span class="o">-</span><span class="n">radius:</span> <span class="mi">4</span><span class="n">px</span><span class="p">;</span>
-</div><div class='line'>  <span class="n">border</span><span class="o">-</span><span class="n">radius:</span> <span class="mi">4</span><span class="n">px</span><span class="p">;</span>
-</div><div class='line'><span class="p">}</span>
-</div><div class='line'><span class="o">.</span><span class="n">table</span><span class="o">-</span><span class="n">bordered</span> <span class="n">th</span> <span class="o">+</span> <span class="n">th</span><span class="p">,</span> <span class="o">.</span><span class="n">table</span><span class="o">-</span><span class="n">bordered</span> <span class="n">td</span> <span class="o">+</span> <span class="n">td</span><span class="p">,</span> <span class="o">.</span><span class="n">table</span><span class="o">-</span><span class="n">bordered</span> <span class="n">th</span> <span class="o">+</span> <span class="n">td</span><span class="p">,</span> <span class="o">.</span><span class="n">table</span><span class="o">-</span><span class="n">bordered</span> <span class="n">td</span> <span class="o">+</span> <span class="n">th</span> <span class="p">{</span>
-</div><div class='line'>  <span class="n">border</span><span class="o">-</span><span class="n">left:</span> <span class="mi">1</span><span class="n">px</span> <span class="n">solid</span> <span class="c1">#ddd;</span>
-</div><div class='line'><span class="p">}</span>
-</div><div class='line'><span class="o">.</span><span class="n">table</span><span class="o">-</span><span class="n">bordered</span> <span class="n">thead:first</span><span class="o">-</span><span class="n">child</span> <span class="nb">tr</span><span class="p">:</span><span class="n">first</span><span class="o">-</span><span class="n">child</span> <span class="n">th</span><span class="p">,</span> <span class="o">.</span><span class="n">table</span><span class="o">-</span><span class="n">bordered</span> <span class="n">tbody:first</span><span class="o">-</span><span class="n">child</span> <span class="nb">tr</span><span class="p">:</span><span class="n">first</span><span class="o">-</span><span class="n">child</span> <span class="n">th</span><span class="p">,</span> <span class="o">.</span><span class="n">table</span><span class="o">-</span><span class="n">bordered</span> <span class="n">tbody:first</span><span class="o">-</span><span class="n">child</span> <span class="nb">tr</span><span class="p">:</span><span class="n">first</span><span class="o">-</span><span class="n">child</span> <span class="n">td</span> <span class="p">{</span>
-</div><div class='line'>  <span class="n">border</span><span class="o">-</span><span class="n">top:</span> <span class="mi">0</span><span class="p">;</span>
-</div><div class='line'><span class="p">}</span>
-</div><div class='line'><span class="sr">/* line 75, ../</span><span class="o">..</span><span class="sr">/../</span><span class="o">..</span><span class="sr">/../</span><span class="o">..</span><span class="sr">/.rvm/g</span><span class="n">ems</span><span class="sr">/ruby-1.9.2-p290/g</span><span class="n">ems</span><span class="sr">/bootstrap-sass-2.0.1/</span><span class="n">vendor</span><span class="sr">/assets/s</span><span class="n">tylesheets</span><span class="sr">/bootstrap/</span><span class="n">_tables</span><span class="o">.</span><span class="n">scss</span> <span class="o">*/</span>
-</div><div class='line'><span class="o">.</span><span class="n">table</span><span class="o">-</span><span class="n">bordered</span> <span class="n">thead:first</span><span class="o">-</span><span class="n">child</span> <span class="nb">tr</span><span class="p">:</span><span class="n">first</span><span class="o">-</span><span class="n">child</span> <span class="n">th:first</span><span class="o">-</span><span class="n">child</span><span class="p">,</span> <span class="o">.</span><span class="n">table</span><span class="o">-</span><span class="n">bordered</span> <span class="n">tbody:first</span><span class="o">-</span><span class="n">child</span> <span class="nb">tr</span><span class="p">:</span><span class="n">first</span><span class="o">-</span><span class="n">child</span> <span class="n">td:first</span><span class="o">-</span><span class="n">child</span> <span class="p">{</span>
-</div><div class='line'>  <span class="o">-</span><span class="n">webkit</span><span class="o">-</span><span class="n">border</span><span class="o">-</span><span class="n">radius:</span> <span class="mi">4</span><span class="n">px</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span><span class="p">;</span>
-</div><div class='line'>  <span class="o">-</span><span class="n">moz</span><span class="o">-</span><span class="n">border</span><span class="o">-</span><span class="n">radius:</span> <span class="mi">4</span><span class="n">px</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span><span class="p">;</span>
-</div><div class='line'>  <span class="n">border</span><span class="o">-</span><span class="n">radius:</span> <span class="mi">4</span><span class="n">px</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span><span class="p">;</span>
-</div><div class='line'><span class="p">}</span>
-</div><div class='line'><span class="o">.</span><span class="n">table</span><span class="o">-</span><span class="n">bordered</span> <span class="n">thead:first</span><span class="o">-</span><span class="n">child</span> <span class="nb">tr</span><span class="p">:</span><span class="n">first</span><span class="o">-</span><span class="n">child</span> <span class="n">th:last</span><span class="o">-</span><span class="n">child</span><span class="p">,</span> <span class="o">.</span><span class="n">table</span><span class="o">-</span><span class="n">bordered</span> <span class="n">tbody:first</span><span class="o">-</span><span class="n">child</span> <span class="nb">tr</span><span class="p">:</span><span class="n">first</span><span class="o">-</span><span class="n">child</span> <span class="n">td:last</span><span class="o">-</span><span class="n">child</span> <span class="p">{</span>
-</div><div class='line'>  <span class="o">-</span><span class="n">webkit</span><span class="o">-</span><span class="n">border</span><span class="o">-</span><span class="n">radius:</span> <span class="mi">0</span> <span class="mi">4</span><span class="n">px</span> <span class="mi">0</span> <span class="mi">0</span><span class="p">;</span>
-</div><div class='line'>  <span class="o">-</span><span class="n">moz</span><span class="o">-</span><span class="n">border</span><span class="o">-</span><span class="n">radius:</span> <span class="mi">0</span> <span class="mi">4</span><span class="n">px</span> <span class="mi">0</span> <span class="mi">0</span><span class="p">;</span>
-</div><div class='line'>  <span class="n">border</span><span class="o">-</span><span class="n">radius:</span> <span class="mi">0</span> <span class="mi">4</span><span class="n">px</span> <span class="mi">0</span> <span class="mi">0</span><span class="p">;</span>
-</div><div class='line'><span class="p">}</span>
-</div><div class='line'><span class="o">.</span><span class="n">table</span><span class="o">-</span><span class="n">bordered</span> <span class="n">thead:last</span><span class="o">-</span><span class="n">child</span> <span class="nb">tr</span><span class="p">:</span><span class="k">last</span><span class="o">-</span><span class="n">child</span> <span class="n">th:first</span><span class="o">-</span><span class="n">child</span><span class="p">,</span> <span class="o">.</span><span class="n">table</span><span class="o">-</span><span class="n">bordered</span> <span class="n">tbody:last</span><span class="o">-</span><span class="n">child</span> <span class="nb">tr</span><span class="p">:</span><span class="k">last</span><span class="o">-</span><span class="n">child</span> <span class="n">td:first</span><span class="o">-</span><span class="n">child</span> <span class="p">{</span>
-</div><div class='line'>  <span class="o">-</span><span class="n">webkit</span><span class="o">-</span><span class="n">border</span><span class="o">-</span><span class="n">radius:</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">4</span><span class="n">px</span><span class="p">;</span>
-</div><div class='line'>  <span class="o">-</span><span class="n">moz</span><span class="o">-</span><span class="n">border</span><span class="o">-</span><span class="n">radius:</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">4</span><span class="n">px</span><span class="p">;</span>
-</div><div class='line'>  <span class="n">border</span><span class="o">-</span><span class="n">radius:</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">4</span><span class="n">px</span><span class="p">;</span>
-</div><div class='line'><span class="p">}</span>
-</div><div class='line'><span class="o">.</span><span class="n">table</span><span class="o">-</span><span class="n">bordered</span> <span class="n">thead:last</span><span class="o">-</span><span class="n">child</span> <span class="nb">tr</span><span class="p">:</span><span class="k">last</span><span class="o">-</span><span class="n">child</span> <span class="n">th:last</span><span class="o">-</span><span class="n">child</span><span class="p">,</span> <span class="o">.</span><span class="n">table</span><span class="o">-</span><span class="n">bordered</span> <span class="n">tbody:last</span><span class="o">-</span><span class="n">child</span> <span class="nb">tr</span><span class="p">:</span><span class="k">last</span><span class="o">-</span><span class="n">child</span> <span class="n">td:last</span><span class="o">-</span><span class="n">child</span> <span class="p">{</span>
-</div><div class='line'>  <span class="o">-</span><span class="n">webkit</span><span class="o">-</span><span class="n">border</span><span class="o">-</span><span class="n">radius:</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">4</span><span class="n">px</span> <span class="mi">0</span><span class="p">;</span>
-</div><div class='line'>  <span class="o">-</span><span class="n">moz</span><span class="o">-</span><span class="n">border</span><span class="o">-</span><span class="n">radius:</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">4</span><span class="n">px</span> <span class="mi">0</span><span class="p">;</span>
-</div><div class='line'>  <span class="n">border</span><span class="o">-</span><span class="n">radius:</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">4</span><span class="n">px</span> <span class="mi">0</span><span class="p">;</span>
-</div><div class='line'><span class="p">}</span>
-</div><div class='line'><span class="o">.</span><span class="n">table</span><span class="o">-</span><span class="n">striped</span> <span class="n">tbody</span> <span class="nb">tr</span><span class="p">:</span><span class="n">nth</span><span class="o">-</span><span class="n">child</span><span class="p">(</span><span class="n">odd</span><span class="p">)</span> <span class="n">td</span><span class="p">,</span> <span class="o">.</span><span class="n">table</span><span class="o">-</span><span class="n">striped</span> <span class="n">tbody</span> <span class="nb">tr</span><span class="p">:</span><span class="n">nth</span><span class="o">-</span><span class="n">child</span><span class="p">(</span><span class="n">odd</span><span class="p">)</span> <span class="n">th</span> <span class="p">{</span>
-</div><div class='line'>  <span class="n">background</span><span class="o">-</span><span class="n">color:</span> <span class="c1">#f9f9f9;</span>
-</div><div class='line'><span class="p">}</span>
-</div><div class='line'> </div><div class='line'><span class="o">.</span><span class="n">table</span> <span class="n">tbody</span> <span class="nb">tr</span><span class="p">:</span><span class="n">hover</span> <span class="n">td</span><span class="p">,</span> <span class="o">.</span><span class="n">table</span> <span class="n">tbody</span> <span class="nb">tr</span><span class="p">:</span><span class="n">hover</span> <span class="n">th</span> <span class="p">{</span>
-</div><div class='line'>  <span class="n">background</span><span class="o">-</span><span class="n">color:</span> <span class="c1">#f5f5f5;</span>
-</div><div class='line'><span class="p">}</span>
-</div><div class='line'> </div><div class='line'><span class="n">table</span> <span class="o">.</span><span class="n">span1</span> <span class="p">{</span>
-</div><div class='line'>  <span class="n">float:</span> <span class="n">none</span><span class="p">;</span>
-</div><div class='line'>  <span class="n">width:</span> <span class="mi">44</span><span class="n">px</span><span class="p">;</span>
-</div><div class='line'>  <span class="n">margin</span><span class="o">-</span><span class="n">left:</span> <span class="mi">0</span><span class="p">;</span>
-</div><div class='line'><span class="p">}</span>
-</div><div class='line'><span class="n">table</span> <span class="o">.</span><span class="n">span2</span> <span class="p">{</span>
-</div><div class='line'>  <span class="n">float:</span> <span class="n">none</span><span class="p">;</span>
-</div><div class='line'>  <span class="n">width:</span> <span class="mi">124</span><span class="n">px</span><span class="p">;</span>
-</div><div class='line'>  <span class="n">margin</span><span class="o">-</span><span class="n">left:</span> <span class="mi">0</span><span class="p">;</span>
-</div><div class='line'><span class="p">}</span>
-</div><div class='line'><span class="n">table</span> <span class="o">.</span><span class="n">span3</span> <span class="p">{</span>
-</div><div class='line'>  <span class="n">float:</span> <span class="n">none</span><span class="p">;</span>
-</div><div class='line'>  <span class="n">width:</span> <span class="mi">204</span><span class="n">px</span><span class="p">;</span>
-</div><div class='line'>  <span class="n">margin</span><span class="o">-</span><span class="n">left:</span> <span class="mi">0</span><span class="p">;</span>
-</div><div class='line'><span class="p">}</span>
-</div><div class='line'><span class="n">table</span> <span class="o">.</span><span class="n">span4</span> <span class="p">{</span>
-</div><div class='line'>  <span class="n">float:</span> <span class="n">none</span><span class="p">;</span>
-</div><div class='line'>  <span class="n">width:</span> <span class="mi">284</span><span class="n">px</span><span class="p">;</span>
-</div><div class='line'>  <span class="n">margin</span><span class="o">-</span><span class="n">left:</span> <span class="mi">0</span><span class="p">;</span>
-</div><div class='line'><span class="p">}</span>
-</div><div class='line'><span class="n">table</span> <span class="o">.</span><span class="n">span5</span> <span class="p">{</span>
-</div><div class='line'>  <span class="n">float:</span> <span class="n">none</span><span class="p">;</span>
-</div><div class='line'>  <span class="n">width:</span> <span class="mi">364</span><span class="n">px</span><span class="p">;</span>
-</div><div class='line'>  <span class="n">margin</span><span class="o">-</span><span class="n">left:</span> <span class="mi">0</span><span class="p">;</span>
-</div><div class='line'><span class="p">}</span>
-</div><div class='line'><span class="n">table</span> <span class="o">.</span><span class="n">span6</span> <span class="p">{</span>
-</div><div class='line'>  <span class="n">float:</span> <span class="n">none</span><span class="p">;</span>
-</div><div class='line'>  <span class="n">width:</span> <span class="mi">444</span><span class="n">px</span><span class="p">;</span>
-</div><div class='line'>  <span class="n">margin</span><span class="o">-</span><span class="n">left:</span> <span class="mi">0</span><span class="p">;</span>
-</div><div class='line'><span class="p">}</span>
-</div><div class='line'><span class="n">table</span> <span class="o">.</span><span class="n">span7</span> <span class="p">{</span>
-</div><div class='line'>  <span class="n">float:</span> <span class="n">none</span><span class="p">;</span>
-</div><div class='line'>  <span class="n">width:</span> <span class="mi">524</span><span class="n">px</span><span class="p">;</span>
-</div><div class='line'>  <span class="n">margin</span><span class="o">-</span><span class="n">left:</span> <span class="mi">0</span><span class="p">;</span>
-</div><div class='line'><span class="p">}</span>
-</div><div class='line'><span class="n">table</span> <span class="o">.</span><span class="n">span8</span> <span class="p">{</span>
-</div><div class='line'>  <span class="n">float:</span> <span class="n">none</span><span class="p">;</span>
-</div><div class='line'>  <span class="n">width:</span> <span class="mi">604</span><span class="n">px</span><span class="p">;</span>
-</div><div class='line'>  <span class="n">margin</span><span class="o">-</span><span class="n">left:</span> <span class="mi">0</span><span class="p">;</span>
-</div><div class='line'><span class="p">}</span>
-</div><div class='line'><span class="n">table</span> <span class="o">.</span><span class="n">span9</span> <span class="p">{</span>
-</div><div class='line'>  <span class="n">float:</span> <span class="n">none</span><span class="p">;</span>
-</div><div class='line'>  <span class="n">width:</span> <span class="mi">684</span><span class="n">px</span><span class="p">;</span>
-</div><div class='line'>  <span class="n">margin</span><span class="o">-</span><span class="n">left:</span> <span class="mi">0</span><span class="p">;</span>
-</div><div class='line'><span class="p">}</span>
-</div><div class='line'><span class="n">table</span> <span class="o">.</span><span class="n">span10</span> <span class="p">{</span>
-</div><div class='line'>  <span class="n">float:</span> <span class="n">none</span><span class="p">;</span>
-</div><div class='line'>  <span class="n">width:</span> <span class="mi">764</span><span class="n">px</span><span class="p">;</span>
-</div><div class='line'>  <span class="n">margin</span><span class="o">-</span><span class="n">left:</span> <span class="mi">0</span><span class="p">;</span>
-</div><div class='line'><span class="p">}</span>
-</div><div class='line'><span class="n">table</span> <span class="o">.</span><span class="n">span11</span> <span class="p">{</span>
-</div><div class='line'>  <span class="n">float:</span> <span class="n">none</span><span class="p">;</span>
-</div><div class='line'>  <span class="n">width:</span> <span class="mi">844</span><span class="n">px</span><span class="p">;</span>
-</div><div class='line'>  <span class="n">margin</span><span class="o">-</span><span class="n">left:</span> <span class="mi">0</span><span class="p">;</span>
-</div><div class='line'><span class="p">}</span>
-</div><div class='line'> </div><div class='line'><span class="n">table</span> <span class="o">.</span><span class="n">span12</span> <span class="p">{</span>
-</div><div class='line'>  <span class="n">float:</span> <span class="n">none</span><span class="p">;</span>
-</div><div class='line'>  <span class="n">width:</span> <span class="mi">924</span><span class="n">px</span><span class="p">;</span>
-</div><div class='line'>  <span class="n">margin</span><span class="o">-</span><span class="n">left:</span> <span class="mi">0</span><span class="p">;</span>
-</div><div class='line'><span class="p">}</span>
-</div></pre></td></tr></table></div></figure>
-
-<p>급작스레 한 작업이라 그냥 간단히 HTML 로 뽑아버렸지만&hellip; 사실 꿈은 좀 더 아름다운 레이아웃으로 뙇하고 나와줬으면                                                                 했었지요.</p>
-
-<p>일단 예정 참가자 이외에 예상치못한 참가자가 있을 것을 염두해서 3개정도의 행을 더 추가해주었구요;;</p>
-
-<p><code>Text::Xslate</code> + <code>Data::Section::Simple</code> 의 조합은 파일하나에 우걱우걱 템플릿까지 끼워넣고 이럴 경우에는 아주 좋았습니다.</p>
-
-<p>CSS 도 그냥 별도의 섹션으로 나눠서 <code>INCLUDE</code> 해버릴 수도 있으니 :-)</p>
-
-<p><code>Facebook::Graph</code> 모듈은 생각보다 좀 변태같습니다. 그 이유는 Facebook Graph API 도 변태같다는 근본적인 &hellip;. 그리고 Access Token 은 뭐 적당하게 Developer 페이지 가서 줏어서 넣었습니다. :-)</p>
-
-<p><img src="https://lh6.googleusercontent.com/-GrgEvhNP0d0/UBDW9W-YzLI/AAAAAAAACAQ/5G48cMzvryY/w389-h521-k/list.jpg" alt=""></p>
-</div>
-
-  <footer>
-    
-    <p><a class="comments-link" href="/2012/07/26/export-facebook-event-attending-list-perl-kr-teatime/#disqus_thread" data-disqus-identifier="http://jeen.github.io/2012/07/26/export-facebook-event-attending-list-perl-kr-teatime/">View comments &raquo;</a></p>
 
     
     
