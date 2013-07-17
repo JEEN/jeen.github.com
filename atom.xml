@@ -3,7 +3,7 @@
   <title><![CDATA[JEEN's techlog]]></title>
   <link href="http://jeen.github.io/atom.xml" rel="self"/>
   <link href="http://jeen.github.io/"/>
-  <updated>2013-07-17T00:59:48+00:00</updated>
+  <updated>2013-07-17T01:49:33+00:00</updated>
   <id>http://jeen.github.io/</id>
   <author>
     <name><![CDATA[Jeen Lee]]></name>
@@ -32,14 +32,14 @@
 
 <p>ApacheCon EU 의 제 강연이 끝난 뒤 받은 질문 중하나는 제가 비교한 두가지 검색엔진의 커뮤니티에 대해서 어떻게 생각하느냐 하는 것이었습니다. 당연하게도 이것은 우리가 컨설팅 계약에서 자주 지적하는 문제이기도 합니다. Apache Solr vs ElasticSearch 시리즈의 글로써 우리는 SolrCloud vs ElasticSearch 의 기술적 요소에서 떠나 아직 ElasticSearch 의 과거의 글들을 읽지 않은 경우에는 여기에 모든 포인터가 있습니다.</p>
 
-<ol>
-<li>Solr vs. ElasticSearch: Part 1 – Overview</li>
-<li>Solr vs. ElasticSearch: Part 2 – Data Handling</li>
-<li>Solr vs. ElasticSearch: Part 3 – Searching</li>
-<li>Solr vs. ElasticSearch: Part 4 – Faceting</li>
-<li>Solr vs. ElasticSearch: Part 5 – Management API Capabilities</li>
-<li>Solr vs. ElasticSearch: Part 6 – User &amp; Dev Communities Compared</li>
-</ol>
+<ul>
+<li><a href="http://jeen.github.io/2013/07/15/solr-vs-elasticsearch-part-1/">1. Solr vs. ElasticSearch: Part 1 – Overview</a></li>
+<li><a href="http://jeen.github.io/2013/07/16/solr-vs-elasticsearch-part-2-indexing-and-language-handling/">2. Solr vs. ElasticSearch: Part 2 – Data Handling</a></li>
+<li><a href="http://jeen.github.io/2013/07/16/solr-vs-elasticsearch-part-3-searching/">3. Solr vs. ElasticSearch: Part 3 – Searching</a></li>
+<li><a href="http://jeen.github.io/2013/07/16/solr-vs-elasticsearch-part-4-faceting/">4. Solr vs. ElasticSearch: Part 4 – Faceting</a></li>
+<li><a href="http://jeen.github.io/2013/07/17/solr-vs-elasticsearch-part-5-management-api-capabilities/">5. Solr vs. ElasticSearch: Part 5 – Management API Capabilities</a></li>
+<li><a href="http://jeen.github.io/2013/07/17/solr-vs-elasticsearch-part-6-user-and-dev-communities-compared/">6. Solr vs. ElasticSearch: Part 6 – User &amp; Dev Communities Compared</a></li>
+</ul>
 
 <h2>유저와 커뮤니티</h2>
 
@@ -191,7 +191,7 @@
 
 
 
-<title type="html"><![CDATA[Solr vs ElasticSearch: Part 5 – Management API Capabilities]]></title>
+<title type="html"><![CDATA[[번역] Solr vs ElasticSearch: Part 5 – Management API Capabilities]]></title>
 <link href="http://jeen.github.io/2013/07/17/solr-vs-elasticsearch-part-5-management-api-capabilities/"/>
 <updated>2013-07-17T00:01:06+00:00</updated>
 <id>http://jeen.github.io/2013/07/17/solr-vs-elasticsearch-part-5-management-api-capabilities</id>
@@ -205,14 +205,14 @@
 
 <p>이전 편에서는 전반적인 개요, 전문검색기능, Faceting 의 집약기능에 대해서 다루었습니다. 지금까지 관리와 운영 옵션과 운용중의 클러스터에서 재기동없이 할 수 있는 일에 대해서는 다루지 않았죠. 자, 그럼 이에 대해서 Apache Solr 와 ElasticSearch 는 무엇을 제공할 수 있는 지 보도록 할까요?</p>
 
-<ol>
-<li>Solr vs. ElasticSearch: Part 1 – Overview</li>
-<li>Solr vs. ElasticSearch: Part 2 – Data Handling</li>
-<li>Solr vs. ElasticSearch: Part 3 – Searching</li>
-<li>Solr vs. ElasticSearch: Part 4 – Faceting</li>
-<li>Solr vs. ElasticSearch: Part 5 – Management API Capabilities</li>
-<li>Solr vs. ElasticSearch: Part 6 – User &amp; Dev Communities Compared</li>
-</ol>
+<ul>
+<li><a href="http://jeen.github.io/2013/07/15/solr-vs-elasticsearch-part-1/">1. Solr vs. ElasticSearch: Part 1 – Overview</a></li>
+<li><a href="http://jeen.github.io/2013/07/16/solr-vs-elasticsearch-part-2-indexing-and-language-handling/">2. Solr vs. ElasticSearch: Part 2 – Data Handling</a></li>
+<li><a href="http://jeen.github.io/2013/07/16/solr-vs-elasticsearch-part-3-searching/">3. Solr vs. ElasticSearch: Part 3 – Searching</a></li>
+<li><a href="http://jeen.github.io/2013/07/16/solr-vs-elasticsearch-part-4-faceting/">4. Solr vs. ElasticSearch: Part 4 – Faceting</a></li>
+<li><a href="http://jeen.github.io/2013/07/17/solr-vs-elasticsearch-part-5-management-api-capabilities/">5. Solr vs. ElasticSearch: Part 5 – Management API Capabilities</a></li>
+<li><a href="http://jeen.github.io/2013/07/17/solr-vs-elasticsearch-part-6-user-and-dev-communities-compared/">6. Solr vs. ElasticSearch: Part 6 – User &amp; Dev Communities Compared</a></li>
+</ul>
 
 <h2>Input/Output Format</h2>
 
@@ -442,14 +442,14 @@
 
 <p>Solr 4 (또는 SolrCloud) 가 릴리즈되었습니다. ElasticSearch vs. Solr 시리즈를 계속하기에는 완벽한 시기라고 말할 수 있겠죠. ElasticSearch vs. Solr 시리즈의 이전 3편에서는 두가지 검색 엔진 전체의 개요, 데이터 취급, 전문검색능력에 대해서 이야기했습니다. 이번 파트에서는 두 엔진이 어떻게 Faceting 을 다루는지를 알아봅니다.</p>
 
-<ol>
-<li>Solr vs. ElasticSearch: Part 1 – Overview</li>
-<li>Solr vs. ElasticSearch: Part 2 - Indexing and Language Handling</li>
-<li>Solr vs. ElasticSearch: Part 3 – Searching</li>
-<li>Solr vs. ElasticSearch: Part 4 – Faceting</li>
-<li>Solr vs. ElasticSearch: Part 5 - Management API Capabilities</li>
-<li>Solr vs. ElasticSearch: Part 6 – User &amp; Dev Communities Compared</li>
-</ol>
+<ul>
+<li><a href="http://jeen.github.io/2013/07/15/solr-vs-elasticsearch-part-1/">1. Solr vs. ElasticSearch: Part 1 – Overview</a></li>
+<li><a href="http://jeen.github.io/2013/07/16/solr-vs-elasticsearch-part-2-indexing-and-language-handling/">2. Solr vs. ElasticSearch: Part 2 – Data Handling</a></li>
+<li><a href="http://jeen.github.io/2013/07/16/solr-vs-elasticsearch-part-3-searching/">3. Solr vs. ElasticSearch: Part 3 – Searching</a></li>
+<li><a href="http://jeen.github.io/2013/07/16/solr-vs-elasticsearch-part-4-faceting/">4. Solr vs. ElasticSearch: Part 4 – Faceting</a></li>
+<li><a href="http://jeen.github.io/2013/07/17/solr-vs-elasticsearch-part-5-management-api-capabilities/">5. Solr vs. ElasticSearch: Part 5 – Management API Capabilities</a></li>
+<li><a href="http://jeen.github.io/2013/07/17/solr-vs-elasticsearch-part-6-user-and-dev-communities-compared/">6. Solr vs. ElasticSearch: Part 6 – User &amp; Dev Communities Compared</a></li>
+</ul>
 
 <h2>Faceting</h2>
 
@@ -697,14 +697,14 @@
 
 <p>이 시리즈의 앞의 2회에서 Apache Solr 4 (SolrCloud라고도 불립니다）와 ElasticSearch 의 전체 아키텍쳐와 데이터가 어떻게 다뤄지는 지, 그리고 두 검색엔진의 언어 취급능력이 어떤 지를 알아봤습니다. 이번 글에서는 검색 엔진의 키가 되는 부분 중 하나인 도큐먼트에 대한 쿼리를 매치해서 결과를 받는 능력에 대해서 의논해보도록 합니다.</p>
 
-<ol>
-<li>Solr vs. ElasticSearch: Part 1 – Overview</li>
-<li>Solr vs. ElasticSearch: Part 2 – Indexing and Language Handling</li>
-<li>Solr vs. ElasticSearch: Part 3 – Searching</li>
-<li>Solr vs. ElasticSearch: Part 4 – Faceting</li>
-<li>Solr vs. ElasticSearch: Part 5 - Management API Capabilities</li>
-<li>Solr vs. ElasticSearch: Part 6 – User &amp; Dev Communities Compared</li>
-</ol>
+<ul>
+<li><a href="http://jeen.github.io/2013/07/15/solr-vs-elasticsearch-part-1/">1. Solr vs. ElasticSearch: Part 1 – Overview</a></li>
+<li><a href="http://jeen.github.io/2013/07/16/solr-vs-elasticsearch-part-2-indexing-and-language-handling/">2. Solr vs. ElasticSearch: Part 2 – Data Handling</a></li>
+<li><a href="http://jeen.github.io/2013/07/16/solr-vs-elasticsearch-part-3-searching/">3. Solr vs. ElasticSearch: Part 3 – Searching</a></li>
+<li><a href="http://jeen.github.io/2013/07/16/solr-vs-elasticsearch-part-4-faceting/">4. Solr vs. ElasticSearch: Part 4 – Faceting</a></li>
+<li><a href="http://jeen.github.io/2013/07/17/solr-vs-elasticsearch-part-5-management-api-capabilities/">5. Solr vs. ElasticSearch: Part 5 – Management API Capabilities</a></li>
+<li><a href="http://jeen.github.io/2013/07/17/solr-vs-elasticsearch-part-6-user-and-dev-communities-compared/">6. Solr vs. ElasticSearch: Part 6 – User &amp; Dev Communities Compared</a></li>
+</ul>
 
 <h2>전체적인 어프로치</h2>
 
@@ -908,14 +908,14 @@
 
 <p>전 편의 &ldquo;Solr vs. ElasticSearch&rdquo; Part1 기사에서 Apache Lucene 을 기반으로 하는 두가지 검색엔진의 전반적인 아키텍쳐에 대해서 이야기 했습니다. 오늘은 데이터의 취급과 인덱싱, 그리고 언어의 해석능력을 알아보도록 합니다.</p>
 
-<ol>
-<li>Solr vs. ElasticSearch: Part 1 - Overview</li>
-<li>Solr vs. ElasticSearch: Part 2 - Indexing and Language Handling</li>
-<li>Solr vs. ElasticSearch: Part 3 - Searching</li>
-<li>Solr vs. ElasticSearch: Part 4 - Faceting</li>
-<li>Solr vs. ElasticSearch: Part 5 - Management API Capabilities</li>
-<li>Solr vs. ElasticSearch: Part 6 – User &amp; Dev Communities Compared</li>
-</ol>
+<ul>
+<li><a href="http://jeen.github.io/2013/07/15/solr-vs-elasticsearch-part-1/">1. Solr vs. ElasticSearch: Part 1 – Overview</a></li>
+<li><a href="http://jeen.github.io/2013/07/16/solr-vs-elasticsearch-part-2-indexing-and-language-handling/">2. Solr vs. ElasticSearch: Part 2 – Data Handling</a></li>
+<li><a href="http://jeen.github.io/2013/07/16/solr-vs-elasticsearch-part-3-searching/">3. Solr vs. ElasticSearch: Part 3 – Searching</a></li>
+<li><a href="http://jeen.github.io/2013/07/16/solr-vs-elasticsearch-part-4-faceting/">4. Solr vs. ElasticSearch: Part 4 – Faceting</a></li>
+<li><a href="http://jeen.github.io/2013/07/17/solr-vs-elasticsearch-part-5-management-api-capabilities/">5. Solr vs. ElasticSearch: Part 5 – Management API Capabilities</a></li>
+<li><a href="http://jeen.github.io/2013/07/17/solr-vs-elasticsearch-part-6-user-and-dev-communities-compared/">6. Solr vs. ElasticSearch: Part 6 – User &amp; Dev Communities Compared</a></li>
+</ul>
 
 <h2>데이터 인덱싱</h2>
 
@@ -1070,14 +1070,14 @@ Stemming: <a href="http://www.elasticsearch.org/guide/reference/index-modules/an
 
 <p>Apache Lucene 4.0 의 릴리즈가 가까워 짐에 따라, 그와 함께 Solr 4.0 릴리즈도 가까워지고 있습니다. Apache Solr 와 ElasticSearch 라는 Lucene 위에 구축된 2가지 검색엔진을 비교해서, 깊은 고찰을 얻으려고 하는 것은 매우 큰 의미가 있다고 생각합니다. 이 토픽은 매우 범위가 깊어서, 우리들의 연구결과를 이 기사를 시작으로 하는 일련의 블로그 포스트로 공개합니다. 이 기사에서는 2가지 검색 엔진이 제공하는 기능의 전체적인 개요를 나타냅니다.</p>
 
-<ol>
-<li>Solr vs. ElasticSearch: Part 1 – 개요</li>
-<li>Solr vs. ElasticSearch: Part 2 – 인덱싱과 언어 다루기</li>
-<li>Solr vs. ElasticSearch: Part 3 – 검색</li>
-<li>Solr vs. ElasticSearch: Part 4 – Faceting</li>
-<li>Solr vs. ElasticSearch: Part 5 - 관리API의 기능</li>
-<li>Solr vs. ElasticSearch: Part 6 – 유저와 개발자의 커뮤니티 비교</li>
-</ol>
+<ul>
+<li><a href="http://jeen.github.io/2013/07/15/solr-vs-elasticsearch-part-1/">1. Solr vs. ElasticSearch: Part 1 – Overview</a></li>
+<li><a href="http://jeen.github.io/2013/07/16/solr-vs-elasticsearch-part-2-indexing-and-language-handling/">2. Solr vs. ElasticSearch: Part 2 – Data Handling</a></li>
+<li><a href="http://jeen.github.io/2013/07/16/solr-vs-elasticsearch-part-3-searching/">3. Solr vs. ElasticSearch: Part 3 – Searching</a></li>
+<li><a href="http://jeen.github.io/2013/07/16/solr-vs-elasticsearch-part-4-faceting/">4. Solr vs. ElasticSearch: Part 4 – Faceting</a></li>
+<li><a href="http://jeen.github.io/2013/07/17/solr-vs-elasticsearch-part-5-management-api-capabilities/">5. Solr vs. ElasticSearch: Part 5 – Management API Capabilities</a></li>
+<li><a href="http://jeen.github.io/2013/07/17/solr-vs-elasticsearch-part-6-user-and-dev-communities-compared/">6. Solr vs. ElasticSearch: Part 6 – User &amp; Dev Communities Compared</a></li>
+</ul>
 
 <h2>시작하기 전에</h2>
 
