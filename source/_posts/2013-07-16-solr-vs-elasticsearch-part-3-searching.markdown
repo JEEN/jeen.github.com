@@ -15,12 +15,12 @@ In the last two parts of the series we looked at the general architecture and ho
 
 이 시리즈의 앞의 2회에서 Apache Solr 4 (SolrCloud라고도 불립니다）와 ElasticSearch 의 전체 아키텍쳐와 데이터가 어떻게 다뤄지는 지, 그리고 두 검색엔진의 언어 취급능력이 어떤 지를 알아봤습니다. 이번 글에서는 검색 엔진의 키가 되는 부분 중 하나인 도큐먼트에 대한 쿼리를 매치해서 결과를 받는 능력에 대해서 의논해보도록 합니다.
 
-1. Solr vs. ElasticSearch: Part 1 – Overview
-2. Solr vs. ElasticSearch: Part 2 – Indexing and Language Handling
-3. Solr vs. ElasticSearch: Part 3 – Searching
-4. Solr vs. ElasticSearch: Part 4 – Faceting
-5. Solr vs. ElasticSearch: Part 5 - Management API Capabilities
-6. Solr vs. ElasticSearch: Part 6 – User & Dev Communities Compared
+- [1. Solr vs. ElasticSearch: Part 1 – Overview](http://jeen.github.io/2013/07/15/solr-vs-elasticsearch-part-1/)
+- [2. Solr vs. ElasticSearch: Part 2 – Data Handling](http://jeen.github.io/2013/07/16/solr-vs-elasticsearch-part-2-indexing-and-language-handling/)
+- [3. Solr vs. ElasticSearch: Part 3 – Searching](http://jeen.github.io/2013/07/16/solr-vs-elasticsearch-part-3-searching/)
+- [4. Solr vs. ElasticSearch: Part 4 – Faceting](http://jeen.github.io/2013/07/16/solr-vs-elasticsearch-part-4-faceting/)
+- [5. Solr vs. ElasticSearch: Part 5 – Management API Capabilities](http://jeen.github.io/2013/07/17/solr-vs-elasticsearch-part-5-management-api-capabilities/)
+- [6. Solr vs. ElasticSearch: Part 6 – User & Dev Communities Compared](http://jeen.github.io/2013/07/17/solr-vs-elasticsearch-part-6-user-and-dev-communities-compared/)
 
 ##전체적인 어프로치
 

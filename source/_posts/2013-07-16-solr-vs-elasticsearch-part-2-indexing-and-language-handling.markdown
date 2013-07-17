@@ -15,12 +15,12 @@ In the previous part of Solr vs. ElasticSearch series we talked about general ar
 
 전 편의 "Solr vs. ElasticSearch" Part1 기사에서 Apache Lucene 을 기반으로 하는 두가지 검색엔진의 전반적인 아키텍쳐에 대해서 이야기 했습니다. 오늘은 데이터의 취급과 인덱싱, 그리고 언어의 해석능력을 알아보도록 합니다.
 
-1. Solr vs. ElasticSearch: Part 1 - Overview
-2. Solr vs. ElasticSearch: Part 2 - Indexing and Language Handling
-3. Solr vs. ElasticSearch: Part 3 - Searching
-4. Solr vs. ElasticSearch: Part 4 - Faceting
-5. Solr vs. ElasticSearch: Part 5 - Management API Capabilities
-6. Solr vs. ElasticSearch: Part 6 – User & Dev Communities Compared
+- [1. Solr vs. ElasticSearch: Part 1 – Overview](http://jeen.github.io/2013/07/15/solr-vs-elasticsearch-part-1/)
+- [2. Solr vs. ElasticSearch: Part 2 – Data Handling](http://jeen.github.io/2013/07/16/solr-vs-elasticsearch-part-2-indexing-and-language-handling/)
+- [3. Solr vs. ElasticSearch: Part 3 – Searching](http://jeen.github.io/2013/07/16/solr-vs-elasticsearch-part-3-searching/)
+- [4. Solr vs. ElasticSearch: Part 4 – Faceting](http://jeen.github.io/2013/07/16/solr-vs-elasticsearch-part-4-faceting/)
+- [5. Solr vs. ElasticSearch: Part 5 – Management API Capabilities](http://jeen.github.io/2013/07/17/solr-vs-elasticsearch-part-5-management-api-capabilities/)
+- [6. Solr vs. ElasticSearch: Part 6 – User & Dev Communities Compared](http://jeen.github.io/2013/07/17/solr-vs-elasticsearch-part-6-user-and-dev-communities-compared/)
 
 ## 데이터 인덱싱
 

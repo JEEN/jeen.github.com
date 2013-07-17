@@ -1,0 +1,247 @@
+---
+layout: post
+title: "[번역] Solr vs ElasticSearch Part 4 - Faceting"
+date: 2013-07-17T01:06:42+09:00
+comments: true
+external-url: 
+categories: [ translation, solr, elasticsearch ]
+---
+
+#Solr vs ElasticSearch: Part 4 – Faceting
+
+October 30, 2012 by Rafał Kuć
+
+Solr 4 (aka SolrCloud) has just been released, so it’s the perfect time to continue our ElasticSearch vs. Solr series. In the last three parts of the ElasticSearch vs. Solr series we gave a general overview of the two search engines, about data handling, and about their full text search capabilities. In this part we  look at how these two engines handle faceting.
+
+Solr 4 (또는 SolrCloud) 가 릴리즈되었습니다. ElasticSearch vs. Solr 시리즈를 계속하기에는 완벽한 시기라고 말할 수 있겠죠. ElasticSearch vs. Solr 시리즈의 이전 3편에서는 두가지 검색 엔진 전체의 개요, 데이터 취급, 전문검색능력에 대해서 이야기했습니다. 이번 파트에서는 두 엔진이 어떻게 Faceting 을 다루는지를 알아봅니다.
+
+- [1. Solr vs. ElasticSearch: Part 1 – Overview](http://jeen.github.io/2013/07/15/solr-vs-elasticsearch-part-1/)
+- [2. Solr vs. ElasticSearch: Part 2 – Data Handling](http://jeen.github.io/2013/07/16/solr-vs-elasticsearch-part-2-indexing-and-language-handling/)
+- [3. Solr vs. ElasticSearch: Part 3 – Searching](http://jeen.github.io/2013/07/16/solr-vs-elasticsearch-part-3-searching/)
+- [4. Solr vs. ElasticSearch: Part 4 – Faceting](http://jeen.github.io/2013/07/16/solr-vs-elasticsearch-part-4-faceting/)
+- [5. Solr vs. ElasticSearch: Part 5 – Management API Capabilities](http://jeen.github.io/2013/07/17/solr-vs-elasticsearch-part-5-management-api-capabilities/)
+- [6. Solr vs. ElasticSearch: Part 6 – User & Dev Communities Compared](http://jeen.github.io/2013/07/17/solr-vs-elasticsearch-part-6-user-and-dev-communities-compared/)
+
+##Faceting
+
+When it comes to faceting, both Solr and ElasticSearch have some faceting methods that other search engine does not.  Both search engines allow you to calculate facets for a given field, numerical range, or date range. The key differences are in the details, of course – in the control of how exactly the facets are calculated, in the memory footprint, and whether we can change the calculation method. In most cases ElasticSearch allows more control over faceting, however Solr has some serious advantages, too.  Lets get into details of each of the methods.
+
+faceting 에 대해서는 Solr 와 ElasticSearch 양쪽이 다른 검색엔진이 가지지 않은 몇가지 faceting 메소드를 가집니다. 두 검색엔진 모두가 주어진 필드, 수치범위, 날짜범위의 Faceting 을 계산할 수 있습니다. 주요한 차이는 실제로 Faceting 을 어떻게 계산할 것인가하는 컨트롤, 메모리풋프린트, 그리고 계산방법을 변경할 수 있는가 입니다. 대부분의 경우 ElasticSearch 는 faceting 에 있어서 다채로운 조작이 가능합니다. 그러나 Solr 도 몇가지 중요한 우위점을 가지고 있습니다. 각각의 메소드의 자세한 내용에 들어가 보겠습니다.
+
+##Term Faceting
+
+This method of faceting allows one to get information about the number of term occurrences in a certain field.
+
+이 faceting 메소드를 통해 어떤 필드안에 어떤 용어가 몇개인가 하는 정보를 얻을 수 있습니다.
+
+###Solr
+Solr let’s you control how many facets are returned, how they are sorted, the minimum quantity required, and so on. In addition to that, in Solr field faceting, you can choose between a couple of different methods for computing facets.  One of these method should be used for fields with a high number of distinct terms, while the second method is best used in the opposite scenario – when you expect relatively few distinct terms in a field being faceted on.
+
+Solr 는 Facet 이 몇개 반환되는가, 그것들이 어떻게 저장되는 가, 최소필요수등을 컨트롤할 수 있습니다. 그리고 Solr 의 필드 faceting 에서는 Facet 계산법을 두세가지의 다른 방법 중에서 선택할 수 있습니다. 이런 메소드 중 하나가 가장 수가 많은 용어로 사용되어, 두번째 방법은 역 시나리오에 적합합니다. 필드 안에 상대적으로 적은 용어가 Facet 되기를 바라는 경우죠.
+
+###ElasticSearch
+On the other side we have ElasticSearch which allows us to do all that Solr can do (in terms of faceting calculation, not the calculation methods), but in addition it also let’s us exclude specific terms we are not interested in and use regular expressions to define which terms will be included in faceting results. In addition to that we can combine term faceting results from different field automatically or just use scripts to modify the fields values before the calculation process steps in
+
+반면에 ElasticSearch 에서는 Solr 가 가능한 모든 것이 가능합니다. (Facet 계산에 관해서이며 계산방법은 그렇지 않습니다) 그리고 흥미없는 특정 용어를 배제할 수 있으며, Facet 결과에 포함된 용어의 정의에 정규표현을 사용할 수 있습니다. 또 다른 필드의 용어 faceting 의 결과를 자동적으로 연결하거나, 계산프로세스에 들어가기 전에 필드의 값을 변경하는 스크립트를 사용하거나 할 수 있습니다.
+
+##Query Faceting
+
+Both Solr and ElasticSearch allow calculating faceting for arbitrary query results. In both cases queries can be expressed in the query API of the search engine which we use. For example, in ElasticSearch you can use the whole query DSL to calculate faceting results on them.
+
+Solr 와 ElasticSearch 양 쪽 모두 임의의 쿼리의 결과에 대해서 Facet 을 계산할 수 있습니다. 양쪽 모두 쿼리는 검색엔진의 쿼리 API 로 표현할 수 있습니다. 예를들어 ElasticSearch 에서는 쿼리DSL 전체를 그 결과의 Facet 의 산출에 사용할 수 있습니다.
+
+##Range Faceting
+Range faceting lets you get the number of documents that match the given range in a field. Both engines allow for range faceting although in different fashion.
+
+Range Faceting 은 어떤 필드에 주어진 범위에 일치하는 도큐먼트의 수를 반환합니다. 두 엔진 모두 Range Faceting 이 가능하지만 서로 다른 방법으로 동작합니다.
+
+###Solr
+
+Apache Solr lets you define the start value, end value, and the gap (with some adjustments like inclusion of values at the end of the ranges) and calculate all the ranges defined by that.
+
+Apache Solr 는 시작과 끝의 값, 갭(과 몇가지 조정할 것, 예를들어 범위의 끝의 값은 포함되는가하는 것 이외 기타 등등)을 지정하고 그에 의해 정의된 모든 범위를 계산합니다.
+
+###ElasticSearch
+
+ElasticSearch takes a different approach – it lets you specify set of ranges and returns document counts as well as aggregated data. In addition to that, ElasticSearch let’s you specify a different field to check if a document falls into a given range and a different field for the aggregated data calculation. Furthermore, you can modify the field and aggregated data with a script. And that’s not all – in addition to the above method of range faceting ElasticSearch also supports the so called histogram calculation.  This is similar to the Apache Solr approach – for a given field you can get a histogram of values. However, ElasticSearch doesn’t let you control the start and end like Solr does, but only the gap.
+
+ElasticSearch 는 다른 접근방법을 취합니다. 범위의 집합을 지정해서 도큐먼트의 카운트와 집약된 데이터를 반환합니다. 그리고 ElasticSearch 는 다른 필드를 지정해서, 도큐먼트가 지정된 범위에 해당하는지 체크하는 것 이외에 집약데이터의 계산에 다른 필드를 지정할 수 있습니다. 또한, 필드와 집약데이터를 스크립트로 변경할 수 있습니다. 그것뿐만 아니라 위의 Range Faceting 에 이어 ElasticSearch Histogram 계산이라고 불리는 것도 이용할 수 있습니다. 이는 Apache Solr 의 접근방법과 비슷하게 주어진 필드의 값의 히스토그램을 얻을 수 있습니다. 그러나 ElasticSearch 는 Solr 처럼 시작값과 마지막값을 컨트롤할 수 없으며, 갭만 가능합니다.
+
+
+##Date Faceting
+
+Again, both search engines support faceting on date based fields.
+
+마찬가지로 두 검색엔진은 필드에 기반한 날짜 Faceting 을 지원합니다.
+
+###Solr
+
+Date faceting in Apache Solr is quite similar to the range faceting, although it is calculated on fields of  solr.DateField type. You have the same control and use similar parameters as withing the range faceting so I’ll omit describing it.
+
+Apache Solr 의 Date Faceting 은 Range Faceting 과 완전히 같지만 solr.DateField 타입의 필드상에서 계산됩니다. Range Faceting 과 같은 컨트롤이 가능하고, 같은 파라메터를 사용할 수 있습니다. 그때문에 여기에서는 자세한 서술은 생략합니다.
+
+###ElasticSearch
+
+On the other hand, we have ElasticSearch with its date faceting which is an enhancement over the standard histogram faceting. It supports interval specification with date specific parameters like for example: year, month, or day. In addition to that, ElasticSearch lets you specify the time zone to be used in computation and of course manipulate the calculation with the use of a script.
+
+반면 ElasticSearch 에서 Date Faceting 은 표준 Histogram Faceting 의 확장으로 동작합니다. 날짜를 특정하는 year, month, day 같은 파라메터와 간격을 지정할 수 있습니다. 그리고 ElasticSearch 는 연산에 사용되는 타임존 지정이 가능하며, 물론 스크립트를 이용해서 계산을 컨트롤할 수 도 있습니다.
+
+###Decision Tree Faceting – Solr Only
+
+One of the things that ElasticSearch lacks and that is present in Solr is the pivot faceting aka decision tree faceting. It basically lets you calculate facets inside a parents facet. For example, this is what pivot faceting results look like in Solr (n.b. this example is trimmed for this post) :
+
+현시점에서 Solr 에 존재하지만 ElasticSearch 에서는 빠진 것 중 하나가 pivot Faceting 또는 결정트리 Faceting 이라고 불리는 것입니다. 이것은 부모 Faceting 내부에서 Faceting 을 계산할 수 있습니다. 아래가 Solr 에서 Pivot Faceting 이 어떻게 동작하는 지에 관한 예제입니다(이 예제는 이 글을 위해서 일부 삭제하였습니다).
+
+	<?xml version="1.0" encoding="UTF-8"?>
+	<response>
+	<lst name="responseHeader">
+	  <int name="status">0</int>
+	  <int name="QTime">1</int>
+	  <lst name="params">
+	    <str name="facet">true</str>
+	    <str name="indent">true</str>
+	    <str name="facet.pivot">inStock,cat</str>
+	    <str name="q">*:*</str>
+	    <str name="rows">0</str>
+	  </lst>
+	</lst>
+	<result name="response" numFound="32" start="0">
+	</result>
+	<lst name="facet_counts">
+	  <lst name="facet_queries"/>
+	  <lst name="facet_fields"/>
+	  <lst name="facet_dates"/>
+	  <lst name="facet_ranges"/>
+	  <lst name="facet_pivot">
+	    <arr name="inStock,cat">
+	      <lst>
+	        <str name="field">inStock</str>
+	        <bool name="value">true</bool>
+	        <int name="count">17</int>
+	        <arr name="pivot">
+	          <lst>
+	            <str name="field">cat</str>
+	            <str name="value">electronics</str>
+	            <int name="count">10</int>
+	          </lst>
+	          <lst>
+	            <str name="field">cat</str>
+	            <str name="value">currency</str>
+	            <int name="count">4</int>
+	          </lst>
+	          .
+	          .
+	          .
+	        </arr>
+	      </lst>
+	      <lst>
+	        <str name="field">inStock</str>
+	        <bool name="value">false</bool>
+	        <int name="count">4</int>
+	        <arr name="pivot">
+	          <lst>
+	            <str name="field">cat</str>
+	            <str name="value">electronics</str>
+	            <int name="count">4</int>
+	          </lst>
+	          <lst>
+	            <str name="field">cat</str>
+	            <str name="value">connector</str>
+	            <int name="count">2</int>
+	          </lst>
+	          .
+	          .
+	          .
+	        </arr>
+	      </lst>
+	    </arr>
+	  </lst>
+	</lst>
+	</response>
+
+##Statistical Faceting
+
+Both ElasticSearch and Apache Solr can compute statistical data on numeric fields – values like count, total, minimal value, maximum value, average, etc. can be computed.
+
+ElasticSearch 와 Apache Solr 양쪽 모두가 통계 데이터를 수치 필드 위에서 계산할 수 있습니다. 예를 들어, 카운트, 총계, 최소값, 최대값, 평균값 등을 계산할 수 있습니다.
+
+###Solr
+
+In Apache Solr the functionality that enables you to calculate statistics for a numeric field is called Stats Component. It returns the above mentioned values as a part of the query result, in a separate list, just as faceting results.
+
+Apache Solr 에서는 수치필드에서 통계를 계산하는 기능은 stats 컴포넌트라고 불립니다. 위에서 적은 값을 쿼리의 결과의 일부로 별도의 리스트 안에 Faceting 결과로 반환합니다.
+
+###ElasticSearch
+
+In ElasticSearch this functionality is called Statistical Facet. You should keep in mind thought that, as usual, ElasticSearch allows us to calculate this information for values returned by a script or combined for multiple fields, which is very nice if you need combined information for two or more fields or you want to do additional processing before getting the data returned by ElasticSearch.
+
+ElasticSearch 에서는 이 기능은 statistical Faceting 이라고 부릅니다. 기억해두어야 할 것은 ElasticSearch 는 이 정보를 스크립트의 반환값에 대해서 계산하거나, 여러 필드의 결합 시에 계산할 수 있다는 것입니다. 2개 이상의 필드의 결합정보가 필요하거나, ElasticSearch 에서 반환된 값을 얻기 전에 추가적인 처리를 실행하고자 하는 경우에 매우 편리합니다.
+
+##Geodistance Faceting
+
+(Geo)spatial search is quite popular nowadays where we try to provide the best search results we can and we considering multiple pieces of information and conditions. Of course both Apache Solr and ElasticSearch provide spatial search capabilities, but we are not talking about searching – we are talking about faceting. Sometimes there is a need to return a distance from a given point, just to show that in our application – and we can do that both in ElasticSearch and Solr.
+
+(Geo)spatial 검색은 요즘 매우 인기가 있습니다. 우리는 가능한한 수치의 정보와 조건에 의한 최고의 검색결과를 얻을 수 있도록 노력하고 있습니다. 물론 Apache Solr 와 ElasticSearch 양쪽 모두 spatial 검색이 가능합니다. 그러나 지금은 검색이야기가 아니라 Faceting 이야기죠. 우리는 어플리케이션에서 때때로 주어진 지점에서 거리를 반환할 필요가 있습니다. ElasticSearch 와 Solr 모두 이런 것이 가능합니다.
+
+###Solr
+
+In Solr to be able to facet by distance from a given point we would have to use facet.query parameter and use frange or geofilt, for example like this:
+
+Solr 에서는 주어진 지점에서 거리로 Faceting 할 수 있습니다. facet.query 파라메터를 사용할 필요가 있으며 frange, geofilt 를 아래처럼 사용합니다.
+
+	q=*:*&sfield=location&pt=10.10,11.11&facet=true&facet.query={!geofilt d=10 key=d10}
+
+This would return the number of document within 10 kilometers from the defined point.
+
+이것은 정의된 지점에서 10km 이내의 도큐먼트의 수를 반환합니다.
+
+###ElasticSearch
+
+ElasticSearch exposes dedicated geo_distance faceting type that lets us pass the point and the array of ranges we want the distance to be calculated for. An example query might look like this:
+
+ElasticSearch 는 geo_distance Faceting 타입이 공개되어 있고, 이것을 사용해서 위치와 계산대상의 거리 범위를 배열로 건넵니다. 쿼리의 예제는 아래와 같습니다.
+
+	{
+	 "query" : {
+	  "match_all" : {}
+	 },
+	 "facets" : {
+	  "d10" : {
+	   "geo_distance" : {
+	    "doc.location" : {
+	     "lat" : 10.10,
+	     "lon" : 11.11
+	    },
+	    "ranges" : [
+	     { "to" : 10 }
+	    ]
+	   }
+	  }
+	 }
+	}
+
+In addition to that, we can specify the units to be used in distance calculations (kilometers and miles) and the distance calculation type – arc for better precision and plane for faster execution.
+
+그리고 거리의 계산에 사용하는 단위(Km 또는 마일)와 거리의 계산타입을 지정할 수 있습니다. arc 는 보다 나은 정밀도, 그리고 plane 은 계산이 빠릅니다.
+
+##Solr, LocalParams and Faceting
+
+One of the good things about faceting in Solr is that it allows the use of local params. For example, you can remove some filters from the faceting results. Imagine you have a query that gets all results for a term ‘flower’ and you only get results that fall into ‘cloth’ category and ‘shirt’ subcategory, but you would like to have faceting for tags field not narrowed to any filter. With the help of local params this query may look like this:
+
+Solr 의 Faceting 에 있어서 좋은 점 중 하나는 로컬파라메터를 사용할 수 있다는 것입니다. 예를들어 Faceting 의 결과에서 몇가지 필터를 삭제할 수 있습니다. `flower` 라는 용어에 대해서 모든 결과를 얻는 쿼리가 있을 경우 `cloth` 의 카테고리에서 `shirt` 의 서브카테고리만의 결과를 얻어야 한다고 합시다. 하지만 tags 필드에 대해서는 어느 필터에서도 조건을 취합하고 싶지는 않습니다. 로컬파라메터의 도움으로 다음과 같은 쿼리를 만들 수 있습니다.
+
+	q=flower&fq={!tag=facet_cat}category:cloth&fq={!tag=facet_sub}subcategory:shirt&facet=true&facet.field={!ex=facet_cat,facet_sub}tags
+
+##ElasticSearch Faceting Scope and Filters
+
+By default ElasticSearch facets are restricted to the scope of a given query, which is understandable. However, ElasticSearch also lets us change the scope of faceting to global and thus calculate the faceting for the whole data set, and not just for a given result set. In addition to that we can calculate facets for different nested objects by defining the scope matching the name of the nested object. This can come in handy in many situations, for example when optimizing memory usage on faceting on multivalued fields with many unique terms. In addition to that with ElasticSearch we can narrow down the subset of the documents on which faceting will be applied by using filters. We can define filters inside faceting (just please remember that filters that narrow down query results are not restricting faceting) and choose which documents should be taken into consideration when calculating facets. Of course, as you may expect, filters for faceting may be defined in the same way as filters for queries.
+
+기본적으로는 ElasticSearch 의 Faceting 은 주어진 쿼리의 범위에 한정됩니다. 이해할 수는 있지만 ElasticSearch 는 Faceting 의 범위를 글로벌하게 변경가능하고, 주어진 결과집합만이 아닌 모든 데이터셋에 대해서 Faceting 을 계산할 수 있습니다. 그리고 다른 중첩오브젝트에 대해서 Faceting 을 계산할 수도 있습니다. 중첩 오브젝트의 이름에 일치하는 범위를 정의합니다. 이는 대부분의 경우에 편리합니다. 예를 들어 많고 다양한 용어와 여러값을 가진 필드에 대해서 Faceting 을 할 시, 메모리를 최적화해야할 경우입니다. ElasticSearch 에서는 필터를 사용함으로써 Faceting 을 적용할 도큐먼트의 부분집합을 뽑아낼 수 있습니다. Faceting 의 내부에서 필터를 설정가능하고(쿼리 결과를 묶는 필터는 Faceting 만으로 한정되지 않는 것을 기억해주세요) 어느 도큐먼트가 Faceting 을 계산할 시에 고려해야할 것인가를 선택할 수 있습니다. 물론 예상되겠지만, Faceting 에 대한 필터는 쿼리에 대해서 필터처럼 정의할 수 있습니다.
+
+## 정리
+
+In this part of the Apache Solr vs ElasticSearch posts series we talked about the ability to calculate facet information and only about this. Of course, this is only a look at the surface of faceting, because both Apache Solr and ElasticSearch provide some additional parameters and features that we couldn’t cover without turning this post into a tl;dr monster. However, we hope this post gives you some general ideas about what you can expect from each of these search engines. In the next part of the series we will focus on other search features, such as geospatial search and the administration API. If you are going to the upcoming ApacheCon EU and are interested in hearing more about how ElasticSearch and Apache Solr compare, please come to my talk titled “Battle of the giants: Apache Solr 4.0 vs ElasticSearch“. See you there!
+
+Apache Solr vs. ElasticSearach 시리즈의 이번 파트에서는 Faceting 정보의 계산에 대해서만 이야기했습니다. 물론 이는 Faceting 의 표면만을 다룬 것에 지나지 않습니다. Apache Solr 와 ElasticSearch 양쪽에 좀 더 추가적인 파라메터와 기능이 더 많이 존재하지만 모든 것을 커버하기에는 현재로는 어렵네요. 하지만 이 글이 각 검색엔진에 무엇을 기대할 것인가 하는 일반적인 생각을 얻을 수 있을 것입니다. 다음편에서는 별도의 검색기능인 geospatial 검색과 관리용 API 에 대해서 다룰 예정입니다. 만약 이번 ApacheCon EU 에 오고 ElasticSearch 와 Apache Solr 비교에 대해서 보다 자세히 듣고 싶다면 내 강연(타이틀은 "Battle of the giants : Apache Solr 4.0 vs ElasticSearch")를 들으러 오세요. 거기서 만나요!
+
+- @kucrafal, @sematext

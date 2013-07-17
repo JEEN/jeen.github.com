@@ -21,12 +21,12 @@ As the Apache Lucene 4.0 release approaches and with it Solr 4.0 release as well
 
 Apache Lucene 4.0 의 릴리즈가 가까워 짐에 따라, 그와 함께 Solr 4.0 릴리즈도 가까워지고 있습니다. Apache Solr 와 ElasticSearch 라는 Lucene 위에 구축된 2가지 검색엔진을 비교해서, 깊은 고찰을 얻으려고 하는 것은 매우 큰 의미가 있다고 생각합니다. 이 토픽은 매우 범위가 깊어서, 우리들의 연구결과를 이 기사를 시작으로 하는 일련의 블로그 포스트로 공개합니다. 이 기사에서는 2가지 검색 엔진이 제공하는 기능의 전체적인 개요를 나타냅니다.
 
-1. Solr vs. ElasticSearch: Part 1 – 개요
-2. Solr vs. ElasticSearch: Part 2 – 인덱싱과 언어 다루기
-3. Solr vs. ElasticSearch: Part 3 – 검색
-4. Solr vs. ElasticSearch: Part 4 – Faceting
-5. Solr vs. ElasticSearch: Part 5 - 관리API의 기능
-6. Solr vs. ElasticSearch: Part 6 – 유저와 개발자의 커뮤니티 비교
+- [1. Solr vs. ElasticSearch: Part 1 – Overview](http://jeen.github.io/2013/07/15/solr-vs-elasticsearch-part-1/)
+- [2. Solr vs. ElasticSearch: Part 2 – Data Handling](http://jeen.github.io/2013/07/16/solr-vs-elasticsearch-part-2-indexing-and-language-handling/)
+- [3. Solr vs. ElasticSearch: Part 3 – Searching](http://jeen.github.io/2013/07/16/solr-vs-elasticsearch-part-3-searching/)
+- [4. Solr vs. ElasticSearch: Part 4 – Faceting](http://jeen.github.io/2013/07/16/solr-vs-elasticsearch-part-4-faceting/)
+- [5. Solr vs. ElasticSearch: Part 5 – Management API Capabilities](http://jeen.github.io/2013/07/17/solr-vs-elasticsearch-part-5-management-api-capabilities/)
+- [6. Solr vs. ElasticSearch: Part 6 – User & Dev Communities Compared](http://jeen.github.io/2013/07/17/solr-vs-elasticsearch-part-6-user-and-dev-communities-compared/)
 
 ## 시작하기 전에
 

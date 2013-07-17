@@ -223,16 +223,36 @@
         <lastmod>2013-07-16T12:32:01+00:00</lastmod>
     </url>
     <url>
+        <loc>http://jeen.github.io/2013/07/16/solr-vs-elasticsearch-part-3-searching/</loc>
+        <lastmod>2013-07-16T13:33:26+00:00</lastmod>
+    </url>
+    <url>
+        <loc>http://jeen.github.io/2013/07/16/solr-vs-elasticsearch-part-4-faceting/</loc>
+        <lastmod>2013-07-16T16:07:17+00:00</lastmod>
+    </url>
+    <url>
+        <loc>
+            http://jeen.github.io/2013/07/17/solr-vs-elasticsearch-part-5-management-api-capabilities/
+        </loc>
+        <lastmod>2013-07-17T00:01:31+00:00</lastmod>
+    </url>
+    <url>
+        <loc>
+            http://jeen.github.io/2013/07/17/solr-vs-elasticsearch-part-6-user-and-dev-communities-compared/
+        </loc>
+        <lastmod>2013-07-17T00:59:39+00:00</lastmod>
+    </url>
+    <url>
         <loc>http://jeen.github.io/about/about/</loc>
         <lastmod>2013-05-02T14:13:19+00:00</lastmod>
     </url>
     <url>
         <loc>http://jeen.github.io/archives/archives/</loc>
-        <lastmod>2013-07-16T12:32:01+00:00</lastmod>
+        <lastmod>2013-07-17T00:59:39+00:00</lastmod>
     </url>
     <url>
         <loc>http://jeen.github.io/</loc>
-        <lastmod>2013-07-16T12:32:01+00:00</lastmod>
+        <lastmod>2013-07-17T00:59:39+00:00</lastmod>
     </url>
     <url>
         <loc>http://jeen.github.io/robots.txt</loc>
