@@ -4,7 +4,7 @@
   <title><![CDATA[Category: elasticsearch | Jeen - Yet anothere techlog]]></title>
   <link href="http://jeen.github.io/blog/categories/elasticsearch/atom.xml" rel="self"/>
   <link href="http://jeen.github.io/"/>
-  <updated>2013-07-17T20:03:44+09:00</updated>
+  <updated>2013-07-17T20:04:57+09:00</updated>
   <id>http://jeen.github.io/</id>
   <author>
     <name><![CDATA[Jeen Lee]]></name>
@@ -92,7 +92,7 @@
 
 <p>We also decided to use uncle Google to look at trends about Apache Solr and ElasticSearch. Let’s look at the following diagram:</p>
 
-<p>Googleおじさんを使用してApache SolrとElasticSearchのトレンドを調べてみよう。次の図を見て欲しい。</p>
+<p>Google 을 써서 Apache Solr 와 ElasticSearch 의 트렌드를 알아봅시다. 다음 그림을 봐주세요.</p>
 
 <p><img src="https://dl.dropboxusercontent.com/u/262117/blog-assets/solr-vs-es-google-trends.png" alt="" /></p>
 
