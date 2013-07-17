@@ -98,6 +98,351 @@
   <header>
     <h1 class="entry-title">
 
+<a href="/2013/05/26/miyagawas-podcast-ep12/">Miyagawa's Podcast Ep12 - Korean Translation</a>
+
+</h1>
+
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2013-05-26T15:15:00+00:00" pubdate data-updated="true">May 26<span>th</span>, 2013</time>
+         &bull; <a rel="bookmark" href="/2013/05/26/miyagawas-podcast-ep12/">Permalink</a>
+      </p>
+    
+  </header>
+
+<div class="entry-content"><p>자주 챙겨듣는 podcast 중에 개인적으로 존경하는 개발자인 @miyagawa 씨가 운영하는 podcast 가 있습니다.</p>
+
+<ul>
+<li><p><a href="http://podcast.bulknews.net">Tatsuhiko Miyagawa&#39;s Podcast</a></p>
+
+<p>주제는 개발이나 각종 기기, 이벤트, 언어, 커뮤니티 등등의 IT와 관련된 다양한 이야기들을 다루고 있습니다.</p>
+
+<p>항상 사전녹화하는 것을 수정해서 올리곤 했는데 이번에는 Mixlr 라는 서비스를 이용해서 생방송으로 진행되었습니다.</p></li>
+<li><p><a href="http://mixlr.com">Mixlr makes broadcasting live audio simple. Share your sounds live&hellip;</a></p>
+
+<p>시간은 미리 공지된 대로 5.26 저녁 10시. 게스트들과의 대화는 스카이프로 이뤄진 것 같습니다. 대화는 1시간 분량입니다.</p>
+
+<p>아래의 내용은 IRC 채널 #perl-kr 에서 내용을 들으면서 옮겨적은 것이며, 부분적으로 빼먹은 부분이나 급작스런 컨텍스트 전환이 있습니다.</p></li>
+</ul>
+
+<h3>Intro</h3>
+
+<ul>
+<li>jeen__ : 미역 팟캐스트 12회는 라이브라고 해서 이거 듣고 퇴근해야지&hellip; 퇴근이랄까..</li>
+<li>skyloader : 미역이 팟캐스트도 하나요?</li>
+<li>skyloader : 주제가 perl?</li>
+<li>jeen__ : ㅇㅇ</li>
+<li>skyloader : 오올</li>
+<li>skyloader : 하지만 일본어겠지..</li>
+<li>jeen__ : ㅇㅇ</li>
+<li>jeen__ : lestratt, tokuhirom 이 게스트</li>
+<li>jeen__ : 처음으로 펄만을 위한 주제인듯 -_-;</li>
+<li>jeen__ : tokuhirom TOEIC 쳤냐고 ㅋㅋ</li>
+<li>jeen__ : 쳤는데 점수 안나왔다고</li>
+<li>skyloader : 올 진사마의 실시간 통역</li>
+<li><p>jeen__ : tokuhirom 이 아마 YAPC::NA 2013 스피커로 나가니까</p>
+
+<ul>
+<li><a href="http://www.yapcna.org/yn2013/talk/4635">YAPC::NA 2013 - June 3-5, Austin, Texas</a></li>
+</ul></li>
+<li><p>jeen__ : 의식을 높이기 위해서 TOEIC 공부하면서 시험쳐봤다고</p></li>
+<li><p>jeen__ : ㅋㅋㅋ</p></li>
+<li><p>jeen__ : 이번에 NA 스피커로 lestratt 이랑 tokuhirom 이 가니까 그래서 그런가</p></li>
+<li><p>jeen__ : 호&hellip;</p></li>
+<li><p>jeen__ : Skype 에 봇이랄까 그런 거 들어가서</p></li>
+<li><p>jeen__ : Skype 대화내용을 리다이렉트 시키고 있다고</p></li>
+<li><p>jeen__ : 물론 대화내용은 음성이지만</p></li>
+<li><p>skyloader : 딱히 perl내용 같지 않..</p></li>
+<li><p>jeen__ : 뭐 아직은&hellip;</p></li>
+<li><p>jeen__ : 사담만 있을 뿐</p></li>
+<li><p>jeen__ : Perl, YAPC 얘기</p></li>
+<li><p>jeen__ : &hellip;</p></li>
+</ul>
+
+<h3>Perl 5.18 에 대해서</h3>
+
+<ul>
+<li>jeen__ : Perl 5.18
+
+<ul>
+<li><a href="http://www.nntp.perl.org/group/perl.perl5.porters/2013/05/msg201940.html">perl 5.18.0 is now available!</a></li>
+</ul></li>
+<li>skyloader : 흠</li>
+<li>jeen__ : Jesse 에서 RJBS 로 매니저가 바뀌고 나서</li>
+<li>jeen__ : 매년 5월에 나오게 되었다고</li>
+<li>jeen__ : 하지만 뭔가 매년 서두르고 있는 건 아닌가라는 느낌으로 서둘러 내고 있는 느낌.</li>
+<li>skyloader : 아니 그럼 일년에 한번만 release한다는 것?</li>
+<li>jeen__ : 매년 이틀씩 늦춰지고 있다고…</li>
+<li>jeen__ : 메이저 업데이트는 1년에 한번</li>
+<li>skyloader : 음</li>
+<li>jeen__ : 5.12-&gt;5.14-&gt;5.16-&gt;5.18</li>
+<li>skyloader : 오키</li>
+<li>jeen__ : Hash Randomization</li>
+<li>jeen__ : 덕분에 테스트 개박살 났다</li>
+<li>jeen__ : 미역도 꽤 테스트 실패하는 모듈이 여럿 있었는데</li>
+<li>jeen__ : 5.17.x 시절에 고쳐놔서</li>
+<li>jeen__ : 그래도 몇개는 아직 그대로 라고</li>
+<li>jeen__ : TT2 도 아직 못 고쳤다고</li>
+<li>jeen__ : 5.18 용 보고는 누군가 일괄적으로 RT 에 리포트 해주고 있다고</li>
+<li>jeen__ : (그래서 나한테도 왔구나&hellip;)</li>
+<li>jeen__ : JSON::XS 가 가장 큰 문제</li>
+<li>skyloader : Hash randomization이 뭐길래</li>
+<li>jeen__ : 메일링 리스트에 지적되었는데</li>
+<li>jeen__ : 이런 수정은 의미가 없다고 레만이 지적</li>
+<li>jeen__ : 오히려 Perl 문서에 적혀 있는대로 했으니까</li>
+<li>jeen__ : 니들이 고쳐라!</li>
+<li>jeen__ : 라고 했지만&hellip;</li>
+<li>jeen__ : 최근에 관련 수정을 업데이트 ㅋㅋㅋ</li>
+<li>jeen__ : 츤데레</li>
+<li>jeen__ : 이걸로 얻을 수 있는 시큐리티 메리트는 거의 없다는 게 레만의 의견</li>
+<li>jeen__ : 실제 Perl 에 대한 해쉬 공격방법은 제대로 보고되지 않아서</li>
+<li>jeen__ : 5.16.2 취약점에서 한번 그런 게 보고 되었지만&hellip;</li>
+<li>jeen__ : 보고자의 보고내용으로는 특정값을 넣어서 메모리가 붕붕 먹었던 그런 경우가 있었다고</li>
+<li>jeen__ : HTTP Query Parameters 의 경우는 거의 대개 Hash 에 넣어서 하기 때문에</li>
+<li>jeen__ : 그런 경우에 해쉬관련 공격의 대상이 될 수 있는데</li>
+<li>jeen__ : 하지만 Perl 5 Porters 에 관련 내용이 올라오지 않아서</li>
+<li>jeen__ : 그다지 의논되지 않은 내용이라고</li>
+<li>jeen__ : 5.16 에서 변경된 패치와 5.18 에서 변경된 내용은&hellip;</li>
+<li>jeen__ : 5.16에서는 같은 해쉬를 복사하면 &hellip; 블라블라</li>
+<li>skyloader : 제 수준에서는 심오한 내용이라 이해가 안됨 ㅠ</li>
+<li>jeen__ : 레만은 5.5 Perldoc 까지 되집어 올라갔는데</li>
+<li>jeen__ : 스펙대로 했다고</li>
+<li>jeen__ : 그런 내용을&hellip;</li>
+<li>jeen__ : perldoc 관련 표현이 애매했다라는 의견도 있고</li>
+<li>jeen__ : 5.8 에서 해쉬를 복사해서</li>
+<li>jeen__ : 몇번이나 돌려봤을 때</li>
+<li>jeen__ : 그 중에 한번은 값의 순서가 바뀌는 경우가 있었다고</li>
+<li>jeen__ : given-when, smart match…</li>
+<li>jeen__ : experimental 로 격이 내려갔다 라는 것은</li>
+<li>jeen__ : 거의 deprecated 라는 상태와 같다고</li>
+<li>jeen__ : given-when, smart match 의 경우는 그다지 와닫는 표현과 퍼포먼스도 그다지 좋지 않았다고</li>
+<li>jeen__ : 너무 어정쩡한 상태로 5.10 에 넣어버려서</li>
+<li>jeen__ : 그게 계속 문제가 되고 해서 5.18 에서 experimental 로</li>
+<li>jeen__ : subroutine signature ?</li>
+<li>jeen__ : 5.20 대상으로 subroutine signature 를&hellip;</li>
+<li>jeen__ : sub asda($&hellip;) { }</li>
+<li>jeen__ : 아직 스펙이 정의되지는 않았다고</li>
+<li>skyloader : prototype?</li>
+<li>jeen__ : MOP 도 5.20 릴리즈 대상으로 &hellip;</li>
+<li>jeen__ : 하지만 아직&hellip; -_-;</li>
+<li>jeen__ : XS 방방하지 않아도 적절한 퍼포먼스가 나왔으면..</li>
+<li>jeen__ : 5만줄 정도의 코드가 삭제 되었는데</li>
+<li>jeen__ : CPANPLUS + 거기에 의존되었던 코드들</li>
+<li>jeen__ : (5.19에서)</li>
+<li>jeen__ : Module::Build, CGI 를 5.20 에서 deprecated 로 만들려고</li>
+<li>jeen__ : 하고 있다고</li>
+<li>jeen__ : 옛 버젼에서 빌드시에 문제가 ..</li>
+<li>jeen__ : 어차피 Module::Build 가 없어져도 CPAN 클라이언트가 알아서 감지해서 잡아주기 때문에 별 문제가 없을 거라고</li>
+<li>jeen__ : CGI.pm 의 경우는 &hellip;.</li>
+<li>jeen__ : 표준모듈로 해 줄 필요는 없지 않냐 라고&hellip;</li>
+<li>jeen__ : CGI.pm 용 보안패치도 여러번 나오기도 해서</li>
+<li>jeen__ : CGI 를 CPAN 에서 넣을려고 하면</li>
+<li>jeen__ : FCGI 를 인스톨하려고 하고</li>
+<li>jeen__ : 그게 XS 의존이라서 C컴파일 환경이 없는 곳에서는 대개 실패</li>
+<li>jeen__ : 그래서 CGI 에서 FCGI 의존을 없애려고</li>
+<li>jeen__ : 지금 CGI 가 FCGI 의 경우까지 고려한 코드가 들어가 있어서
+jaker has joined (~<a href="mailto:jaker@36.39.50.37">jaker@36.39.50.37</a>)</li>
+<li>jeen__ : tokuhirom 은 5.18.1 까지 기다릴 거라고</li>
+<li>jeen__ : 아직 상용서버에 넣어 돌리기는 괜히 걱정된다나&hellip;</li>
+<li>jeen__ : 특별히 써보고 싶다라는 기능도 없고 해서</li>
+<li>jeen__ : 5.16.3 이 가장 좋은 선택지가 아닌가 하고</li>
+<li>jeen__ : 10-20% 정도 퍼포먼스 향상은 있다고 하는데</li>
+<li>jeen__ : 어떤 경유로 퍼포먼스 향상이 있었는지 그걸 몰라서</li>
+<li>jeen__ : taint support 를 없애는 걸로 퍼포먼스가 올라가는 것은 아닌가 하고 생각</li>
+</ul>
+
+<h3>plenv</h3>
+
+<ul>
+<li>jeen__ : 미역이 perlbrew -&gt; plenv 로 바꾸</li>
+<li><p>jeen__ : plenv 의 차이점은?</p>
+
+<ul>
+<li><a href="https://metacpan.org/module/plenv">plenv - perl binary manager - metacpan.org</a></li>
+</ul></li>
+<li><p>jeen__ : perlbrew 는 환경변수 PATH 를 열심히 변경하고 있는데</p></li>
+<li><p>jeen__ : plenv 는 중간에 PATH 를 직접건드리지 않고 하고 있다고</p></li>
+<li><p>jeen__ : perlbrew 에서 너무 많은 펄 버젼을 지원하기 위햇 어런저런 마법같은 구문들을 집어넣어서</p></li>
+<li><p>jeen__ : 그걸 심플하게 하기 위해서 plenv 를 만들었다고</p></li>
+<li><p>jeen__ : 테스트를 위해서 perlbrew switch 하지 않고</p></li>
+<li><p>jeen__ : 좀 더 간단하게 가능하다고</p></li>
+<li><p>jeen__ : plenv 를 production 에서 쓰는 건 필요이상의 오버헤드가 들어가서 스스로도 권장하지 않는다고</p></li>
+<li><p>jeen__ : travis ci, dotcloud 도 perlbrew 를 사용하고 있</p>
+
+<ul>
+<li><a href="https://www.dotcloud.com">dotCloud - One home for all your apps</a></li>
+<li><a href="https://travis-ci.org">Travis CI - Free Hosted Continuous Integration Platform for the Open Source Community</a></li>
+</ul></li>
+<li><p>jeen__ : .rvmrc 같은 표기처럼 해당 프로젝트 루트에서 버젼표기를 하는 방식으로 하는 게 편리하지 않은가 라든가</p></li>
+<li><p>jeen__ : plenv 는 yapc::na 에서 발표할 예정이라고</p></li>
+<li><p>jeen__ : perlbrew 쪽이 압도적으로 지명도가 높고, 문서도 별로고</p></li>
+<li><p>jeen__ : 그래서 사용할 메리트가 별로 없으니</p></li>
+<li><p>jeen__ : 문서에 집중하는 게 좋지 않겠느냐</p></li>
+<li><p>jeen__ : plenv 는 이런 부분에서 압도적으로 좋다라는 부분이 없어서</p></li>
+<li><p>jeen__ : 뭘 강조해야할지 망설이고 있다</p></li>
+</ul>
+
+<h3>YAPC::Asia Tokyo 2013</h3>
+
+<ul>
+<li>jeen__ : YAPC::Asia 이야기
+
+<ul>
+<li><a href="http://yapcasia.org/2013/05/yapcasia-2013-venue.html">YAPC::Asia 2013 会場を紹介します | YAPC::Asia Tokyo 2013</a></li>
+</ul></li>
+<li>jaker : 끝났나요?</li>
+<li>jeen__ : 스피커 모집은 아무 문제가 없으면 내일 시작</li>
+<li>jeen__ : 미역 뱅기 티켓 끊어야 되니까 빨리 뭐 해달라고</li>
+<li>jeen__ : 4트랙으로 진행한다고 ㄷㄷㄷ</li>
+<li>jeen__ : 여태껏 3트랙으로 했는데</li>
+<li>jeen__ : 일수는 2일로</li>
+<li>jeen__ : 전야제는 여느때처럼 하고</li>
+<li>jeen__ : JPA 주최로 이번이 5회째</li>
+<li>jeen__ : 흙</li>
+<li>jeen__ : 누군가 해준다면 넘겨주고 싶다고</li>
+<li>jeen__ : 컨퍼런스 운영자 모임에서 먹거리 얘기가 나와서..</li>
+<li>jeen__ : 맥주랑 닭튀김은 있어야 된다고&hellip;</li>
+<li>jeen__ : 매년 와인/일본주는 남는데</li>
+<li>jeen__ : 맥주는 추가주문해야된다고</li>
+<li>jeen__ : 모두들 감자튀김이랑 닭튀김이랑 맥주 정도만 있으면 되는 건 아닌가..</li>
+<li>jeen__ : 동공대 스시 가 매우 좋았다고</li>
+<li>jeen__ : 결혼식 피로연 하는 그런 공간이 있어서</li>
+<li>jeen__ : 300명 정도 들어가고</li>
+<li>jeen__ : 컨퍼런스 파티 참가비는 무료</li>
+<li>jeen__ : 컨퍼런스 참가자는 1000명 목표</li>
+<li>luzluna : 실시간번역 감사..</li>
+<li>jeen__ : 작년이 860명이었으니</li>
+<li>luzluna : 치맥은 어느나라를 가든 진리&hellip;</li>
+<li>jeen__ : 941 가 말하기를 컨퍼런스를 확대하느냐 포커스를 맞춰서 집중하느냐</li>
+<li>jeen__ : 하지만 아직 마키는 좀 더 확대노선으로 갔으면 한다고</li>
+<li>jeen__ : 지금까지 오지 못한 사람들을 조금 더 오게 하도록</li>
+<li>jeen__ : 미역이 미국의 Railsconf 에서는 1500명 정도 왔다고</li>
+<li>jeen__ : 장소는 OSCON 과 같은 장소</li>
+<li>jeen__ : 실제 사용규모는 절반</li>
+<li>jeen__ : 트랙은 3-4 밖에 없어서</li>
+<li>jeen__ : 제일 작은 방에 들어가도 한 방에</li>
+<li>jeen__ : 200-300 들어가야 되니까</li>
+<li>jeen__ : 니치한 이야기를 하기에는 좀 어려웠다고</li>
+<li>jeen__ : 모두가 재미있어 하는 토크는 별로 재미있지 않다</li>
+<li>jeen__ : 그래서 대상이 20-50명 정도로 하면 굉장히 재미있고 남은 참가자들의 모티베이션도 생긴다고</li>
+<li>jeen__ : YAPC::ASIA 는 제일 큰곳은 450명 들어가는 곳이고, 작은 곳이 60명</li>
+<li>jeen__ : YAPC::ASIA Closed Talk 같은 공간을 준비한다고</li>
+<li>jeen__ : ㅋㅋㅋ</li>
+<li>jeen__ : 뒷얘기 위주</li>
+<li>jeen__ : 예전에 perl 관련 설문을 했는데</li>
+<li>jeen__ : 의외인 부분은 의외로 많은 사람들이 perl6 얘기를 듣고 싶어한다</li>
+<li>jeen__ : 그리고 레거시 시스템을 어떻게 끌고 가느냐</li>
+<li>jeen__ : 그리고 관련 사례를 소개시켜줬으면 한다 라든가</li>
+<li>jeen__ :미국쪽에는 그런 사례소개가 많았는데</li>
+<li>jeen__ : 근데 레거시 관련 얘기는 미국에서는 별로 없어서</li>
+<li>jeen__ : Big Data</li>
+<li>jeen__ : 수치 계산</li>
+<li>jeen__ : 이런 거 좀 해줬으면 한다고</li>
+<li>jeen__ : 4-5년 전에는 Bio 에서 많이 썼는데</li>
+<li>jeen__ : 이런 게 전부 Python 으로 가버린 거 같다고</li>
+<li><p>jeen__ : USA Today 가 Perl 로 되어 있다고</p>
+
+<ul>
+<li><a href="http://www.usatoday.com">USA TODAY: Latest World and US News  - USATODAY.com</a></li>
+</ul></li>
+<li><p>jeen__ : 근데 YAPC::NA 라든가 이런 곳에서 사례 소개로 안나온다고</p></li>
+<li><p>jeen__ : RubyKaigi 는 이번주 하는데</p></li>
+<li><p>jeen__ : 더이상 규모를 확대하지 않고</p></li>
+<li><p>jeen__ : 좀 더 참가비를 올리고</p></li>
+<li><p>jeen__ : 진짜 오고 싶어하는 사람들을 오게 하겠다는데&hellip;</p></li>
+<li><p>jeen__ : 전체 크기를 크게 해버리면 아무래도 예산관리가 힘들다고</p></li>
+<li><p>jeen__ : 매번 장소 찾는 것도 피똥흘리면서 하고</p></li>
+<li><p>jeen__ : 일본 국내 첫 영국식 허브 컨퍼런스 회장이라고&hellip;</p></li>
+<li><p>jeen__ : YAPC::ASIA 는</p></li>
+<li><p>jeen__ : 작년은 앉을 공간이 별로 없었는데</p></li>
+<li><p>jeen__ : 올해는 좀 나아질 거 같다고</p></li>
+<li><p>jeen__ : LTthon 트랙이라고 작년은 하루종일 LT 만 하는 트랙이 있었는데</p></li>
+<li><p>jeen__ : 올해는 좀 힘들겠다고</p></li>
+<li><p>skyloader : 앉아 있던 카페가 문닫아서 전 이만 이동..</p></li>
+<li><p>jeen__ : 모두들 Perl 에 대한 사랑이 없고, Perl 커뮤니티에 대한 사랑만 있는 것인가&hellip;</p></li>
+<li><p>jeen__ : 그래서 Perl 커뮤니티에서 딴 얘기만 하는 건 아닌가</p></li>
+<li><p>jeen__ : …</p></li>
+<li><p>jeen__ : RubyKaigi 에 가는 사람은 정말로 초 Ruby Lover인데</p></li>
+<li><p>jeen__ : Perl 컨퍼런스는 Perl 아니고도 다른 거 많이 쓰고 그런 경우가 있어서</p></li>
+<li><p>jeen__ : 거리감이 먼 것은 아닌가
+skyloader has left IRC (Remote host closed the connection)</p></li>
+<li><p>jeen__ : YAPC 말고 좀 더 Core 한 얘기를 하는 컨퍼런스가 좋지 않겠는가 하고</p></li>
+<li><p>jeen__ : Hackathon 인가..</p></li>
+<li><p>jeen__ : Official 로는 아직 YAPC Hackathon 은 못하고</p></li>
+<li><p>jeen__ : 전날에 장소가 정해지거나</p></li>
+<li><p>jeen__ : 그런 경우가 많아서&hellip;</p></li>
+<li><p>jeen__ : QA Hackathon 에서는 50명 정도라면 대개 장소 정도는 빌릴 수 있지 않을까</p></li>
+<li><p>jeen__ : NHN 이라든가, Mixi 라든가, DeNA 라든가 … 라고</p></li>
+<li><p>jeen__ : Hallaway hackathon</p></li>
+<li><p>jeen__ : 이라고 트랙에서 얘기듣지 않고</p></li>
+<li><p>jeen__ : 밖에서 서로 떠들고 하는 게 있어서</p></li>
+<li><p>jeen__ : 오히려 그런 공간을 마련해주는 것도 좋지 않겠는가 라고</p></li>
+<li><p>jeen__ : 운영쪽에서 ~~한다가 아니라</p></li>
+<li><p>jeen__ : 다른쪽에서 오히려 ~~한다!</p></li>
+<li><p>jeen__ : 라고 정하고 덤벼들었으면 좋겠다고</p></li>
+<li><p>jeen__ : 작년에는 NA 에서 토크 스트리밍을 했는데 , 작년 유러피언컵 보면서 NA 토크를 봤다고 (미역)</p></li>
+<li><p>jeen__ : 대만의 OSDCTW 장소는  국제회의장이라서</p></li>
+<li><p>jeen__ : 자리마다 마이크가 붙어있다고</p></li>
+<li><p>jeen__ : 질문 있으면 버튼 누르고 마이크로 말하면 된다고&hellip;</p></li>
+<li><p>jeen__ : 이번 YAPC::Asia 초청스피커인 pjf 는 생각 외로 커뮤니티에서 별로 유명하지 않다고</p></li>
+<li><p>jeen__ : 그래도 발표는 재미있다나</p></li>
+<li><p>luzluna : pjf가 누구에요?</p></li>
+<li><p>jeen__ : <a href="http://yapcasia.org/2013/">http://yapcasia.org/2013/</a></p></li>
+<li><p>hongbot : [YAPC::Asia Tokyo 2013] - <a href="http://yapcasia.org/2013/">http://yapcasia.org/2013/</a></p></li>
+<li><p>jeen__ : autodie 만든사람이요</p></li>
+<li><p>luzluna : 아..</p></li>
+<li><p>jeen__ : 작년 White Camel Award</p></li>
+<li><p>jeen__ : <a href="https://twitter.com/JEEN_LEE/status/338657107895259136">https://twitter.com/JEEN_LEE/status/338657107895259136</a></p></li>
+<li><p>jeen__ : ㅋㅋㅋ</p></li>
+<li><p>hongbot : JEEN_LEE: このpodcast、同時翻訳してるんですけど… #bulknews <a href="http://t.co/BGrK6qtBaX">http://t.co/BGrK6qtBaX</a></p></li>
+<li><p>jeen_ : 방송 도중에 언급 ㅋㅋㅋㅋ</p></li>
+</ul>
+
+<blockquote class="twitter-tweet"><p>このpodcast、同時翻訳してるんですけど… <a href="https://twitter.com/search/%23bulknews">#bulknews</a> <a href="http://t.co/BGrK6qtBaX" title="http://twitter.com/JEEN_LEE/status/338657107895259136/photo/1">twitter.com/JEEN_LEE/statu…</a></p>&mdash; JEEN (@JEEN_LEE) <a href="https://twitter.com/JEEN_LEE/status/338657107895259136">May 26, 2013</a></blockquote>
+
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+</div>
+
+  <footer>
+    
+    <p><a class="comments-link" href="/2013/05/26/miyagawas-podcast-ep12/#disqus_thread" data-disqus-identifier="http://jeen.github.io/2013/05/26/miyagawas-podcast-ep12/">View comments &raquo;</a></p>
+
+    
+    
+  </footer>
+
+
+    </article>
+  
+    
+
+
+
+
+
+
+
+
+
+
+    <article >
+      
+  <header>
+    <h1 class="entry-title">
+
 <a href="/2013/05/25/download-percona-mysql-expo-2013-slides/">Download Percona MySQL Expo 2013 Slides</a>
 
 </h1>
@@ -266,249 +611,6 @@
   <footer>
     
     <p><a class="comments-link" href="/2013/05/20/using-dbi-callbacks-generate-sqlite-file-automatically/#disqus_thread" data-disqus-identifier="http://jeen.github.io/2013/05/20/using-dbi-callbacks-generate-sqlite-file-automatically/">View comments &raquo;</a></p>
-
-    
-    
-  </footer>
-
-
-    </article>
-  
-    
-
-
-
-
-
-
-
-
-
-
-    <article >
-      
-  <header>
-    <h1 class="entry-title">
-
-<a href="/2013/05/04/lancaster-consensus/">Lancaster Consensus</a>
-
-</h1>
-
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-
-<time datetime="2013-05-04T08:16:34+00:00" pubdate data-updated="true">May 4<span>th</span>, 2013</time>
-         &bull; <a rel="bookmark" href="/2013/05/04/lancaster-consensus/">Permalink</a>
-      </p>
-    
-  </header>
-
-<div class="entry-content"><h1>Lancaster Consensus</h1>
-
-<p>2008년 오슬로에서 개최된 첫번째 Perl QA Hackathon 에서는, Perl 의 품질관리와 툴체인에 관한 모듈의 저자, 메인테이너, 뜻 있는 사람들이 모여서, 몇가지 표준과 관행에 대해서 합의를 이뤘습니다. 이 때 발표된 합의는 Oslo Consensus 라는 이름으로 알려지게 되었습니다.</p>
-
-<p>그로부터 5년인 지난 2013년, Perl QA Hackathon 에서는 5년전과 마찬가지로 여러 전문가들이 모여, 새로이 통일된 견해가 필요해진 몇몇 문제들에 대해서 논의하였습니다.</p>
-
-<p>아래의 결정사항들은 이후의 방침을 나타내는 것이며, 경우에 따라서 구현에 걸리는 시간은 실제 작업을 희망하는 이들의 사정이나 희망자들이 나타날 지의 여하에 달려 있습니다.</p>
-
-<h2>툴 체인과 테스트</h2>
-
-<h3>최소지원 Perl 버젼</h3>
-
-<p>앞으로 Perl 툴체인은 2003년 9월에 릴리즈된 <code>Perl 5.8.1</code> 을 대상으로 하게 됩니다. 이에따라서, 툴체인 모듈은 PerlIO나, Perl 5.8 에서 개선된 Unicode 지원을 안심하고 이용할 수 있게 됩니다.</p>
-
-<p>또한, 5.8의 초기의 몇몇 릴리즈에서는 Unicode 관련 버그수정이 상당부분 이뤄졌기 때문에, 툴체인의 유지보수는 추후 최소버젼을 5.8.4 로 올리는 권리를 가지는 것으로 합니다(이는 Solaris 10 에 기본포함된 버젼).</p>
-
-<h3>Pure Perl 로 빌드하도록 지정</h3>
-
-<p>배포판에 따라서는 <code>XS</code> 버젼과 <code>Pure Perl</code> 버젼을 준비하고, <code>Makefile.PL</code> 이나 <code>Build.PL</code> 을 실행하는 단계에서 어느 것을 선택할 수 있도록 하는 것이 있습니다. 현시점에서는 이 배포판들은 각각의 독자적인 방법으로 유저에게 선택하게 하고 있기 때문에, CPAN 클라이언트나 그 외의 빌트 툴 쪽에서는 이 선택을 자동화시키고 싶은 유저의 욕구를 충족시켜줄 수 없는 상황이었습니다.</p>
-
-<p>앞으로, <code>Makefile.PL</code> 과 <code>Build.PL</code> 의 스펙에서는, 아래처럼 <code>Pure Perl</code> 버젼만 빌드되도록 커맨드라인 옵션이 포함되게 됩니다.</p>
-
-<ul>
-<li><code>PUREPERL_ONLY=1</code> (<code>Makefile.PL</code>의 경우)</li>
-<li><code>--pureperl-only</code> (<code>Build.PL</code>의 경우)</li>
-</ul>
-
-<p>이 옵션들은 다른 커맨드라인처럼, <code>PERL_MM_OPT</code> 또는 <code>PERL_MB_OPT</code> 같은 환경변수로 설정해도 됩니다.</p>
-
-<p>배포판 저자는 이 옵션이 존재하는 경우, 설치할 모듈이 (직접, 또는 <code>Inline</code> 모듈을 통해서) <code>XS</code> 를 불러오거나 플랫폼 고유의 코드를 동적으로 생성하지 않아도 되도록 보증해야 합니다. 설치된 파일은 아키텍쳐가 달라도 Perl 버젼이 같다면(어플리케이션을 <code>fatpack</code> 한다든가) 다른 머신으로 복사해도 제대로 동작해야 합니다. 이 조건을 만족시킬 수 없는 경우 <code>Makefile.PL</code> 이나 <code>Build.PL</code> 은 에러로 종료되어야 합니다.</p>
-
-<h3>테스트가 어떤 상황에서 실행되었는가(컨텍스트)를 지정하기 위한 환경변수</h3>
-
-<p>Oslo Consensus 에서는 테스트할 때의 컨텍스트를 알리는 것으로 <code>AUTOMATED_TESTING</code> 과 <code>RELEASE_TESTING</code> 이라는 두가지 환경변수를 정의했지만, 그 중 <code>AUTOMATED_TESTING</code> 에 대해서는 쉽게 혼동되었습니다. 경우에 따라서는 &ldquo;유저와의 상호동작을 하지 않는다&rdquo; 라는 의미로 사용되거나 &ldquo;시간이 걸리는 테스트를 실행한다&rdquo; 라는 의미로 사용되어 왔기 때문입니다.</p>
-
-<p>Lancaster 에서는 <code>Dist::Zilla</code> 와 같은 툴이 <code>AUTHOR_TESTING</code> 과 <code>RELEASE_TESTING</code> 을 지금 어떻게 구별하고 있는 지에 대해서도 (짧지만) 논의하였습니다.</p>
-
-<p>배포판의 저자는 앞으로 아래와 같은 내용들을 따라야 합니다.</p>
-
-<ul>
-<li><code>AUTOMATED_TESTING</code>: 이 환경변수가 참일 경우, 테스트를 실행하고 있는 것은 어떤 자동 테스트 구조이고, 모듈을 설치하고 있지 않다는 것을 의미합니다. <code>CPAN Smoker</code> 는 이 환경변수를 참으로 해야합니다. 또, CPAN 클라이언트는 이 환경변수를 설정해서는 안됩니다.</li>
-<li><code>NONINTERACTIVE_TESTING</code>: 이 환경변수가 참일 경우, 테스트 시에 유저와의 상호동작을 해서는 안됩니다. 테스트의 출력이 표시되지 않거나, 프롬프트에 응답이 돌아오지 않습니다.</li>
-<li><code>EXTENDED_TESTING</code>: 이 환경변수가 참일 경우, 테스트를 실행하고 있는 유저 또는 프로세스는, 끝날 때까지는 불필요하게 시간이 걸리거나 리소스를 필요로하는 옵션으로 테스트를 실행할 계획이 있다 라는 것을 의미합니다. 단, 실행 시의 기능을 테스트하는 것만을 포함해야 합니다.</li>
-<li><code>RELEASE_TESTING</code>: 이 환경변수가 참일 경우, 테스트는 릴리즈 시의 품질관리 프로세스의 일부로써 실행되어야 한다는 것을 의미합니다. CPAN 클라이언트는 이 환경변수를 설정해서는 안됩니다.</li>
-<li><code>AUTHOR_TESTING</code>: 이 환경변수가 참일 경우, 테스트는 저자 개인적인 개발 프로세스의 일부로써 실행된다는 것을 의미합니다. 이런 테스트는 릴리즈 전에 실행되는 지는 알 수 없습니다. CPAN 클라이언트는 이 환경변수를 설정해서는 안됩니다. 배포판의 패키지(ppm, deb, rpm 등)도 이 환경변수를 설정해서는 안됩니다.</li>
-</ul>
-
-<p>이미 CPAN 에서는 이런 환경변수의 설정을 간단하게 사용할 수 있게끔 하는 라이브러리가 두가지 존재합니다.</p>
-
-<ul>
-<li><a href="http://metacpan.org/module/Test::Is">Test::Is</a></li>
-<li><a href="http://metacpan.org/module/Test::DescribeMe">Test::DescribeMe</a></li>
-</ul>
-
-<p><code>CPAN Smoker</code> 나 통합 테스터는 자동 테스트를 수행한다는 것을 명시해야 합니다. 그리고 리소스에 따라 다르지만, 시간이 걸리는 테스트도 수행하도록 요구할 수 있습니다.</p>
-
-<p>CPAN 클라이언트는 설정에 따라서 자유롭게 비상호적인 테스트나 시간이 걸리는 테스트를 수행할 수 있습니다.</p>
-
-<p><code>CPAN Smoker</code> 나 클라이언트는 &ldquo;설정해서는 안되는&rdquo; 환경변수에 새로이 명시적으로 값이 설정되어 있는 경우, 그 값을 삭제하면 안됩니다.</p>
-
-<h3>Build.PL 스펙의 수정</h3>
-
-<p><em>David Golden</em> 과 <em>Leon Timmermans</em> 는 <code>Build.PL</code> 의 스펙책정에 힘써왔습니다. 이 스펙은 Build.PL 을 사용한 Perl 빌드 툴이 어떻게 동작해야 하는 가를 나타내는 것으로, 필연적으로 <code>Module::Build</code> 에 따르지만, 반드시 <code>Module::Build</code> 의 동작에 완전히 따라야 한다는 것은 아닙니다.</p>
-
-<p>Lancaster 에서는 <code>.modulebuildrc</code> 의 사용법과 의미는 스펙에서 제외되어야 한다고 합의하였습니다.</p>
-
-<h3>설치가 끝난 배포판의 데이터베이스</h3>
-
-<p>QA Hackathon 의 프로젝트의 하나로 <code>packlist</code> 를 대체하는 어떠한 것을 만드는 것이 있습니다. 설치가 끝난 배포판의 데이터베이스가 있다면, 설치가 끝난 배포판의 간단한 목록이나 제거툴, 설치가 끝난 모듈의 의존그래프의 트래킹 등을 간단하게 할 수 있게 될 겁니다.</p>
-
-<p>Lancaster 에서는 모듈은 수많은 다른 장소에서 설치될 것이기에 그런 데이터베이스는 <code>INC마다</code> 준비할 필요가 있다는 것과 <code>INC</code> 스스로 같은 동작으로 스택에 쌓아올릴 필요가 있다는 것에 합의하였습니다. 즉, <code>INC</code> 에 경로를 추가한다면 데이터베이스가 설치가 끝난 모듈은 변화할 것이라는 것입니다.</p>
-
-<p>또, 이런 데이터베이스 시스템이 코어 이외의 의존모듈을 요구하는 일은 있어서는 안되지만, 권장되는 CPAN 모듈이 설치되어 있는 경우에 확장기능을 제공할 수 있을 것입니다.</p>
-
-<p>그 외의 구현의 자세한 내용에 대해서는 시스템을 설계하는 사람에게 달려 있습니다.</p>
-
-<h3>설치 후의 테스트</h3>
-
-<p>Hackathon 참가자 안에는 모듈을 설치한 다음에도 그 모듈의 테스트를 실행할 수 있게 하는 시스템에 관심을 가지고 있는 사람들이 여럿 있었습니다. 예를들어 의존모듈을 업그레이드함으로써 모듈이 깨지지 않았는가 확인하거나, 전체 정합성을 테스트하기 위한 것입니다.</p>
-
-<p>Lancaster 에서는 그런 테스트를 수행할 경우, 테스트 중에 배포판 안의 모든 파일을 이용할 수 있게 해야합니다. 즉, 테스트는 배포판의 tarball 이 있는 디렉토리에서 실행되지 않으면 안되는 것으로 합의하였습니다. 또, 그런 테스트는 <code>make test-installed</code> 나 <code>Build test-installed</code> 라는 새로운 <code>make</code> 혹은 <code>Build</code> 타겟을 사용해서 실행해야 합니다. 이 타겟들은 <code>make test</code> 나 <code>Build test</code> 에 해당하지만, <code>INC</code> 에는 <code>blib</code> 을 추가하지 않도록 해야 합니다. 그리고 <code>prove</code> 어플리케이션을 사용해서는 안됩니다.</p>
-
-<p>또, 그런 테스트 시에는 <code>INC</code> 에 의한 모듈을 저장하거나 숨기는 방법도 존중할 필요가 있다는 것도 합의하였습니다. <code>PERL5LIB</code> 을 설정하면 &ldquo;설치된&rdquo; 배포판이 변할 가능성이 있고, 그에 따라서 어느 테스트가 실행되어야 하는지도 바뀔 수 있기 때문에 설치가 끝난 배포판의 데이터베이스와 연계할 것을 권장합니다.</p>
-
-<p>그 외의 구현의 자세한 내용에 대해서는 배포판의 디렉토리 내용을 처음 설치할 때에 저장하거나, <code>CPAN/BackPAN</code> 에서 다시금 가지고 오는 것을 포함해서 시스템을 설계하는 사람에 달려 있습니다.</p>
-
-<h2>META 파일의 스펙</h2>
-
-<h3>&ldquo;provides&rdquo; 필드</h3>
-
-<p><code>CPAN::Meta::Spec</code> 의 <code>provides</code> 필드는 &ldquo;file&rdquo; 키를 필수요소로 하고 있지만, 동적으로 생성되는 패키지의 경우, 그 의미가 명확하지 않았습니다. Lancaster 에서는 &ldquo;file&rdquo; 키는 그 패키지가 유래하는 배포판의 디렉토리 안에 있는 실제 파일을 참조해야야 한다고 합의하였습니다(그 파일이 <code>.pm</code> 파일이거나 <code>.PL</code> 파일이거나 또는 그 외의 동적으로 생성되는 파일인가 상관없이).</p>
-
-<h3>&ldquo;conflicts&rdquo; 개선</h3>
-
-<p>Lancaster 에서는 의존모듈 정보(prerequisite) 데이터에 포함된 <code>conflicts</code> 키의 이미 알려진 문제에 대해서도 몇가지 간단하게 의논하였습니다.</p>
-
-<p>어찌되었든 대부분의 개발자가 원하는 것은, 어떤 특정 모듈을 설치하면 다른 특정 버젼의 모듈을 깬다고 알려져 있는(예를 들어 Foo 를 2.0 으로 업그레이드 하면 3.14 보다 낮은 모든 Bar 가 깨지는) 것을 나타내는 방법입니다.</p>
-
-<p>이 문제의 개선에 흥미를 가지고 있는 쪽에서는, x_breaks 또는 유사 커스텀키를 사용하며, CPAN 클라이언트는 이를 지원하기 위한 패치를 받아서 프로토타입을 만드는 것을 권장합니다. 실전에서는 충분한 테스트가 끝났다면, 앞으로는 스펙의 버젼3의 후보가 될 수 있습니다.</p>
-
-<h2>PAUSE 와 CPAN</h2>
-
-<h3>PAUSE 에 있는 배포판 레벨의 데이터에 대한 장기적인 목표</h3>
-
-<p>의논의 극점에 있는 PAUSE 의 몇가지 문제점으로부터 PAUSE 는 패키지(이름공간) 레벨의 인덱스나 권한 데이터 외에, &ldquo;배포판&rdquo; 레벨의 데이터도 유지할 필요가 있다는 것이 명확해졌습니다. 예를들어 지금은 배포판의 권한을 양도하면 모든 패키지의 권한을 양도해야 했지만, 그 대신에 배포판을 단위로 한 권한의 양도가 가능하게 됩니다.</p>
-
-<p>Lancaster 에서는 이것은 장기적인 목표로 적절하다고 보고, 단기적으로는 눈 앞의 문제를 해결하기 위한 다른 제안을 구현하는 것으로 합의하였습니다.</p>
-
-<h3>대문자/소문자를 구별하지 않는 패키지의 권한</h3>
-
-<p>직접 의논된 것은 아니지만, 추가하고 싶은 내용으로 PAUSE 의 패키지 권한에 대해서는 간간히 대문자 소문자를 묻지 않게 될 예정입니다. 단, 대문자 소문자를 구별하지 않는 파일시스템에서는 설치된 경우에도 인덱스된 모듈은 확실하게 유니크하도록 대문자나 소문자는 보존될 예정입니다.</p>
-
-<h3>배포판 이름의 규칙</h3>
-
-<p>CPAN 에코 시스템에 속하는 웹 사이트나 툴의 대부분은 &ldquo;배포판이름&rdquo; 을 유니크한 식별자로 이용하고 있지만, 지금까지는 그것이 유니크하다는 것을 강제하는 것은 아무것도 없습니다. 유니크하지 않은 것을 허용하는 것은 얼마나 자주 말해도 혼란스럽지만, 최악의 경우는 보안적인 위험이 됩니다.</p>
-
-<p>앞으로, <code>PAUSE</code> 에 업로드될 배포판의 배포판 안에 인덱스된 패키지 이름과 &ldquo;대응하는&rdquo; 이름을 가져야합니다. 또, 업로드할 사람은 그 패키지의 권한을 가져야 합니다. 그렇지 않으면, 배포판 전체가 인덱스되지 않습니다.</p>
-
-<p>예를들어, <code>DAGOLDEN</code> 이 <code>Foo-Bar-1.23.tar.gz</code> 을 업로드 하는 경우, 배포판의 이름은 <code>Foo-Bar</code> 로, 그 배포판에는 인덱스 가능한 <code>Foo::Bar</code> 라는 패키지가 있어야 합니다.</p>
-
-<p>CPAN 에는 이런 규칙에 따르지 않는 배포판이 1000건 정도 있지만, 이것들에 대해서는 새로운 규칙의 예외로 합니다. 단, 이 배포판들에 대해서도 배포판 이름을 바꾸거나, 새롭게 .pm 파일을 추가하거나 또는 내부적으로 적절한 이름의 패키지를 도입해서 표준에 맞추는 것을 권장합니다.</p>
-
-<p>예를들어, <code>LWP</code>는 <code>libwww-perl-6.05.tar.gz</code> 로 릴리즈되지만, 만약 그 .pm 파일에 <code>package libwww::perl;</code> 이라는 것이 포함되어 있다면 그 패키지가 인덱스되어 표준에 따르게 됩니다.</p>
-
-<p>기술적으로는 <code>provides</code> 필드를 사용하면 올바른 패키지이름을 <code>META.json</code> 파일의 안에서만 선언하는 것도 가능합니다. 그 경우 &ldquo;file&quot;의 값은 <code>META.json</code>　으로 해서, 그 패키지를 선언하는 파일이 <code>META.json</code> 이라는 것을 명시해야 합니다.</p>
-
-<h3>폐기 모듈이나 협력이 필요한 모듈에 도장을 찍는다</h3>
-
-<p>현시점에서는 에서는 CPAN 모듈의 저자가 사망한 경우, 그 사람의 모듈의 권한은 &quot;ADOPTME&quot;라는 가공의 저자에 양도됩니다. 그 모듈을 유지보수하고 싶은 희망자가 있다면, 손들고 나와서 하고 싶다고 요구할 수도 있습니다.</p>
-
-<p>Lancaster 에서는 모듈이 폐기되거나 저자가 책임을 공유한 사람을 찾는 것을 나타내는 경우도 단기적으로는 같은 메커니즘을 사용해야 한다는 것에 합의하였습니다. 단, 저자가 없어진 경우와는 달리 이 경우들은 표시로써 &quot;공동유지보수자&rdquo; 의 권한을 사용해서, 원저자가 필요에 따라서는 그 표시를 삭제할 수 있게 할 예정입니다.</p>
-
-<p>(장기적으로는 PAUSE에 배포판 레벨의 데이터 모델에 따라, 이 요구에 보다 직접적으로 대처할 수 있을 것이라고 기대하고 있습니다)</p>
-
-<p>CPAN 검색 엔진등의 커뮤니티사이트에서는 이 퍼미션의 표시나 그에 관련된 의미를 이용해서 배포판의 상태를 전달해도 됩니다.</p>
-
-<ul>
-<li><code>ADOPTME(프라이머리의 경우)</code>: 이것은 일반적으로 저자가 죽었다는 것을 나타냅니다. 희망자는 <code>modules@perl.org</code> 경유로 인수를 요구할 수 있습니다.</li>
-<li><code>ADOPTME(공동유지보수자의 경우)</code>: 이것은 응답이 없는 것을 확인한 저자를 나타냅니다. 커뮤니티는 패키지에 이 표시를 붙일 때에는 인수된 경우와 마찬가지로 (즉, 저자에게 여러번 연락을 취한 다음에, <code>modules@perl.org</code> 경유로 요구한다는) 룰에 따라 제안할 수 있습니다. 희망자는 <code>modules@perl.org</code> 경유로 <code>ADOPTME</code> 모듈 인수를 요구할 수 있습니다. 추가로 기다리는 시간은 필요없습니다.</li>
-<li><code>HANDOFF(공동유지보수자의 경우)</code>: 이것은 저자가 영원히 주요 유지보수자의 역할을 다른 사람에게 넘기고 싶다는 것을 나타냅니다.</li>
-<li><code>NEEDHELP(공동유지보수자의 경우)</code>: 이것은 저자가 모듈의 유지보수를 도와줄 사람을 찾고 있다는 것으로, 주요유지보수자인 것은 계속하려고 계획하고 있다는 것을 나타냅니다.</li>
-</ul>
-
-<p><code>ADOPTME</code> 에서 &ldquo;인수&quot;를 예외로해서 (이것은 <code>modules@perl.org</code> 를 통해야 합니다), CPAN 모듈의 저자는 이 공동유지 권한을 일반적인 PAUSE 인터페이스를 이용해서 관리해야 합니다.</p>
-
-<p>또, CPAN 모듈의 저자는 PAUSE 관리자에게 요구가 있다면 즉시 권한을 양도해도 좋다는 것을 나타내기 때문에, 주요유지보수자 또는 공동유지보수자의 권한을 스스로 ADOPTME 에 양도해도 됩니다.</p>
-
-<h3>PAUSE ID 자동등록</h3>
-
-<p>역사적으로 PAUSE ID 는 수작업으로 승인되어 왔기에, 등록까지는 종종 꽤 시간이 걸리곤 했습니다. Lancaster 에서는 로봇이나 스팸에 대한 적절한 보호책을 가지고 있다는 전제를 가지고 PAUSE 는 자동승인 시스템으로 옮긴다고 합의하였습니다. 이것으로 PAUSE 도 다른 프로그래밍 언어의 저장소나 오픈 소스 커뮤니티의 사이트와 어깨를 나란히 할 수 있을 것입니다.</p>
-
-<p>또, Lancaster 에서는 사용되지 않고, 활동의 흔적이 없는 <code>PAUSE ID</code> 는 일정기나 후 삭제해서 재이용할 수 있도록 한다라는 것에 합의하였습니다. 구체적으로 말하면, 과거에 몇번인가 업로드한 적이 있는 <code>PAUSE ID</code> 는 삭제해서는 안됩니다(BackPAN 에서는 그 PAUSE ID 에 연결된 파일이 존재하기 때문입니다). 또한 <code>PAUSE ID</code> 에 로그인(또는 <code>rt.cpan.org</code> 등의 프록시를 경유)한다면 충분히 활동의 흔적이 있다고 간주됩니다. 활동의 흔적이 없는 ID 도 PAUSE 에 로그인할 수 있도록 경고하는 메시지도 없이 삭제할 수는 없습니다.</p>
-
-<h3>CPAN 배포판의 자동 클린업</h3>
-
-<p>CPAN 상의 파일 중, 거의 절반 정도가 5년전의 것이지만, CPAN 모듈의 저자의 대부분은 낡은 배포판을 전혀 삭제하지 않습니다. CPAN 의 크기를 감당하기 위해서, Lancaster 에서는 어떤 조건을 가지고 옛 배포판은 자동적으로 삭제하도록 준비(그리고, 결과적으로 BackPAN 에만 보존하지 않도록 한다)하도록 합의하였습니다.</p>
-
-<p>삭제 대상으로 선택되는 배포판은 적어도 3개의 안정판이 존재해야 합니다. 그 3개의 안정판 중 제일 낡은 것도 더 옛 배포판의 리비젼 중, 5년 전의 것으로 <code>02packages</code> 파일에 인덱스되지 않은 것은 모두 삭제하도록 준비하게 됩니다.</p>
-
-<p>perl의 tarball 은 물론 모두 삭제 대상에서 제외됩니다.</p>
-
-<p>삭제가 준비된 것은 일반적으로 저자에게 통보되며 삭제준비를 취소할 수 있도록 유예기간도 주어집니다.</p>
-
-<p>클린업은 어떤 방법으로 PAUSE ID 가 대상이 된 순으로 수행하고, CPAN 모듈의 저자에게 빈번하게 삭제통지가 간다는 것을 피할 수 있도록 구현할 예정입니다.</p>
-
-<h3>모듈 등록</h3>
-
-<p>Lancaster 에서는 PAUSE 모듈 등록은 그 유용성을 거의 잃었다는 것에 합의하였습니다. 등록된 것은 일부의 CPAN 모듈이기 때문에 메타데이터(예를들어 &quot;DSLIP&rdquo;)의 총합제공원이 될 수 없고, 커버되는 정보도 대부분은 META 파일을 통해서 더욱 광범위하게 입수할 수 있기 때문입니다.</p>
-
-<p>Lancaster 에서는 지금이라도 새로운 CPAN 모듈의 저자가 맨 처음 모듈을 등록하려고 할 때에 종종 피드백을 받는다는 이점이 남아있다는 것은 인정하지만, PrePAN 등의 다른 장소 쪽의 새로운 저자에게는 보다 경험을 제공할 수 있다고 생각하고 있습니다. 특히 PrePAN 은 1-2사람의 PAUSE 관리자에게 그치지 않는 커뮤니티의 참가가 있고, (메일링 리스트의 아카이브를 검색하지 않아도) 참고할 만한 예제를 풍부하게 제공하고 있습니다.</p>
-
-<p>그 때문에 Lancaster 에서는 기존의 PAUSE 문서를 변경해서, 조언이 필요한 경우는 PrePAN 에 가도록 새로운 저자에게 (또는 경험을 가진 저자에게도) 안내한다는 것에 합의하였습니다.</p>
-
-<p>가까운 시일안에 PAUSE 는 모듈 등록 데이터베이스를 CPAN 미러에 공개하는 것을 그만둘 예정입니다 ( 인덱스 파일이 있다는 것을 기대하는 CPAN 클라이언트를 부수지 않도록, 인덱스 파일은 남아 있지만, 내용은 비게 될 예정입니다). 평가기간이 끝났다면, 모듈 등록은 아마도 닫히고, 그 기능도 PAUSE 에서 제외될 예정입니다.</p>
-
-<h3>Lancaster Consensus 의논에 참가한 사람들</h3>
-
-<p>의논은 3일간에 걸쳐 다소 변경이 있지만, 매일 20명 정도가 의논에 참가하였습니다. 아래의 참가자들에게 감사의 말을 전합니다.</p>
-
-<p>Andreas Konig, Barbie, Breno Oliveira, Chris Williams, Christian Walde, David Golden, Daniel Perrett, Gordon Banner, H. Merijn Brand, James Mastros, Jens Rehsack, Jess Robinson, Joakim Tormoen, Kenichi Ishigaki, Leon Timmermans, Liz Mattijsen, Matthew Horsfall, Michael Schwern, Olivier Mengue, Paul Johnson, Peter Rabbitson, Philippe Bruhat, Piers Cawley, Ricardo Signes, Salve J. Nilsen and Wendy van Dijk</p>
-
-<p>(참가자로 리스트에서 빠진 사람이 있다면 dagolden at cpan dot org 로 메일을 하거나 pull request 를 보내면 추가하겠습니다)</p>
-
-<h2>참고</h2>
-
-<ul>
-<li>원문 : <a href="https://github.com/Perl-Toolchain-Gang/toolchain-site/blob/master/lancaster-consensus.md">https://github.com/Perl-Toolchain-Gang/toolchain-site/blob/master/lancaster-consensus.md</a></li>
-<li>역자 : 이종진(JEEN_LEE)</li>
-</ul>
-</div>
-
-  <footer>
-    
-    <p><a class="comments-link" href="/2013/05/04/lancaster-consensus/#disqus_thread" data-disqus-identifier="http://jeen.github.io/2013/05/04/lancaster-consensus/">View comments &raquo;</a></p>
 
     
     

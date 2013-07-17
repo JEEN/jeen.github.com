@@ -98,6 +98,282 @@
   <header>
     <h1 class="entry-title">
 
+<a href="/2013/07/17/solr-vs-elasticsearch-part-5-management-api-capabilities/">Solr vs ElasticSearch: Part 5 – Management API Capabilities</a>
+
+</h1>
+
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2013-07-17T00:01:06+00:00" pubdate data-updated="true">Jul 17<span>th</span>, 2013</time>
+         &bull; <a rel="bookmark" href="/2013/07/17/solr-vs-elasticsearch-part-5-management-api-capabilities/">Permalink</a>
+      </p>
+    
+  </header>
+
+<div class="entry-content"><h1>Solr vs ElasticSearch: Part 5 – Management API Capabilities</h1>
+
+<p>January 8, 2013 by Rafał Kuć</p>
+
+<p>In previous posts, all listed below, we’ve discussed general architecture, full text search capabilities and facet aggregations possibilities. However, till now we have not discussed any of the administration and management options and things you can do on a live cluster without any restart. So let’s get into it and see what Apache Solr and ElasticSearch have to offer.</p>
+
+<p>이전 편에서는 전반적인 개요, 전문검색기능, Faceting 의 집약기능에 대해서 다루었습니다. 지금까지 관리와 운영 옵션과 운용중의 클러스터에서 재기동없이 할 수 있는 일에 대해서는 다루지 않았죠. 자, 그럼 이에 대해서 Apache Solr 와 ElasticSearch 는 무엇을 제공할 수 있는 지 보도록 할까요?</p>
+
+<ol>
+<li>Solr vs. ElasticSearch: Part 1 – Overview</li>
+<li>Solr vs. ElasticSearch: Part 2 – Data Handling</li>
+<li>Solr vs. ElasticSearch: Part 3 – Searching</li>
+<li>Solr vs. ElasticSearch: Part 4 – Faceting</li>
+<li>Solr vs. ElasticSearch: Part 5 – Management API Capabilities</li>
+<li>Solr vs. ElasticSearch: Part 6 – User &amp; Dev Communities Compared</li>
+</ol>
+
+<h2>Input/Output Format</h2>
+
+<h3>ElasticSearch</h3>
+
+<p>As you probably know ElasticSearch offers a single way to talk to it – its HTTP REST API – JSON structured queries and responses. In most cases, especially during query time, it is very handy, because it let’s you perfectly control the structure of your queries and thus control the logic.</p>
+
+<p>알고 계시겠지만 ElasticSearch 는 하나의 통신방법을 제공합니다. 그것이 바로 HTTP REST API이며 이는 JSON 구조로 쿼리와 응답을 만들어냅니다. 대부분의 경우, 특히 쿼리시에 매우 편리합니다. 쿼리 구조를 완전하게 컨트롤할 수 있고, 그러므로 로직을 컨트롤할 수 있기 때문입니다.</p>
+
+<h3>Apache Solr</h3>
+
+<p>On the other hand we have Apache Solr. If you are familiar with it you know that in order to send a query to Solr one needs to send it using URL request parameters.  This makes communication much less structured compared to ElasticSearch JSON format. In response you can get multiple response formats that are supported out of the box, like the default XML, JSON, CSV, PHP serialized, or Ruby.</p>
+
+<p>반면 Apache Solr 는 쿼리를 보낼 때에 URL 리퀘스트 파라메터를 보낼 필요가 있다는 것은 알고 계실겁니다. 이것이 ElasticSearch 의 JSON 형식과 비교하면 커뮤니케이션을 보다 낮은 수준으로 구조화해버리는 것이죠. 하지만 응답시에는 여러 응답형식을 지원하고 있습니다. 기본적으로 XML, JSON, CSV, 직렬화된 PHP, Ruby 가 그것들이죠.</p>
+
+<h2>Statistics API</h2>
+
+<p>Most of the time your search cluster will be fine and you won’t have any problems with it. However, there are times where you may need to see what is happening inside Apache Solr or ElasticSearch to diagnose problems, such as performance problems (hello SPM!), stability issues, or anything like that. In such cases, both search engines provide some amount of statistics.</p>
+
+<p>대부분의 경우, 검색 클러스터는 튼튼하고 문제를 일으키는 일은 없을 것 입니다. 그러나 Apache Solr 나 ElasticSearch 에서 무슨 일이 일어났는가를 보고 문제 진단을 해 볼 필요가 있습니다. 예를들어서 퍼포먼스 문제나(어이, SPM!) 안전성의 문제 와 같은 것들이죠. 그런 경우에는 두 검색엔진은 몇가지의 통계값을 제공합니다.</p>
+
+<h3>Apache Solr</h3>
+
+<p>In Solr we can use JMX or HTTP requests to retrieve information about handler usage, cache statistics or information about most Solr components.</p>
+
+<p>Solr 에서는 JMX 나 HTTP 질의를 핸들러로 캐쉬의 통계, 그리고 대부분의 Solr 컴포넌트의 정보를 얻을 때에 이용할 수 있습니다.</p>
+
+<h3>ElasticSearch</h3>
+
+<p>ElasticSearch was designed to be able to return various statistics about itself. With the REST API calls we can get information from the simplest ones like cluster health or nodes statistic, to extent information like the detailed ones about indices with merges, refreshes. The same stats are available via JMX, too.</p>
+
+<p>ElasticSearch는 자체적으로 다양한 통계를 반환할 수 있도록 설계되었습니다. REST API 의 호출을 사용해서 가장 단순한 것, 예를 들자면 클러스터의 건강상태나 노드의 통계에서 인덱스의 머지, 리프레쉬와 같은 상세한 것 등의 광범위한 정보를 얻을 수 있습니다. 이와 같은 정보는 JMX 경유로 얻을 수 있습니다.</p>
+
+<h2>Settings API</h2>
+
+<h3>ElasticSearch</h3>
+
+<p>ElasticSearch allows us to modify most of the configuration values dynamically. For example, you can clear you caches (or just specific type of cache), you can move shards and replicas to specific nodes in your cluster. In addition to that you are also allowed to update mappings (to some extent), define warming queries (since version 0.20), etc. You can even shut down a single node or a whole cluster with the use of a single HTTP call. Of course, this is just an example and doesn’t cover all the possibilities exposed by ElasticSearch.</p>
+
+<p>ElasticSearch는 동적으로 설정값의 대부분을 변경할 수 있습니다. 예를 들어 캐쉬를 클리어했다든가, 특정 타입의 캐쉬만을 클리어했다거나, Shard 와 레플리카를 클러스터로 지정한 노드로 이동할 수 있습니다. 그리고 어떤 범위의 맵핑을 변경하거나 워밍쿼리(v0.20이후)를 정의할 수도 있습니다. 단일 노드나 클러스터 전체를 한번의 HTTP 호출로 셧다운할 수도 있죠. 물론 이것들은 단순히 일부분 일 뿐이며, ElasticSearch 에서 공개된 기능 전체를 커버하는 것은 아닙니다.</p>
+
+<h3>Apache Solr</h3>
+
+<p>In case of Apache Solr we do not (yet) have the possibility of changing configuration values (like warming queries) with API calls.</p>
+
+<p>Apache Solr 의 경우, API 호출로 설정값의 변경 (예를들어 워밍쿼리)할 수 있는 기능은 &ldquo;아직&rdquo; 없습니다.</p>
+
+<h2>인덱스/콜렉션의 관리기능</h2>
+
+<p>In addition to the capabilities mentioned above both ElasticSearch and Apache Solr provide APIs that allows us to modify our deployment when it comes to collections and indices.</p>
+
+<p>위에서 설명한 기능 이외에 ElasticSearch 와 Apache Solr 는 콜렉션과 인덱스에 관한 디플로이를 변경할 수 있습니다.</p>
+
+<h3>Apache Solr</h3>
+
+<p>Pre 4.0 we were able to manipulate cores inside our Solr instances. We could create new cores, reload them, get their status, rename, swap two of them, and finally remove a core from the instance. With Solr 4.0, a new API was introduced that is built on top of core admin API – the collections API. It allows us to create collections on started SolrCloud cluster, reload them and of course delete them. As the collections API is built on top of the core admin API,  if you create a new collection all the needed cores on all instances will be created. Of course, the same goes for reloading and deleting – all the cores will be appropriately informed and processed.</p>
+
+<p>4.0 이전에는 Solr 인스턴ㅅ 안에 여러 코어를 만질 수 있었습니다. 새로운 코어를 만들거나 리로드 하거나, 상태정보를 얻거나, 이름을 바꾸거나, 두가지를 스와핑하거나, 마지막으로 인스턴스에서 코어를 삭제할 수 가 있었습니다. Solr 4.0 에서는 코어관리 API 의 맨 위에 새로운 API 가 새로이 소개되었습니다. 그것이 바로 Collections API 입니다. 이미 시작한 SolrCloud 클러스터 위에 콜렉션을 만들거나 리로드, 삭제도 할 수 있습니다. 콜렉션 API 가 코어 관리 API 위에서 구축되어 새로운 콜렉션을 만들면 모든 인스턴스 상의 필요한 코어가 모두 작성됩니다. 마찬가지로 리로드나 삭제도 가능합니다. 모든 코어는 적절하게 정보를 받아 처리됩니다.</p>
+
+<h3>ElasticSearch</h3>
+
+<p>In case of ElasticSearch we can create and delete indices by running a simple HTTP command (GET or DELETE method) with the index name we are interested in. In addition to that, with a simple API call we can increase and decrease the number of replicas without the need of shutting down nodes or creating new nodes. With the newer ElasticSearch versions we can even manipulate shard placement with the cluster reroute API. With the use of that API we can move shards between nodes, we can cancel shard allocation process and we can also force shard allocation – everything on a live cluster.</p>
+
+<p>ElasticSearch 의 경우, 간단한 HTTP 커맨드(GET 또는 DELETE 메소드)를 대상으로 한 인덱스의 이름과 함께 실행하는 것만으로 인덱싱과 삭제가 가능합니다. 그리고 간단한 API 호출로 레플리카의 수를 노드의 셧다운이나 추가없이 증감할 수도 있습니다. 새로운 ElasticSearch 버젼에서는 Shard 의 배치를 클러스터의 리로드 API 로 할 수 있습니다. 이를 통해서 Shard 를 노드끼리 이동한다거나, Shard 를 할당절차를 취소하거나 강제할 수도 있습니다. 모든 것은 운용중의 클러스터 위에서 가능합니다.</p>
+
+<h2>Query Analysis</h2>
+
+<h3>Apache Solr</h3>
+
+<p>If you’ve used Apache Solr you probably come across the debugQuery parameter and the explainOther parameter. Those two allows to see the detailed score calculation for the given query and documents found in the results (the debugQuery parameter) and the specified ones (the explainOther). In addition, we can also see how the analysis process is done with the use of analysis handler or by using the analysis page of the Solr administration panel provided with Solr.</p>
+
+<p>Apache Solr 를 이전에 사용한 적이 있다면 debugQuery 파라메터와 explainOther 파라메터를 알고 있으실 겁니다. 이 두가지를 사용해서 주어진 쿼리와 그 결과를 발견한 도큐먼트(debugQuery파라메터), 또는 특정 하나의(plainOther)의 스코어 계산에 대한 자세한 내용을 볼 수도 있습니다. 거기에 해석핸들러를 사용하거나 Solr 에서 제공되는 Solr 관리패널의 해석페이지로 해석프로세스가 어떻게 이뤄지는 지도 확인할 수 있습니다.</p>
+
+<p>For example this is how debug information returned by Solr can look like:</p>
+
+<p>Solr로 반환되는 디버그 정보가 어떻게 보여지는 가는 아래를 참고해주세요.</p>
+<div class="highlight"><pre><code class="text">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;response&gt;
+.
+.
+.
+&lt;lst name=&quot;debug&quot;&gt;
+ &lt;str name=&quot;rawquerystring&quot;&gt;ten&lt;/str&gt;
+ &lt;str name=&quot;querystring&quot;&gt;ten&lt;/str&gt;
+ &lt;str name=&quot;parsedquery&quot;&gt;(+DisjunctionMaxQuery((prefixTok:ten)~0.01) ())/no_coord&lt;/str&gt;
+ &lt;str name=&quot;parsedquery_toString&quot;&gt;+(prefixTok:ten)~0.01 ()&lt;/str&gt;
+ &lt;str name=&quot;QParser&quot;&gt;DisMaxQParser&lt;/str&gt;
+ &lt;null name=&quot;altquerystring&quot;/&gt;
+ &lt;null name=&quot;boostfuncs&quot;/&gt;
+ &lt;lst name=&quot;timing&quot;&gt;
+  &lt;double name=&quot;time&quot;&gt;2.0&lt;/double&gt;
+  &lt;lst name=&quot;prepare&quot;&gt;
+   &lt;double name=&quot;time&quot;&gt;1.0&lt;/double&gt;
+   &lt;lst name=&quot;org.apache.solr.handler.component.QueryComponent&quot;&gt;
+    &lt;double name=&quot;time&quot;&gt;1.0&lt;/double&gt;
+   &lt;/lst&gt;
+   &lt;lst name=&quot;org.apache.solr.handler.component.FacetComponent&quot;&gt;
+    &lt;double name=&quot;time&quot;&gt;0.0&lt;/double&gt;
+   &lt;/lst&gt;
+   &lt;lst name=&quot;org.apache.solr.handler.component.MoreLikeThisComponent&quot;&gt;
+    &lt;double name=&quot;time&quot;&gt;0.0&lt;/double&gt;
+   &lt;/lst&gt;
+   &lt;lst name=&quot;org.apache.solr.handler.component.HighlightComponent&quot;&gt;
+    &lt;double name=&quot;time&quot;&gt;0.0&lt;/double&gt;
+   &lt;/lst&gt;
+   &lt;lst name=&quot;org.apache.solr.handler.component.StatsComponent&quot;&gt;
+    &lt;double name=&quot;time&quot;&gt;0.0&lt;/double&gt;
+   &lt;/lst&gt;
+   &lt;lst name=&quot;org.apache.solr.handler.component.DebugComponent&quot;&gt;
+    &lt;double name=&quot;time&quot;&gt;0.0&lt;/double&gt;
+   &lt;/lst&gt;
+ &lt;/lst&gt;
+ &lt;lst name=&quot;process&quot;&gt;
+  &lt;double name=&quot;time&quot;&gt;1.0&lt;/double&gt;
+  &lt;lst name=&quot;org.apache.solr.handler.component.QueryComponent&quot;&gt;
+   &lt;double name=&quot;time&quot;&gt;0.0&lt;/double&gt;
+  &lt;/lst&gt;
+  &lt;lst name=&quot;org.apache.solr.handler.component.FacetComponent&quot;&gt;
+   &lt;double name=&quot;time&quot;&gt;0.0&lt;/double&gt;
+  &lt;/lst&gt;
+  &lt;lst name=&quot;org.apache.solr.handler.component.MoreLikeThisComponent&quot;&gt;
+   &lt;double name=&quot;time&quot;&gt;0.0&lt;/double&gt;
+  &lt;/lst&gt;
+  &lt;lst name=&quot;org.apache.solr.handler.component.HighlightComponent&quot;&gt;
+   &lt;double name=&quot;time&quot;&gt;0.0&lt;/double&gt;
+  &lt;/lst&gt;
+  &lt;lst name=&quot;org.apache.solr.handler.component.StatsComponent&quot;&gt;
+   &lt;double name=&quot;time&quot;&gt;0.0&lt;/double&gt;
+  &lt;/lst&gt;
+  &lt;lst name=&quot;org.apache.solr.handler.component.DebugComponent&quot;&gt;
+   &lt;double name=&quot;time&quot;&gt;1.0&lt;/double&gt;
+  &lt;/lst&gt;
+ &lt;/lst&gt;
+&lt;/lst&gt;
+&lt;lst name=&quot;explain&quot;&gt;
+ &lt;str name=&quot;Ten mices&quot;&gt;
+1.3527006 = (MATCH) sum of:
+ 1.3527006 = (MATCH) weight(prefixTok:ten in 35158) [DefaultSimilarity], result of:
+ 1.3527006 = fieldWeight in 35158, product of:
+ 1.4142135 = tf(freq=2.0), with freq of:
+ 2.0 = termFreq=2.0
+ 6.1216245 = idf(docFreq=6355, maxDocs=1065313)
+ 0.15625 = fieldNorm(doc=35158)
+ &lt;/str&gt;
+&lt;/lst&gt;
+&lt;/lst&gt;
+&lt;/response&gt;
+</code></pre></div>
+<p>As you can see, we can get information about timings of each of the used components. In addition to that, we see the parsed query and of course the explain information showing us how the document score was calculated.</p>
+
+<p>보시는 대로, 사용하고 있는 각 컴포넌트의 타이밍에 관한 정보를 얻을 수 있습니다. 그리고 파싱된 쿼리를 보거나, 어떻게 도큐먼트의 스코어가 계산되는 가를 알 수 있는 explain 정보도 확인가능합니다.</p>
+
+<h3>ElasticSearch</h3>
+
+<p>ElasticSearch exposes three separate REST end-points to analyze our queries, documents and explain the documents score. The Analyze API allows us to test our analyzer on a specified text in order to see how it is processed and is similar to the analysis page functionality of Solr. The Explain API provides us with information about the score calculation for a given documents. Finally, the Validate API can validate our query to see is it is proper and how expensive it can be.</p>
+
+<p>ElasticSearch는 3개로 나뉘어진 REST 엔드포인트를 공개하여, 쿼리나 도큐먼트, 도큐먼트 스코어의 explain 을 해석할 수 있습니다. 해석API 는 해석기가 특정 텍스트에서 어떻게 처리되는지를 테스트할 수 있습니다. SOlr 의 해석페이지 기능과 비슷합니다. Explain API 는 주어진 도큐먼트에 대해서 스코어 연산에 관한 정보를 제공합니다. 마지막으로 Validate API 는 쿼리가 적절하게 어느 정도의 비용인지를 확인할 수 있습니다.</p>
+
+<p>For example, this is what Explain API response looks like:</p>
+
+<p>Explain API 의 응답은 아래와 같습니다.</p>
+<div class="highlight"><pre><code class="text">{
+ &quot;ok&quot; : true,
+ &quot;_index&quot; : &quot;docs&quot;,
+ &quot;_type&quot; : &quot;doc&quot;,
+ &quot;_id&quot; : &quot;1&quot;,
+ &quot;matched&quot; : true,
+ &quot;explanation&quot; : {
+   &quot;value&quot; : 0.15342641,
+   &quot;description&quot; : &quot;fieldWeight(_all:document in 0), product of:&quot;,
+   &quot;details&quot; : [ {
+     &quot;value&quot; : 1.0,
+     &quot;description&quot; : &quot;tf(termFreq(_all:document)=1)&quot;
+   }, {
+     &quot;value&quot; : 0.30685282,
+     &quot;description&quot; : &quot;idf(docFreq=1, maxDocs=1)&quot;
+   }, {
+     &quot;value&quot; : 0.5,
+     &quot;description&quot; : &quot;fieldNorm(field=_all, doc=0)&quot;
+   } ]
+ }
+}
+</code></pre></div>
+<p>You can see the description about score calculation that is returned from the Explain API.</p>
+
+<p>Explain API로 반환되는 스코어 계산에 대한 내용을 알 수 있겠죠?</p>
+
+<h2>Before We End</h2>
+
+<p>There are a few words more we wanted to write before summarizing this comparison. First of all the above mentioned APIs and possibilities are not all that it is available, especially when it comes to ElasticSearch. For example, with ElasticSearch you can clear caches on the index level, you can check index and types existence, you can retrieve and manage your warming queries, clear the transaction log by running the Flush API, or  even close an index or open those that were closed. We wanted to point some differences and similarities between Apache Solr and ElasticSearch, but we didn’t want to make a summary of the documentation. :) So, if you are interested in some functionality and you don’t know if it exists, just send a mail to Apache Solr or ElasticSearch mailing list or leave a comment here, and we will be glad to help.</p>
+
+<p>이 비교를 정리하기 전에 좀 더 써두고 싶은 것이 있습니다. 우선 맨처음 위에서 설명한 API 와 기능은 두 검색엔진이 가진 모든 기능이 아닙니다. 특히 ElasticSearch가 그렇습니다. 예를들어 ElasticSearch 에서는 인덱스 레벨 위에서 캐쉬를 지우거나 존재하는 인덱스와 타입을 확인하거나, 워밍쿼리를 뽑고, 관리하거나, 플러쉬 API 를 시행해서 트랜잭션로그를 삭제하거나, 거기에 인덱스를 닥거나 닫힌 인덱스를 여는 것도 가능합니다. 우리는 Apache Solr 와 ElasticSearch 의 차이와 유사점에 대해서 다루고 싶었지, 정리한 문서를 만들고 싶지는 않았습니다. :) 따라서 만약 어떤 기능에 흥미가 있고, 그런 기능이 있는 지 모르는 경우는 Apache Solr 나 ElasticSearch 의 메일링리스트에 메일을 보내거나 여기에 코멘트를 남겨주세요. 기꺼이 도와드리겠습니다.</p>
+
+<h2>정리</h2>
+
+<p>When we first started the Solr vs ElasticSearch series we planned to initially divide the series into five posts, which are now published. However after seeing the popularity of the series and the amount of feedback we’ve received, we decided to extend the series. You can soon expect the next part, which will be dedicated to non-technical, but deeply important and interesting aspects of both search servers. After that, we’ll get back to the technical details with the subsequent post  dedicated to score influence capabilities, describing how we can change the default Lucene scoring and influence it from configuration, during indexing time and finally during querying.</p>
+
+<p>Solr vs ElasticSearch 시리즈를 시작했을 때, 우리는 시리즈를 다섯개의 기사로 나눌 예정이었습니다. 하지만 이 시리즈의 인기와 여러 피드백의 양을 생각한 결과 이 시리즈를 확장하기로 했습니다. 이미 다음편을 기대하고 있겠죠. 다음편은 비기술적이지만 매우 중요하고 재미있는 두 가지 검색서버의 측면에 대해서 다루고자 합니다. 그리고 기술적인 자세한 이야기에 이은 포스트에서는 반환되는 스코어에 영향을 주는 기능에 대해서 다루고, 인덱싱할 때와 최종적으로 쿼리 사이에 어떻게 Lucene 의 기본 스코어링을 바꿔서 설정에서 영향을 줄 수 있는 가를 다루고자 합니다.</p>
+
+<p>If you liked this post, please tweet it!</p>
+
+<p>이 글이 좋아한다면 트윗해주세요.</p>
+
+<ul>
+<li>@kucrafal, @sematext</li>
+</ul>
+</div>
+
+  <footer>
+    
+    <p><a class="comments-link" href="/2013/07/17/solr-vs-elasticsearch-part-5-management-api-capabilities/#disqus_thread" data-disqus-identifier="http://jeen.github.io/2013/07/17/solr-vs-elasticsearch-part-5-management-api-capabilities/">View comments &raquo;</a></p>
+
+    
+    
+  </footer>
+
+
+    </article>
+  
+    
+
+
+
+
+
+
+
+
+
+
+    <article >
+      
+  <header>
+    <h1 class="entry-title">
+
 <a href="/2013/07/16/solr-vs-elasticsearch-part-4-faceting/">[번역] Solr vs ElasticSearch Part 4 - Faceting</a>
 
 </h1>
@@ -618,201 +894,6 @@
   <footer>
     
     <p><a class="comments-link" href="/2013/07/16/solr-vs-elasticsearch-part-3-searching/#disqus_thread" data-disqus-identifier="http://jeen.github.io/2013/07/16/solr-vs-elasticsearch-part-3-searching/">View comments &raquo;</a></p>
-
-    
-    
-  </footer>
-
-
-    </article>
-  
-    
-
-
-
-
-
-
-
-
-
-
-    <article >
-      
-  <header>
-    <h1 class="entry-title">
-
-<a href="/2013/07/16/solr-vs-elasticsearch-part-2-indexing-and-language-handling/">[번역] Solr vs. ElasticSearch: Part 2 - Indexing and Language Handling</a>
-
-</h1>
-
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-
-<time datetime="2013-07-16T12:30:39+00:00" pubdate data-updated="true">Jul 16<span>th</span>, 2013</time>
-         &bull; <a rel="bookmark" href="/2013/07/16/solr-vs-elasticsearch-part-2-indexing-and-language-handling/">Permalink</a>
-      </p>
-    
-  </header>
-
-<div class="entry-content"><h1>Solr vs. ElasticSearch: Part 2 – Indexing and Language Handling</h1>
-
-<p>September 4, 2012 by Rafał Kuć</p>
-
-<p>In the previous part of Solr vs. ElasticSearch series we talked about general architecture of these two great search engines based on Apache Lucene. Today, we will look at their ability to handle your data and perform indexing and language analysis.</p>
-
-<p>전 편의 &ldquo;Solr vs. ElasticSearch&rdquo; Part1 기사에서 Apache Lucene 을 기반으로 하는 두가지 검색엔진의 전반적인 아키텍쳐에 대해서 이야기 했습니다. 오늘은 데이터의 취급과 인덱싱, 그리고 언어의 해석능력을 알아보도록 합니다.</p>
-
-<ol>
-<li>Solr vs. ElasticSearch: Part 1 - Overview</li>
-<li>Solr vs. ElasticSearch: Part 2 - Indexing and Language Handling</li>
-<li>Solr vs. ElasticSearch: Part 3 - Searching</li>
-<li>Solr vs. ElasticSearch: Part 4 - Faceting</li>
-<li>Solr vs. ElasticSearch: Part 5 - Management API Capabilities</li>
-<li>Solr vs. ElasticSearch: Part 6 – User &amp; Dev Communities Compared</li>
-</ol>
-
-<h2>데이터 인덱싱</h2>
-
-<p>Apart from using Java API exposed both by ElasticSearch and Apache Solr, you can index data using an HTTP call. To index data in ElasticSearch you need to prepare your data in JSON format. Solr also allows that, but in addition to that, it lets you to use other formats like the default XML or CSV. Importantly, indexing data in different formats has different performance characteristics, but that comes with some limitations. For example, indexing documents in CSV format is considered to be the fastest, but you can’t use field value boosting while using that format. Of course, one will usually use some kind of a library or Java API to index data as one doesn’t typically store data in a way that allows indexing of data straight into the search engine (at least in most cases that’s true).</p>
-
-<p>ElasticSearch와 Apache Solr 모두 공개되어 있는 Java API 가 아닌 HTTP 호출을 사용해서 데이터 인덱싱을 할 수 있습니다. ElasticSearch 에서 데이터를 인덱싱하기 위해서는 데이터를 JSON 포맷으로 준비할 필요가 있습니다. Solr 도 가능하지만, 그에 덧붙여 기본적으로는 XML 이나 CSV 등 다른 형식을 이용할 수 있습니다. 중요한 것은 다른 형식의 데이터를 인덱싱 하는 경우 다른 퍼포먼스 특성이 존재하며 이에 대해서는 몇 가지 제약이 따릅니다. 예를 들어 CSV 형식의 도큐먼트를 인덱싱하는 경우가 가장 빠르다고 볼 수 있는 데, 이 경우 필드값의 boosting 을 이용할 수 없습니다. 물론 일반적으로는 어떠한 종류의 라이브러리나 Java API 를 사용해서 데이터를 인덱싱할 것입니다. 일반적으로는 검색 엔진에 직접 들어가는 데이터의 인덱스를 만들면서 데이터를 저장하는 일은 없습니다. (적어도 대부분의 경우 그렇습니다)</p>
-
-<h2>ElasticSearch에 대해서 보충설명</h2>
-
-<p>It is worth noting that ElasticSearch supports two additional things, that Solr does not – nested documents and multiple document types inside a single index.</p>
-
-<p>Solr 가 지원하지 않는 ElasticSearch 의 두가지 추가기능에 대해서 다뤄볼 가치가 있는 데 그것은 중첩 도큐먼트와 단일 도큐먼 안에서의 복수도큐먼트 타입니다. </p>
-
-<p>The nested documents functionality lets you create more than a flat document structure. For example, imagine you index documents that are bound to some group of users. In addition to document contents, you would like to store which users can access that document.  And this is were we run into a little problem – this data changes over time. If you were to store document content and users inside a single index document, you would have to reindex the whole document every time the list of users who can access it changes in any way. Luckily, with ElasticSearch you don’t have to do that – you can use nested document types and then use appropriate queries for matching. In this example, a nested document would hold a lists of users with document access rights. Internally, nested documents are indexed as separate index documents stored inside the same index. ElasticSearch ensures they are indexed in a way that allows it to use fast join operations to get them. In addition to that, these documents are not shown when using standard queries and you have to use nested query to get them, a very handy feature.</p>
-
-<p>중첩 도큐먼트 기능은 평탄한 도큐먼트 구조를 넘은 것을 만들 수 있습니다. 이를테면 어떤 유저 그룹에 연결된 도큐먼트를 인덱싱한다고 생각해봅시다. 도큐먼트의 내용 뿐만 아니라 어느 유저가 그 문서에 접근할 수 있는 지를 넣고 싶다고 해둡니다. 만약 단일 인스턴스의 도큐먼트 안에서 도큐먼트의 내용과 유저를 넣을 경우, 그 도큐먼트에 접근할 수 있는 유저의 리스트를 변경할 때마다 도큐먼트 전체를 다시 인덱싱해야 합니다. 다행히도 ElasticSearch 를 사용하면 그런 일은 없습니다. 중첩 도큐먼트 타입을 사용해서 적절한 쿼리를 매칭에 사용할 수 있습니다. 이 예제에서는 중첩 도큐먼트는 유저 리스트와 도큐먼트의 접근권한을 가집니다. 내부적으로는 중첩 도큐먼트는 같은 인덱스 안에서 놓여진 분리된 인덱스 문서로 색인됩니다.</p>
-
-<p>ElasticSearch는 빠른 JOIN 명령을 사용해서 인덱싱할 수 있습니다. 덧붙여 이 도큐먼트들은 표준 쿼리를 사용한 경우는 보이지 않으며, 중첩 쿼리를 얻어내기 위해서는 사용할 수 있어 매우 편리한 기능입니다.</p>
-
-<p>Multiple types of documents per index allow just what the name says – you can index different types of documents inside the same index.  This is not possible with Solr, as you have only one schema in Solr per core.  In ElasticSearch you can filter, query, or facet on document types. You can make queries against all document types or just choose a single document type (both with Java API and REST).</p>
-
-<p>인덱스마다 복수타입의 도큐먼트는 이름 그대로의 행위를 할 수 있습니다.. 다른 타입의 도큐먼트를 같은 인덱스 안에서 인덱싱할 수 있는데, 이것은 Solr 에서는 코어당 하나의 스키마만을 가질 수 있기 때문에 불가능합니다.</p>
-
-<p>ElasticSearch에서는 도큐먼트타입에 의해 필터, 쿼리, 퍼셋(Facet) 을 할 수 있습니다. 모든 도큐먼트 타입에 대해서, 또는 하나의 도큐먼트 타입을 선택해서 쿼리를 날릴 수 있습니다. (Java API 와 REST 양쪽 모두 가능합니다)</p>
-
-<h2>인덱스 다루기</h2>
-
-<p>Let’s look at the ability to manage your indices/collections using the HTTP API of both Apache Solr and ElasticSearch.</p>
-
-<p>Apache Solr 와 ElasticSearch 에서의 인덱스/콜렉션을 HTTP API 를 사용해서 관리하는 방법을 보도록 합니다.</p>
-
-<h3>Solr</h3>
-
-<p>Solr let’s you control all cores that live inside your cluster with the CoreAdmin API – you can create cores, rename, reload, or even merge them into another core. In addition to the CoreAdmin API Solr enables you to use the collections API to create, delete or reload a collection. The collections API uses CoreAdmin API under the hood, but it’s a simpler way to control your collections. Remember that you need to have your configuration pushed into ZooKeeper ensemble in order to create a collection with a new configuration.</p>
-
-<p>Solr 는 운용중인 클래스 안에서 모든 코어를 CoreAdmin API 로 관리할 수 있습니다. 코어 작성, 이름 변경, 리로드, 또는 여러 코어들을 하나의 코어로 머지할 수 있습니다. 또한 Solr 는 Collections API 를 사용해서 콜렉션의 작성, 삭제, 그리고 리로드를 할 수 있습니다. Collections API 는 뒷단에서 CoreAdmin API 를 사용하며 간단하게 콜렉션을 다룰 수 있습니다. 새로운 설정의 콜렉션을 작성하기 위해서는 ZooKeeper ensemble 에 설정을 넣어 둘 필요가 있습니다. </p>
-
-<p>When it comes to Solr, there is additional functionality that is in early stages of work, although it’s functional – the ability to split your shards. After applying the patch available in SOLR-3755 you can use a SPLIT action to split your index and write it to two separate cores. If you look at the mentioned JIRA issue, you’ll see that once this is commited Solr will have the ability not only to create new replicas, but also to dynamically re-shard the indices.  This is huge!</p>
-
-<p>Solr 에는 아직 미성숙하지만 유효한 추가기능이 있습니다. 바로 Shard 의 분할입니다. SOLR-3755에 있는 패치를 적용한 다음에 인덱스를 분할해서 두개로 분할한 코어에 넣는 것이 SPLIT 액션을 사용해서 가능해집니다. 그 JIRA 이슈를 읽으면 이것이 커밋되면 Solr 는 새로운 레플리카를 작서아는 것뿐만 아니라, 동적으로 인덱스를 re-shard 하는 기능을 가지게 됩니다. 이것은 매우 큰 이점입니다!</p>
-
-<h3>ElasticSearch</h3>
-
-<p>One of the great things in ElasticSearch is the ability to control your indices using HTTP API. We will take about it extensively in the last part of the series, but I have to mention it ere, too. In ElasticSearch you can create indices on the live cluster and delete them. During creation you can specify the number of shards an index should have and you can decrease and increase the number of replicas without anything more than a single API call. You cannot change the number of shards yet.  Of course, you can also define mappings and analyzers during index creation, so you have all the control you need to index a new type of data into you cluster.</p>
-
-<p>ElasticSearch의 굉장한 기능 중 하나로 HTTP API를 사용해서 인덱스를 다루는 능력이 있습니다. 이 시리즈의 마지막 파트에서 이에 대해서 광범위하게 다룰 예정이지만, 일단 여기에서도 간단히 다룰 필요가 있을 것 같습니다. ElasticSearch에서는 운용중의 클러스터 위에서 인덱싱을 할 수 있고, 삭제할 수 있습니다. 인덱싱 하는 동안, 인덱스를 가져야할 Shard 의 수를 지정할 수 있으며, 단일 API 호출만으로 레플리카 수의 증감을 조정할 수 있습니다. Shard 수는 아직 변경할 수 없습니다. 물론 맵핑과 해석기를 인덱싱 시에 설정가능하고, 클러스터 안에서 새로운 형태의 데이터 인덱싱에 필요한 모든 컨트롤을 가지게 됩니다.</p>
-
-<h2>도큐먼트의 부분갱신</h2>
-
-<p>Both search engines support partial document update. This is not the true partial document update that everyone has been after for years – this is really just normal document reindexing, but performed on the search engine side, so it feels like a real update.</p>
-
-<p>두 검색엔진 모두 도큐먼트의 부분갱신을 지원합니다. 이것은 모두가 기대한 그런 도큐먼트 부분갱신이 아닙니다. 단지 일반적인 도큐먼트 의 재인덱싱일 뿐입니다. 그러나 검색엔진에서 실행되기에 진짜 갱신처럼 보이기도 합니다.</p>
-
-<h3>Solr</h3>
-
-<p>Let’s start from the requirements – because this functionality reconstructs the document on the server side you need to have your fields set as stored and you have to have the <em>version</em> field available in your index structure. Then you can update a document with a simple API call, for example:</p>
-
-<p>요건부터 시작하겠습니다. 이 기능은 서버측의 도큐먼트를 재구성하기에 필드의 집합이 격납되었고 _version_필드가 인덱스 구성에서 존재하지 않으면 안됩니다. 이렇게 하면 단일 API 호출에 의해 도큐먼트를 갱신할 수 있습니다.</p>
-
-<p>예：</p>
-<div class="highlight"><pre><code class="text">curl &#39;localhost:8983/solr/update&#39; -H &#39;Content-type:application/json&#39; -d &#39;[{&quot;id&quot;:&quot;1&quot;,&quot;price&quot;:{&quot;set&quot;:100}}]&#39;
-</code></pre></div>
-<h3>ElasticSearch</h3>
-
-<p>In case of ElasticSearch you need to have the _source field enabled for the partial update functionality to work. This _source is a special ElasticSearch field that stores the original JSON document.  Theis functionality doesn’t have add/set/delete command, but instead lets you use script to modify a document. For example, the following command updates the same document that we updated with the above Solr request:</p>
-
-<p>ElasticSearch 의 경우, 부분갱신 기능이 제대로 동작하기 위해서는 _source 필드가 허가되어 있을 필요가 있습니다. 이 _source는 특별한 ElasticSearch 필드에서 오리지널 JSON 도큐먼트를 저장합니다. 이 기능에는 add/set/delete 명령은 존재하지 않습니다. 그 대신에 도큐먼트를 변경하는 스크립트의 사용을 허가합니다. 예를 들어 다음의 명령어를 위의 Solr 리퀘스트에서 갱신한 것과 같은 문서를 갱신한다고 합니다.</p>
-<div class="highlight"><pre><code class="text">curl -XPOST &#39;localhost:9200/sematext/doc/1/_update&#39;-d &#39;{
-    &quot;script&quot; : &quot;ctx._source.price = price&quot;,
-    &quot;params&quot; : {
-        &quot;price&quot; : 100
-    }
-}&#39;
-</code></pre></div>
-<h2>다국어데이터의 취급</h2>
-
-<p>As we mentioned previously, and as you probably know, both ElasticSearch and Solr use Apache Lucene to index and search data. But, of course, each search engine has its own Java implementation that interacts with Lucene. This is also the case when it comes to language handling. Apache Solr 4.0 beta has the advantage over ElasticSearch because it can handle more languages out of the box. For example, my native language Polish is supported by Solr out of the box (with two different filters for stemming), but not by ElasticSearch. On the other hand, there are many plugins for ElasticSearch that enable support for languages not supported by default, though still not as many as we can find supported in Solr out of the box.  It’s also worth mentioning there are commercial analyzers that plug into Solr (and Lucene), but none that we are aware of work with ElasticSearch…. yet.</p>
-
-<p>이전 언급한 대로, ElasticSearch와 Solr 는 Apache Lucene 을 인덱싱 및 데이터의 검색에 이용하고 있습니다. 각 검색엔진은 그 자체가 Java 구현을 가지며 Lucene 과 상호작용합니다. 이것이 여러 나라의 언어취급에 있어서도 마찬가지 입니다. 이 부분에 있어서는 Apache Solr 4.0β가 ElasticSearch 에 대해서 우위입니다. Solr 그 자체로도 많은 언어를 다룰 수 있기 때문입니다. 예를 들어 저자의 네이티브 언어인 폴란드어는 Solr 에서는 처음부터 지원되었습니다. (두가지 다른 stemming용 필터를 포함한 채) 그러나 ElasticSearch는 그렇지 않습니다. ElasticSearch에서는 기본적으로는 지원하지 않는 언어를 지원하는 플러그인이 다수 존재합니다. 그래도 그 수는 Solr 가 처음부터 지원하고 있는 수만큼은 아닙니다. 또 하나 알아둘 가치가 있는 것은 Solr(와 Lucene)에는 상업해석기가 있습니다. 그러나 ElasticSearch 용은 아직 있는 지 모르겠습니다.</p>
-
-<h2>지원되는 자연언어</h2>
-
-<p>For the full list of languages supported by those two search engine please refer to the following pages:</p>
-
-<p>두 검색엔진에서 지원되는 언어의 완전한 리스트에 대해서는 다음 버젼을 참고해주세요.</p>
-
-<p>Apache Solr
-    <a href="http://wiki.apache.org/solr/LanguageAnalysis" ><a href="http://wiki.apache.org/solr/LanguageAnalysis">http://wiki.apache.org/solr/LanguageAnalysis</a></a></p>
-
-<p>ElasticSearch</p>
-
-<p>Analyzers: <a href="http://www.elasticsearch.org/guide/reference/index-modules/analysis/lang-analyzer.html">http://www.elasticsearch.org/guide/reference/index-modules/analysis/lang-analyzer.html</a>
-Stemming: <a href="http://www.elasticsearch.org/guide/reference/index-modules/analysis/stemmer-tokenfilter.html">http://www.elasticsearch.org/guide/reference/index-modules/analysis/stemmer-tokenfilter.html</a>,
- <a href="http://www.elasticsearch.org/guide/reference/index-modules/analysis/snowball-tokenfilter.html">http://www.elasticsearch.org/guide/reference/index-modules/analysis/snowball-tokenfilter.html</a> 그리고 <a href="http://www.elasticsearch.org/guide/reference/index-modules/analysis/snowball-tokenfilter.html">http://www.elasticsearch.org/guide/reference/index-modules/analysis/kstem-tokenfilter.html</a></p>
-
-<h2>해석체인의 정의</h2>
-
-<p>Of course, both Apache Solr and ElasticSearch allow you to define a custom analysis chain by specifying your own analyzer/tokenizer and list of filters that should be used to process your data. However, the difference between ElasticSearch and Solr is not only in the list of supported languages. ElasticSearch allows one to specify the analyzer per document and per query. So, if you need to use a different analyzer for each document in the index you can do that in ElasticSearch. The same applies to queries – each query can use a different analyzer.</p>
-
-<p>물론, Apache Solr 와 ElasticSearch 양쪽 모두 커스텀 해석기 체인을 정의할 수 있습니다. 당신의 데이터 처리에 사용되는 해석기 및 토크나이저, 필터의 리스트를 지정합니다. 그러나, ElasticSearch 와 Solr 의 차이는 지원되는 언어의 리스트 뿐만이 아닙니다. ElasticSearch 는 도큐먼트 마다, 쿼리마다 해석기를 지정할 수 있습니다. 때문에 인덱스 안의 각각의 도큐먼트에 다른 해석기의 사용이 필요하다면 ElasticSearch 에서는 가능합니다. 쿼리도 마찬가지입니다. 각 쿼리는 다른 해석기를 사용할 수 있습니다.</p>
-
-<h2>결과의 그룹핑</h2>
-
-<p>One of the most requested features for Apache Solr was result grouping. It was highly anticipated for Solr and it is still anticipated for ElasticSearch, which doesn’t yet have field grouping as of this writing.  You can see the number of +1 votes in the following issue: <a href="https://github.com/elasticsearch/elasticsearch/issues/256">https://github.com/elasticsearch/elasticsearch/issues/256</a>.  You can expect grouping to be supported in ElasticSearch after changes introduced in 0.20. If you are not familiar with results grouping – it allows you to group results based on the value of a field, value of a query, or a function and return matching documents as  groups. You can imagine grouping results of restaurants on the value of the city field and returning only five restaurants for each city. A feature like this may be handy in some situations. Currently, for the search engines we are talking about, only Apache Solr supports results grouping out of the box.</p>
-
-<p>Apache Solr 에 가장 많이 요청된 기능 중 하나가 결과의 그룹핑입니다. Solr 에 있어서 가장 기대되어 온 기능이며, ElasticSearch 에 있어서도 지금도 기대를 머금고 있습니다. 이 글을 쓰고 있는 시점에서는 ElasticSearch 는 필드의 그룹핑을 가지고 있지 않습니다. 다음 이슈를 보면 이에 대한 여러 요청이 있는 것을 알 수 있을 것입니다. <a href="https://github.com/elasticsearch/elasticsearch/issues/256">https://github.com/elasticsearch/elasticsearch/issues/256</a></p>
-
-<p>ElasticSearch에서는 0.20 이 릴리즈 된 때에 지원될 것이라고 기대하고 있습니다. 결과의 그룹핑을 모르는 사람을 위해 설명하자면, 필드나 쿼리 또는 함수의 값에 의해 결과를 그룹으로 나눌 수 있습니다. 그리고 매치된 도큐먼트를 그룹으로 반환합니다. 예를들어 레스토랑의 결과를 마을의 필드로 그룹핑해서 각 거리의 다섯가지 레스토랑만 반환합니다. 이런 기능은 여러 상황에서 편리하겠죠. 지금은 Apache Solr 만이 기본적으로 결과의 그룹핑을 할 수 있습니다.</p>
-
-<h2>Prospective Search</h2>
-
-<p>One thing Apache Solr completely lacks when comparing to ElasticSearch is functionality called Percolator in ElasticSearch. Imagine a search engine that, instead of storing documents in the index, stores queries and lets you check which stored/indexed queries match each new document being indexed. Sound handy, right?  For example, this is useful when people want to watch out for any new documents (think Social Media, News, etc.) matching their topics of interest, as described through queries. This functionality is also called Prospective Search, some call it Pub-Sub as well as Stored Searches.  At Sematext we’ve implemented this a few times for our clients using Solr, but ElasticSearch has this functionality built-in.  If you want to know more about ElasticSearch Percolator see <a href="http://www.elasticsearch.org/blog/2011/02/08/percolator.html">http://www.elasticsearch.org/blog/2011/02/08/percolator.html</a>.</p>
-
-<p>Apache Solr 가 ElasticSearch와 비교해서 완전하게 결여된 것 중 하나는 ElasticSearch 에서 퍼컬레이터 라고 부르는 기능입니다. 예를들어 인덱스에 도큐먼트를 넣는 것이 아니라, 쿼리를 넣고 새로운 도큐먼트의 인덱싱 때마다 인덱스된 쿼리가 매치하는 지 어떤 지를 체크하는 것이죠. 좋지 않나요?
- 편리한 점은 유저가 모든 새로운 도큐먼트(소셜미디어나 뉴스 같은 것을 생각해보세요)가 유저가 흥미를 가지는 토픽에 해당되는 지, 앞서 정의한 쿼리를 통해서 체크하고 싶은 경우에 유용합니다. 이 기능은 또 Prospective Search 라고도 불립니다. 또 어떤 사람은 Pub-Sub라고도 부르고, stored search 라고도 부릅니다. Sematext 에서는 Solr를 사용하는 고객을 위해서 이것을 몇 번인가 구현한 적이 있습니다. 하지만 ElasticSearch는 기본적으로 이 기능을 가지고 있죠. 만약 ElasticSearch의 퍼컬레이터에 대해서 좀 더 알아보고 싶으시다면 다음 URL 을 참고하세요.</p>
-
-<p><a href="http://www.elasticsearch.org/blog/2011/02/08/percolator.html">http://www.elasticsearch.org/blog/2011/02/08/percolator.html</a></p>
-
-<h2>다음회 예고</h2>
-
-<p>In the next part of the series we will focus on comparing the ability to query your indices and leverage the full text search capabilities of Apache Solr and ElasticSearch. We will also look at the possibility to influence Lucene scoring algorithms during query time. Till next time :)</p>
-
-<p>다음회에서는 Apache Solr 와 ElasticSearch 상의 인덱스에 대해서 쿼리의 능력과 전문검색의 능력에 대해서 알아보도록 합니다. 또 쿼리시에 Lucene 의 스코어링 알고리즘을 다루는 방법에 대해서도 알아볼 예정입니다. 그럼 다음회에서 봐요.</p>
-
-<p>@kucrafal, @sematext</p>
-</div>
-
-  <footer>
-    
-    <p><a class="comments-link" href="/2013/07/16/solr-vs-elasticsearch-part-2-indexing-and-language-handling/#disqus_thread" data-disqus-identifier="http://jeen.github.io/2013/07/16/solr-vs-elasticsearch-part-2-indexing-and-language-handling/">View comments &raquo;</a></p>
 
     
     

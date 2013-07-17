@@ -98,6 +98,138 @@
   <header>
     <h1 class="entry-title">
 
+<a href="/2012/06/17/dbix-class-and-replication/">DBIx::Class + Replication</a>
+
+</h1>
+
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2012-06-17T19:05:00+00:00" pubdate data-updated="true">Jun 17<span>th</span>, 2012</time>
+         &bull; <a rel="bookmark" href="/2012/06/17/dbix-class-and-replication/">Permalink</a>
+      </p>
+    
+  </header>
+
+<div class="entry-content"><p>일반적으로 회사에서 개발하는 규모에서는 Replication 을 크게 고려하지 않았었는데, 이번에 수주받은 프로젝트에서 DBIx::Class 사용시에 Replication 에 대해서 고려해야 할 부분이 있었습니다.</p>
+
+<p>이전 회사에서 MySQL Replication 을 설정할 때 slave 서버들의 앞단에 keepalived 를 놓아서 로드 밸런서 역할로 사용했던 적이 있습니다. 말그대로 부하분산의 목적도 있고, 많은 slave 서버들의 커넥션정보를 일일이 웹 어플리케이션에서 설정할 필요도 없었죠. 하지만 IDC 에 로드밸런서 서버 한대를 더 우겨넣어야 했었죠.</p>
+
+<p>뭐 그리고 어플리케이션 로직에서도 master, slave 를 명시적으로 지정해야할 필요도 있었습니다.</p>
+
+<p>최근에는 HAProxy 를 사용해서 이런 저런 구성을 하고 있다는 얘기를 들었지만 마땅히 실제업무에서는 사용해보지 못해서 뭐라 말도 못하겠군요.</p>
+
+<p>그나저나 DBIx::Class 에서는 0.081x 버젼부터 자체적으로 Replication 설정을 할 수 있게 되었습니다. 위에서 로드밸런서를 사용하는 것과는 달리 slave 서버들의 접속정보를 모두 적어야할 필요가 있습니다. 하지만 설정만으로 갱신/참조용 쿼리를 어플리케이션 로직에 상관없이 분리시킬 수 있습니다.</p>
+
+<ul>
+<li><p><a href="https://metacpan.org/module/DBIx::Class::Storage::DBI::Replicated">DBIx:Class::Storage::DBI::Replicated - metacpan.org</a></p>
+
+<p>DBIx::Class::Storage::DBI::Replicated 의 SYNOPSIS 에 나와있는 대로 하면 됩니다.</p>
+
+<p>&hellip;.
+my $schema = MyApp::Schema-&gt;clone;
+$schema-&gt;storage_type([
+    &#39;::DBI::Replicated&#39; =&gt; {
+        balancer_type =&gt; &#39;::Random&#39;,
+        balancer_args =&gt; {
+            auto_validate_every =&gt; 10,
+            master_read_weight  =&gt; 0,
+        },<br>
+        pool_args =&gt; {
+            maximum_lag =&gt; 2,
+        }<br>
+    }<br>
+]);
+$schema-&gt;connection({
+    dsn      =&gt; &ldquo;dbi:mysql:myapp:127.0.0.50&rdquo;,
+    user     =&gt; &ldquo;user&rdquo;,
+    password =&gt; &ldquo;whatthehell&rdquo;,
+    RaiseError        =&gt; 1,
+    AutoCommit        =&gt; 1,
+    mysql_enable_utf8 =&gt; 1,
+    on_connect_do     =&gt; [&ldquo;SET NAMES utf8&rdquo;],
+    quote_char        =&gt; q{},
+});
+$schema-&gt;storage-&gt;connect_replicants([
+    {
+        dsn      =&gt; &ldquo;dbi:mysql:myapp:192.168.0.51&rdquo;,
+        user     =&gt; &ldquo;user&rdquo;,
+        password =&gt; &ldquo;whatthehell&rdquo;,
+    },
+    &hellip;.
+]);</p>
+
+<p>DBIx::Class 에서 위처럼, -&gt;storage_type 에 DBI::Replicated 를 지정하고 그에 적합한 인수를 넘겨주면 됩니다. <code>balancer_type</code> 은 기본적으로 <code>First</code>, <code>Random</code> 이 있습니다. 일단 저는 <code>Random</code>을 사용하구요. </p>
+
+<p>balancer_args에서 <code>auto_validate_every</code> 를 통해서 매초당 Replication 의 유효성을 확인합니다. 0으로 지정되어 있을 경우에는 뭐 안하겠다고 생각할 수 있지만&hellip; 그게 아니라 매번 쿼리를 날릴때마다 체크를 하게 됩니다.</p>
+
+<p>pool_args 의 <code>maximum_lags</code> 는 Replication 서버에 대한 유효성 체크에서 해당 수치를 초과하면 자동으로 Replication Pool 에서 해당 서버에 대한 접속을 빼버리게 됩니다.</p>
+
+<p>-&gt;connection 에서 지정한 것은 master 서버, -&gt;storage-&gt;connect_replicants 에서 복수의 slave 서버들을 지정합니다.</p>
+
+<p>그럼 Replication 체크는 어떻게 하고 있을까요?</p>
+
+<p>sub is_replicating {
+    my $status = shift-&gt;<em>get_dbh-&gt;selectrow_hashref(&#39;show slave status&#39;);
+    return ($status-&gt;{Slave</em>IO_Running} eq &#39;Yes&#39;) &amp;&amp; ($status-&gt;{Slave_SQL_Running} eq &#39;Yes&#39;);
+}</p>
+
+<p><code>DBIx::Class::Storage::DBI::mysql</code> 에서 확인할 수 있습니다만, <code>show slave status</code> 를 날려서 Slave_IO_Running, Slave_SQL_Running 값을 보고 Replication 체크를 수행하고 있는 것이죠.  뭐 물론 mysql 의 경우입니다만, 만약 DBD::* 에서 is_replicating 이 정의가 되어 있지 않다면 master 로의 fail-over 같은 건 동작하지 않습니다.</p>
+
+<p>화면상에서 이뤄지는 각각의 쿼리들이 정말로 제대로 가고 있을까 확인해보고 싶을 경우도 있을 겁니다. 그때는&hellip;</p>
+
+<p>$schema-&gt;storage-&gt;debug(1);</p>
+
+<p>을 지정함으로, 어떤 쿼리가 어느 DB 서버로 향하는 지에 대한 정보가 화면에 뿌려지기에 눈으로 확인하기 좋겠죠.</p>
+
+<p>만약 Replication 이 제대로 설정되지 않으면 자동으로 모든 쿼리는 master 서버로 향하게 됩니다.</p>
+
+<p>Exception trying to -&gt;ensure_connected for replicant dbi:mysql:bto:localhost, error is Class::MOP::Class:::around(): DBI Connection failed: DBI connect(&#39;my app:localhost&#39;,&#39;user&#39;,&hellip;) failed: Access denied for user &#39;user&#39;@&#39;localhost&#39; (using password: YES) at /Users/jeen/perl5/perlbrew/perls/perl-5.14.2-llvm/lib/site_perl/5.14.2/DBIx/Class/Storage/DBI.pm line 1249. at /Users/jeen/perl5/perlbrew/perls/perl-5.14.2-llvm/lib/site_perl/5.14.2/darwin-2level/Class/MOP/Method/Wrapped.pm line 162
+No Replicants validate, falling back to master reads.</p>
+
+<p>이렇게 몇줄만의 설정으로 간단하게 어플리케이션단에서 Replication 설정을 수행할 수 있습니다&hellip;만, 여러가지 운용이슈가 발생할 테고 그에 맞춰서 적당하게 답을 내야할 경우가 생기겠죠. 네, 뭐 그건 그때 가서&hellip; </p></li>
+</ul>
+</div>
+
+  <footer>
+    
+    <p><a class="comments-link" href="/2012/06/17/dbix-class-and-replication/#disqus_thread" data-disqus-identifier="http://jeen.github.io/2012/06/17/dbix-class-and-replication/">View comments &raquo;</a></p>
+
+    
+    
+  </footer>
+
+
+    </article>
+  
+    
+
+
+
+
+
+
+
+
+
+
+    <article >
+      
+  <header>
+    <h1 class="entry-title">
+
 <a href="/2012/06/14/beginning-perl/">Beginning Perl</a>
 
 </h1>
@@ -235,79 +367,6 @@
   <footer>
     
     <p><a class="comments-link" href="/2012/06/14/rex-im-a-contributor/#disqus_thread" data-disqus-identifier="http://jeen.github.io/2012/06/14/rex-im-a-contributor/">View comments &raquo;</a></p>
-
-    
-    
-  </footer>
-
-
-    </article>
-  
-    
-
-
-
-
-
-
-
-
-
-
-    <article >
-      
-  <header>
-    <h1 class="entry-title">
-
-<a href="/2012/02/28/crontab-plus-perlbrew/">Crontab + Perlbrew</a>
-
-</h1>
-
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-
-<time datetime="2012-02-28T21:03:00+00:00" pubdate data-updated="true">Feb 28<span>th</span>, 2012</time>
-         &bull; <a rel="bookmark" href="/2012/02/28/crontab-plus-perlbrew/">Permalink</a>
-      </p>
-    
-  </header>
-
-<div class="entry-content"><p>이번 글은 성의가 매우 부족하게 트윗의 열거로 끝낼까 합니다.</p>
-
-<blockquote class="twitter-tweet"><p>질문. perlbrew 설정이 crontab에서도 적용되게 하려면 어떻게 적어줘야 할까요..? .bashrc 에서 perlbrew의 설정파일을 부르게 해 둔 상태인데 crontab으로 실행하는 스크립트에는 적용이 안 되어 시스템 펄을 부르네요.</p>&mdash; Raymundo (@gypark) <a href="https://twitter.com/gypark/status/172218904352010240" data-datetime="2012-02-22T07:19:21+00:00">February 22, 2012</a></blockquote>
-
-<blockquote class="twitter-tweet" data-in-reply-to="172218904352010240"><p>@<a href="https://twitter.com/gypark">gypark</a> <a href="https://t.co/Q0yfoquc" title="https://gist.github.com/1882996">gist.github.com/1882996</a> 이런 식으로 하면 됩니다.</p>&mdash; envi (@nving) <a href="https://twitter.com/nving/status/172219600216399872" data-datetime="2012-02-22T07:22:07+00:00">February 22, 2012</a></blockquote>
-
-<blockquote class="twitter-tweet" data-in-reply-to="172219600216399872"><p>@<a href="https://twitter.com/nving">nving</a> 어&hellip; 그러면 다른 버전으로 switch 할 때마다 저 변수값을 바꿔줘야 해서&hellip;</p>&mdash; Raymundo (@gypark) <a href="https://twitter.com/gypark/status/172220146138611713" data-datetime="2012-02-22T07:24:17+00:00">February 22, 2012</a></blockquote>
-
-<blockquote class="twitter-tweet" data-in-reply-to="172221017534631936"><p>@<a href="https://twitter.com/nving">nving</a>perlbrew깔린디렉토리/perlbrew/bin/perlbrew exec 스크립트.pl이런 식으로 하니까 되네요~</p>&mdash; Raymundo (@gypark) <a href="https://twitter.com/gypark/status/172224703652564992" data-datetime="2012-02-22T07:42:23+00:00">February 22, 2012</a></blockquote>
-
-<blockquote class="twitter-tweet" data-in-reply-to="172220146138611713"><p>@<a href="https://twitter.com/gypark">gypark</a> @<a href="https://twitter.com/nving">nving</a>님께서 알려주신 방법이 정석(perlbrew와 동일한 방식)이라고 보여집니다. 다만 저라면 환경 변수 설정 없이 명시적으로 실행할 펄 바이너리를 명시하고 실행할 스크립트를 적어줄 것 같습니다.</p>&mdash; keedi (@keedi) <a href="https://twitter.com/keedi/status/172228561166536704" data-datetime="2012-02-22T07:57:43+00:00">February 22, 2012</a></blockquote>
-
-<blockquote class="twitter-tweet"><p>@<a href="https://twitter.com/gypark">gypark</a> @<a href="https://twitter.com/nving">nving</a> 크론에서 돌린다면 사실 어떤 버전이든지 알아서(환경 변수에 따라) 실행되게 하는 것은 위험한 것 같습니다. 더불어 크론으로 돌릴 스크립트라면 환경 변수를 믿지 않도록 작성할 필요도 있을테구요.</p>&mdash; keedi (@keedi) <a href="https://twitter.com/keedi/status/172228854906228737" data-datetime="2012-02-22T07:58:53+00:00">February 22, 2012</a></blockquote>
-
-<blockquote class="twitter-tweet" data-in-reply-to="172227703838220289"><p>@<a href="https://twitter.com/nving">nving</a> @<a href="https://twitter.com/gypark">gypark</a> 그렇게 실행할 경우 지금 현재 자신이 switch 하는 perl 버전에 따라 cronᅟ으로 돌릴 스크립트가 영향을 받지 않나요? 그렇다면 어떤 버전에는 설치된 모듈이 있고 어떤 버전에는 없다면 문제가 생길 것 같아요.</p>&mdash; keedi (@keedi) <a href="https://twitter.com/keedi/status/172229942577336320" data-datetime="2012-02-22T08:03:12+00:00">February 22, 2012</a></blockquote>
-
-<blockquote class="twitter-tweet" data-in-reply-to="172234678059794432"><p>@<a href="https://twitter.com/keedi">keedi</a> @<a href="https://twitter.com/nving">nving</a> RSS만드는 스크립트들을, 5.14에서 테스트했더니 와장창 망가지더라고요. Mechanize쪽이 어느 순간부터 반환값을 디코드해서 반환하는 터라. 그래서 거기에 맞춰 고쳤더니 정작 크론에서는 5.8 상에서 도는 바람에 OTL</p>&mdash; Raymundo (@gypark) <a href="https://twitter.com/gypark/status/172237570988703745" data-datetime="2012-02-22T08:33:31+00:00">February 22, 2012</a></blockquote>
-
-<p>이상 날로먹는 crontab + perlbrew 끝.</p>
-</div>
-
-  <footer>
-    
-    <p><a class="comments-link" href="/2012/02/28/crontab-plus-perlbrew/#disqus_thread" data-disqus-identifier="http://jeen.github.io/2012/02/28/crontab-plus-perlbrew/">View comments &raquo;</a></p>
 
     
     
