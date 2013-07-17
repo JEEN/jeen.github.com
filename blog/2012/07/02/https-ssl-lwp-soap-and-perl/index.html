@@ -1,0 +1,397 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>HTTPS-SSL-LWP-SOAP and Perl - Jeen - Yet anothere techlog</title>
+  <meta name="author" content="Jeen Lee">
+
+  
+  <meta name="description" content="tl;dr: I hate Java and SOAP, use Perl 지난 주에 고객으로부터 요구를 받았는데, DB특정 항목에 대치되는 어떤 값을 가지고 모 API를 통해서 결과를 받아서 뿌려주는 간단한 것이었습니다. 그 API 제공회사에서 날라온 API 명세서는 뭘 &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://jeen.github.io/blog/2012/07/02/https-ssl-lwp-soap-and-perl">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Jeen - Yet anothere techlog" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-27958809-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Jeen - Yet anothere techlog</a></h1>
+  
+    <h2>STFUAWSC</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:jeen.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">HTTPS-SSL-LWP-SOAP and Perl</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-07-02T15:23:00+09:00" pubdate data-updated="true">Jul 2<span>nd</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><blockquote><p>tl;dr: I hate Java and SOAP, use Perl</p></blockquote>
+
+<p> 지난 주에 고객으로부터 요구를 받았는데, DB특정 항목에 대치되는 어떤 값을 가지고 모 API를 통해서 결과를 받아서 뿌려주는 간단한 것이었습니다.</p>
+
+<p> 그 API 제공회사에서 날라온 API 명세서는 뭘 해도 자바였었죠. 샘플이라고 널려놓은 두세네개 코드도 전부 자바였습니다. 해야하는 건 결국 뭐 SOAP 정도였죠.</p>
+
+<p> 명세서에는 Axis 라는 것을 깔아서 뭐 붙여서 어떻게 뭐 wsdl 붙이고 어쩌고 복잡하게 써놨는데&hellip;</p>
+
+<p> 결론부터 말하면 endpoint 와 보낼 값들만 필요하면 자바가 무슨 소용이냐 싶어서 집어냈습니다.</p>
+
+<p>~~~ perl
+use strict;
+use warnings;
+use LWP::UserAgent;
+use Data::Dumper;</p>
+
+<p>my $q = {
+&lt;?xml version=&ldquo;1.0&rdquo; encoding=&ldquo;UTF-8&rdquo;?>
+&lt;soapenv:Envelope xmlns:soapenv=&ldquo;<a href="http://schemas.xmlsoap.org/soap/envelope/">http://schemas.xmlsoap.org/soap/envelope/</a>&rdquo; xmlns:xsd=&ldquo;<a href="http://www.w3.org/2001/XMLSchema">http://www.w3.org/2001/XMLSchema</a>&rdquo; xmlns:xsi=&ldquo;<a href="http://www.w3.org/2001/XMLSchema-instance">http://www.w3.org/2001/XMLSchema-instance</a>&rdquo;>
+ &lt;soapenv:Body>
+ &hellip;&hellip;&hellip;
+ &lt;/soapenv:Body>
+};</p>
+
+<p>my $ua = LWP::UserAgent->new;
+my $res = $ua->post(&lsquo;<a href="https://........">https://&#8230;&#8230;..</a>&rsquo;,
+  &lsquo;Content-Type&rsquo; => &lsquo;text/xml; charset=utf-8&rsquo;,
+  Content => $q,
+);</p>
+
+<p>print Dumper $res->content;
+~~~</p>
+
+<p>우선 SOAP XML 내용 및 endpoint 는 해당업체 비밀자료이기에 표시하지 않습니다.</p>
+
+<p>위의 코드의 결과는</p>
+
+<p>~~~ bash
+Can\&rsquo;t connect to demo-asp.ysdasp-service.ne.jp:443 (certificate verify failed)</p>
+
+<p>LWP::Protocol::<a href="https::Socket:">https::Socket:</a> SSL connect attempt failed with unknown error error:14090086:SSL routines:SSL3_GET_SERVER_CERTIFICATE:certificate verify failed at &hellip;/perl-5.14.2-llvm/lib/site_perl/5.14.2/LWP/Protocol/http.pm line 51.
+~~~</p>
+
+<p>이라고 나온 것이었습니다. 유효하지 않은 인증서라는 데, 브라우저에서는 그냥 무시하고 지나가버리면 되는 데, Perl 의 경우에서는 어떻게 할까&hellip; 결론은 구글해봤습니다.</p>
+
+<p><del> perl
+$ENV{&lsquo;PERL_LWP_SSL_VERIFY_HOSTNAME&rsquo;} = 0;
+</del></p>
+
+<p><code>PERL_LWP_SSL_VERIFY_HOSTNAME</code> 이라는 환경변수의 값을 0으로 지정함으로써 LWP 가 인증서의 유효성 체크를 생략시켜버립니다.</p>
+
+<p>이제는 되겠지 하고 실행을 시켜보니&hellip;</p>
+
+<p><del> xml
+&lt;?xml version=&ldquo;1.0&rdquo; encoding=&ldquo;UTF-8&rdquo;?>
+&lt;soapenv:Envelope xmlns:soapenv=&ldquo;<a href="http://schemas.xmlsoap.org/soap/envelope/">http://schemas.xmlsoap.org/soap/envelope/</a>&rdquo; xmlns:xsd=&ldquo;<a href="http://www.w3.org/2001/XMLSchema">http://www.w3.org/2001/XMLSchema</a>&rdquo; xmlns:xsi=&ldquo;<a href="http://www.w3.org/2001/XMLSchema-instance">http://www.w3.org/2001/XMLSchema-instance</a>&rdquo;>
+ &lt;soapenv:Body>
+  &lt;soapenv:Fault>
+   <faultcode xmlns:ns1="http://xml.apache.org/axis/">ns1:Client.NoSOAPAction</faultcode>
+   <faultstring>no SOAPAction header!</faultstring>
+   <detail/>
+  &lt;/soapenv:Fault>
+ &lt;/soapenv:Body>
+&lt;/soapenv:Envelope>
+</del></p>
+
+<p>이라는 결과가 나옵니다. <code>SOAPAction</code> 이라는 헤더가 없다고 하는데&hellip; SOAP 통신에는 SOAPAction 이라는 헤더를 넣는다고&hellip; 그냥 해보니 <code>SOAPAction</code> 에 그냥 빈값이라도 헤더이름만 넣고 돌려보면 되겠구나 라는 생각이 들었습니다.</p>
+
+<p><del> perl
+my $res = $ua->post(&lsquo;<a href="https://........">https://&#8230;&#8230;..</a>&rsquo;,
+  &lsquo;Content-Type&rsquo; => &lsquo;text/xml; charset=utf-8&rsquo;,
+  SOAPAction => &lsquo;&ldquo;&rdquo;&rsquo;,
+  Content => $q,
+);
+</del></p>
+
+<p>POST 시에 <code>SOAPAction</code> 헤더를 넣어주고 다시 돌려보았습니다.</p>
+
+<p>~~~ xml
+&lt;?xml version=&ldquo;1.0&rdquo; encoding=&ldquo;UTF-8&rdquo;?>
+&lt;soapenv:Envelope xmlns:soapenv=&ldquo;<a href="http://schemas.xmlsoap.org/soap/envelope/">http://schemas.xmlsoap.org/soap/envelope/</a>&rdquo; xmlns:xsd=&ldquo;<a href="http://www.w3.org/2001/XMLSchema">http://www.w3.org/2001/XMLSchema</a>&rdquo; xmlns:xsi=&ldquo;<a href="http://www.w3.org/2001/XMLSchema-instance">http://www.w3.org/2001/XMLSchema-instance</a>&rdquo;>
+ &lt;soapenv:Body>
+  &lt;soapenv:Fault>
+   <faultcode>soapenv:Server.userException</faultcode>
+   <faultstring>org.xml.sax.SAXParseException: The processing instruction target matching &quot;[xX][mM][lL]&quot; is not allowed.</faultstring>
+   <detail/>
+  &lt;/soapenv:Fault>
+ &lt;/soapenv:Body>
+&lt;/soapenv:Envelope>
+&#8220;`</p>
+
+<p>다시 해당 <code>faultstring</code> 으로 검색을 해본 결과, 이유는 &lt;?xml &hellip;?> 앞에 빈 공백값이 있으면 안된다는 것이었습니다.</p>
+
+<p><del> perl
+my $q = q{&lt;?xml version=&ldquo;1.0&rdquo; encoding=&ldquo;UTF-8&rdquo;?>
+&lt;soapenv:Envelope xmlns:soapenv=&ldquo;<a href="http://schemas.xmlsoap.org/soap/envelope/">http://schemas.xmlsoap.org/soap/envelope/</a>&rdquo; xmlns:xsd=&ldquo;<a href="http://www.w3.org/2001/XMLSchema">http://www.w3.org/2001/XMLSchema</a>&rdquo; xmlns:xsi=&ldquo;<a href="http://www.w3.org/2001/XMLSchema-instance">http://www.w3.org/2001/XMLSchema-instance</a>&rdquo;>
+ &lt;soapenv:Body>
+ &hellip;&hellip;&hellip;
+ &lt;/soapenv:Body>
+};
+</del></p>
+
+<p>맨 위의 코드에서 <code>q{</code> 다음에 개행을 넣은 게 문제가 되어서 다시 지우고 돌려본 결과 좌르르르륵 펴쳐져 나오는 기나긴 XML의 향연&hellip;</p>
+
+<p>아무튼 이걸로 API 제공업체에서 JAVA 를 기준으로 작성된 길고 긴 명세서들과 설치요령 등등의 문서들을 제쳐두고 해야할 일에만 집중할 수 있게 되었습니다.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Jeen Lee</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-07-02T15:23:00+09:00" pubdate data-updated="true">Jul 2<span>nd</span>, 2012</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/perl/'>perl</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://jeen.github.io/blog/2012/07/02/https-ssl-lwp-soap-and-perl/" data-via="JEEN_LEE" data-counturl="http://jeen.github.io/blog/2012/07/02/https-ssl-lwp-soap-and-perl/" >Tweet</a>
+  
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2012/07/01/regexp-wildcards/" title="Previous Post: Regexp::Wildcards">&laquo; Regexp::Wildcards</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2012/07/18/export-github-issues/" title="Next Post: Export Github Issues">Export Github Issues &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/07/17/solr-vs-elasticsearch-part-6-user-and-dev-communities-compared/">[번역] Solr vs. ElasticSearch: Part 6 – User &amp; Dev Communities Compared</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/07/17/solr-vs-elasticsearch-part-5-management-api-capabilities/">[번역] Solr vs ElasticSearch: Part 5 – Management API Capabilities</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/07/17/solr-vs-elasticsearch-part-4-faceting/">[번역] Solr vs ElasticSearch Part 4 - Faceting</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/07/16/solr-vs-elasticsearch-part-3-searching/">[번역] Solr vs. ElasticSearch - Part 3 : Searching</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/07/16/solr-vs-elasticsearch-part-2-indexing-and-language-handling/">[번역] Solr vs. ElasticSearch: Part 2 - Indexing and Language Handling</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/jeen">@jeen</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'jeen',
+            count: 0,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Jeen Lee -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'jeen';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://jeen.github.io/blog/2012/07/02/https-ssl-lwp-soap-and-perl/';
+        var disqus_url = 'http://jeen.github.io/blog/2012/07/02/https-ssl-lwp-soap-and-perl/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id; js.async = true;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

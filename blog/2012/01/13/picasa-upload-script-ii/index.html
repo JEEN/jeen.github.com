@@ -1,0 +1,444 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Picasa Upload Script II - Jeen - Yet anothere techlog</title>
+  <meta name="author" content="Jeen Lee">
+
+  
+  <meta name="description" content="~~~ perl picasa-uploader.pl !/usr/bin/env perl package PicasaUploader;
+use Any::Moose;
+use namespace::autoclean;
+use Config::Pit;
+use LWP::UserAgent &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://jeen.github.io/blog/2012/01/13/picasa-upload-script-ii">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Jeen - Yet anothere techlog" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-27958809-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Jeen - Yet anothere techlog</a></h1>
+  
+    <h2>STFUAWSC</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:jeen.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Picasa Upload Script II</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-01-13T18:36:00+09:00" pubdate data-updated="true">Jan 13<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>~~~ perl picasa-uploader.pl</p>
+
+<h1>!/usr/bin/env perl</h1>
+
+<p>package PicasaUploader;
+use Any::Moose;
+use namespace::autoclean;
+use Config::Pit;
+use LWP::UserAgent;
+use Net::Google::AuthSub;
+use MIME::Types ();</p>
+
+<p>has user_id => (</p>
+
+<pre><code>is      =&gt; 'ro',
+default =&gt; 'default',
+</code></pre>
+
+<p>);</p>
+
+<p>has album_id => (</p>
+
+<pre><code>is      =&gt; 'ro',
+default =&gt; 'default',
+</code></pre>
+
+<p>);</p>
+
+<p>has files => (</p>
+
+<pre><code>is      =&gt; 'ro',
+isa     =&gt; 'ArrayRef',
+default =&gt; sub { \[\] }
+</code></pre>
+
+<p>);</p>
+
+<p>has google_auth => (</p>
+
+<pre><code>is      =&gt; 'rw',
+isa     =&gt; 'Net::Google::AuthSub',
+default =&gt; sub {
+    Net::Google::AuthSub-&gt;new(
+        service =&gt; 'lh2',
+        source  =&gt; 'my-picasauploader-0.1'
+    );
+}
+</code></pre>
+
+<p>);</p>
+
+<p>has &lsquo;_ua&rsquo; => (</p>
+
+<pre><code>is      =&gt; 'rw',
+isa     =&gt; 'LWP::UserAgent',
+default =&gt; sub {
+    LWP::UserAgent-&gt;new( cookie_jar =&gt; {} ); 
+}
+</code></pre>
+
+<p>);</p>
+
+<p>has &lsquo;config&rsquo; => (</p>
+
+<pre><code>is          =&gt; 'ro',
+isa         =&gt; 'HashRef',
+lazy_build  =&gt; 1,
+</code></pre>
+
+<p>);</p>
+
+<p>sub BUILD {</p>
+
+<pre><code>my $self = shift;
+$self-&gt;auth;
+return 1;
+</code></pre>
+
+<p>}</p>
+
+<p>sub _build_config {</p>
+
+<pre><code>Config::Pit::pit_get('google.com', require =&gt; {
+   username =&gt; 'your username on google.com',
+   password =&gt; 'your password on google.com' 
+});    
+</code></pre>
+
+<p>}</p>
+
+<p>sub auth {</p>
+
+<pre><code>my $self = shift;
+
+my $res = $self-&gt;google_auth-&gt;login($self-&gt;config-&gt;{username}, $self-&gt;config-&gt;{password});
+die "Login Failed: ". $res-&gt;error unless $res-&gt;is_success;
+</code></pre>
+
+<p>}</p>
+
+<p>sub upload_files {</p>
+
+<pre><code>my $self = shift;
+
+for my $file_path (@{ $self-&gt;files }) {
+    my $link = $self-&gt;upload_file($file_path);
+    print $link."\n";
+}
+</code></pre>
+
+<p>}</p>
+
+<p>sub upload_file {</p>
+
+<pre><code>my ($self, $file_path) = @_;
+
+my $file = Path::Class::File-&gt;new($file_path);
+die "File Not Found : $file" unless -f $file;
+
+my $post_url = sprintf 'https://picasaweb.google.com/data/feed/api/user/%s/albumid/%s', $self-&gt;user_id, $self-&gt;album_id;
+
+my ($mime_type, $encoding) = MIME::Types::by_suffix($file-&gt;basename);
+my $content = $file-&gt;slurp;
+my $res = $self-&gt;_ua-&gt;post($post_url,
+    $self-&gt;google_auth-&gt;auth_params,
+    Content_Type   =&gt; $mime_type,
+    Slug           =&gt; $file-&gt;basename,
+    Content        =&gt; $content,
+);
+
+die 'UPLOAD Failed : '.$res-&gt;status_line unless $res-&gt;is_success;
+my ($link) = ($res-&gt;decoded_content=~/content type.*?src='(.\*?)'/gsm);
+$link;
+</code></pre>
+
+<p>}</p>
+
+<p><strong>PACKAGE</strong>&ndash;>meta->make_immutable;</p>
+
+<p>package main;</p>
+
+<p>my $uploader = PicasaUploader->new( files => \@ARGV );
+$uploader->upload_files;
+~~~</p>
+
+<p>  <a href="http://aanoaa.github.com/blog/2012/01/03/picasa-upload-script/">@aanoaa 님의 글</a>에서 Picasa Uploader 스크립트를 소개했었는데요. <code>PicasaUploader</code> 라고 package 로 정의해서 쓰도록 했습니다.
+  거기에 <a href="https://metacpan.org/module/Config::Pit">Config::Pit</a> 을 써서 계정정보를 다루도록 했구요.
+  심심해서 그냥 약간 개량해봤습니다.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Jeen Lee</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-01-13T18:36:00+09:00" pubdate data-updated="true">Jan 13<span>th</span>, 2012</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/perl/'>perl</a>, <a class='category' href='/blog/categories/picasa/'>picasa</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://jeen.github.io/blog/2012/01/13/picasa-upload-script-ii/" data-via="JEEN_LEE" data-counturl="http://jeen.github.io/blog/2012/01/13/picasa-upload-script-ii/" >Tweet</a>
+  
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2012/01/05/freebsd-8-dot-2-stable-cpan-error/" title="Previous Post: FreeBSD 8.2 STABLE - CPAN Error">&laquo; FreeBSD 8.2 STABLE - CPAN Error</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2012/01/16/carton-cpan-dependencies-manager/" title="Next Post: Carton - CPAN dependencies manager">Carton - CPAN dependencies manager &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/07/17/solr-vs-elasticsearch-part-6-user-and-dev-communities-compared/">[번역] Solr vs. ElasticSearch: Part 6 – User &amp; Dev Communities Compared</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/07/17/solr-vs-elasticsearch-part-5-management-api-capabilities/">[번역] Solr vs ElasticSearch: Part 5 – Management API Capabilities</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/07/17/solr-vs-elasticsearch-part-4-faceting/">[번역] Solr vs ElasticSearch Part 4 - Faceting</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/07/16/solr-vs-elasticsearch-part-3-searching/">[번역] Solr vs. ElasticSearch - Part 3 : Searching</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/07/16/solr-vs-elasticsearch-part-2-indexing-and-language-handling/">[번역] Solr vs. ElasticSearch: Part 2 - Indexing and Language Handling</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/jeen">@jeen</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'jeen',
+            count: 0,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Jeen Lee -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'jeen';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://jeen.github.io/blog/2012/01/13/picasa-upload-script-ii/';
+        var disqus_url = 'http://jeen.github.io/blog/2012/01/13/picasa-upload-script-ii/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id; js.async = true;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

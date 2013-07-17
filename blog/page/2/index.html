@@ -1,0 +1,800 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Jeen - Yet anothere techlog</title>
+  <meta name="author" content="Jeen Lee">
+
+  
+  <meta name="description" content="Solr vs ElasticSearch: Part 3 – Searching October 1, 2012 by Rafał Kuć In the last two parts of the series we looked at the general architecture and &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://jeen.github.io/blog/page/2">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Jeen - Yet anothere techlog" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-27958809-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Jeen - Yet anothere techlog</a></h1>
+  
+    <h2>STFUAWSC</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:jeen.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/07/16/solr-vs-elasticsearch-part-3-searching/">[번역] Solr vs. ElasticSearch - Part 3 : Searching</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-16T22:32:49+09:00" pubdate data-updated="true">Jul 16<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h1>Solr vs ElasticSearch: Part 3 – Searching</h1>
+
+<p>October 1, 2012 by Rafał Kuć</p>
+
+<p>In the last two parts of the series we looked at the general architecture and how data can be handled in both Apache Solr 4 (aka SolrCloud) and ElasticSearch and what the language handling capabilities of both enterprise search engines are like. In today’s post we will discuss one of the key parts of any search engine – the ability to match queries to documents and retrieve them.</p>
+
+<p>이 시리즈의 앞의 2회에서 Apache Solr 4 (SolrCloud라고도 불립니다）와 ElasticSearch 의 전체 아키텍쳐와 데이터가 어떻게 다뤄지는 지, 그리고 두 검색엔진의 언어 취급능력이 어떤 지를 알아봤습니다. 이번 글에서는 검색 엔진의 키가 되는 부분 중 하나인 도큐먼트에 대한 쿼리를 매치해서 결과를 받는 능력에 대해서 의논해보도록 합니다.</p>
+
+<ul>
+<li><a href="http://jeen.github.io/2013/07/15/solr-vs-elasticsearch-part-1/">1. Solr vs. ElasticSearch: Part 1 – Overview</a></li>
+<li><a href="http://jeen.github.io/2013/07/16/solr-vs-elasticsearch-part-2-indexing-and-language-handling/">2. Solr vs. ElasticSearch: Part 2 – Data Handling</a></li>
+<li><a href="http://jeen.github.io/2013/07/16/solr-vs-elasticsearch-part-3-searching/">3. Solr vs. ElasticSearch: Part 3 – Searching</a></li>
+<li><a href="http://jeen.github.io/2013/07/16/solr-vs-elasticsearch-part-4-faceting/">4. Solr vs. ElasticSearch: Part 4 – Faceting</a></li>
+<li><a href="http://jeen.github.io/2013/07/17/solr-vs-elasticsearch-part-5-management-api-capabilities/">5. Solr vs. ElasticSearch: Part 5 – Management API Capabilities</a></li>
+<li><a href="http://jeen.github.io/2013/07/17/solr-vs-elasticsearch-part-6-user-and-dev-communities-compared/">6. Solr vs. ElasticSearch: Part 6 – User &amp; Dev Communities Compared</a></li>
+</ul>
+
+
+<h2>전체적인 어프로치</h2>
+
+<p>Both search engines expose their search APIs via HTTP. If you are not familiar with Solr or ElasticSearch, here are a few simple examples of what Apache Solr and ElasticSearch queries look like:</p>
+
+<p>두 검색엔진 모두 HTTP 경유로 검색 API 를 공개하고 있습니다. Solr 와 ElasticSearch 를 잘 모르는 분을 위해, 여기에서 몇가지 Apache Solr 와 ElasticSearch 의 쿼리가 어떤지를 간단한 예로 보여드립니다.</p>
+
+<h3>Solr</h3>
+
+<pre><code>curl -XGET 'http://localhost:8983/solr/sematext/select?q=post_date:[2012-09-10T12:00:00Z+TO+2012-09-10T15:00:00Z]'
+</code></pre>
+
+<h3>ElasticSearch</h3>
+
+<pre><code>curl -XGET http://localhost:9200/sematext/_search?pretty=true -d '{
+    "query" : {
+        "range" : {
+            "post_date" : {
+                "from" : "2012-09-10T12:00:00",
+                "to" : "2012-09-10T15:00:00"
+            }
+        }
+    }
+}'
+</code></pre>
+
+<p>As you can see the ElasticSearch query is more structured allowing for more precise control of what you are trying to get – similar to Lucene queries. Solr on the other hand uses a query parser to parse your query out of the textual value of the “q” URL parameter (n.b. you can use query parser in ElasticSearch too). But as one can see on Solr mailing lists, many new users have problems because of such approach – they are overwhelmed with all the options and parameters. At the same time, Solr does make simple queries with boosting and extended dismax parser very easy to do, although that comes at a price. If you want to have a higher degree of control over your query, you are (in most cases) forced to use local params that, while powerful, can be quite hard for users not familiar with its cryptic syntax.</p>
+
+<p>보시는 대로, ElasticSearch의 쿼리는 보다 구조화되어 원하는 결과를 얻기위해 정확한 컨트를을 가능하게 합니다. Lucene 쿼리와 비슷합니다. 반면 Solr 는 쿼리파서를 URL 파라메터의 <code>q</code> 값으로 넣은 텍스트 값을 쿼리로 파싱합니다. (주의: ElasticSearch 에서도 쿼리파서를 이용할 수 있습니다) 하지만, Solr 의 메일링리스트에서 확인할 수 있듯이 많은 유저가 그런 방법으로 인해 문제를 겪고 있습니다. 그들은 모든 옵션과 파라메터에 매우 난감해하고 있습니다. 동시에 Solr 는 간단한 쿼리를 boosting 과 확장된 dismax 파서로 간단하게 실행할 수 있습니다. 하지만 그에 상응하는 부담을 지고 있습니다. 만약 고도의 컨트롤을 쿼리로 할 경우에는 (대부분의 경우) 로컬 파라메터를 사용하지 않으면 안되며, (파워풀하지만) 그 암호같은 문법에 익숙하지 않은 유저에게는 매우 큰일이 아닐 수 없습니다.</p>
+
+<p>To sum up our short introduction – both search engines give you a similar degree of control when it comes to querying, although if you want to create your queries from scratch and control every aspect of them, just as you would when using Lucene directly, ElasticSearch is the way to go, not because Solr doesn’t let you, but the structured JSON way of querying ElasticSearch is a better fit in that case and feels more intuitive.</p>
+
+<p>우리들의 짧은 소개를 정리하면, 두 검색엔진이 같은 정도의 컨트롤을 쿼리로 제공합니다. 그러나 스크래치부터 쿼리를 만들고, Lucene 을 직접 이용하도록 모든 국면을 컨트롤하고 싶은 경우, ElasticSearch 를 선택해야 합니다. Solr 에서는 불가능한 것은 아니지만, ElasticSearch 가 제공하는 구조화된 JSON 이 그런 케이스에 보다 안성맞춤이고 보다 직감적으로 느낄 수 있기 때문입니다.</p>
+
+<h2>전문검색</h2>
+
+<p>In this section we try to compare search capabilities of both both Apache Solr and ElasticSearch. This is by no means a comprehensive tutorial of all the features that both search engines expose, but rather  a simple comparison of similarities and difference of them.</p>
+
+<p>이 섹션에서는 Apache Solr 와 ElasticSearch 모두 검색능력을 비교해 봅니다. 물론 포괄적으로 두 검색엔진이 가지는 모든 기능의 튜토리얼이 아닙니다. 콕 찝어서 말하자면 간단한 유사점과 차이점의 비교가 아닐까 하네요.</p>
+
+<h3>검색</h3>
+
+<p>Of course, both Apache Solr and ElasticSearch enable you to run standard queries such as Boolean queries, phrase queries, fuzzy queries, wildcard queries, etc. You can combine them into multiple Boolean phrases using Boolean operators. In addition to that, both engine let one specify query-time boosts and control how score is calculated during search execution.</p>
+
+<p>물론 Apahe Solr 와 ElasticSearch 양쪽 모두 표준적인 검색이 가능합니다. 불리언 쿼리, 프레이즈 쿼리, 퍼지 쿼리, 와일드 카드 쿼리 같은 것들 말이죠. 불리언연산자를 사용해서 이것들을 결합해서 여러 불리언 프레이즈에 결합할 수도 있습니다. 물론 두 검색엔진은 쿼리 마다 boost 를 지정하고, 검색실행 중에 어떻게 스코어가 계산되는 지를 컨트롤할 수 있습니다.</p>
+
+<h3>Span Queries</h3>
+
+<p>If you are not familiar with span queries here is a one-sentence description: Lucene provides span queries in order to enable searching documents with position requirements, but not necessarily appearing one after another like in the phrase query. And now the comparison:</p>
+
+<p>스팬쿼리를 모르는 사람을 위해 간단하게 설명하자면, Lucene 이 제공하는 스팬쿼리는 위치를 필요로하는 도큐먼트 검색을 가능하게 합니다. 그러나 프레이즈쿼리처럼 연속해서 나올 필요는 없습니다. 한번 비교해볼까요?</p>
+
+<h4>Solr</h4>
+
+<p>Update: As Erik Hatcher noticed support for span queries is already there in Apache Solr (SOLR-2703). We can use span queries by using the surround query parser.</p>
+
+<p>업데이트： Erik Hatcher에 의해서 스팬쿼리는 이미 Apache Solr 에 들어갔습니다.(SOLR-2703) 쿼리파서로 감싸서 스팬쿼리를 사용할 수 있습니다.</p>
+
+<h4>ElasticSearch</h4>
+
+<p>ElasticSearch has the support for Lucene SpanNearQuery, SpanFirstQuery, SpanTermQuery, SpanOrQuery and SpanNotQuery. With these queries you can construct different span queries similar to what you can do with Lucene.</p>
+
+<p>ElasticSearch는 Lucene 의 SpanNearQuery, SpanFristQuery, SpanTermQuery, SpanOrQuery, 그리고 SpanNotQuery를 지원합니다. 이 쿼리들을 사용해서 Lucene 에서 이뤄지는 다양한 스팬쿼리를 구성할 수 있습니다.</p>
+
+<h3>More Like This</h3>
+
+<p>“More like this” (aka MLT) functionality lets you to get documents similar to a given query according to some assumptions and parameters used to find documents that are similar to one another. Both search engines have the ability to run MLT queries. In Solr, MLT  query is implemented as a search component. On the other hand there is ElasticSearch where more like this is just another type of query one can construct using JSON. When comparing parameters available in both search servers it seems that ElasticSearch provides slightly more control over more like this functionality with features like specifying a set of words that shouldn’t be taken into consideration and the percentage of terms to match on.</p>
+
+<p>&ldquo;More like this&rdquo;(또는 MLT) 란, 쿼리에서 부여된 도큐먼트에 몇가지 파라메터를 이용해 비슷한 도큐먼트를 얻을 수 있는 기능입니다. 차이가 있는 도큐먼트를 찾기 위해서 파라메터가 사용됩니다. 두 검색엔진 모두 MLT 쿼리를 사용할 수 있습니다. Solr 에서는 MLT 쿼리는 검색 컴포넌트로 구현되어 있습니다. 반면, ElasticSearch 에서는 JSON 을 사용해서 구축하는 한 종류의 쿼리가 됩니다. 두 검색 서버에 존재하는 파라메터를 비교하면 ElasticSearch 는 조금 더 많은 컨트롤을 제공합니다. 예를들어 고려하지 않은 단어의 집합을 지정하거나, 매치하는 항목의 분할을 지정할 수 있습니다.</p>
+
+<h3>Did You Mean</h3>
+
+<p>“Did you mean” (aka DYM) functionality makes it possible to correct users’ query typos and spelling mistakes and suggest corrected queries. For example, for a misspelled phrase “saerch problems” our Researcher module on <a href="http://search-lucene.com">http://search-lucene.com</a> (which is a kind of a did you mean module) works like this:</p>
+
+<p>&ldquo;Did you mean&#8221;（또는 DYM） 이란 유저의 쿼리의 타이핑오류나 스펠링오류를 고치고 정정된 쿼리를 제안하는 기능입니다. 예를들어 &#8220;saerch problems&rdquo; 라는 잘못된 스펠 구문에서 <a href="http://search-lucene.com">http://search-lucene.com</a> 에 존재하는 우리 연구자 모듈(Did you mean 모듈과 같은 것입니다) 은 이런 동작을 하게 됩니다.</p>
+
+<p>Let’s see what Solr and ElasticSearch have to offer here.</p>
+
+<p>Solr 와 ElasticSearch 에 어떤 기능이 제공되는지 확인해봅시다.</p>
+
+<h4>Solr</h4>
+
+<p>Solr exposes spell check component API, which is built on top of Lucene spell checker module. Before Solr 4.0 the spell checker required its own index that, while built automatically by Solr, was another moving piece and potential inconvenience.  Now there is a DirectSolrSpellchecker implementation available which can give spell checker suggestion based on the index you are using for search instead of relying on the side-car spell checker index. Solr spell checker supports distributed search and has numerous parameters which allow control over its behavior, like number of suggestion, collation properties, accuracy, etc.</p>
+
+<p>Solr 는 스펠링체크 컴포넌트 API 를 제공합니다. 이는 Lucene 의 스펠체커 모듈 위에 구축되어 있습니다. Solr 4.0 이전에는 스펠체커 자체가 인덱스를 필요로 하고, Solr 에 의해 자동적으로 구축되었지만, 별도로 동작하는 부품으로는 조금 불편한 것이었습니다. 지금은 DirectSolrSpellchecker 구현이 존재하며, 검색에 사용하고 있는 인덱스에 기초하여 스펠체커가 제안할 수 있습니다. 스펠체커용의 인덱스를 필요로하지 않습니다. Solr 의 스펠체커는 분산검색을 지원하고, 많은 파라메터를 가진 것으로 그 동작을 컨트롤할 수 있습니다. 예를들어 제안 수나 조합 속성이나 정확성등입니다.</p>
+
+<h4>ElasticSearch</h4>
+
+<p>Unfortunately, ElasticSearch doesn’t offer did you mean functionality out of the box. There is issue  #911 currently open, so we can expect that module in one of the future releases. Although we’ll be talking about plug-ins in the last part of the Solr vs ElasticSearch series, if you need did you mean functionality in ElasticSearch you can use the Suggest Plugin developed by @spinscale (<a href="https://github.com/spinscale/elasticsearch-suggest-plugin">https://github.com/spinscale/elasticsearch-suggest-plugin</a>).</p>
+
+<p>아쉽게도 ElasticSearch는 &ldquo;Did you mean&rdquo; 기능을 그대로 제공하지 않습니다. Issue#911이 현재 오픈되어 있고, 앞으로의 릴리즈에서 그 모듈을 기대할 수 있겠습니다. Solr ElasticSearch 의 마지막 파트에서 플러그인에 대해서 다룰 예정이지만, 만약 &ldquo;Did you mean&rdquo; 기능을 ElasticSearch 에서 필요로 한다면 @spinscale 이 개발한 Suggest 플러그인을 이용할 수 있습니다.(<a href="https://github.com/spinscale/elasticsearch-suggest-plugin">https://github.com/spinscale/elasticsearch-suggest-plugin</a>).</p>
+
+<h3>Nested Queries</h3>
+
+<p>As we already wrote, ElasticSearch supports indexing of nested document which Solr doesn’t support. In order to query nested documents ElasticSearch exposes nested query type. This query is run against nested documents, but as the result we get the root documents. In addition to that, you can also set how scoring of the root document is affected.</p>
+
+<p>이미 다룬 적이 있지만, ElasticSearch 는 중첩 도큐먼트의 인덱싱을 지원합니다. Solr 는 지원하지 않습니다. 중첩도큐먼트를 쿼리하기 위해서는 ElasticSearch 는 중첩쿼리타입을 공개하고 있습니다. 이 쿼리는 중첩도큐먼트에 대해서 실행되지만 결과로 루트 도큐먼트를 얻게 됩니다. 그리고 루트도큐먼트의 스코어링에 어떻게 영향받는지도 설정할 수 있습니다.</p>
+
+<h3>Parent – Child Relationship Queries</h3>
+
+<h4>Solr</h4>
+
+<p>In Apache Solr there is no functionality called parent &ndash; child, instead of that we have the possibility to use joins. Solr joins are specified in local params format and look like this:</p>
+
+<p>Apache Solr 에서는 부모자식이라고 불리는 기능은 없습니다. 대신에 join 을 사용하는 방법이 있습니다. Solr 의 join 은 로컬파라메터 형식으로 지정되어 아래처럼 사용할 수 있습니다.</p>
+
+<pre><code>q={!join from=parent to=id}color:Yellow
+</code></pre>
+
+<p>The above query says that we want to get all parent documents that have child documents that have the Yellow term in the color field. The join should be done on parent field in the children to the id field in the parent document.</p>
+
+<p>위 쿼리에서 color 필드에 Yellow 를 가진 자식 도큐먼트를 가진 모든 부모 도큐먼트를 얻습니다. join 은 자식 도큐먼트의 parent 필드에서 부모 도큐먼트의 id필드상에서 이뤄집니다.</p>
+
+<h4>ElasticSearch</h4>
+
+<p>ElasticSearch lets you use two type of queries – has_children and top_children queries to operate on child documents. The first query accepts a query expressed in ElasticSearch Query DSL as well as the child type and it results in all parent documents that have children matching the given query. The second type of query is run against a set number of children documents and then they are aggregated into parent documents. We are also allowed to choose score calculation for the second query type.</p>
+
+<p>ElasticSearch는 두가지 타입의 쿼리를 사용할 수 있습니다. has_children 과 top_children 쿼리는 자식 도큐먼트 위에서 명령됩니다. 최초의 쿼리는 ElasticSearch Query DSL 또는 child타입으로 표현된 쿼리를 받아서, 부여된 쿼리에 매치하는 도큐먼트를 가지는 모든 부모 도큐먼트를 결과로 합니다. 두번째 타입의 쿼리는 몇가지 자식 도큐먼트의 집합에 대해서 실행되고 그것들은 부모 도큐먼트 안에서 집약됩니다. 두번째의 쿼리타입에 대해서도 스코어 연산을 선택할 수 있습니다.</p>
+
+<h3>Filtering And Caching Control</h3>
+
+<h4>Solr</h4>
+
+<p>Of course Solr lets you to narrow results of your query execution with filters. You can filter documents based on a single value, Boolean expression, query, field existence, geographical location and many, many more. In addition to that you can use local params and construct complicated queries like:</p>
+
+<p>물론 Solr 는 쿼리의 실행결과를 필터로 제한할 수 있습니다. 단일 값, 불리언식, 필드의 존재, 지리상의 위치, 그리고 가장 많은 것을 기준으로 해서 도큐먼트를 필터링할 수 있습니다. 그리고 로컬파라메터를 사용해서 복잡한 쿼리를 구성할 수 있습니다.</p>
+
+<p>예:</p>
+
+<pre><code>fq={!frange l=10 u=30}if(exists(promotionPrice),sum(promotionPrice,dailyPrice),sum(price,dailyPrice))
+</code></pre>
+
+<h4>ElasticSearch</h4>
+
+<p>ElasticSearch, similar to Solr, lets you use many filter types, which are similar to filters, so we’ll skip mentioning them all. However, in addition to similarities with Solr, there are also some differences like supports for filters run against nested documents and children documents. ElasticSearch can also use scripts to filter documents with the script filter.</p>
+
+<p>ElasticSearch는 Solr 와 비슷하게 많은 필터타입을 사용할 수 있습니다. 필터와 마찬가지이기에 따로 말할 필요도 없습니다. 그러나 Solr 에 대한 유사성 이외에 몇가지 차이점이 존재합니다. 예를들어 중첩 도큐먼트나 자식 도큐먼트에 대해 실행하는 필터를 지원하는 것입니다. 또한 ElasticSearch 는 스크립트 필터를 사용해서 도큐먼트의 필터링에 스크립트를 사용할 수도 있습니다.</p>
+
+<h3>Filter Cache Control</h3>
+
+<p>Both ElasticSearch and Apache Solr can control if the filter should or shouldn’t be cached, but in addition to that Solr lets you control the order of filters execution (the non cached ones). Its a great feature of Solr, because if you know that one of your filters is a performance killer, you can set its execution after all other filters and that way it’ll only work on the subset of the original result set.</p>
+
+<p>ElasticSearch 와 Apache Solr 양쪽 모두 필터가 캐쉬되어야하는지 그렇지 않는 지를 설정할 수 있습니다. Solr 는 필터의 실행순서를 조정할 수 있습니다(캐쉬되지 않은 것만). 이는 Solr 의 뛰어난 기능으로 만약 당신이 필터 하나가 퍼포먼스에 나쁜 영향을 주는 것을 이미 알고 있다면 그 필터의 실행의 순서를 뒤로 미루도록 설정할 수 있습니다. 그렇게 함으로써 그 필터는 오리지널의 실행결과의 부분집합만을 대상으로 실행됩니다.</p>
+
+<h3>Score Calculation Control</h3>
+
+<p>In both engines we are more or less allowed to control how scores for documents are calculated. In Solr this is mostly done by using function queries and different boosts and queries made using local params. In ElasticSearch we can use different query types which allow us to give specific scores to some of the documents (for example ones matching a certain filter) or calculate score on the basis of used script.</p>
+
+<p>두 엔진에 있어서 많든 적든 도큐먼트에 대해서 스코어가 어떻게 계산할 것인가를 컨트롤할 수 있습니다. Solr 에서는 대부분의 경우에 있어서 Function Queries 가 복수의 boost 를 사용해서 이뤄지고, 쿼리는 로컬파라메터를 사용해서 만들어집니다. ElasticSearch 에서는 다른 쿼리타입을 사용해서 어떤 도큐먼트에 대해서 특정 스코어를 줄 수도 있습니다(예를들어 몇가지 필터에 매치하는 도큐먼트). 또는 사용한 스크립트에 따라 스코어를 계산할 수도 있습니다.</p>
+
+<h3>Real Time Get</h3>
+
+<p>Real time get allows us to retrieve a document using its identifier as soon as it was sent for indexing even if it hasn’t yet been hard committed. Both ElasticSearch and Apache Solr return the newest document, even if it wasn’t indexed. But lets go into specifics.</p>
+
+<p>Real Time Get 은 도큐먼트 ID 를 사용해서 인덱싱을 위해서 보내졌을 때, 설령 하드커밋이 이뤄지지 않았어도 도큐먼트 회수를 가능하게 합니다. ElasticSearch 와 Apache Solr 모두 최신 도큐먼트를 인덱스되지 않아도 반환 할 수 있습니다. 이에 대해서 좀 더 자세히 볼까요.</p>
+
+<h4>Solr</h4>
+
+<p>Introduction of so called transaction log in Solr 4.0 allowed for the real time get functionality. Basically, the real time get looks for the newest version of the document in the transaction log first and returns it as a result of such call (if it is found, of course). If it is not found the real time get handler gets the document using the latest opened searcher available. Keep in mind that in order to return the newest version of the document in near real time manner Solr doesn’t need to reopen the index after indexing, so this functionality is useful even if you don’t reopen your searcher every second.</p>
+
+<p>Solr4.0에서 트랜잭션 로그라고 불리는 기능으로 Real Time Get 을 이용할 수 있게 되었습니다. 기본적으로는 Real Time Get 은 도큐먼트의 최신 버젼을 트랜잭션 로그에서 맨처음 찾아서 결과로 반환합니다(물론 찾은 경우에). 혹시라도 못 찾았다면 Real Time Get 핸들러는 가장 최근에 열린 searcher 가 존재하는 도큐먼트를 반환합니다. 기억해두었으면 하는 것은 거의 리얼타임 의 최신 버젼의 도큐먼트를 반환하기 위해 Solr 는 인덱싱 뒤에 인덱스를 다시 열 필요는 없습니다. 따라서 이 기능은 searcher 를 매초 다시 열지 않아도 유효합니다.</p>
+
+<h4>ElasticSearch</h4>
+
+<p>ElasticSearch also uses transaction log and because of that the real time get is not affected by the refresh rate of your indices. In addition to returning the document itself ElasticSearch exposes a few other API parameter that allow you to specify if the request should go to the primary or local shard (or even a custom one). You can also use routing with real time get to route the request to one specific shard if you know which shard should have the appropriate document. The real time get API of ElasticSearch also allows to check if the document exists using HTTP HEAD method, for example:</p>
+
+<p>ElasticSearch 도 트랜잭션로그를 사용하기 때문에 Real Time Get 은 인덱스의 리프레쉬율에 영향을 받지 않습니다. 도큐먼트를 반환하기 윙해 ElasticSearch 는 몇가지 다른 API 파라메터를 공개하고 그것을 사용 함으로써 질의가 프라이머리인지 또는 로컬의 Shard 로 (또는 커스텀 Shard 에만) 보낼지에 대한 것을 지정할 수 있습니다. 또 라우팅을 Real Time Get 과 함께 사용함으로 어느 shard 가 적절하게 도큐먼트를 가지고 있는지 알고 있는 경우에 질의를 하나의 특정 shard 로 유도할 수 있습니다. ElasticSearch 의 Real Time Get API 는 도큐먼트가 존재하는지 어떤지를 HTTP HEAD 메소드로 확인할 수 있습니다.</p>
+
+<pre><code>curl -XHEAD 'http://localhost:9200/sematext/blog/123456789'
+</code></pre>
+
+<h3>Aliasing</h3>
+
+<p>One of the things introduced in Apache Solr 4.0 and no available in ElasticSearch right now is the ability to transform result documents. First of all Solr allows you to alias returned fields, so for example you can return field price_usd or price_eur as price depending on your needs. The second thing is the ability to return values returned by functions as a (pseudo) field in the result (or fields). Solr also has the ability to return fields which start with a given prefix (for example all fields starting with price). Apart from the ability to get a function value as a field added to matched documents on the fly other functionalities are not ground breaking, though they can be handy in some cases.</p>
+
+<p>Apache Solr 4.0 에서 소개된 ElasticSearch 에 현시점에서 아직 존재하지 않는 기능으로 결과의 도큐먼트 변환이 있습니다. 맨처음 Solr 는 반환값의 필드에 별명을 붙일 수 있습니다. 그 때문에 필요에 따라서 price 필드로 price_usd 나 price_eur 을 반환할 수 있습니다. 두번째로 함수의 반환값을 (겉보기의) 필드로써 결과(또는 필드)로 반환할 수 있습니다. Solr 는 부여된 접두어로 시작하는 필드(예를들어 price 로 시작하는 모든 필드)를 반환하는 기능도 있습니다.</p>
+
+<h3>그 외</h3>
+
+<p>One of the things we always mention when talking about the differences between Apache Solr and ElasticSearch, at least when it comes to query handling, is the possibility of specifying the analyzer during query time. But lets start from the beginning. In Solr, you have to create the schema.xml file which holds the information about the index structure as well as query and index-time analyzers for fields. Similarly, in ElasticSearch, you can create mappings and define analyzers. At query-time Solr will choose the right analyzer for each field and use it.  ElasticSearch will do the same with one major difference. In ElasticSearch you can change the analyzer and specify the analyzer you want to use for analysis at query-time. For example, this is very useful when you know the language of the query because then you can choose the most language-appropriate analyzer on the fly.  We have made use of this in combination with our Language Identifier.</p>
+
+<p>Apache Solr 와 ElasticSearch 의 차이에 대해서 우리들이 항상 전달하고 싶은 것중 하나는, 적어도 쿼리이 취급에 관해서는 쿼리하는 도중에 해석기를 지정할 가능성입니다. Solr 에서는 인덱스구조, 거기에 쿼리와 필드의 인덱싱의 해석기에 관한 정보를 가지는 schema.xml 파일을 만들 필요가 있습니다.  ElasticSearch 에서는 맵핑을 작성해서 해석기를 정의합니다. 쿼리시에 Solr 는 각 필드에 대해서 적절한 해석기를 선택해서 사용합니다. ElasticSearch 도 같은 일을 하지만 큰 차이가 하나 있습니다. ElasticSearch 에서는 해석기 변경과 해석에 필요한 해석기의 지정이 쿼리시에 이뤄집니다. 예를 들어 쿼리대상의 언어를 알고 있는 경우 매우 편리하겠죠. 언어에 가장 적절한 해석기를 동적으로 선택할 수 있기 때문입니다. 우리들은 이 기능을 직접 만든 언어특정기와 함께 사용하고 있습니다.。</p>
+
+<h2>정리</h2>
+
+<p>As you can see, both ElasticSearch and Apache Solr expose lots of functionality when it comes to handling your search queries, and we barely scratched the surface here. Of course, each of them has some features that the other one doesn’t have, but Solr and ElasticSearch are competing for mind and market share, and are both rapidly evolving and improving, so we can expect more features from both of them in the future. In the next, fourth part of the series we will concentrate on the faceting capabilities of Apache Solr and ElasticSearch.  Stay tuned.  In the mean time, you can follow @sematext and tell us what you want us to cover.</p>
+
+<p>보시는 대로, ElasticSearch 와 Apache Solr 모두 많은 기능을 공개하고 있습니다. 그리고 이 글에서는 겉을 살짝 핥은 것에 지나지 않습니다. 물론 각각 다른 쪽이 가지지 않은 기능을 가지고 있고, Solr 와 ElasticSearch 는 사고방식과 시장 마켓셰어 에서 경쟁을 하고 있습니다. 그리고 양쪽모두 급속하게 진화하고 있지요. 따라서 앞으로 더욱 많은 기능을 기대할 수 있을 것입니다.</p>
+
+<p>다음편에서는 Apache Solr 와 ElasticSearch 의 Faceting 기능에 대해서 다루도록 합니다. 이어서 계속 지켜봐주세요. 그때까지는 @sematext 를 팔로해서 무엇을 다뤄주었으면 좋은 지 알려주세요.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/07/16/solr-vs-elasticsearch-part-2-indexing-and-language-handling/">[번역] Solr vs. ElasticSearch: Part 2 - Indexing and Language Handling</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-16T21:30:39+09:00" pubdate data-updated="true">Jul 16<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h1>Solr vs. ElasticSearch: Part 2 – Indexing and Language Handling</h1>
+
+<p>September 4, 2012 by Rafał Kuć</p>
+
+<p>In the previous part of Solr vs. ElasticSearch series we talked about general architecture of these two great search engines based on Apache Lucene. Today, we will look at their ability to handle your data and perform indexing and language analysis.</p>
+
+<p>전 편의 &ldquo;Solr vs. ElasticSearch&rdquo; Part1 기사에서 Apache Lucene 을 기반으로 하는 두가지 검색엔진의 전반적인 아키텍쳐에 대해서 이야기 했습니다. 오늘은 데이터의 취급과 인덱싱, 그리고 언어의 해석능력을 알아보도록 합니다.</p>
+
+<ul>
+<li><a href="http://jeen.github.io/2013/07/15/solr-vs-elasticsearch-part-1/">1. Solr vs. ElasticSearch: Part 1 – Overview</a></li>
+<li><a href="http://jeen.github.io/2013/07/16/solr-vs-elasticsearch-part-2-indexing-and-language-handling/">2. Solr vs. ElasticSearch: Part 2 – Data Handling</a></li>
+<li><a href="http://jeen.github.io/2013/07/16/solr-vs-elasticsearch-part-3-searching/">3. Solr vs. ElasticSearch: Part 3 – Searching</a></li>
+<li><a href="http://jeen.github.io/2013/07/16/solr-vs-elasticsearch-part-4-faceting/">4. Solr vs. ElasticSearch: Part 4 – Faceting</a></li>
+<li><a href="http://jeen.github.io/2013/07/17/solr-vs-elasticsearch-part-5-management-api-capabilities/">5. Solr vs. ElasticSearch: Part 5 – Management API Capabilities</a></li>
+<li><a href="http://jeen.github.io/2013/07/17/solr-vs-elasticsearch-part-6-user-and-dev-communities-compared/">6. Solr vs. ElasticSearch: Part 6 – User &amp; Dev Communities Compared</a></li>
+</ul>
+
+
+<h2>데이터 인덱싱</h2>
+
+<p>Apart from using Java API exposed both by ElasticSearch and Apache Solr, you can index data using an HTTP call. To index data in ElasticSearch you need to prepare your data in JSON format. Solr also allows that, but in addition to that, it lets you to use other formats like the default XML or CSV. Importantly, indexing data in different formats has different performance characteristics, but that comes with some limitations. For example, indexing documents in CSV format is considered to be the fastest, but you can’t use field value boosting while using that format. Of course, one will usually use some kind of a library or Java API to index data as one doesn’t typically store data in a way that allows indexing of data straight into the search engine (at least in most cases that’s true).</p>
+
+<p>ElasticSearch와 Apache Solr 모두 공개되어 있는 Java API 가 아닌 HTTP 호출을 사용해서 데이터 인덱싱을 할 수 있습니다. ElasticSearch 에서 데이터를 인덱싱하기 위해서는 데이터를 JSON 포맷으로 준비할 필요가 있습니다. Solr 도 가능하지만, 그에 덧붙여 기본적으로는 XML 이나 CSV 등 다른 형식을 이용할 수 있습니다. 중요한 것은 다른 형식의 데이터를 인덱싱 하는 경우 다른 퍼포먼스 특성이 존재하며 이에 대해서는 몇 가지 제약이 따릅니다. 예를 들어 CSV 형식의 도큐먼트를 인덱싱하는 경우가 가장 빠르다고 볼 수 있는 데, 이 경우 필드값의 boosting 을 이용할 수 없습니다. 물론 일반적으로는 어떠한 종류의 라이브러리나 Java API 를 사용해서 데이터를 인덱싱할 것입니다. 일반적으로는 검색 엔진에 직접 들어가는 데이터의 인덱스를 만들면서 데이터를 저장하는 일은 없습니다. (적어도 대부분의 경우 그렇습니다)</p>
+
+<h2>ElasticSearch에 대해서 보충설명</h2>
+
+<p>It is worth noting that ElasticSearch supports two additional things, that Solr does not – nested documents and multiple document types inside a single index.</p>
+
+<p>Solr 가 지원하지 않는 ElasticSearch 의 두가지 추가기능에 대해서 다뤄볼 가치가 있는 데 그것은 중첩 도큐먼트와 단일 도큐먼 안에서의 복수도큐먼트 타입니다.</p>
+
+<p>The nested documents functionality lets you create more than a flat document structure. For example, imagine you index documents that are bound to some group of users. In addition to document contents, you would like to store which users can access that document.  And this is were we run into a little problem – this data changes over time. If you were to store document content and users inside a single index document, you would have to reindex the whole document every time the list of users who can access it changes in any way. Luckily, with ElasticSearch you don’t have to do that – you can use nested document types and then use appropriate queries for matching. In this example, a nested document would hold a lists of users with document access rights. Internally, nested documents are indexed as separate index documents stored inside the same index. ElasticSearch ensures they are indexed in a way that allows it to use fast join operations to get them. In addition to that, these documents are not shown when using standard queries and you have to use nested query to get them, a very handy feature.</p>
+
+<p>중첩 도큐먼트 기능은 평탄한 도큐먼트 구조를 넘은 것을 만들 수 있습니다. 이를테면 어떤 유저 그룹에 연결된 도큐먼트를 인덱싱한다고 생각해봅시다. 도큐먼트의 내용 뿐만 아니라 어느 유저가 그 문서에 접근할 수 있는 지를 넣고 싶다고 해둡니다. 만약 단일 인스턴스의 도큐먼트 안에서 도큐먼트의 내용과 유저를 넣을 경우, 그 도큐먼트에 접근할 수 있는 유저의 리스트를 변경할 때마다 도큐먼트 전체를 다시 인덱싱해야 합니다. 다행히도 ElasticSearch 를 사용하면 그런 일은 없습니다. 중첩 도큐먼트 타입을 사용해서 적절한 쿼리를 매칭에 사용할 수 있습니다. 이 예제에서는 중첩 도큐먼트는 유저 리스트와 도큐먼트의 접근권한을 가집니다. 내부적으로는 중첩 도큐먼트는 같은 인덱스 안에서 놓여진 분리된 인덱스 문서로 색인됩니다.</p>
+
+<p>ElasticSearch는 빠른 JOIN 명령을 사용해서 인덱싱할 수 있습니다. 덧붙여 이 도큐먼트들은 표준 쿼리를 사용한 경우는 보이지 않으며, 중첩 쿼리를 얻어내기 위해서는 사용할 수 있어 매우 편리한 기능입니다.</p>
+
+<p>Multiple types of documents per index allow just what the name says – you can index different types of documents inside the same index.  This is not possible with Solr, as you have only one schema in Solr per core.  In ElasticSearch you can filter, query, or facet on document types. You can make queries against all document types or just choose a single document type (both with Java API and REST).</p>
+
+<p>인덱스마다 복수타입의 도큐먼트는 이름 그대로의 행위를 할 수 있습니다.. 다른 타입의 도큐먼트를 같은 인덱스 안에서 인덱싱할 수 있는데, 이것은 Solr 에서는 코어당 하나의 스키마만을 가질 수 있기 때문에 불가능합니다.</p>
+
+<p>ElasticSearch에서는 도큐먼트타입에 의해 필터, 쿼리, 퍼셋(Facet) 을 할 수 있습니다. 모든 도큐먼트 타입에 대해서, 또는 하나의 도큐먼트 타입을 선택해서 쿼리를 날릴 수 있습니다. (Java API 와 REST 양쪽 모두 가능합니다)</p>
+
+<h2>인덱스 다루기</h2>
+
+<p>Let’s look at the ability to manage your indices/collections using the HTTP API of both Apache Solr and ElasticSearch.</p>
+
+<p>Apache Solr 와 ElasticSearch 에서의 인덱스/콜렉션을 HTTP API 를 사용해서 관리하는 방법을 보도록 합니다.</p>
+
+<h3>Solr</h3>
+
+<p>Solr let’s you control all cores that live inside your cluster with the CoreAdmin API – you can create cores, rename, reload, or even merge them into another core. In addition to the CoreAdmin API Solr enables you to use the collections API to create, delete or reload a collection. The collections API uses CoreAdmin API under the hood, but it’s a simpler way to control your collections. Remember that you need to have your configuration pushed into ZooKeeper ensemble in order to create a collection with a new configuration.</p>
+
+<p>Solr 는 운용중인 클래스 안에서 모든 코어를 CoreAdmin API 로 관리할 수 있습니다. 코어 작성, 이름 변경, 리로드, 또는 여러 코어들을 하나의 코어로 머지할 수 있습니다. 또한 Solr 는 Collections API 를 사용해서 콜렉션의 작성, 삭제, 그리고 리로드를 할 수 있습니다. Collections API 는 뒷단에서 CoreAdmin API 를 사용하며 간단하게 콜렉션을 다룰 수 있습니다. 새로운 설정의 콜렉션을 작성하기 위해서는 ZooKeeper ensemble 에 설정을 넣어 둘 필요가 있습니다.</p>
+
+<p>When it comes to Solr, there is additional functionality that is in early stages of work, although it’s functional – the ability to split your shards. After applying the patch available in SOLR-3755 you can use a SPLIT action to split your index and write it to two separate cores. If you look at the mentioned JIRA issue, you’ll see that once this is commited Solr will have the ability not only to create new replicas, but also to dynamically re-shard the indices.  This is huge!</p>
+
+<p>Solr 에는 아직 미성숙하지만 유효한 추가기능이 있습니다. 바로 Shard 의 분할입니다. SOLR-3755에 있는 패치를 적용한 다음에 인덱스를 분할해서 두개로 분할한 코어에 넣는 것이 SPLIT 액션을 사용해서 가능해집니다. 그 JIRA 이슈를 읽으면 이것이 커밋되면 Solr 는 새로운 레플리카를 작서아는 것뿐만 아니라, 동적으로 인덱스를 re-shard 하는 기능을 가지게 됩니다. 이것은 매우 큰 이점입니다!</p>
+
+<h3>ElasticSearch</h3>
+
+<p>One of the great things in ElasticSearch is the ability to control your indices using HTTP API. We will take about it extensively in the last part of the series, but I have to mention it ere, too. In ElasticSearch you can create indices on the live cluster and delete them. During creation you can specify the number of shards an index should have and you can decrease and increase the number of replicas without anything more than a single API call. You cannot change the number of shards yet.  Of course, you can also define mappings and analyzers during index creation, so you have all the control you need to index a new type of data into you cluster.</p>
+
+<p>ElasticSearch의 굉장한 기능 중 하나로 HTTP API를 사용해서 인덱스를 다루는 능력이 있습니다. 이 시리즈의 마지막 파트에서 이에 대해서 광범위하게 다룰 예정이지만, 일단 여기에서도 간단히 다룰 필요가 있을 것 같습니다. ElasticSearch에서는 운용중의 클러스터 위에서 인덱싱을 할 수 있고, 삭제할 수 있습니다. 인덱싱 하는 동안, 인덱스를 가져야할 Shard 의 수를 지정할 수 있으며, 단일 API 호출만으로 레플리카 수의 증감을 조정할 수 있습니다. Shard 수는 아직 변경할 수 없습니다. 물론 맵핑과 해석기를 인덱싱 시에 설정가능하고, 클러스터 안에서 새로운 형태의 데이터 인덱싱에 필요한 모든 컨트롤을 가지게 됩니다.</p>
+
+<h2>도큐먼트의 부분갱신</h2>
+
+<p>Both search engines support partial document update. This is not the true partial document update that everyone has been after for years – this is really just normal document reindexing, but performed on the search engine side, so it feels like a real update.</p>
+
+<p>두 검색엔진 모두 도큐먼트의 부분갱신을 지원합니다. 이것은 모두가 기대한 그런 도큐먼트 부분갱신이 아닙니다. 단지 일반적인 도큐먼트 의 재인덱싱일 뿐입니다. 그러나 검색엔진에서 실행되기에 진짜 갱신처럼 보이기도 합니다.</p>
+
+<h3>Solr</h3>
+
+<p>Let’s start from the requirements – because this functionality reconstructs the document on the server side you need to have your fields set as stored and you have to have the <em>version</em> field available in your index structure. Then you can update a document with a simple API call, for example:</p>
+
+<p>요건부터 시작하겠습니다. 이 기능은 서버측의 도큐먼트를 재구성하기에 필드의 집합이 격납되었고 <em>version</em>필드가 인덱스 구성에서 존재하지 않으면 안됩니다. 이렇게 하면 단일 API 호출에 의해 도큐먼트를 갱신할 수 있습니다.</p>
+
+<p>예：</p>
+
+<pre><code>curl 'localhost:8983/solr/update' -H 'Content-type:application/json' -d '[{"id":"1","price":{"set":100}}]'
+</code></pre>
+
+<h3>ElasticSearch</h3>
+
+<p>In case of ElasticSearch you need to have the <em>source field enabled for the partial update functionality to work. This </em>source is a special ElasticSearch field that stores the original JSON document.  Theis functionality doesn’t have add/set/delete command, but instead lets you use script to modify a document. For example, the following command updates the same document that we updated with the above Solr request:</p>
+
+<p>ElasticSearch 의 경우, 부분갱신 기능이 제대로 동작하기 위해서는 <em>source 필드가 허가되어 있을 필요가 있습니다. 이 </em>source는 특별한 ElasticSearch 필드에서 오리지널 JSON 도큐먼트를 저장합니다. 이 기능에는 add/set/delete 명령은 존재하지 않습니다. 그 대신에 도큐먼트를 변경하는 스크립트의 사용을 허가합니다. 예를 들어 다음의 명령어를 위의 Solr 리퀘스트에서 갱신한 것과 같은 문서를 갱신한다고 합니다.</p>
+
+<pre><code>curl -XPOST 'localhost:9200/sematext/doc/1/_update'-d '{
+    "script" : "ctx._source.price = price",
+    "params" : {
+        "price" : 100
+    }
+}'
+</code></pre>
+
+<h2>다국어데이터의 취급</h2>
+
+<p>As we mentioned previously, and as you probably know, both ElasticSearch and Solr use Apache Lucene to index and search data. But, of course, each search engine has its own Java implementation that interacts with Lucene. This is also the case when it comes to language handling. Apache Solr 4.0 beta has the advantage over ElasticSearch because it can handle more languages out of the box. For example, my native language Polish is supported by Solr out of the box (with two different filters for stemming), but not by ElasticSearch. On the other hand, there are many plugins for ElasticSearch that enable support for languages not supported by default, though still not as many as we can find supported in Solr out of the box.  It’s also worth mentioning there are commercial analyzers that plug into Solr (and Lucene), but none that we are aware of work with ElasticSearch…. yet.</p>
+
+<p>이전 언급한 대로, ElasticSearch와 Solr 는 Apache Lucene 을 인덱싱 및 데이터의 검색에 이용하고 있습니다. 각 검색엔진은 그 자체가 Java 구현을 가지며 Lucene 과 상호작용합니다. 이것이 여러 나라의 언어취급에 있어서도 마찬가지 입니다. 이 부분에 있어서는 Apache Solr 4.0β가 ElasticSearch 에 대해서 우위입니다. Solr 그 자체로도 많은 언어를 다룰 수 있기 때문입니다. 예를 들어 저자의 네이티브 언어인 폴란드어는 Solr 에서는 처음부터 지원되었습니다. (두가지 다른 stemming용 필터를 포함한 채) 그러나 ElasticSearch는 그렇지 않습니다. ElasticSearch에서는 기본적으로는 지원하지 않는 언어를 지원하는 플러그인이 다수 존재합니다. 그래도 그 수는 Solr 가 처음부터 지원하고 있는 수만큼은 아닙니다. 또 하나 알아둘 가치가 있는 것은 Solr(와 Lucene)에는 상업해석기가 있습니다. 그러나 ElasticSearch 용은 아직 있는 지 모르겠습니다.</p>
+
+<h2>지원되는 자연언어</h2>
+
+<p>For the full list of languages supported by those two search engine please refer to the following pages:</p>
+
+<p>두 검색엔진에서 지원되는 언어의 완전한 리스트에 대해서는 다음 버젼을 참고해주세요.</p>
+
+<p>Apache Solr</p>
+
+<pre><code>&lt;a href="http://wiki.apache.org/solr/LanguageAnalysis" &gt;http://wiki.apache.org/solr/LanguageAnalysis&lt;/a&gt;
+</code></pre>
+
+<p>ElasticSearch</p>
+
+<p>Analyzers: <a href="http://www.elasticsearch.org/guide/reference/index-modules/analysis/lang-analyzer.html">http://www.elasticsearch.org/guide/reference/index-modules/analysis/lang-analyzer.html</a>
+Stemming: <a href="http://www.elasticsearch.org/guide/reference/index-modules/analysis/stemmer-tokenfilter.html">http://www.elasticsearch.org/guide/reference/index-modules/analysis/stemmer-tokenfilter.html</a>,
+ <a href="http://www.elasticsearch.org/guide/reference/index-modules/analysis/snowball-tokenfilter.html">http://www.elasticsearch.org/guide/reference/index-modules/analysis/snowball-tokenfilter.html</a> 그리고 <a href="http://www.elasticsearch.org/guide/reference/index-modules/analysis/snowball-tokenfilter.html">http://www.elasticsearch.org/guide/reference/index-modules/analysis/kstem-tokenfilter.html</a></p>
+
+<h2>해석체인의 정의</h2>
+
+<p>Of course, both Apache Solr and ElasticSearch allow you to define a custom analysis chain by specifying your own analyzer/tokenizer and list of filters that should be used to process your data. However, the difference between ElasticSearch and Solr is not only in the list of supported languages. ElasticSearch allows one to specify the analyzer per document and per query. So, if you need to use a different analyzer for each document in the index you can do that in ElasticSearch. The same applies to queries – each query can use a different analyzer.</p>
+
+<p>물론, Apache Solr 와 ElasticSearch 양쪽 모두 커스텀 해석기 체인을 정의할 수 있습니다. 당신의 데이터 처리에 사용되는 해석기 및 토크나이저, 필터의 리스트를 지정합니다. 그러나, ElasticSearch 와 Solr 의 차이는 지원되는 언어의 리스트 뿐만이 아닙니다. ElasticSearch 는 도큐먼트 마다, 쿼리마다 해석기를 지정할 수 있습니다. 때문에 인덱스 안의 각각의 도큐먼트에 다른 해석기의 사용이 필요하다면 ElasticSearch 에서는 가능합니다. 쿼리도 마찬가지입니다. 각 쿼리는 다른 해석기를 사용할 수 있습니다.</p>
+
+<h2>결과의 그룹핑</h2>
+
+<p>One of the most requested features for Apache Solr was result grouping. It was highly anticipated for Solr and it is still anticipated for ElasticSearch, which doesn’t yet have field grouping as of this writing.  You can see the number of +1 votes in the following issue: <a href="https://github.com/elasticsearch/elasticsearch/issues/256.">https://github.com/elasticsearch/elasticsearch/issues/256.</a>  You can expect grouping to be supported in ElasticSearch after changes introduced in 0.20. If you are not familiar with results grouping – it allows you to group results based on the value of a field, value of a query, or a function and return matching documents as  groups. You can imagine grouping results of restaurants on the value of the city field and returning only five restaurants for each city. A feature like this may be handy in some situations. Currently, for the search engines we are talking about, only Apache Solr supports results grouping out of the box.</p>
+
+<p>Apache Solr 에 가장 많이 요청된 기능 중 하나가 결과의 그룹핑입니다. Solr 에 있어서 가장 기대되어 온 기능이며, ElasticSearch 에 있어서도 지금도 기대를 머금고 있습니다. 이 글을 쓰고 있는 시점에서는 ElasticSearch 는 필드의 그룹핑을 가지고 있지 않습니다. 다음 이슈를 보면 이에 대한 여러 요청이 있는 것을 알 수 있을 것입니다. <a href="https://github.com/elasticsearch/elasticsearch/issues/256">https://github.com/elasticsearch/elasticsearch/issues/256</a></p>
+
+<p>ElasticSearch에서는 0.20 이 릴리즈 된 때에 지원될 것이라고 기대하고 있습니다. 결과의 그룹핑을 모르는 사람을 위해 설명하자면, 필드나 쿼리 또는 함수의 값에 의해 결과를 그룹으로 나눌 수 있습니다. 그리고 매치된 도큐먼트를 그룹으로 반환합니다. 예를들어 레스토랑의 결과를 마을의 필드로 그룹핑해서 각 거리의 다섯가지 레스토랑만 반환합니다. 이런 기능은 여러 상황에서 편리하겠죠. 지금은 Apache Solr 만이 기본적으로 결과의 그룹핑을 할 수 있습니다.</p>
+
+<h2>Prospective Search</h2>
+
+<p>One thing Apache Solr completely lacks when comparing to ElasticSearch is functionality called Percolator in ElasticSearch. Imagine a search engine that, instead of storing documents in the index, stores queries and lets you check which stored/indexed queries match each new document being indexed. Sound handy, right?  For example, this is useful when people want to watch out for any new documents (think Social Media, News, etc.) matching their topics of interest, as described through queries. This functionality is also called Prospective Search, some call it Pub-Sub as well as Stored Searches.  At Sematext we’ve implemented this a few times for our clients using Solr, but ElasticSearch has this functionality built-in.  If you want to know more about ElasticSearch Percolator see <a href="http://www.elasticsearch.org/blog/2011/02/08/percolator.html.">http://www.elasticsearch.org/blog/2011/02/08/percolator.html.</a></p>
+
+<p>Apache Solr 가 ElasticSearch와 비교해서 완전하게 결여된 것 중 하나는 ElasticSearch 에서 퍼컬레이터 라고 부르는 기능입니다. 예를들어 인덱스에 도큐먼트를 넣는 것이 아니라, 쿼리를 넣고 새로운 도큐먼트의 인덱싱 때마다 인덱스된 쿼리가 매치하는 지 어떤 지를 체크하는 것이죠. 좋지 않나요?
+ 편리한 점은 유저가 모든 새로운 도큐먼트(소셜미디어나 뉴스 같은 것을 생각해보세요)가 유저가 흥미를 가지는 토픽에 해당되는 지, 앞서 정의한 쿼리를 통해서 체크하고 싶은 경우에 유용합니다. 이 기능은 또 Prospective Search 라고도 불립니다. 또 어떤 사람은 Pub-Sub라고도 부르고, stored search 라고도 부릅니다. Sematext 에서는 Solr를 사용하는 고객을 위해서 이것을 몇 번인가 구현한 적이 있습니다. 하지만 ElasticSearch는 기본적으로 이 기능을 가지고 있죠. 만약 ElasticSearch의 퍼컬레이터에 대해서 좀 더 알아보고 싶으시다면 다음 URL 을 참고하세요.</p>
+
+<p><a href="http://www.elasticsearch.org/blog/2011/02/08/percolator.html">http://www.elasticsearch.org/blog/2011/02/08/percolator.html</a></p>
+
+<h2>다음회 예고</h2>
+
+<p>In the next part of the series we will focus on comparing the ability to query your indices and leverage the full text search capabilities of Apache Solr and ElasticSearch. We will also look at the possibility to influence Lucene scoring algorithms during query time. Till next time :)</p>
+
+<p>다음회에서는 Apache Solr 와 ElasticSearch 상의 인덱스에 대해서 쿼리의 능력과 전문검색의 능력에 대해서 알아보도록 합니다. 또 쿼리시에 Lucene 의 스코어링 알고리즘을 다루는 방법에 대해서도 알아볼 예정입니다. 그럼 다음회에서 봐요.</p>
+
+<p>@kucrafal, @sematext</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/07/15/solr-vs-elasticsearch-part-1/">[번역] Solr vs ElasticSearch - Part 1 : Overview</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-15T09:17:35+09:00" pubdate data-updated="true">Jul 15<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h1>Solr vs. ElasticSearch: Part 1 – Overview</h1>
+
+<p>August 23, 2012 by <a href="http://blog.sematext.com/author/kucrafal/">Rafał Kuć</a></p>
+
+<p>2012/08/23 원저자 Rafał Kuć</p>
+
+<p>A good Solr vs. ElasticSearch coverage is long overdue.  We make good use of our own Search Analytics and pay attention to what people search for.  Not surprisingly, lots of people are wondering when to choose Solr and when ElasticSearch, and this SolrCloud vs. ElasticSearch question is something we regularly address in our search consulting engagements.</p>
+
+<p>Solr 와 ElasticSearch 에 대한 좋은 비교기사를 오래도록 기다려왔습니다. 우리는 스스로 검색분석을 활용해 온 사람들이 무엇을 검색하고 싶은 지 주목했습니다. 대개, 많은 사람들이 언제 Solr 를 선택하고, 언제 ElasticSearch 를 선택해야 하는 가에 어려워하고 있었습니다. 그리고 이 SolrCloud vs. ElasticSearch 문제는 우리가 검색 컨설팅 계약 중에 항상 겪어온 것입니다.</p>
+
+<p>As the Apache Lucene 4.0 release approaches and with it Solr 4.0 release as well, we thought it would be beneficial to take a deeper look and compare the two leading open source search engines built on top of Lucene – Apache Solr and ElasticSearch. Because the topic is very wide and can go deep, we are publishing our research as a series of blog posts starting with this post, which provides the general overview of the functionality provided by both search engines.</p>
+
+<p>Apache Lucene 4.0 의 릴리즈가 가까워 짐에 따라, 그와 함께 Solr 4.0 릴리즈도 가까워지고 있습니다. Apache Solr 와 ElasticSearch 라는 Lucene 위에 구축된 2가지 검색엔진을 비교해서, 깊은 고찰을 얻으려고 하는 것은 매우 큰 의미가 있다고 생각합니다. 이 토픽은 매우 범위가 깊어서, 우리들의 연구결과를 이 기사를 시작으로 하는 일련의 블로그 포스트로 공개합니다. 이 기사에서는 2가지 검색 엔진이 제공하는 기능의 전체적인 개요를 나타냅니다.</p>
+
+<ul>
+<li><a href="http://jeen.github.io/2013/07/15/solr-vs-elasticsearch-part-1/">1. Solr vs. ElasticSearch: Part 1 – Overview</a></li>
+<li><a href="http://jeen.github.io/2013/07/16/solr-vs-elasticsearch-part-2-indexing-and-language-handling/">2. Solr vs. ElasticSearch: Part 2 – Data Handling</a></li>
+<li><a href="http://jeen.github.io/2013/07/16/solr-vs-elasticsearch-part-3-searching/">3. Solr vs. ElasticSearch: Part 3 – Searching</a></li>
+<li><a href="http://jeen.github.io/2013/07/16/solr-vs-elasticsearch-part-4-faceting/">4. Solr vs. ElasticSearch: Part 4 – Faceting</a></li>
+<li><a href="http://jeen.github.io/2013/07/17/solr-vs-elasticsearch-part-5-management-api-capabilities/">5. Solr vs. ElasticSearch: Part 5 – Management API Capabilities</a></li>
+<li><a href="http://jeen.github.io/2013/07/17/solr-vs-elasticsearch-part-6-user-and-dev-communities-compared/">6. Solr vs. ElasticSearch: Part 6 – User &amp; Dev Communities Compared</a></li>
+</ul>
+
+
+<h2>시작하기 전에</h2>
+
+<p>This post is based on released versions of Solr and ElasticSearch. For Solr, all the functionality description is based on version 4.0 beta and all of the ElasticSearch functionality is based on 0.19.8. Because we are comparing ElasticSearch and Solr, on the Solr side the focus is on Solr 4.0 (aka SolrCloud) functionality functionality and not Solr 3.*, so we could call this series as SolrCloud vs. ElasticSearch, too.</p>
+
+<p>이 포스트는 다음과 같은 버젼을 기반으로 하고 있습니다. Solr 의 기능에 대한 서술은 버젼 4.0β를 기준으로 하며, ElasticSearch 은 버젼 0.19.8를 기준으로 합니다. ElasticSearch 와 Solr 를 비교하는 것이기에 Solr 는 Solr 3.* 이 아닌, SolrCloud 로 알려진 Solr 4.0 에 초점을 맞춥니다. 이 때문에 우리는 이 일련의 기사를 SolrCloud vs. ElasticSearch 로 부르고 있습니다.</p>
+
+<h2>검색 엔진의 뒷편</h2>
+
+<p>For indexing and searching both Solr and ElasticSearch use Lucene. As you may suspect, Solr 4.0 beta uses the 4.0 version of Lucene, while ElasticSearch 0.19.8 still uses version 3.6.  Of course, that doesn’t mean much when it comes to future versions of ElasticSearch because you can be sure that ElasticSearch will start using Lucene 4.0 once it’s GA release is ready, or maybe even before that.</p>
+
+<p>인덱싱과 검색에는 Solr 와 ElasticSearch 모두 Lucene 을 사용합니다. 눈치채셨겠지만 Solr4.0β는 Lucene 4.0을 사용하지만 ElasticSearch 0.19.8은 3.6 을 사용하고 있습니다. 물론 그것은 ElasticSearch 의 장래 버젼에 대해서는 많은 의미를 가지고 있을 것입니다. Lucene 4.0 의 GA 릴리즈의 준비가 끝났다면 당장(또는 그 이전부터) ElasticSearch 도 그것을 사용하기 시작할 것은 확실하기 때문입니다.</p>
+
+<h2>기본</h2>
+
+<p>There are a few differences in the way Solr and ElasticSearch name certain concepts. Let’s start with the basics – many servers connected together forms a cluster for both ElasticSearch and Solr. A single instance of Solr or ElasticSearch is called a node. That’s about it for nomenclature overlap.</p>
+
+<p>Solr 와 ElasticSearch에는 몇가지 컨셉에 대한 네이밍에 약간 차이가 있습니다. 기초부터 시작해봅시다.</p>
+
+<p>ElasticSearch 와 Solr 모두, 많은 서버를 모아 클러스터를 구성할 수 있습니다. Solr 또는 ElasticSearch 의 하나의 인스턴스는 노드라고 부릅니다. 양쪽의 명명법이 겹치는 것은 그것뿐입니다.</p>
+
+<p>The main logical data structure for Solr is called the Collection. A Collection is composed of Shards that are really Lucene indices. A single Collection can have multiple Shards and Shards can live on different Nodes. Because a Collection is composed of one or more Shards, a single Collection can be spread across multiple Nodes giving you a distributed environment. In addition to that, a Collection can have Replicas – basically an exact copy of the Shard whose main purpose is to enable scaling and data duplication in case of Node failures (i.e., High Availability).</p>
+
+<p>Solr 의 메인 논리데이터구조는 콜렉션이라고 부릅니다. 콜렉션은 실제로는 Lucene 의 인덱스인 Shard 로 구성됩니다. 하나의 콜렉션은 여러 Shard 를 가질 수 있으며, Shard 는 다른 노드 위에 놓을 수 있습니다. 콜렉션이 하나 이상의 Shard 에 의해 구성되기에 하나의 컬렉션은 여러 노드에 걸칠 수 있기 에 분산시스템이 됩니다. 덧붙여, 콜렉션은 레플리카를 가질 수 있습니다. 레플리카는 기본적으로 Shard 의 완전한 카피로 주요한 목적은 스케일러빌리티와 노드의 장애에 대비하기 위한 데이터의 복제입니다 (즉 고가용성입니다).</p>
+
+<p>On the other hand we have ElasticSearch where the top logical data structure is called an Index. Similar to a Collection in Solr, ElasticSearch Index can have multiple Shards and Replicas. And here, too, Shards and Replicas are small Lucene indices, that can be spread across the Cluster in order to create a distributed environment. But that’s not all – in ElasticSearch you can have multiple Types of documents in a single Index. This means that you can index documents of different index structure (for example users and their documents) in a single Index. ElasticSearch is able to distinguish those Types during indexing as well as querying. In order to achieve the same with Solr you would have to simulate that inside your application or develop a custom search component.</p>
+
+<p>한편, ElasticSearch는 인덱스라고 부르는 논리적인 데이터 구조 위에 있습니다. Solr 의 콜렉션과 비슷해서, ElasticSearch 의 인덱스는 여러 Shard 와 인덱스를 가질 수 있습니다. 그리고 Shard 와 레플리칸는 작은 Lucene 의 인덱스이며 클러스터 위에 분산뒤어 분산환경을 구축합니다. 그러나 그것뿐이 아닙니다. ElasticSearch 에서는 하나의 인덱스 위에 여러 형태의 도큐먼트를 가질 수 있습니다. 이것은 다른 인덱스 구조의 여러 도큐먼트(예를들어 유저와 그들의 문서) 를 단일 인스턴스에 색인할 수 있다는 것을 의미합니다. ElasticSearch 는 인덱스 작성시는 물론 검색시에도 그런 형태들을 구분지을 수 있습니다. Solr 로 같은 일을 하기 위해서는 어플리케이션 안에서 그것을 시뮬레이트하거나, 커스텀 검색 컴포넌트를 개발할 필요가 있을 것입니다.</p>
+
+<h2>설정</h2>
+
+<p>Lets take a quick look at how Solr and ElasticSearch are configured. Let’s start with the index structure.</p>
+
+<p>Solr 와 ElasticSearch 가 어떻게 설정되는지 간단하게 보도록 합니다. 우선은 인덱스의 구조부터 시작하겠습니다.</p>
+
+<p>In Solr you need the schema.xml file in order to define how your index structure, to define fields and their types. Of course, you can have all fields defined as dynamic fields and create them on the fly, but you still need at least some degree of index configuration. In most cases though, you’ll create a schema.xml to match your data structure.</p>
+
+<p>Solr 에서는 schema.xml 파일을 인덱스 구조의 필드와 그 형태의 정의를 위해서 필요로 합니다. 물론 모든 필드의 동적인 필드로 정의하고 동적생성을 할 수도 있습니다. 그러나 그것만으로도 어느정도는 인덱스의 정의를 필요로 할 것입니다. 대부분의 경우 데이터 구조에 매치하는 schema.xml 을 작성하게 됩니다.</p>
+
+<p>ElasticSearch is a bit different – it can be called schemaless. What exactly does this mean, you may ask. In short, it means one can launch ElasticSearch and start sending documents to it in order to have them indexed without creating any sort of index schema and ElasticSearch will try to guess field types. It is not always 100% accurate, at least when comparing to the manual creation of the index mappings, but it works quite well. Of course, you can also define the index structure (so called mappings) and then create the index with those mappings, or even create the mappings files for each type that will exist in the index and let ElasticSearch use it when a new index is created. Sounds pretty cool, right? In addition to than, when a new, previously unseen field is found in a document being indexed, ElasticSearch will try to create that field and will try to guess its type.  As you may imagine, this behavior can be turned off.</p>
+
+<p>ElasticSearch 는 조금 다릅니다. Schemaless 라고 부릅니다. 그것이 무엇인지 궁금할 수 있겠죠. 짧게 말하면 누구라도 ElasticSearch 를 기동해서 그대로 문서를 그 안에 보내는 것으로 하나의 인덱스 스키마를 정의하는 일도 없이 인덱스 작성을 할 수 있습니다. ElasticSearch 가 필드 형태를 추론해줍니다. 언제라도 100% 정확하다고 할 수는 없습니다. 적어도 수동으로 스키마를 정의한 경우에 비례해서는 당연히 그렇습니다. 그러나 매우 잘 동작합니다. 물론, 인덱스 정의(즉 맵핑)을 정의하는 것은 가능하고, 맵핑에 따라 인덱스를 작성할 수도 있스빈다. 또 여러 맵핑파일을 인덱스에 존재할 여러 형태에 대해서 작성하는 것도 가능하고, ElasticSearch 에 새로운 인덱스가 작성될 때에 그것을 사용하는 것도 가능합니다. 매우 매력적이죠? 덧붙여서 인덱스 작성중의 문서에는 아직 발견되지 않은 새로운 필드가 발견된 경우, ElasticSearch 는 그 형태를 추론해서 새로운 필드를 작성하려고 합니다. 물론 그 기능은 끌 수도 있습니다.</p>
+
+<p>Let’s talk about the actual configuration of Solr and ElasticSearch for a bit. In Solr, the configuration of all components, search handlers, index specific things such as merge factor or buffers, caches, etc. are defined in the solrconfig.xml file. After each change you need to restart Solr node or reload it. All  configs in ElasticSearch are written to elasticsearch.yml file, which is just another configuration file. However, that’s not the only way to store and change ElasticSearch settings. Many settings exposed by ElasticSearch (not all though) can be changed on the live cluster – for example you can change how your shards and replicas are placed inside your cluster and ElasticSearch nodes don’t need to be restarted.  Learn more about this in ElasticSearch Shard Placement Control.</p>
+
+<p>Solr 와 ElasticSearch 의 실제 설정에 대해서도 조금 더 이야기를 이어가겠습니다. Solr 에서는 모든 컴포넌트, 검색 핸들러, 인덱스를 특정하기 위한 다양한 일(예를들어 머지팩터와 버퍼, 캐쉬 등)의 정의는, solrconfig.xml 파일 안에 정의됩니다. 모든 변경 뒤에는 Solr 노드의 재기동이나 리로드가 필요합니다. ElasticSearch 의 모든 설정은 elasticsearch.yml 파일에 적혀져 있습니다. 그것은 또한 다른 설정파일에 지나지 않습니다. 그러나 ElasticSearch 의 설정을 정의하거나 변경하는 방법은 그것뿐만이 아닙니다. ElasticSearch 에 있어서 많은 설정(그러나 모든 것이 아닌)은 운용중인 클러스터 위에서 변경가능합니다. 예를들어 Shard 와 레플리카를 클러스터 내부의 어디에 놓을 것인가입니다. 또 ElasticSearch 노드는 재기동할 필요가 없습니다. 이에 대해서는 ElasticSearch 의 Shard 의 배치 컨트롤에에서 보다 자세히 배우도록 합니다.</p>
+
+<h2>검색과 클러스터의 관리</h2>
+
+<p>Solr and ElasticSearch have a different approach to cluster node discovery and cluster management in general.  The main purpose of discovery is to monitor nodes’ states, choose master nodes, and in some cases also store shared configuration files.</p>
+
+<p>Solr 와 ElasticSearch는 클러스터 노드의 탐색과 클러스터 관리 전반에 있어서 다른 접근을 취합니다. 탐색의 주요한 목적은 노드의 상태 감시, 마스터 노드의 선택, 또 Shard 정의 파일의 격납을 따라가는 몇가지 케이스가 있습니다.</p>
+
+<p>By default ElasticSearch uses the so called Zen Discovery, which has two methods of node discovery: multicast and unicast.  With multicast a single node sends a multicast request and all nodes that receive that request respond to it. So if your nodes can see each other at the network layer with the use of multicast method your nodes will be able to form a cluster. On the other hand, unicast depends on the list of hosts that should be pinged in order to form the cluster. In addition to that, the Zen Discovery  module is also responsible for detecting the master node for the cluster and for fault discovery. The fault discovery is done in two ways – the master node pings all the other nodes to see if they are healthy and the nodes ping the master in order to see if the master is still working as it should.  We should note that there is an ElasticSearch plugin that makes ElasticSearch use Apache Zookeeper instead of its own Zen Discovery.</p>
+
+<p>기본적으로는 ElasticSearch는 선탐색(Zen Discovery)이라고 불리는 방법을 사용하는데, 이는 멀티캐스트와 유니캐스트 라는 2가지 노드의 탐색수법이 존재합니다. 멀티캐스트에는 하나의 노드는 멀티캐스트 쿼리를 송신하고 그 리퀘스트를 받은 모든 노드는 그에 대해 응답을 보냅니다. 만약 노드가 멀티캐스트 메소드를 사용하고 네트워크 층에 대해서 서로 인식할 수 있으면, 노드는 클러스터를 구성할 수 있습니다. 한편, 유니캐스트는 호스트의 리스트에 따라, 클러스터를 구성하기 위해 ping 을 보낼 필요가 있습니다. 덧붙여 선탐색 모듈은 클러스터의 마스터 노드의 검지와 장애탐색의 책임을 가집니다. 장애탐색에는 두가지 방법을 취할 수 있습니다. 마스터 노드는 다른 모든 노드에 대해 ping 을 보내 건강한지를 확인하고, 다른 노드는 마스터가 움직이는 지를 확인하기 위해서 ping 을 보냅니다. 주목할 점으로는 선탐색 대신에 Apache ZooKeeper 를 사용하는 ElasticSearch 플러그인이 존재합니다.</p>
+
+<p>Apache Solr uses a different approach for handling search cluster. Solr uses Apache Zookeeper ensemble – which is basically one or more Zookeeper instances running together. Zookeeper is used to store the configuration files and monitoring – for keeping track of the status of all nodes and of the overall cluster state. In order for a new node to join an existing cluster Solr needs to know which Zookeeper ensemble to connect to.</p>
+
+<p>Apache Solr 는 클러스터 탐색을 다루는 것에 있어서 다른 접근방법을 가집니다. Solr 는 Apache Zookeeper ensemble 을 이용합니다. 그것은 기본적으로 하나이상의 ZooKeeper 의 인스턴스가 동시에 실행하는 것으로 구성됩니다. ZooKeeper 는 설정파일의 격납과 감시에 이용됩니다. 모든 노드와 클러스터 전체의 상태를 추적합니다. 기존 클러스터에 새로운 노드를 추가하는 경우에는 Solr 는 어느  ZooKeeper ensemble 에 접속할 것인가 알아야 할 필요가 있습니다.</p>
+
+<p>There is one thing worth noting when it comes to cluster handling – the split brain situation. Imagine a situation, where you cluster is divided into half, so half of your nodes don’t see the other half, for example because of the network failure. In such cases ElasticSearch will try to elect a new master in the cluster part that doesn’t have one and this will lead to creation of two independent clusters running at the same time. This can be limited with a small degree of configuration, but it can still happen. On the other hand, Solr 4.0 is immune to split brain situations, because it uses Zookeeper, which prevents such ill situations. If half of your Solr cluster is disconnected, it wouldn’t be visible by Zookeeper and thus data and queries wouldn’t be forwarded there.</p>
+
+<p>하나 주의할 점이 클러스터를 다루는 것에 있습니다. 스플릿플레인이라고 하는 상태입니다. 클러스터가 분쪽으로 나눠져 노드의 반쪽이 다른 한쪽의 반쪽을 알수 없는 상태를 상상해보세요. 예를들어 네트워크의 장애입니다. 그런 케이스에서는 ElasticSearch는 마스터 노드를 가지지 않는 쪽의 부분 클러스터에 새로운 마스터를 선택하려고 합니다. 이것이 두개의 독립한 클러스터 도잇에 실행되는 상황으로 인도합니다. 이것은 적은 양의 정의로 제한할 수 있지만, 그래고 발생할 수 있습니다. 반면 Solr 4.0 은 스플릿플레인 상태에 면역이 있습니다. ZooKeeper 를 사용하고 있기 때문에, 그런 상태를 방지할 수 있습니다. 만약 반쪽의 Solr 클러서가 접속불가능한 경우, ZooKeeper 에는 보여지지 않고, 따라서 데이터와 쿼리는 그쪽에는 전송되지 않습니다.</p>
+
+<h2>API</h2>
+
+<p>If you know Apache Solr or ElasticSearch you know that they expose an HTTP API.</p>
+
+<p>Apache Solr 가 ElasticSearch 를 알고 있다면 HTTP API 를 공개했다는 것도 알고 있을 겁니다.</p>
+
+<p>Those of you familiar with Solr know that in order to get search results from it you need to query one of the defined request handlers and pass in the parameters that define your query criteria. Depending on which query parser you choose to use, these parameters will be different, but the method is still the same – an HTTP GET request is sent to Solr in order to fetch search results. The good thing is that you are not limited to a single response format – you may choose to get results in XML, in JSON in JavaBin format and several other formats that have response writers developed for them.  You can thus choose the format that is the most convenient for you and your search application.  Of course, Solr API is not only about querying as you can also get some statistics about different search components or control Solr behavior, such as collection creation for example.</p>
+
+<p>Solr 를 잘 아는 사람은 검색결과를 얻기 위해서 정의가 끝는 리퀘스트 핸들러를 요구하고, 쿼리의 기준을 정의하는 파라메터의 안에서 넘길 필요가 있는 것은 알고 있을 겁니다. 어느 쿼리 파서를 선택할 것인가에 따라 그것들의 파라메터는 달라집니다. 그러나 방법은 같습니다. HTTP GET 리퀘스트가 검색결괄르 얻기위해서 Solr 에 보내집니다. 좋은 점은 단일 응답형식에 제한되지 않는 다는 것입니다. 결과를 얻기위해서는 XML, JavaBin 형식의 JSON 이나 다른 몇가지 그것들을 위해 개발된 응답을 써보내줄 녀석을 가지는 형식을 선택할 수 있습니다. 따라서, 스스로 검색과 검색 어플리케이션에 가장 편리한 형식을 선택할 수 있습니다. 물론 Solr API 는 쿼리를 위한 것 뿐만 아니라, 다른 검색컴포넌트의 통계를 얻고, Solr 의 동작, 예를들어 콜렉션의 작성등을 컨트롤할 수도 있습니다.</p>
+
+<p>And what about ElasticSearch?  ElasticSearch exposes a REST API which can be accessed using HTTP GET, DELETE, POST and PUT methods. Its API allows one not only to query or delete documents, but also to create indices, manage them, control analysis and get all the metrics describing current state and configuration of ElasticSearch. If you need to know anything about ElasticSearch, you can get it through the REST API (we use it in our Scalable Performance Monitoring for ElasticSearch, too!). If you are used to Solr there is one thing that may be strange for you in the beginning – the only format ElasticSearch can respond in JSON – there is no XML response for example. Another big difference between ElasticSearch and Solr is querying. While with Solr all query parameters are passed in as URL parameters, in ElasticSearch queries are structured in JSON representation. Queries structured as JSON objects give one a lot of control over how ElasticSearch should understand the query and thus what results to return.</p>
+
+<p>ElasticSearch 는 어떨까요? ElasticSearch는 HTTP GET, DELETE, POST, PUT 메소드를 사용해서 접근할 수 있는 REST API 를 공개하고 있습니다. 도큐먼트에 쿼리를 날리거나 삭제할 수 있을 뿐만 아니라, 인덱스를 작성하거나 관리하거나 분석을 컨트롤해서 현재의 상태를 나타내는 메트릭스를 모두 얻거나, ElasticSearch 설정을 뽑아낼 수도 있습니다. 만약 ElasticSearch 에 대해서 뭔가 알고 싶은 것이 있다면 REST API 를 통해서 얻어낼 수 있습니다. (우리는 그것을 자사 &ldquo;Scalable Performance Monitoring for ElasticSearch&#8221;에서도 사용하고 있습니다) 만약 Solr 에 익숙해져 있다면 가장 먼저 이상하게 느끼는 것중 하나 일 것입니다. ElasticSearch 의 응답에는 JSON 포맷밖에 존재하지 않습니다. XML 은 없습니다. ElasticSearch 와 Solr 의 다른 큰 차이점ㅇ은 쿼리입니다. Solr 에서는 모든 쿼리파라메터가 URL 파라메터로 넘겨지는 것에 반해, ElasticSearch 쿼리에서는 JSON 표현으로 구성됩니다. JSON 오브젝트로 쿼리를 구성하는 것으로 ElasticSearch 가 어떻게 쿼리를 이해하고, 어떻게 결과를 보내주는 지에 대한 많은 컨트롤을 제공합니다.</p>
+
+<h2>데이터의 취급</h2>
+
+<p>Of course, both Solr and ElasticSearch leverage Lucene near real-time capabilities.  This makes it possible for queries to match documents right after they’ve been indexed. In addition to that, both Solr (since 4.0) and ElasticSearch (since 0.15) allow versioning of documents in the index.  This feature allows them to support optimistic locking and thus enable prevention of overwriting updates. Let’s look at how distributed indexing is done in Solr vs. ElastiSearch.</p>
+
+<p>물론, Solr 와 ElasticSearch 양쪽이 Lucene 의 거의 리얼타임 특성을 이용하고 있습니다. 그것이 쿼리가 도큐먼트에 대해서 인덱스가 작성된 다음에 바르게 매치하는 것을 가능하게 합니다. 덧붙여 Solr(4.0부터) 와 ElasticSearch(0.15부터) 는 인덱스 안에서 도큐먼트의 버져닝도 가능합니다. 이 기능은 낙관적인 로직의 지원을 가능하게 하고, 변경에 대한 덮어쓰기를 방지할 수도 있습니다. Solr 와 ElasticSearch 에서 분산 인덱스가 어떻게 수행되는 가를 보도록 합니다.</p>
+
+<p>Let’s start with ElasticSearch this time. In order to add a document to the index in a distributed environment ElasticSearch needs to choose which shard each document should be sent to. By default a document is placed in a shard that is calculated as a hash from the documents identifier. Because this default behavior is not always desired, one can control and alter this behavior by using a feature called routing.  This is controlled via the routing parameter, which can take any value you would like it to have. Imagine that you have a single logical index divided into multiple shards and you index multiple users’ data in it.  On the search side you know queries are narrowed mostly to a single user’s data. With the use of the routing parameter you can index all documents belonging to a single user within a single shard by using the same routing value for all his/her documents.  On the search side you can then use the same routing value when querying. This would result in a single shard being queried instead of the query being spread across all shards in the index, which would be more expensive and slower. In case each index shard contains multiple users’ data we could additionally use a filter to limit matches to only one user’s documents.  In cases like this, routing functionality allows one to think of some nice optimization for both indexing and querying. If you want to hear some more about distributed indexing capabilities of ElasticSearch please take a look at my Berlin Buzzwords 2012 talk – Scaling Massive ElasticSearch Clusters (video).</p>
+
+<p>이번에는 ElasticSearch부터 시작합니다. 분산환경에 있어서 ElasticSearch 의 인덱스에 도큐먼트를 추가하기 위해서는 여러 도큐먼트가 어느 Shard 로 보내졌는가를 선택할 필요가 있습니다. 기본적으로는 도큐먼트는 도큐먼트ID에서 계산된 해쉬키에 의해서 결정된 Shard 로 놓여집니다. 기본적인 동작은 항상 이상적이지 않기 때문에, 라우팅이라고 불리는 기능을 사용해서 변경할 수 있습니다. 이것은 라우팅 파라메터를 통해서 조정할 수 있고, 이 값은 임의의 값을 설정할 수 있습니다. 여러 Shard 로 분할된 하나의 논리 인덱스를 가지고 있고, 여러 유저의 데이터를 그곳에 색인하도록 해본다고 생각해봅시다. 검색 사이드에서는 쿼리는 대부분의 경우에 단일 유저의 데이터에 묶여 있다는 것을 알고 있습니다. 라우팅 파라메터를 사용하는 것으로 단일 유저에 소속된 모든 도큐먼트를 단일 Shard 에서 색인할 수 있다는 것이 모든 유저의 도큐먼트에 대해서 같은 라우팅 값을 사용할 수 있습니다. 검색 사이드에서는 따라서 쿼리 시에 같은 라우팅 값을 사용할 수 있습니다. 이에 의해 결과는 쿼리가 실행된 단일 Shard 안에서만 존재하고 쿼리가 인덱스 안에서 모든 Shard 에 대해서 넓어지지 않습니다. 그 경웅는 보다 높은 비용으로 느려지겠죠. 개개의 인덱스의  Shard 가 여러 유저의 데이터를 가지고 있는 경우에는 추가하는 것으로 필터를 이용해서 단 한 사람의 유저의 도큐먼트에 적합하게 제한할 수 있습니다. ElasticSearch 의 분산인덱스의 기능에 대해서 더 자세히 듣고 싶다면 저자의 Berlin Buzzwords 2012의 강연, &ldquo;<a href="http://blog.sematext.com/2012/06/05/slides-scaling-massive-elasticsearch-clusters/" title="http://blog.sematext.com/2012/06/05/slides-scaling-massive-elasticsearch-clusters/">Scaling Massive ElasticSearch Clusters</a>&rdquo; 비디오 (<a href="https://vimeo.com/44718089">https://vimeo.com/44718089</a>)를 참조해주세요.</p>
+
+<p>Details of Solr’s implementation of distributed indexing (and searching) capabilities can be found in our The New SolrCloud: Overview post. But let’s recall some of those details. In order to forward a document to a proper shard Solr uses Murmur hashing algorithm which calculates the hash for the given document on the basis of its unique identifier. This part is similar to default ElasticSearch behavior.  However, Solr doesn’t yet let you specify explicitly to which shard the document should be sent  &ndash; there is no document and query routing equivalent in Solr yet.</p>
+
+<p>Solr 의 분산 인덱스(와 검색) 에 관한 구현의 자세한 내용은 우리의 <a href="http://blog.sematext.com/2012/02/01/solrcloud-distributed-realtime-search/">&ldquo;The New Solrcloud: Overview&rdquo;</a>의 기사를 참조해주세요. 그리고 그 자세한 내용의 몇가지를 복습해보도록 합니다. 도큐먼트를 적절하게 Shard 에 보내기 위해서 Solr 는 Murmur hashing 이라는 알고리즘을 사용해서 부여된 도큐먼트의 해쉬값을 고유한 식별자로 삼아서 계산하고 있습니다. 이 부분은 ElasticSearch 의 기본동작과 비슷합니다. 그러나 Solr 는 명시적으로 어느 Shard 에 도큐먼트를 보낼 것인가를 지정하는 것은 아직 불가능합니다. 도큐먼트와 쿼리의 라우팅에 비견되는 것은 Solr 에는 아직 없습니다.</p>
+
+<p>Of course, both Solr and ElasticSearch allow one to configure replicas of indices (ElasticSearch) or collections (Solr). This is crucial because replicas enable creation of highly available clusters – even if some of nodes are down, for example because of hardware failure or maintenance, the cluster and data within it can remain available. Without replicas if one nodes is lost, you lose (access to) the data that were on the missing node. If you have replicas present in your configuration both search engines will automatically copy documents to replicas, so that you don’t need to worry about data loss.</p>
+
+<p>물론, Solr 와 ElasticSearch 모두 인덱스（ElasticSearch)、 또는 콜렉션（Solr）의 레플리카 설정을 가능하게 합니다. 이것은 레플리카 클러스터의 고가용성을 실현하는 것이기 때문에 매우 중요합니다. 예를들어 몇가지 노드가 하드웨어장애나 메인테넌스로 다운되었어도, 클러스터와 그 안의 데이터는 계속 이용가능합니다. 레플리카 없이는 하나의 노드를 잃어버리면 잃어버린 노드 위에 존재한 데이터(에 대한 접근)을 잃어버립니다. 만약 설정에서 레플리카가 존재하는 경우 두 검색엔진은 자동적으로 도큐먼트를 레플리카로 복사하기 때문에, 데이터 소실에 대해서 걱정할 필요는 없습니다.</p>
+
+<h2>결론</h2>
+
+<p>We hope that after reading this post you have the basic understanding of what you can expect from both Solr 4.0 and ElasticSearch 0.19.* and you can start to get the feeling for differences and similarities between them.  Of course,  both Solr and ElasticSearch have very strong and active user and development communities and are constantly evolving and improving, and are doing that rather fast. In pre-Solr 4.0 (aka SolrCloud) world the difference between Solr and ElasticSearch was quite stark.  Since then, and under the pressure from ElasticSearch, the gap has narrowed and both projects are moving forward quite quickly.  At Sematext our clients often ask us to recommend the search engine for their use and we recommend both of them.  Which one we recommend for a particular project depends on project requirements, which we always go through at the beginning of every engagement.  If you need help deciding, let us know.</p>
+
+<p>이 기사를 읽은 다음에 Solr 4.0 과 ElasticSearch 0.19.* 양쪽에서 무엇을 기대할 수 있는가, 그 기초를 이해했기를 바랍니다. 그리고 둘 사이의 차이와 유사점에 대해서도 이해되었기를. 물론, Solr 와 ElasticSearch 양쪽모두 매우 강력하고 활발한 유저와 개발자의 커뮤니티가 존재하며, 정기적으로 진화하고 세련되며, 그리고 보다 빨라지고 있습니다. Solr Cloud 로 알려진 Solr 4.0 이전에는 Solr 와 ElasticSearch 의 차이는 매우 컸습니다. ElasticSearch 의 압력의 근원으로 갭은 좁아져 두가지 프로젝트는 함께 빨리 진행되고 있습니다. 어느 프로젝트를 추천하는 지는 요건에 따라 달라집니다. 이것은 우리가 항상 계약시점에 넘어야 할 길입니다. 만약 당신이 결단에 도움을 필요로 한다면 꼭 알려주세요.</p>
+
+<p>Also please keep in mind this post is not meant to be the most comprehensive guide to all the similarities and differences between ElasticSearch and Solr. We wanted to start with a general overview of how these two great search engines work and cover the big picture. In subsequent parts of the “Solr vs. ElasticSearch” series we’ll describe how the most frequently used features of both search engines work, what the differences between them are, and we’ll get into details of those features showing you pros and cons of Solr vs. ElasticSearch approach (for example approaches used in faceting or caching). Just as a sneak peak into the next post in the series – you can expect information about language handling capabilities, analysis configuration, and querying.</p>
+
+<p>또 이 기사가 ElasticSearch와 Solr 사이의 유사점과 차이점에 대해서 가장 완벽한 가이드가 아니라는 점을 항상 주의해주세요. 우리는 이 두가지 대단한 검색 엔진이 어떻게 동작하는 가 하는 일반적인 개요와 외관부터 시작하고 싶었습니다. 이에 이어서 &ldquo;Solr vs. ElasticSearch&rdquo; 시리즈의의 파트에서는 두 검색엔진에서 가장 빈번하게 사용되는 기능이 어떻게 동작하는 지 해설합니다. 그리고 그 기능들의 자세한 내용들을 &ldquo;ElasticSearch vs. Solr&rdquo; 로 접근해서 그 이점과 결점을 보도록합니다. 예를들어 Facet 과 Cache 로 이용되는 접근방식에서) 시리즈의 다음회에 언어의 취급 기능과 분석설정, 그리고 쿼리에 대해서 기대해주세요.</p>
+
+<p><a href="http://twitter.com/kucrafal">@kucrafal</a>, <a href="http://twitter.com/sematext" title="sematext">@sematext</a></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  <div class="pagination">
+    
+      <a class="prev" href="/blog/page/3/">&larr; Older</a>
+    
+    <a href="/blog/archives">Blog Archives</a>
+    
+    <a class="next" href="/">Newer &rarr;</a>
+    
+  </div>
+</div>
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/07/17/solr-vs-elasticsearch-part-6-user-and-dev-communities-compared/">[번역] Solr vs. ElasticSearch: Part 6 – User &amp; Dev Communities Compared</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/07/17/solr-vs-elasticsearch-part-5-management-api-capabilities/">[번역] Solr vs ElasticSearch: Part 5 – Management API Capabilities</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/07/17/solr-vs-elasticsearch-part-4-faceting/">[번역] Solr vs ElasticSearch Part 4 - Faceting</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/07/16/solr-vs-elasticsearch-part-3-searching/">[번역] Solr vs. ElasticSearch - Part 3 : Searching</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/07/16/solr-vs-elasticsearch-part-2-indexing-and-language-handling/">[번역] Solr vs. ElasticSearch: Part 2 - Indexing and Language Handling</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating&#8230;</li>
+  </ul>
+  
+  <a href="https://github.com/jeen">@jeen</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'jeen',
+            count: 0,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Jeen Lee -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'jeen';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id; js.async = true;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

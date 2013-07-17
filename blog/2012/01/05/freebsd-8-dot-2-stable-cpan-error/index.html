@@ -1,0 +1,441 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>FreeBSD 8.2 STABLE - CPAN Error - Jeen - Yet anothere techlog</title>
+  <meta name="author" content="Jeen Lee">
+
+  
+  <meta name="description" content="회사업무차 FreeBSD 8.2 STABLE OS 를 사용하는 서버에서 CPAN 사용시 에러가 발생했습니다. ~~~ bash
+$ cpan Module::Install
+Reading &lsquo;/home/jeen/.cpan/sources/authors/ &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://jeen.github.io/blog/2012/01/05/freebsd-8-dot-2-stable-cpan-error">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Jeen - Yet anothere techlog" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-27958809-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Jeen - Yet anothere techlog</a></h1>
+  
+    <h2>STFUAWSC</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:jeen.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">FreeBSD 8.2 STABLE - CPAN Error</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-01-05T22:32:00+09:00" pubdate data-updated="true">Jan 5<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>  회사업무차 <code>FreeBSD 8.2 STABLE</code> OS 를 사용하는 서버에서 CPAN 사용시 에러가 발생했습니다.</p>
+
+<p>~~~ bash
+$ cpan Module::Install
+Reading &lsquo;/home/jeen/.cpan/sources/authors/01mailrc.txt.gz&rsquo;
+&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;.DONE
+Reading &lsquo;/home/jeen/.cpan/sources/modules/02packages.details.txt.gz&rsquo;
+  Database was generated on Thu, 05 Jan 2012 05:12:02 GMT
+&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;.DONE
+Reading &lsquo;/home/jeen/.cpan/sources/modules/03modlist.data.gz&rsquo;
+Can&rsquo;t locate object method &ldquo;data&rdquo; via package &ldquo;CPAN::Modulelist&rdquo; (perhaps you forgot to load &ldquo;CPAN::Modulelist&rdquo;?) at (eval 24) line 1.
+ at /home/jeen/perl5/perlbrew/perls/perl-5.14.2/lib/5.14.2/CPAN/Index.pm line 524</p>
+
+<pre><code>CPAN::Index::rd_modlist('CPAN::Index', '/home/jeen/.cpan/sources/modules/03modlist.data.gz') called at /home/jeen/perl5/perlbrew/perls/perl-5.14.2/lib/5.14.2/CPAN/Index.pm line 85
+CPAN::Index::reload('CPAN::Index') called at /home/jeen/perl5/perlbrew/perls/perl-5.14.2/lib/5.14.2/CPAN.pm line 976
+CPAN::exists('CPAN=HASH(0x801fe27f8)', 'CPAN::Module', 'Module::Install') called at /home/jeen/perl5/perlbrew/perls/perl-5.14.2/lib/5.14.2/CPAN/Shell.pm line 1256
+CPAN::Shell::expandany('CPAN::Shell', 'Module::Install') called at /home/jeen/perl5/perlbrew/perls/perl-5.14.2/lib/5.14.2/CPAN/Shell.pm line 1681
+CPAN::Shell::rematein('CPAN::Shell', 'install', 'Module::Install') called at /home/jeen/perl5/perlbrew/perls/perl-5.14.2/lib/5.14.2/CPAN/Shell.pm line 1977
+CPAN::Shell::__ANON__('CPAN::Shell', 'Module::Install') called at /home/jeen/perl5/perlbrew/perls/perl-5.14.2/lib/5.14.2/App/Cpan.pm line 459
+App::Cpan::__ANON__('Module::Install') called at /home/jeen/perl5/perlbrew/perls/perl-5.14.2/lib/5.14.2/App/Cpan.pm line 468
+App::Cpan::_default('ARRAY(0x800e92780)', 'HASH(0x801fe7d38)') called at /home/jeen/perl5/perlbrew/perls/perl-5.14.2/lib/5.14.2/App/Cpan.pm line 386
+App::Cpan::run('App::Cpan', 'Module::Install') called at /home/jeen/perl5/perlbrew/perls/perl-5.14.2/bin/cpan line 11
+</code></pre>
+
+<p>~~~</p>
+
+<p>  마땅히 어떻게 <code>cpan</code> 자체가 안되니, 다른 CPAN 모듈 설치도 안되고&hellip;</p>
+
+<p><del> bash
+$ curl -L <a href="http://cpanmin.us">http://cpanmin.us</a> | perl &ndash; &mdash;self-upgrade
+</del></p>
+
+<p>  그래서 일단은 그냥 <code>cpanm</code> 을 설치하고 필요한 모듈들을 설치했습니다. 하지만 여전히 <code>cpan</code> 으로 모듈을 설치하려면 위처럼 에러가 뜨니 아직도 찜찜하기 그지 없네요.</p>
+
+<p><del> bash
+$ uname -a
+FreeBSD xxx.xxxxx.kr 8.2-STABLE FreeBSD 8.2-STABLE #1: Wed Apr 13 13:10:49 KST 2011     root@xxx.xxxx.kr:/usr/obj/usr/src/sys/GENERIC  amd64
+</del></p>
+
+<p>~~~ bash
+$ perl -V
+Summary of my perl5 (revision 5 version 14 subversion 2) configuration:</p>
+
+<p>  Platform:</p>
+
+<pre><code>osname=freebsd, osvers=8.2-stable, archname=amd64-freebsd
+uname='freebsd xxx.xxxxx.kr 8.2-stable freebsd 8.2-stable #1: wed apr 13 13:10:49 kst 2011 root@xxx.xxxx.kr:usrobjusrsrcsysgeneric amd64 '
+config_args='-de -Dprefix=/home/jeen/perl5/perlbrew/perls/perl-5.14.2'
+hint=recommended, useposix=true, d_sigaction=define
+useithreads=undef, usemultiplicity=undef
+useperlio=define, d_sfio=undef, uselargefiles=define, usesocks=undef
+use64bitint=define, use64bitall=define, uselongdouble=undef
+usemymalloc=n, bincompat5005=undef
+</code></pre>
+
+<p>  Compiler:</p>
+
+<pre><code>cc='cc', ccflags ='-DHAS_FPSETMASK -DHAS_FLOATINGPOINT_H -fno-strict-aliasing -pipe -fstack-protector -I/usr/local/include',
+optimize='-O',
+cppflags='-DHAS_FPSETMASK -DHAS_FLOATINGPOINT_H -fno-strict-aliasing -pipe -fstack-protector -I/usr/local/include'
+ccversion='', gccversion='4.2.1 20070719  [FreeBSD]', gccosandvers=''
+intsize=4, longsize=8, ptrsize=8, doublesize=8, byteorder=12345678
+d_longlong=define, longlongsize=8, d_longdbl=define, longdblsize=16
+ivtype='long', ivsize=8, nvtype='double', nvsize=8, Off_t='off_t', lseeksize=8
+alignbytes=8, prototype=define
+</code></pre>
+
+<p>  Linker and Libraries:</p>
+
+<pre><code>ld='cc', ldflags ='-Wl,-E  -fstack-protector -L/usr/local/lib'
+libpth=/usr/lib /usr/local/lib
+libs=-lm -lcrypt -lutil -lc
+perllibs=-lm -lcrypt -lutil -lc
+libc=, so=so, useshrplib=false, libperl=libperl.a
+gnulibc_version=''
+</code></pre>
+
+<p>  Dynamic Linking:</p>
+
+<pre><code>dlsrc=dl_dlopen.xs, dlext=so, d_dlsymun=undef, ccdlflags=' '
+cccdlflags='-DPIC -fPIC', lddlflags='-shared  -L/usr/local/lib -fstack-protector'
+</code></pre>
+
+<p>Characteristics of this binary (from libperl):
+  Compile-time options: PERL_DONT_CREATE_GVSV PERL_MALLOC_WRAP</p>
+
+<pre><code>                    PERL_PRESERVE_IVUV USE_64_BIT_ALL USE_64_BIT_INT
+                    USE_LARGE_FILES USE_PERLIO USE_PERL_ATOF
+</code></pre>
+
+<p>  Built under freebsd
+  Compiled at Jan  5 2012 15:51:41
+  %ENV:</p>
+
+<pre><code>PERLBREW_BASHRC_VERSION="0.39"
+PERLBREW_HOME="/home/jeen/.perlbrew"
+PERLBREW_MANPATH="/home/jeen/perl5/perlbrew/perls/perl-5.14.2/man"
+PERLBREW_PATH="/home/jeen/perl5/perlbrew/bin:/home/jeen/perl5/perlbrew/perls/perl-5.14.2/bin"
+PERLBREW_PERL="perl-5.14.2"
+PERLBREW_ROOT="/home/jeen/perl5/perlbrew"
+PERLBREW_VERSION="0.39"
+</code></pre>
+
+<p>  @INC:</p>
+
+<pre><code>/home/jeen/perl5/perlbrew/perls/perl-5.14.2/lib/site_perl/5.14.2/amd64-freebsd
+/home/jeen/perl5/perlbrew/perls/perl-5.14.2/lib/site_perl/5.14.2
+/home/jeen/perl5/perlbrew/perls/perl-5.14.2/lib/5.14.2/amd64-freebsd
+/home/jeen/perl5/perlbrew/perls/perl-5.14.2/lib/5.14.2
+.
+</code></pre>
+
+<p>~~~</p>
+
+<p><del> bash
+$ df -Th .
+Filesystem   Type    Size    Used   Avail Capacity  Mounted on
+/dev/ar0s1f  ufs      43G    5.1G     35G    13%    /usr
+</del></p>
+
+<p>  일단 사건해결에 도움이 될 만한 정보들은 모조리 뽑아봤습니다.
+  천천히 살펴보며 구원을 요청해야 되겠네요.</p>
+
+<h3>Conclusion</h3>
+
+<p>  <a href="http://webchat.freenode.net?channels=perl-kr">#perl-kr</a> 에서 위에 정리한 내용들로 <a href="http://twitter.com/aer0">@aer0</a> 님께 질문을 날렸습니다. @aer0 님께서 제안하신 방법으로</p>
+
+<ul>
+<li><code>Bundle::CPAN</code> 을 설치</li>
+<li><p><code>~/.cpan</code> 디렉토리를 삭제 후 다시 <code>cpan</code> 실행</p>
+
+<p>이었습니다.</p>
+
+<p><code>Bundle::CPAN</code> 을 설치해도 사태가 해결되지 않아서, 결국은 <code>~/.cpan</code> 디렉토리를 삭제한 후 다시 <code>cpan</code> 을 실행했습니다.</p></li>
+<li><p>~/.cpan/sources/modules/02packages.details.txt.gz</p></li>
+<li><p>~/.cpan/sources/modules/03modlist.data.gz</p>
+
+<p>같은 CPAN 미러에서 가져오는 인덱스 파일이 이상해서 꼬인 것 같다라는 @aer0 님의 총평이었습니다.</p>
+
+<p>역시 이런 사건이 발생할 때는 <code>#perl-kr</code> 에 들러야 됩니다. :&ndash;)</p></li>
+</ul>
+
+
+<blockquote class="twitter-tweet" data-in-reply-to="154824190581678081" lang="ko"><p>@<a href="https://twitter.com/JEEN_LEE">JEEN_LEE</a> 자문자답 <a href="http://t.co/hSGdHz9i" title="http://jeen.github.com/blog/2012/01/05/freebsd-8-dot-2-stable-cpan-error/">jeen.github.com/blog/2012/01/0…</a></p>&mdash; JEEN (@JEEN_LEE) <a href="https://twitter.com/JEEN_LEE/status/154930926294536192" data-datetime="2012-01-05T14:23:05+00:00">1월 5, 2012</a></blockquote>
+
+
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Jeen Lee</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-01-05T22:32:00+09:00" pubdate data-updated="true">Jan 5<span>th</span>, 2012</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/cpan/'>cpan</a>, <a class='category' href='/blog/categories/error/'>error</a>, <a class='category' href='/blog/categories/freebsd/'>freebsd</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://jeen.github.io/blog/2012/01/05/freebsd-8-dot-2-stable-cpan-error/" data-via="JEEN_LEE" data-counturl="http://jeen.github.io/blog/2012/01/05/freebsd-8-dot-2-stable-cpan-error/" >Tweet</a>
+  
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2012/01/05/test-more-use-subtest-instead-of-block/" title="Previous Post: Test::More - use 'subtest' instead of {} block">&laquo; Test::More - use 'subtest' instead of {} block</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2012/01/13/picasa-upload-script-ii/" title="Next Post: Picasa Upload Script II">Picasa Upload Script II &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/07/17/solr-vs-elasticsearch-part-6-user-and-dev-communities-compared/">[번역] Solr vs. ElasticSearch: Part 6 – User &amp; Dev Communities Compared</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/07/17/solr-vs-elasticsearch-part-5-management-api-capabilities/">[번역] Solr vs ElasticSearch: Part 5 – Management API Capabilities</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/07/17/solr-vs-elasticsearch-part-4-faceting/">[번역] Solr vs ElasticSearch Part 4 - Faceting</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/07/16/solr-vs-elasticsearch-part-3-searching/">[번역] Solr vs. ElasticSearch - Part 3 : Searching</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/07/16/solr-vs-elasticsearch-part-2-indexing-and-language-handling/">[번역] Solr vs. ElasticSearch: Part 2 - Indexing and Language Handling</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/jeen">@jeen</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'jeen',
+            count: 0,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Jeen Lee -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'jeen';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://jeen.github.io/blog/2012/01/05/freebsd-8-dot-2-stable-cpan-error/';
+        var disqus_url = 'http://jeen.github.io/blog/2012/01/05/freebsd-8-dot-2-stable-cpan-error/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id; js.async = true;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

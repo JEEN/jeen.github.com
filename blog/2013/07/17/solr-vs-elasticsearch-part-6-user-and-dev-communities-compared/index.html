@@ -1,0 +1,450 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>[번역] Solr vs. ElasticSearch: Part 6 – User &amp; Dev Communities Compared - Jeen - Yet anothere techlog</title>
+  <meta name="author" content="Jeen Lee">
+
+  
+  <meta name="description" content="Solr vs. ElasticSearch: Part 6 – User &amp; Dev Communities Compared January 22, 2013 by Rafał Kuć One of the questions after my talk during the &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://jeen.github.io/blog/2013/07/17/solr-vs-elasticsearch-part-6-user-and-dev-communities-compared">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Jeen - Yet anothere techlog" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-27958809-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Jeen - Yet anothere techlog</a></h1>
+  
+    <h2>STFUAWSC</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:jeen.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">[번역] Solr vs. ElasticSearch: Part 6 – User &amp; Dev Communities Compared</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-17T09:47:24+09:00" pubdate data-updated="true">Jul 17<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><h1>Solr vs. ElasticSearch: Part 6 – User &amp; Dev Communities Compared</h1>
+
+<p>January 22, 2013 by Rafał Kuć</p>
+
+<p>One of the questions after my talk during the recent ApacheCon EU was what I thought about the communities of the two search engines I was comparing. Not surprisingly, this is also a question we often address in our consulting engagements.  As a part of our Apache Solr vs ElasticSearch post series we decided to step away from the technical aspects of SolrCloud vs. ElasticSearch and look at the communities gathered around thesee two projects. If you haven’t read the previous posts about Apache Solr vs. ElasticSearch here are pointers to all of them:</p>
+
+<p>ApacheCon EU 의 제 강연이 끝난 뒤 받은 질문 중하나는 제가 비교한 두가지 검색엔진의 커뮤니티에 대해서 어떻게 생각하느냐 하는 것이었습니다. 당연하게도 이것은 우리가 컨설팅 계약에서 자주 지적하는 문제이기도 합니다. Apache Solr vs ElasticSearch 시리즈의 글로써 우리는 SolrCloud vs ElasticSearch 의 기술적 요소에서 떠나 아직 ElasticSearch 의 과거의 글들을 읽지 않은 경우에는 여기에 모든 포인터가 있습니다.</p>
+
+<ul>
+<li><a href="http://jeen.github.io/2013/07/15/solr-vs-elasticsearch-part-1/">1. Solr vs. ElasticSearch: Part 1 – Overview</a></li>
+<li><a href="http://jeen.github.io/2013/07/16/solr-vs-elasticsearch-part-2-indexing-and-language-handling/">2. Solr vs. ElasticSearch: Part 2 – Data Handling</a></li>
+<li><a href="http://jeen.github.io/2013/07/16/solr-vs-elasticsearch-part-3-searching/">3. Solr vs. ElasticSearch: Part 3 – Searching</a></li>
+<li><a href="http://jeen.github.io/2013/07/16/solr-vs-elasticsearch-part-4-faceting/">4. Solr vs. ElasticSearch: Part 4 – Faceting</a></li>
+<li><a href="http://jeen.github.io/2013/07/17/solr-vs-elasticsearch-part-5-management-api-capabilities/">5. Solr vs. ElasticSearch: Part 5 – Management API Capabilities</a></li>
+<li><a href="http://jeen.github.io/2013/07/17/solr-vs-elasticsearch-part-6-user-and-dev-communities-compared/">6. Solr vs. ElasticSearch: Part 6 – User &amp; Dev Communities Compared</a></li>
+</ul>
+
+
+<h2>유저와 커뮤니티</h2>
+
+<p>Let’s start by discussing the user activity around both ElasticSearch and Apache Solr.</p>
+
+<p>ElasticSearch 와 Apache Solr 양쪽의 유저의 활동에 대해서 이야기를 해 볼까요?</p>
+
+<h3>유저 활동</h3>
+
+<p>We started working on this post right before the Christmas break of 2012. During that time we decided to see how active the user base was for both ElasticSearch and Apache Solr. To do that we used our handy search-lucene.com service and we compared the number of email messages sent to both user list. So let’s see how they stack up.</p>
+
+<p>이 글을 2012년 크리스마스 휴가 전에 시작했습니다. 그 사이 ElasticSearch 와 Apache Solr 두 검색엔진의 유저기반이 어느 정도로 활발한지를 알아보았습니다. 이에 대해서 우리는 편리한 search-lucene.com 서비스를 사용해서 두 검색엔진의 메일링리스트로 보내진 이메일 메시지 수를 비교해봤습니다. 우선 그것들이 어떻게 다른지 보도록 하겠습니다.</p>
+
+<h4>Apache Solr</h4>
+
+<p><img src="https://dl.dropboxusercontent.com/u/262117/blog-assets/solr_user.png" alt="" /></p>
+
+<p>As you can see, Solr user activity varies slightly from month to month which is perfectly understandable. Each bar on the chart represents two weeks. We can see the number of messages ranges from about 390 mails to about 770 per two weeks, which gives us between 800 to 1600 mails per month is we do a bit of rounding up. Quite impressive I must say!</p>
+
+<p>보시다시피, Solr 의 유저활동은 매월 확실하게 다르다는 것을 알 수 있습니다. 차트 위의 각 막대는 2주간을 나타냅니다. 메시지 수의 범위는 2주일마다 약 390통에서 770통이며, 매월 800에서 1600통이 된다고 합시다. 매우 인상적이라고 할 수 있겠죠.</p>
+
+<h4>ElasticSearch</h4>
+
+<p><img src="https://dl.dropboxusercontent.com/u/262117/blog-assets/es_user.png" alt="ElasticSearch User Mailing List" /></p>
+
+<p>Now let’s discuss the ElasticSearch side. First a few words of explanation. If you look at the above chart you might think that ElasticSearch mailing list was silent and then users started posting on October 2012. That’s clearly not true – it is just that we didn’t add ElasticSearch to search-lucene.com until recently.  However, you may see that the number of messages during the same period of time is quite similar – both Solr and ElasticSearch saw about 670 – 730 messages during a two weeks period. This gives us 2 emails per hour on average.</p>
+
+<p>ElasitcSearch 를 볼까요? 먼저 잠깐 설명을 하자면, 위의 차트를 보면 ElasticSearch 의 메일링리스트는 조용하고 유저는 2012년 10월에 투고를 시작했구나 하고 생각할 수 있겠지만, 그렇지 않습니다. 이건 단지 우리들이 ElasticSearch 에 대해 최근까지 search-lucene.com 에 추가하지 않았기 때문이죠. 하지만 같은 기간의 메시지 수는 매우 비슷하다는 것을 알 수 있습니다. Solr 와 ElasticSearch 는 2주간 약 670에서 730통 정도로 볼 수 있습니다. 이것은 평균 1시간당 2통 정도가 되겠네요.</p>
+
+<h3>개별 유저의 수</h3>
+
+<p>Email volume is one thing, but I was always curious about how many different people write emails on the mailing lists. Having such number would give us an additional understanding of the structure of the community around a particular search engine, new users, etc. However, we should not look only at this number, but also on things like most active people on the mailing lists. In both cases we’ve looked at the same period from 1 to 30 December 2012. We’ve used the data we index for search-lucene.com to calculate these numbers.</p>
+
+<p>이메일 수는 하나의 지표입니다. 하지만 우리는 항상 어느정도의 다른 사람이 메일링리스트에 써왔는지를 주목했습니다. 그런 숫자를 통해서 검색 엔진이나 새로운 유저에 관한 커뮤니티의 구조에 대해서 보다 깊은 이해를 얻을 수 있습니다. 하지만 이 숫자뿐만 아니라, 가장 활발한 메일링 리스트 상의 사람들도 참고해보도록 합니다. 양쪽의 케이스에 대해서 2012년 12월 1일부터 30일까지의 같은 기간을 두고 조사했습니다. 사용한 데이터는 우리가 search-lucene.com 에서 이 숫자들을 계산하기 위해 인덱싱한 것입니다.</p>
+
+<h4>Apache Solr</h4>
+
+<p>In case of Apache Solr there were 234 unique users sending mail to the users mailing list. Almost 8 unique users per day on average, nice :)</p>
+
+<p>Apache Solr 에서는 234명의 사람들이 유저 메일링리스트에 메일을 보내왔습니다. 하루 평균 약 8명의 유저입니다. 굉장하네요.</p>
+
+<h4>ElasticSearch</h4>
+
+<p>In case of ElasticSearch there were 271 unique users sending mail to the users mailing list. This gives us about 9 unique users per day on average which is even nicer.</p>
+
+<p>ElasticSearch 는 271명의 유저가 메일링리스트에 메일을 보냈습니다. 하루 평균 약 9명인데, 더 굉장하네요.</p>
+
+<h2>사용가능한 리소스</h2>
+
+<p>As far as resources available, both ElasticSearch and Solr have great documentation. On Solr wiki site (<a href="http://wiki.apache.org/solr/">http://wiki.apache.org/solr/</a>) you can find information about most of the components and of course the tutorial for beginners. ElasticSearch is very similar, with tutorial and very good description of functionality available at <a href="http://www.elasticsearch.org/.">http://www.elasticsearch.org/.</a> In addition to that, there are three books published about Apache Solr (in English) and more (e.g. my Apache Solr 4 Cookbook) coming soon. As of now, there are no published books about ElasticSearch, but…. stay tuned :)</p>
+
+<p>사용가능한 리소스에 관해서, ElasticSearch 와 Solr 양쪽 모두 매우 좋은 문서를 가지고 있습니다. Solr Wiki Site(<a href="http://wiki.apache.org/solr/">http://wiki.apache.org/solr/</a>) 에서는 대부분의 컴포넌트는 물론 초보자용 튜토리얼에 관한 정보도 얻을 수 있습니다. ElasticSearch 도 마찬가지로 튜토리얼과 매우 좋은 기능설명이 <a href="http://www.elasticsearch.org/">http://www.elasticsearch.org/</a> 에 있습니다. 그리고 Apache Solr 에는 (영어로 된) 책이 3권 출판되었고, 거기에 (예를들어 저의 Apache Solr 4 Cookbook)이 곧 나올 예정입니다. 지금까지는 ElasticSearch 에 관한 책은 아직 출판되지 않았지만&hellip; 좀 더 기다려 볼까요 :)</p>
+
+<h2>검색 상의 트렌드</h2>
+
+<p>We also decided to use uncle Google to look at trends about Apache Solr and ElasticSearch. Let’s look at the following diagram:</p>
+
+<p>Googleおじさんを使用してApache SolrとElasticSearchのトレンドを調べてみよう。次の図を見て欲しい。</p>
+
+<p><img src="https://dl.dropboxusercontent.com/u/262117/blog-assets/solr-vs-es-google-trends.png" alt="" /></p>
+
+<p>As you can see, until early 2010 there was no interest in ElasticSearch at all, at least looking from the point of view of users searching about it. Note that we published the interview with Shay Banon over two and a half years ago – back in May 2010 – before ElasticSearch registered on Google’s search trends radar! SolrCloud didn’t exist back then, so people slowly started looking for information on SolrCloud later in 2010.  The volume of searches mentioning SolrCloud is very small even today – perhaps because people tend to search for Solr and not SolrCloud.  And while SolrCloud is still a new kid around the block, searches for Solr dwarf searches for ElasticSearch despite the buzz surrounding ElasticSearch.</p>
+
+<p>보시다시피 2012년초까지는 ElasticSearch 에 대한 흥미는 전혀 없었습니다. 적어도 그것을 검색한 사람의 수로 보면 그렇죠. 참고해둘 것은 우리가 Shay Banon 과 인터뷰를 공개한 것은 2년반 전이라는 것입니다. 즉 2010년 5월. ElasticSearch 가 Google 검색트렌드의 트레이드레이더에 등록되기도 전이죠. SolrCloud 는 그 당시에 존재하지도 않았습니다. 따라서 사람들은 느긋하게 SolrCloud 에 관한 정보를 2010년 말에 찾기 시작했습니다. 검색량이 나타내는 것은 SolrCloud 는 지금도 매우 적습니다. 아마 많은 사람들이 Solr 로 검색하지, SolrCloud 로는 하지 않기 때문이겠죠. 그리고 SolrCloud 가 지금도 갓 나온 것과 달리, Solr 에 대한 검색은 ElasticSearch 에 대한 검색보다 조금 더 눈에 뜁니다. ElasticSearch 에 대한 Buzz 에도 불구하고 말이죠.</p>
+
+<p>Of course, the above doesn’t say anything about the number of users of both search engines, but it definitely shows some information about the interest in these technologies.</p>
+
+<p>물론 위에서 두 검색엔진의 유저 수에 대해서는 말할 것도 없습니다. 하지만 두 기술에 대한 흥미를 나타내는 어떤 정보라는 것은 결정적이죠.</p>
+
+<h2>개발자와 코드</h2>
+
+<p>If you are familiar with ElasticSearch and Solr you’ll probably know that ElasticSearch is much younger than Apache Solr. Apache Solr was created by Yonik Seeley in 2004 and donated to Apache Software Foundation. On the other hand, the first version of ElasticSearch was released by Shay Banon in 2010. This is quite important to say before we can talk about differences about contributors and the code itself. But getting to the point – we thought that it may be interesting to see both Apache Solr and ElasticSearch look from the Bird’s Eye perspective. To do that we’ve used the statistics and charts from ohloh.net. So, let’s see what they look like.</p>
+
+<p>만약 ElasticSearch 와 Solr 에 익숙하다면 아마도 ElasticSearch 쪽이 Apache Solr 와 비교해서 조금 더 어리다는 것을 알고 있을 겁니다. Apache Solr 와 Yonik Seeley 에 의해 2004년에 만들어져 Apache 소프트웨어 재단에 기증되었습니다. 반면 ElasticSearch 의 최초 버젼은 2010년 Shay Banon 에 의해서 릴리즈 되었죠. 이것은 공헌자와 코드 자체의 차이에 대해서 의논하기 전에 매우 중요한 것입니다. 하지만 그전에 Apache Solr 와 ElasticSearch 를 관망적으로 보는 것도 좋다고 생각합니다. 그러기 위해서 ohloh.net 에서 통계와 그래프를 사용했습니다. 그럼 한번 볼까요?</p>
+
+<h3>Apache Solr</h3>
+
+<h4>코드 통계</h4>
+
+<p>If we look at the current statistics, at the beginning of January 2013 Solr had more than 212k lines of code, with almost 7000 commits and 38 contributors. However, keep in mind that contributors are people that committed the code, not necessarily the ones that actually implemented it and provided the patch, so the actual number of contributors is much higher. The chart looks like this: !</p>
+
+<p>현재의 통계를 보면 2012년 1월 처음으로 Solr 는 212k줄 이상의 코드를 가지고, 약 7000커밋과 38명의 컨트리뷰터가 있습니다. 하지만 주의할 것은 컨트리뷰터라는 것은 코드를 커밋한 사람들을 나타내며, 실제로 구현해서 패치를 제공한 사람들이 아니라는 것입니다. 그 때문에 실제 컨트리뷰터 수는 보다 많을 것이라고 장담합니다. 아래의 그래프를 볼까요.</p>
+
+<p><img src="https://dl.dropboxusercontent.com/u/262117/blog-assets/lines_of_code_solr1.png" alt="lines_of_code_solr" /></p>
+
+<h4>최고의 컨트리뷰터</h4>
+
+<p>If we look at top contributors we see Mark Miller on top, followed by Yonik Seeley and Robert Muir in the third place :)</p>
+
+<p>최고의 컨트리뷰터는 Mark Miller 입니다. 이어서 Yonik Seeley, 그리고 Robert Muir 가 3위를 잇고 있습니다. :)
+<img src="https://dl.dropboxusercontent.com/u/262117/blog-assets/top_commiters_solr.png" alt="Active Contributors" /></p>
+
+<h4>활동적인 컨트리뷰터</h4>
+
+<p>One more interesting thing is the number of contributors that were actively involved during a given period of time. Looking at Apache Solr since 2006 we can see the following: active_commiters_solr I think that we can say that we had a stable growth of active contributors starting from 2006 until June 2012 with a bit of downfall shortly after that. However I don’t think that the number active contributors will be dropping, it’s more likely due to a bit of exhaustion of releasing Apache Lucene and Solr 4.0 :)</p>
+
+<p>또 하나 재미있는 것은 어떤 기간 사이에 실제로 관계한 컨트리뷰터 수입니다. Apache Solr 에 관해서는 2006년부도 보면 다음과 가튼 사실을 알 수 있습니다:
+제가 생각하기에 2006년부터 2012년 6월까지 안정적이고 활동적인 컨트리뷰터의 증가가 있었다고 장담합니다. 그 뒤에 다소 하락폭이지만요. 하지만 활동적인 컨트리뷰터의 수가 이후 줄어들고 있다고 생각하지 않습니다. 오히려 Apache Lucene 과 Solr 의 4.0 릴리즈로 맥이 빠져 있겠죠. :)</p>
+
+<p><img src="https://dl.dropboxusercontent.com/u/262117/blog-assets/active_commiters_solr.png" alt="" /></p>
+
+<h3>ElasticSearch</h3>
+
+<h4>코드 통계</h4>
+
+<p>Current code statistics for ElasticSeach shows that the code base just hit the 240k LOC  with about 4.2k commits and 87 contributors. lines_of_code_es</p>
+
+<p>현재 ElasticSearch의 코드 통계는 코드베이스가 240k줄이고 4.2k 의 커밋과 87명의 컨트리뷰터입니다.</p>
+
+<p><img src="https://dl.dropboxusercontent.com/u/262117/blog-assets/lines_of_code_es.png" alt="" /></p>
+
+<h4>최고의 공헌자</h4>
+
+<p>As we’d expect, Shay Banon is the top contributor to ElasticSearch. In the second place on the podium we have Martijn van Groningen and Igor Motov in the third place:</p>
+
+<p>기대한대로 Shay Banon 이 ElasticSearch의 최고 공헌자입니다. 2위는 Martijn van Groningen 이고 3위는 Igor Motov 입니다.</p>
+
+<p><img src="https://dl.dropboxusercontent.com/u/262117/blog-assets/top_commiters_es.png" alt="" /></p>
+
+<h5>활동적인 컨트리뷰터</h5>
+
+<p>And finally the active contributors. We don’t have the same time frame comparing to Apache Solr, which is understandable as ElasticSearch is younger, but still we can see what is happening. active_commiters_es As you can see from the first quarter of 2011 there was a number of active contributors varying from 5 to about 10 with the top at the same time as in Solr – 12 active contributors in June 2012.</p>
+
+<p>마지막으로 활동적인 컨트리뷰터입니다. Apache Solr 와는 달리 같은 수준의 타임프레임으로는 비교할 수 없습니다. ElasticSearch 가 훨씬 어리기 때문이죠. 하지만 그래도 무슨 일이 있는 지는 봐야되겠죠.</p>
+
+<p><img src="https://dl.dropboxusercontent.com/u/262117/blog-assets/active_commiters_es.png" alt="" /></p>
+
+<p>2011 년 1/4분기에서 볼 수 있듯, 활동적인 컨트리뷰터의 수는 5에서 10명까지 바뀌고 있고, Solr 와 같은 시기인 7월에 최대 12명을 기록하고 있습니다.</p>
+
+<h2>정리</h2>
+
+<p>As everything in this post indicates, both projects’ development and user communities are strong, active, and about equal. 2013 will be an interesting year for both projects.</p>
+
+<p>이 글이 나타내는 대로, 두 프로젝트의 개발자와 유저 커뮤니티는 강력하고 활동적이며 그리고 대체로 비슷합니다. 2013년은 두 검색엔진에 있어서 재미있는 한 해가 되겠죠.</p>
+
+<p>We are nearing the end of our SolrCloud vs. ElasticSearch series.  What else would you like us to cover?  Please use the comments to let us know!</p>
+
+<p>SolrCloud vs ElasticSearch 시리즈도 이제 끝입니다. 혹시 뭔가 다른 것을 다뤘으면 하는 게 있나요? 커멘트로 알려주세요.</p>
+
+<ul>
+<li>@kucrafal, @sematext</li>
+</ul>
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Jeen Lee</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-17T09:47:24+09:00" pubdate data-updated="true">Jul 17<span>th</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/elasticsearch/'>elasticsearch</a>, <a class='category' href='/blog/categories/solr/'>solr</a>, <a class='category' href='/blog/categories/translation/'>translation</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://jeen.github.io/blog/2013/07/17/solr-vs-elasticsearch-part-6-user-and-dev-communities-compared/" data-via="JEEN_LEE" data-counturl="http://jeen.github.io/blog/2013/07/17/solr-vs-elasticsearch-part-6-user-and-dev-communities-compared/" >Tweet</a>
+  
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/07/17/solr-vs-elasticsearch-part-5-management-api-capabilities/" title="Previous Post: [번역] Solr vs ElasticSearch: Part 5 – Management API Capabilities">&laquo; [번역] Solr vs ElasticSearch: Part 5 – Management API Capabilities</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/07/17/solr-vs-elasticsearch-part-6-user-and-dev-communities-compared/">[번역] Solr vs. ElasticSearch: Part 6 – User &amp; Dev Communities Compared</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/07/17/solr-vs-elasticsearch-part-5-management-api-capabilities/">[번역] Solr vs ElasticSearch: Part 5 – Management API Capabilities</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/07/17/solr-vs-elasticsearch-part-4-faceting/">[번역] Solr vs ElasticSearch Part 4 - Faceting</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/07/16/solr-vs-elasticsearch-part-3-searching/">[번역] Solr vs. ElasticSearch - Part 3 : Searching</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/07/16/solr-vs-elasticsearch-part-2-indexing-and-language-handling/">[번역] Solr vs. ElasticSearch: Part 2 - Indexing and Language Handling</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/jeen">@jeen</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'jeen',
+            count: 0,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Jeen Lee -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'jeen';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://jeen.github.io/blog/2013/07/17/solr-vs-elasticsearch-part-6-user-and-dev-communities-compared/';
+        var disqus_url = 'http://jeen.github.io/blog/2013/07/17/solr-vs-elasticsearch-part-6-user-and-dev-communities-compared/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id; js.async = true;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

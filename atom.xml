@@ -1,0 +1,2594 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Jeen - Yet anothere techlog]]></title>
+  <link href="http://jeen.github.io/atom.xml" rel="self"/>
+  <link href="http://jeen.github.io/"/>
+  <updated>2013-07-17T19:50:53+09:00</updated>
+  <id>http://jeen.github.io/</id>
+  <author>
+    <name><![CDATA[Jeen Lee]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[[번역] Solr vs. ElasticSearch: Part 6 – User &amp; Dev Communities Compared]]></title>
+    <link href="http://jeen.github.io/blog/2013/07/17/solr-vs-elasticsearch-part-6-user-and-dev-communities-compared/"/>
+    <updated>2013-07-17T09:47:24+09:00</updated>
+    <id>http://jeen.github.io/blog/2013/07/17/solr-vs-elasticsearch-part-6-user-and-dev-communities-compared</id>
+    <content type="html"><![CDATA[<h1>Solr vs. ElasticSearch: Part 6 – User &amp; Dev Communities Compared</h1>
+
+<p>January 22, 2013 by Rafał Kuć</p>
+
+<p>One of the questions after my talk during the recent ApacheCon EU was what I thought about the communities of the two search engines I was comparing. Not surprisingly, this is also a question we often address in our consulting engagements.  As a part of our Apache Solr vs ElasticSearch post series we decided to step away from the technical aspects of SolrCloud vs. ElasticSearch and look at the communities gathered around thesee two projects. If you haven’t read the previous posts about Apache Solr vs. ElasticSearch here are pointers to all of them:</p>
+
+<p>ApacheCon EU 의 제 강연이 끝난 뒤 받은 질문 중하나는 제가 비교한 두가지 검색엔진의 커뮤니티에 대해서 어떻게 생각하느냐 하는 것이었습니다. 당연하게도 이것은 우리가 컨설팅 계약에서 자주 지적하는 문제이기도 합니다. Apache Solr vs ElasticSearch 시리즈의 글로써 우리는 SolrCloud vs ElasticSearch 의 기술적 요소에서 떠나 아직 ElasticSearch 의 과거의 글들을 읽지 않은 경우에는 여기에 모든 포인터가 있습니다.</p>
+
+<ul>
+<li><a href="http://jeen.github.io/2013/07/15/solr-vs-elasticsearch-part-1/">1. Solr vs. ElasticSearch: Part 1 – Overview</a></li>
+<li><a href="http://jeen.github.io/2013/07/16/solr-vs-elasticsearch-part-2-indexing-and-language-handling/">2. Solr vs. ElasticSearch: Part 2 – Data Handling</a></li>
+<li><a href="http://jeen.github.io/2013/07/16/solr-vs-elasticsearch-part-3-searching/">3. Solr vs. ElasticSearch: Part 3 – Searching</a></li>
+<li><a href="http://jeen.github.io/2013/07/16/solr-vs-elasticsearch-part-4-faceting/">4. Solr vs. ElasticSearch: Part 4 – Faceting</a></li>
+<li><a href="http://jeen.github.io/2013/07/17/solr-vs-elasticsearch-part-5-management-api-capabilities/">5. Solr vs. ElasticSearch: Part 5 – Management API Capabilities</a></li>
+<li><a href="http://jeen.github.io/2013/07/17/solr-vs-elasticsearch-part-6-user-and-dev-communities-compared/">6. Solr vs. ElasticSearch: Part 6 – User &amp; Dev Communities Compared</a></li>
+</ul>
+
+
+<h2>유저와 커뮤니티</h2>
+
+<p>Let’s start by discussing the user activity around both ElasticSearch and Apache Solr.</p>
+
+<p>ElasticSearch 와 Apache Solr 양쪽의 유저의 활동에 대해서 이야기를 해 볼까요?</p>
+
+<h3>유저 활동</h3>
+
+<p>We started working on this post right before the Christmas break of 2012. During that time we decided to see how active the user base was for both ElasticSearch and Apache Solr. To do that we used our handy search-lucene.com service and we compared the number of email messages sent to both user list. So let’s see how they stack up.</p>
+
+<p>이 글을 2012년 크리스마스 휴가 전에 시작했습니다. 그 사이 ElasticSearch 와 Apache Solr 두 검색엔진의 유저기반이 어느 정도로 활발한지를 알아보았습니다. 이에 대해서 우리는 편리한 search-lucene.com 서비스를 사용해서 두 검색엔진의 메일링리스트로 보내진 이메일 메시지 수를 비교해봤습니다. 우선 그것들이 어떻게 다른지 보도록 하겠습니다.</p>
+
+<h4>Apache Solr</h4>
+
+<p><img src="https://dl.dropboxusercontent.com/u/262117/blog-assets/solr_user.png" alt="" /></p>
+
+<p>As you can see, Solr user activity varies slightly from month to month which is perfectly understandable. Each bar on the chart represents two weeks. We can see the number of messages ranges from about 390 mails to about 770 per two weeks, which gives us between 800 to 1600 mails per month is we do a bit of rounding up. Quite impressive I must say!</p>
+
+<p>보시다시피, Solr 의 유저활동은 매월 확실하게 다르다는 것을 알 수 있습니다. 차트 위의 각 막대는 2주간을 나타냅니다. 메시지 수의 범위는 2주일마다 약 390통에서 770통이며, 매월 800에서 1600통이 된다고 합시다. 매우 인상적이라고 할 수 있겠죠.</p>
+
+<h4>ElasticSearch</h4>
+
+<p><img src="https://dl.dropboxusercontent.com/u/262117/blog-assets/es_user.png" alt="ElasticSearch User Mailing List" /></p>
+
+<p>Now let’s discuss the ElasticSearch side. First a few words of explanation. If you look at the above chart you might think that ElasticSearch mailing list was silent and then users started posting on October 2012. That’s clearly not true – it is just that we didn’t add ElasticSearch to search-lucene.com until recently.  However, you may see that the number of messages during the same period of time is quite similar – both Solr and ElasticSearch saw about 670 – 730 messages during a two weeks period. This gives us 2 emails per hour on average.</p>
+
+<p>ElasitcSearch 를 볼까요? 먼저 잠깐 설명을 하자면, 위의 차트를 보면 ElasticSearch 의 메일링리스트는 조용하고 유저는 2012년 10월에 투고를 시작했구나 하고 생각할 수 있겠지만, 그렇지 않습니다. 이건 단지 우리들이 ElasticSearch 에 대해 최근까지 search-lucene.com 에 추가하지 않았기 때문이죠. 하지만 같은 기간의 메시지 수는 매우 비슷하다는 것을 알 수 있습니다. Solr 와 ElasticSearch 는 2주간 약 670에서 730통 정도로 볼 수 있습니다. 이것은 평균 1시간당 2통 정도가 되겠네요.</p>
+
+<h3>개별 유저의 수</h3>
+
+<p>Email volume is one thing, but I was always curious about how many different people write emails on the mailing lists. Having such number would give us an additional understanding of the structure of the community around a particular search engine, new users, etc. However, we should not look only at this number, but also on things like most active people on the mailing lists. In both cases we’ve looked at the same period from 1 to 30 December 2012. We’ve used the data we index for search-lucene.com to calculate these numbers.</p>
+
+<p>이메일 수는 하나의 지표입니다. 하지만 우리는 항상 어느정도의 다른 사람이 메일링리스트에 써왔는지를 주목했습니다. 그런 숫자를 통해서 검색 엔진이나 새로운 유저에 관한 커뮤니티의 구조에 대해서 보다 깊은 이해를 얻을 수 있습니다. 하지만 이 숫자뿐만 아니라, 가장 활발한 메일링 리스트 상의 사람들도 참고해보도록 합니다. 양쪽의 케이스에 대해서 2012년 12월 1일부터 30일까지의 같은 기간을 두고 조사했습니다. 사용한 데이터는 우리가 search-lucene.com 에서 이 숫자들을 계산하기 위해 인덱싱한 것입니다.</p>
+
+<h4>Apache Solr</h4>
+
+<p>In case of Apache Solr there were 234 unique users sending mail to the users mailing list. Almost 8 unique users per day on average, nice :)</p>
+
+<p>Apache Solr 에서는 234명의 사람들이 유저 메일링리스트에 메일을 보내왔습니다. 하루 평균 약 8명의 유저입니다. 굉장하네요.</p>
+
+<h4>ElasticSearch</h4>
+
+<p>In case of ElasticSearch there were 271 unique users sending mail to the users mailing list. This gives us about 9 unique users per day on average which is even nicer.</p>
+
+<p>ElasticSearch 는 271명의 유저가 메일링리스트에 메일을 보냈습니다. 하루 평균 약 9명인데, 더 굉장하네요.</p>
+
+<h2>사용가능한 리소스</h2>
+
+<p>As far as resources available, both ElasticSearch and Solr have great documentation. On Solr wiki site (<a href="http://wiki.apache.org/solr/">http://wiki.apache.org/solr/</a>) you can find information about most of the components and of course the tutorial for beginners. ElasticSearch is very similar, with tutorial and very good description of functionality available at <a href="http://www.elasticsearch.org/.">http://www.elasticsearch.org/.</a> In addition to that, there are three books published about Apache Solr (in English) and more (e.g. my Apache Solr 4 Cookbook) coming soon. As of now, there are no published books about ElasticSearch, but…. stay tuned :)</p>
+
+<p>사용가능한 리소스에 관해서, ElasticSearch 와 Solr 양쪽 모두 매우 좋은 문서를 가지고 있습니다. Solr Wiki Site(<a href="http://wiki.apache.org/solr/">http://wiki.apache.org/solr/</a>) 에서는 대부분의 컴포넌트는 물론 초보자용 튜토리얼에 관한 정보도 얻을 수 있습니다. ElasticSearch 도 마찬가지로 튜토리얼과 매우 좋은 기능설명이 <a href="http://www.elasticsearch.org/">http://www.elasticsearch.org/</a> 에 있습니다. 그리고 Apache Solr 에는 (영어로 된) 책이 3권 출판되었고, 거기에 (예를들어 저의 Apache Solr 4 Cookbook)이 곧 나올 예정입니다. 지금까지는 ElasticSearch 에 관한 책은 아직 출판되지 않았지만&hellip; 좀 더 기다려 볼까요 :)</p>
+
+<h2>검색 상의 트렌드</h2>
+
+<p>We also decided to use uncle Google to look at trends about Apache Solr and ElasticSearch. Let’s look at the following diagram:</p>
+
+<p>Googleおじさんを使用してApache SolrとElasticSearchのトレンドを調べてみよう。次の図を見て欲しい。</p>
+
+<p><img src="https://dl.dropboxusercontent.com/u/262117/blog-assets/solr-vs-es-google-trends.png" alt="" /></p>
+
+<p>As you can see, until early 2010 there was no interest in ElasticSearch at all, at least looking from the point of view of users searching about it. Note that we published the interview with Shay Banon over two and a half years ago – back in May 2010 – before ElasticSearch registered on Google’s search trends radar! SolrCloud didn’t exist back then, so people slowly started looking for information on SolrCloud later in 2010.  The volume of searches mentioning SolrCloud is very small even today – perhaps because people tend to search for Solr and not SolrCloud.  And while SolrCloud is still a new kid around the block, searches for Solr dwarf searches for ElasticSearch despite the buzz surrounding ElasticSearch.</p>
+
+<p>보시다시피 2012년초까지는 ElasticSearch 에 대한 흥미는 전혀 없었습니다. 적어도 그것을 검색한 사람의 수로 보면 그렇죠. 참고해둘 것은 우리가 Shay Banon 과 인터뷰를 공개한 것은 2년반 전이라는 것입니다. 즉 2010년 5월. ElasticSearch 가 Google 검색트렌드의 트레이드레이더에 등록되기도 전이죠. SolrCloud 는 그 당시에 존재하지도 않았습니다. 따라서 사람들은 느긋하게 SolrCloud 에 관한 정보를 2010년 말에 찾기 시작했습니다. 검색량이 나타내는 것은 SolrCloud 는 지금도 매우 적습니다. 아마 많은 사람들이 Solr 로 검색하지, SolrCloud 로는 하지 않기 때문이겠죠. 그리고 SolrCloud 가 지금도 갓 나온 것과 달리, Solr 에 대한 검색은 ElasticSearch 에 대한 검색보다 조금 더 눈에 뜁니다. ElasticSearch 에 대한 Buzz 에도 불구하고 말이죠.</p>
+
+<p>Of course, the above doesn’t say anything about the number of users of both search engines, but it definitely shows some information about the interest in these technologies.</p>
+
+<p>물론 위에서 두 검색엔진의 유저 수에 대해서는 말할 것도 없습니다. 하지만 두 기술에 대한 흥미를 나타내는 어떤 정보라는 것은 결정적이죠.</p>
+
+<h2>개발자와 코드</h2>
+
+<p>If you are familiar with ElasticSearch and Solr you’ll probably know that ElasticSearch is much younger than Apache Solr. Apache Solr was created by Yonik Seeley in 2004 and donated to Apache Software Foundation. On the other hand, the first version of ElasticSearch was released by Shay Banon in 2010. This is quite important to say before we can talk about differences about contributors and the code itself. But getting to the point – we thought that it may be interesting to see both Apache Solr and ElasticSearch look from the Bird’s Eye perspective. To do that we’ve used the statistics and charts from ohloh.net. So, let’s see what they look like.</p>
+
+<p>만약 ElasticSearch 와 Solr 에 익숙하다면 아마도 ElasticSearch 쪽이 Apache Solr 와 비교해서 조금 더 어리다는 것을 알고 있을 겁니다. Apache Solr 와 Yonik Seeley 에 의해 2004년에 만들어져 Apache 소프트웨어 재단에 기증되었습니다. 반면 ElasticSearch 의 최초 버젼은 2010년 Shay Banon 에 의해서 릴리즈 되었죠. 이것은 공헌자와 코드 자체의 차이에 대해서 의논하기 전에 매우 중요한 것입니다. 하지만 그전에 Apache Solr 와 ElasticSearch 를 관망적으로 보는 것도 좋다고 생각합니다. 그러기 위해서 ohloh.net 에서 통계와 그래프를 사용했습니다. 그럼 한번 볼까요?</p>
+
+<h3>Apache Solr</h3>
+
+<h4>코드 통계</h4>
+
+<p>If we look at the current statistics, at the beginning of January 2013 Solr had more than 212k lines of code, with almost 7000 commits and 38 contributors. However, keep in mind that contributors are people that committed the code, not necessarily the ones that actually implemented it and provided the patch, so the actual number of contributors is much higher. The chart looks like this: !</p>
+
+<p>현재의 통계를 보면 2012년 1월 처음으로 Solr 는 212k줄 이상의 코드를 가지고, 약 7000커밋과 38명의 컨트리뷰터가 있습니다. 하지만 주의할 것은 컨트리뷰터라는 것은 코드를 커밋한 사람들을 나타내며, 실제로 구현해서 패치를 제공한 사람들이 아니라는 것입니다. 그 때문에 실제 컨트리뷰터 수는 보다 많을 것이라고 장담합니다. 아래의 그래프를 볼까요.</p>
+
+<p><img src="https://dl.dropboxusercontent.com/u/262117/blog-assets/lines_of_code_solr1.png" alt="lines_of_code_solr" /></p>
+
+<h4>최고의 컨트리뷰터</h4>
+
+<p>If we look at top contributors we see Mark Miller on top, followed by Yonik Seeley and Robert Muir in the third place :)</p>
+
+<p>최고의 컨트리뷰터는 Mark Miller 입니다. 이어서 Yonik Seeley, 그리고 Robert Muir 가 3위를 잇고 있습니다. :)
+<img src="https://dl.dropboxusercontent.com/u/262117/blog-assets/top_commiters_solr.png" alt="Active Contributors" /></p>
+
+<h4>활동적인 컨트리뷰터</h4>
+
+<p>One more interesting thing is the number of contributors that were actively involved during a given period of time. Looking at Apache Solr since 2006 we can see the following: active_commiters_solr I think that we can say that we had a stable growth of active contributors starting from 2006 until June 2012 with a bit of downfall shortly after that. However I don’t think that the number active contributors will be dropping, it’s more likely due to a bit of exhaustion of releasing Apache Lucene and Solr 4.0 :)</p>
+
+<p>또 하나 재미있는 것은 어떤 기간 사이에 실제로 관계한 컨트리뷰터 수입니다. Apache Solr 에 관해서는 2006년부도 보면 다음과 가튼 사실을 알 수 있습니다:
+제가 생각하기에 2006년부터 2012년 6월까지 안정적이고 활동적인 컨트리뷰터의 증가가 있었다고 장담합니다. 그 뒤에 다소 하락폭이지만요. 하지만 활동적인 컨트리뷰터의 수가 이후 줄어들고 있다고 생각하지 않습니다. 오히려 Apache Lucene 과 Solr 의 4.0 릴리즈로 맥이 빠져 있겠죠. :)</p>
+
+<p><img src="https://dl.dropboxusercontent.com/u/262117/blog-assets/active_commiters_solr.png" alt="" /></p>
+
+<h3>ElasticSearch</h3>
+
+<h4>코드 통계</h4>
+
+<p>Current code statistics for ElasticSeach shows that the code base just hit the 240k LOC  with about 4.2k commits and 87 contributors. lines_of_code_es</p>
+
+<p>현재 ElasticSearch의 코드 통계는 코드베이스가 240k줄이고 4.2k 의 커밋과 87명의 컨트리뷰터입니다.</p>
+
+<p><img src="https://dl.dropboxusercontent.com/u/262117/blog-assets/lines_of_code_es.png" alt="" /></p>
+
+<h4>최고의 공헌자</h4>
+
+<p>As we’d expect, Shay Banon is the top contributor to ElasticSearch. In the second place on the podium we have Martijn van Groningen and Igor Motov in the third place:</p>
+
+<p>기대한대로 Shay Banon 이 ElasticSearch의 최고 공헌자입니다. 2위는 Martijn van Groningen 이고 3위는 Igor Motov 입니다.</p>
+
+<p><img src="https://dl.dropboxusercontent.com/u/262117/blog-assets/top_commiters_es.png" alt="" /></p>
+
+<h5>활동적인 컨트리뷰터</h5>
+
+<p>And finally the active contributors. We don’t have the same time frame comparing to Apache Solr, which is understandable as ElasticSearch is younger, but still we can see what is happening. active_commiters_es As you can see from the first quarter of 2011 there was a number of active contributors varying from 5 to about 10 with the top at the same time as in Solr – 12 active contributors in June 2012.</p>
+
+<p>마지막으로 활동적인 컨트리뷰터입니다. Apache Solr 와는 달리 같은 수준의 타임프레임으로는 비교할 수 없습니다. ElasticSearch 가 훨씬 어리기 때문이죠. 하지만 그래도 무슨 일이 있는 지는 봐야되겠죠.</p>
+
+<p><img src="https://dl.dropboxusercontent.com/u/262117/blog-assets/active_commiters_es.png" alt="" /></p>
+
+<p>2011 년 1/4분기에서 볼 수 있듯, 활동적인 컨트리뷰터의 수는 5에서 10명까지 바뀌고 있고, Solr 와 같은 시기인 7월에 최대 12명을 기록하고 있습니다.</p>
+
+<h2>정리</h2>
+
+<p>As everything in this post indicates, both projects’ development and user communities are strong, active, and about equal. 2013 will be an interesting year for both projects.</p>
+
+<p>이 글이 나타내는 대로, 두 프로젝트의 개발자와 유저 커뮤니티는 강력하고 활동적이며 그리고 대체로 비슷합니다. 2013년은 두 검색엔진에 있어서 재미있는 한 해가 되겠죠.</p>
+
+<p>We are nearing the end of our SolrCloud vs. ElasticSearch series.  What else would you like us to cover?  Please use the comments to let us know!</p>
+
+<p>SolrCloud vs ElasticSearch 시리즈도 이제 끝입니다. 혹시 뭔가 다른 것을 다뤘으면 하는 게 있나요? 커멘트로 알려주세요.</p>
+
+<ul>
+<li>@kucrafal, @sematext</li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[[번역] Solr vs ElasticSearch: Part 5 – Management API Capabilities]]></title>
+    <link href="http://jeen.github.io/blog/2013/07/17/solr-vs-elasticsearch-part-5-management-api-capabilities/"/>
+    <updated>2013-07-17T09:01:06+09:00</updated>
+    <id>http://jeen.github.io/blog/2013/07/17/solr-vs-elasticsearch-part-5-management-api-capabilities</id>
+    <content type="html"><![CDATA[<h1>Solr vs ElasticSearch: Part 5 – Management API Capabilities</h1>
+
+<p>January 8, 2013 by Rafał Kuć</p>
+
+<p>In previous posts, all listed below, we’ve discussed general architecture, full text search capabilities and facet aggregations possibilities. However, till now we have not discussed any of the administration and management options and things you can do on a live cluster without any restart. So let’s get into it and see what Apache Solr and ElasticSearch have to offer.</p>
+
+<p>이전 편에서는 전반적인 개요, 전문검색기능, Faceting 의 집약기능에 대해서 다루었습니다. 지금까지 관리와 운영 옵션과 운용중의 클러스터에서 재기동없이 할 수 있는 일에 대해서는 다루지 않았죠. 자, 그럼 이에 대해서 Apache Solr 와 ElasticSearch 는 무엇을 제공할 수 있는 지 보도록 할까요?</p>
+
+<ul>
+<li><a href="http://jeen.github.io/2013/07/15/solr-vs-elasticsearch-part-1/">1. Solr vs. ElasticSearch: Part 1 – Overview</a></li>
+<li><a href="http://jeen.github.io/2013/07/16/solr-vs-elasticsearch-part-2-indexing-and-language-handling/">2. Solr vs. ElasticSearch: Part 2 – Data Handling</a></li>
+<li><a href="http://jeen.github.io/2013/07/16/solr-vs-elasticsearch-part-3-searching/">3. Solr vs. ElasticSearch: Part 3 – Searching</a></li>
+<li><a href="http://jeen.github.io/2013/07/16/solr-vs-elasticsearch-part-4-faceting/">4. Solr vs. ElasticSearch: Part 4 – Faceting</a></li>
+<li><a href="http://jeen.github.io/2013/07/17/solr-vs-elasticsearch-part-5-management-api-capabilities/">5. Solr vs. ElasticSearch: Part 5 – Management API Capabilities</a></li>
+<li><a href="http://jeen.github.io/2013/07/17/solr-vs-elasticsearch-part-6-user-and-dev-communities-compared/">6. Solr vs. ElasticSearch: Part 6 – User &amp; Dev Communities Compared</a></li>
+</ul>
+
+
+<h2>Input/Output Format</h2>
+
+<h3>ElasticSearch</h3>
+
+<p>As you probably know ElasticSearch offers a single way to talk to it – its HTTP REST API – JSON structured queries and responses. In most cases, especially during query time, it is very handy, because it let’s you perfectly control the structure of your queries and thus control the logic.</p>
+
+<p>알고 계시겠지만 ElasticSearch 는 하나의 통신방법을 제공합니다. 그것이 바로 HTTP REST API이며 이는 JSON 구조로 쿼리와 응답을 만들어냅니다. 대부분의 경우, 특히 쿼리시에 매우 편리합니다. 쿼리 구조를 완전하게 컨트롤할 수 있고, 그러므로 로직을 컨트롤할 수 있기 때문입니다.</p>
+
+<h3>Apache Solr</h3>
+
+<p>On the other hand we have Apache Solr. If you are familiar with it you know that in order to send a query to Solr one needs to send it using URL request parameters.  This makes communication much less structured compared to ElasticSearch JSON format. In response you can get multiple response formats that are supported out of the box, like the default XML, JSON, CSV, PHP serialized, or Ruby.</p>
+
+<p>반면 Apache Solr 는 쿼리를 보낼 때에 URL 리퀘스트 파라메터를 보낼 필요가 있다는 것은 알고 계실겁니다. 이것이 ElasticSearch 의 JSON 형식과 비교하면 커뮤니케이션을 보다 낮은 수준으로 구조화해버리는 것이죠. 하지만 응답시에는 여러 응답형식을 지원하고 있습니다. 기본적으로 XML, JSON, CSV, 직렬화된 PHP, Ruby 가 그것들이죠.</p>
+
+<h2>Statistics API</h2>
+
+<p>Most of the time your search cluster will be fine and you won’t have any problems with it. However, there are times where you may need to see what is happening inside Apache Solr or ElasticSearch to diagnose problems, such as performance problems (hello SPM!), stability issues, or anything like that. In such cases, both search engines provide some amount of statistics.</p>
+
+<p>대부분의 경우, 검색 클러스터는 튼튼하고 문제를 일으키는 일은 없을 것 입니다. 그러나 Apache Solr 나 ElasticSearch 에서 무슨 일이 일어났는가를 보고 문제 진단을 해 볼 필요가 있습니다. 예를들어서 퍼포먼스 문제나(어이, SPM!) 안전성의 문제 와 같은 것들이죠. 그런 경우에는 두 검색엔진은 몇가지의 통계값을 제공합니다.</p>
+
+<h3>Apache Solr</h3>
+
+<p>In Solr we can use JMX or HTTP requests to retrieve information about handler usage, cache statistics or information about most Solr components.</p>
+
+<p>Solr 에서는 JMX 나 HTTP 질의를 핸들러로 캐쉬의 통계, 그리고 대부분의 Solr 컴포넌트의 정보를 얻을 때에 이용할 수 있습니다.</p>
+
+<h3>ElasticSearch</h3>
+
+<p>ElasticSearch was designed to be able to return various statistics about itself. With the REST API calls we can get information from the simplest ones like cluster health or nodes statistic, to extent information like the detailed ones about indices with merges, refreshes. The same stats are available via JMX, too.</p>
+
+<p>ElasticSearch는 자체적으로 다양한 통계를 반환할 수 있도록 설계되었습니다. REST API 의 호출을 사용해서 가장 단순한 것, 예를 들자면 클러스터의 건강상태나 노드의 통계에서 인덱스의 머지, 리프레쉬와 같은 상세한 것 등의 광범위한 정보를 얻을 수 있습니다. 이와 같은 정보는 JMX 경유로 얻을 수 있습니다.</p>
+
+<h2>Settings API</h2>
+
+<h3>ElasticSearch</h3>
+
+<p>ElasticSearch allows us to modify most of the configuration values dynamically. For example, you can clear you caches (or just specific type of cache), you can move shards and replicas to specific nodes in your cluster. In addition to that you are also allowed to update mappings (to some extent), define warming queries (since version 0.20), etc. You can even shut down a single node or a whole cluster with the use of a single HTTP call. Of course, this is just an example and doesn’t cover all the possibilities exposed by ElasticSearch.</p>
+
+<p>ElasticSearch는 동적으로 설정값의 대부분을 변경할 수 있습니다. 예를 들어 캐쉬를 클리어했다든가, 특정 타입의 캐쉬만을 클리어했다거나, Shard 와 레플리카를 클러스터로 지정한 노드로 이동할 수 있습니다. 그리고 어떤 범위의 맵핑을 변경하거나 워밍쿼리(v0.20이후)를 정의할 수도 있습니다. 단일 노드나 클러스터 전체를 한번의 HTTP 호출로 셧다운할 수도 있죠. 물론 이것들은 단순히 일부분 일 뿐이며, ElasticSearch 에서 공개된 기능 전체를 커버하는 것은 아닙니다.</p>
+
+<h3>Apache Solr</h3>
+
+<p>In case of Apache Solr we do not (yet) have the possibility of changing configuration values (like warming queries) with API calls.</p>
+
+<p>Apache Solr 의 경우, API 호출로 설정값의 변경 (예를들어 워밍쿼리)할 수 있는 기능은 &ldquo;아직&rdquo; 없습니다.</p>
+
+<h2>인덱스/콜렉션의 관리기능</h2>
+
+<p>In addition to the capabilities mentioned above both ElasticSearch and Apache Solr provide APIs that allows us to modify our deployment when it comes to collections and indices.</p>
+
+<p>위에서 설명한 기능 이외에 ElasticSearch 와 Apache Solr 는 콜렉션과 인덱스에 관한 디플로이를 변경할 수 있습니다.</p>
+
+<h3>Apache Solr</h3>
+
+<p>Pre 4.0 we were able to manipulate cores inside our Solr instances. We could create new cores, reload them, get their status, rename, swap two of them, and finally remove a core from the instance. With Solr 4.0, a new API was introduced that is built on top of core admin API – the collections API. It allows us to create collections on started SolrCloud cluster, reload them and of course delete them. As the collections API is built on top of the core admin API,  if you create a new collection all the needed cores on all instances will be created. Of course, the same goes for reloading and deleting – all the cores will be appropriately informed and processed.</p>
+
+<p>4.0 이전에는 Solr 인스턴ㅅ 안에 여러 코어를 만질 수 있었습니다. 새로운 코어를 만들거나 리로드 하거나, 상태정보를 얻거나, 이름을 바꾸거나, 두가지를 스와핑하거나, 마지막으로 인스턴스에서 코어를 삭제할 수 가 있었습니다. Solr 4.0 에서는 코어관리 API 의 맨 위에 새로운 API 가 새로이 소개되었습니다. 그것이 바로 Collections API 입니다. 이미 시작한 SolrCloud 클러스터 위에 콜렉션을 만들거나 리로드, 삭제도 할 수 있습니다. 콜렉션 API 가 코어 관리 API 위에서 구축되어 새로운 콜렉션을 만들면 모든 인스턴스 상의 필요한 코어가 모두 작성됩니다. 마찬가지로 리로드나 삭제도 가능합니다. 모든 코어는 적절하게 정보를 받아 처리됩니다.</p>
+
+<h3>ElasticSearch</h3>
+
+<p>In case of ElasticSearch we can create and delete indices by running a simple HTTP command (GET or DELETE method) with the index name we are interested in. In addition to that, with a simple API call we can increase and decrease the number of replicas without the need of shutting down nodes or creating new nodes. With the newer ElasticSearch versions we can even manipulate shard placement with the cluster reroute API. With the use of that API we can move shards between nodes, we can cancel shard allocation process and we can also force shard allocation – everything on a live cluster.</p>
+
+<p>ElasticSearch 의 경우, 간단한 HTTP 커맨드(GET 또는 DELETE 메소드)를 대상으로 한 인덱스의 이름과 함께 실행하는 것만으로 인덱싱과 삭제가 가능합니다. 그리고 간단한 API 호출로 레플리카의 수를 노드의 셧다운이나 추가없이 증감할 수도 있습니다. 새로운 ElasticSearch 버젼에서는 Shard 의 배치를 클러스터의 리로드 API 로 할 수 있습니다. 이를 통해서 Shard 를 노드끼리 이동한다거나, Shard 를 할당절차를 취소하거나 강제할 수도 있습니다. 모든 것은 운용중의 클러스터 위에서 가능합니다.</p>
+
+<h2>Query Analysis</h2>
+
+<h3>Apache Solr</h3>
+
+<p>If you’ve used Apache Solr you probably come across the debugQuery parameter and the explainOther parameter. Those two allows to see the detailed score calculation for the given query and documents found in the results (the debugQuery parameter) and the specified ones (the explainOther). In addition, we can also see how the analysis process is done with the use of analysis handler or by using the analysis page of the Solr administration panel provided with Solr.</p>
+
+<p>Apache Solr 를 이전에 사용한 적이 있다면 debugQuery 파라메터와 explainOther 파라메터를 알고 있으실 겁니다. 이 두가지를 사용해서 주어진 쿼리와 그 결과를 발견한 도큐먼트(debugQuery파라메터), 또는 특정 하나의(plainOther)의 스코어 계산에 대한 자세한 내용을 볼 수도 있습니다. 거기에 해석핸들러를 사용하거나 Solr 에서 제공되는 Solr 관리패널의 해석페이지로 해석프로세스가 어떻게 이뤄지는 지도 확인할 수 있습니다.</p>
+
+<p>For example this is how debug information returned by Solr can look like:</p>
+
+<p>Solr로 반환되는 디버그 정보가 어떻게 보여지는 가는 아래를 참고해주세요.</p>
+
+<pre><code>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;response&gt;
+.
+.
+.
+&lt;lst name="debug"&gt;
+ &lt;str name="rawquerystring"&gt;ten&lt;/str&gt;
+ &lt;str name="querystring"&gt;ten&lt;/str&gt;
+ &lt;str name="parsedquery"&gt;(+DisjunctionMaxQuery((prefixTok:ten)~0.01) ())/no_coord&lt;/str&gt;
+ &lt;str name="parsedquery_toString"&gt;+(prefixTok:ten)~0.01 ()&lt;/str&gt;
+ &lt;str name="QParser"&gt;DisMaxQParser&lt;/str&gt;
+ &lt;null name="altquerystring"/&gt;
+ &lt;null name="boostfuncs"/&gt;
+ &lt;lst name="timing"&gt;
+  &lt;double name="time"&gt;2.0&lt;/double&gt;
+  &lt;lst name="prepare"&gt;
+   &lt;double name="time"&gt;1.0&lt;/double&gt;
+   &lt;lst name="org.apache.solr.handler.component.QueryComponent"&gt;
+    &lt;double name="time"&gt;1.0&lt;/double&gt;
+   &lt;/lst&gt;
+   &lt;lst name="org.apache.solr.handler.component.FacetComponent"&gt;
+    &lt;double name="time"&gt;0.0&lt;/double&gt;
+   &lt;/lst&gt;
+   &lt;lst name="org.apache.solr.handler.component.MoreLikeThisComponent"&gt;
+    &lt;double name="time"&gt;0.0&lt;/double&gt;
+   &lt;/lst&gt;
+   &lt;lst name="org.apache.solr.handler.component.HighlightComponent"&gt;
+    &lt;double name="time"&gt;0.0&lt;/double&gt;
+   &lt;/lst&gt;
+   &lt;lst name="org.apache.solr.handler.component.StatsComponent"&gt;
+    &lt;double name="time"&gt;0.0&lt;/double&gt;
+   &lt;/lst&gt;
+   &lt;lst name="org.apache.solr.handler.component.DebugComponent"&gt;
+    &lt;double name="time"&gt;0.0&lt;/double&gt;
+   &lt;/lst&gt;
+ &lt;/lst&gt;
+ &lt;lst name="process"&gt;
+  &lt;double name="time"&gt;1.0&lt;/double&gt;
+  &lt;lst name="org.apache.solr.handler.component.QueryComponent"&gt;
+   &lt;double name="time"&gt;0.0&lt;/double&gt;
+  &lt;/lst&gt;
+  &lt;lst name="org.apache.solr.handler.component.FacetComponent"&gt;
+   &lt;double name="time"&gt;0.0&lt;/double&gt;
+  &lt;/lst&gt;
+  &lt;lst name="org.apache.solr.handler.component.MoreLikeThisComponent"&gt;
+   &lt;double name="time"&gt;0.0&lt;/double&gt;
+  &lt;/lst&gt;
+  &lt;lst name="org.apache.solr.handler.component.HighlightComponent"&gt;
+   &lt;double name="time"&gt;0.0&lt;/double&gt;
+  &lt;/lst&gt;
+  &lt;lst name="org.apache.solr.handler.component.StatsComponent"&gt;
+   &lt;double name="time"&gt;0.0&lt;/double&gt;
+  &lt;/lst&gt;
+  &lt;lst name="org.apache.solr.handler.component.DebugComponent"&gt;
+   &lt;double name="time"&gt;1.0&lt;/double&gt;
+  &lt;/lst&gt;
+ &lt;/lst&gt;
+&lt;/lst&gt;
+&lt;lst name="explain"&gt;
+ &lt;str name="Ten mices"&gt;
+1.3527006 = (MATCH) sum of:
+ 1.3527006 = (MATCH) weight(prefixTok:ten in 35158) [DefaultSimilarity], result of:
+ 1.3527006 = fieldWeight in 35158, product of:
+ 1.4142135 = tf(freq=2.0), with freq of:
+ 2.0 = termFreq=2.0
+ 6.1216245 = idf(docFreq=6355, maxDocs=1065313)
+ 0.15625 = fieldNorm(doc=35158)
+ &lt;/str&gt;
+&lt;/lst&gt;
+&lt;/lst&gt;
+&lt;/response&gt;
+</code></pre>
+
+<p>As you can see, we can get information about timings of each of the used components. In addition to that, we see the parsed query and of course the explain information showing us how the document score was calculated.</p>
+
+<p>보시는 대로, 사용하고 있는 각 컴포넌트의 타이밍에 관한 정보를 얻을 수 있습니다. 그리고 파싱된 쿼리를 보거나, 어떻게 도큐먼트의 스코어가 계산되는 가를 알 수 있는 explain 정보도 확인가능합니다.</p>
+
+<h3>ElasticSearch</h3>
+
+<p>ElasticSearch exposes three separate REST end-points to analyze our queries, documents and explain the documents score. The Analyze API allows us to test our analyzer on a specified text in order to see how it is processed and is similar to the analysis page functionality of Solr. The Explain API provides us with information about the score calculation for a given documents. Finally, the Validate API can validate our query to see is it is proper and how expensive it can be.</p>
+
+<p>ElasticSearch는 3개로 나뉘어진 REST 엔드포인트를 공개하여, 쿼리나 도큐먼트, 도큐먼트 스코어의 explain 을 해석할 수 있습니다. 해석API 는 해석기가 특정 텍스트에서 어떻게 처리되는지를 테스트할 수 있습니다. SOlr 의 해석페이지 기능과 비슷합니다. Explain API 는 주어진 도큐먼트에 대해서 스코어 연산에 관한 정보를 제공합니다. 마지막으로 Validate API 는 쿼리가 적절하게 어느 정도의 비용인지를 확인할 수 있습니다.</p>
+
+<p>For example, this is what Explain API response looks like:</p>
+
+<p>Explain API 의 응답은 아래와 같습니다.</p>
+
+<pre><code>{
+ "ok" : true,
+ "_index" : "docs",
+ "_type" : "doc",
+ "_id" : "1",
+ "matched" : true,
+ "explanation" : {
+   "value" : 0.15342641,
+   "description" : "fieldWeight(_all:document in 0), product of:",
+   "details" : [ {
+     "value" : 1.0,
+     "description" : "tf(termFreq(_all:document)=1)"
+   }, {
+     "value" : 0.30685282,
+     "description" : "idf(docFreq=1, maxDocs=1)"
+   }, {
+     "value" : 0.5,
+     "description" : "fieldNorm(field=_all, doc=0)"
+   } ]
+ }
+}
+</code></pre>
+
+<p>You can see the description about score calculation that is returned from the Explain API.</p>
+
+<p>Explain API로 반환되는 스코어 계산에 대한 내용을 알 수 있겠죠?</p>
+
+<h2>Before We End</h2>
+
+<p>There are a few words more we wanted to write before summarizing this comparison. First of all the above mentioned APIs and possibilities are not all that it is available, especially when it comes to ElasticSearch. For example, with ElasticSearch you can clear caches on the index level, you can check index and types existence, you can retrieve and manage your warming queries, clear the transaction log by running the Flush API, or  even close an index or open those that were closed. We wanted to point some differences and similarities between Apache Solr and ElasticSearch, but we didn’t want to make a summary of the documentation. :) So, if you are interested in some functionality and you don’t know if it exists, just send a mail to Apache Solr or ElasticSearch mailing list or leave a comment here, and we will be glad to help.</p>
+
+<p>이 비교를 정리하기 전에 좀 더 써두고 싶은 것이 있습니다. 우선 맨처음 위에서 설명한 API 와 기능은 두 검색엔진이 가진 모든 기능이 아닙니다. 특히 ElasticSearch가 그렇습니다. 예를들어 ElasticSearch 에서는 인덱스 레벨 위에서 캐쉬를 지우거나 존재하는 인덱스와 타입을 확인하거나, 워밍쿼리를 뽑고, 관리하거나, 플러쉬 API 를 시행해서 트랜잭션로그를 삭제하거나, 거기에 인덱스를 닥거나 닫힌 인덱스를 여는 것도 가능합니다. 우리는 Apache Solr 와 ElasticSearch 의 차이와 유사점에 대해서 다루고 싶었지, 정리한 문서를 만들고 싶지는 않았습니다. :) 따라서 만약 어떤 기능에 흥미가 있고, 그런 기능이 있는 지 모르는 경우는 Apache Solr 나 ElasticSearch 의 메일링리스트에 메일을 보내거나 여기에 코멘트를 남겨주세요. 기꺼이 도와드리겠습니다.</p>
+
+<h2>정리</h2>
+
+<p>When we first started the Solr vs ElasticSearch series we planned to initially divide the series into five posts, which are now published. However after seeing the popularity of the series and the amount of feedback we’ve received, we decided to extend the series. You can soon expect the next part, which will be dedicated to non-technical, but deeply important and interesting aspects of both search servers. After that, we’ll get back to the technical details with the subsequent post  dedicated to score influence capabilities, describing how we can change the default Lucene scoring and influence it from configuration, during indexing time and finally during querying.</p>
+
+<p>Solr vs ElasticSearch 시리즈를 시작했을 때, 우리는 시리즈를 다섯개의 기사로 나눌 예정이었습니다. 하지만 이 시리즈의 인기와 여러 피드백의 양을 생각한 결과 이 시리즈를 확장하기로 했습니다. 이미 다음편을 기대하고 있겠죠. 다음편은 비기술적이지만 매우 중요하고 재미있는 두 가지 검색서버의 측면에 대해서 다루고자 합니다. 그리고 기술적인 자세한 이야기에 이은 포스트에서는 반환되는 스코어에 영향을 주는 기능에 대해서 다루고, 인덱싱할 때와 최종적으로 쿼리 사이에 어떻게 Lucene 의 기본 스코어링을 바꿔서 설정에서 영향을 줄 수 있는 가를 다루고자 합니다.</p>
+
+<p>If you liked this post, please tweet it!</p>
+
+<p>이 글이 좋아한다면 트윗해주세요.</p>
+
+<ul>
+<li>@kucrafal, @sematext</li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[[번역] Solr vs ElasticSearch Part 4 - Faceting]]></title>
+    <link href="http://jeen.github.io/blog/2013/07/17/solr-vs-elasticsearch-part-4-faceting/"/>
+    <updated>2013-07-17T01:06:42+09:00</updated>
+    <id>http://jeen.github.io/blog/2013/07/17/solr-vs-elasticsearch-part-4-faceting</id>
+    <content type="html"><![CDATA[<h1>Solr vs ElasticSearch: Part 4 – Faceting</h1>
+
+<p>October 30, 2012 by Rafał Kuć</p>
+
+<p>Solr 4 (aka SolrCloud) has just been released, so it’s the perfect time to continue our ElasticSearch vs. Solr series. In the last three parts of the ElasticSearch vs. Solr series we gave a general overview of the two search engines, about data handling, and about their full text search capabilities. In this part we  look at how these two engines handle faceting.</p>
+
+<p>Solr 4 (또는 SolrCloud) 가 릴리즈되었습니다. ElasticSearch vs. Solr 시리즈를 계속하기에는 완벽한 시기라고 말할 수 있겠죠. ElasticSearch vs. Solr 시리즈의 이전 3편에서는 두가지 검색 엔진 전체의 개요, 데이터 취급, 전문검색능력에 대해서 이야기했습니다. 이번 파트에서는 두 엔진이 어떻게 Faceting 을 다루는지를 알아봅니다.</p>
+
+<ul>
+<li><a href="http://jeen.github.io/2013/07/15/solr-vs-elasticsearch-part-1/">1. Solr vs. ElasticSearch: Part 1 – Overview</a></li>
+<li><a href="http://jeen.github.io/2013/07/16/solr-vs-elasticsearch-part-2-indexing-and-language-handling/">2. Solr vs. ElasticSearch: Part 2 – Data Handling</a></li>
+<li><a href="http://jeen.github.io/2013/07/16/solr-vs-elasticsearch-part-3-searching/">3. Solr vs. ElasticSearch: Part 3 – Searching</a></li>
+<li><a href="http://jeen.github.io/2013/07/16/solr-vs-elasticsearch-part-4-faceting/">4. Solr vs. ElasticSearch: Part 4 – Faceting</a></li>
+<li><a href="http://jeen.github.io/2013/07/17/solr-vs-elasticsearch-part-5-management-api-capabilities/">5. Solr vs. ElasticSearch: Part 5 – Management API Capabilities</a></li>
+<li><a href="http://jeen.github.io/2013/07/17/solr-vs-elasticsearch-part-6-user-and-dev-communities-compared/">6. Solr vs. ElasticSearch: Part 6 – User &amp; Dev Communities Compared</a></li>
+</ul>
+
+
+<h2>Faceting</h2>
+
+<p>When it comes to faceting, both Solr and ElasticSearch have some faceting methods that other search engine does not.  Both search engines allow you to calculate facets for a given field, numerical range, or date range. The key differences are in the details, of course – in the control of how exactly the facets are calculated, in the memory footprint, and whether we can change the calculation method. In most cases ElasticSearch allows more control over faceting, however Solr has some serious advantages, too.  Lets get into details of each of the methods.</p>
+
+<p>faceting 에 대해서는 Solr 와 ElasticSearch 양쪽이 다른 검색엔진이 가지지 않은 몇가지 faceting 메소드를 가집니다. 두 검색엔진 모두가 주어진 필드, 수치범위, 날짜범위의 Faceting 을 계산할 수 있습니다. 주요한 차이는 실제로 Faceting 을 어떻게 계산할 것인가하는 컨트롤, 메모리풋프린트, 그리고 계산방법을 변경할 수 있는가 입니다. 대부분의 경우 ElasticSearch 는 faceting 에 있어서 다채로운 조작이 가능합니다. 그러나 Solr 도 몇가지 중요한 우위점을 가지고 있습니다. 각각의 메소드의 자세한 내용에 들어가 보겠습니다.</p>
+
+<h2>Term Faceting</h2>
+
+<p>This method of faceting allows one to get information about the number of term occurrences in a certain field.</p>
+
+<p>이 faceting 메소드를 통해 어떤 필드안에 어떤 용어가 몇개인가 하는 정보를 얻을 수 있습니다.</p>
+
+<h3>Solr</h3>
+
+<p>Solr let’s you control how many facets are returned, how they are sorted, the minimum quantity required, and so on. In addition to that, in Solr field faceting, you can choose between a couple of different methods for computing facets.  One of these method should be used for fields with a high number of distinct terms, while the second method is best used in the opposite scenario – when you expect relatively few distinct terms in a field being faceted on.</p>
+
+<p>Solr 는 Facet 이 몇개 반환되는가, 그것들이 어떻게 저장되는 가, 최소필요수등을 컨트롤할 수 있습니다. 그리고 Solr 의 필드 faceting 에서는 Facet 계산법을 두세가지의 다른 방법 중에서 선택할 수 있습니다. 이런 메소드 중 하나가 가장 수가 많은 용어로 사용되어, 두번째 방법은 역 시나리오에 적합합니다. 필드 안에 상대적으로 적은 용어가 Facet 되기를 바라는 경우죠.</p>
+
+<h3>ElasticSearch</h3>
+
+<p>On the other side we have ElasticSearch which allows us to do all that Solr can do (in terms of faceting calculation, not the calculation methods), but in addition it also let’s us exclude specific terms we are not interested in and use regular expressions to define which terms will be included in faceting results. In addition to that we can combine term faceting results from different field automatically or just use scripts to modify the fields values before the calculation process steps in</p>
+
+<p>반면에 ElasticSearch 에서는 Solr 가 가능한 모든 것이 가능합니다. (Facet 계산에 관해서이며 계산방법은 그렇지 않습니다) 그리고 흥미없는 특정 용어를 배제할 수 있으며, Facet 결과에 포함된 용어의 정의에 정규표현을 사용할 수 있습니다. 또 다른 필드의 용어 faceting 의 결과를 자동적으로 연결하거나, 계산프로세스에 들어가기 전에 필드의 값을 변경하는 스크립트를 사용하거나 할 수 있습니다.</p>
+
+<h2>Query Faceting</h2>
+
+<p>Both Solr and ElasticSearch allow calculating faceting for arbitrary query results. In both cases queries can be expressed in the query API of the search engine which we use. For example, in ElasticSearch you can use the whole query DSL to calculate faceting results on them.</p>
+
+<p>Solr 와 ElasticSearch 양 쪽 모두 임의의 쿼리의 결과에 대해서 Facet 을 계산할 수 있습니다. 양쪽 모두 쿼리는 검색엔진의 쿼리 API 로 표현할 수 있습니다. 예를들어 ElasticSearch 에서는 쿼리DSL 전체를 그 결과의 Facet 의 산출에 사용할 수 있습니다.</p>
+
+<h2>Range Faceting</h2>
+
+<p>Range faceting lets you get the number of documents that match the given range in a field. Both engines allow for range faceting although in different fashion.</p>
+
+<p>Range Faceting 은 어떤 필드에 주어진 범위에 일치하는 도큐먼트의 수를 반환합니다. 두 엔진 모두 Range Faceting 이 가능하지만 서로 다른 방법으로 동작합니다.</p>
+
+<h3>Solr</h3>
+
+<p>Apache Solr lets you define the start value, end value, and the gap (with some adjustments like inclusion of values at the end of the ranges) and calculate all the ranges defined by that.</p>
+
+<p>Apache Solr 는 시작과 끝의 값, 갭(과 몇가지 조정할 것, 예를들어 범위의 끝의 값은 포함되는가하는 것 이외 기타 등등)을 지정하고 그에 의해 정의된 모든 범위를 계산합니다.</p>
+
+<h3>ElasticSearch</h3>
+
+<p>ElasticSearch takes a different approach – it lets you specify set of ranges and returns document counts as well as aggregated data. In addition to that, ElasticSearch let’s you specify a different field to check if a document falls into a given range and a different field for the aggregated data calculation. Furthermore, you can modify the field and aggregated data with a script. And that’s not all – in addition to the above method of range faceting ElasticSearch also supports the so called histogram calculation.  This is similar to the Apache Solr approach – for a given field you can get a histogram of values. However, ElasticSearch doesn’t let you control the start and end like Solr does, but only the gap.</p>
+
+<p>ElasticSearch 는 다른 접근방법을 취합니다. 범위의 집합을 지정해서 도큐먼트의 카운트와 집약된 데이터를 반환합니다. 그리고 ElasticSearch 는 다른 필드를 지정해서, 도큐먼트가 지정된 범위에 해당하는지 체크하는 것 이외에 집약데이터의 계산에 다른 필드를 지정할 수 있습니다. 또한, 필드와 집약데이터를 스크립트로 변경할 수 있습니다. 그것뿐만 아니라 위의 Range Faceting 에 이어 ElasticSearch Histogram 계산이라고 불리는 것도 이용할 수 있습니다. 이는 Apache Solr 의 접근방법과 비슷하게 주어진 필드의 값의 히스토그램을 얻을 수 있습니다. 그러나 ElasticSearch 는 Solr 처럼 시작값과 마지막값을 컨트롤할 수 없으며, 갭만 가능합니다.</p>
+
+<h2>Date Faceting</h2>
+
+<p>Again, both search engines support faceting on date based fields.</p>
+
+<p>마찬가지로 두 검색엔진은 필드에 기반한 날짜 Faceting 을 지원합니다.</p>
+
+<h3>Solr</h3>
+
+<p>Date faceting in Apache Solr is quite similar to the range faceting, although it is calculated on fields of  solr.DateField type. You have the same control and use similar parameters as withing the range faceting so I’ll omit describing it.</p>
+
+<p>Apache Solr 의 Date Faceting 은 Range Faceting 과 완전히 같지만 solr.DateField 타입의 필드상에서 계산됩니다. Range Faceting 과 같은 컨트롤이 가능하고, 같은 파라메터를 사용할 수 있습니다. 그때문에 여기에서는 자세한 서술은 생략합니다.</p>
+
+<h3>ElasticSearch</h3>
+
+<p>On the other hand, we have ElasticSearch with its date faceting which is an enhancement over the standard histogram faceting. It supports interval specification with date specific parameters like for example: year, month, or day. In addition to that, ElasticSearch lets you specify the time zone to be used in computation and of course manipulate the calculation with the use of a script.</p>
+
+<p>반면 ElasticSearch 에서 Date Faceting 은 표준 Histogram Faceting 의 확장으로 동작합니다. 날짜를 특정하는 year, month, day 같은 파라메터와 간격을 지정할 수 있습니다. 그리고 ElasticSearch 는 연산에 사용되는 타임존 지정이 가능하며, 물론 스크립트를 이용해서 계산을 컨트롤할 수 도 있습니다.</p>
+
+<h3>Decision Tree Faceting – Solr Only</h3>
+
+<p>One of the things that ElasticSearch lacks and that is present in Solr is the pivot faceting aka decision tree faceting. It basically lets you calculate facets inside a parents facet. For example, this is what pivot faceting results look like in Solr (n.b. this example is trimmed for this post) :</p>
+
+<p>현시점에서 Solr 에 존재하지만 ElasticSearch 에서는 빠진 것 중 하나가 pivot Faceting 또는 결정트리 Faceting 이라고 불리는 것입니다. 이것은 부모 Faceting 내부에서 Faceting 을 계산할 수 있습니다. 아래가 Solr 에서 Pivot Faceting 이 어떻게 동작하는 지에 관한 예제입니다(이 예제는 이 글을 위해서 일부 삭제하였습니다).</p>
+
+<pre><code>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;response&gt;
+&lt;lst name="responseHeader"&gt;
+  &lt;int name="status"&gt;0&lt;/int&gt;
+  &lt;int name="QTime"&gt;1&lt;/int&gt;
+  &lt;lst name="params"&gt;
+    &lt;str name="facet"&gt;true&lt;/str&gt;
+    &lt;str name="indent"&gt;true&lt;/str&gt;
+    &lt;str name="facet.pivot"&gt;inStock,cat&lt;/str&gt;
+    &lt;str name="q"&gt;*:*&lt;/str&gt;
+    &lt;str name="rows"&gt;0&lt;/str&gt;
+  &lt;/lst&gt;
+&lt;/lst&gt;
+&lt;result name="response" numFound="32" start="0"&gt;
+&lt;/result&gt;
+&lt;lst name="facet_counts"&gt;
+  &lt;lst name="facet_queries"/&gt;
+  &lt;lst name="facet_fields"/&gt;
+  &lt;lst name="facet_dates"/&gt;
+  &lt;lst name="facet_ranges"/&gt;
+  &lt;lst name="facet_pivot"&gt;
+    &lt;arr name="inStock,cat"&gt;
+      &lt;lst&gt;
+        &lt;str name="field"&gt;inStock&lt;/str&gt;
+        &lt;bool name="value"&gt;true&lt;/bool&gt;
+        &lt;int name="count"&gt;17&lt;/int&gt;
+        &lt;arr name="pivot"&gt;
+          &lt;lst&gt;
+            &lt;str name="field"&gt;cat&lt;/str&gt;
+            &lt;str name="value"&gt;electronics&lt;/str&gt;
+            &lt;int name="count"&gt;10&lt;/int&gt;
+          &lt;/lst&gt;
+          &lt;lst&gt;
+            &lt;str name="field"&gt;cat&lt;/str&gt;
+            &lt;str name="value"&gt;currency&lt;/str&gt;
+            &lt;int name="count"&gt;4&lt;/int&gt;
+          &lt;/lst&gt;
+          .
+          .
+          .
+        &lt;/arr&gt;
+      &lt;/lst&gt;
+      &lt;lst&gt;
+        &lt;str name="field"&gt;inStock&lt;/str&gt;
+        &lt;bool name="value"&gt;false&lt;/bool&gt;
+        &lt;int name="count"&gt;4&lt;/int&gt;
+        &lt;arr name="pivot"&gt;
+          &lt;lst&gt;
+            &lt;str name="field"&gt;cat&lt;/str&gt;
+            &lt;str name="value"&gt;electronics&lt;/str&gt;
+            &lt;int name="count"&gt;4&lt;/int&gt;
+          &lt;/lst&gt;
+          &lt;lst&gt;
+            &lt;str name="field"&gt;cat&lt;/str&gt;
+            &lt;str name="value"&gt;connector&lt;/str&gt;
+            &lt;int name="count"&gt;2&lt;/int&gt;
+          &lt;/lst&gt;
+          .
+          .
+          .
+        &lt;/arr&gt;
+      &lt;/lst&gt;
+    &lt;/arr&gt;
+  &lt;/lst&gt;
+&lt;/lst&gt;
+&lt;/response&gt;
+</code></pre>
+
+<h2>Statistical Faceting</h2>
+
+<p>Both ElasticSearch and Apache Solr can compute statistical data on numeric fields – values like count, total, minimal value, maximum value, average, etc. can be computed.</p>
+
+<p>ElasticSearch 와 Apache Solr 양쪽 모두가 통계 데이터를 수치 필드 위에서 계산할 수 있습니다. 예를 들어, 카운트, 총계, 최소값, 최대값, 평균값 등을 계산할 수 있습니다.</p>
+
+<h3>Solr</h3>
+
+<p>In Apache Solr the functionality that enables you to calculate statistics for a numeric field is called Stats Component. It returns the above mentioned values as a part of the query result, in a separate list, just as faceting results.</p>
+
+<p>Apache Solr 에서는 수치필드에서 통계를 계산하는 기능은 stats 컴포넌트라고 불립니다. 위에서 적은 값을 쿼리의 결과의 일부로 별도의 리스트 안에 Faceting 결과로 반환합니다.</p>
+
+<h3>ElasticSearch</h3>
+
+<p>In ElasticSearch this functionality is called Statistical Facet. You should keep in mind thought that, as usual, ElasticSearch allows us to calculate this information for values returned by a script or combined for multiple fields, which is very nice if you need combined information for two or more fields or you want to do additional processing before getting the data returned by ElasticSearch.</p>
+
+<p>ElasticSearch 에서는 이 기능은 statistical Faceting 이라고 부릅니다. 기억해두어야 할 것은 ElasticSearch 는 이 정보를 스크립트의 반환값에 대해서 계산하거나, 여러 필드의 결합 시에 계산할 수 있다는 것입니다. 2개 이상의 필드의 결합정보가 필요하거나, ElasticSearch 에서 반환된 값을 얻기 전에 추가적인 처리를 실행하고자 하는 경우에 매우 편리합니다.</p>
+
+<h2>Geodistance Faceting</h2>
+
+<p>(Geo)spatial search is quite popular nowadays where we try to provide the best search results we can and we considering multiple pieces of information and conditions. Of course both Apache Solr and ElasticSearch provide spatial search capabilities, but we are not talking about searching – we are talking about faceting. Sometimes there is a need to return a distance from a given point, just to show that in our application – and we can do that both in ElasticSearch and Solr.</p>
+
+<p>(Geo)spatial 검색은 요즘 매우 인기가 있습니다. 우리는 가능한한 수치의 정보와 조건에 의한 최고의 검색결과를 얻을 수 있도록 노력하고 있습니다. 물론 Apache Solr 와 ElasticSearch 양쪽 모두 spatial 검색이 가능합니다. 그러나 지금은 검색이야기가 아니라 Faceting 이야기죠. 우리는 어플리케이션에서 때때로 주어진 지점에서 거리를 반환할 필요가 있습니다. ElasticSearch 와 Solr 모두 이런 것이 가능합니다.</p>
+
+<h3>Solr</h3>
+
+<p>In Solr to be able to facet by distance from a given point we would have to use facet.query parameter and use frange or geofilt, for example like this:</p>
+
+<p>Solr 에서는 주어진 지점에서 거리로 Faceting 할 수 있습니다. facet.query 파라메터를 사용할 필요가 있으며 frange, geofilt 를 아래처럼 사용합니다.</p>
+
+<pre><code>q=*:*&amp;sfield=location&amp;pt=10.10,11.11&amp;facet=true&amp;facet.query={!geofilt d=10 key=d10}
+</code></pre>
+
+<p>This would return the number of document within 10 kilometers from the defined point.</p>
+
+<p>이것은 정의된 지점에서 10km 이내의 도큐먼트의 수를 반환합니다.</p>
+
+<h3>ElasticSearch</h3>
+
+<p>ElasticSearch exposes dedicated geo_distance faceting type that lets us pass the point and the array of ranges we want the distance to be calculated for. An example query might look like this:</p>
+
+<p>ElasticSearch 는 geo_distance Faceting 타입이 공개되어 있고, 이것을 사용해서 위치와 계산대상의 거리 범위를 배열로 건넵니다. 쿼리의 예제는 아래와 같습니다.</p>
+
+<pre><code>{
+ "query" : {
+  "match_all" : {}
+ },
+ "facets" : {
+  "d10" : {
+   "geo_distance" : {
+    "doc.location" : {
+     "lat" : 10.10,
+     "lon" : 11.11
+    },
+    "ranges" : [
+     { "to" : 10 }
+    ]
+   }
+  }
+ }
+}
+</code></pre>
+
+<p>In addition to that, we can specify the units to be used in distance calculations (kilometers and miles) and the distance calculation type – arc for better precision and plane for faster execution.</p>
+
+<p>그리고 거리의 계산에 사용하는 단위(Km 또는 마일)와 거리의 계산타입을 지정할 수 있습니다. arc 는 보다 나은 정밀도, 그리고 plane 은 계산이 빠릅니다.</p>
+
+<h2>Solr, LocalParams and Faceting</h2>
+
+<p>One of the good things about faceting in Solr is that it allows the use of local params. For example, you can remove some filters from the faceting results. Imagine you have a query that gets all results for a term ‘flower’ and you only get results that fall into ‘cloth’ category and ‘shirt’ subcategory, but you would like to have faceting for tags field not narrowed to any filter. With the help of local params this query may look like this:</p>
+
+<p>Solr 의 Faceting 에 있어서 좋은 점 중 하나는 로컬파라메터를 사용할 수 있다는 것입니다. 예를들어 Faceting 의 결과에서 몇가지 필터를 삭제할 수 있습니다. <code>flower</code> 라는 용어에 대해서 모든 결과를 얻는 쿼리가 있을 경우 <code>cloth</code> 의 카테고리에서 <code>shirt</code> 의 서브카테고리만의 결과를 얻어야 한다고 합시다. 하지만 tags 필드에 대해서는 어느 필터에서도 조건을 취합하고 싶지는 않습니다. 로컬파라메터의 도움으로 다음과 같은 쿼리를 만들 수 있습니다.</p>
+
+<pre><code>q=flower&amp;fq={!tag=facet_cat}category:cloth&amp;fq={!tag=facet_sub}subcategory:shirt&amp;facet=true&amp;facet.field={!ex=facet_cat,facet_sub}tags
+</code></pre>
+
+<h2>ElasticSearch Faceting Scope and Filters</h2>
+
+<p>By default ElasticSearch facets are restricted to the scope of a given query, which is understandable. However, ElasticSearch also lets us change the scope of faceting to global and thus calculate the faceting for the whole data set, and not just for a given result set. In addition to that we can calculate facets for different nested objects by defining the scope matching the name of the nested object. This can come in handy in many situations, for example when optimizing memory usage on faceting on multivalued fields with many unique terms. In addition to that with ElasticSearch we can narrow down the subset of the documents on which faceting will be applied by using filters. We can define filters inside faceting (just please remember that filters that narrow down query results are not restricting faceting) and choose which documents should be taken into consideration when calculating facets. Of course, as you may expect, filters for faceting may be defined in the same way as filters for queries.</p>
+
+<p>기본적으로는 ElasticSearch 의 Faceting 은 주어진 쿼리의 범위에 한정됩니다. 이해할 수는 있지만 ElasticSearch 는 Faceting 의 범위를 글로벌하게 변경가능하고, 주어진 결과집합만이 아닌 모든 데이터셋에 대해서 Faceting 을 계산할 수 있습니다. 그리고 다른 중첩오브젝트에 대해서 Faceting 을 계산할 수도 있습니다. 중첩 오브젝트의 이름에 일치하는 범위를 정의합니다. 이는 대부분의 경우에 편리합니다. 예를 들어 많고 다양한 용어와 여러값을 가진 필드에 대해서 Faceting 을 할 시, 메모리를 최적화해야할 경우입니다. ElasticSearch 에서는 필터를 사용함으로써 Faceting 을 적용할 도큐먼트의 부분집합을 뽑아낼 수 있습니다. Faceting 의 내부에서 필터를 설정가능하고(쿼리 결과를 묶는 필터는 Faceting 만으로 한정되지 않는 것을 기억해주세요) 어느 도큐먼트가 Faceting 을 계산할 시에 고려해야할 것인가를 선택할 수 있습니다. 물론 예상되겠지만, Faceting 에 대한 필터는 쿼리에 대해서 필터처럼 정의할 수 있습니다.</p>
+
+<h2>정리</h2>
+
+<p>In this part of the Apache Solr vs ElasticSearch posts series we talked about the ability to calculate facet information and only about this. Of course, this is only a look at the surface of faceting, because both Apache Solr and ElasticSearch provide some additional parameters and features that we couldn’t cover without turning this post into a tl;dr monster. However, we hope this post gives you some general ideas about what you can expect from each of these search engines. In the next part of the series we will focus on other search features, such as geospatial search and the administration API. If you are going to the upcoming ApacheCon EU and are interested in hearing more about how ElasticSearch and Apache Solr compare, please come to my talk titled “Battle of the giants: Apache Solr 4.0 vs ElasticSearch“. See you there!</p>
+
+<p>Apache Solr vs. ElasticSearach 시리즈의 이번 파트에서는 Faceting 정보의 계산에 대해서만 이야기했습니다. 물론 이는 Faceting 의 표면만을 다룬 것에 지나지 않습니다. Apache Solr 와 ElasticSearch 양쪽에 좀 더 추가적인 파라메터와 기능이 더 많이 존재하지만 모든 것을 커버하기에는 현재로는 어렵네요. 하지만 이 글이 각 검색엔진에 무엇을 기대할 것인가 하는 일반적인 생각을 얻을 수 있을 것입니다. 다음편에서는 별도의 검색기능인 geospatial 검색과 관리용 API 에 대해서 다룰 예정입니다. 만약 이번 ApacheCon EU 에 오고 ElasticSearch 와 Apache Solr 비교에 대해서 보다 자세히 듣고 싶다면 내 강연(타이틀은 &ldquo;Battle of the giants : Apache Solr 4.0 vs ElasticSearch&rdquo;)를 들으러 오세요. 거기서 만나요!</p>
+
+<ul>
+<li>@kucrafal, @sematext</li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[[번역] Solr vs. ElasticSearch - Part 3 : Searching]]></title>
+    <link href="http://jeen.github.io/blog/2013/07/16/solr-vs-elasticsearch-part-3-searching/"/>
+    <updated>2013-07-16T22:32:49+09:00</updated>
+    <id>http://jeen.github.io/blog/2013/07/16/solr-vs-elasticsearch-part-3-searching</id>
+    <content type="html"><![CDATA[<h1>Solr vs ElasticSearch: Part 3 – Searching</h1>
+
+<p>October 1, 2012 by Rafał Kuć</p>
+
+<p>In the last two parts of the series we looked at the general architecture and how data can be handled in both Apache Solr 4 (aka SolrCloud) and ElasticSearch and what the language handling capabilities of both enterprise search engines are like. In today’s post we will discuss one of the key parts of any search engine – the ability to match queries to documents and retrieve them.</p>
+
+<p>이 시리즈의 앞의 2회에서 Apache Solr 4 (SolrCloud라고도 불립니다）와 ElasticSearch 의 전체 아키텍쳐와 데이터가 어떻게 다뤄지는 지, 그리고 두 검색엔진의 언어 취급능력이 어떤 지를 알아봤습니다. 이번 글에서는 검색 엔진의 키가 되는 부분 중 하나인 도큐먼트에 대한 쿼리를 매치해서 결과를 받는 능력에 대해서 의논해보도록 합니다.</p>
+
+<ul>
+<li><a href="http://jeen.github.io/2013/07/15/solr-vs-elasticsearch-part-1/">1. Solr vs. ElasticSearch: Part 1 – Overview</a></li>
+<li><a href="http://jeen.github.io/2013/07/16/solr-vs-elasticsearch-part-2-indexing-and-language-handling/">2. Solr vs. ElasticSearch: Part 2 – Data Handling</a></li>
+<li><a href="http://jeen.github.io/2013/07/16/solr-vs-elasticsearch-part-3-searching/">3. Solr vs. ElasticSearch: Part 3 – Searching</a></li>
+<li><a href="http://jeen.github.io/2013/07/16/solr-vs-elasticsearch-part-4-faceting/">4. Solr vs. ElasticSearch: Part 4 – Faceting</a></li>
+<li><a href="http://jeen.github.io/2013/07/17/solr-vs-elasticsearch-part-5-management-api-capabilities/">5. Solr vs. ElasticSearch: Part 5 – Management API Capabilities</a></li>
+<li><a href="http://jeen.github.io/2013/07/17/solr-vs-elasticsearch-part-6-user-and-dev-communities-compared/">6. Solr vs. ElasticSearch: Part 6 – User &amp; Dev Communities Compared</a></li>
+</ul>
+
+
+<h2>전체적인 어프로치</h2>
+
+<p>Both search engines expose their search APIs via HTTP. If you are not familiar with Solr or ElasticSearch, here are a few simple examples of what Apache Solr and ElasticSearch queries look like:</p>
+
+<p>두 검색엔진 모두 HTTP 경유로 검색 API 를 공개하고 있습니다. Solr 와 ElasticSearch 를 잘 모르는 분을 위해, 여기에서 몇가지 Apache Solr 와 ElasticSearch 의 쿼리가 어떤지를 간단한 예로 보여드립니다.</p>
+
+<h3>Solr</h3>
+
+<pre><code>curl -XGET 'http://localhost:8983/solr/sematext/select?q=post_date:[2012-09-10T12:00:00Z+TO+2012-09-10T15:00:00Z]'
+</code></pre>
+
+<h3>ElasticSearch</h3>
+
+<pre><code>curl -XGET http://localhost:9200/sematext/_search?pretty=true -d '{
+    "query" : {
+        "range" : {
+            "post_date" : {
+                "from" : "2012-09-10T12:00:00",
+                "to" : "2012-09-10T15:00:00"
+            }
+        }
+    }
+}'
+</code></pre>
+
+<p>As you can see the ElasticSearch query is more structured allowing for more precise control of what you are trying to get – similar to Lucene queries. Solr on the other hand uses a query parser to parse your query out of the textual value of the “q” URL parameter (n.b. you can use query parser in ElasticSearch too). But as one can see on Solr mailing lists, many new users have problems because of such approach – they are overwhelmed with all the options and parameters. At the same time, Solr does make simple queries with boosting and extended dismax parser very easy to do, although that comes at a price. If you want to have a higher degree of control over your query, you are (in most cases) forced to use local params that, while powerful, can be quite hard for users not familiar with its cryptic syntax.</p>
+
+<p>보시는 대로, ElasticSearch의 쿼리는 보다 구조화되어 원하는 결과를 얻기위해 정확한 컨트를을 가능하게 합니다. Lucene 쿼리와 비슷합니다. 반면 Solr 는 쿼리파서를 URL 파라메터의 <code>q</code> 값으로 넣은 텍스트 값을 쿼리로 파싱합니다. (주의: ElasticSearch 에서도 쿼리파서를 이용할 수 있습니다) 하지만, Solr 의 메일링리스트에서 확인할 수 있듯이 많은 유저가 그런 방법으로 인해 문제를 겪고 있습니다. 그들은 모든 옵션과 파라메터에 매우 난감해하고 있습니다. 동시에 Solr 는 간단한 쿼리를 boosting 과 확장된 dismax 파서로 간단하게 실행할 수 있습니다. 하지만 그에 상응하는 부담을 지고 있습니다. 만약 고도의 컨트롤을 쿼리로 할 경우에는 (대부분의 경우) 로컬 파라메터를 사용하지 않으면 안되며, (파워풀하지만) 그 암호같은 문법에 익숙하지 않은 유저에게는 매우 큰일이 아닐 수 없습니다.</p>
+
+<p>To sum up our short introduction – both search engines give you a similar degree of control when it comes to querying, although if you want to create your queries from scratch and control every aspect of them, just as you would when using Lucene directly, ElasticSearch is the way to go, not because Solr doesn’t let you, but the structured JSON way of querying ElasticSearch is a better fit in that case and feels more intuitive.</p>
+
+<p>우리들의 짧은 소개를 정리하면, 두 검색엔진이 같은 정도의 컨트롤을 쿼리로 제공합니다. 그러나 스크래치부터 쿼리를 만들고, Lucene 을 직접 이용하도록 모든 국면을 컨트롤하고 싶은 경우, ElasticSearch 를 선택해야 합니다. Solr 에서는 불가능한 것은 아니지만, ElasticSearch 가 제공하는 구조화된 JSON 이 그런 케이스에 보다 안성맞춤이고 보다 직감적으로 느낄 수 있기 때문입니다.</p>
+
+<h2>전문검색</h2>
+
+<p>In this section we try to compare search capabilities of both both Apache Solr and ElasticSearch. This is by no means a comprehensive tutorial of all the features that both search engines expose, but rather  a simple comparison of similarities and difference of them.</p>
+
+<p>이 섹션에서는 Apache Solr 와 ElasticSearch 모두 검색능력을 비교해 봅니다. 물론 포괄적으로 두 검색엔진이 가지는 모든 기능의 튜토리얼이 아닙니다. 콕 찝어서 말하자면 간단한 유사점과 차이점의 비교가 아닐까 하네요.</p>
+
+<h3>검색</h3>
+
+<p>Of course, both Apache Solr and ElasticSearch enable you to run standard queries such as Boolean queries, phrase queries, fuzzy queries, wildcard queries, etc. You can combine them into multiple Boolean phrases using Boolean operators. In addition to that, both engine let one specify query-time boosts and control how score is calculated during search execution.</p>
+
+<p>물론 Apahe Solr 와 ElasticSearch 양쪽 모두 표준적인 검색이 가능합니다. 불리언 쿼리, 프레이즈 쿼리, 퍼지 쿼리, 와일드 카드 쿼리 같은 것들 말이죠. 불리언연산자를 사용해서 이것들을 결합해서 여러 불리언 프레이즈에 결합할 수도 있습니다. 물론 두 검색엔진은 쿼리 마다 boost 를 지정하고, 검색실행 중에 어떻게 스코어가 계산되는 지를 컨트롤할 수 있습니다.</p>
+
+<h3>Span Queries</h3>
+
+<p>If you are not familiar with span queries here is a one-sentence description: Lucene provides span queries in order to enable searching documents with position requirements, but not necessarily appearing one after another like in the phrase query. And now the comparison:</p>
+
+<p>스팬쿼리를 모르는 사람을 위해 간단하게 설명하자면, Lucene 이 제공하는 스팬쿼리는 위치를 필요로하는 도큐먼트 검색을 가능하게 합니다. 그러나 프레이즈쿼리처럼 연속해서 나올 필요는 없습니다. 한번 비교해볼까요?</p>
+
+<h4>Solr</h4>
+
+<p>Update: As Erik Hatcher noticed support for span queries is already there in Apache Solr (SOLR-2703). We can use span queries by using the surround query parser.</p>
+
+<p>업데이트： Erik Hatcher에 의해서 스팬쿼리는 이미 Apache Solr 에 들어갔습니다.(SOLR-2703) 쿼리파서로 감싸서 스팬쿼리를 사용할 수 있습니다.</p>
+
+<h4>ElasticSearch</h4>
+
+<p>ElasticSearch has the support for Lucene SpanNearQuery, SpanFirstQuery, SpanTermQuery, SpanOrQuery and SpanNotQuery. With these queries you can construct different span queries similar to what you can do with Lucene.</p>
+
+<p>ElasticSearch는 Lucene 의 SpanNearQuery, SpanFristQuery, SpanTermQuery, SpanOrQuery, 그리고 SpanNotQuery를 지원합니다. 이 쿼리들을 사용해서 Lucene 에서 이뤄지는 다양한 스팬쿼리를 구성할 수 있습니다.</p>
+
+<h3>More Like This</h3>
+
+<p>“More like this” (aka MLT) functionality lets you to get documents similar to a given query according to some assumptions and parameters used to find documents that are similar to one another. Both search engines have the ability to run MLT queries. In Solr, MLT  query is implemented as a search component. On the other hand there is ElasticSearch where more like this is just another type of query one can construct using JSON. When comparing parameters available in both search servers it seems that ElasticSearch provides slightly more control over more like this functionality with features like specifying a set of words that shouldn’t be taken into consideration and the percentage of terms to match on.</p>
+
+<p>&ldquo;More like this&rdquo;(또는 MLT) 란, 쿼리에서 부여된 도큐먼트에 몇가지 파라메터를 이용해 비슷한 도큐먼트를 얻을 수 있는 기능입니다. 차이가 있는 도큐먼트를 찾기 위해서 파라메터가 사용됩니다. 두 검색엔진 모두 MLT 쿼리를 사용할 수 있습니다. Solr 에서는 MLT 쿼리는 검색 컴포넌트로 구현되어 있습니다. 반면, ElasticSearch 에서는 JSON 을 사용해서 구축하는 한 종류의 쿼리가 됩니다. 두 검색 서버에 존재하는 파라메터를 비교하면 ElasticSearch 는 조금 더 많은 컨트롤을 제공합니다. 예를들어 고려하지 않은 단어의 집합을 지정하거나, 매치하는 항목의 분할을 지정할 수 있습니다.</p>
+
+<h3>Did You Mean</h3>
+
+<p>“Did you mean” (aka DYM) functionality makes it possible to correct users’ query typos and spelling mistakes and suggest corrected queries. For example, for a misspelled phrase “saerch problems” our Researcher module on <a href="http://search-lucene.com">http://search-lucene.com</a> (which is a kind of a did you mean module) works like this:</p>
+
+<p>&ldquo;Did you mean&#8221;（또는 DYM） 이란 유저의 쿼리의 타이핑오류나 스펠링오류를 고치고 정정된 쿼리를 제안하는 기능입니다. 예를들어 &#8220;saerch problems&rdquo; 라는 잘못된 스펠 구문에서 <a href="http://search-lucene.com">http://search-lucene.com</a> 에 존재하는 우리 연구자 모듈(Did you mean 모듈과 같은 것입니다) 은 이런 동작을 하게 됩니다.</p>
+
+<p>Let’s see what Solr and ElasticSearch have to offer here.</p>
+
+<p>Solr 와 ElasticSearch 에 어떤 기능이 제공되는지 확인해봅시다.</p>
+
+<h4>Solr</h4>
+
+<p>Solr exposes spell check component API, which is built on top of Lucene spell checker module. Before Solr 4.0 the spell checker required its own index that, while built automatically by Solr, was another moving piece and potential inconvenience.  Now there is a DirectSolrSpellchecker implementation available which can give spell checker suggestion based on the index you are using for search instead of relying on the side-car spell checker index. Solr spell checker supports distributed search and has numerous parameters which allow control over its behavior, like number of suggestion, collation properties, accuracy, etc.</p>
+
+<p>Solr 는 스펠링체크 컴포넌트 API 를 제공합니다. 이는 Lucene 의 스펠체커 모듈 위에 구축되어 있습니다. Solr 4.0 이전에는 스펠체커 자체가 인덱스를 필요로 하고, Solr 에 의해 자동적으로 구축되었지만, 별도로 동작하는 부품으로는 조금 불편한 것이었습니다. 지금은 DirectSolrSpellchecker 구현이 존재하며, 검색에 사용하고 있는 인덱스에 기초하여 스펠체커가 제안할 수 있습니다. 스펠체커용의 인덱스를 필요로하지 않습니다. Solr 의 스펠체커는 분산검색을 지원하고, 많은 파라메터를 가진 것으로 그 동작을 컨트롤할 수 있습니다. 예를들어 제안 수나 조합 속성이나 정확성등입니다.</p>
+
+<h4>ElasticSearch</h4>
+
+<p>Unfortunately, ElasticSearch doesn’t offer did you mean functionality out of the box. There is issue  #911 currently open, so we can expect that module in one of the future releases. Although we’ll be talking about plug-ins in the last part of the Solr vs ElasticSearch series, if you need did you mean functionality in ElasticSearch you can use the Suggest Plugin developed by @spinscale (<a href="https://github.com/spinscale/elasticsearch-suggest-plugin">https://github.com/spinscale/elasticsearch-suggest-plugin</a>).</p>
+
+<p>아쉽게도 ElasticSearch는 &ldquo;Did you mean&rdquo; 기능을 그대로 제공하지 않습니다. Issue#911이 현재 오픈되어 있고, 앞으로의 릴리즈에서 그 모듈을 기대할 수 있겠습니다. Solr ElasticSearch 의 마지막 파트에서 플러그인에 대해서 다룰 예정이지만, 만약 &ldquo;Did you mean&rdquo; 기능을 ElasticSearch 에서 필요로 한다면 @spinscale 이 개발한 Suggest 플러그인을 이용할 수 있습니다.(<a href="https://github.com/spinscale/elasticsearch-suggest-plugin">https://github.com/spinscale/elasticsearch-suggest-plugin</a>).</p>
+
+<h3>Nested Queries</h3>
+
+<p>As we already wrote, ElasticSearch supports indexing of nested document which Solr doesn’t support. In order to query nested documents ElasticSearch exposes nested query type. This query is run against nested documents, but as the result we get the root documents. In addition to that, you can also set how scoring of the root document is affected.</p>
+
+<p>이미 다룬 적이 있지만, ElasticSearch 는 중첩 도큐먼트의 인덱싱을 지원합니다. Solr 는 지원하지 않습니다. 중첩도큐먼트를 쿼리하기 위해서는 ElasticSearch 는 중첩쿼리타입을 공개하고 있습니다. 이 쿼리는 중첩도큐먼트에 대해서 실행되지만 결과로 루트 도큐먼트를 얻게 됩니다. 그리고 루트도큐먼트의 스코어링에 어떻게 영향받는지도 설정할 수 있습니다.</p>
+
+<h3>Parent – Child Relationship Queries</h3>
+
+<h4>Solr</h4>
+
+<p>In Apache Solr there is no functionality called parent &ndash; child, instead of that we have the possibility to use joins. Solr joins are specified in local params format and look like this:</p>
+
+<p>Apache Solr 에서는 부모자식이라고 불리는 기능은 없습니다. 대신에 join 을 사용하는 방법이 있습니다. Solr 의 join 은 로컬파라메터 형식으로 지정되어 아래처럼 사용할 수 있습니다.</p>
+
+<pre><code>q={!join from=parent to=id}color:Yellow
+</code></pre>
+
+<p>The above query says that we want to get all parent documents that have child documents that have the Yellow term in the color field. The join should be done on parent field in the children to the id field in the parent document.</p>
+
+<p>위 쿼리에서 color 필드에 Yellow 를 가진 자식 도큐먼트를 가진 모든 부모 도큐먼트를 얻습니다. join 은 자식 도큐먼트의 parent 필드에서 부모 도큐먼트의 id필드상에서 이뤄집니다.</p>
+
+<h4>ElasticSearch</h4>
+
+<p>ElasticSearch lets you use two type of queries – has_children and top_children queries to operate on child documents. The first query accepts a query expressed in ElasticSearch Query DSL as well as the child type and it results in all parent documents that have children matching the given query. The second type of query is run against a set number of children documents and then they are aggregated into parent documents. We are also allowed to choose score calculation for the second query type.</p>
+
+<p>ElasticSearch는 두가지 타입의 쿼리를 사용할 수 있습니다. has_children 과 top_children 쿼리는 자식 도큐먼트 위에서 명령됩니다. 최초의 쿼리는 ElasticSearch Query DSL 또는 child타입으로 표현된 쿼리를 받아서, 부여된 쿼리에 매치하는 도큐먼트를 가지는 모든 부모 도큐먼트를 결과로 합니다. 두번째 타입의 쿼리는 몇가지 자식 도큐먼트의 집합에 대해서 실행되고 그것들은 부모 도큐먼트 안에서 집약됩니다. 두번째의 쿼리타입에 대해서도 스코어 연산을 선택할 수 있습니다.</p>
+
+<h3>Filtering And Caching Control</h3>
+
+<h4>Solr</h4>
+
+<p>Of course Solr lets you to narrow results of your query execution with filters. You can filter documents based on a single value, Boolean expression, query, field existence, geographical location and many, many more. In addition to that you can use local params and construct complicated queries like:</p>
+
+<p>물론 Solr 는 쿼리의 실행결과를 필터로 제한할 수 있습니다. 단일 값, 불리언식, 필드의 존재, 지리상의 위치, 그리고 가장 많은 것을 기준으로 해서 도큐먼트를 필터링할 수 있습니다. 그리고 로컬파라메터를 사용해서 복잡한 쿼리를 구성할 수 있습니다.</p>
+
+<p>예:</p>
+
+<pre><code>fq={!frange l=10 u=30}if(exists(promotionPrice),sum(promotionPrice,dailyPrice),sum(price,dailyPrice))
+</code></pre>
+
+<h4>ElasticSearch</h4>
+
+<p>ElasticSearch, similar to Solr, lets you use many filter types, which are similar to filters, so we’ll skip mentioning them all. However, in addition to similarities with Solr, there are also some differences like supports for filters run against nested documents and children documents. ElasticSearch can also use scripts to filter documents with the script filter.</p>
+
+<p>ElasticSearch는 Solr 와 비슷하게 많은 필터타입을 사용할 수 있습니다. 필터와 마찬가지이기에 따로 말할 필요도 없습니다. 그러나 Solr 에 대한 유사성 이외에 몇가지 차이점이 존재합니다. 예를들어 중첩 도큐먼트나 자식 도큐먼트에 대해 실행하는 필터를 지원하는 것입니다. 또한 ElasticSearch 는 스크립트 필터를 사용해서 도큐먼트의 필터링에 스크립트를 사용할 수도 있습니다.</p>
+
+<h3>Filter Cache Control</h3>
+
+<p>Both ElasticSearch and Apache Solr can control if the filter should or shouldn’t be cached, but in addition to that Solr lets you control the order of filters execution (the non cached ones). Its a great feature of Solr, because if you know that one of your filters is a performance killer, you can set its execution after all other filters and that way it’ll only work on the subset of the original result set.</p>
+
+<p>ElasticSearch 와 Apache Solr 양쪽 모두 필터가 캐쉬되어야하는지 그렇지 않는 지를 설정할 수 있습니다. Solr 는 필터의 실행순서를 조정할 수 있습니다(캐쉬되지 않은 것만). 이는 Solr 의 뛰어난 기능으로 만약 당신이 필터 하나가 퍼포먼스에 나쁜 영향을 주는 것을 이미 알고 있다면 그 필터의 실행의 순서를 뒤로 미루도록 설정할 수 있습니다. 그렇게 함으로써 그 필터는 오리지널의 실행결과의 부분집합만을 대상으로 실행됩니다.</p>
+
+<h3>Score Calculation Control</h3>
+
+<p>In both engines we are more or less allowed to control how scores for documents are calculated. In Solr this is mostly done by using function queries and different boosts and queries made using local params. In ElasticSearch we can use different query types which allow us to give specific scores to some of the documents (for example ones matching a certain filter) or calculate score on the basis of used script.</p>
+
+<p>두 엔진에 있어서 많든 적든 도큐먼트에 대해서 스코어가 어떻게 계산할 것인가를 컨트롤할 수 있습니다. Solr 에서는 대부분의 경우에 있어서 Function Queries 가 복수의 boost 를 사용해서 이뤄지고, 쿼리는 로컬파라메터를 사용해서 만들어집니다. ElasticSearch 에서는 다른 쿼리타입을 사용해서 어떤 도큐먼트에 대해서 특정 스코어를 줄 수도 있습니다(예를들어 몇가지 필터에 매치하는 도큐먼트). 또는 사용한 스크립트에 따라 스코어를 계산할 수도 있습니다.</p>
+
+<h3>Real Time Get</h3>
+
+<p>Real time get allows us to retrieve a document using its identifier as soon as it was sent for indexing even if it hasn’t yet been hard committed. Both ElasticSearch and Apache Solr return the newest document, even if it wasn’t indexed. But lets go into specifics.</p>
+
+<p>Real Time Get 은 도큐먼트 ID 를 사용해서 인덱싱을 위해서 보내졌을 때, 설령 하드커밋이 이뤄지지 않았어도 도큐먼트 회수를 가능하게 합니다. ElasticSearch 와 Apache Solr 모두 최신 도큐먼트를 인덱스되지 않아도 반환 할 수 있습니다. 이에 대해서 좀 더 자세히 볼까요.</p>
+
+<h4>Solr</h4>
+
+<p>Introduction of so called transaction log in Solr 4.0 allowed for the real time get functionality. Basically, the real time get looks for the newest version of the document in the transaction log first and returns it as a result of such call (if it is found, of course). If it is not found the real time get handler gets the document using the latest opened searcher available. Keep in mind that in order to return the newest version of the document in near real time manner Solr doesn’t need to reopen the index after indexing, so this functionality is useful even if you don’t reopen your searcher every second.</p>
+
+<p>Solr4.0에서 트랜잭션 로그라고 불리는 기능으로 Real Time Get 을 이용할 수 있게 되었습니다. 기본적으로는 Real Time Get 은 도큐먼트의 최신 버젼을 트랜잭션 로그에서 맨처음 찾아서 결과로 반환합니다(물론 찾은 경우에). 혹시라도 못 찾았다면 Real Time Get 핸들러는 가장 최근에 열린 searcher 가 존재하는 도큐먼트를 반환합니다. 기억해두었으면 하는 것은 거의 리얼타임 의 최신 버젼의 도큐먼트를 반환하기 위해 Solr 는 인덱싱 뒤에 인덱스를 다시 열 필요는 없습니다. 따라서 이 기능은 searcher 를 매초 다시 열지 않아도 유효합니다.</p>
+
+<h4>ElasticSearch</h4>
+
+<p>ElasticSearch also uses transaction log and because of that the real time get is not affected by the refresh rate of your indices. In addition to returning the document itself ElasticSearch exposes a few other API parameter that allow you to specify if the request should go to the primary or local shard (or even a custom one). You can also use routing with real time get to route the request to one specific shard if you know which shard should have the appropriate document. The real time get API of ElasticSearch also allows to check if the document exists using HTTP HEAD method, for example:</p>
+
+<p>ElasticSearch 도 트랜잭션로그를 사용하기 때문에 Real Time Get 은 인덱스의 리프레쉬율에 영향을 받지 않습니다. 도큐먼트를 반환하기 윙해 ElasticSearch 는 몇가지 다른 API 파라메터를 공개하고 그것을 사용 함으로써 질의가 프라이머리인지 또는 로컬의 Shard 로 (또는 커스텀 Shard 에만) 보낼지에 대한 것을 지정할 수 있습니다. 또 라우팅을 Real Time Get 과 함께 사용함으로 어느 shard 가 적절하게 도큐먼트를 가지고 있는지 알고 있는 경우에 질의를 하나의 특정 shard 로 유도할 수 있습니다. ElasticSearch 의 Real Time Get API 는 도큐먼트가 존재하는지 어떤지를 HTTP HEAD 메소드로 확인할 수 있습니다.</p>
+
+<pre><code>curl -XHEAD 'http://localhost:9200/sematext/blog/123456789'
+</code></pre>
+
+<h3>Aliasing</h3>
+
+<p>One of the things introduced in Apache Solr 4.0 and no available in ElasticSearch right now is the ability to transform result documents. First of all Solr allows you to alias returned fields, so for example you can return field price_usd or price_eur as price depending on your needs. The second thing is the ability to return values returned by functions as a (pseudo) field in the result (or fields). Solr also has the ability to return fields which start with a given prefix (for example all fields starting with price). Apart from the ability to get a function value as a field added to matched documents on the fly other functionalities are not ground breaking, though they can be handy in some cases.</p>
+
+<p>Apache Solr 4.0 에서 소개된 ElasticSearch 에 현시점에서 아직 존재하지 않는 기능으로 결과의 도큐먼트 변환이 있습니다. 맨처음 Solr 는 반환값의 필드에 별명을 붙일 수 있습니다. 그 때문에 필요에 따라서 price 필드로 price_usd 나 price_eur 을 반환할 수 있습니다. 두번째로 함수의 반환값을 (겉보기의) 필드로써 결과(또는 필드)로 반환할 수 있습니다. Solr 는 부여된 접두어로 시작하는 필드(예를들어 price 로 시작하는 모든 필드)를 반환하는 기능도 있습니다.</p>
+
+<h3>그 외</h3>
+
+<p>One of the things we always mention when talking about the differences between Apache Solr and ElasticSearch, at least when it comes to query handling, is the possibility of specifying the analyzer during query time. But lets start from the beginning. In Solr, you have to create the schema.xml file which holds the information about the index structure as well as query and index-time analyzers for fields. Similarly, in ElasticSearch, you can create mappings and define analyzers. At query-time Solr will choose the right analyzer for each field and use it.  ElasticSearch will do the same with one major difference. In ElasticSearch you can change the analyzer and specify the analyzer you want to use for analysis at query-time. For example, this is very useful when you know the language of the query because then you can choose the most language-appropriate analyzer on the fly.  We have made use of this in combination with our Language Identifier.</p>
+
+<p>Apache Solr 와 ElasticSearch 의 차이에 대해서 우리들이 항상 전달하고 싶은 것중 하나는, 적어도 쿼리이 취급에 관해서는 쿼리하는 도중에 해석기를 지정할 가능성입니다. Solr 에서는 인덱스구조, 거기에 쿼리와 필드의 인덱싱의 해석기에 관한 정보를 가지는 schema.xml 파일을 만들 필요가 있습니다.  ElasticSearch 에서는 맵핑을 작성해서 해석기를 정의합니다. 쿼리시에 Solr 는 각 필드에 대해서 적절한 해석기를 선택해서 사용합니다. ElasticSearch 도 같은 일을 하지만 큰 차이가 하나 있습니다. ElasticSearch 에서는 해석기 변경과 해석에 필요한 해석기의 지정이 쿼리시에 이뤄집니다. 예를 들어 쿼리대상의 언어를 알고 있는 경우 매우 편리하겠죠. 언어에 가장 적절한 해석기를 동적으로 선택할 수 있기 때문입니다. 우리들은 이 기능을 직접 만든 언어특정기와 함께 사용하고 있습니다.。</p>
+
+<h2>정리</h2>
+
+<p>As you can see, both ElasticSearch and Apache Solr expose lots of functionality when it comes to handling your search queries, and we barely scratched the surface here. Of course, each of them has some features that the other one doesn’t have, but Solr and ElasticSearch are competing for mind and market share, and are both rapidly evolving and improving, so we can expect more features from both of them in the future. In the next, fourth part of the series we will concentrate on the faceting capabilities of Apache Solr and ElasticSearch.  Stay tuned.  In the mean time, you can follow @sematext and tell us what you want us to cover.</p>
+
+<p>보시는 대로, ElasticSearch 와 Apache Solr 모두 많은 기능을 공개하고 있습니다. 그리고 이 글에서는 겉을 살짝 핥은 것에 지나지 않습니다. 물론 각각 다른 쪽이 가지지 않은 기능을 가지고 있고, Solr 와 ElasticSearch 는 사고방식과 시장 마켓셰어 에서 경쟁을 하고 있습니다. 그리고 양쪽모두 급속하게 진화하고 있지요. 따라서 앞으로 더욱 많은 기능을 기대할 수 있을 것입니다.</p>
+
+<p>다음편에서는 Apache Solr 와 ElasticSearch 의 Faceting 기능에 대해서 다루도록 합니다. 이어서 계속 지켜봐주세요. 그때까지는 @sematext 를 팔로해서 무엇을 다뤄주었으면 좋은 지 알려주세요.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[[번역] Solr vs. ElasticSearch: Part 2 - Indexing and Language Handling]]></title>
+    <link href="http://jeen.github.io/blog/2013/07/16/solr-vs-elasticsearch-part-2-indexing-and-language-handling/"/>
+    <updated>2013-07-16T21:30:39+09:00</updated>
+    <id>http://jeen.github.io/blog/2013/07/16/solr-vs-elasticsearch-part-2-indexing-and-language-handling</id>
+    <content type="html"><![CDATA[<h1>Solr vs. ElasticSearch: Part 2 – Indexing and Language Handling</h1>
+
+<p>September 4, 2012 by Rafał Kuć</p>
+
+<p>In the previous part of Solr vs. ElasticSearch series we talked about general architecture of these two great search engines based on Apache Lucene. Today, we will look at their ability to handle your data and perform indexing and language analysis.</p>
+
+<p>전 편의 &ldquo;Solr vs. ElasticSearch&rdquo; Part1 기사에서 Apache Lucene 을 기반으로 하는 두가지 검색엔진의 전반적인 아키텍쳐에 대해서 이야기 했습니다. 오늘은 데이터의 취급과 인덱싱, 그리고 언어의 해석능력을 알아보도록 합니다.</p>
+
+<ul>
+<li><a href="http://jeen.github.io/2013/07/15/solr-vs-elasticsearch-part-1/">1. Solr vs. ElasticSearch: Part 1 – Overview</a></li>
+<li><a href="http://jeen.github.io/2013/07/16/solr-vs-elasticsearch-part-2-indexing-and-language-handling/">2. Solr vs. ElasticSearch: Part 2 – Data Handling</a></li>
+<li><a href="http://jeen.github.io/2013/07/16/solr-vs-elasticsearch-part-3-searching/">3. Solr vs. ElasticSearch: Part 3 – Searching</a></li>
+<li><a href="http://jeen.github.io/2013/07/16/solr-vs-elasticsearch-part-4-faceting/">4. Solr vs. ElasticSearch: Part 4 – Faceting</a></li>
+<li><a href="http://jeen.github.io/2013/07/17/solr-vs-elasticsearch-part-5-management-api-capabilities/">5. Solr vs. ElasticSearch: Part 5 – Management API Capabilities</a></li>
+<li><a href="http://jeen.github.io/2013/07/17/solr-vs-elasticsearch-part-6-user-and-dev-communities-compared/">6. Solr vs. ElasticSearch: Part 6 – User &amp; Dev Communities Compared</a></li>
+</ul>
+
+
+<h2>데이터 인덱싱</h2>
+
+<p>Apart from using Java API exposed both by ElasticSearch and Apache Solr, you can index data using an HTTP call. To index data in ElasticSearch you need to prepare your data in JSON format. Solr also allows that, but in addition to that, it lets you to use other formats like the default XML or CSV. Importantly, indexing data in different formats has different performance characteristics, but that comes with some limitations. For example, indexing documents in CSV format is considered to be the fastest, but you can’t use field value boosting while using that format. Of course, one will usually use some kind of a library or Java API to index data as one doesn’t typically store data in a way that allows indexing of data straight into the search engine (at least in most cases that’s true).</p>
+
+<p>ElasticSearch와 Apache Solr 모두 공개되어 있는 Java API 가 아닌 HTTP 호출을 사용해서 데이터 인덱싱을 할 수 있습니다. ElasticSearch 에서 데이터를 인덱싱하기 위해서는 데이터를 JSON 포맷으로 준비할 필요가 있습니다. Solr 도 가능하지만, 그에 덧붙여 기본적으로는 XML 이나 CSV 등 다른 형식을 이용할 수 있습니다. 중요한 것은 다른 형식의 데이터를 인덱싱 하는 경우 다른 퍼포먼스 특성이 존재하며 이에 대해서는 몇 가지 제약이 따릅니다. 예를 들어 CSV 형식의 도큐먼트를 인덱싱하는 경우가 가장 빠르다고 볼 수 있는 데, 이 경우 필드값의 boosting 을 이용할 수 없습니다. 물론 일반적으로는 어떠한 종류의 라이브러리나 Java API 를 사용해서 데이터를 인덱싱할 것입니다. 일반적으로는 검색 엔진에 직접 들어가는 데이터의 인덱스를 만들면서 데이터를 저장하는 일은 없습니다. (적어도 대부분의 경우 그렇습니다)</p>
+
+<h2>ElasticSearch에 대해서 보충설명</h2>
+
+<p>It is worth noting that ElasticSearch supports two additional things, that Solr does not – nested documents and multiple document types inside a single index.</p>
+
+<p>Solr 가 지원하지 않는 ElasticSearch 의 두가지 추가기능에 대해서 다뤄볼 가치가 있는 데 그것은 중첩 도큐먼트와 단일 도큐먼 안에서의 복수도큐먼트 타입니다.</p>
+
+<p>The nested documents functionality lets you create more than a flat document structure. For example, imagine you index documents that are bound to some group of users. In addition to document contents, you would like to store which users can access that document.  And this is were we run into a little problem – this data changes over time. If you were to store document content and users inside a single index document, you would have to reindex the whole document every time the list of users who can access it changes in any way. Luckily, with ElasticSearch you don’t have to do that – you can use nested document types and then use appropriate queries for matching. In this example, a nested document would hold a lists of users with document access rights. Internally, nested documents are indexed as separate index documents stored inside the same index. ElasticSearch ensures they are indexed in a way that allows it to use fast join operations to get them. In addition to that, these documents are not shown when using standard queries and you have to use nested query to get them, a very handy feature.</p>
+
+<p>중첩 도큐먼트 기능은 평탄한 도큐먼트 구조를 넘은 것을 만들 수 있습니다. 이를테면 어떤 유저 그룹에 연결된 도큐먼트를 인덱싱한다고 생각해봅시다. 도큐먼트의 내용 뿐만 아니라 어느 유저가 그 문서에 접근할 수 있는 지를 넣고 싶다고 해둡니다. 만약 단일 인스턴스의 도큐먼트 안에서 도큐먼트의 내용과 유저를 넣을 경우, 그 도큐먼트에 접근할 수 있는 유저의 리스트를 변경할 때마다 도큐먼트 전체를 다시 인덱싱해야 합니다. 다행히도 ElasticSearch 를 사용하면 그런 일은 없습니다. 중첩 도큐먼트 타입을 사용해서 적절한 쿼리를 매칭에 사용할 수 있습니다. 이 예제에서는 중첩 도큐먼트는 유저 리스트와 도큐먼트의 접근권한을 가집니다. 내부적으로는 중첩 도큐먼트는 같은 인덱스 안에서 놓여진 분리된 인덱스 문서로 색인됩니다.</p>
+
+<p>ElasticSearch는 빠른 JOIN 명령을 사용해서 인덱싱할 수 있습니다. 덧붙여 이 도큐먼트들은 표준 쿼리를 사용한 경우는 보이지 않으며, 중첩 쿼리를 얻어내기 위해서는 사용할 수 있어 매우 편리한 기능입니다.</p>
+
+<p>Multiple types of documents per index allow just what the name says – you can index different types of documents inside the same index.  This is not possible with Solr, as you have only one schema in Solr per core.  In ElasticSearch you can filter, query, or facet on document types. You can make queries against all document types or just choose a single document type (both with Java API and REST).</p>
+
+<p>인덱스마다 복수타입의 도큐먼트는 이름 그대로의 행위를 할 수 있습니다.. 다른 타입의 도큐먼트를 같은 인덱스 안에서 인덱싱할 수 있는데, 이것은 Solr 에서는 코어당 하나의 스키마만을 가질 수 있기 때문에 불가능합니다.</p>
+
+<p>ElasticSearch에서는 도큐먼트타입에 의해 필터, 쿼리, 퍼셋(Facet) 을 할 수 있습니다. 모든 도큐먼트 타입에 대해서, 또는 하나의 도큐먼트 타입을 선택해서 쿼리를 날릴 수 있습니다. (Java API 와 REST 양쪽 모두 가능합니다)</p>
+
+<h2>인덱스 다루기</h2>
+
+<p>Let’s look at the ability to manage your indices/collections using the HTTP API of both Apache Solr and ElasticSearch.</p>
+
+<p>Apache Solr 와 ElasticSearch 에서의 인덱스/콜렉션을 HTTP API 를 사용해서 관리하는 방법을 보도록 합니다.</p>
+
+<h3>Solr</h3>
+
+<p>Solr let’s you control all cores that live inside your cluster with the CoreAdmin API – you can create cores, rename, reload, or even merge them into another core. In addition to the CoreAdmin API Solr enables you to use the collections API to create, delete or reload a collection. The collections API uses CoreAdmin API under the hood, but it’s a simpler way to control your collections. Remember that you need to have your configuration pushed into ZooKeeper ensemble in order to create a collection with a new configuration.</p>
+
+<p>Solr 는 운용중인 클래스 안에서 모든 코어를 CoreAdmin API 로 관리할 수 있습니다. 코어 작성, 이름 변경, 리로드, 또는 여러 코어들을 하나의 코어로 머지할 수 있습니다. 또한 Solr 는 Collections API 를 사용해서 콜렉션의 작성, 삭제, 그리고 리로드를 할 수 있습니다. Collections API 는 뒷단에서 CoreAdmin API 를 사용하며 간단하게 콜렉션을 다룰 수 있습니다. 새로운 설정의 콜렉션을 작성하기 위해서는 ZooKeeper ensemble 에 설정을 넣어 둘 필요가 있습니다.</p>
+
+<p>When it comes to Solr, there is additional functionality that is in early stages of work, although it’s functional – the ability to split your shards. After applying the patch available in SOLR-3755 you can use a SPLIT action to split your index and write it to two separate cores. If you look at the mentioned JIRA issue, you’ll see that once this is commited Solr will have the ability not only to create new replicas, but also to dynamically re-shard the indices.  This is huge!</p>
+
+<p>Solr 에는 아직 미성숙하지만 유효한 추가기능이 있습니다. 바로 Shard 의 분할입니다. SOLR-3755에 있는 패치를 적용한 다음에 인덱스를 분할해서 두개로 분할한 코어에 넣는 것이 SPLIT 액션을 사용해서 가능해집니다. 그 JIRA 이슈를 읽으면 이것이 커밋되면 Solr 는 새로운 레플리카를 작서아는 것뿐만 아니라, 동적으로 인덱스를 re-shard 하는 기능을 가지게 됩니다. 이것은 매우 큰 이점입니다!</p>
+
+<h3>ElasticSearch</h3>
+
+<p>One of the great things in ElasticSearch is the ability to control your indices using HTTP API. We will take about it extensively in the last part of the series, but I have to mention it ere, too. In ElasticSearch you can create indices on the live cluster and delete them. During creation you can specify the number of shards an index should have and you can decrease and increase the number of replicas without anything more than a single API call. You cannot change the number of shards yet.  Of course, you can also define mappings and analyzers during index creation, so you have all the control you need to index a new type of data into you cluster.</p>
+
+<p>ElasticSearch의 굉장한 기능 중 하나로 HTTP API를 사용해서 인덱스를 다루는 능력이 있습니다. 이 시리즈의 마지막 파트에서 이에 대해서 광범위하게 다룰 예정이지만, 일단 여기에서도 간단히 다룰 필요가 있을 것 같습니다. ElasticSearch에서는 운용중의 클러스터 위에서 인덱싱을 할 수 있고, 삭제할 수 있습니다. 인덱싱 하는 동안, 인덱스를 가져야할 Shard 의 수를 지정할 수 있으며, 단일 API 호출만으로 레플리카 수의 증감을 조정할 수 있습니다. Shard 수는 아직 변경할 수 없습니다. 물론 맵핑과 해석기를 인덱싱 시에 설정가능하고, 클러스터 안에서 새로운 형태의 데이터 인덱싱에 필요한 모든 컨트롤을 가지게 됩니다.</p>
+
+<h2>도큐먼트의 부분갱신</h2>
+
+<p>Both search engines support partial document update. This is not the true partial document update that everyone has been after for years – this is really just normal document reindexing, but performed on the search engine side, so it feels like a real update.</p>
+
+<p>두 검색엔진 모두 도큐먼트의 부분갱신을 지원합니다. 이것은 모두가 기대한 그런 도큐먼트 부분갱신이 아닙니다. 단지 일반적인 도큐먼트 의 재인덱싱일 뿐입니다. 그러나 검색엔진에서 실행되기에 진짜 갱신처럼 보이기도 합니다.</p>
+
+<h3>Solr</h3>
+
+<p>Let’s start from the requirements – because this functionality reconstructs the document on the server side you need to have your fields set as stored and you have to have the <em>version</em> field available in your index structure. Then you can update a document with a simple API call, for example:</p>
+
+<p>요건부터 시작하겠습니다. 이 기능은 서버측의 도큐먼트를 재구성하기에 필드의 집합이 격납되었고 <em>version</em>필드가 인덱스 구성에서 존재하지 않으면 안됩니다. 이렇게 하면 단일 API 호출에 의해 도큐먼트를 갱신할 수 있습니다.</p>
+
+<p>예：</p>
+
+<pre><code>curl 'localhost:8983/solr/update' -H 'Content-type:application/json' -d '[{"id":"1","price":{"set":100}}]'
+</code></pre>
+
+<h3>ElasticSearch</h3>
+
+<p>In case of ElasticSearch you need to have the <em>source field enabled for the partial update functionality to work. This </em>source is a special ElasticSearch field that stores the original JSON document.  Theis functionality doesn’t have add/set/delete command, but instead lets you use script to modify a document. For example, the following command updates the same document that we updated with the above Solr request:</p>
+
+<p>ElasticSearch 의 경우, 부분갱신 기능이 제대로 동작하기 위해서는 <em>source 필드가 허가되어 있을 필요가 있습니다. 이 </em>source는 특별한 ElasticSearch 필드에서 오리지널 JSON 도큐먼트를 저장합니다. 이 기능에는 add/set/delete 명령은 존재하지 않습니다. 그 대신에 도큐먼트를 변경하는 스크립트의 사용을 허가합니다. 예를 들어 다음의 명령어를 위의 Solr 리퀘스트에서 갱신한 것과 같은 문서를 갱신한다고 합니다.</p>
+
+<pre><code>curl -XPOST 'localhost:9200/sematext/doc/1/_update'-d '{
+    "script" : "ctx._source.price = price",
+    "params" : {
+        "price" : 100
+    }
+}'
+</code></pre>
+
+<h2>다국어데이터의 취급</h2>
+
+<p>As we mentioned previously, and as you probably know, both ElasticSearch and Solr use Apache Lucene to index and search data. But, of course, each search engine has its own Java implementation that interacts with Lucene. This is also the case when it comes to language handling. Apache Solr 4.0 beta has the advantage over ElasticSearch because it can handle more languages out of the box. For example, my native language Polish is supported by Solr out of the box (with two different filters for stemming), but not by ElasticSearch. On the other hand, there are many plugins for ElasticSearch that enable support for languages not supported by default, though still not as many as we can find supported in Solr out of the box.  It’s also worth mentioning there are commercial analyzers that plug into Solr (and Lucene), but none that we are aware of work with ElasticSearch…. yet.</p>
+
+<p>이전 언급한 대로, ElasticSearch와 Solr 는 Apache Lucene 을 인덱싱 및 데이터의 검색에 이용하고 있습니다. 각 검색엔진은 그 자체가 Java 구현을 가지며 Lucene 과 상호작용합니다. 이것이 여러 나라의 언어취급에 있어서도 마찬가지 입니다. 이 부분에 있어서는 Apache Solr 4.0β가 ElasticSearch 에 대해서 우위입니다. Solr 그 자체로도 많은 언어를 다룰 수 있기 때문입니다. 예를 들어 저자의 네이티브 언어인 폴란드어는 Solr 에서는 처음부터 지원되었습니다. (두가지 다른 stemming용 필터를 포함한 채) 그러나 ElasticSearch는 그렇지 않습니다. ElasticSearch에서는 기본적으로는 지원하지 않는 언어를 지원하는 플러그인이 다수 존재합니다. 그래도 그 수는 Solr 가 처음부터 지원하고 있는 수만큼은 아닙니다. 또 하나 알아둘 가치가 있는 것은 Solr(와 Lucene)에는 상업해석기가 있습니다. 그러나 ElasticSearch 용은 아직 있는 지 모르겠습니다.</p>
+
+<h2>지원되는 자연언어</h2>
+
+<p>For the full list of languages supported by those two search engine please refer to the following pages:</p>
+
+<p>두 검색엔진에서 지원되는 언어의 완전한 리스트에 대해서는 다음 버젼을 참고해주세요.</p>
+
+<p>Apache Solr</p>
+
+<pre><code>&lt;a href="http://wiki.apache.org/solr/LanguageAnalysis" &gt;http://wiki.apache.org/solr/LanguageAnalysis&lt;/a&gt;
+</code></pre>
+
+<p>ElasticSearch</p>
+
+<p>Analyzers: <a href="http://www.elasticsearch.org/guide/reference/index-modules/analysis/lang-analyzer.html">http://www.elasticsearch.org/guide/reference/index-modules/analysis/lang-analyzer.html</a>
+Stemming: <a href="http://www.elasticsearch.org/guide/reference/index-modules/analysis/stemmer-tokenfilter.html">http://www.elasticsearch.org/guide/reference/index-modules/analysis/stemmer-tokenfilter.html</a>,
+ <a href="http://www.elasticsearch.org/guide/reference/index-modules/analysis/snowball-tokenfilter.html">http://www.elasticsearch.org/guide/reference/index-modules/analysis/snowball-tokenfilter.html</a> 그리고 <a href="http://www.elasticsearch.org/guide/reference/index-modules/analysis/snowball-tokenfilter.html">http://www.elasticsearch.org/guide/reference/index-modules/analysis/kstem-tokenfilter.html</a></p>
+
+<h2>해석체인의 정의</h2>
+
+<p>Of course, both Apache Solr and ElasticSearch allow you to define a custom analysis chain by specifying your own analyzer/tokenizer and list of filters that should be used to process your data. However, the difference between ElasticSearch and Solr is not only in the list of supported languages. ElasticSearch allows one to specify the analyzer per document and per query. So, if you need to use a different analyzer for each document in the index you can do that in ElasticSearch. The same applies to queries – each query can use a different analyzer.</p>
+
+<p>물론, Apache Solr 와 ElasticSearch 양쪽 모두 커스텀 해석기 체인을 정의할 수 있습니다. 당신의 데이터 처리에 사용되는 해석기 및 토크나이저, 필터의 리스트를 지정합니다. 그러나, ElasticSearch 와 Solr 의 차이는 지원되는 언어의 리스트 뿐만이 아닙니다. ElasticSearch 는 도큐먼트 마다, 쿼리마다 해석기를 지정할 수 있습니다. 때문에 인덱스 안의 각각의 도큐먼트에 다른 해석기의 사용이 필요하다면 ElasticSearch 에서는 가능합니다. 쿼리도 마찬가지입니다. 각 쿼리는 다른 해석기를 사용할 수 있습니다.</p>
+
+<h2>결과의 그룹핑</h2>
+
+<p>One of the most requested features for Apache Solr was result grouping. It was highly anticipated for Solr and it is still anticipated for ElasticSearch, which doesn’t yet have field grouping as of this writing.  You can see the number of +1 votes in the following issue: <a href="https://github.com/elasticsearch/elasticsearch/issues/256.">https://github.com/elasticsearch/elasticsearch/issues/256.</a>  You can expect grouping to be supported in ElasticSearch after changes introduced in 0.20. If you are not familiar with results grouping – it allows you to group results based on the value of a field, value of a query, or a function and return matching documents as  groups. You can imagine grouping results of restaurants on the value of the city field and returning only five restaurants for each city. A feature like this may be handy in some situations. Currently, for the search engines we are talking about, only Apache Solr supports results grouping out of the box.</p>
+
+<p>Apache Solr 에 가장 많이 요청된 기능 중 하나가 결과의 그룹핑입니다. Solr 에 있어서 가장 기대되어 온 기능이며, ElasticSearch 에 있어서도 지금도 기대를 머금고 있습니다. 이 글을 쓰고 있는 시점에서는 ElasticSearch 는 필드의 그룹핑을 가지고 있지 않습니다. 다음 이슈를 보면 이에 대한 여러 요청이 있는 것을 알 수 있을 것입니다. <a href="https://github.com/elasticsearch/elasticsearch/issues/256">https://github.com/elasticsearch/elasticsearch/issues/256</a></p>
+
+<p>ElasticSearch에서는 0.20 이 릴리즈 된 때에 지원될 것이라고 기대하고 있습니다. 결과의 그룹핑을 모르는 사람을 위해 설명하자면, 필드나 쿼리 또는 함수의 값에 의해 결과를 그룹으로 나눌 수 있습니다. 그리고 매치된 도큐먼트를 그룹으로 반환합니다. 예를들어 레스토랑의 결과를 마을의 필드로 그룹핑해서 각 거리의 다섯가지 레스토랑만 반환합니다. 이런 기능은 여러 상황에서 편리하겠죠. 지금은 Apache Solr 만이 기본적으로 결과의 그룹핑을 할 수 있습니다.</p>
+
+<h2>Prospective Search</h2>
+
+<p>One thing Apache Solr completely lacks when comparing to ElasticSearch is functionality called Percolator in ElasticSearch. Imagine a search engine that, instead of storing documents in the index, stores queries and lets you check which stored/indexed queries match each new document being indexed. Sound handy, right?  For example, this is useful when people want to watch out for any new documents (think Social Media, News, etc.) matching their topics of interest, as described through queries. This functionality is also called Prospective Search, some call it Pub-Sub as well as Stored Searches.  At Sematext we’ve implemented this a few times for our clients using Solr, but ElasticSearch has this functionality built-in.  If you want to know more about ElasticSearch Percolator see <a href="http://www.elasticsearch.org/blog/2011/02/08/percolator.html.">http://www.elasticsearch.org/blog/2011/02/08/percolator.html.</a></p>
+
+<p>Apache Solr 가 ElasticSearch와 비교해서 완전하게 결여된 것 중 하나는 ElasticSearch 에서 퍼컬레이터 라고 부르는 기능입니다. 예를들어 인덱스에 도큐먼트를 넣는 것이 아니라, 쿼리를 넣고 새로운 도큐먼트의 인덱싱 때마다 인덱스된 쿼리가 매치하는 지 어떤 지를 체크하는 것이죠. 좋지 않나요?
+ 편리한 점은 유저가 모든 새로운 도큐먼트(소셜미디어나 뉴스 같은 것을 생각해보세요)가 유저가 흥미를 가지는 토픽에 해당되는 지, 앞서 정의한 쿼리를 통해서 체크하고 싶은 경우에 유용합니다. 이 기능은 또 Prospective Search 라고도 불립니다. 또 어떤 사람은 Pub-Sub라고도 부르고, stored search 라고도 부릅니다. Sematext 에서는 Solr를 사용하는 고객을 위해서 이것을 몇 번인가 구현한 적이 있습니다. 하지만 ElasticSearch는 기본적으로 이 기능을 가지고 있죠. 만약 ElasticSearch의 퍼컬레이터에 대해서 좀 더 알아보고 싶으시다면 다음 URL 을 참고하세요.</p>
+
+<p><a href="http://www.elasticsearch.org/blog/2011/02/08/percolator.html">http://www.elasticsearch.org/blog/2011/02/08/percolator.html</a></p>
+
+<h2>다음회 예고</h2>
+
+<p>In the next part of the series we will focus on comparing the ability to query your indices and leverage the full text search capabilities of Apache Solr and ElasticSearch. We will also look at the possibility to influence Lucene scoring algorithms during query time. Till next time :)</p>
+
+<p>다음회에서는 Apache Solr 와 ElasticSearch 상의 인덱스에 대해서 쿼리의 능력과 전문검색의 능력에 대해서 알아보도록 합니다. 또 쿼리시에 Lucene 의 스코어링 알고리즘을 다루는 방법에 대해서도 알아볼 예정입니다. 그럼 다음회에서 봐요.</p>
+
+<p>@kucrafal, @sematext</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[[번역] Solr vs ElasticSearch - Part 1 : Overview]]></title>
+    <link href="http://jeen.github.io/blog/2013/07/15/solr-vs-elasticsearch-part-1/"/>
+    <updated>2013-07-15T09:17:35+09:00</updated>
+    <id>http://jeen.github.io/blog/2013/07/15/solr-vs-elasticsearch-part-1</id>
+    <content type="html"><![CDATA[<h1>Solr vs. ElasticSearch: Part 1 – Overview</h1>
+
+<p>August 23, 2012 by <a href="http://blog.sematext.com/author/kucrafal/">Rafał Kuć</a></p>
+
+<p>2012/08/23 원저자 Rafał Kuć</p>
+
+<p>A good Solr vs. ElasticSearch coverage is long overdue.  We make good use of our own Search Analytics and pay attention to what people search for.  Not surprisingly, lots of people are wondering when to choose Solr and when ElasticSearch, and this SolrCloud vs. ElasticSearch question is something we regularly address in our search consulting engagements.</p>
+
+<p>Solr 와 ElasticSearch 에 대한 좋은 비교기사를 오래도록 기다려왔습니다. 우리는 스스로 검색분석을 활용해 온 사람들이 무엇을 검색하고 싶은 지 주목했습니다. 대개, 많은 사람들이 언제 Solr 를 선택하고, 언제 ElasticSearch 를 선택해야 하는 가에 어려워하고 있었습니다. 그리고 이 SolrCloud vs. ElasticSearch 문제는 우리가 검색 컨설팅 계약 중에 항상 겪어온 것입니다.</p>
+
+<p>As the Apache Lucene 4.0 release approaches and with it Solr 4.0 release as well, we thought it would be beneficial to take a deeper look and compare the two leading open source search engines built on top of Lucene – Apache Solr and ElasticSearch. Because the topic is very wide and can go deep, we are publishing our research as a series of blog posts starting with this post, which provides the general overview of the functionality provided by both search engines.</p>
+
+<p>Apache Lucene 4.0 의 릴리즈가 가까워 짐에 따라, 그와 함께 Solr 4.0 릴리즈도 가까워지고 있습니다. Apache Solr 와 ElasticSearch 라는 Lucene 위에 구축된 2가지 검색엔진을 비교해서, 깊은 고찰을 얻으려고 하는 것은 매우 큰 의미가 있다고 생각합니다. 이 토픽은 매우 범위가 깊어서, 우리들의 연구결과를 이 기사를 시작으로 하는 일련의 블로그 포스트로 공개합니다. 이 기사에서는 2가지 검색 엔진이 제공하는 기능의 전체적인 개요를 나타냅니다.</p>
+
+<ul>
+<li><a href="http://jeen.github.io/2013/07/15/solr-vs-elasticsearch-part-1/">1. Solr vs. ElasticSearch: Part 1 – Overview</a></li>
+<li><a href="http://jeen.github.io/2013/07/16/solr-vs-elasticsearch-part-2-indexing-and-language-handling/">2. Solr vs. ElasticSearch: Part 2 – Data Handling</a></li>
+<li><a href="http://jeen.github.io/2013/07/16/solr-vs-elasticsearch-part-3-searching/">3. Solr vs. ElasticSearch: Part 3 – Searching</a></li>
+<li><a href="http://jeen.github.io/2013/07/16/solr-vs-elasticsearch-part-4-faceting/">4. Solr vs. ElasticSearch: Part 4 – Faceting</a></li>
+<li><a href="http://jeen.github.io/2013/07/17/solr-vs-elasticsearch-part-5-management-api-capabilities/">5. Solr vs. ElasticSearch: Part 5 – Management API Capabilities</a></li>
+<li><a href="http://jeen.github.io/2013/07/17/solr-vs-elasticsearch-part-6-user-and-dev-communities-compared/">6. Solr vs. ElasticSearch: Part 6 – User &amp; Dev Communities Compared</a></li>
+</ul>
+
+
+<h2>시작하기 전에</h2>
+
+<p>This post is based on released versions of Solr and ElasticSearch. For Solr, all the functionality description is based on version 4.0 beta and all of the ElasticSearch functionality is based on 0.19.8. Because we are comparing ElasticSearch and Solr, on the Solr side the focus is on Solr 4.0 (aka SolrCloud) functionality functionality and not Solr 3.*, so we could call this series as SolrCloud vs. ElasticSearch, too.</p>
+
+<p>이 포스트는 다음과 같은 버젼을 기반으로 하고 있습니다. Solr 의 기능에 대한 서술은 버젼 4.0β를 기준으로 하며, ElasticSearch 은 버젼 0.19.8를 기준으로 합니다. ElasticSearch 와 Solr 를 비교하는 것이기에 Solr 는 Solr 3.* 이 아닌, SolrCloud 로 알려진 Solr 4.0 에 초점을 맞춥니다. 이 때문에 우리는 이 일련의 기사를 SolrCloud vs. ElasticSearch 로 부르고 있습니다.</p>
+
+<h2>검색 엔진의 뒷편</h2>
+
+<p>For indexing and searching both Solr and ElasticSearch use Lucene. As you may suspect, Solr 4.0 beta uses the 4.0 version of Lucene, while ElasticSearch 0.19.8 still uses version 3.6.  Of course, that doesn’t mean much when it comes to future versions of ElasticSearch because you can be sure that ElasticSearch will start using Lucene 4.0 once it’s GA release is ready, or maybe even before that.</p>
+
+<p>인덱싱과 검색에는 Solr 와 ElasticSearch 모두 Lucene 을 사용합니다. 눈치채셨겠지만 Solr4.0β는 Lucene 4.0을 사용하지만 ElasticSearch 0.19.8은 3.6 을 사용하고 있습니다. 물론 그것은 ElasticSearch 의 장래 버젼에 대해서는 많은 의미를 가지고 있을 것입니다. Lucene 4.0 의 GA 릴리즈의 준비가 끝났다면 당장(또는 그 이전부터) ElasticSearch 도 그것을 사용하기 시작할 것은 확실하기 때문입니다.</p>
+
+<h2>기본</h2>
+
+<p>There are a few differences in the way Solr and ElasticSearch name certain concepts. Let’s start with the basics – many servers connected together forms a cluster for both ElasticSearch and Solr. A single instance of Solr or ElasticSearch is called a node. That’s about it for nomenclature overlap.</p>
+
+<p>Solr 와 ElasticSearch에는 몇가지 컨셉에 대한 네이밍에 약간 차이가 있습니다. 기초부터 시작해봅시다.</p>
+
+<p>ElasticSearch 와 Solr 모두, 많은 서버를 모아 클러스터를 구성할 수 있습니다. Solr 또는 ElasticSearch 의 하나의 인스턴스는 노드라고 부릅니다. 양쪽의 명명법이 겹치는 것은 그것뿐입니다.</p>
+
+<p>The main logical data structure for Solr is called the Collection. A Collection is composed of Shards that are really Lucene indices. A single Collection can have multiple Shards and Shards can live on different Nodes. Because a Collection is composed of one or more Shards, a single Collection can be spread across multiple Nodes giving you a distributed environment. In addition to that, a Collection can have Replicas – basically an exact copy of the Shard whose main purpose is to enable scaling and data duplication in case of Node failures (i.e., High Availability).</p>
+
+<p>Solr 의 메인 논리데이터구조는 콜렉션이라고 부릅니다. 콜렉션은 실제로는 Lucene 의 인덱스인 Shard 로 구성됩니다. 하나의 콜렉션은 여러 Shard 를 가질 수 있으며, Shard 는 다른 노드 위에 놓을 수 있습니다. 콜렉션이 하나 이상의 Shard 에 의해 구성되기에 하나의 컬렉션은 여러 노드에 걸칠 수 있기 에 분산시스템이 됩니다. 덧붙여, 콜렉션은 레플리카를 가질 수 있습니다. 레플리카는 기본적으로 Shard 의 완전한 카피로 주요한 목적은 스케일러빌리티와 노드의 장애에 대비하기 위한 데이터의 복제입니다 (즉 고가용성입니다).</p>
+
+<p>On the other hand we have ElasticSearch where the top logical data structure is called an Index. Similar to a Collection in Solr, ElasticSearch Index can have multiple Shards and Replicas. And here, too, Shards and Replicas are small Lucene indices, that can be spread across the Cluster in order to create a distributed environment. But that’s not all – in ElasticSearch you can have multiple Types of documents in a single Index. This means that you can index documents of different index structure (for example users and their documents) in a single Index. ElasticSearch is able to distinguish those Types during indexing as well as querying. In order to achieve the same with Solr you would have to simulate that inside your application or develop a custom search component.</p>
+
+<p>한편, ElasticSearch는 인덱스라고 부르는 논리적인 데이터 구조 위에 있습니다. Solr 의 콜렉션과 비슷해서, ElasticSearch 의 인덱스는 여러 Shard 와 인덱스를 가질 수 있습니다. 그리고 Shard 와 레플리칸는 작은 Lucene 의 인덱스이며 클러스터 위에 분산뒤어 분산환경을 구축합니다. 그러나 그것뿐이 아닙니다. ElasticSearch 에서는 하나의 인덱스 위에 여러 형태의 도큐먼트를 가질 수 있습니다. 이것은 다른 인덱스 구조의 여러 도큐먼트(예를들어 유저와 그들의 문서) 를 단일 인스턴스에 색인할 수 있다는 것을 의미합니다. ElasticSearch 는 인덱스 작성시는 물론 검색시에도 그런 형태들을 구분지을 수 있습니다. Solr 로 같은 일을 하기 위해서는 어플리케이션 안에서 그것을 시뮬레이트하거나, 커스텀 검색 컴포넌트를 개발할 필요가 있을 것입니다.</p>
+
+<h2>설정</h2>
+
+<p>Lets take a quick look at how Solr and ElasticSearch are configured. Let’s start with the index structure.</p>
+
+<p>Solr 와 ElasticSearch 가 어떻게 설정되는지 간단하게 보도록 합니다. 우선은 인덱스의 구조부터 시작하겠습니다.</p>
+
+<p>In Solr you need the schema.xml file in order to define how your index structure, to define fields and their types. Of course, you can have all fields defined as dynamic fields and create them on the fly, but you still need at least some degree of index configuration. In most cases though, you’ll create a schema.xml to match your data structure.</p>
+
+<p>Solr 에서는 schema.xml 파일을 인덱스 구조의 필드와 그 형태의 정의를 위해서 필요로 합니다. 물론 모든 필드의 동적인 필드로 정의하고 동적생성을 할 수도 있습니다. 그러나 그것만으로도 어느정도는 인덱스의 정의를 필요로 할 것입니다. 대부분의 경우 데이터 구조에 매치하는 schema.xml 을 작성하게 됩니다.</p>
+
+<p>ElasticSearch is a bit different – it can be called schemaless. What exactly does this mean, you may ask. In short, it means one can launch ElasticSearch and start sending documents to it in order to have them indexed without creating any sort of index schema and ElasticSearch will try to guess field types. It is not always 100% accurate, at least when comparing to the manual creation of the index mappings, but it works quite well. Of course, you can also define the index structure (so called mappings) and then create the index with those mappings, or even create the mappings files for each type that will exist in the index and let ElasticSearch use it when a new index is created. Sounds pretty cool, right? In addition to than, when a new, previously unseen field is found in a document being indexed, ElasticSearch will try to create that field and will try to guess its type.  As you may imagine, this behavior can be turned off.</p>
+
+<p>ElasticSearch 는 조금 다릅니다. Schemaless 라고 부릅니다. 그것이 무엇인지 궁금할 수 있겠죠. 짧게 말하면 누구라도 ElasticSearch 를 기동해서 그대로 문서를 그 안에 보내는 것으로 하나의 인덱스 스키마를 정의하는 일도 없이 인덱스 작성을 할 수 있습니다. ElasticSearch 가 필드 형태를 추론해줍니다. 언제라도 100% 정확하다고 할 수는 없습니다. 적어도 수동으로 스키마를 정의한 경우에 비례해서는 당연히 그렇습니다. 그러나 매우 잘 동작합니다. 물론, 인덱스 정의(즉 맵핑)을 정의하는 것은 가능하고, 맵핑에 따라 인덱스를 작성할 수도 있스빈다. 또 여러 맵핑파일을 인덱스에 존재할 여러 형태에 대해서 작성하는 것도 가능하고, ElasticSearch 에 새로운 인덱스가 작성될 때에 그것을 사용하는 것도 가능합니다. 매우 매력적이죠? 덧붙여서 인덱스 작성중의 문서에는 아직 발견되지 않은 새로운 필드가 발견된 경우, ElasticSearch 는 그 형태를 추론해서 새로운 필드를 작성하려고 합니다. 물론 그 기능은 끌 수도 있습니다.</p>
+
+<p>Let’s talk about the actual configuration of Solr and ElasticSearch for a bit. In Solr, the configuration of all components, search handlers, index specific things such as merge factor or buffers, caches, etc. are defined in the solrconfig.xml file. After each change you need to restart Solr node or reload it. All  configs in ElasticSearch are written to elasticsearch.yml file, which is just another configuration file. However, that’s not the only way to store and change ElasticSearch settings. Many settings exposed by ElasticSearch (not all though) can be changed on the live cluster – for example you can change how your shards and replicas are placed inside your cluster and ElasticSearch nodes don’t need to be restarted.  Learn more about this in ElasticSearch Shard Placement Control.</p>
+
+<p>Solr 와 ElasticSearch 의 실제 설정에 대해서도 조금 더 이야기를 이어가겠습니다. Solr 에서는 모든 컴포넌트, 검색 핸들러, 인덱스를 특정하기 위한 다양한 일(예를들어 머지팩터와 버퍼, 캐쉬 등)의 정의는, solrconfig.xml 파일 안에 정의됩니다. 모든 변경 뒤에는 Solr 노드의 재기동이나 리로드가 필요합니다. ElasticSearch 의 모든 설정은 elasticsearch.yml 파일에 적혀져 있습니다. 그것은 또한 다른 설정파일에 지나지 않습니다. 그러나 ElasticSearch 의 설정을 정의하거나 변경하는 방법은 그것뿐만이 아닙니다. ElasticSearch 에 있어서 많은 설정(그러나 모든 것이 아닌)은 운용중인 클러스터 위에서 변경가능합니다. 예를들어 Shard 와 레플리카를 클러스터 내부의 어디에 놓을 것인가입니다. 또 ElasticSearch 노드는 재기동할 필요가 없습니다. 이에 대해서는 ElasticSearch 의 Shard 의 배치 컨트롤에에서 보다 자세히 배우도록 합니다.</p>
+
+<h2>검색과 클러스터의 관리</h2>
+
+<p>Solr and ElasticSearch have a different approach to cluster node discovery and cluster management in general.  The main purpose of discovery is to monitor nodes’ states, choose master nodes, and in some cases also store shared configuration files.</p>
+
+<p>Solr 와 ElasticSearch는 클러스터 노드의 탐색과 클러스터 관리 전반에 있어서 다른 접근을 취합니다. 탐색의 주요한 목적은 노드의 상태 감시, 마스터 노드의 선택, 또 Shard 정의 파일의 격납을 따라가는 몇가지 케이스가 있습니다.</p>
+
+<p>By default ElasticSearch uses the so called Zen Discovery, which has two methods of node discovery: multicast and unicast.  With multicast a single node sends a multicast request and all nodes that receive that request respond to it. So if your nodes can see each other at the network layer with the use of multicast method your nodes will be able to form a cluster. On the other hand, unicast depends on the list of hosts that should be pinged in order to form the cluster. In addition to that, the Zen Discovery  module is also responsible for detecting the master node for the cluster and for fault discovery. The fault discovery is done in two ways – the master node pings all the other nodes to see if they are healthy and the nodes ping the master in order to see if the master is still working as it should.  We should note that there is an ElasticSearch plugin that makes ElasticSearch use Apache Zookeeper instead of its own Zen Discovery.</p>
+
+<p>기본적으로는 ElasticSearch는 선탐색(Zen Discovery)이라고 불리는 방법을 사용하는데, 이는 멀티캐스트와 유니캐스트 라는 2가지 노드의 탐색수법이 존재합니다. 멀티캐스트에는 하나의 노드는 멀티캐스트 쿼리를 송신하고 그 리퀘스트를 받은 모든 노드는 그에 대해 응답을 보냅니다. 만약 노드가 멀티캐스트 메소드를 사용하고 네트워크 층에 대해서 서로 인식할 수 있으면, 노드는 클러스터를 구성할 수 있습니다. 한편, 유니캐스트는 호스트의 리스트에 따라, 클러스터를 구성하기 위해 ping 을 보낼 필요가 있습니다. 덧붙여 선탐색 모듈은 클러스터의 마스터 노드의 검지와 장애탐색의 책임을 가집니다. 장애탐색에는 두가지 방법을 취할 수 있습니다. 마스터 노드는 다른 모든 노드에 대해 ping 을 보내 건강한지를 확인하고, 다른 노드는 마스터가 움직이는 지를 확인하기 위해서 ping 을 보냅니다. 주목할 점으로는 선탐색 대신에 Apache ZooKeeper 를 사용하는 ElasticSearch 플러그인이 존재합니다.</p>
+
+<p>Apache Solr uses a different approach for handling search cluster. Solr uses Apache Zookeeper ensemble – which is basically one or more Zookeeper instances running together. Zookeeper is used to store the configuration files and monitoring – for keeping track of the status of all nodes and of the overall cluster state. In order for a new node to join an existing cluster Solr needs to know which Zookeeper ensemble to connect to.</p>
+
+<p>Apache Solr 는 클러스터 탐색을 다루는 것에 있어서 다른 접근방법을 가집니다. Solr 는 Apache Zookeeper ensemble 을 이용합니다. 그것은 기본적으로 하나이상의 ZooKeeper 의 인스턴스가 동시에 실행하는 것으로 구성됩니다. ZooKeeper 는 설정파일의 격납과 감시에 이용됩니다. 모든 노드와 클러스터 전체의 상태를 추적합니다. 기존 클러스터에 새로운 노드를 추가하는 경우에는 Solr 는 어느  ZooKeeper ensemble 에 접속할 것인가 알아야 할 필요가 있습니다.</p>
+
+<p>There is one thing worth noting when it comes to cluster handling – the split brain situation. Imagine a situation, where you cluster is divided into half, so half of your nodes don’t see the other half, for example because of the network failure. In such cases ElasticSearch will try to elect a new master in the cluster part that doesn’t have one and this will lead to creation of two independent clusters running at the same time. This can be limited with a small degree of configuration, but it can still happen. On the other hand, Solr 4.0 is immune to split brain situations, because it uses Zookeeper, which prevents such ill situations. If half of your Solr cluster is disconnected, it wouldn’t be visible by Zookeeper and thus data and queries wouldn’t be forwarded there.</p>
+
+<p>하나 주의할 점이 클러스터를 다루는 것에 있습니다. 스플릿플레인이라고 하는 상태입니다. 클러스터가 분쪽으로 나눠져 노드의 반쪽이 다른 한쪽의 반쪽을 알수 없는 상태를 상상해보세요. 예를들어 네트워크의 장애입니다. 그런 케이스에서는 ElasticSearch는 마스터 노드를 가지지 않는 쪽의 부분 클러스터에 새로운 마스터를 선택하려고 합니다. 이것이 두개의 독립한 클러스터 도잇에 실행되는 상황으로 인도합니다. 이것은 적은 양의 정의로 제한할 수 있지만, 그래고 발생할 수 있습니다. 반면 Solr 4.0 은 스플릿플레인 상태에 면역이 있습니다. ZooKeeper 를 사용하고 있기 때문에, 그런 상태를 방지할 수 있습니다. 만약 반쪽의 Solr 클러서가 접속불가능한 경우, ZooKeeper 에는 보여지지 않고, 따라서 데이터와 쿼리는 그쪽에는 전송되지 않습니다.</p>
+
+<h2>API</h2>
+
+<p>If you know Apache Solr or ElasticSearch you know that they expose an HTTP API.</p>
+
+<p>Apache Solr 가 ElasticSearch 를 알고 있다면 HTTP API 를 공개했다는 것도 알고 있을 겁니다.</p>
+
+<p>Those of you familiar with Solr know that in order to get search results from it you need to query one of the defined request handlers and pass in the parameters that define your query criteria. Depending on which query parser you choose to use, these parameters will be different, but the method is still the same – an HTTP GET request is sent to Solr in order to fetch search results. The good thing is that you are not limited to a single response format – you may choose to get results in XML, in JSON in JavaBin format and several other formats that have response writers developed for them.  You can thus choose the format that is the most convenient for you and your search application.  Of course, Solr API is not only about querying as you can also get some statistics about different search components or control Solr behavior, such as collection creation for example.</p>
+
+<p>Solr 를 잘 아는 사람은 검색결과를 얻기 위해서 정의가 끝는 리퀘스트 핸들러를 요구하고, 쿼리의 기준을 정의하는 파라메터의 안에서 넘길 필요가 있는 것은 알고 있을 겁니다. 어느 쿼리 파서를 선택할 것인가에 따라 그것들의 파라메터는 달라집니다. 그러나 방법은 같습니다. HTTP GET 리퀘스트가 검색결괄르 얻기위해서 Solr 에 보내집니다. 좋은 점은 단일 응답형식에 제한되지 않는 다는 것입니다. 결과를 얻기위해서는 XML, JavaBin 형식의 JSON 이나 다른 몇가지 그것들을 위해 개발된 응답을 써보내줄 녀석을 가지는 형식을 선택할 수 있습니다. 따라서, 스스로 검색과 검색 어플리케이션에 가장 편리한 형식을 선택할 수 있습니다. 물론 Solr API 는 쿼리를 위한 것 뿐만 아니라, 다른 검색컴포넌트의 통계를 얻고, Solr 의 동작, 예를들어 콜렉션의 작성등을 컨트롤할 수도 있습니다.</p>
+
+<p>And what about ElasticSearch?  ElasticSearch exposes a REST API which can be accessed using HTTP GET, DELETE, POST and PUT methods. Its API allows one not only to query or delete documents, but also to create indices, manage them, control analysis and get all the metrics describing current state and configuration of ElasticSearch. If you need to know anything about ElasticSearch, you can get it through the REST API (we use it in our Scalable Performance Monitoring for ElasticSearch, too!). If you are used to Solr there is one thing that may be strange for you in the beginning – the only format ElasticSearch can respond in JSON – there is no XML response for example. Another big difference between ElasticSearch and Solr is querying. While with Solr all query parameters are passed in as URL parameters, in ElasticSearch queries are structured in JSON representation. Queries structured as JSON objects give one a lot of control over how ElasticSearch should understand the query and thus what results to return.</p>
+
+<p>ElasticSearch 는 어떨까요? ElasticSearch는 HTTP GET, DELETE, POST, PUT 메소드를 사용해서 접근할 수 있는 REST API 를 공개하고 있습니다. 도큐먼트에 쿼리를 날리거나 삭제할 수 있을 뿐만 아니라, 인덱스를 작성하거나 관리하거나 분석을 컨트롤해서 현재의 상태를 나타내는 메트릭스를 모두 얻거나, ElasticSearch 설정을 뽑아낼 수도 있습니다. 만약 ElasticSearch 에 대해서 뭔가 알고 싶은 것이 있다면 REST API 를 통해서 얻어낼 수 있습니다. (우리는 그것을 자사 &ldquo;Scalable Performance Monitoring for ElasticSearch&#8221;에서도 사용하고 있습니다) 만약 Solr 에 익숙해져 있다면 가장 먼저 이상하게 느끼는 것중 하나 일 것입니다. ElasticSearch 의 응답에는 JSON 포맷밖에 존재하지 않습니다. XML 은 없습니다. ElasticSearch 와 Solr 의 다른 큰 차이점ㅇ은 쿼리입니다. Solr 에서는 모든 쿼리파라메터가 URL 파라메터로 넘겨지는 것에 반해, ElasticSearch 쿼리에서는 JSON 표현으로 구성됩니다. JSON 오브젝트로 쿼리를 구성하는 것으로 ElasticSearch 가 어떻게 쿼리를 이해하고, 어떻게 결과를 보내주는 지에 대한 많은 컨트롤을 제공합니다.</p>
+
+<h2>데이터의 취급</h2>
+
+<p>Of course, both Solr and ElasticSearch leverage Lucene near real-time capabilities.  This makes it possible for queries to match documents right after they’ve been indexed. In addition to that, both Solr (since 4.0) and ElasticSearch (since 0.15) allow versioning of documents in the index.  This feature allows them to support optimistic locking and thus enable prevention of overwriting updates. Let’s look at how distributed indexing is done in Solr vs. ElastiSearch.</p>
+
+<p>물론, Solr 와 ElasticSearch 양쪽이 Lucene 의 거의 리얼타임 특성을 이용하고 있습니다. 그것이 쿼리가 도큐먼트에 대해서 인덱스가 작성된 다음에 바르게 매치하는 것을 가능하게 합니다. 덧붙여 Solr(4.0부터) 와 ElasticSearch(0.15부터) 는 인덱스 안에서 도큐먼트의 버져닝도 가능합니다. 이 기능은 낙관적인 로직의 지원을 가능하게 하고, 변경에 대한 덮어쓰기를 방지할 수도 있습니다. Solr 와 ElasticSearch 에서 분산 인덱스가 어떻게 수행되는 가를 보도록 합니다.</p>
+
+<p>Let’s start with ElasticSearch this time. In order to add a document to the index in a distributed environment ElasticSearch needs to choose which shard each document should be sent to. By default a document is placed in a shard that is calculated as a hash from the documents identifier. Because this default behavior is not always desired, one can control and alter this behavior by using a feature called routing.  This is controlled via the routing parameter, which can take any value you would like it to have. Imagine that you have a single logical index divided into multiple shards and you index multiple users’ data in it.  On the search side you know queries are narrowed mostly to a single user’s data. With the use of the routing parameter you can index all documents belonging to a single user within a single shard by using the same routing value for all his/her documents.  On the search side you can then use the same routing value when querying. This would result in a single shard being queried instead of the query being spread across all shards in the index, which would be more expensive and slower. In case each index shard contains multiple users’ data we could additionally use a filter to limit matches to only one user’s documents.  In cases like this, routing functionality allows one to think of some nice optimization for both indexing and querying. If you want to hear some more about distributed indexing capabilities of ElasticSearch please take a look at my Berlin Buzzwords 2012 talk – Scaling Massive ElasticSearch Clusters (video).</p>
+
+<p>이번에는 ElasticSearch부터 시작합니다. 분산환경에 있어서 ElasticSearch 의 인덱스에 도큐먼트를 추가하기 위해서는 여러 도큐먼트가 어느 Shard 로 보내졌는가를 선택할 필요가 있습니다. 기본적으로는 도큐먼트는 도큐먼트ID에서 계산된 해쉬키에 의해서 결정된 Shard 로 놓여집니다. 기본적인 동작은 항상 이상적이지 않기 때문에, 라우팅이라고 불리는 기능을 사용해서 변경할 수 있습니다. 이것은 라우팅 파라메터를 통해서 조정할 수 있고, 이 값은 임의의 값을 설정할 수 있습니다. 여러 Shard 로 분할된 하나의 논리 인덱스를 가지고 있고, 여러 유저의 데이터를 그곳에 색인하도록 해본다고 생각해봅시다. 검색 사이드에서는 쿼리는 대부분의 경우에 단일 유저의 데이터에 묶여 있다는 것을 알고 있습니다. 라우팅 파라메터를 사용하는 것으로 단일 유저에 소속된 모든 도큐먼트를 단일 Shard 에서 색인할 수 있다는 것이 모든 유저의 도큐먼트에 대해서 같은 라우팅 값을 사용할 수 있습니다. 검색 사이드에서는 따라서 쿼리 시에 같은 라우팅 값을 사용할 수 있습니다. 이에 의해 결과는 쿼리가 실행된 단일 Shard 안에서만 존재하고 쿼리가 인덱스 안에서 모든 Shard 에 대해서 넓어지지 않습니다. 그 경웅는 보다 높은 비용으로 느려지겠죠. 개개의 인덱스의  Shard 가 여러 유저의 데이터를 가지고 있는 경우에는 추가하는 것으로 필터를 이용해서 단 한 사람의 유저의 도큐먼트에 적합하게 제한할 수 있습니다. ElasticSearch 의 분산인덱스의 기능에 대해서 더 자세히 듣고 싶다면 저자의 Berlin Buzzwords 2012의 강연, &ldquo;<a href="http://blog.sematext.com/2012/06/05/slides-scaling-massive-elasticsearch-clusters/" title="http://blog.sematext.com/2012/06/05/slides-scaling-massive-elasticsearch-clusters/">Scaling Massive ElasticSearch Clusters</a>&rdquo; 비디오 (<a href="https://vimeo.com/44718089">https://vimeo.com/44718089</a>)를 참조해주세요.</p>
+
+<p>Details of Solr’s implementation of distributed indexing (and searching) capabilities can be found in our The New SolrCloud: Overview post. But let’s recall some of those details. In order to forward a document to a proper shard Solr uses Murmur hashing algorithm which calculates the hash for the given document on the basis of its unique identifier. This part is similar to default ElasticSearch behavior.  However, Solr doesn’t yet let you specify explicitly to which shard the document should be sent  &ndash; there is no document and query routing equivalent in Solr yet.</p>
+
+<p>Solr 의 분산 인덱스(와 검색) 에 관한 구현의 자세한 내용은 우리의 <a href="http://blog.sematext.com/2012/02/01/solrcloud-distributed-realtime-search/">&ldquo;The New Solrcloud: Overview&rdquo;</a>의 기사를 참조해주세요. 그리고 그 자세한 내용의 몇가지를 복습해보도록 합니다. 도큐먼트를 적절하게 Shard 에 보내기 위해서 Solr 는 Murmur hashing 이라는 알고리즘을 사용해서 부여된 도큐먼트의 해쉬값을 고유한 식별자로 삼아서 계산하고 있습니다. 이 부분은 ElasticSearch 의 기본동작과 비슷합니다. 그러나 Solr 는 명시적으로 어느 Shard 에 도큐먼트를 보낼 것인가를 지정하는 것은 아직 불가능합니다. 도큐먼트와 쿼리의 라우팅에 비견되는 것은 Solr 에는 아직 없습니다.</p>
+
+<p>Of course, both Solr and ElasticSearch allow one to configure replicas of indices (ElasticSearch) or collections (Solr). This is crucial because replicas enable creation of highly available clusters – even if some of nodes are down, for example because of hardware failure or maintenance, the cluster and data within it can remain available. Without replicas if one nodes is lost, you lose (access to) the data that were on the missing node. If you have replicas present in your configuration both search engines will automatically copy documents to replicas, so that you don’t need to worry about data loss.</p>
+
+<p>물론, Solr 와 ElasticSearch 모두 인덱스（ElasticSearch)、 또는 콜렉션（Solr）의 레플리카 설정을 가능하게 합니다. 이것은 레플리카 클러스터의 고가용성을 실현하는 것이기 때문에 매우 중요합니다. 예를들어 몇가지 노드가 하드웨어장애나 메인테넌스로 다운되었어도, 클러스터와 그 안의 데이터는 계속 이용가능합니다. 레플리카 없이는 하나의 노드를 잃어버리면 잃어버린 노드 위에 존재한 데이터(에 대한 접근)을 잃어버립니다. 만약 설정에서 레플리카가 존재하는 경우 두 검색엔진은 자동적으로 도큐먼트를 레플리카로 복사하기 때문에, 데이터 소실에 대해서 걱정할 필요는 없습니다.</p>
+
+<h2>결론</h2>
+
+<p>We hope that after reading this post you have the basic understanding of what you can expect from both Solr 4.0 and ElasticSearch 0.19.* and you can start to get the feeling for differences and similarities between them.  Of course,  both Solr and ElasticSearch have very strong and active user and development communities and are constantly evolving and improving, and are doing that rather fast. In pre-Solr 4.0 (aka SolrCloud) world the difference between Solr and ElasticSearch was quite stark.  Since then, and under the pressure from ElasticSearch, the gap has narrowed and both projects are moving forward quite quickly.  At Sematext our clients often ask us to recommend the search engine for their use and we recommend both of them.  Which one we recommend for a particular project depends on project requirements, which we always go through at the beginning of every engagement.  If you need help deciding, let us know.</p>
+
+<p>이 기사를 읽은 다음에 Solr 4.0 과 ElasticSearch 0.19.* 양쪽에서 무엇을 기대할 수 있는가, 그 기초를 이해했기를 바랍니다. 그리고 둘 사이의 차이와 유사점에 대해서도 이해되었기를. 물론, Solr 와 ElasticSearch 양쪽모두 매우 강력하고 활발한 유저와 개발자의 커뮤니티가 존재하며, 정기적으로 진화하고 세련되며, 그리고 보다 빨라지고 있습니다. Solr Cloud 로 알려진 Solr 4.0 이전에는 Solr 와 ElasticSearch 의 차이는 매우 컸습니다. ElasticSearch 의 압력의 근원으로 갭은 좁아져 두가지 프로젝트는 함께 빨리 진행되고 있습니다. 어느 프로젝트를 추천하는 지는 요건에 따라 달라집니다. 이것은 우리가 항상 계약시점에 넘어야 할 길입니다. 만약 당신이 결단에 도움을 필요로 한다면 꼭 알려주세요.</p>
+
+<p>Also please keep in mind this post is not meant to be the most comprehensive guide to all the similarities and differences between ElasticSearch and Solr. We wanted to start with a general overview of how these two great search engines work and cover the big picture. In subsequent parts of the “Solr vs. ElasticSearch” series we’ll describe how the most frequently used features of both search engines work, what the differences between them are, and we’ll get into details of those features showing you pros and cons of Solr vs. ElasticSearch approach (for example approaches used in faceting or caching). Just as a sneak peak into the next post in the series – you can expect information about language handling capabilities, analysis configuration, and querying.</p>
+
+<p>또 이 기사가 ElasticSearch와 Solr 사이의 유사점과 차이점에 대해서 가장 완벽한 가이드가 아니라는 점을 항상 주의해주세요. 우리는 이 두가지 대단한 검색 엔진이 어떻게 동작하는 가 하는 일반적인 개요와 외관부터 시작하고 싶었습니다. 이에 이어서 &ldquo;Solr vs. ElasticSearch&rdquo; 시리즈의의 파트에서는 두 검색엔진에서 가장 빈번하게 사용되는 기능이 어떻게 동작하는 지 해설합니다. 그리고 그 기능들의 자세한 내용들을 &ldquo;ElasticSearch vs. Solr&rdquo; 로 접근해서 그 이점과 결점을 보도록합니다. 예를들어 Facet 과 Cache 로 이용되는 접근방식에서) 시리즈의 다음회에 언어의 취급 기능과 분석설정, 그리고 쿼리에 대해서 기대해주세요.</p>
+
+<p><a href="http://twitter.com/kucrafal">@kucrafal</a>, <a href="http://twitter.com/sematext" title="sematext">@sematext</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Apply MoeEmotional Hudson Plugin on Jenkins]]></title>
+    <link href="http://jeen.github.io/blog/2013/07/10/apply-moeemotional-hudson-plugin-on-jenkins/"/>
+    <updated>2013-07-10T22:28:59+09:00</updated>
+    <id>http://jeen.github.io/blog/2013/07/10/apply-moeemotional-hudson-plugin-on-jenkins</id>
+    <content type="html"><![CDATA[<blockquote class="twitter-tweet"><p>젠킨스에서 대머리 아저씨 얼굴 보기가 싫어서, 급하게 테마 하나 제작했습니다. <a href="https://t.co/FcNPdqMjlO">https://t.co/FcNPdqMjlO</a> 앞으로 플랫플랫하게 해볼 예정.</p>&mdash; Park Hyun-woo (@lqez) <a href="https://twitter.com/lqez/statuses/354925228079579138">July 10, 2013</a></blockquote>
+
+
+<script async src="http://jeen.github.io//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+
+<p> 이 모든 원인은 @lqez 님의 트윗에서 시작했습니다.</p>
+
+<p> 이 트윗을 보고 예전에&hellip; 그러니까 일본에서 일하고 있을 당시 CI 에는 별로 신경도 쓰지도 않던 시절에 Hatena bookmark 에서 모에짙은 플러그인에 대한 기사를 떠올렸습니다.</p>
+
+<ul>
+<li><a href="http://d.hatena.ne.jp/kanu-orz/20090803/1249225200">Hudsonの萌え化、もしくは痛Hudson化</a></li>
+</ul>
+
+
+<p>　그러니까 당시 Jenkins 가 Hudson 이던 시절에 수염난 아저씨를 눈뜨고 쳐다볼 수 없었던 Hudson 사용자들은 <code>moeemotional-hudson</code> 이라는 플러그인을 만들어 냅니다.
+　그와 관련된 링크는 아래와 같습니다.</p>
+
+<ul>
+<li><a href="http://d.hatena.ne.jp/torazuka/20090731/1248970549">hud子「継続的インテグレーションを、あなたに」</a></li>
+<li><a href="http://d.hatena.ne.jp/torazuka/20090802/hudmis">RED_LAMP用のhud美を追加</a></li>
+<li><a href="http://d.hatena.ne.jp/kanu-orz/20090802/1249182957">萌えよHudson(hud子バージョン公開)</a></li>
+</ul>
+
+
+<p> 그리고 모에말고 일반적인 Emotional Jenkins 플러그인도 존재합니다. &ndash;_&ndash;;</p>
+
+<ul>
+<li><a href="https://wiki.jenkins-ci.org/display/JENKINS/Emotional+Jenkins+Plugin">https://wiki.jenkins-ci.org/display/JENKINS/Emotional+Jenkins+Plugin</a></li>
+</ul>
+
+
+<p> 뭐 결론은 Stable, Unstable 에 따라서 각각의 상황에 맞는 그림을 대신 표시해주는 것이지요.</p>
+
+<blockquote class="twitter-tweet"><p>그러니까 그런 노력의 결과로&#8230; 이런 아저씨가&#8230; <a href="http://t.co/1d1TuMWbJs">pic.twitter.com/1d1TuMWbJs</a></p>&mdash; JEEN (@JEEN_LEE) <a href="https://twitter.com/JEEN_LEE/statuses/354939083795083265">July 10, 2013</a></blockquote>
+
+
+
+
+<blockquote class="twitter-tweet"><p>이런 OL 이 된다는 것입니다. <a href="http://t.co/c3Wu2plYAT">pic.twitter.com/c3Wu2plYAT</a></p>&mdash; JEEN (@JEEN_LEE) <a href="https://twitter.com/JEEN_LEE/statuses/354939140883742720">July 10, 2013</a></blockquote>
+
+
+<p> 이 플러그인은 각 Job 단위로 설정이 가능합니다. 플러그인을 설치하고 post-build action 에서 Moeemotional Hudson 을 추가해줍니다. <strike>그러니까 Job 단위로 설정이 가능한게 Job A 페이지에서만 표시되고 해당 Job 의 빌드 결과에 따른 그림변화는 없었습니다.</strike> 아&hellip; 캐쉬에 의한 착각이었습니다. 각 빌드 페이지에서도 정상적으로 출력됩니다.</p>
+
+<p> 아무튼 플랫플랫하게 나올 결과물을 기대해봅니다.</p>
+
+<ul>
+<li><a href="https://github.com/lqez/flat-jenkins">Github &ndash; lqez/flat-jenkins</a></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Released DBIx::Class::InflateColumn::Serializer::Hstore]]></title>
+    <link href="http://jeen.github.io/blog/2013/07/07/released-dbix-class-inflatecolumn-serializer-hstore/"/>
+    <updated>2013-07-07T19:05:31+09:00</updated>
+    <id>http://jeen.github.io/blog/2013/07/07/released-dbix-class-inflatecolumn-serializer-hstore</id>
+    <content type="html"><![CDATA[<p> 예전에는 그냥 Pg 를 사용한 만들어진 웹서비스를 유지보수하는 수준에서 밖에 Pg 를 접하지 않았는데&hellip;
+ 최근의 한 프로젝트에서 Postgres 를 도입하기로 결정이 났습니다.</p>
+
+<p> 이전부터 Pg 의 hstore나 Array 타입이라든가 이런저런 유의미한 기능에 대해서는 기대하고 있었고, 약간 설레임이 있었습니다.</p>
+
+<p> 작업을 하면서 살펴보니 hstore 의 경우는 Postgre Extension 으로 존재하며, DBIx::Class 는 아마도 DB 의 특정 Extension 까지 보살펴주지는 않겠지 하고 생각했습니다.</p>
+
+<p> 결국 기본적으로 DBIx::Class에서 컬럼의 참조/등록시에 Serialization/Deserialization 하면서 쓰고, hstore 에 대해서 참조쿼리를 발생시킬 때는 적절한 스칼라레퍼런스로 사용할 수 밖에 없지 않겠는가 싶었습니다.</p>
+
+<p> 그래서 뭐 결국은 DBIx::Class::InflateColumn::Serializer 모듈에 그냥 끼워넣기로 DBIx::Class::InflateColumn::Serializer::Hstore 라는 모듈을 추가해서 CPAN 에 올렸습니다.</p>
+
+<p> 사용법은 CPAN 문서의 SYNOPSIS 를 참조하면 됩니다. :&ndash;)</p>
+
+<p> DBD::Pg 에서 UTF8 사용을 위해서 <code>pg_enable_utf8</code> 과 <code>Pg::hstore</code> 를 병용할 때 UTF8 표시문제가 있어서 기존 <code>DBIx::Class::InflateColumn::Serializer</code> 에는 없던 옵션인 <code>recursive_encode</code> 를 추가했습니다.</p>
+
+<p> UTF8 을 포함한 hstore 컬럼과 그렇지 않은 것들을 구분해서 사용하면 되지 않을까 싶습니다만&hellip;</p>
+
+<p> 뭐 아무튼 결론은 요 1주일 정도 Pg 로 옮기면서 되던 게 안된다든가, 이런게 된다든가 하는 다양한 문제를 접하며 즐거운 비명을 지르고 있습니다.</p>
+
+<p> <blockquote class="twitter-tweet"><p>Pg::hstore w/ pg_enable_utf8 = oops</p>&mdash; JEEN (@JEEN_LEE) <a href="https://twitter.com/JEEN_LEE/statuses/353168251531956225">July 5, 2013</a></blockquote></p>
+
+<script async src="http://jeen.github.io//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+
+
+
+<blockquote class="twitter-tweet"><p>Pg 의 ㅅㅂ함을 만끽하고 있음 :-)</p>&mdash; JEEN (@JEEN_LEE) <a href="https://twitter.com/JEEN_LEE/statuses/353050682095443969">July 5, 2013</a></blockquote>
+
+
+
+
+<blockquote class="twitter-tweet"><p>신비함.. 신비함..</p>&mdash; JEEN (@JEEN_LEE) <a href="https://twitter.com/JEEN_LEE/statuses/353050712432840704">July 5, 2013</a></blockquote>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Using MSSQL in Perl(Linux)]]></title>
+    <link href="http://jeen.github.io/blog/2013/06/18/using-mssql-in-perl-linux/"/>
+    <updated>2013-06-18T22:33:40+09:00</updated>
+    <id>http://jeen.github.io/blog/2013/06/18/using-mssql-in-perl-linux</id>
+    <content type="html"><![CDATA[<p>오늘은 IRC 상에서 리눅스 환경에서 Perl 로 MS-SQL 에 접속하는 최선의 방법에 대한 이야기가 있었습니다. 그냥 흘리기에는 아쉬운 얘기들이 많아서 긁어서 정리해봅니다.</p>
+
+<script src="http://jeen.github.io//storify.com/jeen_lee/using-mssql-in-perl-linux.js" type="text/javascript" language="javascript"></script>
+
+
+<p><noscript>[<a href="http://jeen.github.io//storify.com/jeen_lee/using-mssql-in-perl-linux" target="_blank">View the story &ldquo;Using MSSQL in Perl(Linux)&rdquo; on Storify</a>]</noscript></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[PullReq on MojoX::Validator]]></title>
+    <link href="http://jeen.github.io/blog/2013/06/07/pullreq-on-mojox-validator/"/>
+    <updated>2013-06-07T17:53:47+09:00</updated>
+    <id>http://jeen.github.io/blog/2013/06/07/pullreq-on-mojox-validator</id>
+    <content type="html"><![CDATA[<p> 지난 수요일에 잠깐 이번 서버 구현에 쓸 Validator 를 물색하던 중에 <a href="http://metacpan.org/module/Mojolicious::Plugin::Validator">Mojolicious::Plugin::Validator</a> 를 보고는 참 Validation 코드쓰기 쉽다라는 생각에 덜컥 채용해버렸습니다.</p>
+
+<p> 모듈은 2011년이 마지막으로 업뎃되었구요. 근데 깔아보니까 안깔립니다. 이것도 설마 5.18 의 Hash Randomization 문제때문인가 하면서 실패한 테스트코드를 살펴본 결과 Mojolicious API 가 바뀐 것때문이었습니다. 그러니까 1년 반안에 프레임워크 테스트 모듈의 근간 API 가 바뀌어버리는 바람에 테스트가 실패한 것이지요.</p>
+
+<p> 일단 이 모듈이 맘에 들었고, 이 모듈을 만든 @vtivti 의 여러가지 결과물들을 보고 재미있는 사람이구나 하고 생각하기도 했었죠.</p>
+
+<ul>
+<li><a href="https://github.com/vti/mojox-validator/pull/17">https://github.com/vti/mojox-validator/pull/17</a></li>
+</ul>
+
+
+<p> 그래서 그냥 뭐 테스트코드 하나 패치해서 Pull Req 를 보냈습니다. 내용을 보면 알겠지만 정말 별거 없습니다. <code>post_form_ok</code> 가 없어지고, <code>post_ok</code> 의 사용법이 아마 3.x ~ 4.x 버젼으로 넘어오면서 바뀌지 않았나 합니다. 남은 건 서버에 올리는 데 carton 으로 깔면 … 아 물론 cpanm 1.6 부터 git 프로토콜을 지원하기는 해서 그냥 git repo 를 집어넣으면 되니까…. // 하지만 그냥 CPAN 을 통해서 받고싶었기에 빨리 패치된 걸로 CPAN 에 올려달라고 독촉했습니다.</p>
+
+<blockquote class="twitter-tweet" lang="ko"><p>@<a href="https://twitter.com/vtivti">vtivti</a> oh, please release it please. Now it is the only one problem I had to deploy on my servers. @__@</p>&mdash; JEEN (@JEEN_LEE) <a href="https://twitter.com/JEEN_LEE/status/342088628903759872">2013년 6월 5일</a></blockquote>
+
+
+<script async src="http://jeen.github.io//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+
+<p> 서버에 Deploy 한다는 건 Jenkins 에 올려놓고 빌드할 때 제대로 돌아가지 않으니까요… 뭐 밀린 숙제 같은 것이었습니다.</p>
+
+<p> <blockquote class="twitter-tweet" lang="ko"><p>MojoX-Validator 0.0014 by VTI &ndash; <a href="http://t.co/1rKxxY9yQh" title="http://metacpan.org/release/VTI/MojoX-Validator-0.0014/">metacpan.org/release/VTI/Mo…</a></p>&mdash; CPAN New Modules (@cpan_new) <a href="https://twitter.com/cpan_new/status/342201018127372288">2013년 6월 5일</a></blockquote></p>
+
+<p> 그래서 오늘에서야 6.5일에 업데이트된 것을 확인하고 Jenkins 설정을 하고 제대로 동작하는 것을 확인했습니다.</p>
+
+<ul>
+<li><a href="https://metacpan.org/source/VTI/MojoX-Validator-0.0014/Changes">https://metacpan.org/source/VTI/MojoX-Validator-0.0014/Changes</a></li>
+</ul>
+
+
+<p> Changes 날짜는 뭐 다르지만 이름이 콕하고 박혀있는 걸 보니… 뭔가 깨작거렸구나 하는 생각이 들기는 합니다.</p>
+
+<h3>결론</h3>
+
+<p>매번 CPAN Recents 의 내용을 봐도 그렇지만 Mojolicious 의 잦은 업데이트가 반갑기도 합니다. 실제로 Catalyst 에서 테스트코드를 쓸려면 좀 이래저래 손이 많이 가는 부분도 Mojolicious 의 <code>Test::Mojo</code> 를 통해서 뭔가 쉽고 직관적이게 테스트코드를 슥샥슥샥 쓸 수 있습니다. 오히려 감동을 받은 부분입니다.</p>
+
+<p>하지만 너무 잦은 업데이트는 이에 의존한 모듈들이 제대로 따라가주지 못하니 저같은 일반 사용자의 입장에서는 이런 경우처럼 예상이외의 수고가 들어가버릴 수도 있구나 ( 모듈을 만든 사람도 물론이거니와… ) 하는 생각도 듭니다.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[miyagawa's podcast ep12 - Korean Translation]]></title>
+    <link href="http://jeen.github.io/blog/2013/05/27/miyagawas-podcast-ep12/"/>
+    <updated>2013-05-27T00:15:00+09:00</updated>
+    <id>http://jeen.github.io/blog/2013/05/27/miyagawas-podcast-ep12</id>
+    <content type="html"><![CDATA[<p> 자주 챙겨듣는 podcast 중에 개인적으로 존경하는 개발자인 @miyagawa 씨가 운영하는 podcast 가 있습니다.</p>
+
+<ul>
+<li><a href="http://podcast.bulknews.net">Tatsuhiko Miyagawa&rsquo;s Podcast</a></li>
+</ul>
+
+
+<p> 주제는 개발이나 각종 기기, 이벤트, 언어, 커뮤니티 등등의 IT와 관련된 다양한 이야기들을 다루고 있습니다.</p>
+
+<p> 항상 사전녹화하는 것을 수정해서 올리곤 했는데 이번에는 Mixlr 라는 서비스를 이용해서 생방송으로 진행되었습니다.</p>
+
+<ul>
+<li><a href="http://mixlr.com">Mixlr makes broadcasting live audio simple. Share your sounds live&hellip;</a></li>
+</ul>
+
+
+<p> 시간은 미리 공지된 대로 5.26 저녁 10시. 게스트들과의 대화는 스카이프로 이뤄진 것 같습니다. 대화는 1시간 분량입니다.</p>
+
+<p> 아래의 내용은 IRC 채널 #perl-kr 에서 내용을 들으면서 옮겨적은 것이며, 부분적으로 빼먹은 부분이나 급작스런 컨텍스트 전환이 있습니다.</p>
+
+<h3>Intro</h3>
+
+<ul>
+<li>jeen__ : 미역 팟캐스트 12회는 라이브라고 해서 이거 듣고 퇴근해야지&hellip; 퇴근이랄까..</li>
+<li>skyloader : 미역이 팟캐스트도 하나요?</li>
+<li>skyloader : 주제가 perl?</li>
+<li>jeen__ : ㅇㅇ</li>
+<li>skyloader : 오올</li>
+<li>skyloader : 하지만 일본어겠지..</li>
+<li>jeen__ : ㅇㅇ</li>
+<li>jeen__ : lestratt, tokuhirom 이 게스트</li>
+<li>jeen<em>_ : 처음으로 펄만을 위한 주제인듯 &ndash;</em>&ndash;;</li>
+<li>jeen__ : tokuhirom TOEIC 쳤냐고 ㅋㅋ</li>
+<li>jeen__ : 쳤는데 점수 안나왔다고</li>
+<li>skyloader : 올 진사마의 실시간 통역</li>
+<li><p>jeen__ : tokuhirom 이 아마 YAPC::NA 2013 스피커로 나가니까</p>
+
+<ul>
+<li><a href="http://www.yapcna.org/yn2013/talk/4635">YAPC::NA 2013 &ndash; June 3-5, Austin, Texas</a></li>
+</ul>
+</li>
+<li><p>jeen__ : 의식을 높이기 위해서 TOEIC 공부하면서 시험쳐봤다고</p></li>
+<li>jeen__ : ㅋㅋㅋ</li>
+<li>jeen__ : 이번에 NA 스피커로 lestratt 이랑 tokuhirom 이 가니까 그래서 그런가</li>
+<li>jeen__ : 호&hellip;</li>
+<li>jeen__ : Skype 에 봇이랄까 그런 거 들어가서</li>
+<li>jeen__ : Skype 대화내용을 리다이렉트 시키고 있다고</li>
+<li>jeen__ : 물론 대화내용은 음성이지만</li>
+<li>skyloader : 딱히 perl내용 같지 않..</li>
+<li>jeen__ : 뭐 아직은&hellip;</li>
+<li>jeen__ : 사담만 있을 뿐</li>
+<li>jeen__ : Perl, YAPC 얘기</li>
+<li>jeen__ : &hellip;</li>
+</ul>
+
+
+<h3>Perl 5.18 에 대해서</h3>
+
+<ul>
+<li>jeen__ : Perl 5.18
+
+<ul>
+<li><a href="http://www.nntp.perl.org/group/perl.perl5.porters/2013/05/msg201940.html">perl 5.18.0 is now available!</a></li>
+</ul>
+</li>
+<li>skyloader : 흠</li>
+<li>jeen__ : Jesse 에서 RJBS 로 매니저가 바뀌고 나서</li>
+<li>jeen__ : 매년 5월에 나오게 되었다고</li>
+<li>jeen__ : 하지만 뭔가 매년 서두르고 있는 건 아닌가라는 느낌으로 서둘러 내고 있는 느낌.</li>
+<li>skyloader : 아니 그럼 일년에 한번만 release한다는 것?</li>
+<li>jeen__ : 매년 이틀씩 늦춰지고 있다고…</li>
+<li>jeen__ : 메이저 업데이트는 1년에 한번</li>
+<li>skyloader : 음</li>
+<li>jeen__ : 5.12->5.14->5.16->5.18</li>
+<li>skyloader : 오키</li>
+<li>jeen__ : Hash Randomization</li>
+<li>jeen__ : 덕분에 테스트 개박살 났다</li>
+<li>jeen__ : 미역도 꽤 테스트 실패하는 모듈이 여럿 있었는데</li>
+<li>jeen__ : 5.17.x 시절에 고쳐놔서</li>
+<li>jeen__ : 그래도 몇개는 아직 그대로 라고</li>
+<li>jeen__ : TT2 도 아직 못 고쳤다고</li>
+<li>jeen__ : 5.18 용 보고는 누군가 일괄적으로 RT 에 리포트 해주고 있다고</li>
+<li>jeen__ : (그래서 나한테도 왔구나&hellip;)</li>
+<li>jeen__ : JSON::XS 가 가장 큰 문제</li>
+<li>skyloader : Hash randomization이 뭐길래</li>
+<li>jeen__ : 메일링 리스트에 지적되었는데</li>
+<li>jeen__ : 이런 수정은 의미가 없다고 레만이 지적</li>
+<li>jeen__ : 오히려 Perl 문서에 적혀 있는대로 했으니까</li>
+<li>jeen__ : 니들이 고쳐라!</li>
+<li>jeen__ : 라고 했지만&hellip;</li>
+<li>jeen__ : 최근에 관련 수정을 업데이트 ㅋㅋㅋ</li>
+<li>jeen__ : 츤데레</li>
+<li>jeen__ : 이걸로 얻을 수 있는 시큐리티 메리트는 거의 없다는 게 레만의 의견</li>
+<li>jeen__ : 실제 Perl 에 대한 해쉬 공격방법은 제대로 보고되지 않아서</li>
+<li>jeen__ : 5.16.2 취약점에서 한번 그런 게 보고 되었지만&hellip;</li>
+<li>jeen__ : 보고자의 보고내용으로는 특정값을 넣어서 메모리가 붕붕 먹었던 그런 경우가 있었다고</li>
+<li>jeen__ : HTTP Query Parameters 의 경우는 거의 대개 Hash 에 넣어서 하기 때문에</li>
+<li>jeen__ : 그런 경우에 해쉬관련 공격의 대상이 될 수 있는데</li>
+<li>jeen__ : 하지만 Perl 5 Porters 에 관련 내용이 올라오지 않아서</li>
+<li>jeen__ : 그다지 의논되지 않은 내용이라고</li>
+<li>jeen__ : 5.16 에서 변경된 패치와 5.18 에서 변경된 내용은&hellip;</li>
+<li>jeen__ : 5.16에서는 같은 해쉬를 복사하면 &hellip; 블라블라</li>
+<li>skyloader : 제 수준에서는 심오한 내용이라 이해가 안됨 ㅠ</li>
+<li>jeen__ : 레만은 5.5 Perldoc 까지 되집어 올라갔는데</li>
+<li>jeen__ : 스펙대로 했다고</li>
+<li>jeen__ : 그런 내용을&hellip;</li>
+<li>jeen__ : perldoc 관련 표현이 애매했다라는 의견도 있고</li>
+<li>jeen__ : 5.8 에서 해쉬를 복사해서</li>
+<li>jeen__ : 몇번이나 돌려봤을 때</li>
+<li>jeen__ : 그 중에 한번은 값의 순서가 바뀌는 경우가 있었다고</li>
+<li>jeen__ : given-when, smart match…</li>
+<li>jeen__ : experimental 로 격이 내려갔다 라는 것은</li>
+<li>jeen__ : 거의 deprecated 라는 상태와 같다고</li>
+<li>jeen__ : given-when, smart match 의 경우는 그다지 와닫는 표현과 퍼포먼스도 그다지 좋지 않았다고</li>
+<li>jeen__ : 너무 어정쩡한 상태로 5.10 에 넣어버려서</li>
+<li>jeen__ : 그게 계속 문제가 되고 해서 5.18 에서 experimental 로</li>
+<li>jeen__ : subroutine signature ?</li>
+<li>jeen__ : 5.20 대상으로 subroutine signature 를&hellip;</li>
+<li>jeen__ : sub asda($&hellip;) { }</li>
+<li>jeen__ : 아직 스펙이 정의되지는 않았다고</li>
+<li>skyloader : prototype?</li>
+<li>jeen__ : MOP 도 5.20 릴리즈 대상으로 &hellip;</li>
+<li>jeen<em>_ : 하지만 아직&hellip; &ndash;</em>&ndash;;</li>
+<li>jeen__ : XS 방방하지 않아도 적절한 퍼포먼스가 나왔으면..</li>
+<li>jeen__ : 5만줄 정도의 코드가 삭제 되었는데</li>
+<li>jeen__ : CPANPLUS + 거기에 의존되었던 코드들</li>
+<li>jeen__ : (5.19에서)</li>
+<li>jeen__ : Module::Build, CGI 를 5.20 에서 deprecated 로 만들려고</li>
+<li>jeen__ : 하고 있다고</li>
+<li>jeen__ : 옛 버젼에서 빌드시에 문제가 ..</li>
+<li>jeen__ : 어차피 Module::Build 가 없어져도 CPAN 클라이언트가 알아서 감지해서 잡아주기 때문에 별 문제가 없을 거라고</li>
+<li>jeen__ : CGI.pm 의 경우는 &hellip;.</li>
+<li>jeen__ : 표준모듈로 해 줄 필요는 없지 않냐 라고&hellip;</li>
+<li>jeen__ : CGI.pm 용 보안패치도 여러번 나오기도 해서</li>
+<li>jeen__ : CGI 를 CPAN 에서 넣을려고 하면</li>
+<li>jeen__ : FCGI 를 인스톨하려고 하고</li>
+<li>jeen__ : 그게 XS 의존이라서 C컴파일 환경이 없는 곳에서는 대개 실패</li>
+<li>jeen__ : 그래서 CGI 에서 FCGI 의존을 없애려고</li>
+<li>jeen__ : 지금 CGI 가 FCGI 의 경우까지 고려한 코드가 들어가 있어서
+jaker has joined (~<a href="&#109;&#97;&#105;&#x6c;&#116;&#111;&#x3a;&#x6a;&#x61;&#x6b;&#101;&#114;&#x40;&#51;&#x36;&#x2e;&#51;&#x39;&#46;&#53;&#x30;&#46;&#51;&#x37;">&#x6a;&#x61;&#107;&#101;&#x72;&#x40;&#x33;&#x36;&#x2e;&#x33;&#57;&#x2e;&#x35;&#x30;&#x2e;&#51;&#55;</a>)</li>
+<li>jeen__ : tokuhirom 은 5.18.1 까지 기다릴 거라고</li>
+<li>jeen__ : 아직 상용서버에 넣어 돌리기는 괜히 걱정된다나&hellip;</li>
+<li>jeen__ : 특별히 써보고 싶다라는 기능도 없고 해서</li>
+<li>jeen__ : 5.16.3 이 가장 좋은 선택지가 아닌가 하고</li>
+<li>jeen__ : 10-20% 정도 퍼포먼스 향상은 있다고 하는데</li>
+<li>jeen__ : 어떤 경유로 퍼포먼스 향상이 있었는지 그걸 몰라서</li>
+<li>jeen__ : taint support 를 없애는 걸로 퍼포먼스가 올라가는 것은 아닌가 하고 생각</li>
+</ul>
+
+
+<h3>plenv</h3>
+
+<ul>
+<li>jeen__ : 미역이 perlbrew &ndash;> plenv 로 바꾸</li>
+<li><p>jeen__ : plenv 의 차이점은?</p>
+
+<ul>
+<li><a href="https://metacpan.org/module/plenv">plenv &ndash; perl binary manager &ndash; metacpan.org</a></li>
+</ul>
+</li>
+<li><p>jeen__ : perlbrew 는 환경변수 PATH 를 열심히 변경하고 있는데</p></li>
+<li>jeen__ : plenv 는 중간에 PATH 를 직접건드리지 않고 하고 있다고</li>
+<li>jeen__ : perlbrew 에서 너무 많은 펄 버젼을 지원하기 위햇 어런저런 마법같은 구문들을 집어넣어서</li>
+<li>jeen__ : 그걸 심플하게 하기 위해서 plenv 를 만들었다고</li>
+<li>jeen__ : 테스트를 위해서 perlbrew switch 하지 않고</li>
+<li>jeen__ : 좀 더 간단하게 가능하다고</li>
+<li>jeen__ : plenv 를 production 에서 쓰는 건 필요이상의 오버헤드가 들어가서 스스로도 권장하지 않는다고</li>
+<li><p>jeen__ : travis ci, dotcloud 도 perlbrew 를 사용하고 있</p>
+
+<ul>
+<li><a href="https://www.dotcloud.com">dotCloud &ndash; One home for all your apps</a></li>
+<li><a href="https://travis-ci.org">Travis CI &ndash; Free Hosted Continuous Integration Platform for the Open Source Community</a></li>
+</ul>
+</li>
+<li><p>jeen__ : .rvmrc 같은 표기처럼 해당 프로젝트 루트에서 버젼표기를 하는 방식으로 하는 게 편리하지 않은가 라든가</p></li>
+<li>jeen__ : plenv 는 yapc::na 에서 발표할 예정이라고</li>
+<li>jeen__ : perlbrew 쪽이 압도적으로 지명도가 높고, 문서도 별로고</li>
+<li>jeen__ : 그래서 사용할 메리트가 별로 없으니</li>
+<li>jeen__ : 문서에 집중하는 게 좋지 않겠느냐</li>
+<li>jeen__ : plenv 는 이런 부분에서 압도적으로 좋다라는 부분이 없어서</li>
+<li>jeen__ : 뭘 강조해야할지 망설이고 있다</li>
+</ul>
+
+
+<h3>YAPC::Asia Tokyo 2013</h3>
+
+<ul>
+<li><p>jeen__ : YAPC::Asia 이야기</p>
+
+<ul>
+<li><a href="http://yapcasia.org/2013/05/yapcasia-2013-venue.html">YAPC::Asia 2013 会場を紹介します | YAPC::Asia Tokyo 2013</a></li>
+</ul>
+</li>
+<li><p>jaker : 끝났나요?</p></li>
+<li>jeen__ : 스피커 모집은 아무 문제가 없으면 내일 시작</li>
+<li>jeen__ : 미역 뱅기 티켓 끊어야 되니까 빨리 뭐 해달라고</li>
+<li>jeen__ : 4트랙으로 진행한다고 ㄷㄷㄷ</li>
+<li>jeen__ : 여태껏 3트랙으로 했는데</li>
+<li>jeen__ : 일수는 2일로</li>
+<li>jeen__ : 전야제는 여느때처럼 하고</li>
+<li>jeen__ : JPA 주최로 이번이 5회째</li>
+<li>jeen__ : 흙</li>
+<li>jeen__ : 누군가 해준다면 넘겨주고 싶다고</li>
+<li>jeen__ : 컨퍼런스 운영자 모임에서 먹거리 얘기가 나와서..</li>
+<li>jeen__ : 맥주랑 닭튀김은 있어야 된다고&hellip;</li>
+<li>jeen__ : 매년 와인/일본주는 남는데</li>
+<li>jeen__ : 맥주는 추가주문해야된다고</li>
+<li>jeen__ : 모두들 감자튀김이랑 닭튀김이랑 맥주 정도만 있으면 되는 건 아닌가..</li>
+<li>jeen__ : 동공대 스시 가 매우 좋았다고</li>
+<li>jeen__ : 결혼식 피로연 하는 그런 공간이 있어서</li>
+<li>jeen__ : 300명 정도 들어가고</li>
+<li>jeen__ : 컨퍼런스 파티 참가비는 무료</li>
+<li>jeen__ : 컨퍼런스 참가자는 1000명 목표</li>
+<li>luzluna : 실시간번역 감사..</li>
+<li>jeen__ : 작년이 860명이었으니</li>
+<li>luzluna : 치맥은 어느나라를 가든 진리&hellip;</li>
+<li>jeen__ : 941 가 말하기를 컨퍼런스를 확대하느냐 포커스를 맞춰서 집중하느냐</li>
+<li>jeen__ : 하지만 아직 마키는 좀 더 확대노선으로 갔으면 한다고</li>
+<li>jeen__ : 지금까지 오지 못한 사람들을 조금 더 오게 하도록</li>
+<li>jeen__ : 미역이 미국의 Railsconf 에서는 1500명 정도 왔다고</li>
+<li>jeen__ : 장소는 OSCON 과 같은 장소</li>
+<li>jeen__ : 실제 사용규모는 절반</li>
+<li>jeen__ : 트랙은 3-4 밖에 없어서</li>
+<li>jeen__ : 제일 작은 방에 들어가도 한 방에</li>
+<li>jeen__ : 200-300 들어가야 되니까</li>
+<li>jeen__ : 니치한 이야기를 하기에는 좀 어려웠다고</li>
+<li>jeen__ : 모두가 재미있어 하는 토크는 별로 재미있지 않다</li>
+<li>jeen__ : 그래서 대상이 20-50명 정도로 하면 굉장히 재미있고 남은 참가자들의 모티베이션도 생긴다고</li>
+<li>jeen__ : YAPC::ASIA 는 제일 큰곳은 450명 들어가는 곳이고, 작은 곳이 60명</li>
+<li>jeen__ : YAPC::ASIA Closed Talk 같은 공간을 준비한다고</li>
+<li>jeen__ : ㅋㅋㅋ</li>
+<li>jeen__ : 뒷얘기 위주</li>
+<li>jeen__ : 예전에 perl 관련 설문을 했는데</li>
+<li>jeen__ : 의외인 부분은 의외로 많은 사람들이 perl6 얘기를 듣고 싶어한다</li>
+<li>jeen__ : 그리고 레거시 시스템을 어떻게 끌고 가느냐</li>
+<li>jeen__ : 그리고 관련 사례를 소개시켜줬으면 한다 라든가</li>
+<li>jeen__ :미국쪽에는 그런 사례소개가 많았는데</li>
+<li>jeen__ : 근데 레거시 관련 얘기는 미국에서는 별로 없어서</li>
+<li>jeen__ : Big Data</li>
+<li>jeen__ : 수치 계산</li>
+<li>jeen__ : 이런 거 좀 해줬으면 한다고</li>
+<li>jeen__ : 4-5년 전에는 Bio 에서 많이 썼는데</li>
+<li>jeen__ : 이런 게 전부 Python 으로 가버린 거 같다고</li>
+<li><p>jeen__ : USA Today 가 Perl 로 되어 있다고</p>
+
+<ul>
+<li><a href="http://www.usatoday.com">USA TODAY: Latest World and US News  &ndash; USATODAY.com</a></li>
+</ul>
+</li>
+<li><p>jeen__ : 근데 YAPC::NA 라든가 이런 곳에서 사례 소개로 안나온다고</p></li>
+<li>jeen__ : RubyKaigi 는 이번주 하는데</li>
+<li>jeen__ : 더이상 규모를 확대하지 않고</li>
+<li>jeen__ : 좀 더 참가비를 올리고</li>
+<li>jeen__ : 진짜 오고 싶어하는 사람들을 오게 하겠다는데&hellip;</li>
+<li>jeen__ : 전체 크기를 크게 해버리면 아무래도 예산관리가 힘들다고</li>
+<li>jeen__ : 매번 장소 찾는 것도 피똥흘리면서 하고</li>
+<li>jeen__ : 일본 국내 첫 영국식 허브 컨퍼런스 회장이라고&hellip;</li>
+<li>jeen__ : YAPC::ASIA 는</li>
+<li>jeen__ : 작년은 앉을 공간이 별로 없었는데</li>
+<li>jeen__ : 올해는 좀 나아질 거 같다고</li>
+<li>jeen__ : LTthon 트랙이라고 작년은 하루종일 LT 만 하는 트랙이 있었는데</li>
+<li>jeen__ : 올해는 좀 힘들겠다고</li>
+<li>skyloader : 앉아 있던 카페가 문닫아서 전 이만 이동..</li>
+<li>jeen__ : 모두들 Perl 에 대한 사랑이 없고, Perl 커뮤니티에 대한 사랑만 있는 것인가&hellip;</li>
+<li>jeen__ : 그래서 Perl 커뮤니티에서 딴 얘기만 하는 건 아닌가</li>
+<li>jeen__ : …</li>
+<li>jeen__ : RubyKaigi 에 가는 사람은 정말로 초 Ruby Lover인데</li>
+<li>jeen__ : Perl 컨퍼런스는 Perl 아니고도 다른 거 많이 쓰고 그런 경우가 있어서</li>
+<li>jeen__ : 거리감이 먼 것은 아닌가
+skyloader has left IRC (Remote host closed the connection)</li>
+<li>jeen__ : YAPC 말고 좀 더 Core 한 얘기를 하는 컨퍼런스가 좋지 않겠는가 하고</li>
+<li>jeen__ : Hackathon 인가..</li>
+<li>jeen__ : Official 로는 아직 YAPC Hackathon 은 못하고</li>
+<li>jeen__ : 전날에 장소가 정해지거나</li>
+<li>jeen__ : 그런 경우가 많아서&hellip;</li>
+<li>jeen__ : QA Hackathon 에서는 50명 정도라면 대개 장소 정도는 빌릴 수 있지 않을까</li>
+<li>jeen__ : NHN 이라든가, Mixi 라든가, DeNA 라든가 … 라고</li>
+<li>jeen__ : Hallaway hackathon</li>
+<li>jeen__ : 이라고 트랙에서 얘기듣지 않고</li>
+<li>jeen__ : 밖에서 서로 떠들고 하는 게 있어서</li>
+<li>jeen__ : 오히려 그런 공간을 마련해주는 것도 좋지 않겠는가 라고</li>
+<li>jeen__ : 운영쪽에서 ~~한다가 아니라</li>
+<li>jeen__ : 다른쪽에서 오히려 ~~한다!</li>
+<li>jeen__ : 라고 정하고 덤벼들었으면 좋겠다고</li>
+<li>jeen__ : 작년에는 NA 에서 토크 스트리밍을 했는데 , 작년 유러피언컵 보면서 NA 토크를 봤다고 (미역)</li>
+<li>jeen__ : 대만의 OSDCTW 장소는  국제회의장이라서</li>
+<li>jeen__ : 자리마다 마이크가 붙어있다고</li>
+<li>jeen__ : 질문 있으면 버튼 누르고 마이크로 말하면 된다고&hellip;</li>
+<li>jeen__ : 이번 YAPC::Asia 초청스피커인 pjf 는 생각 외로 커뮤니티에서 별로 유명하지 않다고</li>
+<li>jeen__ : 그래도 발표는 재미있다나</li>
+<li>luzluna : pjf가 누구에요?</li>
+<li>jeen__ : <a href="http://yapcasia.org/2013/">http://yapcasia.org/2013/</a></li>
+<li>hongbot : [YAPC::Asia Tokyo 2013] &ndash; <a href="http://yapcasia.org/2013/">http://yapcasia.org/2013/</a></li>
+<li>jeen__ : autodie 만든사람이요</li>
+<li>luzluna : 아..</li>
+<li>jeen__ : 작년 White Camel Award</li>
+<li>jeen__ : <a href="https://twitter.com/JEEN_LEE/status/338657107895259136">https://twitter.com/JEEN_LEE/status/338657107895259136</a></li>
+<li>jeen__ : ㅋㅋㅋ</li>
+<li>hongbot : JEEN_LEE: このpodcast、同時翻訳してるんですけど… #bulknews <a href="http://t.co/BGrK6qtBaX">http://t.co/BGrK6qtBaX</a></li>
+<li>jeen_ : 방송 도중에 언급 ㅋㅋㅋㅋ</li>
+</ul>
+
+
+<blockquote class="twitter-tweet"><p>このpodcast、同時翻訳してるんですけど… <a href="https://twitter.com/search/%23bulknews">#bulknews</a> <a href="http://t.co/BGrK6qtBaX" title="http://twitter.com/JEEN_LEE/status/338657107895259136/photo/1">twitter.com/JEEN_LEE/statu…</a></p>&mdash; JEEN (@JEEN_LEE) <a href="https://twitter.com/JEEN_LEE/status/338657107895259136">May 26, 2013</a></blockquote>
+
+
+<script async src="http://jeen.github.io//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Download Percona MySQL Expo 2013 Slides]]></title>
+    <link href="http://jeen.github.io/blog/2013/05/25/download-percona-mysql-expo-2013-slides/"/>
+    <updated>2013-05-25T19:27:42+09:00</updated>
+    <id>http://jeen.github.io/blog/2013/05/25/download-percona-mysql-expo-2013-slides</id>
+    <content type="html"><![CDATA[<blockquote class="twitter-tweet" lang="ko"><p>Percona Live : MySQL Conference And Expo 2013 의 슬라이드를 다 긁어오는 스크립트 슥샥. 모두 60개정도. <a href="http://t.co/fpmNe0leud" title="http://www.percona.com/live/mysql-conference-2013/slides">percona.com/live/mysql-con…</a> <a href="https://t.co/32IBvl2KBk" title="https://gist.github.com/JEEN/5581298">gist.github.com/JEEN/5581298</a></p>&mdash; JEEN (@JEEN_LEE) <a href="https://twitter.com/JEEN_LEE/status/334498408838598656">2013년 5월 15일</a></blockquote>
+
+
+<script async src="http://jeen.github.io//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+
+
+
+<script src="https://gist.github.com/JEEN/5581298.js"></script>
+
+
+<p><a href="http://metacpan.org/module/AnyEvent::HTTP::LWP::UserAgent">AnyEvent::HTTP::LWP::UserAgent</a> 의 SYNOPSIS 의 내용을 참고해서 그냥 한번 깨작거려 봤습니다.</p>
+
+<p> 대상이 되는 사이트는</p>
+
+<ul>
+<li><a href="http://www.percona.com/live/mysql-conference-2013/slides">http://www.percona.com/live/mysql-conference-2013/slides</a></li>
+</ul>
+
+
+<p> 입니다.</p>
+
+<p> 여기에 페이지가 3개 정도 되고, 사람 손으로 그 만한 슬라이드 파일들을 받아오는 건 시간의 낭비라는 생각인데…</p>
+
+<p> 물론 10일 전에 받아놓고 아직 제대로 슬라이드를 지긋하게 쳐다본 적은 없다는 것이 함정이라면 함정입니다.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Using DBI Callbacks - Generate a SQLite file automatically]]></title>
+    <link href="http://jeen.github.io/blog/2013/05/20/using-dbi-callbacks-generate-sqlite-file-automatically/"/>
+    <updated>2013-05-20T11:59:04+09:00</updated>
+    <id>http://jeen.github.io/blog/2013/05/20/using-dbi-callbacks-generate-sqlite-file-automatically</id>
+    <content type="html"><![CDATA[<p> 이런저런 임시데이터를 주고받고 하는 용도로 SQLite 파일을 덩어리채로 주고받는 경우가 있습니다.</p>
+
+<p>매일매일 그런 일이 일어나니 파일에는 날짜 정도는 집어넣어줘야 되구요.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>DROP TABLE IF EXISTS item;
+</span><span class='line'>CREATE TABLE item (
+</span><span class='line'>  id    INTEGER NOT NULL PRIMARY KEY,
+</span><span class='line'>  name  VARCHAR(64),
+</span><span class='line'>  price INTEGER,
+</span><span class='line'>  maker VARCHAR(64),
+</span><span class='line'>  created_at INTEGER
+</span><span class='line'>);
+</span><span class='line'>...</span></code></pre></td></tr></table></div></figure>
+
+
+<p>대충 위와 같은 SQL 문을 이용해서 SQLite 파일안에 테이블도 만들어 줘야되고,</p>
+
+<p>이런저런 데이터들도 넣어줘야 되겠죠.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ sqlite db/item.db3 &lt; sql/item.sql</span></code></pre></td></tr></table></div></figure>
+
+
+<p>일단은 요렇게 SQLite 를 만들고…</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ perl bin/generate_data.pl</span></code></pre></td></tr></table></div></figure>
+
+
+<p>뭐 요런 식으로 <code>item.db3</code> 에 있는 테이블들에 데이터를 쑤셔넣고 보내는 식입니다.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>use MyApp::DB;
+</span><span class='line'>
+</span><span class='line'>my $db = MyApp::DB-&gt;new({ connect_info =&gt; [
+</span><span class='line'>    'dbi:SQLite:db/item.db3', "", "", {
+</span><span class='line'>      PrintError =&gt; 1,
+</span><span class='line'>      RaiseError =&gt; 1,
+</span><span class='line'>      Callbacks =&gt; {
+</span><span class='line'>          connected =&gt; sub {
+</span><span class='line'>              my $conn = shift;
+</span><span class='line'>              open my $fh, "&lt;", "sql/item.sql" or die "cannot found a sql file";
+</span><span class='line'>              my $sqls = do { local $/; &lt;$fh&gt; };
+</span><span class='line'>              for (split /;\s+/, $sqls) {
+</span><span class='line'>                  $conn-&gt;do($_);
+</span><span class='line'>              }
+</span><span class='line'>              return;
+</span><span class='line'>          },
+</span><span class='line'>      },
+</span><span class='line'>    }
+</span><span class='line'>]})
+</span><span class='line'>….</span></code></pre></td></tr></table></div></figure>
+
+
+<p>SQLite 의 경우는 Connection정보를 지정해서 해당 DB파일이 지정 디렉토리에 위치해있으면 그 파일을 참조하고,
+없으면 0바이트의 파일을 만들어버립니다.</p>
+
+<p>이때 DBI Callbacks 를 이용해서 연결되었을 시(connected), <code>sql/item.sql</code> 에 위치한 SQL 문들을 실행합니다.</p>
+
+<p>DBI는 한 액션에 여러 SQL 문을 실행할 수 없기 때문에 &lsquo;;&rsquo; 를 구분자로해서 실행하면 각 쿼리별로 쪼개지게 됩니다.</p>
+
+<p>그렇게 해서 별다른 SQLite 파일 생성에 따른 외부적인 액션이 없이 스크립트 실행시마다 만들어지게 됩니다.
+(물론 저 위의 코드는 일부를 발췌해왔기 때문에 뭐 날마다 어쩌고 한다든가, 파일을 옮긴다든가 하는 부분의 코드는 생략했습니다)</p>
+
+<p>위처럼 DBI Callbacks 나 DBI Subclassing 을 이용해서 프로파일링이나 쿼리로그 같은 다양한 모듈들이 존재하니,</p>
+
+<p>그쪽도 한번 참고해보시면 도움이 되지 않을까 생각합니다.</p>
+
+<h3>참고</h3>
+
+<ul>
+<li><a href="http://search.cpan.org/~timb/DBI-1.611/DBI.pm#Callbacks_(hash_ref)">http://search.cpan.org/~timb/DBI-1.611/DBI.pm#Callbacks_(hash_ref)</a></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Lancaster Consensus]]></title>
+    <link href="http://jeen.github.io/blog/2013/05/04/lancaster-consensus/"/>
+    <updated>2013-05-04T17:16:34+09:00</updated>
+    <id>http://jeen.github.io/blog/2013/05/04/lancaster-consensus</id>
+    <content type="html"><![CDATA[<h1>Lancaster Consensus</h1>
+
+<p>2008년 오슬로에서 개최된 첫번째 Perl QA Hackathon 에서는, Perl 의 품질관리와 툴체인에 관한 모듈의 저자, 메인테이너, 뜻 있는 사람들이 모여서, 몇가지 표준과 관행에 대해서 합의를 이뤘습니다. 이 때 발표된 합의는 Oslo Consensus 라는 이름으로 알려지게 되었습니다.</p>
+
+<p>그로부터 5년인 지난 2013년, Perl QA Hackathon 에서는 5년전과 마찬가지로 여러 전문가들이 모여, 새로이 통일된 견해가 필요해진 몇몇 문제들에 대해서 논의하였습니다.</p>
+
+<p>아래의 결정사항들은 이후의 방침을 나타내는 것이며, 경우에 따라서 구현에 걸리는 시간은 실제 작업을 희망하는 이들의 사정이나 희망자들이 나타날 지의 여하에 달려 있습니다.</p>
+
+<h2>툴 체인과 테스트</h2>
+
+<h3>최소지원 Perl 버젼</h3>
+
+<p>앞으로 Perl 툴체인은 2003년 9월에 릴리즈된 <code>Perl 5.8.1</code> 을 대상으로 하게 됩니다. 이에따라서, 툴체인 모듈은 PerlIO나, Perl 5.8 에서 개선된 Unicode 지원을 안심하고 이용할 수 있게 됩니다.</p>
+
+<p>또한, 5.8의 초기의 몇몇 릴리즈에서는 Unicode 관련 버그수정이 상당부분 이뤄졌기 때문에, 툴체인의 유지보수는 추후 최소버젼을 5.8.4 로 올리는 권리를 가지는 것으로 합니다(이는 Solaris 10 에 기본포함된 버젼).</p>
+
+<h3>Pure Perl 로 빌드하도록 지정</h3>
+
+<p>배포판에 따라서는 <code>XS</code> 버젼과 <code>Pure Perl</code> 버젼을 준비하고, <code>Makefile.PL</code> 이나 <code>Build.PL</code> 을 실행하는 단계에서 어느 것을 선택할 수 있도록 하는 것이 있습니다. 현시점에서는 이 배포판들은 각각의 독자적인 방법으로 유저에게 선택하게 하고 있기 때문에, CPAN 클라이언트나 그 외의 빌트 툴 쪽에서는 이 선택을 자동화시키고 싶은 유저의 욕구를 충족시켜줄 수 없는 상황이었습니다.</p>
+
+<p>앞으로, <code>Makefile.PL</code> 과 <code>Build.PL</code> 의 스펙에서는, 아래처럼 <code>Pure Perl</code> 버젼만 빌드되도록 커맨드라인 옵션이 포함되게 됩니다.</p>
+
+<ul>
+<li><code>PUREPERL_ONLY=1</code> (<code>Makefile.PL</code>의 경우)</li>
+<li><code>--pureperl-only</code> (<code>Build.PL</code>의 경우)</li>
+</ul>
+
+
+<p>이 옵션들은 다른 커맨드라인처럼, <code>PERL_MM_OPT</code> 또는 <code>PERL_MB_OPT</code> 같은 환경변수로 설정해도 됩니다.</p>
+
+<p>배포판 저자는 이 옵션이 존재하는 경우, 설치할 모듈이 (직접, 또는 <code>Inline</code> 모듈을 통해서) <code>XS</code> 를 불러오거나 플랫폼 고유의 코드를 동적으로 생성하지 않아도 되도록 보증해야 합니다. 설치된 파일은 아키텍쳐가 달라도 Perl 버젼이 같다면(어플리케이션을 <code>fatpack</code> 한다든가) 다른 머신으로 복사해도 제대로 동작해야 합니다. 이 조건을 만족시킬 수 없는 경우 <code>Makefile.PL</code> 이나 <code>Build.PL</code> 은 에러로 종료되어야 합니다.</p>
+
+<h3>테스트가 어떤 상황에서 실행되었는가(컨텍스트)를 지정하기 위한 환경변수</h3>
+
+<p>Oslo Consensus 에서는 테스트할 때의 컨텍스트를 알리는 것으로 <code>AUTOMATED_TESTING</code> 과 <code>RELEASE_TESTING</code> 이라는 두가지 환경변수를 정의했지만, 그 중 <code>AUTOMATED_TESTING</code> 에 대해서는 쉽게 혼동되었습니다. 경우에 따라서는 &ldquo;유저와의 상호동작을 하지 않는다&rdquo; 라는 의미로 사용되거나 &ldquo;시간이 걸리는 테스트를 실행한다&rdquo; 라는 의미로 사용되어 왔기 때문입니다.</p>
+
+<p>Lancaster 에서는 <code>Dist::Zilla</code> 와 같은 툴이 <code>AUTHOR_TESTING</code> 과 <code>RELEASE_TESTING</code> 을 지금 어떻게 구별하고 있는 지에 대해서도 (짧지만) 논의하였습니다.</p>
+
+<p>배포판의 저자는 앞으로 아래와 같은 내용들을 따라야 합니다.</p>
+
+<ul>
+<li><code>AUTOMATED_TESTING</code>: 이 환경변수가 참일 경우, 테스트를 실행하고 있는 것은 어떤 자동 테스트 구조이고, 모듈을 설치하고 있지 않다는 것을 의미합니다. <code>CPAN Smoker</code> 는 이 환경변수를 참으로 해야합니다. 또, CPAN 클라이언트는 이 환경변수를 설정해서는 안됩니다.</li>
+<li><code>NONINTERACTIVE_TESTING</code>: 이 환경변수가 참일 경우, 테스트 시에 유저와의 상호동작을 해서는 안됩니다. 테스트의 출력이 표시되지 않거나, 프롬프트에 응답이 돌아오지 않습니다.</li>
+<li><code>EXTENDED_TESTING</code>: 이 환경변수가 참일 경우, 테스트를 실행하고 있는 유저 또는 프로세스는, 끝날 때까지는 불필요하게 시간이 걸리거나 리소스를 필요로하는 옵션으로 테스트를 실행할 계획이 있다 라는 것을 의미합니다. 단, 실행 시의 기능을 테스트하는 것만을 포함해야 합니다.</li>
+<li><code>RELEASE_TESTING</code>: 이 환경변수가 참일 경우, 테스트는 릴리즈 시의 품질관리 프로세스의 일부로써 실행되어야 한다는 것을 의미합니다. CPAN 클라이언트는 이 환경변수를 설정해서는 안됩니다.</li>
+<li><code>AUTHOR_TESTING</code>: 이 환경변수가 참일 경우, 테스트는 저자 개인적인 개발 프로세스의 일부로써 실행된다는 것을 의미합니다. 이런 테스트는 릴리즈 전에 실행되는 지는 알 수 없습니다. CPAN 클라이언트는 이 환경변수를 설정해서는 안됩니다. 배포판의 패키지(ppm, deb, rpm 등)도 이 환경변수를 설정해서는 안됩니다.</li>
+</ul>
+
+
+<p>이미 CPAN 에서는 이런 환경변수의 설정을 간단하게 사용할 수 있게끔 하는 라이브러리가 두가지 존재합니다.</p>
+
+<ul>
+<li><a href="http://metacpan.org/module/Test::Is">Test::Is</a></li>
+<li><a href="http://metacpan.org/module/Test::DescribeMe">Test::DescribeMe</a></li>
+</ul>
+
+
+<p><code>CPAN Smoker</code> 나 통합 테스터는 자동 테스트를 수행한다는 것을 명시해야 합니다. 그리고 리소스에 따라 다르지만, 시간이 걸리는 테스트도 수행하도록 요구할 수 있습니다.</p>
+
+<p>CPAN 클라이언트는 설정에 따라서 자유롭게 비상호적인 테스트나 시간이 걸리는 테스트를 수행할 수 있습니다.</p>
+
+<p><code>CPAN Smoker</code> 나 클라이언트는 &ldquo;설정해서는 안되는&rdquo; 환경변수에 새로이 명시적으로 값이 설정되어 있는 경우, 그 값을 삭제하면 안됩니다.</p>
+
+<h3>Build.PL 스펙의 수정</h3>
+
+<p><em>David Golden</em> 과 <em>Leon Timmermans</em> 는 <code>Build.PL</code> 의 스펙책정에 힘써왔습니다. 이 스펙은 Build.PL 을 사용한 Perl 빌드 툴이 어떻게 동작해야 하는 가를 나타내는 것으로, 필연적으로 <code>Module::Build</code> 에 따르지만, 반드시 <code>Module::Build</code> 의 동작에 완전히 따라야 한다는 것은 아닙니다.</p>
+
+<p>Lancaster 에서는 <code>.modulebuildrc</code> 의 사용법과 의미는 스펙에서 제외되어야 한다고 합의하였습니다.</p>
+
+<h3>설치가 끝난 배포판의 데이터베이스</h3>
+
+<p>QA Hackathon 의 프로젝트의 하나로 <code>packlist</code> 를 대체하는 어떠한 것을 만드는 것이 있습니다. 설치가 끝난 배포판의 데이터베이스가 있다면, 설치가 끝난 배포판의 간단한 목록이나 제거툴, 설치가 끝난 모듈의 의존그래프의 트래킹 등을 간단하게 할 수 있게 될 겁니다.</p>
+
+<p>Lancaster 에서는 모듈은 수많은 다른 장소에서 설치될 것이기에 그런 데이터베이스는 <code>INC마다</code> 준비할 필요가 있다는 것과 <code>INC</code> 스스로 같은 동작으로 스택에 쌓아올릴 필요가 있다는 것에 합의하였습니다. 즉, <code>INC</code> 에 경로를 추가한다면 데이터베이스가 설치가 끝난 모듈은 변화할 것이라는 것입니다.</p>
+
+<p>또, 이런 데이터베이스 시스템이 코어 이외의 의존모듈을 요구하는 일은 있어서는 안되지만, 권장되는 CPAN 모듈이 설치되어 있는 경우에 확장기능을 제공할 수 있을 것입니다.</p>
+
+<p>그 외의 구현의 자세한 내용에 대해서는 시스템을 설계하는 사람에게 달려 있습니다.</p>
+
+<h3>설치 후의 테스트</h3>
+
+<p>Hackathon 참가자 안에는 모듈을 설치한 다음에도 그 모듈의 테스트를 실행할 수 있게 하는 시스템에 관심을 가지고 있는 사람들이 여럿 있었습니다. 예를들어 의존모듈을 업그레이드함으로써 모듈이 깨지지 않았는가 확인하거나, 전체 정합성을 테스트하기 위한 것입니다.</p>
+
+<p>Lancaster 에서는 그런 테스트를 수행할 경우, 테스트 중에 배포판 안의 모든 파일을 이용할 수 있게 해야합니다. 즉, 테스트는 배포판의 tarball 이 있는 디렉토리에서 실행되지 않으면 안되는 것으로 합의하였습니다. 또, 그런 테스트는 <code>make test-installed</code> 나 <code>Build test-installed</code> 라는 새로운 <code>make</code> 혹은 <code>Build</code> 타겟을 사용해서 실행해야 합니다. 이 타겟들은 <code>make test</code> 나 <code>Build test</code> 에 해당하지만, <code>INC</code> 에는 <code>blib</code> 을 추가하지 않도록 해야 합니다. 그리고 <code>prove</code> 어플리케이션을 사용해서는 안됩니다.</p>
+
+<p>또, 그런 테스트 시에는 <code>INC</code> 에 의한 모듈을 저장하거나 숨기는 방법도 존중할 필요가 있다는 것도 합의하였습니다. <code>PERL5LIB</code> 을 설정하면 &ldquo;설치된&rdquo; 배포판이 변할 가능성이 있고, 그에 따라서 어느 테스트가 실행되어야 하는지도 바뀔 수 있기 때문에 설치가 끝난 배포판의 데이터베이스와 연계할 것을 권장합니다.</p>
+
+<p>그 외의 구현의 자세한 내용에 대해서는 배포판의 디렉토리 내용을 처음 설치할 때에 저장하거나, <code>CPAN/BackPAN</code> 에서 다시금 가지고 오는 것을 포함해서 시스템을 설계하는 사람에 달려 있습니다.</p>
+
+<h2>META 파일의 스펙</h2>
+
+<h3>&ldquo;provides&rdquo; 필드</h3>
+
+<p><code>CPAN::Meta::Spec</code> 의 <code>provides</code> 필드는 &ldquo;file&rdquo; 키를 필수요소로 하고 있지만, 동적으로 생성되는 패키지의 경우, 그 의미가 명확하지 않았습니다. Lancaster 에서는 &ldquo;file&rdquo; 키는 그 패키지가 유래하는 배포판의 디렉토리 안에 있는 실제 파일을 참조해야야 한다고 합의하였습니다(그 파일이 <code>.pm</code> 파일이거나 <code>.PL</code> 파일이거나 또는 그 외의 동적으로 생성되는 파일인가 상관없이).</p>
+
+<h3>&ldquo;conflicts&rdquo; 개선</h3>
+
+<p>Lancaster 에서는 의존모듈 정보(prerequisite) 데이터에 포함된 <code>conflicts</code> 키의 이미 알려진 문제에 대해서도 몇가지 간단하게 의논하였습니다.</p>
+
+<p>어찌되었든 대부분의 개발자가 원하는 것은, 어떤 특정 모듈을 설치하면 다른 특정 버젼의 모듈을 깬다고 알려져 있는(예를 들어 Foo 를 2.0 으로 업그레이드 하면 3.14 보다 낮은 모든 Bar 가 깨지는) 것을 나타내는 방법입니다.</p>
+
+<p>이 문제의 개선에 흥미를 가지고 있는 쪽에서는, x_breaks 또는 유사 커스텀키를 사용하며, CPAN 클라이언트는 이를 지원하기 위한 패치를 받아서 프로토타입을 만드는 것을 권장합니다. 실전에서는 충분한 테스트가 끝났다면, 앞으로는 스펙의 버젼3의 후보가 될 수 있습니다.</p>
+
+<h2>PAUSE 와 CPAN</h2>
+
+<h3>PAUSE 에 있는 배포판 레벨의 데이터에 대한 장기적인 목표</h3>
+
+<p>의논의 극점에 있는 PAUSE 의 몇가지 문제점으로부터 PAUSE 는 패키지(이름공간) 레벨의 인덱스나 권한 데이터 외에, &ldquo;배포판&rdquo; 레벨의 데이터도 유지할 필요가 있다는 것이 명확해졌습니다. 예를들어 지금은 배포판의 권한을 양도하면 모든 패키지의 권한을 양도해야 했지만, 그 대신에 배포판을 단위로 한 권한의 양도가 가능하게 됩니다.</p>
+
+<p>Lancaster 에서는 이것은 장기적인 목표로 적절하다고 보고, 단기적으로는 눈 앞의 문제를 해결하기 위한 다른 제안을 구현하는 것으로 합의하였습니다.</p>
+
+<h3>대문자/소문자를 구별하지 않는 패키지의 권한</h3>
+
+<p>직접 의논된 것은 아니지만, 추가하고 싶은 내용으로 PAUSE 의 패키지 권한에 대해서는 간간히 대문자 소문자를 묻지 않게 될 예정입니다. 단, 대문자 소문자를 구별하지 않는 파일시스템에서는 설치된 경우에도 인덱스된 모듈은 확실하게 유니크하도록 대문자나 소문자는 보존될 예정입니다.</p>
+
+<h3>배포판 이름의 규칙</h3>
+
+<p>CPAN 에코 시스템에 속하는 웹 사이트나 툴의 대부분은 &ldquo;배포판이름&rdquo; 을 유니크한 식별자로 이용하고 있지만, 지금까지는 그것이 유니크하다는 것을 강제하는 것은 아무것도 없습니다. 유니크하지 않은 것을 허용하는 것은 얼마나 자주 말해도 혼란스럽지만, 최악의 경우는 보안적인 위험이 됩니다.</p>
+
+<p>앞으로, <code>PAUSE</code> 에 업로드될 배포판의 배포판 안에 인덱스된 패키지 이름과 &ldquo;대응하는&rdquo; 이름을 가져야합니다. 또, 업로드할 사람은 그 패키지의 권한을 가져야 합니다. 그렇지 않으면, 배포판 전체가 인덱스되지 않습니다.</p>
+
+<p>예를들어, <code>DAGOLDEN</code> 이 <code>Foo-Bar-1.23.tar.gz</code> 을 업로드 하는 경우, 배포판의 이름은 <code>Foo-Bar</code> 로, 그 배포판에는 인덱스 가능한 <code>Foo::Bar</code> 라는 패키지가 있어야 합니다.</p>
+
+<p>CPAN 에는 이런 규칙에 따르지 않는 배포판이 1000건 정도 있지만, 이것들에 대해서는 새로운 규칙의 예외로 합니다. 단, 이 배포판들에 대해서도 배포판 이름을 바꾸거나, 새롭게 .pm 파일을 추가하거나 또는 내부적으로 적절한 이름의 패키지를 도입해서 표준에 맞추는 것을 권장합니다.</p>
+
+<p>예를들어, <code>LWP</code>는 <code>libwww-perl-6.05.tar.gz</code> 로 릴리즈되지만, 만약 그 .pm 파일에 <code>package libwww::perl;</code> 이라는 것이 포함되어 있다면 그 패키지가 인덱스되어 표준에 따르게 됩니다.</p>
+
+<p>기술적으로는 <code>provides</code> 필드를 사용하면 올바른 패키지이름을 <code>META.json</code> 파일의 안에서만 선언하는 것도 가능합니다. 그 경우 &ldquo;file&#8221;의 값은 <code>META.json</code>　으로 해서, 그 패키지를 선언하는 파일이 <code>META.json</code> 이라는 것을 명시해야 합니다.</p>
+
+<h3>폐기 모듈이나 협력이 필요한 모듈에 도장을 찍는다</h3>
+
+<p>현시점에서는 에서는 CPAN 모듈의 저자가 사망한 경우, 그 사람의 모듈의 권한은 &ldquo;ADOPTME&#8221;라는 가공의 저자에 양도됩니다. 그 모듈을 유지보수하고 싶은 희망자가 있다면, 손들고 나와서 하고 싶다고 요구할 수도 있습니다.</p>
+
+<p>Lancaster 에서는 모듈이 폐기되거나 저자가 책임을 공유한 사람을 찾는 것을 나타내는 경우도 단기적으로는 같은 메커니즘을 사용해야 한다는 것에 합의하였습니다. 단, 저자가 없어진 경우와는 달리 이 경우들은 표시로써 &ldquo;공동유지보수자&rdquo; 의 권한을 사용해서, 원저자가 필요에 따라서는 그 표시를 삭제할 수 있게 할 예정입니다.</p>
+
+<p>(장기적으로는 PAUSE에 배포판 레벨의 데이터 모델에 따라, 이 요구에 보다 직접적으로 대처할 수 있을 것이라고 기대하고 있습니다)</p>
+
+<p>CPAN 검색 엔진등의 커뮤니티사이트에서는 이 퍼미션의 표시나 그에 관련된 의미를 이용해서 배포판의 상태를 전달해도 됩니다.</p>
+
+<ul>
+<li><code>ADOPTME(프라이머리의 경우)</code>: 이것은 일반적으로 저자가 죽었다는 것을 나타냅니다. 희망자는 <code>modules@perl.org</code> 경유로 인수를 요구할 수 있습니다.</li>
+<li><code>ADOPTME(공동유지보수자의 경우)</code>: 이것은 응답이 없는 것을 확인한 저자를 나타냅니다. 커뮤니티는 패키지에 이 표시를 붙일 때에는 인수된 경우와 마찬가지로 (즉, 저자에게 여러번 연락을 취한 다음에, <code>modules@perl.org</code> 경유로 요구한다는) 룰에 따라 제안할 수 있습니다. 희망자는 <code>modules@perl.org</code> 경유로 <code>ADOPTME</code> 모듈 인수를 요구할 수 있습니다. 추가로 기다리는 시간은 필요없습니다.</li>
+<li><code>HANDOFF(공동유지보수자의 경우)</code>: 이것은 저자가 영원히 주요 유지보수자의 역할을 다른 사람에게 넘기고 싶다는 것을 나타냅니다.</li>
+<li><code>NEEDHELP(공동유지보수자의 경우)</code>: 이것은 저자가 모듈의 유지보수를 도와줄 사람을 찾고 있다는 것으로, 주요유지보수자인 것은 계속하려고 계획하고 있다는 것을 나타냅니다.</li>
+</ul>
+
+
+<p><code>ADOPTME</code> 에서 &ldquo;인수&#8221;를 예외로해서 (이것은 <code>modules@perl.org</code> 를 통해야 합니다), CPAN 모듈의 저자는 이 공동유지 권한을 일반적인 PAUSE 인터페이스를 이용해서 관리해야 합니다.</p>
+
+<p>또, CPAN 모듈의 저자는 PAUSE 관리자에게 요구가 있다면 즉시 권한을 양도해도 좋다는 것을 나타내기 때문에, 주요유지보수자 또는 공동유지보수자의 권한을 스스로 ADOPTME 에 양도해도 됩니다.</p>
+
+<h3>PAUSE ID 자동등록</h3>
+
+<p>역사적으로 PAUSE ID 는 수작업으로 승인되어 왔기에, 등록까지는 종종 꽤 시간이 걸리곤 했습니다. Lancaster 에서는 로봇이나 스팸에 대한 적절한 보호책을 가지고 있다는 전제를 가지고 PAUSE 는 자동승인 시스템으로 옮긴다고 합의하였습니다. 이것으로 PAUSE 도 다른 프로그래밍 언어의 저장소나 오픈 소스 커뮤니티의 사이트와 어깨를 나란히 할 수 있을 것입니다.</p>
+
+<p>또, Lancaster 에서는 사용되지 않고, 활동의 흔적이 없는 <code>PAUSE ID</code> 는 일정기나 후 삭제해서 재이용할 수 있도록 한다라는 것에 합의하였습니다. 구체적으로 말하면, 과거에 몇번인가 업로드한 적이 있는 <code>PAUSE ID</code> 는 삭제해서는 안됩니다(BackPAN 에서는 그 PAUSE ID 에 연결된 파일이 존재하기 때문입니다). 또한 <code>PAUSE ID</code> 에 로그인(또는 <code>rt.cpan.org</code> 등의 프록시를 경유)한다면 충분히 활동의 흔적이 있다고 간주됩니다. 활동의 흔적이 없는 ID 도 PAUSE 에 로그인할 수 있도록 경고하는 메시지도 없이 삭제할 수는 없습니다.</p>
+
+<h3>CPAN 배포판의 자동 클린업</h3>
+
+<p>CPAN 상의 파일 중, 거의 절반 정도가 5년전의 것이지만, CPAN 모듈의 저자의 대부분은 낡은 배포판을 전혀 삭제하지 않습니다. CPAN 의 크기를 감당하기 위해서, Lancaster 에서는 어떤 조건을 가지고 옛 배포판은 자동적으로 삭제하도록 준비(그리고, 결과적으로 BackPAN 에만 보존하지 않도록 한다)하도록 합의하였습니다.</p>
+
+<p>삭제 대상으로 선택되는 배포판은 적어도 3개의 안정판이 존재해야 합니다. 그 3개의 안정판 중 제일 낡은 것도 더 옛 배포판의 리비젼 중, 5년 전의 것으로 <code>02packages</code> 파일에 인덱스되지 않은 것은 모두 삭제하도록 준비하게 됩니다.</p>
+
+<p>perl의 tarball 은 물론 모두 삭제 대상에서 제외됩니다.</p>
+
+<p>삭제가 준비된 것은 일반적으로 저자에게 통보되며 삭제준비를 취소할 수 있도록 유예기간도 주어집니다.</p>
+
+<p>클린업은 어떤 방법으로 PAUSE ID 가 대상이 된 순으로 수행하고, CPAN 모듈의 저자에게 빈번하게 삭제통지가 간다는 것을 피할 수 있도록 구현할 예정입니다.</p>
+
+<h3>모듈 등록</h3>
+
+<p>Lancaster 에서는 PAUSE 모듈 등록은 그 유용성을 거의 잃었다는 것에 합의하였습니다. 등록된 것은 일부의 CPAN 모듈이기 때문에 메타데이터(예를들어 &ldquo;DSLIP&rdquo;)의 총합제공원이 될 수 없고, 커버되는 정보도 대부분은 META 파일을 통해서 더욱 광범위하게 입수할 수 있기 때문입니다.</p>
+
+<p>Lancaster 에서는 지금이라도 새로운 CPAN 모듈의 저자가 맨 처음 모듈을 등록하려고 할 때에 종종 피드백을 받는다는 이점이 남아있다는 것은 인정하지만, PrePAN 등의 다른 장소 쪽의 새로운 저자에게는 보다 경험을 제공할 수 있다고 생각하고 있습니다. 특히 PrePAN 은 1-2사람의 PAUSE 관리자에게 그치지 않는 커뮤니티의 참가가 있고, (메일링 리스트의 아카이브를 검색하지 않아도) 참고할 만한 예제를 풍부하게 제공하고 있습니다.</p>
+
+<p>그 때문에 Lancaster 에서는 기존의 PAUSE 문서를 변경해서, 조언이 필요한 경우는 PrePAN 에 가도록 새로운 저자에게 (또는 경험을 가진 저자에게도) 안내한다는 것에 합의하였습니다.</p>
+
+<p>가까운 시일안에 PAUSE 는 모듈 등록 데이터베이스를 CPAN 미러에 공개하는 것을 그만둘 예정입니다 ( 인덱스 파일이 있다는 것을 기대하는 CPAN 클라이언트를 부수지 않도록, 인덱스 파일은 남아 있지만, 내용은 비게 될 예정입니다). 평가기간이 끝났다면, 모듈 등록은 아마도 닫히고, 그 기능도 PAUSE 에서 제외될 예정입니다.</p>
+
+<h3>Lancaster Consensus 의논에 참가한 사람들</h3>
+
+<p>의논은 3일간에 걸쳐 다소 변경이 있지만, 매일 20명 정도가 의논에 참가하였습니다. 아래의 참가자들에게 감사의 말을 전합니다.</p>
+
+<p>Andreas Konig, Barbie, Breno Oliveira, Chris Williams, Christian Walde, David Golden, Daniel Perrett, Gordon Banner, H. Merijn Brand, James Mastros, Jens Rehsack, Jess Robinson, Joakim Tormoen, Kenichi Ishigaki, Leon Timmermans, Liz Mattijsen, Matthew Horsfall, Michael Schwern, Olivier Mengue, Paul Johnson, Peter Rabbitson, Philippe Bruhat, Piers Cawley, Ricardo Signes, Salve J. Nilsen and Wendy van Dijk</p>
+
+<p>(참가자로 리스트에서 빠진 사람이 있다면 dagolden at cpan dot org 로 메일을 하거나 pull request 를 보내면 추가하겠습니다)</p>
+
+<h2>참고</h2>
+
+<ul>
+<li>원문 : <a href="https://github.com/Perl-Toolchain-Gang/toolchain-site/blob/master/lancaster-consensus.md">https://github.com/Perl-Toolchain-Gang/toolchain-site/blob/master/lancaster-consensus.md</a></li>
+<li>역자 : 이종진(JEEN_LEE)</li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Better Than Ack]]></title>
+    <link href="http://jeen.github.io/blog/2013/05/02/better-than-ack/"/>
+    <updated>2013-05-02T23:14:14+09:00</updated>
+    <id>http://jeen.github.io/blog/2013/05/02/better-than-ack</id>
+    <content type="html"><![CDATA[<p>계속 쓰다보니 자연스레 손에 익은 이유도 있고, 여러 서버들에 <code>ack</code> 이 기본적으로 깔려 있지 않은 이유도 있습니다. 그것이 제게 있어서 <code>ack</code> 을 사용하지 않는 핑계가 되겠네요.</p>
+
+<p>그런 현실중에 <code>ag</code> 를 소개하는 것은 조심스러울 따름입니다.</p>
+
+<ul>
+<li><a href="https://github.com/ggreer/the_silver_searcher">https://github.com/ggreer/the_silver_searcher</a></li>
+</ul>
+
+
+<p>위 github 페이지에서 확인할 수 있는 내용대로,</p>
+
+<ul>
+<li><code>ack</code> 보다 3-5배 빠르고</li>
+<li>검색시에 <code>.gitignore</code>, <code>.hgignore</code> 를 참고하여 검색대상에서 제외해줍니다.</li>
+<li>그리고 <code>ack</code> 보다 한글자 더 적은 노력으로 검색할 수 있습니다. :&ndash;)</li>
+</ul>
+
+
+<p>제 Github Pages Repo 안에 속한 1566 개의 파일을 대상으로 각각의 성능을 비교해봤습니다.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ time ag Perl
+</span><span class='line'>……
+</span><span class='line'>……
+</span><span class='line'>source.old/_posts/2012-08-28-building-a-perl-project-on-travis-ci.markdown
+</span><span class='line'>11:`Travis CI`은 이전에 얘기를 들었을 때는 별  관심이 없었는데(처음에는 확실히 Perl 을 지원하지 않아서), 언제부턴가 Perl 을 지원한다는 얘기를 듣고 Perl 커뮤니티에서 움직임이 조금씩 있더라구요. `Dist::Zilla::TravisCI` 같은 모듈들도 나오는 걸로 봐서…
+</span><span class='line'>15: - [Travis CI - Building a Perl Project](http://about.travis-ci.org/docs/user/languages/perl/)
+</span><span class='line'>43:Perl may be copied only under the terms of either the Artistic License or the
+</span><span class='line'>44:GNU General Public License, which may be found in the Perl 5 source kit.
+</span><span class='line'>46:Complete documentation for Perl, including FAQ lists, should be found on
+</span><span class='line'>48:Internet, point your browser at http://www.perl.org/, the Perl Home Page.
+</span><span class='line'>……
+</span><span class='line'>ag Perl  0.07s user 0.14s system 128% cpu 0.164 total</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ time grep -R Perl .
+</span><span class='line'>……
+</span><span class='line'>./source.old/_posts/2012-12-26-a-usecase-of-app-fatpacker.markdown:  # ABSTRACT: Perl binding for Redis database
+</span><span class='line'>……
+</span><span class='line'>grep -R Perl .  1.13s user 0.09s system 77% cpu 1.573 total</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ time ack Perl
+</span><span class='line'>……
+</span><span class='line'>public/page/5/index.html
+</span><span class='line'>245:&lt;a href="http://jeen.github.io/2012/07/26/export-facebook-event-attending-list-perl-kr-teatime/"&gt;Export Facebook Event Attending List - Perl-kr TeaTime&lt;/a&gt;
+</span><span class='line'>……
+</span><span class='line'>ack Perl  0.38s user 0.06s system 54% cpu 0.812 total</span></code></pre></td></tr></table></div></figure>
+
+
+<p>보시다시피 <code>ag</code> 의 위력은 대단합니다. 기본적으로 사용법도 <code>ack</code> 과 크게 다를 것도 없습니다.</p>
+
+<p>문제는 기본적으로 사용할 수 있냐는 것이겠는데… 요즘 세상에는 <code>Rex</code> 같은 걸로 그냥 뭐 한번만 수고해주면 뭐 사용할 서버들에 일괄적으로 설치하는 것은 일도 아니지 않냐라고 그냥 스스로 수긍해버리면 될 것 같습니다.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Rex Common Practice]]></title>
+    <link href="http://jeen.github.io/blog/2013/04/28/more-rex/"/>
+    <updated>2013-04-28T18:32:00+09:00</updated>
+    <id>http://jeen.github.io/blog/2013/04/28/more-rex</id>
+    <content type="html"><![CDATA[<h3>Parallelism 설정</h3>
+
+<p> 한 손에 셀 수 있을 정도의 서버규모라면 사실 특별하게 병렬처리를 하느니 하는 것은 별로 고려하지 않아도 되겠습니다만, 그 이상일 경우에는 한 작업을 수행함에 있어서 수십대의 서버에 순차적으로 접속하고 작업하고하는 것을 지켜보는 것은 상당히 고역이죠.
+ 이럴 경우에는 <code>parallelism</code> 을 지정합니다.</p>
+
+<p> 방법은 <code>Rexfile</code> 에 다음과 같이 설정합니다.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>parallelism =&gt; 10;</span></code></pre></td></tr></table></div></figure>
+
+
+<p> 이렇게 하면 한번에 10대의 서버에 대해서 병렬로 작업을 수행하게 됩니다. 어차피 작업은 원격지서버에서 하는 것이고, 로컬에서는 SSH 커넥션이 1개로 붙던 것들이 10개로 늘어나며, 물론 시간 또한 parallelism 설정갯수에 비례하게 됩니다. 하지만 로그는 이쁘게 남지는 않을 겁니다.</p>
+
+<p> 애시당초 CLI 옵션에 <code>parallelism</code> 옵션이 있었으면 좋겠는데&hellip;</p>
+
+<h3>Logging</h3>
+
+<p> 일단 작업 기록은 꾸준히 남기는 것이 좋겠다라고 생각하는 바, 매 작업분기마다 로그를 남기도록 합니다. 하지만 매뉴얼에는 마땅히 로그에 관한 설명은 보이지 않는 것 같았습니다.</p>
+
+<p> Rex 에서의 기본적인 로그를 쓰는 방법은 다음과 같습니다.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Rex::Logger::info("MSG"[, "TYPE"]);</span></code></pre></td></tr></table></div></figure>
+
+
+<p> 로그 메시지는 당연히 필수이며, TYPE 은 사실 안써도 됩니다만, error/warn 두가지 인수를 넣을 수 있습니다. 에러 상황시 확실하게 눈에 띄게 해주는 정도(노랑색, 빨강색)입니다.</p>
+
+<p> Parallelism 사용시에 병렬로 작업을 수행함으로 인해서 로그가 뒤죽박죽이 되기 마련인데, 이때 로그에 명기해주었으면 하는 것은 역시 각 서버의 호스트/IP입니다.</p>
+
+<ul>
+<li><a href="https://metacpan.org/module/Rex::Logger">https://metacpan.org/module/Rex::Logger</a></li>
+</ul>
+
+
+<p> <code>Rex::Logger</code> 에서 다음과 같은 사용법을 통해서 해결할 수 있습니다.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$Rex::Logger::format = '%h - %D - %s';
+</span><span class='line'># srv001 - 2012-04-12 18:35:12 - Installing package vim</span></code></pre></td></tr></table></div></figure>
+
+
+<p> 각 포맷에 대한 자세한 설명은 위의 Metacpan 링크에서 확인할 수 있습니다.</p>
+
+<h3>CPAN 의존모듈 설치</h3>
+
+<p> 애시당초 처음에 Rex 를 사용하는 이유가 여러대의 서버에 CPAN 모듈을 설치해야할 필요가 있었기 때문이었습니다. 하지만 사용구조상 일일이 모든 서버에 대해서 <code>perlbrew</code> 를 설치한다거나, 하는 호화(?)를 누릴 수는 없었습니다. <code>perlbrew</code> 를 꺼내는 것 자체가 애시당초 핀트에 어긋나버리는 얘기가 되어버리지만… &ndash;_&ndash;;</p>
+
+<p> 뭐 네, 방법은 간단합니다.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>run("curl -L http://cpanmin.us | perl - --notest --mirror ftp://cpan.mirror.cdnetworks.com/CPAN/ --mirror-only Test::More LWP::UserAgent JSON Nagios::Plugin");</span></code></pre></td></tr></table></div></figure>
+
+
+<p> 애시당초 Rex 의 접근은 <code>root</code> 로 이뤄지기 때문에 이와같은 설정으로 그냥 땜박질 할 수 있었지만, <code>sudo</code> 로 접근한다거나 하는 예외상황에서는 <code>--sudo</code> 옵션을 붙여주면 되겠습니다. 물론 <code>root</code> 로 접근했을 때 <code>--sudo</code> 옵션은 쓰면 오동작의 원인이 됩니다.</p>
+
+<p> <code>--notest</code> 는 물론 수많은 서버가 동일 구성이며, 처음 커맨드로 때려보고 한방에 된다고 했을 때, 테스트가 불필요하다는 판단아래에서 집어넣었구요.</p>
+
+<p> 좀 더 속도개선을 노려본다면 <code>--mirror</code> 옵션을 통해서 <code>CDNetworks</code> 같은 CPAN Mirror 를 이용해보는 것도 괜찮을 것 같습니다. 눈에 띄는 속도향상을 체감할 수 있을 겁니다.</p>
+
+<h3>결론</h3>
+
+<p> 어떤 일을 하기에 필요한 도구를 찾아서 사용하는 것이 일반적인 접근일텐데, 때로는 어떤 도구를 사용하기 위해서 일부러 일을 그쪽방향으로 맞추는 경우를 주변에서 많이 접하게 됩니다. 저는 어떻게해서 Rex 를 알고 사용하게 되었는지 이미 까먹었지만, 하는 일에 대한 최적의 선택이었다고 생각합니다.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Data::Printer vs Data::Dump(er)]]></title>
+    <link href="http://jeen.github.io/blog/2013/04/08/data-printer-vs-data-dump-er/"/>
+    <updated>2013-04-08T12:59:00+09:00</updated>
+    <id>http://jeen.github.io/blog/2013/04/08/data-printer-vs-data-dump-er</id>
+    <content type="html"><![CDATA[<p> 여태껏 많은 Perl 코드에서 습관적으로 <code>Data::Dumper</code> 를 사용해왔습니다.</p>
+
+<blockquote><p>안되면 찍어봐라</p></blockquote>
+
+<p> 라는 가장 기본적인 디버깅 방법론을 <code>Data::Dumper</code> 와 함께 해왔었죠. 물론 코어모듈이기때문에 별다른 모듈 설치없이 그냥 사용할 수 있는 점이 가장 큰 매력이었습니다.</p>
+
+<p> 단순한 데이터구조에서는 빛을 발하지만, 이런저런 데이터들이 서로 어우러지고 구겨지고 하는 구조에 한글과 같은 멀티바이트문자가 들어갔을 때는 사정없이 깨져버리는 문제가 있습니다. 물론 회피책도 있기는 하지만 매번 그러기도 쉽지가 않죠. 기존의 많은 <code>Data::Printer</code> 에도 언급되었다시피, <code>DBIx::Class</code> 오브젝트를 찍어보는 것에 매우 효과적입니다. <code>DateTime</code> 도 마찬가지 입니다. 이는 <code>DBIx::Class</code> 나 <code>DateTime</code> 을 <code>Data::Dumper</code> 로 찍어본 사람이라면 누구나 느껴봤을 법한 것이죠.</p>
+
+<p> 아무튼 그래서 <code>Data::Printer</code> 를 사용하기 시작했습니다. 현재 회사에서는 이전과는 달리 웹개발에 메인으로 Perl 을 사용하지 않고 주로 여러가지 배치작업이나 스크래핑 작업 용도로 사용하고 있어서 주로 사용하는 모듈을 그냥 처음부터 집어넣고 시작하고 있습니다.</p>
+
+<p><img src="https://dl.dropboxusercontent.com/u/262117/blog-assets/screenshot-201304112.png" alt="https://dl.dropboxusercontent.com/u/262117/blog-assets/screenshot-201304112.png" /></p>
+
+<p> 그리고 결정적으로 키와 값의 색 구분이라든가, 배열의 인덱스 번호를 좌르륵 이라든가, 한글이 안깨진다든가…</p>
+
+<p> 단점은 없는 게 아닙니다. 그러니까 좀 규모가 있는 데이터를 <code>Data::Printer</code> 로 덤프하면 그 나름대로 치장하는 시간이 좌르르륵 올라갑니다. 근데 뭐 그런 규모있는 데이터를 <code>Data::Printer</code> 로 뽑는 것 자체가 이상한 일이라 &ndash;_&ndash;;;</p>
+
+<p> 아 그리고 <code>Data::Printer</code> 의 <code>p</code> 함수는 기본적으로 인자를 기본형만 받을 수 있습니다.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>p [{ a =&gt; 1 }]</span></code></pre></td></tr></table></div></figure>
+
+
+<p>이라고 했을 때,</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Type of arg 1 to Data::Printer::p must be one of [@$%&]</span></code></pre></td></tr></table></div></figure>
+
+
+<p>라는 에러메시지가 나옵니다.</p>
+
+<p> 아 그리고 <code>Data::Printer</code> 의 출력은 기본적으로 STDERR 로 나옵니다. 물론 뭐 하고 싶다면야 STDOUT 으로 지정할 수 있습니다.</p>
+
+<ul>
+<li><a href="https://metacpan.org/module/Data::Printer#Changing-output-targets">https://metacpan.org/module/Data::Printer#Changing-output-targets</a></li>
+</ul>
+
+
+<p> <code>Data::Printer</code> 와 함께 깔끔한 디버깅을&hellip;</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Using Rex - Environment]]></title>
+    <link href="http://jeen.github.io/blog/2013/04/04/using-rex-environment/"/>
+    <updated>2013-04-04T12:28:00+09:00</updated>
+    <id>http://jeen.github.io/blog/2013/04/04/using-rex-environment</id>
+    <content type="html"><![CDATA[<p> 주위 사람들은 Chef나 Fabric 을 많이 쓴다고 하지만 ( 그보다 손으로 여전히 하는 사람들이 더 많은 것 같기도 ), Rex 에 그냥 적응하면서 여전히 <a href="http://rexify.org">Rex</a> 를 사용하고 있습니다. 회사를 옮기고 새로운 작업환경을 둘러보다가 이전의 패턴이 그대로 먹히지 않기에 기존에 사용하던 Rexfile 의 구조도 살며시 바꿔나가야 했습니다.</p>
+
+<h2>Rex 초기 설정</h2>
+
+<p> Rex 가 설치되어 있다면, <code>rexify</code> 커맨드를 사용할 수 있습니다. 이 커맨드를 이용해서 초기 뼈대를 만들어 봅니다.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ rexify M</span></code></pre></td></tr></table></div></figure>
+
+
+<p>그러면 아래와 같은 구성으로 Rex 를 사용하기 위한 기본 구성이 마련됩니다.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ tree
+</span><span class='line'>.
+</span><span class='line'>├── Rexfile
+</span><span class='line'>└── lib
+</span><span class='line'>    └── M.pm</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>Rexfile</code> 에는 온갖 설정 정보를 넣고, M.pm 에는 각 Task 를 정의해둡니다.</p>
+
+<h2>서버 그룹 위의 또 다른 그룹을 정의한다?</h2>
+
+<p>　지금까지는 서버의 목적, 그러니까 <code>DB</code> 서버 면 <code>DB</code> 그룹에 , <code>Web</code> 서버면 <code>Web</code> 그룹에 묶으면 되었는데요. 하지만 현재의 회사에서는 서비스그룹이 나뉘어져 있기도 하고, 계정정보도 좀 다르기도 하고 그런 게 있습니다. &ndash;_&ndash;;</p>
+
+<p> 그래서 <code>environment</code> 로 각 그룹을 묶어서 별도로 관리하기로 했습니다.</p>
+
+<p> 그런 것을 고려해서 써놓은 Rexfile 은 아래와 같습니다.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>use Rex -feature =&gt; 0.40;
+</span><span class='line'>
+</span><span class='line'>environment sdt =&gt; sub {
+</span><span class='line'>    set user =&gt; "xxxx";
+</span><span class='line'>    set password =&gt; "xxxxxx";
+</span><span class='line'>    set -passauth;
+</span><span class='line'>
+</span><span class='line'>    set group =&gt; "all" =&gt; qw/1.2.3.51 1.2.3.52 1.2.3.53 1.2.3.54 1.2.3.55 1.2.3.56/;
+</span><span class='line'>    set group =&gt; "db"  =&gt; qw/1.2.3.53 1.2.3.54/;
+</span><span class='line'>    set group =&gt; "web" =&gt; qw/1.2.3.51 1.2.3.52 1.2.3.55 1.2.3.56/;
+</span><span class='line'>};
+</span><span class='line'>
+</span><span class='line'>environment pshd =&gt; sub {
+</span><span class='line'>    set user =&gt; "xxxx";
+</span><span class='line'>    set password =&gt; "xxxxxxxx";
+</span><span class='line'>    set -passauth;
+</span><span class='line'>    set group =&gt; "all" =&gt; qw/1.2.4.31 1.2.4.32 1.2.4.33 1.2.4.34 1.2.4.35 1.2.4.36/;
+</span><span class='line'>    set group =&gt; "db"  =&gt; qw/1.2.4.35 1.2.4.36/;
+</span><span class='line'>    set group =&gt; "web" =&gt; qw/1.2.4.31 1.2.4.32 1.2.4.33 1.2.4.34/;
+</span><span class='line'>};
+</span><span class='line'>
+</span><span class='line'>require M;</span></code></pre></td></tr></table></div></figure>
+
+
+<p>이렇게 <code>sdt</code> 와 <code>pshd</code> 라는 environment 를 따로 빼놓고 그 안에 각각 전체와 Web, DB 각각을 정의해둡니다.</p>
+
+<p> <code>M.pm</code> 에는 <code>restart-opsview-agent</code>, <code>restart-munin-node</code>, <code>restart-apache</code>, <code>deploy-apps</code> 같은 뭐 이런저런 Task 들이 정의되어 있다고 치고…</p>
+
+<p> 그런 것들을 각 environment 의 그룹단위로 실행시키도록 합니다.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ rex -E sdt -G all M:restart-opsview-agent</span></code></pre></td></tr></table></div></figure>
+
+
+<p> 위처럼 <code>-E</code> 의 인자값으로 environment 를 지정하고 <code>-G</code> 의 인자값으로 all 그룹을 지정해줌으로써, sdt 의 전체 서버에 대해서 <code>opsview-agent</code> 를 재시작하게끔 합니다.</p>
+
+<h2>결론</h2>
+
+<p> 사실은 뭐 각 서버에 SSH Key 를 박아넣고 사용해야 좀 더 안심이 되기도 하지만, 여기에는 뜻모를 어른들의 사정이 숨어져 있는지라 쉽게 그럴수는 없기도 하답니다. &ndash;_&ndash;; 좀 더 시간을 두고 뭐 여러가지 불안요소와 편의성을 도모하기로 하고…</p>
+
+<p> 터미널 사용에 익숙하지 않은 팀원들을 위해서 <code>Rex::WebUI</code> 도 살며시 검토해봤는데, 아직까지는 Task 에 기재된 정보를 기준으로 읽어들이는 것 밖에 되지 않는지라… 위처럼 그룹을 지정하거나 environment 를 지정하거나 하는 것은 불가능하군요. 뭐 어차피 서버 데몬을 아무나 만지게 하고 그러는 것도 조심스러운 지라… &ndash;_&ndash;;; 꼭 모두가 써야하는 것인가 하는 의문이 있어서, 이건 뭐 전제자체가 붕괴되는 군요.</p>
+
+<p> 아무튼 Rex 괜찮습니다.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[cpanm 1.6 is here for you]]></title>
+    <link href="http://jeen.github.io/blog/2013/02/28/cpanm-1-dot-6-is-here-for-you/"/>
+    <updated>2013-02-28T09:34:00+09:00</updated>
+    <id>http://jeen.github.io/blog/2013/02/28/cpanm-1-dot-6-is-here-for-you</id>
+    <content type="html"><![CDATA[<p> 엊그제 cpanm 1.6 이 릴리즈되었습니다. 그동안 개발버젼으로 1.6에 포함될 기능들이 일부 소개되어 왔지만, 아무튼 뭐 @miyagawa 씨가 친히 Screencast 까지 준비해서 소개할 정도로 많은 기능들이 추가되었습니다.</p>
+
+<p> <iframe width="560" height="315" src="http://www.youtube.com/embed/6Vglyf7X2S8" frameborder="0" allowfullscreen></iframe></p>
+
+<h2>버젼지정 설치</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ cpanm MIYAGAWA/Plack-1.0015.tar.gz</span></code></pre></td></tr></table></div></figure>
+
+
+<p>위처럼 번거로운 버젼지정 설치방식이</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ cpanm Plack@1.0015</span></code></pre></td></tr></table></div></figure>
+
+
+<p>이렇게 간단해졌습니다.</p>
+
+<p>예전에 <code>Mail::Sender</code> 의 마이너버젼에 따라서 인코딩지정이 좀 엉망이 되어서 우회코드를 쓸 까 하다가</p>
+
+<p>그냥 증상이 나타나기 이전버젼으로 땜빵으로 버티던 기억이 있습니다. (물론 해당 버젼의 동작이 이상해서 뭐 금방 업데이트 되었었지만…)</p>
+
+<h2>개발버젼 설치</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ cpanm --dev Plack</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>--dev</code> 옵션을 이용하여 개발버젼의 모듈을 설치할 수 있습니다.</p>
+
+<p>저같은 경우는 요즘 거의 개발버젼을 보고 사용하는 경우가 없어서 쓸 일은 없을 것 같습니다.</p>
+
+<ul>
+<li>버젼범위 지정</li>
+</ul>
+
+
+<p> 1.0000 이상 2.0000 미만의 Plack 모듈 설치</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ cpanm Plack~"&gt;= 1.0000, &lt; 2.0000"</span></code></pre></td></tr></table></div></figure>
+
+
+<p> 1.0000 버젼의 Plack 설치 (<code>cpanm Plack@1.0000</code> 과 동일합니다.)</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ cpanm Plack~"== 1.0000"</span></code></pre></td></tr></table></div></figure>
+
+
+<p> 1.0000 이상이지만 1.0016 버젼은 제외한 가장 최신의 Plack 모듈 설치</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ cpanm Plack~"&gt;= 1.0000, != 1.0016"</span></code></pre></td></tr></table></div></figure>
+
+
+<p>사실 <code>Makefile.PL</code> 에 의존모듈들을 넣었을 때 위와 같은 표기가 필요할 경우가 발생할 수 있겠습니다만, 대개의 경우는 특정 버젼만 지정해서 사용하는 경우가 많았기 때문에 어떨런지 잘 모르겠습니다.</p>
+
+<h2>Git Repository 에서 받아서 설치</h2>
+
+<p> 몇몇 CPAN Author 들을 보면, CPAN 에 올릴 만큼 정비되지 않았다는 이유로 Github 에만 공개해놓는 경우를 많이 볼 수 있습니다. 몇번 그런 경우가 있었고, 일부러 다른 툴을 사용해서 Github 에서 CPAN Module 을 설치했던 기억도 있습니다. 이제부터 cpanm 이 이런 케이스를 지원해주니 다행이군요.</p>
+
+<p> 기본 브랜치를 설치</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ cpanm git://github.com/JEEN/p5-WebService-Aladdin.git</span></code></pre></td></tr></table></div></figure>
+
+
+<p> devel 브랜치를 설치</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ cpanm git://github.com/JEEN/p5-WebService-Aladdin.git@devel</span></code></pre></td></tr></table></div></figure>
+
+
+<p> 특정 커밋내용이 적용된 부분을 설치</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ cpanm git://github.com/JEEN/p5-WebService-Aladdin.git@730fbd0a80</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>결론</h2>
+
+<p> perlbrew 에서 <code>perlbrew install-cpanm</code> 으로 설치된 cpanm 을 사용하고 있었는데,</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ cpanm --self-upgrade</span></code></pre></td></tr></table></div></figure>
+
+
+<p> 로는 perlbrew 를 통해서 설치된 cpanm 의 버젼이 바뀌지 않는군요. 그럴 경우는,</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ perlbrew install-cpanm</span></code></pre></td></tr></table></div></figure>
+
+
+<p> 을 통해서 기존의 cpanm 을 덮어써서 설치할 수 있습니다.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[A usecase of App::Fatpacker - Nagios Plugin]]></title>
+    <link href="http://jeen.github.io/blog/2012/12/26/a-usecase-of-app-fatpacker/"/>
+    <updated>2012-12-26T23:48:00+09:00</updated>
+    <id>http://jeen.github.io/blog/2012/12/26/a-usecase-of-app-fatpacker</id>
+    <content type="html"><![CDATA[<p> 최근 업무때문에 Nagios Plugin 을 만져야 하는 일들이 빈번하게 있었고, 앞으로도 발생할 소지가 상당히 높습니다. 이런 Nagios Plugin 을 만들거나 기존에 만들어 진 것들을 간편하게 다른 복수의 서버에 배포하는 일도 필요합니다.</p>
+
+<p> Nagios Plugin 이야 굳이 언어를 가리지 않는다고 치더라도, 언어의 특정 라이브러리에 의존을 가지는 경우가 많습니다. MongoDB 용 Nagios Plugin 에는 Python 의 pymongo 라이브러리를 설치해야하는 경우가 있지요.</p>
+
+<p> 일례로 Redis 용 Nagios Plugin 을 설치할 시에는 Redis CPAN 모듈을 필요로 합니다. 그런데 Redis 서버가 여러대이고, 이 여러대의 서버에 매번 Redis 모듈을 깔고, Redis 모니터링용 Nagios Plugin 도 설치를 해야하는 경우가 있습니다. 그냥 뭐 시간을 좀 허비해서라도 그렇게 번거로운 일을 하면 일이야 끝나겠지만, 현인(@aer0 님)의 조언을 빌어서 <a href="http://metacpan.org/module/App::FatPacker">App::FatPacker</a> 를 사용해서 단일 스크립트에 우겨넣는 방향으로 돌리도록 합니다.</p>
+
+<p> 우선은 <code>App::FatPacker</code> 를 설치하면 <code>fatpack</code> 이라는 커맨드를 사용할 수 있습니다.</p>
+
+<p> <a href="http://exchange.nagios.org">Nagios Exchange</a> 에서 찾아낸 <a href="http://exchange.nagios.org/directory/Plugins/Databases/check_redis-2Epl/details">check_redis</a> 중에 <code>check_redis.pl</code> 파일이 위에 말한대로 Redis 모듈에 의존이 걸린 상황입니다.</p>
+
+<p> 그럼 우선 <code>fatpack</code> 커맨드로 다음과 같이 입력을 합니다.</p>
+
+<p><del> bash
+$ fatpack trace check_redis.pl
+check_redis.pl syntax OK
+</del></p>
+
+<p> 결과 <code>syntax OK</code> 가 뜨고 해당 디렉토리에 <code>fatpacker.trace</code> 라는 파일이 생성됩니다.</p>
+
+<p><del> bash
+$ cat fatpacker.trace
+IO/Handle.pm
+List/Util.pm
+Getopt/Long.pm
+SelectSaver.pm
+IO/Socket.pm
+Fcntl.pm
+Text/ParseWords.pm
+Symbol.pm
+Scalar/Util.pm
+IO/Socket/INET.pm
+Errno.pm
+fields.pm
+warnings/register.pm
+Encode/Alias.pm
+Time/HiRes.pm
+Encode/Config.pm
+Encode/Encoding.pm
+Redis.pm
+Encode.pm
+base.pm
+Config.pm
+IO.pm
+IO/Socket/UNIX.pm
+Carp.pm
+bytes.pm
+Exporter/Heavy.pm
+vars.pm
+constant.pm
+Socket.pm
+Try/Tiny.pm
+IO/Select.pm
+overload.pm
+lib.pm
+DynaLoader.pm
+Data/Dumper.pm
+</del></p>
+
+<p>내용을 보면 말 그대로 해당 모듈이 가지고 있는 의존 모듈이 좌르르륵 표시됩니다. 물론 걔중에는 Core 모듈도 있기도 합니다.</p>
+
+<p> 일단 <code>App::FatPacker</code> SYNOPSIS 대로 진행을 해보면…</p>
+
+<p><del> bash
+$ fatpack packlists-for <code>cat fatpacker.trace</code>  > packlists
+</del></p>
+
+<p>위 결과로 생긴 <code>packlists</code> 는 파일은 다음과 같은 내용을 가집니다.</p>
+
+<p><del> bash
+$ cat packlists
+/home/jeen/perl5/perlbrew/perls/perl-5.14.0/lib/5.14.0/x86_64-linux-thread-multi/auto/Time/HiRes/.packlist
+/home/jeen/perl5/perlbrew/perls/perl-5.14.0/lib/site_perl/5.14.0/x86_64-linux-thread-multi/auto/Redis/.packlist
+/home/jeen/perl5/perlbrew/perls/perl-5.14.0/lib/site_perl/5.14.0/x86_64-linux-thread-multi/auto/Try/Tiny/.packlist
+</del></p>
+
+<p>각 의존 모듈 위치에 맞춰서 <code>.packlist</code> 파일이 생성되고, 그 내용은…</p>
+
+<p><del> bash
+$ cat /home/jeen/perl5/perlbrew/perls/perl-5.14.0/lib/site_perl/5.14.0/x86_64-linux-thread-multi/auto/Redis/.packlist
+/home/jeen/perl5/perlbrew/perls/perl-5.14.0/lib/site_perl/5.14.0/Redis.pm
+/home/jeen/perl5/perlbrew/perls/perl-5.14.0/lib/site_perl/5.14.0/Redis/Hash.pm
+/home/jeen/perl5/perlbrew/perls/perl-5.14.0/lib/site_perl/5.14.0/Redis/List.pm
+/home/jeen/perl5/perlbrew/perls/perl-5.14.0/man/man3/Redis.3
+/home/jeen/perl5/perlbrew/perls/perl-5.14.0/man/man3/Redis::Hash.3
+/home/jeen/perl5/perlbrew/perls/perl-5.14.0/man/man3/Redis::List.3
+</del></p>
+
+<p>위와 같습니다.</p>
+
+<p>그리고 다음 커맨드를 입력해봅니다.</p>
+
+<p><del> bash
+$ fatpack tree <code>cat packlists</code>
+</del></p>
+
+<p>그 결과 현재 디렉토리에서 <code>fatlib</code> 이라는 디렉토리가 생성되고 그 안에 관련 의존모듈들이 복사됩니다.</p>
+
+<p><del> bash
+$ tree
+…
+├── fatlib
+│   ├── Redis
+│   │   ├── Hash.pm
+│   │   └── List.pm
+│   ├── Redis.pm
+│   ├── Try
+│   │   └── Tiny.pm
+│   └── x86_64-linux-thread-multi
+│       ├── Time
+│       │   └── HiRes.pm
+│       └── auto
+│           └── Time
+│               └── HiRes
+│                   ├── HiRes.bs
+│                   └── HiRes.so
+…
+</del></p>
+
+<p>그럼 다음 커맨드를 입력해보면…</p>
+
+<p><del> bash
+$ (fatpack file; cat check_redis.pl ) > check_redis.packed.pl
+Can&rsquo;t stat /home/jeen/fp/tt/lib: 그런 파일이나 디렉터리가 없습니다
+ at /home/jeen/perl5/perlbrew/perls/perl-5.14.0/lib/site_perl/5.14.0/App/FatPacker.pm line 200
+BEGIN failed&mdash;compilation aborted at /home/jeen/perl5/perlbrew/perls/perl-5.14.0/bin/fatpack line 3.
+</del></p>
+
+<p>제대로 동작하지 않습니다. 에러가 발생하네요. 정답은 에러메시지에 있습니다. <code>App::FatPacker</code> 자체는 Perl Library 규칙에 정형화된 디렉토리 구조를 가정하고 있습니다. 즉 <code>lib</code> 디렉토리가 존재하지 않기 때문에 발생하는 것이죠. 뭐 물론 다운받은 <code>check_redis.pl</code> 파일 하나만 있는 데 <code>lib</code> 디렉토리를 가지고 뭐 더 넣고 자시고 할 것도 아닌데…, 그래도 뭐 일단 사태해결을 위해서 아무것도 없어도 그냥 <code>lib</code> 디렉토리 하나는 만들어 줍니다.</p>
+
+<p>그리고 다시 실행해보면 <code>check_redis.packed.pl</code> 이라는 파일이 생성됩니다.</p>
+
+<p>~~~ perl
+ # This chunk of stuff was generated by App::FatPacker. To find the original
+ # file&rsquo;s code, look for the end of this BEGIN block or the string &lsquo;FATPACK&rsquo;
+BEGIN {
+my %fatpacked;</p>
+
+<p>$fatpacked{&ldquo;Redis.pm&rdquo;} = &lt;&lt;&lsquo;REDIS&rsquo;;
+  package Redis;</p>
+
+<p>  # ABSTRACT: Perl binding for Redis database
+  our $VERSION = &lsquo;1.955&rsquo;; # VERSION
+  our $AUTHORITY = &lsquo;cpan:MELO&rsquo;; # AUTHORITY
+  …
+~~~</p>
+
+<p> 일단 Nagios Plugin 은 기본 실행권한을 가지는 파일로 해두는 것이 여러모로 편합니다. 한가지 주의할 점은 일단 위처럼 생성된 파일에서 shebang line 이 존재하지 않기때문에 shebang line 을 추가해주면 됩니다. :&ndash;)</p>
+
+<p><del> perl
+ #!/usr/bin/env perl
+</del></p>
+
+<p> 위의 내용을 <code>check_redis.packed.pl</code> 파일의 첫째줄에 추가해줍니다.</p>
+
+<p> 그리고 완성된 파일들을 Redis 서버에 붙여서 <code>check_nrpe</code> 등으로 동작을 확인하고 설정에 추가하는 것으로 관련된 작업은 끝이 났습니다.</p>
+
+<p> 파일 중앙배포와 관련해서도 다양한 이슈가 있지만 이에 관련해서는 추후 <code>Rex</code> 를 다루면서 이야기를 계속할 까 합니다.</p>
+
+<p> 다 쓰고 나서 검색을 해보니 예전에 @aer0 님께서 작성하신 블로그 기사가 있군요.</p>
+
+<ul>
+<li><a href="http://aero2blog.blogspot.kr/2010/09/perl-appfatpacker.html">Perl 스크립트에 필요한 모듈 같이 넣기 App::FatPacker</a></li>
+</ul>
+
+
+<p>덩달아서 같이 참고하시면 좋을 것 같습니다.</p>
+]]></content>
+  </entry>
+  
+</feed>

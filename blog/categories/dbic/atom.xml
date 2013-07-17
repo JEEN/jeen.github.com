@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: dbic | Jeen - Yet anothere techlog]]></title>
+  <link href="http://jeen.github.io/blog/categories/dbic/atom.xml" rel="self"/>
+  <link href="http://jeen.github.io/"/>
+  <updated>2013-07-17T19:50:53+09:00</updated>
+  <id>http://jeen.github.io/</id>
+  <author>
+    <name><![CDATA[Jeen Lee]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[DBIx::Class and JSON]]></title>
+    <link href="http://jeen.github.io/blog/2012/08/25/dbix-class-and-json/"/>
+    <updated>2012-08-25T12:44:00+09:00</updated>
+    <id>http://jeen.github.io/blog/2012/08/25/dbix-class-and-json</id>
+    <content type="html"><![CDATA[<p> 흔한 웹서비스의 흔한 AJAX 나 흔한 RESTful API 를 제공하기 위해서, 대개 JSON 포맷의 데이터를 서버에서 뿜어내고는 합니다.</p>
+
+<p> 하지만 누구나가 <code>Catalyst</code> + <code>DBIx::Class</code> 조합에서 이렇게 하면 되는 게 아닐까 하고 접근했다가…</p>
+
+<blockquote><p>… encountered object &lsquo;..&rsquo;, but neither allow_blessed nor convert_blessed settings are enabled …</p></blockquote>
+
+<p> 라는 에러를 접하게 됩니다. bless 된 오브젝트를 어떻게든 JSON 인코딩을 시도하려고 했을 때는 위와 같은 에러를 쉬이 접할 수 있습니다.</p>
+
+<p> 이것을 푸는 방법은 사실 여러가지가 있습니다.</p>
+
+<p> 이것저것 신경쓰지 말고 한번에 가자고 할 때는 <code>Catalyst::View::JSON</code> 에서 인코딩하게 되는 stash 된 값들을 전부 ArrayRef 나 HashRef 로 변환해서 넘기는 방법입니다.</p>
+
+<p>~~~ perl
+   my @data;
+   my $rs = $c->model(&lsquo;DB&rsquo;)&ndash;>resultset(&lsquo;User&rsquo;)&ndash;>search();
+   while(my $row = $rs->next) {</p>
+
+<pre><code>   push @data, {
+       id =&gt; $row-&gt;id,
+       name =&gt; $row-&gt;name,
+       created_at =&gt; $row-&gt;created_at,
+   };
+</code></pre>
+
+<p>   }
+   $c->stash->{people} = \@data;
+~~~</p>
+
+<p>위처럼 특정컬럼을 선별해서 넣어주는 방법이 있겠지요. 좀 더 단순화한다면, 각  스키마테이블 별로 HashRef 를 반환하는 메소드를 넣어두는 것도 좋습니다.</p>
+
+<p>~~~ perl  lib/MyApp/Schema/Result/User.pm
+sub to_hashref {</p>
+
+<pre><code>my $self = shift;
+return {
+    id =&gt; $self-&gt;id,
+    name =&gt; $self-&gt;name,
+    created_at =&gt; $self-&gt;created_at,
+};
+</code></pre>
+
+<p>}</p>
+
+<p>   # Controller
+   my @data;
+   my $rs = $c->model(&lsquo;DB&rsquo;)&ndash;>resultset(&lsquo;User&rsquo;)&ndash;>search();
+   while(my $row = $rs->next) {</p>
+
+<pre><code>   push @data, $row-&gt;to_hashref;
+</code></pre>
+
+<p>   }
+   $c->stash->{people} = \@data;
+~~~</p>
+
+<p>~~~ perl
+  my $person = $c->model(&lsquo;DB&rsquo;)&ndash;>resultset(&lsquo;User&rsquo;)&ndash;>search($cond, {</p>
+
+<pre><code>  result_class =&gt; 'DBIx::Class::ResultClass::HashRefInflator',
+</code></pre>
+
+<p>  })&ndash;>first;
+  $c->stash->{person} = $person;
+~~~</p>
+
+<p>그럴 필요가 없다면 위처럼 <code>result_class</code> 를 지정해줌으로써 결과를 무조건 HashRef 로 반환하게끔 합니다.</p>
+
+<p>사실 <code>DBIx::Class::ResultClass::HashRefInflator</code> 를 적용하면 일일이 오브젝트를 만들어내지 않기 때문에 퍼포먼스 측면에서 매우 좋습니다만, 그냥 HashRef 일 따름인지라Resultset 에서 정의한 각종 메소드를 참조할 수 없습니다.</p>
+
+<p>그러니 이런저런 경우에는 가려서 사용하는 것이 좋습니다.</p>
+
+<p>이제 본질적으로 좀 더 접근해보면…
+JSON::XS 는 인코딩할 시에, 오브젝트가 대상인 경우에는 해당 오브젝트의 TO_JSON 메소드를 참조하여 결과를 뽑아낼 수 있습니다. 물론 <code>allow_blessed</code>, <code>convert_blessed</code> 플래그를 지정할 필요가 있지요.</p>
+
+<p>~~~ perl</p>
+
+<h1>lib/MyApp/View/JSON.pm</h1>
+
+<p>package MyApp::View::JSON;
+use JSON::XS ();</p>
+
+<p>use parent qw(Catalyst::View::JSON);</p>
+
+<p>my $encoder = JSON::XS->new</p>
+
+<pre><code>          -&gt;utf8
+                      -&gt;pretty(0)
+                      -&gt;indent(0)
+                      -&gt;allow_blessed(1)
+                      -&gt;convert_blessed(1);
+</code></pre>
+
+<p>sub encode_json {</p>
+
+<pre><code>my ($self, $c, $data) = @_;
+$encoder-&gt;encode($data);
+</code></pre>
+
+<p>}</p>
+
+<p>1;
+~~~</p>
+
+<p>그러면 위처럼 <code>encode_json</code> 을 오버라이드합니다. <code>allow_blessed</code> 와 <code>convert_blessed</code>  플래그를 켜주는 것이죠.</p>
+
+<p>~~~ perl</p>
+
+<h1>lib/MyApp/Schema/Result/User.pm</h1>
+
+<p>..
+sub TO_JSON {</p>
+
+<pre><code>return { $_\[0\]-&gt;get_inflated_columns };
+</code></pre>
+
+<p>}
+..
+~~~</p>
+
+<p>그리고 위처럼 User Result 에 대해서 TO_JSON 를 지정합니다.</p>
+
+<p><del> perl
+   $c->stash->{people} = [  $c->model(&lsquo;DB&rsquo;)&ndash;>resultset(&lsquo;User&rsquo;)&ndash;>search()&ndash;>all ];
+</del></p>
+
+<p>그러면 이제는 아무런 걱정없이 그냥 생짜 DBIC Resultset 을 날려버려도 이제는 알아서 문제해결이 됩니다. :&ndash;)</p>
+
+<p> 각 Resultset 마다 <code>TO_JSON</code> 을 지정하기가 벅차다면…</p>
+
+<ul>
+<li><a href="http://advent.perl.kr/2011/2011-12-17.html">Seoul.pm Advent Calendar 2011 &ndash; 열일곱번째 날 : DBIx::Class로 스키마 관리하기</a></li>
+</ul>
+
+
+<p>위의 글에서 <code>ResultBase</code> 를 참고해주세요.</p>
+
+<p> <code>MyApp::Schema::ResultBase</code> 를 상속받은 각 Result 테이블들은 <code>TO_JSON</code> 을 오버라이드 해서 빼놓고 싶은 컬럼(예를 들어 <code>password</code> 같은 컬럼) 을 배제해서 출력할 수 있지 않을까요?</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[DBIx::Class - Using GIS Extensions]]></title>
+    <link href="http://jeen.github.io/blog/2011/12/26/dbix-class-using-gis-extensions/"/>
+    <updated>2011-12-26T15:56:00+09:00</updated>
+    <id>http://jeen.github.io/blog/2011/12/26/dbix-class-using-gis-extensions</id>
+    <content type="html"><![CDATA[<h3>DBIx::Class 에서의 GIS!?</h3>
+
+<p>ORM 을 사용함에 있어서 단순한 SELECT 문은 그렇게 큰 고민없이 사용할 수 있습니다. 하지만 GIS Extension 을 사용한 쿼리들을 ORM 에서 사용한다면 일단 고민이 들어가기 마련입니다.</p>
+
+<h3>DBIx::Class 로 사용할 GIS 용 Query 확인</h3>
+
+<p>우선 대상으로 할 테이블은 아래와 같습니다.</p>
+
+<p>~~~ sql</p>
+
+<pre><code>CREATE TABLE venue (
+  id            INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  name          VARCHAR(255) NOT NULL,
+  latitude      VARCHAR(64) NOT NULL,
+  longitude     VARCHAR(64) NOT NULL,
+  location      Point NOT NULL,
+  SPATIAL INDEX(location),
+  created_on    DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00'
+) ENGINE=MyISAM DEFAULT CHARSET UTF8;
+</code></pre>
+
+<p>~~~</p>
+
+<p>위의 CREATE TABLE 문에서 알 수 있듯, <code>location</code> 이 <em>SPATIAL INDEX</em> 를 사용하게 됩니다. 이제 이 <code>location</code> 컬럼을 대상으로 온갖 GIS 관련 쿼리를 ORM 에서 사용하게끔 합니다.</p>
+
+<h3>INSERT</h3>
+
+<p>우선 DB 스키마는 덤프되어 있다고 가정하며 <code>Venue</code> 라는 결과 클래스에 데이터를 등록해보도록 합니다.</p>
+
+<p>~~~ perl</p>
+
+<pre><code>$self-&gt;resultset('Venue')-&gt;create({
+    name     =&gt; 'Silex',
+    latitude =&gt; '32.123512',
+    longitude =&gt; '127.0123123',
+    location  =&gt; \"GeomFromText('POINT(32.123512 127.0123123)')",
+});
+</code></pre>
+
+<p>~~~</p>
+
+<p>위와같은 코드로 <code>location</code> 에 대해서 Scalar Reference 를 지정함으로 GIS 관련 <code>GeomFromText</code> 라는 Function 을 사용할 수 있게 됩니다.</p>
+
+<h3>SELECT</h3>
+
+<p>일단 위치정보의 등록은 위와같은 코드로 가능했고, 이제 결과값을 찾아보도록 합니다.
+인자로 사용될 값은 모바일기기의 화면단의 좌상단 Latitude/Longitude 좌표와 우하단 Latitude/Longitude 좌표입니다.</p>
+
+<p>~~~ perl</p>
+
+<pre><code>$self-&gt;resultset('Venue')-&gt;search({
+    -and =&gt; \[
+        \"Intersects(location, Envelope(GeomFromText('LineString(32.0 127.0, 33.0 128.0)')))",
+    \]
+});
+</code></pre>
+
+<p>~~~</p>
+
+<p>위처럼 또다시 Scalar Reference 의 힘을 빌려서 사태를 회피할 수 있습니다. 위의 코드로 좌상단의 점과 우하단의 점을 잇는 사각형의 영역에 대해서 결과를 얻어낼 수 있습니다.</p>
+
+<h3>SELECT + ORDER_BY</h3>
+
+<p>여기까지는 그저 Scalar Reference 의 마법을 이용해서 잘도 헤쳐왔지만 이제부터가 문제입니다. 결과값을 뽑아낼 때에, 중점을 기준으로 결과값을 정렬해서 보여줄 필요가 생겼습니다.</p>
+
+<p>이제껏 <a href="http://search.cpan.org/perldoc?DBIx::Class">DBIx::Class</a> 를 사용하며 숱하게 회피방법을 연구해봤지만 도저히 답이 나오지 않아서 결국은 GIS 관련 등의 복잡한 쿼리에서 ORM 의 사용을 피하고 쌩 SQL 을 날릴 수 밖에 없었습니다만, 이런저런 시련의 세월 속에서 결국은 방법을 찾아냈습니다.</p>
+
+<p>그 방법이란 Dynamic View 를 이용하는 방법입니다. 일반적으로 View 를 만듬에 있어서 컬럼들의 비교나 의미가 정해진 정적인 값을 써서 미리 View 를 만들어서 사용하는 방법을 주로 사용해왔었는데, Dynamic View 를 통해서 해당 위치정보에 해당하는 값들을 바인딩해서 즉석에서 View 를 생성하는 방법입니다.</p>
+
+<p>우선은 <code>VenueComplex</code> 라는 View Table Class 를 작성합니다.</p>
+
+<p>~~~ perl</p>
+
+<pre><code>package MyApp::Schema::Result::VenueComplex;
+use strict;
+use warnings;
+use base qw/DBIx::Class::Core/;
+
+__PACKAGE__-&gt;table_class('DBIx::Class::ResultSource::View');
+__PACKAGE__-&gt;table('venue_complex');
+__PACKAGE__-&gt;result_source_instance-&gt;is_virtual(1);
+__PACKAGE__-&gt;result_source_instance-&gt;view_definition(q{
+    SELECT v.*, SQRT(POW(ABS(X(v.location) - X(GeomFromText(?))), 2) + POW(ABS(Y(v.location) - Y(GeomFromText(?))), 2)) as distance FROM venue v WHERE Intersects(v.location, Envelope(GeomFromText(x))) ORDER BY distance asc
+});
+
+__PACKAGE__-&gt;add_columns( ... );
+</code></pre>
+
+<p>~~~</p>
+
+<p>여타 컬럼정보, 릴레이션 설정등은 기존의 <code>Venue</code> 결과클래스에서 정의한 것을 그대로 사용하도록 합니다. 위의 view_definition 의 Prepared Statement SQL 에 바인딩 될 값은 3개입니다.</p>
+
+<p>자, 준비는 끝났으니, 이제 중점기준으로 값을 구해봅니다.</p>
+
+<p>~~~ perl</p>
+
+<pre><code>my ($nw_lat, $nw_lng) = split ',', $args-&gt;{location1};
+my ($se_lat, $se_lng) = split ',', $args-&gt;{location2};
+
+my $center_point_x = ($se_lat - $nw_lat) / 2 + $nw_lat;
+my $center_point_y = ($se_lng - $nw_lng) / 2 + $nw_lng;
+
+my $r = $self-&gt;resultset('VenueComplex')-&gt;search({}, {
+     bind =&gt; \[ "POINT($center_point_x $center_point_y)",
+               "POINT($center_point_x $center_point_y)",
+               "LineString($nw_lat $nw_lng , $se_lat $se_lng)",
+             \],
+});
+</code></pre>
+
+<p>~~~</p>
+
+<p>기존의 <code>Venue</code> 클래스가 아닌 <code>VenueComplex</code> 로 대상을 바꾸고, bind 로 세개의 값을 넘겨줍니다. 중점기준으로 정렬은 위의 <code>VenueComplex</code> 의 SQL 상에서 처리하고 있습니다.</p>
+
+<h3>Conclusion</h3>
+
+<p>ORM 을 사용할 때에는 수많은 장점에도 불구하고 아직까지 논의되고 있는 수많은 단점들을 명확하게 인지해야 합니다. 상황에 맞게 쓰는 것이 당연히 중요하겠죠.
+위에서 제가 제시한 코드들이 바른 길이라고는 장담할 수 없겠습니다만, 다양한 요구사항을 수렴할 수 있다면 그걸로 괜찮다고 그냥 생각하고 있습니다.</p>
+]]></content>
+  </entry>
+  
+</feed>

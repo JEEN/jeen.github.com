@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: db | Jeen - Yet anothere techlog]]></title>
+  <link href="http://jeen.github.io/blog/categories/db/atom.xml" rel="self"/>
+  <link href="http://jeen.github.io/"/>
+  <updated>2013-07-17T19:50:53+09:00</updated>
+  <id>http://jeen.github.io/</id>
+  <author>
+    <name><![CDATA[Jeen Lee]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Using MSSQL in Perl(Linux)]]></title>
+    <link href="http://jeen.github.io/blog/2013/06/18/using-mssql-in-perl-linux/"/>
+    <updated>2013-06-18T22:33:40+09:00</updated>
+    <id>http://jeen.github.io/blog/2013/06/18/using-mssql-in-perl-linux</id>
+    <content type="html"><![CDATA[<p>오늘은 IRC 상에서 리눅스 환경에서 Perl 로 MS-SQL 에 접속하는 최선의 방법에 대한 이야기가 있었습니다. 그냥 흘리기에는 아쉬운 얘기들이 많아서 긁어서 정리해봅니다.</p>
+
+<script src="http://jeen.github.io//storify.com/jeen_lee/using-mssql-in-perl-linux.js" type="text/javascript" language="javascript"></script>
+
+
+<p><noscript>[<a href="http://jeen.github.io//storify.com/jeen_lee/using-mssql-in-perl-linux" target="_blank">View the story &ldquo;Using MSSQL in Perl(Linux)&rdquo; on Storify</a>]</noscript></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Using DBI Callbacks - Generate a SQLite file automatically]]></title>
+    <link href="http://jeen.github.io/blog/2013/05/20/using-dbi-callbacks-generate-sqlite-file-automatically/"/>
+    <updated>2013-05-20T11:59:04+09:00</updated>
+    <id>http://jeen.github.io/blog/2013/05/20/using-dbi-callbacks-generate-sqlite-file-automatically</id>
+    <content type="html"><![CDATA[<p> 이런저런 임시데이터를 주고받고 하는 용도로 SQLite 파일을 덩어리채로 주고받는 경우가 있습니다.</p>
+
+<p>매일매일 그런 일이 일어나니 파일에는 날짜 정도는 집어넣어줘야 되구요.</p>
+
+<p><code>
+DROP TABLE IF EXISTS item;
+CREATE TABLE item (
+  id    INTEGER NOT NULL PRIMARY KEY,
+  name  VARCHAR(64),
+  price INTEGER,
+  maker VARCHAR(64),
+  created_at INTEGER
+);
+...
+</code></p>
+
+<p>대충 위와 같은 SQL 문을 이용해서 SQLite 파일안에 테이블도 만들어 줘야되고,</p>
+
+<p>이런저런 데이터들도 넣어줘야 되겠죠.</p>
+
+<p><code>
+$ sqlite db/item.db3 &lt; sql/item.sql
+</code></p>
+
+<p>일단은 요렇게 SQLite 를 만들고…</p>
+
+<p><code>
+$ perl bin/generate_data.pl
+</code></p>
+
+<p>뭐 요런 식으로 <code>item.db3</code> 에 있는 테이블들에 데이터를 쑤셔넣고 보내는 식입니다.</p>
+
+<p>```
+use MyApp::DB;</p>
+
+<p>my $db = MyApp::DB->new({ connect_info => [</p>
+
+<pre><code>'dbi:SQLite:db/item.db3', "", "", {
+    PrintError =&gt; 1,
+    RaiseError =&gt; 1,
+    Callbacks =&gt; {
+        connected =&gt; sub {
+            my $conn = shift;
+            open my $fh, "&lt;", "sql/item.sql" or die "cannot found a sql file";
+            my $sqls = do { local $/; &lt;$fh&gt; };
+            for (split /;\s+/, $sqls) {
+                $conn-&gt;do($_);
+            }
+            return;
+        },
+    },
+}
+</code></pre>
+
+<p>]})
+….
+```</p>
+
+<p>SQLite 의 경우는 Connection정보를 지정해서 해당 DB파일이 지정 디렉토리에 위치해있으면 그 파일을 참조하고,
+없으면 0바이트의 파일을 만들어버립니다.</p>
+
+<p>이때 DBI Callbacks 를 이용해서 연결되었을 시(connected), <code>sql/item.sql</code> 에 위치한 SQL 문들을 실행합니다.</p>
+
+<p>DBI는 한 액션에 여러 SQL 문을 실행할 수 없기 때문에 &lsquo;;&rsquo; 를 구분자로해서 실행하면 각 쿼리별로 쪼개지게 됩니다.</p>
+
+<p>그렇게 해서 별다른 SQLite 파일 생성에 따른 외부적인 액션이 없이 스크립트 실행시마다 만들어지게 됩니다.
+(물론 저 위의 코드는 일부를 발췌해왔기 때문에 뭐 날마다 어쩌고 한다든가, 파일을 옮긴다든가 하는 부분의 코드는 생략했습니다)</p>
+
+<p>위처럼 DBI Callbacks 나 DBI Subclassing 을 이용해서 프로파일링이나 쿼리로그 같은 다양한 모듈들이 존재하니,</p>
+
+<p>그쪽도 한번 참고해보시면 도움이 되지 않을까 생각합니다.</p>
+
+<h3>참고</h3>
+
+<ul>
+<li><a href="http://search.cpan.org/~timb/DBI-1.611/DBI.pm#Callbacks_(hash_ref)">http://search.cpan.org/~timb/DBI-1.611/DBI.pm#Callbacks_(hash_ref)</a></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+</feed>

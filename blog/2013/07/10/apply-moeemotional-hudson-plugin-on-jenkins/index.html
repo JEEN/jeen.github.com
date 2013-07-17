@@ -1,0 +1,342 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Apply MoeEmotional Hudson Plugin on Jenkins - Jeen - Yet anothere techlog</title>
+  <meta name="author" content="Jeen Lee">
+
+  
+  <meta name="description" content="젠킨스에서 대머리 아저씨 얼굴 보기가 싫어서, 급하게 테마 하나 제작했습니다. https://t.co/FcNPdqMjlO 앞으로 플랫플랫하게 해볼 예정.&mdash; Park Hyun-woo (@lqez) July 10, 2013 이 모든 원인은 @lqez 님의 &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://jeen.github.io/blog/2013/07/10/apply-moeemotional-hudson-plugin-on-jenkins">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Jeen - Yet anothere techlog" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-27958809-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Jeen - Yet anothere techlog</a></h1>
+  
+    <h2>STFUAWSC</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:jeen.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Apply MoeEmotional Hudson Plugin on Jenkins</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-10T22:28:59+09:00" pubdate data-updated="true">Jul 10<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><blockquote class="twitter-tweet"><p>젠킨스에서 대머리 아저씨 얼굴 보기가 싫어서, 급하게 테마 하나 제작했습니다. <a href="https://t.co/FcNPdqMjlO">https://t.co/FcNPdqMjlO</a> 앞으로 플랫플랫하게 해볼 예정.</p>&mdash; Park Hyun-woo (@lqez) <a href="https://twitter.com/lqez/statuses/354925228079579138">July 10, 2013</a></blockquote>
+
+
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+
+<p> 이 모든 원인은 @lqez 님의 트윗에서 시작했습니다.</p>
+
+<p> 이 트윗을 보고 예전에&hellip; 그러니까 일본에서 일하고 있을 당시 CI 에는 별로 신경도 쓰지도 않던 시절에 Hatena bookmark 에서 모에짙은 플러그인에 대한 기사를 떠올렸습니다.</p>
+
+<ul>
+<li><a href="http://d.hatena.ne.jp/kanu-orz/20090803/1249225200">Hudsonの萌え化、もしくは痛Hudson化</a></li>
+</ul>
+
+
+<p>　그러니까 당시 Jenkins 가 Hudson 이던 시절에 수염난 아저씨를 눈뜨고 쳐다볼 수 없었던 Hudson 사용자들은 <code>moeemotional-hudson</code> 이라는 플러그인을 만들어 냅니다.
+　그와 관련된 링크는 아래와 같습니다.</p>
+
+<ul>
+<li><a href="http://d.hatena.ne.jp/torazuka/20090731/1248970549">hud子「継続的インテグレーションを、あなたに」</a></li>
+<li><a href="http://d.hatena.ne.jp/torazuka/20090802/hudmis">RED_LAMP用のhud美を追加</a></li>
+<li><a href="http://d.hatena.ne.jp/kanu-orz/20090802/1249182957">萌えよHudson(hud子バージョン公開)</a></li>
+</ul>
+
+
+<p> 그리고 모에말고 일반적인 Emotional Jenkins 플러그인도 존재합니다. &ndash;_&ndash;;</p>
+
+<ul>
+<li><a href="https://wiki.jenkins-ci.org/display/JENKINS/Emotional+Jenkins+Plugin">https://wiki.jenkins-ci.org/display/JENKINS/Emotional+Jenkins+Plugin</a></li>
+</ul>
+
+
+<p> 뭐 결론은 Stable, Unstable 에 따라서 각각의 상황에 맞는 그림을 대신 표시해주는 것이지요.</p>
+
+<blockquote class="twitter-tweet"><p>그러니까 그런 노력의 결과로&#8230; 이런 아저씨가&#8230; <a href="http://t.co/1d1TuMWbJs">pic.twitter.com/1d1TuMWbJs</a></p>&mdash; JEEN (@JEEN_LEE) <a href="https://twitter.com/JEEN_LEE/statuses/354939083795083265">July 10, 2013</a></blockquote>
+
+
+
+
+<blockquote class="twitter-tweet"><p>이런 OL 이 된다는 것입니다. <a href="http://t.co/c3Wu2plYAT">pic.twitter.com/c3Wu2plYAT</a></p>&mdash; JEEN (@JEEN_LEE) <a href="https://twitter.com/JEEN_LEE/statuses/354939140883742720">July 10, 2013</a></blockquote>
+
+
+<p> 이 플러그인은 각 Job 단위로 설정이 가능합니다. 플러그인을 설치하고 post-build action 에서 Moeemotional Hudson 을 추가해줍니다. <strike>그러니까 Job 단위로 설정이 가능한게 Job A 페이지에서만 표시되고 해당 Job 의 빌드 결과에 따른 그림변화는 없었습니다.</strike> 아&hellip; 캐쉬에 의한 착각이었습니다. 각 빌드 페이지에서도 정상적으로 출력됩니다.</p>
+
+<p> 아무튼 플랫플랫하게 나올 결과물을 기대해봅니다.</p>
+
+<ul>
+<li><a href="https://github.com/lqez/flat-jenkins">Github &ndash; lqez/flat-jenkins</a></li>
+</ul>
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Jeen Lee</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-10T22:28:59+09:00" pubdate data-updated="true">Jul 10<span>th</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/jenkins/'>jenkins</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://jeen.github.io/blog/2013/07/10/apply-moeemotional-hudson-plugin-on-jenkins/" data-via="JEEN_LEE" data-counturl="http://jeen.github.io/blog/2013/07/10/apply-moeemotional-hudson-plugin-on-jenkins/" >Tweet</a>
+  
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/07/07/released-dbix-class-inflatecolumn-serializer-hstore/" title="Previous Post: Released DBIx::Class::InflateColumn::Serializer::Hstore">&laquo; Released DBIx::Class::InflateColumn::Serializer::Hstore</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2013/07/15/solr-vs-elasticsearch-part-1/" title="Next Post: [번역] Solr vs ElasticSearch - Part 1 : Overview">[번역] Solr vs ElasticSearch - Part 1 : Overview &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/07/17/solr-vs-elasticsearch-part-6-user-and-dev-communities-compared/">[번역] Solr vs. ElasticSearch: Part 6 – User &amp; Dev Communities Compared</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/07/17/solr-vs-elasticsearch-part-5-management-api-capabilities/">[번역] Solr vs ElasticSearch: Part 5 – Management API Capabilities</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/07/17/solr-vs-elasticsearch-part-4-faceting/">[번역] Solr vs ElasticSearch Part 4 - Faceting</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/07/16/solr-vs-elasticsearch-part-3-searching/">[번역] Solr vs. ElasticSearch - Part 3 : Searching</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/07/16/solr-vs-elasticsearch-part-2-indexing-and-language-handling/">[번역] Solr vs. ElasticSearch: Part 2 - Indexing and Language Handling</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/jeen">@jeen</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'jeen',
+            count: 0,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Jeen Lee -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'jeen';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://jeen.github.io/blog/2013/07/10/apply-moeemotional-hudson-plugin-on-jenkins/';
+        var disqus_url = 'http://jeen.github.io/blog/2013/07/10/apply-moeemotional-hudson-plugin-on-jenkins/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id; js.async = true;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

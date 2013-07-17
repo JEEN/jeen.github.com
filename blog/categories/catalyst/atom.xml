@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: catalyst | Jeen - Yet anothere techlog]]></title>
+  <link href="http://jeen.github.io/blog/categories/catalyst/atom.xml" rel="self"/>
+  <link href="http://jeen.github.io/"/>
+  <updated>2013-07-17T19:50:53+09:00</updated>
+  <id>http://jeen.github.io/</id>
+  <author>
+    <name><![CDATA[Jeen Lee]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[DBIx::Class and JSON]]></title>
+    <link href="http://jeen.github.io/blog/2012/08/25/dbix-class-and-json/"/>
+    <updated>2012-08-25T12:44:00+09:00</updated>
+    <id>http://jeen.github.io/blog/2012/08/25/dbix-class-and-json</id>
+    <content type="html"><![CDATA[<p> 흔한 웹서비스의 흔한 AJAX 나 흔한 RESTful API 를 제공하기 위해서, 대개 JSON 포맷의 데이터를 서버에서 뿜어내고는 합니다.</p>
+
+<p> 하지만 누구나가 <code>Catalyst</code> + <code>DBIx::Class</code> 조합에서 이렇게 하면 되는 게 아닐까 하고 접근했다가…</p>
+
+<blockquote><p>… encountered object &lsquo;..&rsquo;, but neither allow_blessed nor convert_blessed settings are enabled …</p></blockquote>
+
+<p> 라는 에러를 접하게 됩니다. bless 된 오브젝트를 어떻게든 JSON 인코딩을 시도하려고 했을 때는 위와 같은 에러를 쉬이 접할 수 있습니다.</p>
+
+<p> 이것을 푸는 방법은 사실 여러가지가 있습니다.</p>
+
+<p> 이것저것 신경쓰지 말고 한번에 가자고 할 때는 <code>Catalyst::View::JSON</code> 에서 인코딩하게 되는 stash 된 값들을 전부 ArrayRef 나 HashRef 로 변환해서 넘기는 방법입니다.</p>
+
+<p>~~~ perl
+   my @data;
+   my $rs = $c->model(&lsquo;DB&rsquo;)&ndash;>resultset(&lsquo;User&rsquo;)&ndash;>search();
+   while(my $row = $rs->next) {</p>
+
+<pre><code>   push @data, {
+       id =&gt; $row-&gt;id,
+       name =&gt; $row-&gt;name,
+       created_at =&gt; $row-&gt;created_at,
+   };
+</code></pre>
+
+<p>   }
+   $c->stash->{people} = \@data;
+~~~</p>
+
+<p>위처럼 특정컬럼을 선별해서 넣어주는 방법이 있겠지요. 좀 더 단순화한다면, 각  스키마테이블 별로 HashRef 를 반환하는 메소드를 넣어두는 것도 좋습니다.</p>
+
+<p>~~~ perl  lib/MyApp/Schema/Result/User.pm
+sub to_hashref {</p>
+
+<pre><code>my $self = shift;
+return {
+    id =&gt; $self-&gt;id,
+    name =&gt; $self-&gt;name,
+    created_at =&gt; $self-&gt;created_at,
+};
+</code></pre>
+
+<p>}</p>
+
+<p>   # Controller
+   my @data;
+   my $rs = $c->model(&lsquo;DB&rsquo;)&ndash;>resultset(&lsquo;User&rsquo;)&ndash;>search();
+   while(my $row = $rs->next) {</p>
+
+<pre><code>   push @data, $row-&gt;to_hashref;
+</code></pre>
+
+<p>   }
+   $c->stash->{people} = \@data;
+~~~</p>
+
+<p>~~~ perl
+  my $person = $c->model(&lsquo;DB&rsquo;)&ndash;>resultset(&lsquo;User&rsquo;)&ndash;>search($cond, {</p>
+
+<pre><code>  result_class =&gt; 'DBIx::Class::ResultClass::HashRefInflator',
+</code></pre>
+
+<p>  })&ndash;>first;
+  $c->stash->{person} = $person;
+~~~</p>
+
+<p>그럴 필요가 없다면 위처럼 <code>result_class</code> 를 지정해줌으로써 결과를 무조건 HashRef 로 반환하게끔 합니다.</p>
+
+<p>사실 <code>DBIx::Class::ResultClass::HashRefInflator</code> 를 적용하면 일일이 오브젝트를 만들어내지 않기 때문에 퍼포먼스 측면에서 매우 좋습니다만, 그냥 HashRef 일 따름인지라Resultset 에서 정의한 각종 메소드를 참조할 수 없습니다.</p>
+
+<p>그러니 이런저런 경우에는 가려서 사용하는 것이 좋습니다.</p>
+
+<p>이제 본질적으로 좀 더 접근해보면…
+JSON::XS 는 인코딩할 시에, 오브젝트가 대상인 경우에는 해당 오브젝트의 TO_JSON 메소드를 참조하여 결과를 뽑아낼 수 있습니다. 물론 <code>allow_blessed</code>, <code>convert_blessed</code> 플래그를 지정할 필요가 있지요.</p>
+
+<p>~~~ perl</p>
+
+<h1>lib/MyApp/View/JSON.pm</h1>
+
+<p>package MyApp::View::JSON;
+use JSON::XS ();</p>
+
+<p>use parent qw(Catalyst::View::JSON);</p>
+
+<p>my $encoder = JSON::XS->new</p>
+
+<pre><code>          -&gt;utf8
+                      -&gt;pretty(0)
+                      -&gt;indent(0)
+                      -&gt;allow_blessed(1)
+                      -&gt;convert_blessed(1);
+</code></pre>
+
+<p>sub encode_json {</p>
+
+<pre><code>my ($self, $c, $data) = @_;
+$encoder-&gt;encode($data);
+</code></pre>
+
+<p>}</p>
+
+<p>1;
+~~~</p>
+
+<p>그러면 위처럼 <code>encode_json</code> 을 오버라이드합니다. <code>allow_blessed</code> 와 <code>convert_blessed</code>  플래그를 켜주는 것이죠.</p>
+
+<p>~~~ perl</p>
+
+<h1>lib/MyApp/Schema/Result/User.pm</h1>
+
+<p>..
+sub TO_JSON {</p>
+
+<pre><code>return { $_\[0\]-&gt;get_inflated_columns };
+</code></pre>
+
+<p>}
+..
+~~~</p>
+
+<p>그리고 위처럼 User Result 에 대해서 TO_JSON 를 지정합니다.</p>
+
+<p><del> perl
+   $c->stash->{people} = [  $c->model(&lsquo;DB&rsquo;)&ndash;>resultset(&lsquo;User&rsquo;)&ndash;>search()&ndash;>all ];
+</del></p>
+
+<p>그러면 이제는 아무런 걱정없이 그냥 생짜 DBIC Resultset 을 날려버려도 이제는 알아서 문제해결이 됩니다. :&ndash;)</p>
+
+<p> 각 Resultset 마다 <code>TO_JSON</code> 을 지정하기가 벅차다면…</p>
+
+<ul>
+<li><a href="http://advent.perl.kr/2011/2011-12-17.html">Seoul.pm Advent Calendar 2011 &ndash; 열일곱번째 날 : DBIx::Class로 스키마 관리하기</a></li>
+</ul>
+
+
+<p>위의 글에서 <code>ResultBase</code> 를 참고해주세요.</p>
+
+<p> <code>MyApp::Schema::ResultBase</code> 를 상속받은 각 Result 테이블들은 <code>TO_JSON</code> 을 오버라이드 해서 빼놓고 싶은 컬럼(예를 들어 <code>password</code> 같은 컬럼) 을 배제해서 출력할 수 있지 않을까요?</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Catalyst - ActionRole]]></title>
+    <link href="http://jeen.github.io/blog/2011/12/27/catalyst-actionrole/"/>
+    <updated>2011-12-27T21:14:00+09:00</updated>
+    <id>http://jeen.github.io/blog/2011/12/27/catalyst-actionrole</id>
+    <content type="html"><![CDATA[<h3>Action Role</h3>
+
+<p>오래된 이야기이지만 Catalyst 가 Moose 기반으로 만들어지면서 ActionRole 이라는 개념이 만들어졌었지요.
+실제 업무에서 적용해볼 껀덕지가 없어서 만져보지는 못했습니다만, 최근에 업무에서 ActionRole 을 적용해서 간단한 수정작업을 진행했습니다.</p>
+
+<p>~~~ perl
+package MyApp::Web::ActionRole::Logger;
+use Moose::Role;
+use namespace::autoclean;</p>
+
+<p>after execute => sub {</p>
+
+<pre><code>my ($self, $controller, $c) = @_;
+
+# ...
+</code></pre>
+
+<p>}</p>
+
+<p>1;
+~~~</p>
+
+<p>일단 업무에서 사용한 ActionRole 의 기본형은 위와 같습니다.</p>
+
+<p>Catalyst App 을 만들 때 사용한 네임스페이스를 기준으로 <code>ActionRole::"RoleName"</code> 을 사용합니다. 그러니 위에서 봤을 때 Catalyst App 의 이름은 <code>MyApp::Web</code> 이 되겠죠. 당연히 ActionRole 의 이름은 Logger 입니다.</p>
+
+<p>또한, Logger 라는 ActionRole 을 참조할 때, Catalyst 는 <code>MyApp::Web</code> 뿐만 아니라 <code>Catalyst::ActionRole::Logger</code> 가 있으면 이를 참조할 수 있습니다.</p>
+
+<p><code>MyApp::Web::ActionRole::Logger</code> 와 <code>Catalyst::ActionRole::Logger</code> 두개가 존재할 시에는 앞의 <code>MyApp::Web::ActionRole::Logger</code> 를 우선적으로 사용하게 됩니다.</p>
+
+<h3>주의점</h3>
+
+<p>위의 코드의 <code>after execute =&gt; sub { ... }</code> 에서 주의할 점이 한가지 있습니다. Catalyst 의 <code>auto</code>, <code>begin</code>, <code>end</code> 등의 Private Action 들 또한 실행이 된다는 점 입니다.
+  예를들어 <code>/user/login</code> 이라는 수행하기 위해서 각 컨트롤러 마다 <code>auto</code>, <code>begin</code> 등의 Private Action 이 정의되어 있다고 하면, 아마 아래와 같이 나올 것입니다.</p>
+
+<p><del>
+  .&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;+&mdash;&mdash;&mdash;&mdash;&mdash;&ndash;.
+| Action                                                     | Time      |
++&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;+&mdash;&mdash;&mdash;&mdash;&mdash;&ndash;+
+| /auto                                                      | 0.000600s |
+| /user/auto                                                 | 0.000208s |
+| /user/login                                                | 0.000219s |
+| /user/end                                                  | 0.009542s |
+|  &ndash;> MyApp::Web::View::Default->process                    | 0.008665s |
+&lsquo;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;+&mdash;&mdash;&mdash;&mdash;&mdash;&ndash;&rsquo;
+</del></p>
+
+<p>애시당초 <code>/user/login</code> 가 끝나면 무엇무엇을 한다라고 <code>ActionRole::Logger</code> 에 정의한 마당에서 해당 액션이 2-3회 중복해서 실행되는 경우가 발생하는 것입니다. 바로 <code>auto</code>, <code>end</code> 가 끝난 다음에도 해당 ActionRole 을 참고한다는 것이죠.</p>
+
+<p>~~~ perl
+package MyApp::Web::ActionRole::Logger;
+use Moose::Role;
+use namespace::autoclean;</p>
+
+<p>after execute => sub {</p>
+
+<pre><code>my ($self, $controller, $c) = @_;
+
+return if $self =~ /(?:auto|begin|end)/;
+
+# ...
+</code></pre>
+
+<p>}</p>
+
+<p>1;
+~~~</p>
+
+<p>그래서 적절하게 <code>auto</code>, <code>begin</code>, <code>end</code> 는 필터링해줍니다. <code>$self</code> 변수에 어떤 액션에서 온 것인지 알 수 있습니다. 전 처음에 계속 <code>$c-&gt;action</code> 으로 알고 착각을 했더랬습니다.</p>
+
+<p>아, 물론 ActionRole 을 추가해줬다고 바로 쓸 수 있는 것은 아닙니다.
+해당 ActionRole 을 사용할 컨트롤러의 기본 상속 모듈을 <code>Catalyst::Controller</code> 에서 <code>Catalyst::Controller::ActionRole</code> 로 바꾸도록 합니다.</p>
+
+<pre><code>package MyApp::Web::Controller::Root;
+use Moose;
+use namespace::autoclean;
+BEGIN { extends 'Catalyst::Controller::ActionRole` };
+</code></pre>
+
+<h3>Conclusion</h3>
+
+<p>위의 예제에서는 그냥 단순히 <code>Root</code> 에서만 사용하고 있는 것 처럼 보이지만, 업무상에서는  특정 컨트롤러 몇개를 제외한 나머지 모든 컨트롤러에서 공통으로 사용하고 있습니다.</p>
+
+<p>거의 모든 컨트롤러 상의 액션이 끝날 때, 시작될 때, 혹은 양쪽 모두에서 공통적으로 특정 행동을 정의할 때 ActionRole 과 함께하면 좀 더 유연하고 아름다운 코드작성에 도움이 되지 않을까 생각하고 있습니다.</p>
+]]></content>
+  </entry>
+  
+</feed>
