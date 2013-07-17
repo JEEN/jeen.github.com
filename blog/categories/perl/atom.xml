@@ -4,7 +4,7 @@
   <title><![CDATA[Category: perl | Jeen - Yet anothere techlog]]></title>
   <link href="http://jeen.github.io/blog/categories/perl/atom.xml" rel="self"/>
   <link href="http://jeen.github.io/"/>
-  <updated>2013-07-17T19:58:40+09:00</updated>
+  <updated>2013-07-17T20:00:39+09:00</updated>
   <id>http://jeen.github.io/</id>
   <author>
     <name><![CDATA[Jeen Lee]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Released DBIx::Class::InflateColumn::Serializer::Hstore]]></title>
-    <link href="http://jeen.github.io/blog/2013/07/07/released-dbix-class-inflatecolumn-serializer-hstore/"/>
+    <link href="http://jeen.github.io/2013/07/07/released-dbix-class-inflatecolumn-serializer-hstore/"/>
     <updated>2013-07-07T19:05:31+09:00</updated>
-    <id>http://jeen.github.io/blog/2013/07/07/released-dbix-class-inflatecolumn-serializer-hstore</id>
+    <id>http://jeen.github.io/2013/07/07/released-dbix-class-inflatecolumn-serializer-hstore</id>
     <content type="html"><![CDATA[<p> 예전에는 그냥 Pg 를 사용한 만들어진 웹서비스를 유지보수하는 수준에서 밖에 Pg 를 접하지 않았는데&hellip;
  최근의 한 프로젝트에서 Postgres 를 도입하기로 결정이 났습니다.</p>
 
@@ -56,9 +56,9 @@
   
   <entry>
     <title type="html"><![CDATA[Using MSSQL in Perl(Linux)]]></title>
-    <link href="http://jeen.github.io/blog/2013/06/18/using-mssql-in-perl-linux/"/>
+    <link href="http://jeen.github.io/2013/06/18/using-mssql-in-perl-linux/"/>
     <updated>2013-06-18T22:33:40+09:00</updated>
-    <id>http://jeen.github.io/blog/2013/06/18/using-mssql-in-perl-linux</id>
+    <id>http://jeen.github.io/2013/06/18/using-mssql-in-perl-linux</id>
     <content type="html"><![CDATA[<p>오늘은 IRC 상에서 리눅스 환경에서 Perl 로 MS-SQL 에 접속하는 최선의 방법에 대한 이야기가 있었습니다. 그냥 흘리기에는 아쉬운 얘기들이 많아서 긁어서 정리해봅니다.</p>
 
 <script src="http://jeen.github.io//storify.com/jeen_lee/using-mssql-in-perl-linux.js" type="text/javascript" language="javascript"></script>
@@ -70,9 +70,9 @@
   
   <entry>
     <title type="html"><![CDATA[PullReq on MojoX::Validator]]></title>
-    <link href="http://jeen.github.io/blog/2013/06/07/pullreq-on-mojox-validator/"/>
+    <link href="http://jeen.github.io/2013/06/07/pullreq-on-mojox-validator/"/>
     <updated>2013-06-07T17:53:47+09:00</updated>
-    <id>http://jeen.github.io/blog/2013/06/07/pullreq-on-mojox-validator</id>
+    <id>http://jeen.github.io/2013/06/07/pullreq-on-mojox-validator</id>
     <content type="html"><![CDATA[<p> 지난 수요일에 잠깐 이번 서버 구현에 쓸 Validator 를 물색하던 중에 <a href="http://metacpan.org/module/Mojolicious::Plugin::Validator">Mojolicious::Plugin::Validator</a> 를 보고는 참 Validation 코드쓰기 쉽다라는 생각에 덜컥 채용해버렸습니다.</p>
 
 <p> 모듈은 2011년이 마지막으로 업뎃되었구요. 근데 깔아보니까 안깔립니다. 이것도 설마 5.18 의 Hash Randomization 문제때문인가 하면서 실패한 테스트코드를 살펴본 결과 Mojolicious API 가 바뀐 것때문이었습니다. 그러니까 1년 반안에 프레임워크 테스트 모듈의 근간 API 가 바뀌어버리는 바람에 테스트가 실패한 것이지요.</p>
@@ -115,9 +115,9 @@
   
   <entry>
     <title type="html"><![CDATA[miyagawa's podcast ep12 - Korean Translation]]></title>
-    <link href="http://jeen.github.io/blog/2013/05/27/miyagawas-podcast-ep12/"/>
+    <link href="http://jeen.github.io/2013/05/27/miyagawas-podcast-ep12/"/>
     <updated>2013-05-27T00:15:00+09:00</updated>
-    <id>http://jeen.github.io/blog/2013/05/27/miyagawas-podcast-ep12</id>
+    <id>http://jeen.github.io/2013/05/27/miyagawas-podcast-ep12</id>
     <content type="html"><![CDATA[<p> 자주 챙겨듣는 podcast 중에 개인적으로 존경하는 개발자인 @miyagawa 씨가 운영하는 podcast 가 있습니다.</p>
 
 <ul>
@@ -257,7 +257,7 @@
 <li>jeen__ : 그게 XS 의존이라서 C컴파일 환경이 없는 곳에서는 대개 실패</li>
 <li>jeen__ : 그래서 CGI 에서 FCGI 의존을 없애려고</li>
 <li>jeen__ : 지금 CGI 가 FCGI 의 경우까지 고려한 코드가 들어가 있어서
-jaker has joined (~<a href="&#109;&#x61;&#x69;&#x6c;&#x74;&#x6f;&#58;&#x6a;&#x61;&#x6b;&#x65;&#x72;&#x40;&#x33;&#54;&#46;&#51;&#57;&#x2e;&#53;&#48;&#46;&#51;&#x37;">&#106;&#x61;&#107;&#101;&#x72;&#x40;&#51;&#x36;&#46;&#51;&#57;&#x2e;&#x35;&#x30;&#46;&#51;&#55;</a>)</li>
+jaker has joined (~<a href="&#x6d;&#x61;&#x69;&#x6c;&#116;&#x6f;&#x3a;&#x6a;&#x61;&#107;&#x65;&#x72;&#x40;&#51;&#54;&#46;&#51;&#x39;&#x2e;&#53;&#x30;&#46;&#x33;&#x37;">&#106;&#97;&#107;&#101;&#x72;&#64;&#51;&#54;&#x2e;&#x33;&#x39;&#x2e;&#53;&#48;&#46;&#x33;&#55;</a>)</li>
 <li>jeen__ : tokuhirom 은 5.18.1 까지 기다릴 거라고</li>
 <li>jeen__ : 아직 상용서버에 넣어 돌리기는 괜히 걱정된다나&hellip;</li>
 <li>jeen__ : 특별히 써보고 싶다라는 기능도 없고 해서</li>
@@ -431,9 +431,9 @@ skyloader has left IRC (Remote host closed the connection)</li>
   
   <entry>
     <title type="html"><![CDATA[Using DBI Callbacks - Generate a SQLite file automatically]]></title>
-    <link href="http://jeen.github.io/blog/2013/05/20/using-dbi-callbacks-generate-sqlite-file-automatically/"/>
+    <link href="http://jeen.github.io/2013/05/20/using-dbi-callbacks-generate-sqlite-file-automatically/"/>
     <updated>2013-05-20T11:59:04+09:00</updated>
-    <id>http://jeen.github.io/blog/2013/05/20/using-dbi-callbacks-generate-sqlite-file-automatically</id>
+    <id>http://jeen.github.io/2013/05/20/using-dbi-callbacks-generate-sqlite-file-automatically</id>
     <content type="html"><![CDATA[<p> 이런저런 임시데이터를 주고받고 하는 용도로 SQLite 파일을 덩어리채로 주고받는 경우가 있습니다.</p>
 
 <p>매일매일 그런 일이 일어나니 파일에는 날짜 정도는 집어넣어줘야 되구요.</p>

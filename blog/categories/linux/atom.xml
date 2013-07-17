@@ -4,7 +4,7 @@
   <title><![CDATA[Category: linux | Jeen - Yet anothere techlog]]></title>
   <link href="http://jeen.github.io/blog/categories/linux/atom.xml" rel="self"/>
   <link href="http://jeen.github.io/"/>
-  <updated>2013-07-17T19:58:40+09:00</updated>
+  <updated>2013-07-17T20:00:39+09:00</updated>
   <id>http://jeen.github.io/</id>
   <author>
     <name><![CDATA[Jeen Lee]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Download package dir/files from Directory Index]]></title>
-    <link href="http://jeen.github.io/blog/2012/11/29/download-package-dir-slash-files-from-directory-index/"/>
+    <link href="http://jeen.github.io/2012/11/29/download-package-dir-slash-files-from-directory-index/"/>
     <updated>2012-11-29T20:10:00+09:00</updated>
-    <id>http://jeen.github.io/blog/2012/11/29/download-package-dir-slash-files-from-directory-index</id>
+    <id>http://jeen.github.io/2012/11/29/download-package-dir-slash-files-from-directory-index</id>
     <content type="html"><![CDATA[<p>최근에 모 오픈소스의 패키지 리포지트리가 조만간 닫힐 것이라는 뉴스가 있어서… 만일을 위해 거기 있는 패키지 파일들을 일단 긁어오기로 했습니다. &ndash;_&ndash;;</p>
 
 <p>그래서 크롤러를 하나 만들까 하다가… 이런 류의 작업은 뭔가 만들어 놓은 툴이 있을 것이라는 생각에 이리저리 뒤져보고 찾아봤지만 마땅한 키워드를 얻지 못했습니다.</p>

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: oauth | Jeen - Yet anothere techlog]]></title>
   <link href="http://jeen.github.io/blog/categories/oauth/atom.xml" rel="self"/>
   <link href="http://jeen.github.io/"/>
-  <updated>2013-07-17T19:58:40+09:00</updated>
+  <updated>2013-07-17T20:00:39+09:00</updated>
   <id>http://jeen.github.io/</id>
   <author>
     <name><![CDATA[Jeen Lee]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Using Plack::Middleware::OAuth]]></title>
-    <link href="http://jeen.github.io/blog/2011/12/27/using-plack-middleware-oauth/"/>
+    <link href="http://jeen.github.io/2011/12/27/using-plack-middleware-oauth/"/>
     <updated>2011-12-27T13:24:00+09:00</updated>
-    <id>http://jeen.github.io/blog/2011/12/27/using-plack-middleware-oauth</id>
+    <id>http://jeen.github.io/2011/12/27/using-plack-middleware-oauth</id>
     <content type="html"><![CDATA[<h3>Before Using Plack::Middleware::OAuth</h3>
 
 <p>사실은 <a href="http://search.cpan.org/perldoc?Plack::Middleware::OAuth">Plack::Middleware::OAuth</a> 를 사용하기 이전에는 OAuth 관련 callback 처리등을 직접 파라메터를 확인해가면서 해당 액션을 처리했었습니다. 그게 P::M::OAuth 를 사용해서 각 OAuth Provider 들을 좀 더 유연하게 다룰 수 있게 되지 않았나 합니다.</p>

@@ -1,0 +1,426 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Using Plack::Middleware::OAuth - Jeen - Yet anothere techlog</title>
+  <meta name="author" content="Jeen Lee">
+
+  
+  <meta name="description" content="Before Using Plack::Middleware::OAuth 사실은 Plack::Middleware::OAuth 를 사용하기 이전에는 OAuth 관련 callback 처리등을 직접 파라메터를 확인해가면서 해당 액션을 처리했었습니다. 그게 P::M::OAuth &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://jeen.github.io/2011/12/27/using-plack-middleware-oauth">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Jeen - Yet anothere techlog" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-27958809-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Jeen - Yet anothere techlog</a></h1>
+  
+    <h2>STFUAWSC</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:jeen.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Using Plack::Middleware::OAuth</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-12-27T13:24:00+09:00" pubdate data-updated="true">Dec 27<span>th</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><h3>Before Using Plack::Middleware::OAuth</h3>
+
+<p>사실은 <a href="http://search.cpan.org/perldoc?Plack::Middleware::OAuth">Plack::Middleware::OAuth</a> 를 사용하기 이전에는 OAuth 관련 callback 처리등을 직접 파라메터를 확인해가면서 해당 액션을 처리했었습니다. 그게 P::M::OAuth 를 사용해서 각 OAuth Provider 들을 좀 더 유연하게 다룰 수 있게 되지 않았나 합니다.</p>
+
+<p>~~~ perl</p>
+
+<pre><code>sub redirect_to_foursquare {
+    my $self = shift;
+
+    # redirect to foursquare authentication url
+    $self-&gt;response-&gt;redirect("https://foursquare.com/oauth2/authenticate?client_id=$client_id&amp;response_type=code&amp;redirect_uri=$callback_url");
+}
+</code></pre>
+
+<p>  sub receive_token_foursquare {</p>
+
+<pre><code>  my $self = shift;
+
+  my $res = Furl-&gt;new-&gt;get("https://foursquare.com/oauth2/access_token?client_id=$client_id&amp;client_secret=$client_secret&amp;grant_type=authorization_code&amp;redirect_uri=$redirect_url&amp;code=".$self-&gt;request-&gt;param('code'));
+  ...
+</code></pre>
+
+<p>  }
+~~~</p>
+
+<p>예, 뭐 위처럼 OAuth 인증시에 <code>client_id</code> 랑 <code>client_secret</code> 그리고 <code>grant_type</code> 등 여러가지 파라메터의 지정이나 인증 URL 등등이 Provider 마다 다르고 이러니 뭐 일일이 Provider 마다 매번 어플리케이션 단에서 코드를 써나가는 것이 참 불쾌하기 마련이었습니다.</p>
+
+<p>나름 플러거블하게 만든다고 해봤지만 역시 이런 부분은 Middleware 단에서 처리하는 게 좋지 않을까 생각하고 있었지요. 그런의미에서 P::M::OAuth 를 사용하게 되었습니다.</p>
+
+<h3>Custom Provider</h3>
+
+<p>P::M::OAuth 는 OAuth v1/v2 를 지원합니다. OAuth 버젼마다 파라메터가 바뀌기 때문에 사용하고자 하는 OAuth Provider 가 어떤 버젼을 지원하는 지 확인해봐야 합니다.</p>
+
+<p>P::M::OAuth 는 기본적으로 <em>Github</em>, <em>Twitter</em>, <em>Facebook</em>, <em>Live</em>, <em>Google</em> 의 다섯가지 OAuth Provider 를 지원합니다.</p>
+
+<p>저는 <em>FourSquare</em> 의 OAuth 를 사용하려고 하는 데, 기본적으로 제공해주지 않으니, 약간 손질을 해줘야 되겠죠.</p>
+
+<p>~~~ perl
+package Plack::Middleware::OAuth::Foursquare;
+use strict;
+use warnings;</p>
+
+<p>sub config {</p>
+
+<pre><code>+{
+    version          =&gt; 2,
+    authorize_url    =&gt; 'https://foursquare.com/oauth2/authenticate',
+    access_token_url =&gt; 'https://foursquare.com/oauth2/access_token',
+    response_type    =&gt; 'code',
+    grant_type       =&gt; 'authorization_code',
+};
+</code></pre>
+
+<p>}</p>
+
+<p>1;
+~~~</p>
+
+<p>  위처럼 <code>Plack::Middleware::OAuth::Foursquare</code> 와,</p>
+
+<p>~~~ perl
+package Plack::Middleware::OAuth::UserInfo::Foursquare;
+use strict;
+use warnings;
+use parent qw(Plack::Middleware::OAuth::UserInfo);
+use LWP::UserAgent;
+use JSON;</p>
+
+<p>sub create_handle {}</p>
+
+<p>sub query {</p>
+
+<pre><code>my $self = shift;
+
+my $uri = URI-&gt;new('https://api.foursquare.com/v2/users/self');
+$uri-&gt;query_form( oauth_token =&gt; $self-&gt;token-&gt;access_token );
+my $res = LWP::UserAgent-&gt;new-&gt;get($uri);
+my $body = $res-&gt;decoded_content;
+return unless $body;
+
+my $obj = decode_json($body) || {};
+return $obj-&gt;{response}-&gt;{user};
+</code></pre>
+
+<p>}</p>
+
+<p>1;
+~~~</p>
+
+<p><code>Plack::Middleware::OAuth::UserInfo::Foursquare</code> 를 추가합니다.</p>
+
+<p>이렇게 쉽게 OAuth Provider 마다 해당 네임스페이스 맞는 모듈을 추가해줍니다.</p>
+
+<h3>MyApp</h3>
+
+<p>~~~ perl</p>
+
+<h1>&hellip;</h1>
+
+<p>my $app = MyApp->psgi_app;
+builder {</p>
+
+<pre><code>mount '/oauth' =&gt; builder {
+    enable 'OAuth',
+        on_success =&gt; sub {
+            my ($mw, $token) = @_;
+
+            # get Foursquare's UserInfo
+            my $info = Plack::Middleware::OAuth::UserInfo-&gt;new( config =&gt; $mw-&gt;config, token =&gt; $token );
+
+            if ($token-&gt;is_provider('Foursquare')) {
+            return $mw-&gt;redirect('/');  
+          }
+          on_error =&gt; sub { #... },
+          providers =&gt; {
+              'Foursquare' =&gt; {
+                  client_id =&gt; 'YOUR CLIENT_ID',
+                  client_secret =&gt; 'YOUR CLIENT_SECRET',
+              },
+          };
+        }
+};
+mount '/' =&gt; $app;
+</code></pre>
+
+<p>};
+~~~</p>
+
+<p>대충 위처럼 사용을 합니다.
+좀 더 자세한 예제는 <a href="https://github.com/c9s/Plack-Middleware-OAuth/blob/develop/eg/app.psgi">P::M::OAuth 모듈의 예제 psgi 파일</a> 또는 , 이 모듈을 사용한 제 프로젝트 <a href="https://github.com/JEEN/Bobby-Akawa/blob/develop/lib/Bobby.pm#L46">Bobby-Akawa 의 특정 모듈</a>에서 찾아볼 수 있습니다.</p>
+
+<h3>Conclusion</h3>
+
+<p>이로써 간략하게나마 Plack::Middleware::OAuth 를 이용해서 OAuth 인증을 Plack Middleware 단에서 구현할 수 있게 되었습니다. 조금 설명이 빈약해서 차후에 좀 더 구현단으로 들어가서 좀 더 깊게 파고들어가 볼까 합니다.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Jeen Lee</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-12-27T13:24:00+09:00" pubdate data-updated="true">Dec 27<span>th</span>, 2011</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/c9s/'>c9s</a>, <a class='category' href='/blog/categories/middleware/'>middleware</a>, <a class='category' href='/blog/categories/oauth/'>oauth</a>, <a class='category' href='/blog/categories/perl/'>perl</a>, <a class='category' href='/blog/categories/psgi/'>psgi</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://jeen.github.io/2011/12/27/using-plack-middleware-oauth/" data-via="JEEN_LEE" data-counturl="http://jeen.github.io/2011/12/27/using-plack-middleware-oauth/" >Tweet</a>
+  
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2011/12/26/dbix-class-using-gis-extensions/" title="Previous Post: DBIx::Class - Using GIS Extensions">&laquo; DBIx::Class - Using GIS Extensions</a>
+      
+      
+        <a class="basic-alignment right" href="/2011/12/27/catalyst-actionrole/" title="Next Post: Catalyst - ActionRole">Catalyst - ActionRole &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2013/07/17/solr-vs-elasticsearch-part-6-user-and-dev-communities-compared/">[번역] Solr vs. ElasticSearch: Part 6 – User &amp; Dev Communities Compared</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/07/17/solr-vs-elasticsearch-part-5-management-api-capabilities/">[번역] Solr vs ElasticSearch: Part 5 – Management API Capabilities</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/07/17/solr-vs-elasticsearch-part-4-faceting/">[번역] Solr vs ElasticSearch Part 4 - Faceting</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/07/16/solr-vs-elasticsearch-part-3-searching/">[번역] Solr vs. ElasticSearch - Part 3 : Searching</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/07/16/solr-vs-elasticsearch-part-2-indexing-and-language-handling/">[번역] Solr vs. ElasticSearch: Part 2 - Indexing and Language Handling</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/jeen">@jeen</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'jeen',
+            count: 0,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Jeen Lee -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'jeen';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://jeen.github.io/2011/12/27/using-plack-middleware-oauth/';
+        var disqus_url = 'http://jeen.github.io/2011/12/27/using-plack-middleware-oauth/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id; js.async = true;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

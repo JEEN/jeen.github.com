@@ -4,7 +4,7 @@
   <title><![CDATA[Category: actionrole | Jeen - Yet anothere techlog]]></title>
   <link href="http://jeen.github.io/blog/categories/actionrole/atom.xml" rel="self"/>
   <link href="http://jeen.github.io/"/>
-  <updated>2013-07-17T19:58:40+09:00</updated>
+  <updated>2013-07-17T20:00:39+09:00</updated>
   <id>http://jeen.github.io/</id>
   <author>
     <name><![CDATA[Jeen Lee]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Catalyst - ActionRole]]></title>
-    <link href="http://jeen.github.io/blog/2011/12/27/catalyst-actionrole/"/>
+    <link href="http://jeen.github.io/2011/12/27/catalyst-actionrole/"/>
     <updated>2011-12-27T21:14:00+09:00</updated>
-    <id>http://jeen.github.io/blog/2011/12/27/catalyst-actionrole</id>
+    <id>http://jeen.github.io/2011/12/27/catalyst-actionrole</id>
     <content type="html"><![CDATA[<h3>Action Role</h3>
 
 <p>오래된 이야기이지만 Catalyst 가 Moose 기반으로 만들어지면서 ActionRole 이라는 개념이 만들어졌었지요.

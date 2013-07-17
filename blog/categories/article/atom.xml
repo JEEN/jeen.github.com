@@ -4,7 +4,7 @@
   <title><![CDATA[Category: article | Jeen - Yet anothere techlog]]></title>
   <link href="http://jeen.github.io/blog/categories/article/atom.xml" rel="self"/>
   <link href="http://jeen.github.io/"/>
-  <updated>2013-07-17T19:58:40+09:00</updated>
+  <updated>2013-07-17T20:00:39+09:00</updated>
   <id>http://jeen.github.io/</id>
   <author>
     <name><![CDATA[Jeen Lee]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Lancaster Consensus]]></title>
-    <link href="http://jeen.github.io/blog/2013/05/04/lancaster-consensus/"/>
+    <link href="http://jeen.github.io/2013/05/04/lancaster-consensus/"/>
     <updated>2013-05-04T17:16:34+09:00</updated>
-    <id>http://jeen.github.io/blog/2013/05/04/lancaster-consensus</id>
+    <id>http://jeen.github.io/2013/05/04/lancaster-consensus</id>
     <content type="html"><![CDATA[<h1>Lancaster Consensus</h1>
 
 <p>2008년 오슬로에서 개최된 첫번째 Perl QA Hackathon 에서는, Perl 의 품질관리와 툴체인에 관한 모듈의 저자, 메인테이너, 뜻 있는 사람들이 모여서, 몇가지 표준과 관행에 대해서 합의를 이뤘습니다. 이 때 발표된 합의는 Oslo Consensus 라는 이름으로 알려지게 되었습니다.</p>

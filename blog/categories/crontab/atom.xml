@@ -4,7 +4,7 @@
   <title><![CDATA[Category: crontab | Jeen - Yet anothere techlog]]></title>
   <link href="http://jeen.github.io/blog/categories/crontab/atom.xml" rel="self"/>
   <link href="http://jeen.github.io/"/>
-  <updated>2013-07-17T19:58:40+09:00</updated>
+  <updated>2013-07-17T20:00:39+09:00</updated>
   <id>http://jeen.github.io/</id>
   <author>
     <name><![CDATA[Jeen Lee]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[crontab + perlbrew]]></title>
-    <link href="http://jeen.github.io/blog/2012/02/28/crontab-plus-perlbrew/"/>
+    <link href="http://jeen.github.io/2012/02/28/crontab-plus-perlbrew/"/>
     <updated>2012-02-28T21:03:00+09:00</updated>
-    <id>http://jeen.github.io/blog/2012/02/28/crontab-plus-perlbrew</id>
+    <id>http://jeen.github.io/2012/02/28/crontab-plus-perlbrew</id>
     <content type="html"><![CDATA[<p>  이번 글은 성의가 매우 부족하게 트윗의 열거로 끝낼까 합니다.</p>
 
 <blockquote class="twitter-tweet"><p>질문. perlbrew 설정이 crontab에서도 적용되게 하려면 어떻게 적어줘야 할까요..? .bashrc 에서 perlbrew의 설정파일을 부르게 해 둔 상태인데 crontab으로 실행하는 스크립트에는 적용이 안 되어 시스템 펄을 부르네요.</p>&mdash; Raymundo (@gypark) <a href="https://twitter.com/gypark/status/172218904352010240" data-datetime="2012-02-22T07:19:21+00:00">February 22, 2012</a></blockquote>

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: dbic | Jeen - Yet anothere techlog]]></title>
   <link href="http://jeen.github.io/blog/categories/dbic/atom.xml" rel="self"/>
   <link href="http://jeen.github.io/"/>
-  <updated>2013-07-17T19:58:40+09:00</updated>
+  <updated>2013-07-17T20:00:39+09:00</updated>
   <id>http://jeen.github.io/</id>
   <author>
     <name><![CDATA[Jeen Lee]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[DBIx::Class and JSON]]></title>
-    <link href="http://jeen.github.io/blog/2012/08/25/dbix-class-and-json/"/>
+    <link href="http://jeen.github.io/2012/08/25/dbix-class-and-json/"/>
     <updated>2012-08-25T12:44:00+09:00</updated>
-    <id>http://jeen.github.io/blog/2012/08/25/dbix-class-and-json</id>
+    <id>http://jeen.github.io/2012/08/25/dbix-class-and-json</id>
     <content type="html"><![CDATA[<p> 흔한 웹서비스의 흔한 AJAX 나 흔한 RESTful API 를 제공하기 위해서, 대개 JSON 포맷의 데이터를 서버에서 뿜어내고는 합니다.</p>
 
 <p> 하지만 누구나가 <code>Catalyst</code> + <code>DBIx::Class</code> 조합에서 이렇게 하면 되는 게 아닐까 하고 접근했다가…</p>
@@ -160,9 +160,9 @@ sub TO_JSON {</p>
   
   <entry>
     <title type="html"><![CDATA[DBIx::Class - Using GIS Extensions]]></title>
-    <link href="http://jeen.github.io/blog/2011/12/26/dbix-class-using-gis-extensions/"/>
+    <link href="http://jeen.github.io/2011/12/26/dbix-class-using-gis-extensions/"/>
     <updated>2011-12-26T15:56:00+09:00</updated>
-    <id>http://jeen.github.io/blog/2011/12/26/dbix-class-using-gis-extensions</id>
+    <id>http://jeen.github.io/2011/12/26/dbix-class-using-gis-extensions</id>
     <content type="html"><![CDATA[<h3>DBIx::Class 에서의 GIS!?</h3>
 
 <p>ORM 을 사용함에 있어서 단순한 SELECT 문은 그렇게 큰 고민없이 사용할 수 있습니다. 하지만 GIS Extension 을 사용한 쿼리들을 ORM 에서 사용한다면 일단 고민이 들어가기 마련입니다.</p>

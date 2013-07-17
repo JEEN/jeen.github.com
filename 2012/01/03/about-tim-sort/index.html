@@ -1,0 +1,383 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>[번역] About Tim Sort - Jeen - Yet anothere techlog</title>
+  <meta name="author" content="Jeen Lee">
+
+  
+  <meta name="description" content="최근, TimSort 라는 정렬 알고리즘 이 화제가 되었습니다. TimSort 는 빠르고 안정적인 정렬 알고리즘으로, Python(&gt;=2.3) 과 Java SE 7, 그리고 Android 에서 표준 정렬 알고리즘으로 채용되었다고 합니다. C++ 의 std:: &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://jeen.github.io/2012/01/03/about-tim-sort">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Jeen - Yet anothere techlog" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-27958809-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Jeen - Yet anothere techlog</a></h1>
+  
+    <h2>STFUAWSC</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:jeen.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">[번역] About Tim Sort</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-01-03T19:44:00+09:00" pubdate data-updated="true">Jan 3<span>rd</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>최근, <code>TimSort</code> 라는 정렬 알고리즘 이 화제가 되었습니다. <code>TimSort</code> 는 빠르고 안정적인 정렬 알고리즘으로, <code>Python(&gt;=2.3)</code> 과 <code>Java SE 7</code>, 그리고 <code>Android</code> 에서 표준 정렬 알고리즘으로 채용되었다고 합니다.</p>
+
+<p>C++ 의 <code>std::sort()</code> 보다도 빠르다는 벤치마크 결과가 화제가 되어(나중에 벤치마크의 오류라고 판명났지만), 그때 <code>TimSort</code> 의 존재를 알았습니다. 실제로 랜덤 데이터에 대해서는 <code>Quick Sort(IntroSort)</code> 보다 빠르지는 않지만, 정렬이라는 단순한 일을 하는 알고리즘 이 지금도 더욱 개량해오며 사람들의 관심을 끌고 있다는 것은 흥미깊은 일입니다.</p>
+
+<h3>개요</h3>
+
+<p><code>TimSort</code> 는 한마디로 하면, <strong>&ldquo;STL 의 <em>IntroSort</em> 의 Merge Sort 버젼&rdquo;</strong> 입니다. 조금 더 정확하게 이야기하면 거기에 몇가지의 Heuristic 이라고 할 수 있습니다. 몇가지 테크닉의 집합체이기에, 이런 것들을 어디까지 <code>TimSort</code> 라고 불러야 할지는 모르겠습니다.</p>
+
+<h3>IntroSort</h3>
+
+<p><code>IntroSort</code> 란, <code>Quick Sort</code> 의 개량버젼입니다. <code>Quick Sort</code> 는 상당히 빠른 알고리즘이지만, 몇가지 약점이 있습니다.</p>
+
+<p>약점 중 하나는 최악계산량입니다. 피벗(Pivot)의 선택이 잘 이뤄지지 않으면, 요소 수의 2제곱에 비례한 시간이 걸리게 됩니다. 몇가지 요소를 샘플링한 뒤에 중앙값을 Pivot하면, 평균적인 데이터에 대해서는 꽤 양호한 성능을 바타내지만, 그것은 최악계산량을 보증하는 것은 아닙니다. 예를 들어, 특정 구현에 대해서 2 제곱의 시간이 걸리는 데이터를 만드는 것은 쉽고, 그것을 노려서 공격하는 것도 가능합니다.</p>
+
+<p><code>IntroSort</code> 에서는 이에 대처하기 위해, 재귀탐색이 요소수의 대수를 넘으면 <code>HeapSort</code> 로 바꾸게 됩니다. 이에 의해 최악계산량을 O(n log n)에 대입하고, 평균적인 데이터에서는 <code>QuickSort</code> 에 필적하는 성능을 달성합니다.</p>
+
+<p>다른 하나의 약점은 요소 수가 적은 경우입니다. 적은 요소 수(&lt; 32 정도) 에서는 계산량의 순서가 커도 단순히 오버헤드가 적은 <code>Insert Sort</code> 나 <code>Select Sort</code> 같은 알고리즘이 더 빠릅니다. 그리고 분할이 진행된 요소수가 줄어들면, <code>Insert Sort</code> 로 바뀝니다.</p>
+
+<h3>TimSort</h3>
+
+<p><code>Merge Sort</code> 는 최악계산량 O(n log n) 이 안정적인 정렬 알고리즘으로, <code>Quick Sort</code> 같은 최악계산량의 문제는 발생하지 않습니다. 그러나, 요소수가 적은 경우는 오버헤드에 의해 <code>Quick Sort</code> 와 마찬가지로 느려집니다. <code>TimSort</code>는 일반적인 <code>Merge Sort</code> 와는 달리, 미리 어느 정도의 크기의 정렬이 끝난 열(run 이라고 부릅니다) 로 분할하고 병합합니다.</p>
+
+<h3>run 크기의 결정</h3>
+
+<p>run 크기는 <code>Insert Sort</code> 가 가장 빠른 범위(&lt; 32) 가 되도록 크게 합니다.또, run 의 갯수가 2의 거듭제곱일 때, 뒷단의 병합이 빨리 끝나기 때문에 [16, 32] 의 범위로, run 의 갯수가 2의 거듭제곱이 되는 것을 선택합니다.</p>
+
+<h3>run 으로의 분할</h3>
+
+<p>우선 처음으로, 입력열의 작은 정렬이 끝난 열로 분해합니다. 입력열을 앞에서 순서대로 놓고, 단순증가하고 있는 최대의 접두사를 요구합니다. 그것이 어느 정도 커지면 그것을 하나의 run 이라고 합니다. 증가열의 크기가 너무 작은 경우는, <code>Insert Sort</code> 를 사용해 확장합니다. 이 때에 사용하는 <code>Insert Sort</code> 는 전방의 요소가 정렬이 끝났기 때문에, 도중에 수행할 수 있습니다.</p>
+
+<p>처음의 두 요소가 내림차순이 되었을 경우, 증가열에서는 되도록 감소열을 위해 반전합니다. 이에 의해 <code>Insert Sort</code> 의 횟수를 줄일 수 있습니다. 여기에서 주의할 것은, 안전성을 위해서 감소열은 strict(&lt;) 이어야 합니다.</p>
+
+<p>입력열의 정렬이 끝난 후, 이 상태로 한번 데이터를 훑어 보는 것만으로 정렬이 끝납니다. 이 때문에 속도가 빠른 것입니다.</p>
+
+<h3>2분할 Insert Sort</h3>
+
+<p><code>TimSort</code> 에서는 단순한 <code>Insert Sort</code> 가 아닌, <code>2분할 Insert Sorrt</code> 가 사용됩니다. 이것은 요소의 삽입위치의 결정을 위해서, 정렬이 끝난 부분을 2분할 탐색하는 것입니다. 안전성을 가지도록 삽입위치를 정할 필요가 있다는 것에 주의해야 합니다.</p>
+
+<h3>Merge</h3>
+
+<p>어느 정도의 사이즈의 run 이 만들어졌다면, 이것을 병합(Merge)합니다. 병합은 평상시대로 2개씩 병합합니다. 이것을 효율있게 수행하기 위해서, 스택을 사용해 run 을 관리합니다. 앞의 상황에서 작성된 run 은 우선 스택에 올려지고, 다음과 같은 불변상황을 만족하도록 병합됩니다.</p>
+
+<ul>
+<li>length[top] + length[top -1] &lt; length[top -2]</li>
+<li>length[top]  &lt; length[top -1]</li>
+</ul>
+
+
+<p>이것을 만족하는 스택의 깊이는 가장 큰 것이라도 요소 수의 대수가 됩니다. 또, 작은 것 끼리 병합되기에, 계산량 O(n log n)을 보증할 수 있습니다 (<code>TimSort</code> 의 경우는 거의 대부분 같은 크기의 run 이 병합되기에 실용적으로도 충분히 빠르다고 말할 수 있습니다).</p>
+
+<h3>2개의 run 의 병합</h3>
+
+<p><code>TimSort</code> 에서는 2개의 run 의 병합에도 많이 고려되어 있습니다.</p>
+
+<h4>연속영역</h4>
+
+<p><code>TimSort</code> 에서는 반드시 마주 보고 있는 메모리 영역을 병합합니다. 이것은 앞의 스택의 불변조건에 의해 run의 병합을 수행하면 자연스레 만족됩니다. 옆에 있는 메모리의 영역을 병합하면</p>
+
+<pre><code>* 앞 줄 중 뒷 줄의 선두보다 적은 것
+* 뒷 줄의 뒤의 요소 중, 앞 줄의 맨 뒤의 요소보다 큰 것
+</code></pre>
+
+<p>의 복사를 생략할 수 있습니다. 연속한 영역의 부분열만 병합하면 되는 것입니다.</p>
+
+<h4>범위없는 2분할 탐색</h4>
+
+<p>  생략하는 요소를 계산하기 위해서도 2분할 탐색을 이용합니다. 단, 일반적인 2분할 탐색과는 달리, 맨 처음 범위를 고정하지 않고, 다음의 두 단계로 탐색을 수행합니다.</p>
+
+<pre><code>* 1, 2, 4, 8, ... 처럼 2의 거듭제곱 순서의 요소를, 요소가 커질때까지 본다
+* 원하는 요소가 어느 범위에 있는 지 요구하기 때문에 (예를 들어, 8번째의 요소가 큰 것이라면, \[4,8\] 에 원하는 요소가 있습니다) 다시 그 범위로 2분할 탐색
+</code></pre>
+
+<p>  병합에 있어서는, 원하는 요소는 꽤 앞에 있을 것이기에, 일반적인 2분할 탐색보다 비교횟수는 적을 것입니다( 평균적인 데이터에 대해서는 선형검색이 빠르다고 생각합니다)</p>
+
+<h4>Galloping Mode</h4>
+
+<p>  남은 부분의 병합은 평상시대로, 맨 앞의 요소를 비교해서 병합해나가지만, 같은 열에서 연속해서 많이 채용되기 시작하면 (>=7), <code>갤로핑 모드(Galloping Mode)</code>라고 불리는 모드로 들어갑니다.</p>
+
+<p>  <code>갤로핑 모드</code>란, 한쪽의 맨 앞의 요소보다도 작은 요소가 다른 쪽의 맨앞에 몇개 있는지를 위의 범위없는 2분할 탐색으로 구하는 것입니다. 같은 줄에서 어느정도 이상의 연속한 경우, 더 많이 연속한다고 예상할 수 있기에, 이것이 제대로 작동할 것입니다.</p>
+
+<h3>Conclusion</h3>
+
+<p>  이상이 <code>TimSort</code> 의 알고리즘입니다. 실질적으로는 <code>Merge Sort</code> 라고 할 수 있습니다. 랜덤한 데이터에 대해서는 <code>IntroSort</code> 나 C++ 의 <code>std::stable_sort()</code> 와 비교해서 속도에 우위성이 있지는 않지만(<code>std::stable_sort()</code> 도 Merge Sort + 작은 요소로 <code>Insert Sort</code>), 정렬이 끝난 데이터, 또는 거의 정렬이 끝난 데이터에 대해서는 맨 처음의 run 작성 및 <code>갤로핑 모드</code>에서 큰 폭의 생략이 예상되기 때문에, 실제 데이터에 그런 경향이 있다면 좋은 성능을 얻을 수 있습니다. 또, <code>Quick Sort</code> 처럼 최악계산량이 문제가 되는 일이 없기 때문에, 이것을 표준으로 채용하는 것은 보안상의 관점에서도 충분히 메리트가 있다고 할 수 있습니다.</p>
+
+<h3>참고자료</h3>
+
+<ul>
+<li><a href="http://research.preferred.jp/2011/10/tim-sort/">高速な安定ソートアルゴリズム &ldquo;TimSort&#8221;の解説</a></li>
+<li><a href="http://en.wikipedia.org/wiki/Timsort">Wikipedia TimSort</a></li>
+</ul>
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Jeen Lee</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-01-03T19:44:00+09:00" pubdate data-updated="true">Jan 3<span>rd</span>, 2012</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/algorithm/'>algorithm</a>, <a class='category' href='/blog/categories/translation/'>translation</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://jeen.github.io/2012/01/03/about-tim-sort/" data-via="JEEN_LEE" data-counturl="http://jeen.github.io/2012/01/03/about-tim-sort/" >Tweet</a>
+  
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2012/01/03/perl-and-continuous-integration-with-jenkins-1/" title="Previous Post: Perl and Continuous Integration with Jenkins - I">&laquo; Perl and Continuous Integration with Jenkins - I</a>
+      
+      
+        <a class="basic-alignment right" href="/2012/01/03/ea-pms-task-management/" title="Next Post: [번역] PM's Task Management @ EA">[번역] PM's Task Management @ EA &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2013/07/17/solr-vs-elasticsearch-part-6-user-and-dev-communities-compared/">[번역] Solr vs. ElasticSearch: Part 6 – User &amp; Dev Communities Compared</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/07/17/solr-vs-elasticsearch-part-5-management-api-capabilities/">[번역] Solr vs ElasticSearch: Part 5 – Management API Capabilities</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/07/17/solr-vs-elasticsearch-part-4-faceting/">[번역] Solr vs ElasticSearch Part 4 - Faceting</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/07/16/solr-vs-elasticsearch-part-3-searching/">[번역] Solr vs. ElasticSearch - Part 3 : Searching</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/07/16/solr-vs-elasticsearch-part-2-indexing-and-language-handling/">[번역] Solr vs. ElasticSearch: Part 2 - Indexing and Language Handling</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/jeen">@jeen</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'jeen',
+            count: 0,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Jeen Lee -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'jeen';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://jeen.github.io/2012/01/03/about-tim-sort/';
+        var disqus_url = 'http://jeen.github.io/2012/01/03/about-tim-sort/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id; js.async = true;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

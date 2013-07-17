@@ -1,0 +1,420 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Regexp::Wildcards - Jeen - Yet anothere techlog</title>
+  <meta name="author" content="Jeen Lee">
+
+  
+  <meta name="description" content="저같은 평범한 개발자야 어떤 패턴을 확인하고 정규표현식을 쓰면 되는데, 사실 일반 사용자들에게
+정규표현식을 어떤 설정의 입력값으로 밀어넣는 것은 일반 사용자에게 배려가 부족하지 않나 하고 생각했었습니다. /path/a/b
+/path/a/c
+/path/a/d / &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://jeen.github.io/2012/07/01/regexp-wildcards">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Jeen - Yet anothere techlog" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-27958809-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Jeen - Yet anothere techlog</a></h1>
+  
+    <h2>STFUAWSC</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:jeen.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Regexp::Wildcards</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-07-01T00:46:00+09:00" pubdate data-updated="true">Jul 1<span>st</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p> 저같은 평범한 개발자야 어떤 패턴을 확인하고 정규표현식을 쓰면 되는데, 사실 일반 사용자들에게
+정규표현식을 어떤 설정의 입력값으로 밀어넣는 것은 일반 사용자에게 배려가 부족하지 않나 하고 생각했었습니다.</p>
+
+<ul>
+<li><code>/path/a/b</code></li>
+<li><code>/path/a/c</code></li>
+<li><code>/path/a/d</code></li>
+</ul>
+
+
+<p><code>/path/a/</code> 디렉토리 아래의 b,c,d 파일들을 삭제한다고 합니다. 물론 b,c,d 밖에 없다고 합니다. 이럴때
+보통 모두가 대개 와일드카드를 사용하죠.</p>
+
+<p><del> bash
+$ rm -rf /path/a/*
+</del></p>
+
+<p>라고 말이죠.</p>
+
+<p> 예를들어서 어떤 관리자페이지 아래에서 특정 유저그룹의 접속권한에 대해서 다룬다고 해봅니다. 특정그룹은 고정IP를 통해서 접근해올 수 있고, 또 다른 그룹은 특정 IP대역에서 찾아온다고 합니다. 이런 것들을 복잡한 설정파일을 통해서가 아니라 유저가 관리하기 쉬운 인터페이스를 제공해야 할 필요도 있죠.</p>
+
+<p> 일반적인 입력예는 아래와 같습니다.</p>
+
+<ul>
+<li><code>211.123.123.1-211.123.123.254</code></li>
+<li><code>211.123.122.5</code></li>
+<li><code>211.123.121.4, 211.123.121.8</code></li>
+</ul>
+
+
+<p> 적당한 IP대역이거나, 혹은 단일 IP라거나, 혹은 몇몇 패턴을 알 수 없는 복수개의 IP라거나&hellip;</p>
+
+<ul>
+<li><code>211.123.126.0/24</code></li>
+</ul>
+
+
+<p> 혹은 네트워크 관리자라면 CIDR 스타일을 사용할지도 모르겠습니다.</p>
+
+<ul>
+<li><code>211.123.128.\*</code></li>
+<li><code>211.123.121.10\*</code></li>
+</ul>
+
+
+<p> 아니면 위에서 말한 대로 와일드카드를 사용할 수 있겠죠.</p>
+
+<p> 우선 위의 네개째까지는 <code>Net::IPAddrRanges</code> 라는 모듈을 사용하면 편하게 이용할 수 있습니다.</p>
+
+<p>~~~ perl
+use strict;
+use warnings;
+use Net::IPAddrRanges;</p>
+
+<p>my $ranges = Net::IPAddrRanges->new;
+$ranges->add(qw{</p>
+
+<pre><code>211.123.123.1-211.123.254
+211.123.122.5
+211.123.121.4 211.123.121.8
+211.123.126.0/24
+</code></pre>
+
+<p>});</p>
+
+<p>$ranges->find(&lsquo;211.123.123.5&rsquo;); # OK;
+~~~</p>
+
+<p> 이런저런 다양한 입력값들을 받아서 <code>Net::IPAddrRanges</code> 모듈에 넘겨주고 <code>-&gt;find</code> 메소드를 통해서 접속해온 IP(211.123.123.5)가 접속가능한 IP인지를 위처럼 간단하게 확인할 수 있죠.</p>
+
+<p> 와일드카드 사용시에는 이와는 좀 다릅니다.</p>
+
+<p>~~~ perl
+use strict;
+use warnings;
+use Regexp::Wildcards;</p>
+
+<p>my $rw = Regexp::Wildcards->new( type => &lsquo;unix&rsquo; );</p>
+
+<p>my $user_ip = &lsquo;211.123.121.108&rsquo;;</p>
+
+<p>if (scalar grep { $user_ip =~ $_ }</p>
+
+<pre><code>       map { $rw-&gt;convert($_) } qw{ 211.123.128.* 211.123.121.10\* }) {
+print "OK";
+</code></pre>
+
+<p>}
+~~~</p>
+
+<p> 뭐 사실 이런 코드를 적당한 메소드로 만들어서 사용하고 있습니다. IP제한같은 시나리오에는 사실 Net::IPAddrRanges 를 사용하는 게 좋아보이기는 합니다만&hellip; 최근에 <code>Regexp::Wildcards</code> 를 사용하는 경우가 있었는데&hellip;</p>
+
+<p> 유저의 권한별로 페이지의 접근을 제어하고 싶다라는 것이었죠.</p>
+
+<p><del> yaml
+  ROLE1: [ /admin/user/list, /admin/user/*/download ]
+  ROLE2: [ /admin/user/* ]
+</del></p>
+
+<p> ROLE1 의 경우에는 admin/user 라는 컨트롤러중에 유저 리스트(/admin/user/list) 와 각 유저별로 관련정보를 다운로드를 할 수 있습니다. 그 이외에는 전부 접근을 차단한다는 것이구요.</p>
+
+<p> ROLE2 의 경우에는 admin/user 의 모든 액션에 접근을 가능하게 합니다.</p>
+
+<p> 이때는 카탈리스트를 사용하고 있다는 전제아래, Admin.pm 이라는 컨드롤러파일의 <code>auto</code> 아래 다음과 같은 코드를 추가했습니다.</p>
+
+<p>~~~ perl
+sub auto :Private {
+&hellip;.</p>
+
+<pre><code>my $rw = Regexp::Wildcards-&gt;new( type =&gt; 'unix' );
+
+my $ACL = ...; # 어떻게 샤바샤바해서 유저권한에 따른 접근가능 목록을 뽑아옵니다
+
+unless (scalar grep { $c-&gt;action =~ $_ } map { $rw-&gt;convert($_); } @{ $ACL }) {
+    $c-&gt;flash( warn_messages =&gt; \[ '접속할 수 없어요.' \] );
+    $c-&gt;res-&gt;redirect($c-&gt;uri_for("/admin"));
+    return 1;
+}
+</code></pre>
+
+<p>&hellip;.
+}
+~~~</p>
+
+<p> 네 아무튼 뭐 사실 결론은 굳이 할 수 있다면 간단하게 설정할 수 있는데, 왜 설정파일에까지 정규표현식이 끼어들어야 하느냐 라는 생각아래에서 시작했었지요. 정규표현식으로 난무할 이런저런 상황들을 적당하게 와일드카드로 커버할 수 있다면 더 직관적으로 이해하고 사용할 수 있지 않을까 하는 생각이 듭니다.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Jeen Lee</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-07-01T00:46:00+09:00" pubdate data-updated="true">Jul 1<span>st</span>, 2012</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/perl/'>perl</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://jeen.github.io/2012/07/01/regexp-wildcards/" data-via="JEEN_LEE" data-counturl="http://jeen.github.io/2012/07/01/regexp-wildcards/" >Tweet</a>
+  
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2012/06/19/dbix-class-and-replication-ii/" title="Previous Post: DBIx::Class and Replication - II">&laquo; DBIx::Class and Replication - II</a>
+      
+      
+        <a class="basic-alignment right" href="/2012/07/02/https-ssl-lwp-soap-and-perl/" title="Next Post: HTTPS-SSL-LWP-SOAP and Perl">HTTPS-SSL-LWP-SOAP and Perl &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2013/07/17/solr-vs-elasticsearch-part-6-user-and-dev-communities-compared/">[번역] Solr vs. ElasticSearch: Part 6 – User &amp; Dev Communities Compared</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/07/17/solr-vs-elasticsearch-part-5-management-api-capabilities/">[번역] Solr vs ElasticSearch: Part 5 – Management API Capabilities</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/07/17/solr-vs-elasticsearch-part-4-faceting/">[번역] Solr vs ElasticSearch Part 4 - Faceting</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/07/16/solr-vs-elasticsearch-part-3-searching/">[번역] Solr vs. ElasticSearch - Part 3 : Searching</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/07/16/solr-vs-elasticsearch-part-2-indexing-and-language-handling/">[번역] Solr vs. ElasticSearch: Part 2 - Indexing and Language Handling</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/jeen">@jeen</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'jeen',
+            count: 0,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Jeen Lee -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'jeen';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://jeen.github.io/2012/07/01/regexp-wildcards/';
+        var disqus_url = 'http://jeen.github.io/2012/07/01/regexp-wildcards/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id; js.async = true;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

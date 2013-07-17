@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Facebook | Jeen - Yet anothere techlog]]></title>
   <link href="http://jeen.github.io/blog/categories/facebook/atom.xml" rel="self"/>
   <link href="http://jeen.github.io/"/>
-  <updated>2013-07-17T19:58:40+09:00</updated>
+  <updated>2013-07-17T20:00:39+09:00</updated>
   <id>http://jeen.github.io/</id>
   <author>
     <name><![CDATA[Jeen Lee]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Export Facebook Event Attending List - perl-kr TeaTime]]></title>
-    <link href="http://jeen.github.io/blog/2012/07/26/export-facebook-event-attending-list-perl-kr-teatime/"/>
+    <link href="http://jeen.github.io/2012/07/26/export-facebook-event-attending-list-perl-kr-teatime/"/>
     <updated>2012-07-26T14:22:00+09:00</updated>
-    <id>http://jeen.github.io/blog/2012/07/26/export-facebook-event-attending-list-perl-kr-teatime</id>
+    <id>http://jeen.github.io/2012/07/26/export-facebook-event-attending-list-perl-kr-teatime</id>
     <content type="html"><![CDATA[<p> 지난번 1회 티타임때의 문제가 제대로 참가비 징수를 못해서 비용정산에 어려움이 있었는데,
 이 문제를 해결하기 위해서 간단하게 참가자 리스트를 A4 용지로 뽑아내서 체크하도록 하는 건 어떨까 하는 생각이 있었습니다.</p>
 

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: freebsd | Jeen - Yet anothere techlog]]></title>
   <link href="http://jeen.github.io/blog/categories/freebsd/atom.xml" rel="self"/>
   <link href="http://jeen.github.io/"/>
-  <updated>2013-07-17T19:58:40+09:00</updated>
+  <updated>2013-07-17T20:00:39+09:00</updated>
   <id>http://jeen.github.io/</id>
   <author>
     <name><![CDATA[Jeen Lee]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[FreeBSD 8.2 STABLE - CPAN Error]]></title>
-    <link href="http://jeen.github.io/blog/2012/01/05/freebsd-8-dot-2-stable-cpan-error/"/>
+    <link href="http://jeen.github.io/2012/01/05/freebsd-8-dot-2-stable-cpan-error/"/>
     <updated>2012-01-05T22:32:00+09:00</updated>
-    <id>http://jeen.github.io/blog/2012/01/05/freebsd-8-dot-2-stable-cpan-error</id>
+    <id>http://jeen.github.io/2012/01/05/freebsd-8-dot-2-stable-cpan-error</id>
     <content type="html"><![CDATA[<p>  회사업무차 <code>FreeBSD 8.2 STABLE</code> OS 를 사용하는 서버에서 CPAN 사용시 에러가 발생했습니다.</p>
 
 <p>~~~ bash

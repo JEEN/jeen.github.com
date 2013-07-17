@@ -4,7 +4,7 @@
   <title><![CDATA[Category: github | Jeen - Yet anothere techlog]]></title>
   <link href="http://jeen.github.io/blog/categories/github/atom.xml" rel="self"/>
   <link href="http://jeen.github.io/"/>
-  <updated>2013-07-17T19:58:40+09:00</updated>
+  <updated>2013-07-17T20:00:39+09:00</updated>
   <id>http://jeen.github.io/</id>
   <author>
     <name><![CDATA[Jeen Lee]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Export Github Issues]]></title>
-    <link href="http://jeen.github.io/blog/2012/07/18/export-github-issues/"/>
+    <link href="http://jeen.github.io/2012/07/18/export-github-issues/"/>
     <updated>2012-07-18T15:44:00+09:00</updated>
-    <id>http://jeen.github.io/blog/2012/07/18/export-github-issues</id>
+    <id>http://jeen.github.io/2012/07/18/export-github-issues</id>
     <content type="html"><![CDATA[<p>회사에서는 한달에 $20 인가 지불하면서 Github 을 쓰고 있습니다.</p>
 
 <p>$20 플랜에서는 한정적인 Private Repo 밖에 만들지 못합니다. 그래서 완료가 된 프로젝트에 대해서는
@@ -133,9 +133,9 @@ Data::Section::Simple->new()&ndash;>get_data_section();
   
   <entry>
     <title type="html"><![CDATA[Rex Pull Request]]></title>
-    <link href="http://jeen.github.io/blog/2012/02/15/rex-pull-request/"/>
+    <link href="http://jeen.github.io/2012/02/15/rex-pull-request/"/>
     <updated>2012-02-15T23:21:00+09:00</updated>
-    <id>http://jeen.github.io/blog/2012/02/15/rex-pull-request</id>
+    <id>http://jeen.github.io/2012/02/15/rex-pull-request</id>
     <content type="html"><![CDATA[<ul>
 <li><a href="http://rexify.org/">&reg;?ex &ndash; A simple framework to simplify systemadministration</a></li>
 </ul>

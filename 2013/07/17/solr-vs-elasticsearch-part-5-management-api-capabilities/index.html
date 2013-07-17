@@ -1,0 +1,520 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>[번역] Solr vs ElasticSearch: Part 5 – Management API Capabilities - Jeen - Yet anothere techlog</title>
+  <meta name="author" content="Jeen Lee">
+
+  
+  <meta name="description" content="Solr vs ElasticSearch: Part 5 – Management API Capabilities January 8, 2013 by Rafał Kuć In previous posts, all listed below, we’ve discussed general &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://jeen.github.io/2013/07/17/solr-vs-elasticsearch-part-5-management-api-capabilities">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Jeen - Yet anothere techlog" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-27958809-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Jeen - Yet anothere techlog</a></h1>
+  
+    <h2>STFUAWSC</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:jeen.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">[번역] Solr vs ElasticSearch: Part 5 – Management API Capabilities</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-17T09:01:06+09:00" pubdate data-updated="true">Jul 17<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><h1>Solr vs ElasticSearch: Part 5 – Management API Capabilities</h1>
+
+<p>January 8, 2013 by Rafał Kuć</p>
+
+<p>In previous posts, all listed below, we’ve discussed general architecture, full text search capabilities and facet aggregations possibilities. However, till now we have not discussed any of the administration and management options and things you can do on a live cluster without any restart. So let’s get into it and see what Apache Solr and ElasticSearch have to offer.</p>
+
+<p>이전 편에서는 전반적인 개요, 전문검색기능, Faceting 의 집약기능에 대해서 다루었습니다. 지금까지 관리와 운영 옵션과 운용중의 클러스터에서 재기동없이 할 수 있는 일에 대해서는 다루지 않았죠. 자, 그럼 이에 대해서 Apache Solr 와 ElasticSearch 는 무엇을 제공할 수 있는 지 보도록 할까요?</p>
+
+<ul>
+<li><a href="http://jeen.github.io/2013/07/15/solr-vs-elasticsearch-part-1/">1. Solr vs. ElasticSearch: Part 1 – Overview</a></li>
+<li><a href="http://jeen.github.io/2013/07/16/solr-vs-elasticsearch-part-2-indexing-and-language-handling/">2. Solr vs. ElasticSearch: Part 2 – Data Handling</a></li>
+<li><a href="http://jeen.github.io/2013/07/16/solr-vs-elasticsearch-part-3-searching/">3. Solr vs. ElasticSearch: Part 3 – Searching</a></li>
+<li><a href="http://jeen.github.io/2013/07/16/solr-vs-elasticsearch-part-4-faceting/">4. Solr vs. ElasticSearch: Part 4 – Faceting</a></li>
+<li><a href="http://jeen.github.io/2013/07/17/solr-vs-elasticsearch-part-5-management-api-capabilities/">5. Solr vs. ElasticSearch: Part 5 – Management API Capabilities</a></li>
+<li><a href="http://jeen.github.io/2013/07/17/solr-vs-elasticsearch-part-6-user-and-dev-communities-compared/">6. Solr vs. ElasticSearch: Part 6 – User &amp; Dev Communities Compared</a></li>
+</ul>
+
+
+<h2>Input/Output Format</h2>
+
+<h3>ElasticSearch</h3>
+
+<p>As you probably know ElasticSearch offers a single way to talk to it – its HTTP REST API – JSON structured queries and responses. In most cases, especially during query time, it is very handy, because it let’s you perfectly control the structure of your queries and thus control the logic.</p>
+
+<p>알고 계시겠지만 ElasticSearch 는 하나의 통신방법을 제공합니다. 그것이 바로 HTTP REST API이며 이는 JSON 구조로 쿼리와 응답을 만들어냅니다. 대부분의 경우, 특히 쿼리시에 매우 편리합니다. 쿼리 구조를 완전하게 컨트롤할 수 있고, 그러므로 로직을 컨트롤할 수 있기 때문입니다.</p>
+
+<h3>Apache Solr</h3>
+
+<p>On the other hand we have Apache Solr. If you are familiar with it you know that in order to send a query to Solr one needs to send it using URL request parameters.  This makes communication much less structured compared to ElasticSearch JSON format. In response you can get multiple response formats that are supported out of the box, like the default XML, JSON, CSV, PHP serialized, or Ruby.</p>
+
+<p>반면 Apache Solr 는 쿼리를 보낼 때에 URL 리퀘스트 파라메터를 보낼 필요가 있다는 것은 알고 계실겁니다. 이것이 ElasticSearch 의 JSON 형식과 비교하면 커뮤니케이션을 보다 낮은 수준으로 구조화해버리는 것이죠. 하지만 응답시에는 여러 응답형식을 지원하고 있습니다. 기본적으로 XML, JSON, CSV, 직렬화된 PHP, Ruby 가 그것들이죠.</p>
+
+<h2>Statistics API</h2>
+
+<p>Most of the time your search cluster will be fine and you won’t have any problems with it. However, there are times where you may need to see what is happening inside Apache Solr or ElasticSearch to diagnose problems, such as performance problems (hello SPM!), stability issues, or anything like that. In such cases, both search engines provide some amount of statistics.</p>
+
+<p>대부분의 경우, 검색 클러스터는 튼튼하고 문제를 일으키는 일은 없을 것 입니다. 그러나 Apache Solr 나 ElasticSearch 에서 무슨 일이 일어났는가를 보고 문제 진단을 해 볼 필요가 있습니다. 예를들어서 퍼포먼스 문제나(어이, SPM!) 안전성의 문제 와 같은 것들이죠. 그런 경우에는 두 검색엔진은 몇가지의 통계값을 제공합니다.</p>
+
+<h3>Apache Solr</h3>
+
+<p>In Solr we can use JMX or HTTP requests to retrieve information about handler usage, cache statistics or information about most Solr components.</p>
+
+<p>Solr 에서는 JMX 나 HTTP 질의를 핸들러로 캐쉬의 통계, 그리고 대부분의 Solr 컴포넌트의 정보를 얻을 때에 이용할 수 있습니다.</p>
+
+<h3>ElasticSearch</h3>
+
+<p>ElasticSearch was designed to be able to return various statistics about itself. With the REST API calls we can get information from the simplest ones like cluster health or nodes statistic, to extent information like the detailed ones about indices with merges, refreshes. The same stats are available via JMX, too.</p>
+
+<p>ElasticSearch는 자체적으로 다양한 통계를 반환할 수 있도록 설계되었습니다. REST API 의 호출을 사용해서 가장 단순한 것, 예를 들자면 클러스터의 건강상태나 노드의 통계에서 인덱스의 머지, 리프레쉬와 같은 상세한 것 등의 광범위한 정보를 얻을 수 있습니다. 이와 같은 정보는 JMX 경유로 얻을 수 있습니다.</p>
+
+<h2>Settings API</h2>
+
+<h3>ElasticSearch</h3>
+
+<p>ElasticSearch allows us to modify most of the configuration values dynamically. For example, you can clear you caches (or just specific type of cache), you can move shards and replicas to specific nodes in your cluster. In addition to that you are also allowed to update mappings (to some extent), define warming queries (since version 0.20), etc. You can even shut down a single node or a whole cluster with the use of a single HTTP call. Of course, this is just an example and doesn’t cover all the possibilities exposed by ElasticSearch.</p>
+
+<p>ElasticSearch는 동적으로 설정값의 대부분을 변경할 수 있습니다. 예를 들어 캐쉬를 클리어했다든가, 특정 타입의 캐쉬만을 클리어했다거나, Shard 와 레플리카를 클러스터로 지정한 노드로 이동할 수 있습니다. 그리고 어떤 범위의 맵핑을 변경하거나 워밍쿼리(v0.20이후)를 정의할 수도 있습니다. 단일 노드나 클러스터 전체를 한번의 HTTP 호출로 셧다운할 수도 있죠. 물론 이것들은 단순히 일부분 일 뿐이며, ElasticSearch 에서 공개된 기능 전체를 커버하는 것은 아닙니다.</p>
+
+<h3>Apache Solr</h3>
+
+<p>In case of Apache Solr we do not (yet) have the possibility of changing configuration values (like warming queries) with API calls.</p>
+
+<p>Apache Solr 의 경우, API 호출로 설정값의 변경 (예를들어 워밍쿼리)할 수 있는 기능은 &ldquo;아직&rdquo; 없습니다.</p>
+
+<h2>인덱스/콜렉션의 관리기능</h2>
+
+<p>In addition to the capabilities mentioned above both ElasticSearch and Apache Solr provide APIs that allows us to modify our deployment when it comes to collections and indices.</p>
+
+<p>위에서 설명한 기능 이외에 ElasticSearch 와 Apache Solr 는 콜렉션과 인덱스에 관한 디플로이를 변경할 수 있습니다.</p>
+
+<h3>Apache Solr</h3>
+
+<p>Pre 4.0 we were able to manipulate cores inside our Solr instances. We could create new cores, reload them, get their status, rename, swap two of them, and finally remove a core from the instance. With Solr 4.0, a new API was introduced that is built on top of core admin API – the collections API. It allows us to create collections on started SolrCloud cluster, reload them and of course delete them. As the collections API is built on top of the core admin API,  if you create a new collection all the needed cores on all instances will be created. Of course, the same goes for reloading and deleting – all the cores will be appropriately informed and processed.</p>
+
+<p>4.0 이전에는 Solr 인스턴ㅅ 안에 여러 코어를 만질 수 있었습니다. 새로운 코어를 만들거나 리로드 하거나, 상태정보를 얻거나, 이름을 바꾸거나, 두가지를 스와핑하거나, 마지막으로 인스턴스에서 코어를 삭제할 수 가 있었습니다. Solr 4.0 에서는 코어관리 API 의 맨 위에 새로운 API 가 새로이 소개되었습니다. 그것이 바로 Collections API 입니다. 이미 시작한 SolrCloud 클러스터 위에 콜렉션을 만들거나 리로드, 삭제도 할 수 있습니다. 콜렉션 API 가 코어 관리 API 위에서 구축되어 새로운 콜렉션을 만들면 모든 인스턴스 상의 필요한 코어가 모두 작성됩니다. 마찬가지로 리로드나 삭제도 가능합니다. 모든 코어는 적절하게 정보를 받아 처리됩니다.</p>
+
+<h3>ElasticSearch</h3>
+
+<p>In case of ElasticSearch we can create and delete indices by running a simple HTTP command (GET or DELETE method) with the index name we are interested in. In addition to that, with a simple API call we can increase and decrease the number of replicas without the need of shutting down nodes or creating new nodes. With the newer ElasticSearch versions we can even manipulate shard placement with the cluster reroute API. With the use of that API we can move shards between nodes, we can cancel shard allocation process and we can also force shard allocation – everything on a live cluster.</p>
+
+<p>ElasticSearch 의 경우, 간단한 HTTP 커맨드(GET 또는 DELETE 메소드)를 대상으로 한 인덱스의 이름과 함께 실행하는 것만으로 인덱싱과 삭제가 가능합니다. 그리고 간단한 API 호출로 레플리카의 수를 노드의 셧다운이나 추가없이 증감할 수도 있습니다. 새로운 ElasticSearch 버젼에서는 Shard 의 배치를 클러스터의 리로드 API 로 할 수 있습니다. 이를 통해서 Shard 를 노드끼리 이동한다거나, Shard 를 할당절차를 취소하거나 강제할 수도 있습니다. 모든 것은 운용중의 클러스터 위에서 가능합니다.</p>
+
+<h2>Query Analysis</h2>
+
+<h3>Apache Solr</h3>
+
+<p>If you’ve used Apache Solr you probably come across the debugQuery parameter and the explainOther parameter. Those two allows to see the detailed score calculation for the given query and documents found in the results (the debugQuery parameter) and the specified ones (the explainOther). In addition, we can also see how the analysis process is done with the use of analysis handler or by using the analysis page of the Solr administration panel provided with Solr.</p>
+
+<p>Apache Solr 를 이전에 사용한 적이 있다면 debugQuery 파라메터와 explainOther 파라메터를 알고 있으실 겁니다. 이 두가지를 사용해서 주어진 쿼리와 그 결과를 발견한 도큐먼트(debugQuery파라메터), 또는 특정 하나의(plainOther)의 스코어 계산에 대한 자세한 내용을 볼 수도 있습니다. 거기에 해석핸들러를 사용하거나 Solr 에서 제공되는 Solr 관리패널의 해석페이지로 해석프로세스가 어떻게 이뤄지는 지도 확인할 수 있습니다.</p>
+
+<p>For example this is how debug information returned by Solr can look like:</p>
+
+<p>Solr로 반환되는 디버그 정보가 어떻게 보여지는 가는 아래를 참고해주세요.</p>
+
+<pre><code>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;response&gt;
+.
+.
+.
+&lt;lst name="debug"&gt;
+ &lt;str name="rawquerystring"&gt;ten&lt;/str&gt;
+ &lt;str name="querystring"&gt;ten&lt;/str&gt;
+ &lt;str name="parsedquery"&gt;(+DisjunctionMaxQuery((prefixTok:ten)~0.01) ())/no_coord&lt;/str&gt;
+ &lt;str name="parsedquery_toString"&gt;+(prefixTok:ten)~0.01 ()&lt;/str&gt;
+ &lt;str name="QParser"&gt;DisMaxQParser&lt;/str&gt;
+ &lt;null name="altquerystring"/&gt;
+ &lt;null name="boostfuncs"/&gt;
+ &lt;lst name="timing"&gt;
+  &lt;double name="time"&gt;2.0&lt;/double&gt;
+  &lt;lst name="prepare"&gt;
+   &lt;double name="time"&gt;1.0&lt;/double&gt;
+   &lt;lst name="org.apache.solr.handler.component.QueryComponent"&gt;
+    &lt;double name="time"&gt;1.0&lt;/double&gt;
+   &lt;/lst&gt;
+   &lt;lst name="org.apache.solr.handler.component.FacetComponent"&gt;
+    &lt;double name="time"&gt;0.0&lt;/double&gt;
+   &lt;/lst&gt;
+   &lt;lst name="org.apache.solr.handler.component.MoreLikeThisComponent"&gt;
+    &lt;double name="time"&gt;0.0&lt;/double&gt;
+   &lt;/lst&gt;
+   &lt;lst name="org.apache.solr.handler.component.HighlightComponent"&gt;
+    &lt;double name="time"&gt;0.0&lt;/double&gt;
+   &lt;/lst&gt;
+   &lt;lst name="org.apache.solr.handler.component.StatsComponent"&gt;
+    &lt;double name="time"&gt;0.0&lt;/double&gt;
+   &lt;/lst&gt;
+   &lt;lst name="org.apache.solr.handler.component.DebugComponent"&gt;
+    &lt;double name="time"&gt;0.0&lt;/double&gt;
+   &lt;/lst&gt;
+ &lt;/lst&gt;
+ &lt;lst name="process"&gt;
+  &lt;double name="time"&gt;1.0&lt;/double&gt;
+  &lt;lst name="org.apache.solr.handler.component.QueryComponent"&gt;
+   &lt;double name="time"&gt;0.0&lt;/double&gt;
+  &lt;/lst&gt;
+  &lt;lst name="org.apache.solr.handler.component.FacetComponent"&gt;
+   &lt;double name="time"&gt;0.0&lt;/double&gt;
+  &lt;/lst&gt;
+  &lt;lst name="org.apache.solr.handler.component.MoreLikeThisComponent"&gt;
+   &lt;double name="time"&gt;0.0&lt;/double&gt;
+  &lt;/lst&gt;
+  &lt;lst name="org.apache.solr.handler.component.HighlightComponent"&gt;
+   &lt;double name="time"&gt;0.0&lt;/double&gt;
+  &lt;/lst&gt;
+  &lt;lst name="org.apache.solr.handler.component.StatsComponent"&gt;
+   &lt;double name="time"&gt;0.0&lt;/double&gt;
+  &lt;/lst&gt;
+  &lt;lst name="org.apache.solr.handler.component.DebugComponent"&gt;
+   &lt;double name="time"&gt;1.0&lt;/double&gt;
+  &lt;/lst&gt;
+ &lt;/lst&gt;
+&lt;/lst&gt;
+&lt;lst name="explain"&gt;
+ &lt;str name="Ten mices"&gt;
+1.3527006 = (MATCH) sum of:
+ 1.3527006 = (MATCH) weight(prefixTok:ten in 35158) [DefaultSimilarity], result of:
+ 1.3527006 = fieldWeight in 35158, product of:
+ 1.4142135 = tf(freq=2.0), with freq of:
+ 2.0 = termFreq=2.0
+ 6.1216245 = idf(docFreq=6355, maxDocs=1065313)
+ 0.15625 = fieldNorm(doc=35158)
+ &lt;/str&gt;
+&lt;/lst&gt;
+&lt;/lst&gt;
+&lt;/response&gt;
+</code></pre>
+
+<p>As you can see, we can get information about timings of each of the used components. In addition to that, we see the parsed query and of course the explain information showing us how the document score was calculated.</p>
+
+<p>보시는 대로, 사용하고 있는 각 컴포넌트의 타이밍에 관한 정보를 얻을 수 있습니다. 그리고 파싱된 쿼리를 보거나, 어떻게 도큐먼트의 스코어가 계산되는 가를 알 수 있는 explain 정보도 확인가능합니다.</p>
+
+<h3>ElasticSearch</h3>
+
+<p>ElasticSearch exposes three separate REST end-points to analyze our queries, documents and explain the documents score. The Analyze API allows us to test our analyzer on a specified text in order to see how it is processed and is similar to the analysis page functionality of Solr. The Explain API provides us with information about the score calculation for a given documents. Finally, the Validate API can validate our query to see is it is proper and how expensive it can be.</p>
+
+<p>ElasticSearch는 3개로 나뉘어진 REST 엔드포인트를 공개하여, 쿼리나 도큐먼트, 도큐먼트 스코어의 explain 을 해석할 수 있습니다. 해석API 는 해석기가 특정 텍스트에서 어떻게 처리되는지를 테스트할 수 있습니다. SOlr 의 해석페이지 기능과 비슷합니다. Explain API 는 주어진 도큐먼트에 대해서 스코어 연산에 관한 정보를 제공합니다. 마지막으로 Validate API 는 쿼리가 적절하게 어느 정도의 비용인지를 확인할 수 있습니다.</p>
+
+<p>For example, this is what Explain API response looks like:</p>
+
+<p>Explain API 의 응답은 아래와 같습니다.</p>
+
+<pre><code>{
+ "ok" : true,
+ "_index" : "docs",
+ "_type" : "doc",
+ "_id" : "1",
+ "matched" : true,
+ "explanation" : {
+   "value" : 0.15342641,
+   "description" : "fieldWeight(_all:document in 0), product of:",
+   "details" : [ {
+     "value" : 1.0,
+     "description" : "tf(termFreq(_all:document)=1)"
+   }, {
+     "value" : 0.30685282,
+     "description" : "idf(docFreq=1, maxDocs=1)"
+   }, {
+     "value" : 0.5,
+     "description" : "fieldNorm(field=_all, doc=0)"
+   } ]
+ }
+}
+</code></pre>
+
+<p>You can see the description about score calculation that is returned from the Explain API.</p>
+
+<p>Explain API로 반환되는 스코어 계산에 대한 내용을 알 수 있겠죠?</p>
+
+<h2>Before We End</h2>
+
+<p>There are a few words more we wanted to write before summarizing this comparison. First of all the above mentioned APIs and possibilities are not all that it is available, especially when it comes to ElasticSearch. For example, with ElasticSearch you can clear caches on the index level, you can check index and types existence, you can retrieve and manage your warming queries, clear the transaction log by running the Flush API, or  even close an index or open those that were closed. We wanted to point some differences and similarities between Apache Solr and ElasticSearch, but we didn’t want to make a summary of the documentation. :) So, if you are interested in some functionality and you don’t know if it exists, just send a mail to Apache Solr or ElasticSearch mailing list or leave a comment here, and we will be glad to help.</p>
+
+<p>이 비교를 정리하기 전에 좀 더 써두고 싶은 것이 있습니다. 우선 맨처음 위에서 설명한 API 와 기능은 두 검색엔진이 가진 모든 기능이 아닙니다. 특히 ElasticSearch가 그렇습니다. 예를들어 ElasticSearch 에서는 인덱스 레벨 위에서 캐쉬를 지우거나 존재하는 인덱스와 타입을 확인하거나, 워밍쿼리를 뽑고, 관리하거나, 플러쉬 API 를 시행해서 트랜잭션로그를 삭제하거나, 거기에 인덱스를 닥거나 닫힌 인덱스를 여는 것도 가능합니다. 우리는 Apache Solr 와 ElasticSearch 의 차이와 유사점에 대해서 다루고 싶었지, 정리한 문서를 만들고 싶지는 않았습니다. :) 따라서 만약 어떤 기능에 흥미가 있고, 그런 기능이 있는 지 모르는 경우는 Apache Solr 나 ElasticSearch 의 메일링리스트에 메일을 보내거나 여기에 코멘트를 남겨주세요. 기꺼이 도와드리겠습니다.</p>
+
+<h2>정리</h2>
+
+<p>When we first started the Solr vs ElasticSearch series we planned to initially divide the series into five posts, which are now published. However after seeing the popularity of the series and the amount of feedback we’ve received, we decided to extend the series. You can soon expect the next part, which will be dedicated to non-technical, but deeply important and interesting aspects of both search servers. After that, we’ll get back to the technical details with the subsequent post  dedicated to score influence capabilities, describing how we can change the default Lucene scoring and influence it from configuration, during indexing time and finally during querying.</p>
+
+<p>Solr vs ElasticSearch 시리즈를 시작했을 때, 우리는 시리즈를 다섯개의 기사로 나눌 예정이었습니다. 하지만 이 시리즈의 인기와 여러 피드백의 양을 생각한 결과 이 시리즈를 확장하기로 했습니다. 이미 다음편을 기대하고 있겠죠. 다음편은 비기술적이지만 매우 중요하고 재미있는 두 가지 검색서버의 측면에 대해서 다루고자 합니다. 그리고 기술적인 자세한 이야기에 이은 포스트에서는 반환되는 스코어에 영향을 주는 기능에 대해서 다루고, 인덱싱할 때와 최종적으로 쿼리 사이에 어떻게 Lucene 의 기본 스코어링을 바꿔서 설정에서 영향을 줄 수 있는 가를 다루고자 합니다.</p>
+
+<p>If you liked this post, please tweet it!</p>
+
+<p>이 글이 좋아한다면 트윗해주세요.</p>
+
+<ul>
+<li>@kucrafal, @sematext</li>
+</ul>
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Jeen Lee</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-17T09:01:06+09:00" pubdate data-updated="true">Jul 17<span>th</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/elasticsearch/'>elasticsearch</a>, <a class='category' href='/blog/categories/solr/'>solr</a>, <a class='category' href='/blog/categories/translation/'>translation</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://jeen.github.io/2013/07/17/solr-vs-elasticsearch-part-5-management-api-capabilities/" data-via="JEEN_LEE" data-counturl="http://jeen.github.io/2013/07/17/solr-vs-elasticsearch-part-5-management-api-capabilities/" >Tweet</a>
+  
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2013/07/17/solr-vs-elasticsearch-part-4-faceting/" title="Previous Post: [번역] Solr vs ElasticSearch Part 4 - Faceting">&laquo; [번역] Solr vs ElasticSearch Part 4 - Faceting</a>
+      
+      
+        <a class="basic-alignment right" href="/2013/07/17/solr-vs-elasticsearch-part-6-user-and-dev-communities-compared/" title="Next Post: [번역] Solr vs. ElasticSearch: Part 6 – User &amp; Dev Communities Compared">[번역] Solr vs. ElasticSearch: Part 6 – User &amp; Dev Communities Compared &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2013/07/17/solr-vs-elasticsearch-part-6-user-and-dev-communities-compared/">[번역] Solr vs. ElasticSearch: Part 6 – User &amp; Dev Communities Compared</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/07/17/solr-vs-elasticsearch-part-5-management-api-capabilities/">[번역] Solr vs ElasticSearch: Part 5 – Management API Capabilities</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/07/17/solr-vs-elasticsearch-part-4-faceting/">[번역] Solr vs ElasticSearch Part 4 - Faceting</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/07/16/solr-vs-elasticsearch-part-3-searching/">[번역] Solr vs. ElasticSearch - Part 3 : Searching</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/07/16/solr-vs-elasticsearch-part-2-indexing-and-language-handling/">[번역] Solr vs. ElasticSearch: Part 2 - Indexing and Language Handling</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/jeen">@jeen</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'jeen',
+            count: 0,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Jeen Lee -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'jeen';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://jeen.github.io/2013/07/17/solr-vs-elasticsearch-part-5-management-api-capabilities/';
+        var disqus_url = 'http://jeen.github.io/2013/07/17/solr-vs-elasticsearch-part-5-management-api-capabilities/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id; js.async = true;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

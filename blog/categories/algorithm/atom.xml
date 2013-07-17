@@ -4,7 +4,7 @@
   <title><![CDATA[Category: algorithm | Jeen - Yet anothere techlog]]></title>
   <link href="http://jeen.github.io/blog/categories/algorithm/atom.xml" rel="self"/>
   <link href="http://jeen.github.io/"/>
-  <updated>2013-07-17T19:58:40+09:00</updated>
+  <updated>2013-07-17T20:00:39+09:00</updated>
   <id>http://jeen.github.io/</id>
   <author>
     <name><![CDATA[Jeen Lee]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[[번역] About Tim Sort]]></title>
-    <link href="http://jeen.github.io/blog/2012/01/03/about-tim-sort/"/>
+    <link href="http://jeen.github.io/2012/01/03/about-tim-sort/"/>
     <updated>2012-01-03T19:44:00+09:00</updated>
-    <id>http://jeen.github.io/blog/2012/01/03/about-tim-sort</id>
+    <id>http://jeen.github.io/2012/01/03/about-tim-sort</id>
     <content type="html"><![CDATA[<p>최근, <code>TimSort</code> 라는 정렬 알고리즘 이 화제가 되었습니다. <code>TimSort</code> 는 빠르고 안정적인 정렬 알고리즘으로, <code>Python(&gt;=2.3)</code> 과 <code>Java SE 7</code>, 그리고 <code>Android</code> 에서 표준 정렬 알고리즘으로 채용되었다고 합니다.</p>
 
 <p>C++ 의 <code>std::sort()</code> 보다도 빠르다는 벤치마크 결과가 화제가 되어(나중에 벤치마크의 오류라고 판명났지만), 그때 <code>TimSort</code> 의 존재를 알았습니다. 실제로 랜덤 데이터에 대해서는 <code>Quick Sort(IntroSort)</code> 보다 빠르지는 않지만, 정렬이라는 단순한 일을 하는 알고리즘 이 지금도 더욱 개량해오며 사람들의 관심을 끌고 있다는 것은 흥미깊은 일입니다.</p>

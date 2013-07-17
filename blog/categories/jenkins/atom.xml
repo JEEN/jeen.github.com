@@ -4,7 +4,7 @@
   <title><![CDATA[Category: jenkins | Jeen - Yet anothere techlog]]></title>
   <link href="http://jeen.github.io/blog/categories/jenkins/atom.xml" rel="self"/>
   <link href="http://jeen.github.io/"/>
-  <updated>2013-07-17T19:58:40+09:00</updated>
+  <updated>2013-07-17T20:00:39+09:00</updated>
   <id>http://jeen.github.io/</id>
   <author>
     <name><![CDATA[Jeen Lee]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Apply MoeEmotional Hudson Plugin on Jenkins]]></title>
-    <link href="http://jeen.github.io/blog/2013/07/10/apply-moeemotional-hudson-plugin-on-jenkins/"/>
+    <link href="http://jeen.github.io/2013/07/10/apply-moeemotional-hudson-plugin-on-jenkins/"/>
     <updated>2013-07-10T22:28:59+09:00</updated>
-    <id>http://jeen.github.io/blog/2013/07/10/apply-moeemotional-hudson-plugin-on-jenkins</id>
+    <id>http://jeen.github.io/2013/07/10/apply-moeemotional-hudson-plugin-on-jenkins</id>
     <content type="html"><![CDATA[<blockquote class="twitter-tweet"><p>젠킨스에서 대머리 아저씨 얼굴 보기가 싫어서, 급하게 테마 하나 제작했습니다. <a href="https://t.co/FcNPdqMjlO">https://t.co/FcNPdqMjlO</a> 앞으로 플랫플랫하게 해볼 예정.</p>&mdash; Park Hyun-woo (@lqez) <a href="https://twitter.com/lqez/statuses/354925228079579138">July 10, 2013</a></blockquote>
 
 
@@ -73,9 +73,9 @@
   
   <entry>
     <title type="html"><![CDATA[Perl and Continuous Integration with Jenkins - II]]></title>
-    <link href="http://jeen.github.io/blog/2012/02/02/perl-and-continuous-integration-with-jenkins-2/"/>
+    <link href="http://jeen.github.io/2012/02/02/perl-and-continuous-integration-with-jenkins-2/"/>
     <updated>2012-02-02T07:00:00+09:00</updated>
-    <id>http://jeen.github.io/blog/2012/02/02/perl-and-continuous-integration-with-jenkins-2</id>
+    <id>http://jeen.github.io/2012/02/02/perl-and-continuous-integration-with-jenkins-2</id>
     <content type="html"><![CDATA[<p>  애시당초 블로깅하려던 내용을 발표자료로 엮었습니다.</p>
 
 <script src="http://storify.com/jeen_lee/perl-and-continuous-integration-w-jenkins.js"></script>
@@ -87,9 +87,9 @@
   
   <entry>
     <title type="html"><![CDATA[Test::More - use 'subtest' instead of {} block]]></title>
-    <link href="http://jeen.github.io/blog/2012/01/05/test-more-use-subtest-instead-of-block/"/>
+    <link href="http://jeen.github.io/2012/01/05/test-more-use-subtest-instead-of-block/"/>
     <updated>2012-01-05T20:33:00+09:00</updated>
-    <id>http://jeen.github.io/blog/2012/01/05/test-more-use-subtest-instead-of-block</id>
+    <id>http://jeen.github.io/2012/01/05/test-more-use-subtest-instead-of-block</id>
     <content type="html"><![CDATA[<p>  여태껏 테스트코드를 써나가면서 그냥 {} 블록안에 일정한 흐름의 테스트 코드를 적곤 했었습니다.</p>
 
 <p>~~~ perl
@@ -216,9 +216,9 @@ ok 4 &ndash; Request should be suceed
   
   <entry>
     <title type="html"><![CDATA[Perl and Continuous Integration with Jenkins - I]]></title>
-    <link href="http://jeen.github.io/blog/2012/01/03/perl-and-continuous-integration-with-jenkins-1/"/>
+    <link href="http://jeen.github.io/2012/01/03/perl-and-continuous-integration-with-jenkins-1/"/>
     <updated>2012-01-03T11:45:00+09:00</updated>
-    <id>http://jeen.github.io/blog/2012/01/03/perl-and-continuous-integration-with-jenkins-1</id>
+    <id>http://jeen.github.io/2012/01/03/perl-and-continuous-integration-with-jenkins-1</id>
     <content type="html"><![CDATA[<h3>Jenkins 를 사용하기 까지</h3>
 
 <p>사실 지난주에 NHN 에서 주최하는 공개개발자 교육에  갔다왔었습니다. 평소 Jenkins 에 대해서 약간 환상 같은 게 있다고 할까, 필요성이 있다고 할까요. 좀 더 프로젝트의 품질이 나아지고 있다는 환상, 그런 걸 보면서 나름 보람을 느끼고 싶다라는 생각도 있었습니다.</p>

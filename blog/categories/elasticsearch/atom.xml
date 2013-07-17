@@ -4,7 +4,7 @@
   <title><![CDATA[Category: elasticsearch | Jeen - Yet anothere techlog]]></title>
   <link href="http://jeen.github.io/blog/categories/elasticsearch/atom.xml" rel="self"/>
   <link href="http://jeen.github.io/"/>
-  <updated>2013-07-17T19:58:40+09:00</updated>
+  <updated>2013-07-17T20:00:39+09:00</updated>
   <id>http://jeen.github.io/</id>
   <author>
     <name><![CDATA[Jeen Lee]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[[번역] Solr vs. ElasticSearch: Part 6 – User &amp; Dev Communities Compared]]></title>
-    <link href="http://jeen.github.io/blog/2013/07/17/solr-vs-elasticsearch-part-6-user-and-dev-communities-compared/"/>
+    <link href="http://jeen.github.io/2013/07/17/solr-vs-elasticsearch-part-6-user-and-dev-communities-compared/"/>
     <updated>2013-07-17T09:47:24+09:00</updated>
-    <id>http://jeen.github.io/blog/2013/07/17/solr-vs-elasticsearch-part-6-user-and-dev-communities-compared</id>
+    <id>http://jeen.github.io/2013/07/17/solr-vs-elasticsearch-part-6-user-and-dev-communities-compared</id>
     <content type="html"><![CDATA[<h1>Solr vs. ElasticSearch: Part 6 – User &amp; Dev Communities Compared</h1>
 
 <p>January 22, 2013 by Rafał Kuć</p>
@@ -183,9 +183,9 @@
   
   <entry>
     <title type="html"><![CDATA[[번역] Solr vs ElasticSearch: Part 5 – Management API Capabilities]]></title>
-    <link href="http://jeen.github.io/blog/2013/07/17/solr-vs-elasticsearch-part-5-management-api-capabilities/"/>
+    <link href="http://jeen.github.io/2013/07/17/solr-vs-elasticsearch-part-5-management-api-capabilities/"/>
     <updated>2013-07-17T09:01:06+09:00</updated>
-    <id>http://jeen.github.io/blog/2013/07/17/solr-vs-elasticsearch-part-5-management-api-capabilities</id>
+    <id>http://jeen.github.io/2013/07/17/solr-vs-elasticsearch-part-5-management-api-capabilities</id>
     <content type="html"><![CDATA[<h1>Solr vs ElasticSearch: Part 5 – Management API Capabilities</h1>
 
 <p>January 8, 2013 by Rafał Kuć</p>
@@ -419,9 +419,9 @@
   
   <entry>
     <title type="html"><![CDATA[[번역] Solr vs ElasticSearch Part 4 - Faceting]]></title>
-    <link href="http://jeen.github.io/blog/2013/07/17/solr-vs-elasticsearch-part-4-faceting/"/>
+    <link href="http://jeen.github.io/2013/07/17/solr-vs-elasticsearch-part-4-faceting/"/>
     <updated>2013-07-17T01:06:42+09:00</updated>
-    <id>http://jeen.github.io/blog/2013/07/17/solr-vs-elasticsearch-part-4-faceting</id>
+    <id>http://jeen.github.io/2013/07/17/solr-vs-elasticsearch-part-4-faceting</id>
     <content type="html"><![CDATA[<h1>Solr vs ElasticSearch: Part 4 – Faceting</h1>
 
 <p>October 30, 2012 by Rafał Kuć</p>
@@ -677,9 +677,9 @@
   
   <entry>
     <title type="html"><![CDATA[[번역] Solr vs. ElasticSearch - Part 3 : Searching]]></title>
-    <link href="http://jeen.github.io/blog/2013/07/16/solr-vs-elasticsearch-part-3-searching/"/>
+    <link href="http://jeen.github.io/2013/07/16/solr-vs-elasticsearch-part-3-searching/"/>
     <updated>2013-07-16T22:32:49+09:00</updated>
-    <id>http://jeen.github.io/blog/2013/07/16/solr-vs-elasticsearch-part-3-searching</id>
+    <id>http://jeen.github.io/2013/07/16/solr-vs-elasticsearch-part-3-searching</id>
     <content type="html"><![CDATA[<h1>Solr vs ElasticSearch: Part 3 – Searching</h1>
 
 <p>October 1, 2012 by Rafał Kuć</p>
@@ -892,9 +892,9 @@
   
   <entry>
     <title type="html"><![CDATA[[번역] Solr vs. ElasticSearch: Part 2 - Indexing and Language Handling]]></title>
-    <link href="http://jeen.github.io/blog/2013/07/16/solr-vs-elasticsearch-part-2-indexing-and-language-handling/"/>
+    <link href="http://jeen.github.io/2013/07/16/solr-vs-elasticsearch-part-2-indexing-and-language-handling/"/>
     <updated>2013-07-16T21:30:39+09:00</updated>
-    <id>http://jeen.github.io/blog/2013/07/16/solr-vs-elasticsearch-part-2-indexing-and-language-handling</id>
+    <id>http://jeen.github.io/2013/07/16/solr-vs-elasticsearch-part-2-indexing-and-language-handling</id>
     <content type="html"><![CDATA[<h1>Solr vs. ElasticSearch: Part 2 – Indexing and Language Handling</h1>
 
 <p>September 4, 2012 by Rafał Kuć</p>

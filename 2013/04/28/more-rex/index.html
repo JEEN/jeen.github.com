@@ -1,0 +1,355 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Rex Common Practice - Jeen - Yet anothere techlog</title>
+  <meta name="author" content="Jeen Lee">
+
+  
+  <meta name="description" content="Parallelism 설정 한 손에 셀 수 있을 정도의 서버규모라면 사실 특별하게 병렬처리를 하느니 하는 것은 별로 고려하지 않아도 되겠습니다만, 그 이상일 경우에는 한 작업을 수행함에 있어서 수십대의 서버에 순차적으로 접속하고 작업하고하는 것을 지켜보는 것은 상당히 &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://jeen.github.io/2013/04/28/more-rex">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Jeen - Yet anothere techlog" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-27958809-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Jeen - Yet anothere techlog</a></h1>
+  
+    <h2>STFUAWSC</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:jeen.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Rex Common Practice</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-04-28T18:32:00+09:00" pubdate data-updated="true">Apr 28<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><h3>Parallelism 설정</h3>
+
+<p> 한 손에 셀 수 있을 정도의 서버규모라면 사실 특별하게 병렬처리를 하느니 하는 것은 별로 고려하지 않아도 되겠습니다만, 그 이상일 경우에는 한 작업을 수행함에 있어서 수십대의 서버에 순차적으로 접속하고 작업하고하는 것을 지켜보는 것은 상당히 고역이죠.
+ 이럴 경우에는 <code>parallelism</code> 을 지정합니다.</p>
+
+<p> 방법은 <code>Rexfile</code> 에 다음과 같이 설정합니다.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>parallelism =&gt; 10;</span></code></pre></td></tr></table></div></figure>
+
+
+<p> 이렇게 하면 한번에 10대의 서버에 대해서 병렬로 작업을 수행하게 됩니다. 어차피 작업은 원격지서버에서 하는 것이고, 로컬에서는 SSH 커넥션이 1개로 붙던 것들이 10개로 늘어나며, 물론 시간 또한 parallelism 설정갯수에 비례하게 됩니다. 하지만 로그는 이쁘게 남지는 않을 겁니다.</p>
+
+<p> 애시당초 CLI 옵션에 <code>parallelism</code> 옵션이 있었으면 좋겠는데&hellip;</p>
+
+<h3>Logging</h3>
+
+<p> 일단 작업 기록은 꾸준히 남기는 것이 좋겠다라고 생각하는 바, 매 작업분기마다 로그를 남기도록 합니다. 하지만 매뉴얼에는 마땅히 로그에 관한 설명은 보이지 않는 것 같았습니다.</p>
+
+<p> Rex 에서의 기본적인 로그를 쓰는 방법은 다음과 같습니다.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Rex::Logger::info("MSG"[, "TYPE"]);</span></code></pre></td></tr></table></div></figure>
+
+
+<p> 로그 메시지는 당연히 필수이며, TYPE 은 사실 안써도 됩니다만, error/warn 두가지 인수를 넣을 수 있습니다. 에러 상황시 확실하게 눈에 띄게 해주는 정도(노랑색, 빨강색)입니다.</p>
+
+<p> Parallelism 사용시에 병렬로 작업을 수행함으로 인해서 로그가 뒤죽박죽이 되기 마련인데, 이때 로그에 명기해주었으면 하는 것은 역시 각 서버의 호스트/IP입니다.</p>
+
+<ul>
+<li><a href="https://metacpan.org/module/Rex::Logger">https://metacpan.org/module/Rex::Logger</a></li>
+</ul>
+
+
+<p> <code>Rex::Logger</code> 에서 다음과 같은 사용법을 통해서 해결할 수 있습니다.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$Rex::Logger::format = '%h - %D - %s';
+</span><span class='line'># srv001 - 2012-04-12 18:35:12 - Installing package vim</span></code></pre></td></tr></table></div></figure>
+
+
+<p> 각 포맷에 대한 자세한 설명은 위의 Metacpan 링크에서 확인할 수 있습니다.</p>
+
+<h3>CPAN 의존모듈 설치</h3>
+
+<p> 애시당초 처음에 Rex 를 사용하는 이유가 여러대의 서버에 CPAN 모듈을 설치해야할 필요가 있었기 때문이었습니다. 하지만 사용구조상 일일이 모든 서버에 대해서 <code>perlbrew</code> 를 설치한다거나, 하는 호화(?)를 누릴 수는 없었습니다. <code>perlbrew</code> 를 꺼내는 것 자체가 애시당초 핀트에 어긋나버리는 얘기가 되어버리지만… &ndash;_&ndash;;</p>
+
+<p> 뭐 네, 방법은 간단합니다.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>run("curl -L http://cpanmin.us | perl - --notest --mirror ftp://cpan.mirror.cdnetworks.com/CPAN/ --mirror-only Test::More LWP::UserAgent JSON Nagios::Plugin");</span></code></pre></td></tr></table></div></figure>
+
+
+<p> 애시당초 Rex 의 접근은 <code>root</code> 로 이뤄지기 때문에 이와같은 설정으로 그냥 땜박질 할 수 있었지만, <code>sudo</code> 로 접근한다거나 하는 예외상황에서는 <code>--sudo</code> 옵션을 붙여주면 되겠습니다. 물론 <code>root</code> 로 접근했을 때 <code>--sudo</code> 옵션은 쓰면 오동작의 원인이 됩니다.</p>
+
+<p> <code>--notest</code> 는 물론 수많은 서버가 동일 구성이며, 처음 커맨드로 때려보고 한방에 된다고 했을 때, 테스트가 불필요하다는 판단아래에서 집어넣었구요.</p>
+
+<p> 좀 더 속도개선을 노려본다면 <code>--mirror</code> 옵션을 통해서 <code>CDNetworks</code> 같은 CPAN Mirror 를 이용해보는 것도 괜찮을 것 같습니다. 눈에 띄는 속도향상을 체감할 수 있을 겁니다.</p>
+
+<h3>결론</h3>
+
+<p> 어떤 일을 하기에 필요한 도구를 찾아서 사용하는 것이 일반적인 접근일텐데, 때로는 어떤 도구를 사용하기 위해서 일부러 일을 그쪽방향으로 맞추는 경우를 주변에서 많이 접하게 됩니다. 저는 어떻게해서 Rex 를 알고 사용하게 되었는지 이미 까먹었지만, 하는 일에 대한 최적의 선택이었다고 생각합니다.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Jeen Lee</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-04-28T18:32:00+09:00" pubdate data-updated="true">Apr 28<span>th</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/perl/'>perl</a>, <a class='category' href='/blog/categories/rex/'>rex</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://jeen.github.io/2013/04/28/more-rex/" data-via="JEEN_LEE" data-counturl="http://jeen.github.io/2013/04/28/more-rex/" >Tweet</a>
+  
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2013/04/08/data-printer-vs-data-dump-er/" title="Previous Post: Data::Printer vs Data::Dump(er)">&laquo; Data::Printer vs Data::Dump(er)</a>
+      
+      
+        <a class="basic-alignment right" href="/2013/05/02/better-than-ack/" title="Next Post: Better Than Ack">Better Than Ack &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2013/07/17/solr-vs-elasticsearch-part-6-user-and-dev-communities-compared/">[번역] Solr vs. ElasticSearch: Part 6 – User &amp; Dev Communities Compared</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/07/17/solr-vs-elasticsearch-part-5-management-api-capabilities/">[번역] Solr vs ElasticSearch: Part 5 – Management API Capabilities</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/07/17/solr-vs-elasticsearch-part-4-faceting/">[번역] Solr vs ElasticSearch Part 4 - Faceting</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/07/16/solr-vs-elasticsearch-part-3-searching/">[번역] Solr vs. ElasticSearch - Part 3 : Searching</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/07/16/solr-vs-elasticsearch-part-2-indexing-and-language-handling/">[번역] Solr vs. ElasticSearch: Part 2 - Indexing and Language Handling</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/jeen">@jeen</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'jeen',
+            count: 0,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Jeen Lee -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'jeen';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://jeen.github.io/2013/04/28/more-rex/';
+        var disqus_url = 'http://jeen.github.io/2013/04/28/more-rex/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id; js.async = true;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

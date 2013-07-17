@@ -4,7 +4,7 @@
   <title><![CDATA[Jeen - Yet anothere techlog]]></title>
   <link href="http://jeen.github.io/atom.xml" rel="self"/>
   <link href="http://jeen.github.io/"/>
-  <updated>2013-07-17T19:58:40+09:00</updated>
+  <updated>2013-07-17T20:00:39+09:00</updated>
   <id>http://jeen.github.io/</id>
   <author>
     <name><![CDATA[Jeen Lee]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[[번역] Solr vs. ElasticSearch: Part 6 – User &amp; Dev Communities Compared]]></title>
-    <link href="http://jeen.github.io/blog/2013/07/17/solr-vs-elasticsearch-part-6-user-and-dev-communities-compared/"/>
+    <link href="http://jeen.github.io/2013/07/17/solr-vs-elasticsearch-part-6-user-and-dev-communities-compared/"/>
     <updated>2013-07-17T09:47:24+09:00</updated>
-    <id>http://jeen.github.io/blog/2013/07/17/solr-vs-elasticsearch-part-6-user-and-dev-communities-compared</id>
+    <id>http://jeen.github.io/2013/07/17/solr-vs-elasticsearch-part-6-user-and-dev-communities-compared</id>
     <content type="html"><![CDATA[<h1>Solr vs. ElasticSearch: Part 6 – User &amp; Dev Communities Compared</h1>
 
 <p>January 22, 2013 by Rafał Kuć</p>
@@ -183,9 +183,9 @@
   
   <entry>
     <title type="html"><![CDATA[[번역] Solr vs ElasticSearch: Part 5 – Management API Capabilities]]></title>
-    <link href="http://jeen.github.io/blog/2013/07/17/solr-vs-elasticsearch-part-5-management-api-capabilities/"/>
+    <link href="http://jeen.github.io/2013/07/17/solr-vs-elasticsearch-part-5-management-api-capabilities/"/>
     <updated>2013-07-17T09:01:06+09:00</updated>
-    <id>http://jeen.github.io/blog/2013/07/17/solr-vs-elasticsearch-part-5-management-api-capabilities</id>
+    <id>http://jeen.github.io/2013/07/17/solr-vs-elasticsearch-part-5-management-api-capabilities</id>
     <content type="html"><![CDATA[<h1>Solr vs ElasticSearch: Part 5 – Management API Capabilities</h1>
 
 <p>January 8, 2013 by Rafał Kuć</p>
@@ -419,9 +419,9 @@
   
   <entry>
     <title type="html"><![CDATA[[번역] Solr vs ElasticSearch Part 4 - Faceting]]></title>
-    <link href="http://jeen.github.io/blog/2013/07/17/solr-vs-elasticsearch-part-4-faceting/"/>
+    <link href="http://jeen.github.io/2013/07/17/solr-vs-elasticsearch-part-4-faceting/"/>
     <updated>2013-07-17T01:06:42+09:00</updated>
-    <id>http://jeen.github.io/blog/2013/07/17/solr-vs-elasticsearch-part-4-faceting</id>
+    <id>http://jeen.github.io/2013/07/17/solr-vs-elasticsearch-part-4-faceting</id>
     <content type="html"><![CDATA[<h1>Solr vs ElasticSearch: Part 4 – Faceting</h1>
 
 <p>October 30, 2012 by Rafał Kuć</p>
@@ -677,9 +677,9 @@
   
   <entry>
     <title type="html"><![CDATA[[번역] Solr vs. ElasticSearch - Part 3 : Searching]]></title>
-    <link href="http://jeen.github.io/blog/2013/07/16/solr-vs-elasticsearch-part-3-searching/"/>
+    <link href="http://jeen.github.io/2013/07/16/solr-vs-elasticsearch-part-3-searching/"/>
     <updated>2013-07-16T22:32:49+09:00</updated>
-    <id>http://jeen.github.io/blog/2013/07/16/solr-vs-elasticsearch-part-3-searching</id>
+    <id>http://jeen.github.io/2013/07/16/solr-vs-elasticsearch-part-3-searching</id>
     <content type="html"><![CDATA[<h1>Solr vs ElasticSearch: Part 3 – Searching</h1>
 
 <p>October 1, 2012 by Rafał Kuć</p>
@@ -892,9 +892,9 @@
   
   <entry>
     <title type="html"><![CDATA[[번역] Solr vs. ElasticSearch: Part 2 - Indexing and Language Handling]]></title>
-    <link href="http://jeen.github.io/blog/2013/07/16/solr-vs-elasticsearch-part-2-indexing-and-language-handling/"/>
+    <link href="http://jeen.github.io/2013/07/16/solr-vs-elasticsearch-part-2-indexing-and-language-handling/"/>
     <updated>2013-07-16T21:30:39+09:00</updated>
-    <id>http://jeen.github.io/blog/2013/07/16/solr-vs-elasticsearch-part-2-indexing-and-language-handling</id>
+    <id>http://jeen.github.io/2013/07/16/solr-vs-elasticsearch-part-2-indexing-and-language-handling</id>
     <content type="html"><![CDATA[<h1>Solr vs. ElasticSearch: Part 2 – Indexing and Language Handling</h1>
 
 <p>September 4, 2012 by Rafał Kuć</p>
@@ -1048,9 +1048,9 @@ Stemming: <a href="http://www.elasticsearch.org/guide/reference/index-modules/an
   
   <entry>
     <title type="html"><![CDATA[[번역] Solr vs ElasticSearch - Part 1 : Overview]]></title>
-    <link href="http://jeen.github.io/blog/2013/07/15/solr-vs-elasticsearch-part-1/"/>
+    <link href="http://jeen.github.io/2013/07/15/solr-vs-elasticsearch-part-1/"/>
     <updated>2013-07-15T09:17:35+09:00</updated>
-    <id>http://jeen.github.io/blog/2013/07/15/solr-vs-elasticsearch-part-1</id>
+    <id>http://jeen.github.io/2013/07/15/solr-vs-elasticsearch-part-1</id>
     <content type="html"><![CDATA[<h1>Solr vs. ElasticSearch: Part 1 – Overview</h1>
 
 <p>August 23, 2012 by <a href="http://blog.sematext.com/author/kucrafal/">Rafał Kuć</a></p>
@@ -1187,9 +1187,9 @@ Stemming: <a href="http://www.elasticsearch.org/guide/reference/index-modules/an
   
   <entry>
     <title type="html"><![CDATA[Apply MoeEmotional Hudson Plugin on Jenkins]]></title>
-    <link href="http://jeen.github.io/blog/2013/07/10/apply-moeemotional-hudson-plugin-on-jenkins/"/>
+    <link href="http://jeen.github.io/2013/07/10/apply-moeemotional-hudson-plugin-on-jenkins/"/>
     <updated>2013-07-10T22:28:59+09:00</updated>
-    <id>http://jeen.github.io/blog/2013/07/10/apply-moeemotional-hudson-plugin-on-jenkins</id>
+    <id>http://jeen.github.io/2013/07/10/apply-moeemotional-hudson-plugin-on-jenkins</id>
     <content type="html"><![CDATA[<blockquote class="twitter-tweet"><p>젠킨스에서 대머리 아저씨 얼굴 보기가 싫어서, 급하게 테마 하나 제작했습니다. <a href="https://t.co/FcNPdqMjlO">https://t.co/FcNPdqMjlO</a> 앞으로 플랫플랫하게 해볼 예정.</p>&mdash; Park Hyun-woo (@lqez) <a href="https://twitter.com/lqez/statuses/354925228079579138">July 10, 2013</a></blockquote>
 
 
@@ -1245,9 +1245,9 @@ Stemming: <a href="http://www.elasticsearch.org/guide/reference/index-modules/an
   
   <entry>
     <title type="html"><![CDATA[Released DBIx::Class::InflateColumn::Serializer::Hstore]]></title>
-    <link href="http://jeen.github.io/blog/2013/07/07/released-dbix-class-inflatecolumn-serializer-hstore/"/>
+    <link href="http://jeen.github.io/2013/07/07/released-dbix-class-inflatecolumn-serializer-hstore/"/>
     <updated>2013-07-07T19:05:31+09:00</updated>
-    <id>http://jeen.github.io/blog/2013/07/07/released-dbix-class-inflatecolumn-serializer-hstore</id>
+    <id>http://jeen.github.io/2013/07/07/released-dbix-class-inflatecolumn-serializer-hstore</id>
     <content type="html"><![CDATA[<p> 예전에는 그냥 Pg 를 사용한 만들어진 웹서비스를 유지보수하는 수준에서 밖에 Pg 를 접하지 않았는데&hellip;
  최근의 한 프로젝트에서 Postgres 를 도입하기로 결정이 났습니다.</p>
 
@@ -1286,9 +1286,9 @@ Stemming: <a href="http://www.elasticsearch.org/guide/reference/index-modules/an
   
   <entry>
     <title type="html"><![CDATA[Using MSSQL in Perl(Linux)]]></title>
-    <link href="http://jeen.github.io/blog/2013/06/18/using-mssql-in-perl-linux/"/>
+    <link href="http://jeen.github.io/2013/06/18/using-mssql-in-perl-linux/"/>
     <updated>2013-06-18T22:33:40+09:00</updated>
-    <id>http://jeen.github.io/blog/2013/06/18/using-mssql-in-perl-linux</id>
+    <id>http://jeen.github.io/2013/06/18/using-mssql-in-perl-linux</id>
     <content type="html"><![CDATA[<p>오늘은 IRC 상에서 리눅스 환경에서 Perl 로 MS-SQL 에 접속하는 최선의 방법에 대한 이야기가 있었습니다. 그냥 흘리기에는 아쉬운 얘기들이 많아서 긁어서 정리해봅니다.</p>
 
 <script src="http://jeen.github.io//storify.com/jeen_lee/using-mssql-in-perl-linux.js" type="text/javascript" language="javascript"></script>
@@ -1300,9 +1300,9 @@ Stemming: <a href="http://www.elasticsearch.org/guide/reference/index-modules/an
   
   <entry>
     <title type="html"><![CDATA[PullReq on MojoX::Validator]]></title>
-    <link href="http://jeen.github.io/blog/2013/06/07/pullreq-on-mojox-validator/"/>
+    <link href="http://jeen.github.io/2013/06/07/pullreq-on-mojox-validator/"/>
     <updated>2013-06-07T17:53:47+09:00</updated>
-    <id>http://jeen.github.io/blog/2013/06/07/pullreq-on-mojox-validator</id>
+    <id>http://jeen.github.io/2013/06/07/pullreq-on-mojox-validator</id>
     <content type="html"><![CDATA[<p> 지난 수요일에 잠깐 이번 서버 구현에 쓸 Validator 를 물색하던 중에 <a href="http://metacpan.org/module/Mojolicious::Plugin::Validator">Mojolicious::Plugin::Validator</a> 를 보고는 참 Validation 코드쓰기 쉽다라는 생각에 덜컥 채용해버렸습니다.</p>
 
 <p> 모듈은 2011년이 마지막으로 업뎃되었구요. 근데 깔아보니까 안깔립니다. 이것도 설마 5.18 의 Hash Randomization 문제때문인가 하면서 실패한 테스트코드를 살펴본 결과 Mojolicious API 가 바뀐 것때문이었습니다. 그러니까 1년 반안에 프레임워크 테스트 모듈의 근간 API 가 바뀌어버리는 바람에 테스트가 실패한 것이지요.</p>
@@ -1345,9 +1345,9 @@ Stemming: <a href="http://www.elasticsearch.org/guide/reference/index-modules/an
   
   <entry>
     <title type="html"><![CDATA[miyagawa's podcast ep12 - Korean Translation]]></title>
-    <link href="http://jeen.github.io/blog/2013/05/27/miyagawas-podcast-ep12/"/>
+    <link href="http://jeen.github.io/2013/05/27/miyagawas-podcast-ep12/"/>
     <updated>2013-05-27T00:15:00+09:00</updated>
-    <id>http://jeen.github.io/blog/2013/05/27/miyagawas-podcast-ep12</id>
+    <id>http://jeen.github.io/2013/05/27/miyagawas-podcast-ep12</id>
     <content type="html"><![CDATA[<p> 자주 챙겨듣는 podcast 중에 개인적으로 존경하는 개발자인 @miyagawa 씨가 운영하는 podcast 가 있습니다.</p>
 
 <ul>
@@ -1487,7 +1487,7 @@ Stemming: <a href="http://www.elasticsearch.org/guide/reference/index-modules/an
 <li>jeen__ : 그게 XS 의존이라서 C컴파일 환경이 없는 곳에서는 대개 실패</li>
 <li>jeen__ : 그래서 CGI 에서 FCGI 의존을 없애려고</li>
 <li>jeen__ : 지금 CGI 가 FCGI 의 경우까지 고려한 코드가 들어가 있어서
-jaker has joined (~<a href="&#109;&#97;&#x69;&#108;&#x74;&#x6f;&#58;&#106;&#x61;&#107;&#101;&#114;&#x40;&#x33;&#54;&#x2e;&#51;&#x39;&#46;&#x35;&#48;&#x2e;&#x33;&#55;">&#106;&#97;&#107;&#x65;&#x72;&#64;&#x33;&#x36;&#46;&#x33;&#x39;&#46;&#53;&#x30;&#46;&#51;&#x37;</a>)</li>
+jaker has joined (~<a href="&#109;&#97;&#105;&#108;&#x74;&#x6f;&#x3a;&#106;&#97;&#107;&#x65;&#114;&#x40;&#51;&#x36;&#46;&#51;&#x39;&#46;&#x35;&#x30;&#x2e;&#51;&#55;">&#x6a;&#97;&#x6b;&#x65;&#114;&#x40;&#51;&#54;&#x2e;&#51;&#57;&#46;&#x35;&#x30;&#46;&#x33;&#55;</a>)</li>
 <li>jeen__ : tokuhirom 은 5.18.1 까지 기다릴 거라고</li>
 <li>jeen__ : 아직 상용서버에 넣어 돌리기는 괜히 걱정된다나&hellip;</li>
 <li>jeen__ : 특별히 써보고 싶다라는 기능도 없고 해서</li>
@@ -1661,9 +1661,9 @@ skyloader has left IRC (Remote host closed the connection)</li>
   
   <entry>
     <title type="html"><![CDATA[Download Percona MySQL Expo 2013 Slides]]></title>
-    <link href="http://jeen.github.io/blog/2013/05/25/download-percona-mysql-expo-2013-slides/"/>
+    <link href="http://jeen.github.io/2013/05/25/download-percona-mysql-expo-2013-slides/"/>
     <updated>2013-05-25T19:27:42+09:00</updated>
-    <id>http://jeen.github.io/blog/2013/05/25/download-percona-mysql-expo-2013-slides</id>
+    <id>http://jeen.github.io/2013/05/25/download-percona-mysql-expo-2013-slides</id>
     <content type="html"><![CDATA[<blockquote class="twitter-tweet" lang="ko"><p>Percona Live : MySQL Conference And Expo 2013 의 슬라이드를 다 긁어오는 스크립트 슥샥. 모두 60개정도. <a href="http://t.co/fpmNe0leud" title="http://www.percona.com/live/mysql-conference-2013/slides">percona.com/live/mysql-con…</a> <a href="https://t.co/32IBvl2KBk" title="https://gist.github.com/JEEN/5581298">gist.github.com/JEEN/5581298</a></p>&mdash; JEEN (@JEEN_LEE) <a href="https://twitter.com/JEEN_LEE/status/334498408838598656">2013년 5월 15일</a></blockquote>
 
 
@@ -1694,9 +1694,9 @@ skyloader has left IRC (Remote host closed the connection)</li>
   
   <entry>
     <title type="html"><![CDATA[Using DBI Callbacks - Generate a SQLite file automatically]]></title>
-    <link href="http://jeen.github.io/blog/2013/05/20/using-dbi-callbacks-generate-sqlite-file-automatically/"/>
+    <link href="http://jeen.github.io/2013/05/20/using-dbi-callbacks-generate-sqlite-file-automatically/"/>
     <updated>2013-05-20T11:59:04+09:00</updated>
-    <id>http://jeen.github.io/blog/2013/05/20/using-dbi-callbacks-generate-sqlite-file-automatically</id>
+    <id>http://jeen.github.io/2013/05/20/using-dbi-callbacks-generate-sqlite-file-automatically</id>
     <content type="html"><![CDATA[<p> 이런저런 임시데이터를 주고받고 하는 용도로 SQLite 파일을 덩어리채로 주고받는 경우가 있습니다.</p>
 
 <p>매일매일 그런 일이 일어나니 파일에는 날짜 정도는 집어넣어줘야 되구요.</p>
@@ -1804,9 +1804,9 @@ skyloader has left IRC (Remote host closed the connection)</li>
   
   <entry>
     <title type="html"><![CDATA[Lancaster Consensus]]></title>
-    <link href="http://jeen.github.io/blog/2013/05/04/lancaster-consensus/"/>
+    <link href="http://jeen.github.io/2013/05/04/lancaster-consensus/"/>
     <updated>2013-05-04T17:16:34+09:00</updated>
-    <id>http://jeen.github.io/blog/2013/05/04/lancaster-consensus</id>
+    <id>http://jeen.github.io/2013/05/04/lancaster-consensus</id>
     <content type="html"><![CDATA[<h1>Lancaster Consensus</h1>
 
 <p>2008년 오슬로에서 개최된 첫번째 Perl QA Hackathon 에서는, Perl 의 품질관리와 툴체인에 관한 모듈의 저자, 메인테이너, 뜻 있는 사람들이 모여서, 몇가지 표준과 관행에 대해서 합의를 이뤘습니다. 이 때 발표된 합의는 Oslo Consensus 라는 이름으로 알려지게 되었습니다.</p>
@@ -2006,9 +2006,9 @@ skyloader has left IRC (Remote host closed the connection)</li>
   
   <entry>
     <title type="html"><![CDATA[Better Than Ack]]></title>
-    <link href="http://jeen.github.io/blog/2013/05/02/better-than-ack/"/>
+    <link href="http://jeen.github.io/2013/05/02/better-than-ack/"/>
     <updated>2013-05-02T23:14:14+09:00</updated>
-    <id>http://jeen.github.io/blog/2013/05/02/better-than-ack</id>
+    <id>http://jeen.github.io/2013/05/02/better-than-ack</id>
     <content type="html"><![CDATA[<p>계속 쓰다보니 자연스레 손에 익은 이유도 있고, 여러 서버들에 <code>ack</code> 이 기본적으로 깔려 있지 않은 이유도 있습니다. 그것이 제게 있어서 <code>ack</code> 을 사용하지 않는 핑계가 되겠네요.</p>
 
 <p>그런 현실중에 <code>ag</code> 를 소개하는 것은 조심스러울 따름입니다.</p>
@@ -2093,9 +2093,9 @@ skyloader has left IRC (Remote host closed the connection)</li>
   
   <entry>
     <title type="html"><![CDATA[Rex Common Practice]]></title>
-    <link href="http://jeen.github.io/blog/2013/04/28/more-rex/"/>
+    <link href="http://jeen.github.io/2013/04/28/more-rex/"/>
     <updated>2013-04-28T18:32:00+09:00</updated>
-    <id>http://jeen.github.io/blog/2013/04/28/more-rex</id>
+    <id>http://jeen.github.io/2013/04/28/more-rex</id>
     <content type="html"><![CDATA[<h3>Parallelism 설정</h3>
 
 <p> 한 손에 셀 수 있을 정도의 서버규모라면 사실 특별하게 병렬처리를 하느니 하는 것은 별로 고려하지 않아도 되겠습니다만, 그 이상일 경우에는 한 작업을 수행함에 있어서 수십대의 서버에 순차적으로 접속하고 작업하고하는 것을 지켜보는 것은 상당히 고역이죠.
@@ -2164,9 +2164,9 @@ skyloader has left IRC (Remote host closed the connection)</li>
   
   <entry>
     <title type="html"><![CDATA[Data::Printer vs Data::Dump(er)]]></title>
-    <link href="http://jeen.github.io/blog/2013/04/08/data-printer-vs-data-dump-er/"/>
+    <link href="http://jeen.github.io/2013/04/08/data-printer-vs-data-dump-er/"/>
     <updated>2013-04-08T12:59:00+09:00</updated>
-    <id>http://jeen.github.io/blog/2013/04/08/data-printer-vs-data-dump-er</id>
+    <id>http://jeen.github.io/2013/04/08/data-printer-vs-data-dump-er</id>
     <content type="html"><![CDATA[<p> 여태껏 많은 Perl 코드에서 습관적으로 <code>Data::Dumper</code> 를 사용해왔습니다.</p>
 
 <blockquote><p>안되면 찍어봐라</p></blockquote>
@@ -2210,9 +2210,9 @@ skyloader has left IRC (Remote host closed the connection)</li>
   
   <entry>
     <title type="html"><![CDATA[Using Rex - Environment]]></title>
-    <link href="http://jeen.github.io/blog/2013/04/04/using-rex-environment/"/>
+    <link href="http://jeen.github.io/2013/04/04/using-rex-environment/"/>
     <updated>2013-04-04T12:28:00+09:00</updated>
-    <id>http://jeen.github.io/blog/2013/04/04/using-rex-environment</id>
+    <id>http://jeen.github.io/2013/04/04/using-rex-environment</id>
     <content type="html"><![CDATA[<p> 주위 사람들은 Chef나 Fabric 을 많이 쓴다고 하지만 ( 그보다 손으로 여전히 하는 사람들이 더 많은 것 같기도 ), Rex 에 그냥 적응하면서 여전히 <a href="http://rexify.org">Rex</a> 를 사용하고 있습니다. 회사를 옮기고 새로운 작업환경을 둘러보다가 이전의 패턴이 그대로 먹히지 않기에 기존에 사용하던 Rexfile 의 구조도 살며시 바꿔나가야 했습니다.</p>
 
 <h2>Rex 초기 설정</h2>
@@ -2317,9 +2317,9 @@ skyloader has left IRC (Remote host closed the connection)</li>
   
   <entry>
     <title type="html"><![CDATA[cpanm 1.6 is here for you]]></title>
-    <link href="http://jeen.github.io/blog/2013/02/28/cpanm-1-dot-6-is-here-for-you/"/>
+    <link href="http://jeen.github.io/2013/02/28/cpanm-1-dot-6-is-here-for-you/"/>
     <updated>2013-02-28T09:34:00+09:00</updated>
-    <id>http://jeen.github.io/blog/2013/02/28/cpanm-1-dot-6-is-here-for-you</id>
+    <id>http://jeen.github.io/2013/02/28/cpanm-1-dot-6-is-here-for-you</id>
     <content type="html"><![CDATA[<p> 엊그제 cpanm 1.6 이 릴리즈되었습니다. 그동안 개발버젼으로 1.6에 포함될 기능들이 일부 소개되어 왔지만, 아무튼 뭐 @miyagawa 씨가 친히 Screencast 까지 준비해서 소개할 정도로 많은 기능들이 추가되었습니다.</p>
 
 <p> <iframe width="560" height="315" src="http://www.youtube.com/embed/6Vglyf7X2S8" frameborder="0" allowfullscreen></iframe></p>
@@ -2419,9 +2419,9 @@ skyloader has left IRC (Remote host closed the connection)</li>
   
   <entry>
     <title type="html"><![CDATA[A usecase of App::Fatpacker - Nagios Plugin]]></title>
-    <link href="http://jeen.github.io/blog/2012/12/26/a-usecase-of-app-fatpacker/"/>
+    <link href="http://jeen.github.io/2012/12/26/a-usecase-of-app-fatpacker/"/>
     <updated>2012-12-26T23:48:00+09:00</updated>
-    <id>http://jeen.github.io/blog/2012/12/26/a-usecase-of-app-fatpacker</id>
+    <id>http://jeen.github.io/2012/12/26/a-usecase-of-app-fatpacker</id>
     <content type="html"><![CDATA[<p> 최근 업무때문에 Nagios Plugin 을 만져야 하는 일들이 빈번하게 있었고, 앞으로도 발생할 소지가 상당히 높습니다. 이런 Nagios Plugin 을 만들거나 기존에 만들어 진 것들을 간편하게 다른 복수의 서버에 배포하는 일도 필요합니다.</p>
 
 <p> Nagios Plugin 이야 굳이 언어를 가리지 않는다고 치더라도, 언어의 특정 라이브러리에 의존을 가지는 경우가 많습니다. MongoDB 용 Nagios Plugin 에는 Python 의 pymongo 라이브러리를 설치해야하는 경우가 있지요.</p>

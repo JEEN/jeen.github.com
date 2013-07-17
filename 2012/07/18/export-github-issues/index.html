@@ -1,0 +1,403 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Export Github Issues - Jeen - Yet anothere techlog</title>
+  <meta name="author" content="Jeen Lee">
+
+  
+  <meta name="description" content="회사에서는 한달에 $20 인가 지불하면서 Github 을 쓰고 있습니다. $20 플랜에서는 한정적인 Private Repo 밖에 만들지 못합니다. 그래서 완료가 된 프로젝트에 대해서는
+Github Repo 를 닫고 사내 Git Repo 로 옮기는 방식으로 사용하고 &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://jeen.github.io/2012/07/18/export-github-issues">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Jeen - Yet anothere techlog" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-27958809-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Jeen - Yet anothere techlog</a></h1>
+  
+    <h2>STFUAWSC</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:jeen.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Export Github Issues</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-07-18T15:44:00+09:00" pubdate data-updated="true">Jul 18<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>회사에서는 한달에 $20 인가 지불하면서 Github 을 쓰고 있습니다.</p>
+
+<p>$20 플랜에서는 한정적인 Private Repo 밖에 만들지 못합니다. 그래서 완료가 된 프로젝트에 대해서는
+Github Repo 를 닫고 사내 Git Repo 로 옮기는 방식으로 사용하고 있습니다.</p>
+
+<p>그럴거면 그냥 사내 Git Repo 를 사용할 것이지 왜 돈내가면서 Github 를 쓰느냐고 물으신다면,
+Github 에서 제공해주는 Issue 관리라든가, Wiki 라든가 여러모로 통합이 잘되어 있고 깔끔해서
+사용하기 편하다고 그냥 그렇게 말하렵니다.</p>
+
+<p>아무튼 그러면서, 프로젝트 뿐 아니라 회사내에 발생하는 다양한 이슈들은 Bugzilla 에 기록해놓습니다.</p>
+
+<p>다 끝나서 닫아야할 프로젝트들을 사내 Repo 로 옮기는 것은 좋지만, Issues 안에 적어둔 깨알같은 내용들과 코멘트들 등등을 고스란히 다 허공으로 날려버려야 된다는 것은 뼈아픈 일입니다.</p>
+
+<p>그래서 잠깐 시간을 내서 Issues 에 있는 내용(이슈타이틀,내용,코멘트, Git commit, 이슈 참조 등등)을 뽑아서 Bugzilla 에 담아놓기 좋게 코드를 써봤습니다.</p>
+
+<p>~~~ perl export-github-issues.pl
+use strict;
+use warnings;
+use Text::Xslate;
+use Data::Section::Simple;
+use Net::GitHub::V3;
+use Config::Pit;</p>
+
+<p>my $pit = pit_get(&lsquo;github.com&rsquo;, require => {</p>
+
+<pre><code>login =&gt; "Your login",
+pass  =&gt; "Your pass",
+</code></pre>
+
+<p>});</p>
+
+<p>my $github = Net::GitHub::V3->new(</p>
+
+<pre><code>login =&gt; $pit-&gt;{login},
+pass  =&gt; $pit-&gt;{pass},
+</code></pre>
+
+<p>);</p>
+
+<p>my ($user, $repo) = @ARGV;
+unless ($user &amp;&amp; $repo) {</p>
+
+<pre><code>print "Usage: perl p.pl silexkr Donnenwa\n";
+exit;
+</code></pre>
+
+<p>}</p>
+
+<p>my $tx  = Text::Xslate->new(</p>
+
+<pre><code>syntax =&gt; 'TTerse',
+module =&gt; \[ 'Text::Xslate::Bridge::TT2Like' \],
+path =&gt; \[
+    Data::Section::Simple-&gt;new()-&gt;get_data_section()
+\],
+</code></pre>
+
+<p>);</p>
+
+<p>my $issue = $github->issue;
+my @issues = $issue->repos_issues($user, $repo, { state => &lsquo;closed&rsquo; });
+while($issue->has_next_page) {</p>
+
+<pre><code>push @issues, $issue-&gt;next_page;
+</code></pre>
+
+<p>}</p>
+
+<p>for my $iss (@issues) {</p>
+
+<pre><code>my @comments = ();
+my @events   = ();
+eval { @comments = $issue-&gt;comments('silexkr', $repo, $iss-&gt;{number}) };
+eval { @events   = $issue-&gt;events('silexkr', $repo, $iss-&gt;{number}) };
+print $tx-&gt;render('text.tx', { %{ $iss }, comments =&gt; \@comments, events =&gt; \@events });
+</code></pre>
+
+<p>}</p>
+
+<p><strong>DATA</strong></p>
+
+<p>@@ text.tx</p>
+
+<p>[% number %].[% title %] [% FOREACH label IN labels %][% label.name %] [% END %]
+  &ndash; [% user.login %]
+  &ndash; [% created_at %] ~ [% closed_at %]
+[% IF body %]
+ // [% body %]
+[% END %]
+[% FOREACH comment IN comments %]
+\= [% comment.user.login %] @ [% comment.updated_at %]
+&mdash; [% comment.body %]
+[% END %]
+[% FOREACH event IN events %][% NEXT UNLESS event.commit_id %]
+\= [% event.commit_id %][% END %]
+~~~</p>
+
+<p><a href="http://metacpan.org/module/Net::GitHub">Net::GitHub</a> 모듈에서 뭔가 코멘트를 뽑아내려는 데 없으면 계속 죽어버리는 문제 등등이 있어서 뭐 그냥 <code>eval {}</code> 로 묶어버렸구요.</p>
+
+<p><a href="http://metacpan.org/module/Text::Xslate">Text::Xslate</a> 에서 <code>path</code> 를</p>
+
+<p><del> perl
+Data::Section::Simple->new()&ndash;>get_data_section();
+</del></p>
+
+<p>으로 해서 쉽게 <code>-&gt;render()</code> 의 첫번째 인수를 템플릿이름으로 지정할 수 있더군요.</p>
+
+<p><code>Net::GitHub</code> 의 <code>-&gt;next_page</code> 가 최근 최근에 사용된 API 기준으로 동작을 하다보니, <code>while()</code> 안에서 <code>events</code>, <code>comments</code> 를 혼용해서 사용해버리면 의도한 대로 동작을 하지 않아서, <code>@issues</code> 안에 일단 전체 이슈를 뽑고서 시작을 했습니다.</p>
+
+<p>아무튼 뭐 얼기설기 그냥 놔두기도 그렇고 혹여나 해서 일단 올려봅니다.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Jeen Lee</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-07-18T15:44:00+09:00" pubdate data-updated="true">Jul 18<span>th</span>, 2012</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/github/'>github</a>, <a class='category' href='/blog/categories/perl/'>perl</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://jeen.github.io/2012/07/18/export-github-issues/" data-via="JEEN_LEE" data-counturl="http://jeen.github.io/2012/07/18/export-github-issues/" >Tweet</a>
+  
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2012/07/02/https-ssl-lwp-soap-and-perl/" title="Previous Post: HTTPS-SSL-LWP-SOAP and Perl">&laquo; HTTPS-SSL-LWP-SOAP and Perl</a>
+      
+      
+        <a class="basic-alignment right" href="/2012/07/18/mysql-diff-a-vs-b/" title="Next Post: MySQL::Diff - A vs B">MySQL::Diff - A vs B &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2013/07/17/solr-vs-elasticsearch-part-6-user-and-dev-communities-compared/">[번역] Solr vs. ElasticSearch: Part 6 – User &amp; Dev Communities Compared</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/07/17/solr-vs-elasticsearch-part-5-management-api-capabilities/">[번역] Solr vs ElasticSearch: Part 5 – Management API Capabilities</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/07/17/solr-vs-elasticsearch-part-4-faceting/">[번역] Solr vs ElasticSearch Part 4 - Faceting</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/07/16/solr-vs-elasticsearch-part-3-searching/">[번역] Solr vs. ElasticSearch - Part 3 : Searching</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/07/16/solr-vs-elasticsearch-part-2-indexing-and-language-handling/">[번역] Solr vs. ElasticSearch: Part 2 - Indexing and Language Handling</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/jeen">@jeen</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'jeen',
+            count: 0,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Jeen Lee -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'jeen';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://jeen.github.io/2012/07/18/export-github-issues/';
+        var disqus_url = 'http://jeen.github.io/2012/07/18/export-github-issues/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id; js.async = true;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

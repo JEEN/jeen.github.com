@@ -4,7 +4,7 @@
   <title><![CDATA[Category: mojolicious | Jeen - Yet anothere techlog]]></title>
   <link href="http://jeen.github.io/blog/categories/mojolicious/atom.xml" rel="self"/>
   <link href="http://jeen.github.io/"/>
-  <updated>2013-07-17T19:58:40+09:00</updated>
+  <updated>2013-07-17T20:00:39+09:00</updated>
   <id>http://jeen.github.io/</id>
   <author>
     <name><![CDATA[Jeen Lee]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[PullReq on MojoX::Validator]]></title>
-    <link href="http://jeen.github.io/blog/2013/06/07/pullreq-on-mojox-validator/"/>
+    <link href="http://jeen.github.io/2013/06/07/pullreq-on-mojox-validator/"/>
     <updated>2013-06-07T17:53:47+09:00</updated>
-    <id>http://jeen.github.io/blog/2013/06/07/pullreq-on-mojox-validator</id>
+    <id>http://jeen.github.io/2013/06/07/pullreq-on-mojox-validator</id>
     <content type="html"><![CDATA[<p> 지난 수요일에 잠깐 이번 서버 구현에 쓸 Validator 를 물색하던 중에 <a href="http://metacpan.org/module/Mojolicious::Plugin::Validator">Mojolicious::Plugin::Validator</a> 를 보고는 참 Validation 코드쓰기 쉽다라는 생각에 덜컥 채용해버렸습니다.</p>
 
 <p> 모듈은 2011년이 마지막으로 업뎃되었구요. 근데 깔아보니까 안깔립니다. 이것도 설마 5.18 의 Hash Randomization 문제때문인가 하면서 실패한 테스트코드를 살펴본 결과 Mojolicious API 가 바뀐 것때문이었습니다. 그러니까 1년 반안에 프레임워크 테스트 모듈의 근간 API 가 바뀌어버리는 바람에 테스트가 실패한 것이지요.</p>

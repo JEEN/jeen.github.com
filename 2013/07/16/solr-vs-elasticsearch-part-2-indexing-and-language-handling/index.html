@@ -1,0 +1,440 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>[번역] Solr vs. ElasticSearch: Part 2 - Indexing and Language Handling - Jeen - Yet anothere techlog</title>
+  <meta name="author" content="Jeen Lee">
+
+  
+  <meta name="description" content="Solr vs. ElasticSearch: Part 2 – Indexing and Language Handling September 4, 2012 by Rafał Kuć In the previous part of Solr vs. ElasticSearch series &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://jeen.github.io/2013/07/16/solr-vs-elasticsearch-part-2-indexing-and-language-handling">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Jeen - Yet anothere techlog" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-27958809-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Jeen - Yet anothere techlog</a></h1>
+  
+    <h2>STFUAWSC</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:jeen.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">[번역] Solr vs. ElasticSearch: Part 2 - Indexing and Language Handling</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-16T21:30:39+09:00" pubdate data-updated="true">Jul 16<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><h1>Solr vs. ElasticSearch: Part 2 – Indexing and Language Handling</h1>
+
+<p>September 4, 2012 by Rafał Kuć</p>
+
+<p>In the previous part of Solr vs. ElasticSearch series we talked about general architecture of these two great search engines based on Apache Lucene. Today, we will look at their ability to handle your data and perform indexing and language analysis.</p>
+
+<p>전 편의 &ldquo;Solr vs. ElasticSearch&rdquo; Part1 기사에서 Apache Lucene 을 기반으로 하는 두가지 검색엔진의 전반적인 아키텍쳐에 대해서 이야기 했습니다. 오늘은 데이터의 취급과 인덱싱, 그리고 언어의 해석능력을 알아보도록 합니다.</p>
+
+<ul>
+<li><a href="http://jeen.github.io/2013/07/15/solr-vs-elasticsearch-part-1/">1. Solr vs. ElasticSearch: Part 1 – Overview</a></li>
+<li><a href="http://jeen.github.io/2013/07/16/solr-vs-elasticsearch-part-2-indexing-and-language-handling/">2. Solr vs. ElasticSearch: Part 2 – Data Handling</a></li>
+<li><a href="http://jeen.github.io/2013/07/16/solr-vs-elasticsearch-part-3-searching/">3. Solr vs. ElasticSearch: Part 3 – Searching</a></li>
+<li><a href="http://jeen.github.io/2013/07/16/solr-vs-elasticsearch-part-4-faceting/">4. Solr vs. ElasticSearch: Part 4 – Faceting</a></li>
+<li><a href="http://jeen.github.io/2013/07/17/solr-vs-elasticsearch-part-5-management-api-capabilities/">5. Solr vs. ElasticSearch: Part 5 – Management API Capabilities</a></li>
+<li><a href="http://jeen.github.io/2013/07/17/solr-vs-elasticsearch-part-6-user-and-dev-communities-compared/">6. Solr vs. ElasticSearch: Part 6 – User &amp; Dev Communities Compared</a></li>
+</ul>
+
+
+<h2>데이터 인덱싱</h2>
+
+<p>Apart from using Java API exposed both by ElasticSearch and Apache Solr, you can index data using an HTTP call. To index data in ElasticSearch you need to prepare your data in JSON format. Solr also allows that, but in addition to that, it lets you to use other formats like the default XML or CSV. Importantly, indexing data in different formats has different performance characteristics, but that comes with some limitations. For example, indexing documents in CSV format is considered to be the fastest, but you can’t use field value boosting while using that format. Of course, one will usually use some kind of a library or Java API to index data as one doesn’t typically store data in a way that allows indexing of data straight into the search engine (at least in most cases that’s true).</p>
+
+<p>ElasticSearch와 Apache Solr 모두 공개되어 있는 Java API 가 아닌 HTTP 호출을 사용해서 데이터 인덱싱을 할 수 있습니다. ElasticSearch 에서 데이터를 인덱싱하기 위해서는 데이터를 JSON 포맷으로 준비할 필요가 있습니다. Solr 도 가능하지만, 그에 덧붙여 기본적으로는 XML 이나 CSV 등 다른 형식을 이용할 수 있습니다. 중요한 것은 다른 형식의 데이터를 인덱싱 하는 경우 다른 퍼포먼스 특성이 존재하며 이에 대해서는 몇 가지 제약이 따릅니다. 예를 들어 CSV 형식의 도큐먼트를 인덱싱하는 경우가 가장 빠르다고 볼 수 있는 데, 이 경우 필드값의 boosting 을 이용할 수 없습니다. 물론 일반적으로는 어떠한 종류의 라이브러리나 Java API 를 사용해서 데이터를 인덱싱할 것입니다. 일반적으로는 검색 엔진에 직접 들어가는 데이터의 인덱스를 만들면서 데이터를 저장하는 일은 없습니다. (적어도 대부분의 경우 그렇습니다)</p>
+
+<h2>ElasticSearch에 대해서 보충설명</h2>
+
+<p>It is worth noting that ElasticSearch supports two additional things, that Solr does not – nested documents and multiple document types inside a single index.</p>
+
+<p>Solr 가 지원하지 않는 ElasticSearch 의 두가지 추가기능에 대해서 다뤄볼 가치가 있는 데 그것은 중첩 도큐먼트와 단일 도큐먼 안에서의 복수도큐먼트 타입니다.</p>
+
+<p>The nested documents functionality lets you create more than a flat document structure. For example, imagine you index documents that are bound to some group of users. In addition to document contents, you would like to store which users can access that document.  And this is were we run into a little problem – this data changes over time. If you were to store document content and users inside a single index document, you would have to reindex the whole document every time the list of users who can access it changes in any way. Luckily, with ElasticSearch you don’t have to do that – you can use nested document types and then use appropriate queries for matching. In this example, a nested document would hold a lists of users with document access rights. Internally, nested documents are indexed as separate index documents stored inside the same index. ElasticSearch ensures they are indexed in a way that allows it to use fast join operations to get them. In addition to that, these documents are not shown when using standard queries and you have to use nested query to get them, a very handy feature.</p>
+
+<p>중첩 도큐먼트 기능은 평탄한 도큐먼트 구조를 넘은 것을 만들 수 있습니다. 이를테면 어떤 유저 그룹에 연결된 도큐먼트를 인덱싱한다고 생각해봅시다. 도큐먼트의 내용 뿐만 아니라 어느 유저가 그 문서에 접근할 수 있는 지를 넣고 싶다고 해둡니다. 만약 단일 인스턴스의 도큐먼트 안에서 도큐먼트의 내용과 유저를 넣을 경우, 그 도큐먼트에 접근할 수 있는 유저의 리스트를 변경할 때마다 도큐먼트 전체를 다시 인덱싱해야 합니다. 다행히도 ElasticSearch 를 사용하면 그런 일은 없습니다. 중첩 도큐먼트 타입을 사용해서 적절한 쿼리를 매칭에 사용할 수 있습니다. 이 예제에서는 중첩 도큐먼트는 유저 리스트와 도큐먼트의 접근권한을 가집니다. 내부적으로는 중첩 도큐먼트는 같은 인덱스 안에서 놓여진 분리된 인덱스 문서로 색인됩니다.</p>
+
+<p>ElasticSearch는 빠른 JOIN 명령을 사용해서 인덱싱할 수 있습니다. 덧붙여 이 도큐먼트들은 표준 쿼리를 사용한 경우는 보이지 않으며, 중첩 쿼리를 얻어내기 위해서는 사용할 수 있어 매우 편리한 기능입니다.</p>
+
+<p>Multiple types of documents per index allow just what the name says – you can index different types of documents inside the same index.  This is not possible with Solr, as you have only one schema in Solr per core.  In ElasticSearch you can filter, query, or facet on document types. You can make queries against all document types or just choose a single document type (both with Java API and REST).</p>
+
+<p>인덱스마다 복수타입의 도큐먼트는 이름 그대로의 행위를 할 수 있습니다.. 다른 타입의 도큐먼트를 같은 인덱스 안에서 인덱싱할 수 있는데, 이것은 Solr 에서는 코어당 하나의 스키마만을 가질 수 있기 때문에 불가능합니다.</p>
+
+<p>ElasticSearch에서는 도큐먼트타입에 의해 필터, 쿼리, 퍼셋(Facet) 을 할 수 있습니다. 모든 도큐먼트 타입에 대해서, 또는 하나의 도큐먼트 타입을 선택해서 쿼리를 날릴 수 있습니다. (Java API 와 REST 양쪽 모두 가능합니다)</p>
+
+<h2>인덱스 다루기</h2>
+
+<p>Let’s look at the ability to manage your indices/collections using the HTTP API of both Apache Solr and ElasticSearch.</p>
+
+<p>Apache Solr 와 ElasticSearch 에서의 인덱스/콜렉션을 HTTP API 를 사용해서 관리하는 방법을 보도록 합니다.</p>
+
+<h3>Solr</h3>
+
+<p>Solr let’s you control all cores that live inside your cluster with the CoreAdmin API – you can create cores, rename, reload, or even merge them into another core. In addition to the CoreAdmin API Solr enables you to use the collections API to create, delete or reload a collection. The collections API uses CoreAdmin API under the hood, but it’s a simpler way to control your collections. Remember that you need to have your configuration pushed into ZooKeeper ensemble in order to create a collection with a new configuration.</p>
+
+<p>Solr 는 운용중인 클래스 안에서 모든 코어를 CoreAdmin API 로 관리할 수 있습니다. 코어 작성, 이름 변경, 리로드, 또는 여러 코어들을 하나의 코어로 머지할 수 있습니다. 또한 Solr 는 Collections API 를 사용해서 콜렉션의 작성, 삭제, 그리고 리로드를 할 수 있습니다. Collections API 는 뒷단에서 CoreAdmin API 를 사용하며 간단하게 콜렉션을 다룰 수 있습니다. 새로운 설정의 콜렉션을 작성하기 위해서는 ZooKeeper ensemble 에 설정을 넣어 둘 필요가 있습니다.</p>
+
+<p>When it comes to Solr, there is additional functionality that is in early stages of work, although it’s functional – the ability to split your shards. After applying the patch available in SOLR-3755 you can use a SPLIT action to split your index and write it to two separate cores. If you look at the mentioned JIRA issue, you’ll see that once this is commited Solr will have the ability not only to create new replicas, but also to dynamically re-shard the indices.  This is huge!</p>
+
+<p>Solr 에는 아직 미성숙하지만 유효한 추가기능이 있습니다. 바로 Shard 의 분할입니다. SOLR-3755에 있는 패치를 적용한 다음에 인덱스를 분할해서 두개로 분할한 코어에 넣는 것이 SPLIT 액션을 사용해서 가능해집니다. 그 JIRA 이슈를 읽으면 이것이 커밋되면 Solr 는 새로운 레플리카를 작서아는 것뿐만 아니라, 동적으로 인덱스를 re-shard 하는 기능을 가지게 됩니다. 이것은 매우 큰 이점입니다!</p>
+
+<h3>ElasticSearch</h3>
+
+<p>One of the great things in ElasticSearch is the ability to control your indices using HTTP API. We will take about it extensively in the last part of the series, but I have to mention it ere, too. In ElasticSearch you can create indices on the live cluster and delete them. During creation you can specify the number of shards an index should have and you can decrease and increase the number of replicas without anything more than a single API call. You cannot change the number of shards yet.  Of course, you can also define mappings and analyzers during index creation, so you have all the control you need to index a new type of data into you cluster.</p>
+
+<p>ElasticSearch의 굉장한 기능 중 하나로 HTTP API를 사용해서 인덱스를 다루는 능력이 있습니다. 이 시리즈의 마지막 파트에서 이에 대해서 광범위하게 다룰 예정이지만, 일단 여기에서도 간단히 다룰 필요가 있을 것 같습니다. ElasticSearch에서는 운용중의 클러스터 위에서 인덱싱을 할 수 있고, 삭제할 수 있습니다. 인덱싱 하는 동안, 인덱스를 가져야할 Shard 의 수를 지정할 수 있으며, 단일 API 호출만으로 레플리카 수의 증감을 조정할 수 있습니다. Shard 수는 아직 변경할 수 없습니다. 물론 맵핑과 해석기를 인덱싱 시에 설정가능하고, 클러스터 안에서 새로운 형태의 데이터 인덱싱에 필요한 모든 컨트롤을 가지게 됩니다.</p>
+
+<h2>도큐먼트의 부분갱신</h2>
+
+<p>Both search engines support partial document update. This is not the true partial document update that everyone has been after for years – this is really just normal document reindexing, but performed on the search engine side, so it feels like a real update.</p>
+
+<p>두 검색엔진 모두 도큐먼트의 부분갱신을 지원합니다. 이것은 모두가 기대한 그런 도큐먼트 부분갱신이 아닙니다. 단지 일반적인 도큐먼트 의 재인덱싱일 뿐입니다. 그러나 검색엔진에서 실행되기에 진짜 갱신처럼 보이기도 합니다.</p>
+
+<h3>Solr</h3>
+
+<p>Let’s start from the requirements – because this functionality reconstructs the document on the server side you need to have your fields set as stored and you have to have the <em>version</em> field available in your index structure. Then you can update a document with a simple API call, for example:</p>
+
+<p>요건부터 시작하겠습니다. 이 기능은 서버측의 도큐먼트를 재구성하기에 필드의 집합이 격납되었고 <em>version</em>필드가 인덱스 구성에서 존재하지 않으면 안됩니다. 이렇게 하면 단일 API 호출에 의해 도큐먼트를 갱신할 수 있습니다.</p>
+
+<p>예：</p>
+
+<pre><code>curl 'localhost:8983/solr/update' -H 'Content-type:application/json' -d '[{"id":"1","price":{"set":100}}]'
+</code></pre>
+
+<h3>ElasticSearch</h3>
+
+<p>In case of ElasticSearch you need to have the <em>source field enabled for the partial update functionality to work. This </em>source is a special ElasticSearch field that stores the original JSON document.  Theis functionality doesn’t have add/set/delete command, but instead lets you use script to modify a document. For example, the following command updates the same document that we updated with the above Solr request:</p>
+
+<p>ElasticSearch 의 경우, 부분갱신 기능이 제대로 동작하기 위해서는 <em>source 필드가 허가되어 있을 필요가 있습니다. 이 </em>source는 특별한 ElasticSearch 필드에서 오리지널 JSON 도큐먼트를 저장합니다. 이 기능에는 add/set/delete 명령은 존재하지 않습니다. 그 대신에 도큐먼트를 변경하는 스크립트의 사용을 허가합니다. 예를 들어 다음의 명령어를 위의 Solr 리퀘스트에서 갱신한 것과 같은 문서를 갱신한다고 합니다.</p>
+
+<pre><code>curl -XPOST 'localhost:9200/sematext/doc/1/_update'-d '{
+    "script" : "ctx._source.price = price",
+    "params" : {
+        "price" : 100
+    }
+}'
+</code></pre>
+
+<h2>다국어데이터의 취급</h2>
+
+<p>As we mentioned previously, and as you probably know, both ElasticSearch and Solr use Apache Lucene to index and search data. But, of course, each search engine has its own Java implementation that interacts with Lucene. This is also the case when it comes to language handling. Apache Solr 4.0 beta has the advantage over ElasticSearch because it can handle more languages out of the box. For example, my native language Polish is supported by Solr out of the box (with two different filters for stemming), but not by ElasticSearch. On the other hand, there are many plugins for ElasticSearch that enable support for languages not supported by default, though still not as many as we can find supported in Solr out of the box.  It’s also worth mentioning there are commercial analyzers that plug into Solr (and Lucene), but none that we are aware of work with ElasticSearch…. yet.</p>
+
+<p>이전 언급한 대로, ElasticSearch와 Solr 는 Apache Lucene 을 인덱싱 및 데이터의 검색에 이용하고 있습니다. 각 검색엔진은 그 자체가 Java 구현을 가지며 Lucene 과 상호작용합니다. 이것이 여러 나라의 언어취급에 있어서도 마찬가지 입니다. 이 부분에 있어서는 Apache Solr 4.0β가 ElasticSearch 에 대해서 우위입니다. Solr 그 자체로도 많은 언어를 다룰 수 있기 때문입니다. 예를 들어 저자의 네이티브 언어인 폴란드어는 Solr 에서는 처음부터 지원되었습니다. (두가지 다른 stemming용 필터를 포함한 채) 그러나 ElasticSearch는 그렇지 않습니다. ElasticSearch에서는 기본적으로는 지원하지 않는 언어를 지원하는 플러그인이 다수 존재합니다. 그래도 그 수는 Solr 가 처음부터 지원하고 있는 수만큼은 아닙니다. 또 하나 알아둘 가치가 있는 것은 Solr(와 Lucene)에는 상업해석기가 있습니다. 그러나 ElasticSearch 용은 아직 있는 지 모르겠습니다.</p>
+
+<h2>지원되는 자연언어</h2>
+
+<p>For the full list of languages supported by those two search engine please refer to the following pages:</p>
+
+<p>두 검색엔진에서 지원되는 언어의 완전한 리스트에 대해서는 다음 버젼을 참고해주세요.</p>
+
+<p>Apache Solr</p>
+
+<pre><code>&lt;a href="http://wiki.apache.org/solr/LanguageAnalysis" &gt;http://wiki.apache.org/solr/LanguageAnalysis&lt;/a&gt;
+</code></pre>
+
+<p>ElasticSearch</p>
+
+<p>Analyzers: <a href="http://www.elasticsearch.org/guide/reference/index-modules/analysis/lang-analyzer.html">http://www.elasticsearch.org/guide/reference/index-modules/analysis/lang-analyzer.html</a>
+Stemming: <a href="http://www.elasticsearch.org/guide/reference/index-modules/analysis/stemmer-tokenfilter.html">http://www.elasticsearch.org/guide/reference/index-modules/analysis/stemmer-tokenfilter.html</a>,
+ <a href="http://www.elasticsearch.org/guide/reference/index-modules/analysis/snowball-tokenfilter.html">http://www.elasticsearch.org/guide/reference/index-modules/analysis/snowball-tokenfilter.html</a> 그리고 <a href="http://www.elasticsearch.org/guide/reference/index-modules/analysis/snowball-tokenfilter.html">http://www.elasticsearch.org/guide/reference/index-modules/analysis/kstem-tokenfilter.html</a></p>
+
+<h2>해석체인의 정의</h2>
+
+<p>Of course, both Apache Solr and ElasticSearch allow you to define a custom analysis chain by specifying your own analyzer/tokenizer and list of filters that should be used to process your data. However, the difference between ElasticSearch and Solr is not only in the list of supported languages. ElasticSearch allows one to specify the analyzer per document and per query. So, if you need to use a different analyzer for each document in the index you can do that in ElasticSearch. The same applies to queries – each query can use a different analyzer.</p>
+
+<p>물론, Apache Solr 와 ElasticSearch 양쪽 모두 커스텀 해석기 체인을 정의할 수 있습니다. 당신의 데이터 처리에 사용되는 해석기 및 토크나이저, 필터의 리스트를 지정합니다. 그러나, ElasticSearch 와 Solr 의 차이는 지원되는 언어의 리스트 뿐만이 아닙니다. ElasticSearch 는 도큐먼트 마다, 쿼리마다 해석기를 지정할 수 있습니다. 때문에 인덱스 안의 각각의 도큐먼트에 다른 해석기의 사용이 필요하다면 ElasticSearch 에서는 가능합니다. 쿼리도 마찬가지입니다. 각 쿼리는 다른 해석기를 사용할 수 있습니다.</p>
+
+<h2>결과의 그룹핑</h2>
+
+<p>One of the most requested features for Apache Solr was result grouping. It was highly anticipated for Solr and it is still anticipated for ElasticSearch, which doesn’t yet have field grouping as of this writing.  You can see the number of +1 votes in the following issue: <a href="https://github.com/elasticsearch/elasticsearch/issues/256.">https://github.com/elasticsearch/elasticsearch/issues/256.</a>  You can expect grouping to be supported in ElasticSearch after changes introduced in 0.20. If you are not familiar with results grouping – it allows you to group results based on the value of a field, value of a query, or a function and return matching documents as  groups. You can imagine grouping results of restaurants on the value of the city field and returning only five restaurants for each city. A feature like this may be handy in some situations. Currently, for the search engines we are talking about, only Apache Solr supports results grouping out of the box.</p>
+
+<p>Apache Solr 에 가장 많이 요청된 기능 중 하나가 결과의 그룹핑입니다. Solr 에 있어서 가장 기대되어 온 기능이며, ElasticSearch 에 있어서도 지금도 기대를 머금고 있습니다. 이 글을 쓰고 있는 시점에서는 ElasticSearch 는 필드의 그룹핑을 가지고 있지 않습니다. 다음 이슈를 보면 이에 대한 여러 요청이 있는 것을 알 수 있을 것입니다. <a href="https://github.com/elasticsearch/elasticsearch/issues/256">https://github.com/elasticsearch/elasticsearch/issues/256</a></p>
+
+<p>ElasticSearch에서는 0.20 이 릴리즈 된 때에 지원될 것이라고 기대하고 있습니다. 결과의 그룹핑을 모르는 사람을 위해 설명하자면, 필드나 쿼리 또는 함수의 값에 의해 결과를 그룹으로 나눌 수 있습니다. 그리고 매치된 도큐먼트를 그룹으로 반환합니다. 예를들어 레스토랑의 결과를 마을의 필드로 그룹핑해서 각 거리의 다섯가지 레스토랑만 반환합니다. 이런 기능은 여러 상황에서 편리하겠죠. 지금은 Apache Solr 만이 기본적으로 결과의 그룹핑을 할 수 있습니다.</p>
+
+<h2>Prospective Search</h2>
+
+<p>One thing Apache Solr completely lacks when comparing to ElasticSearch is functionality called Percolator in ElasticSearch. Imagine a search engine that, instead of storing documents in the index, stores queries and lets you check which stored/indexed queries match each new document being indexed. Sound handy, right?  For example, this is useful when people want to watch out for any new documents (think Social Media, News, etc.) matching their topics of interest, as described through queries. This functionality is also called Prospective Search, some call it Pub-Sub as well as Stored Searches.  At Sematext we’ve implemented this a few times for our clients using Solr, but ElasticSearch has this functionality built-in.  If you want to know more about ElasticSearch Percolator see <a href="http://www.elasticsearch.org/blog/2011/02/08/percolator.html.">http://www.elasticsearch.org/blog/2011/02/08/percolator.html.</a></p>
+
+<p>Apache Solr 가 ElasticSearch와 비교해서 완전하게 결여된 것 중 하나는 ElasticSearch 에서 퍼컬레이터 라고 부르는 기능입니다. 예를들어 인덱스에 도큐먼트를 넣는 것이 아니라, 쿼리를 넣고 새로운 도큐먼트의 인덱싱 때마다 인덱스된 쿼리가 매치하는 지 어떤 지를 체크하는 것이죠. 좋지 않나요?
+ 편리한 점은 유저가 모든 새로운 도큐먼트(소셜미디어나 뉴스 같은 것을 생각해보세요)가 유저가 흥미를 가지는 토픽에 해당되는 지, 앞서 정의한 쿼리를 통해서 체크하고 싶은 경우에 유용합니다. 이 기능은 또 Prospective Search 라고도 불립니다. 또 어떤 사람은 Pub-Sub라고도 부르고, stored search 라고도 부릅니다. Sematext 에서는 Solr를 사용하는 고객을 위해서 이것을 몇 번인가 구현한 적이 있습니다. 하지만 ElasticSearch는 기본적으로 이 기능을 가지고 있죠. 만약 ElasticSearch의 퍼컬레이터에 대해서 좀 더 알아보고 싶으시다면 다음 URL 을 참고하세요.</p>
+
+<p><a href="http://www.elasticsearch.org/blog/2011/02/08/percolator.html">http://www.elasticsearch.org/blog/2011/02/08/percolator.html</a></p>
+
+<h2>다음회 예고</h2>
+
+<p>In the next part of the series we will focus on comparing the ability to query your indices and leverage the full text search capabilities of Apache Solr and ElasticSearch. We will also look at the possibility to influence Lucene scoring algorithms during query time. Till next time :)</p>
+
+<p>다음회에서는 Apache Solr 와 ElasticSearch 상의 인덱스에 대해서 쿼리의 능력과 전문검색의 능력에 대해서 알아보도록 합니다. 또 쿼리시에 Lucene 의 스코어링 알고리즘을 다루는 방법에 대해서도 알아볼 예정입니다. 그럼 다음회에서 봐요.</p>
+
+<p>@kucrafal, @sematext</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Jeen Lee</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-16T21:30:39+09:00" pubdate data-updated="true">Jul 16<span>th</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/elasticsearch/'>elasticsearch</a>, <a class='category' href='/blog/categories/solr/'>solr</a>, <a class='category' href='/blog/categories/translation/'>translation</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://jeen.github.io/2013/07/16/solr-vs-elasticsearch-part-2-indexing-and-language-handling/" data-via="JEEN_LEE" data-counturl="http://jeen.github.io/2013/07/16/solr-vs-elasticsearch-part-2-indexing-and-language-handling/" >Tweet</a>
+  
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2013/07/15/solr-vs-elasticsearch-part-1/" title="Previous Post: [번역] Solr vs ElasticSearch - Part 1 : Overview">&laquo; [번역] Solr vs ElasticSearch - Part 1 : Overview</a>
+      
+      
+        <a class="basic-alignment right" href="/2013/07/16/solr-vs-elasticsearch-part-3-searching/" title="Next Post: [번역] Solr vs. ElasticSearch - Part 3 : Searching">[번역] Solr vs. ElasticSearch - Part 3 : Searching &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2013/07/17/solr-vs-elasticsearch-part-6-user-and-dev-communities-compared/">[번역] Solr vs. ElasticSearch: Part 6 – User &amp; Dev Communities Compared</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/07/17/solr-vs-elasticsearch-part-5-management-api-capabilities/">[번역] Solr vs ElasticSearch: Part 5 – Management API Capabilities</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/07/17/solr-vs-elasticsearch-part-4-faceting/">[번역] Solr vs ElasticSearch Part 4 - Faceting</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/07/16/solr-vs-elasticsearch-part-3-searching/">[번역] Solr vs. ElasticSearch - Part 3 : Searching</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/07/16/solr-vs-elasticsearch-part-2-indexing-and-language-handling/">[번역] Solr vs. ElasticSearch: Part 2 - Indexing and Language Handling</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/jeen">@jeen</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'jeen',
+            count: 0,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Jeen Lee -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'jeen';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://jeen.github.io/2013/07/16/solr-vs-elasticsearch-part-2-indexing-and-language-handling/';
+        var disqus_url = 'http://jeen.github.io/2013/07/16/solr-vs-elasticsearch-part-2-indexing-and-language-handling/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id; js.async = true;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

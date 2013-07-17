@@ -4,7 +4,7 @@
   <title><![CDATA[Category: db | Jeen - Yet anothere techlog]]></title>
   <link href="http://jeen.github.io/blog/categories/db/atom.xml" rel="self"/>
   <link href="http://jeen.github.io/"/>
-  <updated>2013-07-17T19:58:40+09:00</updated>
+  <updated>2013-07-17T20:00:39+09:00</updated>
   <id>http://jeen.github.io/</id>
   <author>
     <name><![CDATA[Jeen Lee]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Using MSSQL in Perl(Linux)]]></title>
-    <link href="http://jeen.github.io/blog/2013/06/18/using-mssql-in-perl-linux/"/>
+    <link href="http://jeen.github.io/2013/06/18/using-mssql-in-perl-linux/"/>
     <updated>2013-06-18T22:33:40+09:00</updated>
-    <id>http://jeen.github.io/blog/2013/06/18/using-mssql-in-perl-linux</id>
+    <id>http://jeen.github.io/2013/06/18/using-mssql-in-perl-linux</id>
     <content type="html"><![CDATA[<p>오늘은 IRC 상에서 리눅스 환경에서 Perl 로 MS-SQL 에 접속하는 최선의 방법에 대한 이야기가 있었습니다. 그냥 흘리기에는 아쉬운 얘기들이 많아서 긁어서 정리해봅니다.</p>
 
 <script src="http://jeen.github.io//storify.com/jeen_lee/using-mssql-in-perl-linux.js" type="text/javascript" language="javascript"></script>
@@ -29,9 +29,9 @@
   
   <entry>
     <title type="html"><![CDATA[Using DBI Callbacks - Generate a SQLite file automatically]]></title>
-    <link href="http://jeen.github.io/blog/2013/05/20/using-dbi-callbacks-generate-sqlite-file-automatically/"/>
+    <link href="http://jeen.github.io/2013/05/20/using-dbi-callbacks-generate-sqlite-file-automatically/"/>
     <updated>2013-05-20T11:59:04+09:00</updated>
-    <id>http://jeen.github.io/blog/2013/05/20/using-dbi-callbacks-generate-sqlite-file-automatically</id>
+    <id>http://jeen.github.io/2013/05/20/using-dbi-callbacks-generate-sqlite-file-automatically</id>
     <content type="html"><![CDATA[<p> 이런저런 임시데이터를 주고받고 하는 용도로 SQLite 파일을 덩어리채로 주고받는 경우가 있습니다.</p>
 
 <p>매일매일 그런 일이 일어나니 파일에는 날짜 정도는 집어넣어줘야 되구요.</p>

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: rex | Jeen - Yet anothere techlog]]></title>
   <link href="http://jeen.github.io/blog/categories/rex/atom.xml" rel="self"/>
   <link href="http://jeen.github.io/"/>
-  <updated>2013-07-17T19:58:40+09:00</updated>
+  <updated>2013-07-17T20:00:39+09:00</updated>
   <id>http://jeen.github.io/</id>
   <author>
     <name><![CDATA[Jeen Lee]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Rex Common Practice]]></title>
-    <link href="http://jeen.github.io/blog/2013/04/28/more-rex/"/>
+    <link href="http://jeen.github.io/2013/04/28/more-rex/"/>
     <updated>2013-04-28T18:32:00+09:00</updated>
-    <id>http://jeen.github.io/blog/2013/04/28/more-rex</id>
+    <id>http://jeen.github.io/2013/04/28/more-rex</id>
     <content type="html"><![CDATA[<h3>Parallelism 설정</h3>
 
 <p> 한 손에 셀 수 있을 정도의 서버규모라면 사실 특별하게 병렬처리를 하느니 하는 것은 별로 고려하지 않아도 되겠습니다만, 그 이상일 경우에는 한 작업을 수행함에 있어서 수십대의 서버에 순차적으로 접속하고 작업하고하는 것을 지켜보는 것은 상당히 고역이죠.
@@ -87,9 +87,9 @@ run("curl -L http://cpanmin.us | perl - --notest --mirror ftp://cpan.mirror.cdne
   
   <entry>
     <title type="html"><![CDATA[Using Rex - Environment]]></title>
-    <link href="http://jeen.github.io/blog/2013/04/04/using-rex-environment/"/>
+    <link href="http://jeen.github.io/2013/04/04/using-rex-environment/"/>
     <updated>2013-04-04T12:28:00+09:00</updated>
-    <id>http://jeen.github.io/blog/2013/04/04/using-rex-environment</id>
+    <id>http://jeen.github.io/2013/04/04/using-rex-environment</id>
     <content type="html"><![CDATA[<p> 주위 사람들은 Chef나 Fabric 을 많이 쓴다고 하지만 ( 그보다 손으로 여전히 하는 사람들이 더 많은 것 같기도 ), Rex 에 그냥 적응하면서 여전히 <a href="http://rexify.org">Rex</a> 를 사용하고 있습니다. 회사를 옮기고 새로운 작업환경을 둘러보다가 이전의 패턴이 그대로 먹히지 않기에 기존에 사용하던 Rexfile 의 구조도 살며시 바꿔나가야 했습니다.</p>
 
 <h2>Rex 초기 설정</h2>
@@ -178,9 +178,9 @@ $ rex -E sdt -G all M:restart-opsview-agent
   
   <entry>
     <title type="html"><![CDATA[Rex - Contributor 가 되어 있었습니다]]></title>
-    <link href="http://jeen.github.io/blog/2012/06/14/rex-im-a-contributor/"/>
+    <link href="http://jeen.github.io/2012/06/14/rex-im-a-contributor/"/>
     <updated>2012-06-14T17:28:00+09:00</updated>
-    <id>http://jeen.github.io/blog/2012/06/14/rex-im-a-contributor</id>
+    <id>http://jeen.github.io/2012/06/14/rex-im-a-contributor</id>
     <content type="html"><![CDATA[<p><a href="http://jeen.github.com/blog/2012/02/15/rex-pull-request/">http://jeen.github.com/blog/2012/02/15/rex-pull-request/</a></p>
 
 <p> 이전에 이렇게 Rex 에 Pull Request 를 날린 적이 있었는데,</p>
@@ -195,9 +195,9 @@ $ rex -E sdt -G all M:restart-opsview-agent
   
   <entry>
     <title type="html"><![CDATA[Rex Pull Request]]></title>
-    <link href="http://jeen.github.io/blog/2012/02/15/rex-pull-request/"/>
+    <link href="http://jeen.github.io/2012/02/15/rex-pull-request/"/>
     <updated>2012-02-15T23:21:00+09:00</updated>
-    <id>http://jeen.github.io/blog/2012/02/15/rex-pull-request</id>
+    <id>http://jeen.github.io/2012/02/15/rex-pull-request</id>
     <content type="html"><![CDATA[<ul>
 <li><a href="http://rexify.org/">&reg;?ex &ndash; A simple framework to simplify systemadministration</a></li>
 </ul>
