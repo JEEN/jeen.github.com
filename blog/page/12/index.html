@@ -1,118 +1,93 @@
 
-<!DOCTYPE HTML>
-<html>
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
-	<meta charset="utf-8">
-	<title>Jeen - Yet anothere techlog</title>
-    <meta name="author" content="Jeen Lee">
-    
-	<meta name="description" content="Published on: Jun 18th, 2012 Tags: bash, zsh 한동안 zsh 을 사용하면서 oh-my-zsh 로 화려한 셸환경을 이용하고 있었는데요, 언제부턴가 grep warning 이 뜨기도 하고, bash 위주의 작업환경에 맞춘 기사들이 &hellip;">
-	
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta charset="utf-8">
+  <title>Jeen - Yet anothere techlog</title>
+  <meta name="author" content="Jeen Lee">
 
-	<link href="/atom.xml" rel="alternate" title="Jeen - Yet anothere techlog" type="application/atom+xml">
-	<link rel="canonical" href="">
-	<link href="/favicon.ico" rel="shortcut icon">
-    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  
+  <meta name="description" content="한동안 zsh 을 사용하면서 oh-my-zsh 로 화려한 셸환경을 이용하고 있었는데요, 언제부턴가 grep warning 이 뜨기도 하고, bash 위주의 작업환경에 맞춘 기사들이 소개되기에 이르러 결국 zsh 을 버리고 다시 bash 로 돌아오게 되었습니다. &hellip;">
+  
 
-    <link href='http://fonts.googleapis.com/css?family=Slackey' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=Amethysta' rel='stylesheet' type='text/css'>
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
-    <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <script type="text/javascript" src="/javascripts/jquery-tapir.js"></script>
+  
+  <link rel="canonical" href="http://jeen.github.io/blog/page/12">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Jeen - Yet anothere techlog" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
 
-    <!-- remove or comment it to disable ajaxification -->   
-    <script src="/javascripts/ajaxify.js"></script>
-   
-    
-    
-	<script type="text/javascript">
-		var _gaq = _gaq || [];
-		_gaq.push(['_setAccount', 'UA-27958809-1']);
-		_gaq.push(['_trackPageview']);
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-27958809-1']);
+    _gaq.push(['_trackPageview']);
 
-		(function() {
-			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-		})();
-	</script>
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
 
 
 </head>
 
-
-<body>
-    <div id="wrapper">
-    <header id="header" class="inner"><!-- for more effects see _animate.scss -->
-<h1 class="animated bounceInDown">
-    <div id="headerbg">
-        Jeen Lee
-    </div>
-</h1>
-<br>
-
-<ul id="social-links" style="text-align:center">
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Jeen - Yet anothere techlog</a></h1>
   
-  <!-- GitHub -->
-  <li>
-  <a href="https://github.com/jeen" class="github" title="Github"></a>
-  </li>
+    <h2>STFUAWSC</h2>
   
-  
-  
-  
-  <!-- Twitter -->
-  <li>
-  <a href="http://www.twitter.com/JEEN_LEE" class="twitter" title="Twitter"></a>
-  </li>
-  
-  
-  
-  
-  
-</ul>
-
-
-<!-- use full url including 'index.html' for navigation bar if you are using ajax -->
-<ul id="nav">
-	<li id="ajax"><a href="/index.html">Home</a></li>
-	<li id="ajax"><a href="/blog/archives/index.html">Archives</a></li>
-    <li><a href="/atom.xml">RSS</a></li>
-    
-    <li>
-    <div id="dark">
-        <form method="get" action="/search.html" id="search">
-            <input name="query" type="text" placeholder="Search..." x-webkit-speech />
-        </form>
-    </div>
-    </li>
-        
-</ul>
-
-
-
+</hgroup>
 
 </header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:jeen.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
 
-<div id="toload">
-<!-- begin toload --> 
-    <div id="content" class="inner">
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2012/06/18/oh-my-zsh-bash-it/">Oh-my-zsh → Bash-it</a></h1>
+    
+    
+      <p class="meta">
         
-
-
-    <article class="post">
-	<h2 class="title">
-		
-		<a href="/2012/06/18/oh-my-zsh-bash-it/">
-		
-			Oh-my-zsh → Bash-it</a>
-	</h2>
-    <div class="entry-content">
-    <div class="meta">
-      <div class="date">Published on: 
 
 
 
@@ -124,16 +99,14 @@
   
 
 
-<time datetime="2012-06-18T17:42:00+09:00" pubdate data-updated="true">Jun 18<span>th</span>, 2012</time></div>
-      <div class="tags">Tags: 
+<time datetime="2012-06-18T17:42:00+09:00" pubdate data-updated="true">Jun 18<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
 
 
-	<a class='category' href='/blog/categories/bash/'>bash</a>, <a class='category' href='/blog/categories/zsh/'>zsh</a>
-
-
-</div>
-    </div>
-		<p> 한동안 zsh 을 사용하면서 oh-my-zsh 로 화려한 셸환경을 이용하고 있었는데요, 언제부턴가 grep warning 이 뜨기도 하고, bash 위주의 작업환경에 맞춘 기사들이 소개되기에 이르러 결국 zsh 을 버리고 다시 bash 로 돌아오게 되었습니다.</p>
+  <div class="entry-content"><p> 한동안 zsh 을 사용하면서 oh-my-zsh 로 화려한 셸환경을 이용하고 있었는데요, 언제부턴가 grep warning 이 뜨기도 하고, bash 위주의 작업환경에 맞춘 기사들이 소개되기에 이르러 결국 zsh 을 버리고 다시 bash 로 돌아오게 되었습니다.</p>
 
 <ul>
 <li><a href="https://github.com/robbyrussell/oh-my-zsh">robbyrussell/oh-my-zsh•GitHub</a></li>
@@ -148,27 +121,23 @@
 
 
 <p> 솔직히 oh-my-zsh 에 비해서는 그렇게 만족스럽지는 못합니다. :&ndash;(</p>
-
-		
-		
-	</div>
-
-<div class="meta">
-	
 </div>
-</article>
+  
+  
 
 
-    <article class="post">
-	<h2 class="title">
-		
-		<a href="/2012/06/17/dbix-class-and-replication/">
-		
-			DBIx::Class + Replication</a>
-	</h2>
-    <div class="entry-content">
-    <div class="meta">
-      <div class="date">Published on: 
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2012/06/17/dbix-class-and-replication/">DBIx::Class + Replication</a></h1>
+    
+    
+      <p class="meta">
+        
 
 
 
@@ -180,16 +149,14 @@
   
 
 
-<time datetime="2012-06-17T19:05:00+09:00" pubdate data-updated="true">Jun 17<span>th</span>, 2012</time></div>
-      <div class="tags">Tags: 
+<time datetime="2012-06-17T19:05:00+09:00" pubdate data-updated="true">Jun 17<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
 
 
-	<a class='category' href='/blog/categories/dbix-class/'>dbix-class</a>, <a class='category' href='/blog/categories/perl/'>perl</a>
-
-
-</div>
-    </div>
-		<p> 일반적으로 회사에서 개발하는 규모에서는 Replication 을 크게 고려하지 않았었는데, 이번에 수주받은 프로젝트에서 DBIx::Class 사용시에 Replication 에 대해서 고려해야 할 부분이 있었습니다.</p>
+  <div class="entry-content"><p> 일반적으로 회사에서 개발하는 규모에서는 Replication 을 크게 고려하지 않았었는데, 이번에 수주받은 프로젝트에서 DBIx::Class 사용시에 Replication 에 대해서 고려해야 할 부분이 있었습니다.</p>
 
 <p> 이전 회사에서 MySQL Replication 을 설정할 때 slave 서버들의 앞단에 keepalived 를 놓아서 로드 밸런서 역할로 사용했던 적이 있습니다. 말그대로 부하분산의 목적도 있고, 많은 slave 서버들의 커넥션정보를 일일이 웹 어플리케이션에서 설정할 필요도 없었죠. 하지만 IDC 에 로드밸런서 서버 한대를 더 우겨넣어야 했었죠.</p>
 
@@ -272,27 +239,23 @@ No Replicants validate, falling back to master reads.
 </code></pre>
 
 <p> 이렇게 몇줄만의 설정으로 간단하게 어플리케이션단에서 Replication 설정을 수행할 수 있습니다&hellip;만, 여러가지 운용이슈가 발생할 테고 그에 맞춰서 적당하게 답을 내야할 경우가 생기겠죠. 네, 뭐 그건 그때 가서&hellip;</p>
-
-		
-		
-	</div>
-
-<div class="meta">
-	
 </div>
-</article>
+  
+  
 
 
-    <article class="post">
-	<h2 class="title">
-		
-		<a href="/2012/06/14/beginning-perl/">
-		
-			Beginning Perl</a>
-	</h2>
-    <div class="entry-content">
-    <div class="meta">
-      <div class="date">Published on: 
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2012/06/14/beginning-perl/">Beginning Perl</a></h1>
+    
+    
+      <p class="meta">
+        
 
 
 
@@ -304,16 +267,14 @@ No Replicants validate, falling back to master reads.
   
 
 
-<time datetime="2012-06-14T22:42:00+09:00" pubdate data-updated="true">Jun 14<span>th</span>, 2012</time></div>
-      <div class="tags">Tags: 
+<time datetime="2012-06-14T22:42:00+09:00" pubdate data-updated="true">Jun 14<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
 
 
-	<a class='category' href='/blog/categories/book/'>book</a>, <a class='category' href='/blog/categories/perl/'>perl</a>
-
-
-</div>
-    </div>
-		<ul>
+  <div class="entry-content"><ul>
 <li><a href="http://blogs.perl.org/users/ovid/2012/06/read-my-book-online-for-free.html">Read my book online for free | Ovid [blogs.perl.org]</a></li>
 </ul>
 
@@ -360,46 +321,97 @@ No Replicants validate, falling back to master reads.
 <p>내용을 보면 각 단락마다 오른쪽에보면 &ldquo;Add Comment&rdquo; 라고 나와있군요. 확실한 교정지원시스템인 것 같습니다.</p>
 
 <p>이렇게 공개된 HTML 은 언제 닫힐 지 알 수 없는 상황입니다. 아마 충분한 피드백을 받았다고 생각되면 없어지겠지요.</p>
-
-		
-		
-	</div>
-
-<div class="meta">
-	
 </div>
-</article>
+  
+  
 
-<nav id="pagenavi">
+
+    </article>
+  
+  <div class="pagination">
     
-        <a href="/blog/page/11/" class="prev">Prev</a>
+      <a class="prev" href="/blog/page/13/">&larr; Older</a>
     
+    <a href="/blog/archives">Blog Archives</a>
     
-        <a href="/blog/page/13/" class="next">Next</a>
+    <a class="next" href="/blog/page/11/">Newer &rarr;</a>
     
-    <div class="center"><a href="/blog/archives">Blog Archives</a></div>
-</nav>
+  </div>
+</div>
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2013/07/17/solr-vs-elasticsearch-part-6-user-and-dev-communities-compared/">[번역] Solr vs. ElasticSearch: Part 6 – User &amp; Dev Communities Compared</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/07/17/solr-vs-elasticsearch-part-5-management-api-capabilities/">[번역] Solr vs ElasticSearch: Part 5 – Management API Capabilities</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/07/17/solr-vs-elasticsearch-part-4-faceting/">[번역] Solr vs ElasticSearch Part 4 - Faceting</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/07/16/solr-vs-elasticsearch-part-3-searching/">[번역] Solr vs. ElasticSearch - Part 3 : Searching</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/07/16/solr-vs-elasticsearch-part-2-indexing-and-language-handling/">[번역] Solr vs. ElasticSearch: Part 2 - Indexing and Language Handling</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating&#8230;</li>
+  </ul>
+  
+  <a href="https://github.com/jeen">@jeen</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'jeen',
+            count: 0,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
 
     </div>
-    <footer id="footer">
-    <div style="display:inline">
-    Copyright &copy; 2013
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Jeen Lee -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
 
-    Jeen Lee
-. Powered by <a href="http://octopress.org">Octopress</a> | 
-    Theme <a href="http://github.com/panks/fabric">fabric</a> by <a href="http://panks.me">Pankaj Kumar</a>
-</div>
-
-
-    </footer>
-    <script src="/javascripts/fabric.js"></script>
-<script src="/javascripts/jquery.fancybox.pack.js"></script>
-<script type="text/javascript">
-(function($){
-	$('.fancybox').fancybox();
-})(jQuery);
-</script> <!-- Delete or comment this line to disable Fancybox -->
-
+</footer>
+  
 
 <script type="text/javascript">
       var disqus_shortname = 'jeen';
@@ -416,16 +428,32 @@ No Replicants validate, falling back to master reads.
 
 
 
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id; js.async = true;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
 
 
-<!-- end toload --> 
-</div>
-</div>
-<script src="/javascripts/jquery.ui.totop.js" type="text/javascript"></script>
-<script type="text/javascript">
-/*<![CDATA[*/
-;(function($){$().UItoTop({easingType:'easeOutCirc'});})(jQuery); 
-/*]]>*/
-</script><!-- remove it to remove the scroll to top button -->
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
 </body>
 </html>

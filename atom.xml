@@ -4,7 +4,7 @@
   <title><![CDATA[Jeen - Yet anothere techlog]]></title>
   <link href="http://jeen.github.io/atom.xml" rel="self"/>
   <link href="http://jeen.github.io/"/>
-  <updated>2013-07-17T20:02:04+09:00</updated>
+  <updated>2013-07-17T20:03:44+09:00</updated>
   <id>http://jeen.github.io/</id>
   <author>
     <name><![CDATA[Jeen Lee]]></name>
@@ -1487,7 +1487,7 @@ Stemming: <a href="http://www.elasticsearch.org/guide/reference/index-modules/an
 <li>jeen__ : 그게 XS 의존이라서 C컴파일 환경이 없는 곳에서는 대개 실패</li>
 <li>jeen__ : 그래서 CGI 에서 FCGI 의존을 없애려고</li>
 <li>jeen__ : 지금 CGI 가 FCGI 의 경우까지 고려한 코드가 들어가 있어서
-jaker has joined (~<a href="&#x6d;&#97;&#105;&#108;&#x74;&#111;&#58;&#106;&#x61;&#107;&#101;&#114;&#x40;&#51;&#x36;&#46;&#51;&#x39;&#46;&#53;&#48;&#46;&#x33;&#55;">&#106;&#x61;&#107;&#101;&#114;&#x40;&#51;&#x36;&#x2e;&#51;&#57;&#46;&#x35;&#48;&#46;&#51;&#55;</a>)</li>
+jaker has joined (~<a href="&#109;&#x61;&#105;&#108;&#116;&#111;&#58;&#106;&#x61;&#x6b;&#101;&#x72;&#x40;&#x33;&#x36;&#x2e;&#51;&#x39;&#46;&#53;&#48;&#46;&#51;&#55;">&#106;&#x61;&#107;&#101;&#x72;&#x40;&#x33;&#x36;&#46;&#x33;&#x39;&#46;&#53;&#x30;&#x2e;&#x33;&#55;</a>)</li>
 <li>jeen__ : tokuhirom 은 5.18.1 까지 기다릴 거라고</li>
 <li>jeen__ : 아직 상용서버에 넣어 돌리기는 괜히 걱정된다나&hellip;</li>
 <li>jeen__ : 특별히 써보고 싶다라는 기능도 없고 해서</li>
