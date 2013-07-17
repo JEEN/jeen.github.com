@@ -1,95 +1,120 @@
 
-<!DOCTYPE html>
-<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
-<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
-<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<!DOCTYPE HTML>
+<html>
 <head>
-  <meta charset="utf-8">
-  <title>Jeen - Yet anothere techlog</title>
-  <meta name="author" content="Jeen Lee">
+	<meta charset="utf-8">
+	<title>Jeen - Yet anothere techlog</title>
+    <meta name="author" content="Jeen Lee">
+    
+	<meta name="description" content="Published on: Dec 27th, 2011 Tags: c9s, middleware, oauth, perl, psgi Before Using Plack::Middleware::OAuth 사실은 Plack::Middleware::OAuth 를 사용하기 이전에는 &hellip;">
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  
-  <meta name="description" content="Before Using Plack::Middleware::OAuth 사실은 Plack::Middleware::OAuth 를 사용하기 이전에는 OAuth 관련 callback 처리등을 직접 파라메터를 확인해가면서 해당 액션을 처리했었습니다. 그게 P::M::OAuth &hellip;">
-  
+	<link href="/atom.xml" rel="alternate" title="Jeen - Yet anothere techlog" type="application/atom+xml">
+	<link rel="canonical" href="">
+	<link href="/favicon.ico" rel="shortcut icon">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
 
-  <!-- http://t.co/dKP3o1e -->
-  <meta name="HandheldFriendly" content="True">
-  <meta name="MobileOptimized" content="320">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href='http://fonts.googleapis.com/css?family=Slackey' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Amethysta' rel='stylesheet' type='text/css'>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 
-  
-  <link rel="canonical" href="http://jeen.github.io/blog/page/19">
-  <link href="/favicon.png" rel="icon">
-  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-  <link href="/atom.xml" rel="alternate" title="Jeen - Yet anothere techlog" type="application/atom+xml">
-  <script src="/javascripts/modernizr-2.0.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
-  <script src="/javascripts/octopress.js" type="text/javascript"></script>
-  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
-<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="/javascripts/jquery-tapir.js"></script>
 
-  
-  <script type="text/javascript">
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-27958809-1']);
-    _gaq.push(['_trackPageview']);
+    <!-- remove or comment it to disable ajaxification -->   
+    <script src="/javascripts/ajaxify.js"></script>
+   
+    
+    
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-27958809-1']);
+		_gaq.push(['_trackPageview']);
 
-    (function() {
-      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    })();
-  </script>
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
 
 
 </head>
 
-<body   >
-  <header role="banner"><hgroup>
-  <h1><a href="/">Jeen - Yet anothere techlog</a></h1>
+
+<body>
+    <div id="wrapper">
+    <header id="header" class="inner"><!-- for more effects see _animate.scss -->
+<h1 class="animated bounceInDown">
+    <div id="headerbg">
+        Jeen Lee
+    </div>
+</h1>
+<br>
+
+<ul id="social-links" style="text-align:center">
   
-    <h2>STFUAWSC</h2>
+  <!-- GitHub -->
+  <li>
+  <a href="https://github.com/jeen" class="github" title="Github"></a>
+  </li>
   
-</hgroup>
+  
+  
+  
+  <!-- Twitter -->
+  <li>
+  <a href="http://www.twitter.com/JEEN_LEE" class="twitter" title="Twitter"></a>
+  </li>
+  
+  
+  
+  
+  
+</ul>
+
+
+<!-- use full url including 'index.html' for navigation bar if you are using ajax -->
+<ul id="nav">
+	<li id="ajax"><a href="/index.html">Home</a></li>
+	<li id="ajax"><a href="/blog/archives/index.html">Archives</a></li>
+    <li><a href="/atom.xml">RSS</a></li>
+    
+    <li>
+    <div id="dark">
+        <form method="get" action="/search.html" id="search">
+            <input name="query" type="text" placeholder="Search..." x-webkit-speech />
+        </form>
+    </div>
+    </li>
+        
+</ul>
+
+
+
 
 </header>
-  <nav role="navigation"><ul class="subscription" data-subscription="rss">
-  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
-  
-</ul>
-  
-<form action="http://google.com/search" method="get">
-  <fieldset role="search">
-    <input type="hidden" name="q" value="site:jeen.github.io" />
-    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
-  </fieldset>
-</form>
-  
-<ul class="main-navigation">
-  <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
-</ul>
 
-</nav>
-  <div id="main">
-    <div id="content">
-      <div class="blog-index">
-  
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2011/12/27/using-plack-middleware-oauth/">Using Plack::Middleware::OAuth</a></h1>
-    
-    
-      <p class="meta">
+<div id="toload">
+<!-- begin toload --> 
+    <div id="content" class="inner">
         
 
 
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/2011/12/27/using-plack-middleware-oauth/">
+		
+			Using Plack::Middleware::OAuth</a>
+	</h2>
+    <div class="entry-content">
+    <div class="meta">
+      <div class="date">Published on: 
+
+
 
 
 
@@ -99,14 +124,16 @@
   
 
 
-<time datetime="2011-12-27T13:24:00+09:00" pubdate data-updated="true">Dec 27<span>th</span>, 2011</time>
-        
-      </p>
-    
-  </header>
+<time datetime="2011-12-27T13:24:00+09:00" pubdate data-updated="true">Dec 27<span>th</span>, 2011</time></div>
+      <div class="tags">Tags: 
 
 
-  <div class="entry-content"><h3>Before Using Plack::Middleware::OAuth</h3>
+	<a class='category' href='/blog/categories/c9s/'>c9s</a>, <a class='category' href='/blog/categories/middleware/'>middleware</a>, <a class='category' href='/blog/categories/oauth/'>oauth</a>, <a class='category' href='/blog/categories/perl/'>perl</a>, <a class='category' href='/blog/categories/psgi/'>psgi</a>
+
+
+</div>
+    </div>
+		<h3>Before Using Plack::Middleware::OAuth</h3>
 
 <p>사실은 <a href="http://search.cpan.org/perldoc?Plack::Middleware::OAuth">Plack::Middleware::OAuth</a> 를 사용하기 이전에는 OAuth 관련 callback 처리등을 직접 파라메터를 확인해가면서 해당 액션을 처리했었습니다. 그게 P::M::OAuth 를 사용해서 각 OAuth Provider 들을 좀 더 유연하게 다룰 수 있게 되지 않았나 합니다.</p>
 
@@ -240,23 +267,27 @@ mount '/' =&gt; $app;
 <h3>Conclusion</h3>
 
 <p>이로써 간략하게나마 Plack::Middleware::OAuth 를 이용해서 OAuth 인증을 Plack Middleware 단에서 구현할 수 있게 되었습니다. 조금 설명이 빈약해서 차후에 좀 더 구현단으로 들어가서 좀 더 깊게 파고들어가 볼까 합니다.</p>
+
+		
+		
+	</div>
+
+<div class="meta">
+	
 </div>
-  
-  
+</article>
 
 
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2011/12/26/dbix-class-using-gis-extensions/">DBIx::Class - Using GIS Extensions</a></h1>
-    
-    
-      <p class="meta">
-        
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/2011/12/26/dbix-class-using-gis-extensions/">
+		
+			DBIx::Class - Using GIS Extensions</a>
+	</h2>
+    <div class="entry-content">
+    <div class="meta">
+      <div class="date">Published on: 
 
 
 
@@ -268,14 +299,16 @@ mount '/' =&gt; $app;
   
 
 
-<time datetime="2011-12-26T15:56:00+09:00" pubdate data-updated="true">Dec 26<span>th</span>, 2011</time>
-        
-      </p>
-    
-  </header>
+<time datetime="2011-12-26T15:56:00+09:00" pubdate data-updated="true">Dec 26<span>th</span>, 2011</time></div>
+      <div class="tags">Tags: 
 
 
-  <div class="entry-content"><h3>DBIx::Class 에서의 GIS!?</h3>
+	<a class='category' href='/blog/categories/dbic/'>dbic</a>, <a class='category' href='/blog/categories/gis/'>gis</a>, <a class='category' href='/blog/categories/mysql/'>mysql</a>, <a class='category' href='/blog/categories/perl/'>perl</a>
+
+
+</div>
+    </div>
+		<h3>DBIx::Class 에서의 GIS!?</h3>
 
 <p>ORM 을 사용함에 있어서 단순한 SELECT 문은 그렇게 큰 고민없이 사용할 수 있습니다. 하지만 GIS Extension 을 사용한 쿼리들을 ORM 에서 사용한다면 일단 고민이 들어가기 마련입니다.</p>
 
@@ -393,23 +426,27 @@ my $r = $self-&gt;resultset('VenueComplex')-&gt;search({}, {
 
 <p>ORM 을 사용할 때에는 수많은 장점에도 불구하고 아직까지 논의되고 있는 수많은 단점들을 명확하게 인지해야 합니다. 상황에 맞게 쓰는 것이 당연히 중요하겠죠.
 위에서 제가 제시한 코드들이 바른 길이라고는 장담할 수 없겠습니다만, 다양한 요구사항을 수렴할 수 있다면 그걸로 괜찮다고 그냥 생각하고 있습니다.</p>
+
+		
+		
+	</div>
+
+<div class="meta">
+	
 </div>
-  
-  
+</article>
 
 
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2011/12/26/dbix-class-using-gis-extensions/">Dbix Class Using Gis Extensions</a></h1>
-    
-    
-      <p class="meta">
-        
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/2011/12/26/dbix-class-using-gis-extensions/">
+		
+			Dbix Class Using Gis Extensions</a>
+	</h2>
+    <div class="entry-content">
+    <div class="meta">
+      <div class="date">Published on: 
 
 
 
@@ -421,14 +458,12 @@ my $r = $self-&gt;resultset('VenueComplex')-&gt;search({}, {
   
 
 
-<time datetime="2011-12-26T00:00:00+09:00" pubdate data-updated="true">Dec 26<span>th</span>, 2011</time>
-        
-      </p>
-    
-  </header>
+<time datetime="2011-12-26T00:00:00+09:00" pubdate data-updated="true">Dec 26<span>th</span>, 2011</time></div>
+      <div class="tags">Tags: 
 
-
-  <div class="entry-content"><?xml version="1.0" encoding="utf-8"?>
+</div>
+    </div>
+		<?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE html PUBLIC
     "-//W3C//DTD XHTML 1.1 plus MathML 2.0 plus SVG 1.1//EN"
     "http://www.w3.org/2002/04/xhtml-math-svg/xhtml-math-svg.dtd">
@@ -531,95 +566,44 @@ my $r = $self-&gt;resultset(&#39;VenueComplex&#39;)-&gt;search({}, {
 
 <p>ORM 을 사용할 때에는 수많은 장점에도 불구하고 아직까지 논의되고 있는 수많은 단점들을 명확하게 인지해야 합니다. 상황에 맞게 쓰는 것이 당연히 중요하겠죠. 위에서 제가 제시한 코드들이 바른 길이라고는 장담할 수 없겠습니다만, 다양한 요구사항을 수렴할 수 있다면 그걸로 괜찮다고 그냥 생각하고 있습니다.</p>
 </body></html>
+
+		
+		
+	</div>
+
+<div class="meta">
+	
 </div>
-  
-  
+</article>
 
-
-    </article>
-  
-  <div class="pagination">
+<nav id="pagenavi">
     
-    <a href="/blog/archives">Blog Archives</a>
+        <a href="/blog/page/18/" class="prev">Prev</a>
     
-    <a class="next" href="/blog/page/18/">Newer &rarr;</a>
     
-  </div>
-</div>
-<aside class="sidebar">
-  
-    <section>
-  <h1>Recent Posts</h1>
-  <ul id="recent_posts">
-    
-      <li class="post">
-        <a href="/2013/07/17/solr-vs-elasticsearch-part-6-user-and-dev-communities-compared/">[번역] Solr vs. ElasticSearch: Part 6 – User &amp; Dev Communities Compared</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2013/07/17/solr-vs-elasticsearch-part-5-management-api-capabilities/">[번역] Solr vs ElasticSearch: Part 5 – Management API Capabilities</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2013/07/17/solr-vs-elasticsearch-part-4-faceting/">[번역] Solr vs ElasticSearch Part 4 - Faceting</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2013/07/16/solr-vs-elasticsearch-part-3-searching/">[번역] Solr vs. ElasticSearch - Part 3 : Searching</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2013/07/16/solr-vs-elasticsearch-part-2-indexing-and-language-handling/">[번역] Solr vs. ElasticSearch: Part 2 - Indexing and Language Handling</a>
-      </li>
-    
-  </ul>
-</section>
-
-<section>
-  <h1>GitHub Repos</h1>
-  <ul id="gh_repos">
-    <li class="loading">Status updating&#8230;</li>
-  </ul>
-  
-  <a href="https://github.com/jeen">@jeen</a> on GitHub
-  
-  <script type="text/javascript">
-    $(document).ready(function(){
-        if (!window.jXHR){
-            var jxhr = document.createElement('script');
-            jxhr.type = 'text/javascript';
-            jxhr.src = '/javascripts/libs/jXHR.js';
-            var s = document.getElementsByTagName('script')[0];
-            s.parentNode.insertBefore(jxhr, s);
-        }
-
-        github.showRepos({
-            user: 'jeen',
-            count: 0,
-            skip_forks: true,
-            target: '#gh_repos'
-        });
-    });
-  </script>
-  <script src="/javascripts/github.js" type="text/javascript"> </script>
-</section>
-
-
-
-
-
-  
-</aside>
+    <div class="center"><a href="/blog/archives">Blog Archives</a></div>
+</nav>
 
     </div>
-  </div>
-  <footer role="contentinfo"><p>
-  Copyright &copy; 2013 - Jeen Lee -
-  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
-</p>
+    <footer id="footer">
+    <div style="display:inline">
+    Copyright &copy; 2013
 
-</footer>
-  
+    Jeen Lee
+. Powered by <a href="http://octopress.org">Octopress</a> | 
+    Theme <a href="http://github.com/panks/fabric">fabric</a> by <a href="http://panks.me">Pankaj Kumar</a>
+</div>
+
+
+    </footer>
+    <script src="/javascripts/fabric.js"></script>
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+	$('.fancybox').fancybox();
+})(jQuery);
+</script> <!-- Delete or comment this line to disable Fancybox -->
+
 
 <script type="text/javascript">
       var disqus_shortname = 'jeen';
@@ -636,32 +620,16 @@ my $r = $self-&gt;resultset(&#39;VenueComplex&#39;)-&gt;search({}, {
 
 
 
-<div id="fb-root"></div>
-<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) {return;}
-  js = d.createElement(s); js.id = id; js.async = true;
-  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
 
 
-
-
-
-  <script type="text/javascript">
-    (function(){
-      var twitterWidgets = document.createElement('script');
-      twitterWidgets.type = 'text/javascript';
-      twitterWidgets.async = true;
-      twitterWidgets.src = '//platform.twitter.com/widgets.js';
-      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
-    })();
-  </script>
-
-
-
-
-
+<!-- end toload --> 
+</div>
+</div>
+<script src="/javascripts/jquery.ui.totop.js" type="text/javascript"></script>
+<script type="text/javascript">
+/*<![CDATA[*/
+;(function($){$().UItoTop({easingType:'easeOutCirc'});})(jQuery); 
+/*]]>*/
+</script><!-- remove it to remove the scroll to top button -->
 </body>
 </html>

@@ -1,105 +1,120 @@
 
-<!DOCTYPE html>
-<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
-<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
-<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<!DOCTYPE HTML>
+<html>
 <head>
-  <meta charset="utf-8">
-  <title>Jeen - Yet anothere techlog</title>
-  <meta name="author" content="Jeen Lee">
+	<meta charset="utf-8">
+	<title>Jeen - Yet anothere techlog</title>
+    <meta name="author" content="Jeen Lee">
+    
+	<meta name="description" content="Published on: May 20th, 2013 Tags: db, perl, sqlite 이런저런 임시데이터를 주고받고 하는 용도로 SQLite 파일을 덩어리채로 주고받는 경우가 있습니다. 매일매일 그런 일이 일어나니 파일에는 날짜 정도는 집어넣어줘야 되구요. &hellip;">
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  
-  <meta name="description" content="이런저런 임시데이터를 주고받고 하는 용도로 SQLite 파일을 덩어리채로 주고받는 경우가 있습니다. 매일매일 그런 일이 일어나니 파일에는 날짜 정도는 집어넣어줘야 되구요. 1
-2
-3
-4
-5
-6
-7
-8
-9
-DROP TABLE IF EXISTS item;
-CREATE &hellip;">
-  
+	<link href="/atom.xml" rel="alternate" title="Jeen - Yet anothere techlog" type="application/atom+xml">
+	<link rel="canonical" href="">
+	<link href="/favicon.ico" rel="shortcut icon">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
 
-  <!-- http://t.co/dKP3o1e -->
-  <meta name="HandheldFriendly" content="True">
-  <meta name="MobileOptimized" content="320">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href='http://fonts.googleapis.com/css?family=Slackey' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Amethysta' rel='stylesheet' type='text/css'>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 
-  
-  <link rel="canonical" href="http://jeen.github.io/blog/page/5">
-  <link href="/favicon.png" rel="icon">
-  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-  <link href="/atom.xml" rel="alternate" title="Jeen - Yet anothere techlog" type="application/atom+xml">
-  <script src="/javascripts/modernizr-2.0.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
-  <script src="/javascripts/octopress.js" type="text/javascript"></script>
-  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
-<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="/javascripts/jquery-tapir.js"></script>
 
-  
-  <script type="text/javascript">
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-27958809-1']);
-    _gaq.push(['_trackPageview']);
+    <!-- remove or comment it to disable ajaxification -->   
+    <script src="/javascripts/ajaxify.js"></script>
+   
+    
+    
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-27958809-1']);
+		_gaq.push(['_trackPageview']);
 
-    (function() {
-      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    })();
-  </script>
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
 
 
 </head>
 
-<body   >
-  <header role="banner"><hgroup>
-  <h1><a href="/">Jeen - Yet anothere techlog</a></h1>
+
+<body>
+    <div id="wrapper">
+    <header id="header" class="inner"><!-- for more effects see _animate.scss -->
+<h1 class="animated bounceInDown">
+    <div id="headerbg">
+        Jeen Lee
+    </div>
+</h1>
+<br>
+
+<ul id="social-links" style="text-align:center">
   
-    <h2>STFUAWSC</h2>
+  <!-- GitHub -->
+  <li>
+  <a href="https://github.com/jeen" class="github" title="Github"></a>
+  </li>
   
-</hgroup>
+  
+  
+  
+  <!-- Twitter -->
+  <li>
+  <a href="http://www.twitter.com/JEEN_LEE" class="twitter" title="Twitter"></a>
+  </li>
+  
+  
+  
+  
+  
+</ul>
+
+
+<!-- use full url including 'index.html' for navigation bar if you are using ajax -->
+<ul id="nav">
+	<li id="ajax"><a href="/index.html">Home</a></li>
+	<li id="ajax"><a href="/blog/archives/index.html">Archives</a></li>
+    <li><a href="/atom.xml">RSS</a></li>
+    
+    <li>
+    <div id="dark">
+        <form method="get" action="/search.html" id="search">
+            <input name="query" type="text" placeholder="Search..." x-webkit-speech />
+        </form>
+    </div>
+    </li>
+        
+</ul>
+
+
+
 
 </header>
-  <nav role="navigation"><ul class="subscription" data-subscription="rss">
-  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
-  
-</ul>
-  
-<form action="http://google.com/search" method="get">
-  <fieldset role="search">
-    <input type="hidden" name="q" value="site:jeen.github.io" />
-    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
-  </fieldset>
-</form>
-  
-<ul class="main-navigation">
-  <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
-</ul>
 
-</nav>
-  <div id="main">
-    <div id="content">
-      <div class="blog-index">
-  
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2013/05/20/using-dbi-callbacks-generate-sqlite-file-automatically/">Using DBI Callbacks - Generate a SQLite File Automatically</a></h1>
-    
-    
-      <p class="meta">
+<div id="toload">
+<!-- begin toload --> 
+    <div id="content" class="inner">
         
 
 
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/2013/05/20/using-dbi-callbacks-generate-sqlite-file-automatically/">
+		
+			Using DBI Callbacks - Generate a SQLite File Automatically</a>
+	</h2>
+    <div class="entry-content">
+    <div class="meta">
+      <div class="date">Published on: 
+
+
 
 
 
@@ -109,14 +124,16 @@ CREATE &hellip;">
   
 
 
-<time datetime="2013-05-20T11:59:04+09:00" pubdate data-updated="true">May 20<span>th</span>, 2013</time>
-        
-      </p>
-    
-  </header>
+<time datetime="2013-05-20T11:59:04+09:00" pubdate data-updated="true">May 20<span>th</span>, 2013</time></div>
+      <div class="tags">Tags: 
 
 
-  <div class="entry-content"><p> 이런저런 임시데이터를 주고받고 하는 용도로 SQLite 파일을 덩어리채로 주고받는 경우가 있습니다.</p>
+	<a class='category' href='/blog/categories/db/'>db</a>, <a class='category' href='/blog/categories/perl/'>perl</a>, <a class='category' href='/blog/categories/sqlite/'>sqlite</a>
+
+
+</div>
+    </div>
+		<p> 이런저런 임시데이터를 주고받고 하는 용도로 SQLite 파일을 덩어리채로 주고받는 경우가 있습니다.</p>
 
 <p>매일매일 그런 일이 일어나니 파일에는 날짜 정도는 집어넣어줘야 되구요.</p>
 
@@ -218,23 +235,27 @@ CREATE &hellip;">
 <li><a href="http://search.cpan.org/~timb/DBI-1.611/DBI.pm#Callbacks_(hash_ref)">http://search.cpan.org/~timb/DBI-1.611/DBI.pm#Callbacks_(hash_ref)</a></li>
 </ul>
 
+
+		
+		
+	</div>
+
+<div class="meta">
+	
 </div>
-  
-  
+</article>
 
 
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2013/05/04/lancaster-consensus/">Lancaster Consensus</a></h1>
-    
-    
-      <p class="meta">
-        
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/2013/05/04/lancaster-consensus/">
+		
+			Lancaster Consensus</a>
+	</h2>
+    <div class="entry-content">
+    <div class="meta">
+      <div class="date">Published on: 
 
 
 
@@ -246,14 +267,16 @@ CREATE &hellip;">
   
 
 
-<time datetime="2013-05-04T17:16:34+09:00" pubdate data-updated="true">May 4<span>th</span>, 2013</time>
-        
-      </p>
-    
-  </header>
+<time datetime="2013-05-04T17:16:34+09:00" pubdate data-updated="true">May 4<span>th</span>, 2013</time></div>
+      <div class="tags">Tags: 
 
 
-  <div class="entry-content"><h1>Lancaster Consensus</h1>
+	<a class='category' href='/blog/categories/article/'>article</a>, <a class='category' href='/blog/categories/perl/'>perl</a>, <a class='category' href='/blog/categories/translate/'>translate</a>
+
+
+</div>
+    </div>
+		<h1>Lancaster Consensus</h1>
 
 <p>2008년 오슬로에서 개최된 첫번째 Perl QA Hackathon 에서는, Perl 의 품질관리와 툴체인에 관한 모듈의 저자, 메인테이너, 뜻 있는 사람들이 모여서, 몇가지 표준과 관행에 대해서 합의를 이뤘습니다. 이 때 발표된 합의는 Oslo Consensus 라는 이름으로 알려지게 되었습니다.</p>
 
@@ -447,23 +470,27 @@ CREATE &hellip;">
 <li>역자 : 이종진(JEEN_LEE)</li>
 </ul>
 
+
+		
+		
+	</div>
+
+<div class="meta">
+	
 </div>
-  
-  
+</article>
 
 
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2013/05/02/better-than-ack/">Better Than Ack</a></h1>
-    
-    
-      <p class="meta">
-        
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/2013/05/02/better-than-ack/">
+		
+			Better Than Ack</a>
+	</h2>
+    <div class="entry-content">
+    <div class="meta">
+      <div class="date">Published on: 
 
 
 
@@ -475,14 +502,12 @@ CREATE &hellip;">
   
 
 
-<time datetime="2013-05-02T23:14:14+09:00" pubdate data-updated="true">May 2<span>nd</span>, 2013</time>
-        
-      </p>
-    
-  </header>
+<time datetime="2013-05-02T23:14:14+09:00" pubdate data-updated="true">May 2<span>nd</span>, 2013</time></div>
+      <div class="tags">Tags: 
 
-
-  <div class="entry-content"><p>계속 쓰다보니 자연스레 손에 익은 이유도 있고, 여러 서버들에 <code>ack</code> 이 기본적으로 깔려 있지 않은 이유도 있습니다. 그것이 제게 있어서 <code>ack</code> 을 사용하지 않는 핑계가 되겠네요.</p>
+</div>
+    </div>
+		<p>계속 쓰다보니 자연스레 손에 익은 이유도 있고, 여러 서버들에 <code>ack</code> 이 기본적으로 깔려 있지 않은 이유도 있습니다. 그것이 제게 있어서 <code>ack</code> 을 사용하지 않는 핑계가 되겠네요.</p>
 
 <p>그런 현실중에 <code>ag</code> 를 소개하는 것은 조심스러울 따름입니다.</p>
 
@@ -561,97 +586,46 @@ CREATE &hellip;">
 <p>보시다시피 <code>ag</code> 의 위력은 대단합니다. 기본적으로 사용법도 <code>ack</code> 과 크게 다를 것도 없습니다.</p>
 
 <p>문제는 기본적으로 사용할 수 있냐는 것이겠는데… 요즘 세상에는 <code>Rex</code> 같은 걸로 그냥 뭐 한번만 수고해주면 뭐 사용할 서버들에 일괄적으로 설치하는 것은 일도 아니지 않냐라고 그냥 스스로 수긍해버리면 될 것 같습니다.</p>
+
+		
+		
+	</div>
+
+<div class="meta">
+	
 </div>
-  
-  
+</article>
 
-
-    </article>
-  
-  <div class="pagination">
+<nav id="pagenavi">
     
-      <a class="prev" href="/blog/page/6/">&larr; Older</a>
+        <a href="/blog/page/4/" class="prev">Prev</a>
     
-    <a href="/blog/archives">Blog Archives</a>
     
-    <a class="next" href="/blog/page/4/">Newer &rarr;</a>
+        <a href="/blog/page/6/" class="next">Next</a>
     
-  </div>
-</div>
-<aside class="sidebar">
-  
-    <section>
-  <h1>Recent Posts</h1>
-  <ul id="recent_posts">
-    
-      <li class="post">
-        <a href="/2013/07/17/solr-vs-elasticsearch-part-6-user-and-dev-communities-compared/">[번역] Solr vs. ElasticSearch: Part 6 – User &amp; Dev Communities Compared</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2013/07/17/solr-vs-elasticsearch-part-5-management-api-capabilities/">[번역] Solr vs ElasticSearch: Part 5 – Management API Capabilities</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2013/07/17/solr-vs-elasticsearch-part-4-faceting/">[번역] Solr vs ElasticSearch Part 4 - Faceting</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2013/07/16/solr-vs-elasticsearch-part-3-searching/">[번역] Solr vs. ElasticSearch - Part 3 : Searching</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2013/07/16/solr-vs-elasticsearch-part-2-indexing-and-language-handling/">[번역] Solr vs. ElasticSearch: Part 2 - Indexing and Language Handling</a>
-      </li>
-    
-  </ul>
-</section>
-
-<section>
-  <h1>GitHub Repos</h1>
-  <ul id="gh_repos">
-    <li class="loading">Status updating&#8230;</li>
-  </ul>
-  
-  <a href="https://github.com/jeen">@jeen</a> on GitHub
-  
-  <script type="text/javascript">
-    $(document).ready(function(){
-        if (!window.jXHR){
-            var jxhr = document.createElement('script');
-            jxhr.type = 'text/javascript';
-            jxhr.src = '/javascripts/libs/jXHR.js';
-            var s = document.getElementsByTagName('script')[0];
-            s.parentNode.insertBefore(jxhr, s);
-        }
-
-        github.showRepos({
-            user: 'jeen',
-            count: 0,
-            skip_forks: true,
-            target: '#gh_repos'
-        });
-    });
-  </script>
-  <script src="/javascripts/github.js" type="text/javascript"> </script>
-</section>
-
-
-
-
-
-  
-</aside>
+    <div class="center"><a href="/blog/archives">Blog Archives</a></div>
+</nav>
 
     </div>
-  </div>
-  <footer role="contentinfo"><p>
-  Copyright &copy; 2013 - Jeen Lee -
-  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
-</p>
+    <footer id="footer">
+    <div style="display:inline">
+    Copyright &copy; 2013
 
-</footer>
-  
+    Jeen Lee
+. Powered by <a href="http://octopress.org">Octopress</a> | 
+    Theme <a href="http://github.com/panks/fabric">fabric</a> by <a href="http://panks.me">Pankaj Kumar</a>
+</div>
+
+
+    </footer>
+    <script src="/javascripts/fabric.js"></script>
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+	$('.fancybox').fancybox();
+})(jQuery);
+</script> <!-- Delete or comment this line to disable Fancybox -->
+
 
 <script type="text/javascript">
       var disqus_shortname = 'jeen';
@@ -668,32 +642,16 @@ CREATE &hellip;">
 
 
 
-<div id="fb-root"></div>
-<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) {return;}
-  js = d.createElement(s); js.id = id; js.async = true;
-  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
 
 
-
-
-
-  <script type="text/javascript">
-    (function(){
-      var twitterWidgets = document.createElement('script');
-      twitterWidgets.type = 'text/javascript';
-      twitterWidgets.async = true;
-      twitterWidgets.src = '//platform.twitter.com/widgets.js';
-      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
-    })();
-  </script>
-
-
-
-
-
+<!-- end toload --> 
+</div>
+</div>
+<script src="/javascripts/jquery.ui.totop.js" type="text/javascript"></script>
+<script type="text/javascript">
+/*<![CDATA[*/
+;(function($){$().UItoTop({easingType:'easeOutCirc'});})(jQuery); 
+/*]]>*/
+</script><!-- remove it to remove the scroll to top button -->
 </body>
 </html>
