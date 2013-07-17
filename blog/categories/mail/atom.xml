@@ -4,7 +4,7 @@
   <title><![CDATA[Category: mail | Jeen - Yet anothere techlog]]></title>
   <link href="http://jeen.github.io/blog/categories/mail/atom.xml" rel="self"/>
   <link href="http://jeen.github.io/"/>
-  <updated>2013-07-17T19:50:53+09:00</updated>
+  <updated>2013-07-17T19:56:54+09:00</updated>
   <id>http://jeen.github.io/</id>
   <author>
     <name><![CDATA[Jeen Lee]]></name>
@@ -277,7 +277,7 @@ to =&gt; \[ 'your2@email.com', 'anotheremail@gmail.com' \],
 
 <p>my $mailer4 = MyApp::Mail->new(
   %data_set,
-  to => &lsquo;mail-1@mail.com, mail-2@mail.com, <a href="&#x6d;&#x61;&#105;&#108;&#116;&#x6f;&#x3a;&#109;&#97;&#105;&#x6c;&#45;&#x33;&#x40;&#109;&#97;&#105;&#x6c;&#x2e;&#99;&#x6f;&#109;">&#x6d;&#97;&#x69;&#108;&#x2d;&#51;&#x40;&#x6d;&#x61;&#105;&#108;&#x2e;&#x63;&#x6f;&#109;</a>&rsquo;,
+  to => &lsquo;mail-1@mail.com, mail-2@mail.com, <a href="&#109;&#97;&#105;&#108;&#x74;&#x6f;&#x3a;&#109;&#x61;&#x69;&#x6c;&#45;&#51;&#x40;&#x6d;&#97;&#105;&#x6c;&#x2e;&#x63;&#x6f;&#109;">&#109;&#97;&#x69;&#108;&#45;&#x33;&#64;&#109;&#97;&#105;&#108;&#x2e;&#99;&#x6f;&#109;</a>&rsquo;,
 );</p>
 
 <p>$mailer4->send;</p>
