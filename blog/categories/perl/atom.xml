@@ -4,7 +4,7 @@
   <title><![CDATA[Category: perl | Jeen - Yet anothere techlog]]></title>
   <link href="http://jeen.github.io/blog/categories/perl/atom.xml" rel="self"/>
   <link href="http://jeen.github.io/"/>
-  <updated>2013-07-17T19:56:54+09:00</updated>
+  <updated>2013-07-17T19:58:40+09:00</updated>
   <id>http://jeen.github.io/</id>
   <author>
     <name><![CDATA[Jeen Lee]]></name>
@@ -257,7 +257,7 @@
 <li>jeen__ : 그게 XS 의존이라서 C컴파일 환경이 없는 곳에서는 대개 실패</li>
 <li>jeen__ : 그래서 CGI 에서 FCGI 의존을 없애려고</li>
 <li>jeen__ : 지금 CGI 가 FCGI 의 경우까지 고려한 코드가 들어가 있어서
-jaker has joined (~<a href="&#x6d;&#x61;&#x69;&#x6c;&#116;&#x6f;&#x3a;&#x6a;&#x61;&#107;&#101;&#x72;&#x40;&#x33;&#54;&#x2e;&#x33;&#x39;&#x2e;&#x35;&#48;&#x2e;&#x33;&#x37;">&#106;&#x61;&#x6b;&#101;&#x72;&#64;&#x33;&#54;&#x2e;&#51;&#x39;&#x2e;&#x35;&#48;&#46;&#x33;&#x37;</a>)</li>
+jaker has joined (~<a href="&#109;&#x61;&#x69;&#x6c;&#x74;&#x6f;&#58;&#x6a;&#x61;&#x6b;&#x65;&#x72;&#x40;&#x33;&#54;&#46;&#51;&#57;&#x2e;&#53;&#48;&#46;&#51;&#x37;">&#106;&#x61;&#107;&#101;&#x72;&#x40;&#51;&#x36;&#46;&#51;&#57;&#x2e;&#x35;&#x30;&#46;&#51;&#55;</a>)</li>
 <li>jeen__ : tokuhirom 은 5.18.1 까지 기다릴 거라고</li>
 <li>jeen__ : 아직 상용서버에 넣어 돌리기는 괜히 걱정된다나&hellip;</li>
 <li>jeen__ : 특별히 써보고 싶다라는 기능도 없고 해서</li>
