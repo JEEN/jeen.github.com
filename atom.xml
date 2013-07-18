@@ -4,7 +4,7 @@
   <title><![CDATA[Jeen - Yet anothere techlog]]></title>
   <link href="http://jeen.github.io/atom.xml" rel="self"/>
   <link href="http://jeen.github.io/"/>
-  <updated>2013-07-17T20:04:57+09:00</updated>
+  <updated>2013-07-18T22:39:38+09:00</updated>
   <id>http://jeen.github.io/</id>
   <author>
     <name><![CDATA[Jeen Lee]]></name>
@@ -12,6 +12,66 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Patching Channel length of Unreal IRC]]></title>
+    <link href="http://jeen.github.io/2013/07/18/patching-channel-length-of-unreal-irc/"/>
+    <updated>2013-07-18T22:16:00+09:00</updated>
+    <id>http://jeen.github.io/2013/07/18/patching-channel-length-of-unreal-irc</id>
+    <content type="html"><![CDATA[<p> 이런저런 실시간 메시지 전송이 필요한 부분이 있었는데, 이를 위해서 고전적이지만 IRC 를
+채용해서 진행하고 있었습니다. 그래서 IRC 서버는 언리얼IRC 로, 여기에서 이런저런 시행착오를
+거듭하고 있었습니다.</p>
+
+<p> 그러면서 채널ID 로 UUID 를 사용하기로 하고, ID 를 키로해서 KVS 에 이런저런 내용들을 넣고 빼면서
+잘 진행하고 있었습니다.</p>
+
+<p> 그러던 중에 KVS 에 들어가는 키값의 크기가 뭔가 몇자리 모자란 것 같은 느낌이 들었는데 알고보니
+채널이름 길이가 짤렸던 것이었습니다. 그럼 UUID 를 쓰면 안되는 건가&hellip; 생각하다가 RFC 문서를 찾아봤습니다.</p>
+
+<ul>
+<li><a href="http://tools.ietf.org/html/rfc2811#section-2.1">http://tools.ietf.org/html/rfc2811#section-2.1</a></li>
+</ul>
+
+
+<blockquote><p>Channels names are strings (beginning with a &lsquo;&amp;&rsquo;, &lsquo;#&rsquo;, &lsquo;+&rsquo; or &lsquo;!&rsquo;
+   character) of length up to fifty (50) characters.  Channel names are
+   case insensitive.</p></blockquote>
+
+<p> 그러니까 50자라는 건데&hellip; 이쪽 IRC 서버에서는 채널이름이 계속 32자정도에서 짤리는 것이죠.
+프리노드서버에 들어가서 확인해본 결과 사용하기로 한 채널이름으로 문제없이 전체가 나타나더랍니다.</p>
+
+<p>결론은 언리얼 IRC 서버에서 뭔가 RFC 2811 대로는 아니간듯해서&hellip; 다시 컴파일해서 깔아야되나 라는 결론에 도달했습니다.</p>
+
+<p>보나마나 헤더파일에 뭐 그런 것이 있겠거니 해서 찾아보니 딱 나왔습니다. <code>include/struct.h</code> 파일의 <code>CHANNELLEN</code> 상수를 아래처럼 고쳐서 다시 컴파일해서 정상적으로 동작하는 것을 확인했습니다.</p>
+
+<div><script src='https://gist.github.com/6029012.js'></script>
+<noscript><pre><code></code></pre></noscript></div>
+
+
+<p>아무튼 처음에 Perl 배우면서 손대기 시작했던 IRC 를 이전에 해보지 않았던 방향으로 만지작거리고 있으니&hellip; 세상에 IRC 가 새롭게 보이다니요&hellip;</p>
+
+<blockquote class="twitter-tweet"><p>내가 Yak Shaving 을 하고 있을 줄이야&#8230;.</p>&mdash; JEEN (@JEEN_LEE) <a href="https://twitter.com/JEEN_LEE/statuses/357821798965972992">July 18, 2013</a></blockquote>
+
+
+<script async src="http://jeen.github.io//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+
+
+
+<blockquote class="twitter-tweet"><p>IRC 채널이름의 최대상한은 32자인가&#8230; ㅜㅜ</p>&mdash; JEEN (@JEEN_LEE) <a href="https://twitter.com/JEEN_LEE/statuses/357835381623889920">July 18, 2013</a></blockquote>
+
+
+
+
+<blockquote class="twitter-tweet"><p>아닌데&#8230; Channels names are strings (beginning with a &#39;&amp;&#39;, &#39;#&#39;, &#39;+&#39; or &#39;!&#39;&#10; character) of length up to fifty (50) characters</p>&mdash; JEEN (@JEEN_LEE) <a href="https://twitter.com/JEEN_LEE/statuses/357840178439663618">July 18, 2013</a></blockquote>
+
+
+
+
+<blockquote class="twitter-tweet"><p>찾았다. 범인은 네 놈 이렸다. <a href="https://twitter.com/search?q=%23CHANNELLEN&amp;src=hash">#CHANNELLEN</a> <a href="https://twitter.com/search?q=%23unrealirc&amp;src=hash">#unrealirc</a> <a href="https://t.co/uGGSmW4moR">https://t.co/uGGSmW4moR</a></p>&mdash; JEEN (@JEEN_LEE) <a href="https://twitter.com/JEEN_LEE/statuses/357843714166620161">July 18, 2013</a></blockquote>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[[번역] Solr vs. ElasticSearch: Part 6 – User &amp; Dev Communities Compared]]></title>
@@ -1487,7 +1547,7 @@ Stemming: <a href="http://www.elasticsearch.org/guide/reference/index-modules/an
 <li>jeen__ : 그게 XS 의존이라서 C컴파일 환경이 없는 곳에서는 대개 실패</li>
 <li>jeen__ : 그래서 CGI 에서 FCGI 의존을 없애려고</li>
 <li>jeen__ : 지금 CGI 가 FCGI 의 경우까지 고려한 코드가 들어가 있어서
-jaker has joined (~<a href="&#109;&#x61;&#x69;&#108;&#116;&#x6f;&#x3a;&#106;&#x61;&#107;&#101;&#114;&#x40;&#51;&#x36;&#x2e;&#51;&#x39;&#x2e;&#x35;&#48;&#46;&#51;&#x37;">&#x6a;&#x61;&#107;&#x65;&#x72;&#64;&#x33;&#x36;&#x2e;&#51;&#x39;&#x2e;&#x35;&#48;&#x2e;&#51;&#x37;</a>)</li>
+jaker has joined (~<a href="&#x6d;&#x61;&#x69;&#108;&#116;&#111;&#x3a;&#x6a;&#x61;&#107;&#x65;&#x72;&#64;&#x33;&#54;&#x2e;&#51;&#x39;&#46;&#53;&#x30;&#x2e;&#x33;&#x37;">&#106;&#x61;&#107;&#x65;&#x72;&#x40;&#x33;&#54;&#46;&#51;&#x39;&#x2e;&#53;&#48;&#46;&#51;&#55;</a>)</li>
 <li>jeen__ : tokuhirom 은 5.18.1 까지 기다릴 거라고</li>
 <li>jeen__ : 아직 상용서버에 넣어 돌리기는 괜히 걱정된다나&hellip;</li>
 <li>jeen__ : 특별히 써보고 싶다라는 기능도 없고 해서</li>
@@ -2414,180 +2474,6 @@ skyloader has left IRC (Remote host closed the connection)</li>
 
 
 <p> 을 통해서 기존의 cpanm 을 덮어써서 설치할 수 있습니다.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[A usecase of App::Fatpacker - Nagios Plugin]]></title>
-    <link href="http://jeen.github.io/2012/12/26/a-usecase-of-app-fatpacker/"/>
-    <updated>2012-12-26T23:48:00+09:00</updated>
-    <id>http://jeen.github.io/2012/12/26/a-usecase-of-app-fatpacker</id>
-    <content type="html"><![CDATA[<p> 최근 업무때문에 Nagios Plugin 을 만져야 하는 일들이 빈번하게 있었고, 앞으로도 발생할 소지가 상당히 높습니다. 이런 Nagios Plugin 을 만들거나 기존에 만들어 진 것들을 간편하게 다른 복수의 서버에 배포하는 일도 필요합니다.</p>
-
-<p> Nagios Plugin 이야 굳이 언어를 가리지 않는다고 치더라도, 언어의 특정 라이브러리에 의존을 가지는 경우가 많습니다. MongoDB 용 Nagios Plugin 에는 Python 의 pymongo 라이브러리를 설치해야하는 경우가 있지요.</p>
-
-<p> 일례로 Redis 용 Nagios Plugin 을 설치할 시에는 Redis CPAN 모듈을 필요로 합니다. 그런데 Redis 서버가 여러대이고, 이 여러대의 서버에 매번 Redis 모듈을 깔고, Redis 모니터링용 Nagios Plugin 도 설치를 해야하는 경우가 있습니다. 그냥 뭐 시간을 좀 허비해서라도 그렇게 번거로운 일을 하면 일이야 끝나겠지만, 현인(@aer0 님)의 조언을 빌어서 <a href="http://metacpan.org/module/App::FatPacker">App::FatPacker</a> 를 사용해서 단일 스크립트에 우겨넣는 방향으로 돌리도록 합니다.</p>
-
-<p> 우선은 <code>App::FatPacker</code> 를 설치하면 <code>fatpack</code> 이라는 커맨드를 사용할 수 있습니다.</p>
-
-<p> <a href="http://exchange.nagios.org">Nagios Exchange</a> 에서 찾아낸 <a href="http://exchange.nagios.org/directory/Plugins/Databases/check_redis-2Epl/details">check_redis</a> 중에 <code>check_redis.pl</code> 파일이 위에 말한대로 Redis 모듈에 의존이 걸린 상황입니다.</p>
-
-<p> 그럼 우선 <code>fatpack</code> 커맨드로 다음과 같이 입력을 합니다.</p>
-
-<p><del> bash
-$ fatpack trace check_redis.pl
-check_redis.pl syntax OK
-</del></p>
-
-<p> 결과 <code>syntax OK</code> 가 뜨고 해당 디렉토리에 <code>fatpacker.trace</code> 라는 파일이 생성됩니다.</p>
-
-<p><del> bash
-$ cat fatpacker.trace
-IO/Handle.pm
-List/Util.pm
-Getopt/Long.pm
-SelectSaver.pm
-IO/Socket.pm
-Fcntl.pm
-Text/ParseWords.pm
-Symbol.pm
-Scalar/Util.pm
-IO/Socket/INET.pm
-Errno.pm
-fields.pm
-warnings/register.pm
-Encode/Alias.pm
-Time/HiRes.pm
-Encode/Config.pm
-Encode/Encoding.pm
-Redis.pm
-Encode.pm
-base.pm
-Config.pm
-IO.pm
-IO/Socket/UNIX.pm
-Carp.pm
-bytes.pm
-Exporter/Heavy.pm
-vars.pm
-constant.pm
-Socket.pm
-Try/Tiny.pm
-IO/Select.pm
-overload.pm
-lib.pm
-DynaLoader.pm
-Data/Dumper.pm
-</del></p>
-
-<p>내용을 보면 말 그대로 해당 모듈이 가지고 있는 의존 모듈이 좌르르륵 표시됩니다. 물론 걔중에는 Core 모듈도 있기도 합니다.</p>
-
-<p> 일단 <code>App::FatPacker</code> SYNOPSIS 대로 진행을 해보면…</p>
-
-<p><del> bash
-$ fatpack packlists-for <code>cat fatpacker.trace</code>  > packlists
-</del></p>
-
-<p>위 결과로 생긴 <code>packlists</code> 는 파일은 다음과 같은 내용을 가집니다.</p>
-
-<p><del> bash
-$ cat packlists
-/home/jeen/perl5/perlbrew/perls/perl-5.14.0/lib/5.14.0/x86_64-linux-thread-multi/auto/Time/HiRes/.packlist
-/home/jeen/perl5/perlbrew/perls/perl-5.14.0/lib/site_perl/5.14.0/x86_64-linux-thread-multi/auto/Redis/.packlist
-/home/jeen/perl5/perlbrew/perls/perl-5.14.0/lib/site_perl/5.14.0/x86_64-linux-thread-multi/auto/Try/Tiny/.packlist
-</del></p>
-
-<p>각 의존 모듈 위치에 맞춰서 <code>.packlist</code> 파일이 생성되고, 그 내용은…</p>
-
-<p><del> bash
-$ cat /home/jeen/perl5/perlbrew/perls/perl-5.14.0/lib/site_perl/5.14.0/x86_64-linux-thread-multi/auto/Redis/.packlist
-/home/jeen/perl5/perlbrew/perls/perl-5.14.0/lib/site_perl/5.14.0/Redis.pm
-/home/jeen/perl5/perlbrew/perls/perl-5.14.0/lib/site_perl/5.14.0/Redis/Hash.pm
-/home/jeen/perl5/perlbrew/perls/perl-5.14.0/lib/site_perl/5.14.0/Redis/List.pm
-/home/jeen/perl5/perlbrew/perls/perl-5.14.0/man/man3/Redis.3
-/home/jeen/perl5/perlbrew/perls/perl-5.14.0/man/man3/Redis::Hash.3
-/home/jeen/perl5/perlbrew/perls/perl-5.14.0/man/man3/Redis::List.3
-</del></p>
-
-<p>위와 같습니다.</p>
-
-<p>그리고 다음 커맨드를 입력해봅니다.</p>
-
-<p><del> bash
-$ fatpack tree <code>cat packlists</code>
-</del></p>
-
-<p>그 결과 현재 디렉토리에서 <code>fatlib</code> 이라는 디렉토리가 생성되고 그 안에 관련 의존모듈들이 복사됩니다.</p>
-
-<p><del> bash
-$ tree
-…
-├── fatlib
-│   ├── Redis
-│   │   ├── Hash.pm
-│   │   └── List.pm
-│   ├── Redis.pm
-│   ├── Try
-│   │   └── Tiny.pm
-│   └── x86_64-linux-thread-multi
-│       ├── Time
-│       │   └── HiRes.pm
-│       └── auto
-│           └── Time
-│               └── HiRes
-│                   ├── HiRes.bs
-│                   └── HiRes.so
-…
-</del></p>
-
-<p>그럼 다음 커맨드를 입력해보면…</p>
-
-<p><del> bash
-$ (fatpack file; cat check_redis.pl ) > check_redis.packed.pl
-Can&rsquo;t stat /home/jeen/fp/tt/lib: 그런 파일이나 디렉터리가 없습니다
- at /home/jeen/perl5/perlbrew/perls/perl-5.14.0/lib/site_perl/5.14.0/App/FatPacker.pm line 200
-BEGIN failed&mdash;compilation aborted at /home/jeen/perl5/perlbrew/perls/perl-5.14.0/bin/fatpack line 3.
-</del></p>
-
-<p>제대로 동작하지 않습니다. 에러가 발생하네요. 정답은 에러메시지에 있습니다. <code>App::FatPacker</code> 자체는 Perl Library 규칙에 정형화된 디렉토리 구조를 가정하고 있습니다. 즉 <code>lib</code> 디렉토리가 존재하지 않기 때문에 발생하는 것이죠. 뭐 물론 다운받은 <code>check_redis.pl</code> 파일 하나만 있는 데 <code>lib</code> 디렉토리를 가지고 뭐 더 넣고 자시고 할 것도 아닌데…, 그래도 뭐 일단 사태해결을 위해서 아무것도 없어도 그냥 <code>lib</code> 디렉토리 하나는 만들어 줍니다.</p>
-
-<p>그리고 다시 실행해보면 <code>check_redis.packed.pl</code> 이라는 파일이 생성됩니다.</p>
-
-<p>~~~ perl
- # This chunk of stuff was generated by App::FatPacker. To find the original
- # file&rsquo;s code, look for the end of this BEGIN block or the string &lsquo;FATPACK&rsquo;
-BEGIN {
-my %fatpacked;</p>
-
-<p>$fatpacked{&ldquo;Redis.pm&rdquo;} = &lt;&lt;&lsquo;REDIS&rsquo;;
-  package Redis;</p>
-
-<p>  # ABSTRACT: Perl binding for Redis database
-  our $VERSION = &lsquo;1.955&rsquo;; # VERSION
-  our $AUTHORITY = &lsquo;cpan:MELO&rsquo;; # AUTHORITY
-  …
-~~~</p>
-
-<p> 일단 Nagios Plugin 은 기본 실행권한을 가지는 파일로 해두는 것이 여러모로 편합니다. 한가지 주의할 점은 일단 위처럼 생성된 파일에서 shebang line 이 존재하지 않기때문에 shebang line 을 추가해주면 됩니다. :&ndash;)</p>
-
-<p><del> perl
- #!/usr/bin/env perl
-</del></p>
-
-<p> 위의 내용을 <code>check_redis.packed.pl</code> 파일의 첫째줄에 추가해줍니다.</p>
-
-<p> 그리고 완성된 파일들을 Redis 서버에 붙여서 <code>check_nrpe</code> 등으로 동작을 확인하고 설정에 추가하는 것으로 관련된 작업은 끝이 났습니다.</p>
-
-<p> 파일 중앙배포와 관련해서도 다양한 이슈가 있지만 이에 관련해서는 추후 <code>Rex</code> 를 다루면서 이야기를 계속할 까 합니다.</p>
-
-<p> 다 쓰고 나서 검색을 해보니 예전에 @aer0 님께서 작성하신 블로그 기사가 있군요.</p>
-
-<ul>
-<li><a href="http://aero2blog.blogspot.kr/2010/09/perl-appfatpacker.html">Perl 스크립트에 필요한 모듈 같이 넣기 App::FatPacker</a></li>
-</ul>
-
-
-<p>덩달아서 같이 참고하시면 좋을 것 같습니다.</p>
 ]]></content>
   </entry>
   

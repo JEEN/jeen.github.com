@@ -9,8 +9,7 @@
   <meta name="author" content="Jeen Lee">
 
   
-  <meta name="description" content="지난번 1회 티타임때의 문제가 제대로 참가비 징수를 못해서 비용정산에 어려움이 있었는데,
-이 문제를 해결하기 위해서 간단하게 참가자 리스트를 A4 용지로 뽑아내서 체크하도록 하는 건 어떨까 하는 생각이 있었습니다. #perl-kr 티타임 Vol.2 아무튼 그런 &hellip;">
+  <meta name="description" content="취미라고 할 것이 있다면 잠, 책, 드라마감상 정도라고 할까요. 걔중에 몇몇 미드들을 아직까지 꾸준하게 시간을 내면서 보고 있습니다. 걔중에는 가끔보면 자막이 없어서 일일이 자막찾으러 들어가고 받고 해야하는 지루한 클릭이 필요한 경우도 있습니다. 윈도라면 곰플레이어 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -78,6 +77,137 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2012/08/09/app-zamakist-dot-dot-dot/">App::Zamakist&#8230;</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-08-09T13:33:00+09:00" pubdate data-updated="true">Aug 9<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>취미라고 할 것이 있다면 잠, 책, 드라마감상 정도라고 할까요.</p>
+
+<p>걔중에 몇몇 미드들을 아직까지 꾸준하게 시간을 내면서 보고 있습니다.</p>
+
+<p>걔중에는 가끔보면 자막이 없어서 일일이 자막찾으러 들어가고 받고 해야하는 지루한 클릭이 필요한 경우도 있습니다.</p>
+
+<p>윈도라면 <code>곰플레이어</code> 로 이런 부분의 수고가 조금 줄어들기는 하지만 Mac 에서 <code>Movist</code> 를 통해서 주로 영상을 감상하려면 심히 신경쓰이지 않을리 없습니다.</p>
+
+<blockquote class="twitter-tweet" lang="ko"><p>멘탈리스트 4기를 볼려고 했는데, 자막이 없네&#8230; 그래서 자막을 세팅하는 스크립트를 깨작거려서 만들어봤다. 좀 더 브러쉬 업해야 되지만서도&#8230; <a href="https://t.co/jeXVNTnI" title="https://gist.github.com/3150026">gist.github.com/3150026</a></p>&mdash; JEEN (@JEEN_LEE) <a href="https://twitter.com/JEEN_LEE/status/226260944597180417" data-datetime="2012-07-20T10:23:07+00:00">7월 20, 2012</a></blockquote>
+
+
+<p>그러니까 7월 20일경에 일단 이런 문제를 겪어서 잠깐 깨작거려서 만들어보기는 했지만 대놓고 앞에 내놓기도 그렇고해서 그냥 보류했었는데요. 뭐 물론 여전히 앞에 내놓는 게 좀 그렇기는 합니다.</p>
+
+<ul>
+<li><a href="https://github.com/JEEN/p5-App-Zamakist">https://github.com/JEEN/p5-App-Zamakist</a></li>
+</ul>
+
+
+<p>일련의 과정을 말하자면…</p>
+
+<p><del> bash
+$ ls -la<br/>
+total 0
+drwxr-xr-x  12 jeen  staff   408  8  9 13:45 .
+drwxr-xr-x+ 52 jeen  staff  1768  8  9 13:45 ..
+-rw-r&mdash;r&mdash;   1 jeen  staff     0  8  9 13:45 NCIS.Los.Angeles.S03E01.720p.HDTV.X264-DIMENSION.avi
+-rw-r&mdash;r&mdash;   1 jeen  staff     0  8  9 13:45 NCIS.Los.Angeles.S03E02.720p.HDTV.X264-DIMENSION.avi
+-rw-r&mdash;r&mdash;   1 jeen  staff     0  8  9 13:45 NCIS.Los.Angeles.S03E03.720p.HDTV.X264-DIMENSION.avi
+-rw-r&mdash;r&mdash;   1 jeen  staff     0  8  9 13:45 NCIS.Los.Angeles.S03E04.720p.HDTV.X264-DIMENSION.avi
+-rw-r&mdash;r&mdash;   1 jeen  staff     0  8  9 13:45 NCIS.Los.Angeles.S03E05.720p.HDTV.X264-DIMENSION.avi
+-rw-r&mdash;r&mdash;   1 jeen  staff     0  8  9 13:45 NCIS.Los.Angeles.S03E06.720p.HDTV.X264-DIMENSION.avi
+-rw-r&mdash;r&mdash;   1 jeen  staff     0  8  9 13:45 NCIS.Los.Angeles.S03E07.720p.HDTV.X264-DIMENSION.avi
+-rw-r&mdash;r&mdash;   1 jeen  staff     0  8  9 13:45 NCIS.Los.Angeles.S03E08.720p.HDTV.X264-DIMENSION.avi
+-rw-r&mdash;r&mdash;   1 jeen  staff     0  8  9 11:44 NCIS.Los.Angeles.S03E09.720p.HDTV.X264-DIMENSION.avi
+-rw-r&mdash;r&mdash;   1 jeen  staff     0  8  9 09:29 NCIS.Los.Angeles.S03E10.720p.HDTV.X264-DIMENSION.avi
+</del></p>
+
+<p>이렇게 뭐 디렉토리에 영상자료들이 널부러져 있습니다. 하지만 자막은 없죠.</p>
+
+<p><del> bash
+$ zamakist &mdash;dir .
+Found 10 subscriptions
+┌────┬──────────────────────────────────────────────────────┐
+│ id │ filename                                             │
+├────┼──────────────────────────────────────────────────────┤
+│  1 │ NCIS.Los.Angeles.S03E01.720p.HDTV.X264-DIMENSION.avi │
+│  2 │ NCIS.Los.Angeles.S03E02.720p.HDTV.X264-DIMENSION.avi │
+│  3 │ NCIS.Los.Angeles.S03E03.720p.HDTV.X264-DIMENSION.avi │
+│  4 │ NCIS.Los.Angeles.S03E04.720p.HDTV.X264-DIMENSION.avi │
+│  5 │ NCIS.Los.Angeles.S03E05.720p.HDTV.X264-DIMENSION.avi │
+│  6 │ NCIS.Los.Angeles.S03E06.720p.HDTV.X264-DIMENSION.avi │
+│  7 │ NCIS.Los.Angeles.S03E07.720p.HDTV.X264-DIMENSION.avi │
+│  8 │ NCIS.Los.Angeles.S03E08.720p.HDTV.X264-DIMENSION.avi │
+│  9 │ NCIS.Los.Angeles.S03E09.720p.HDTV.X264-DIMENSION.avi │
+│ 10 │ NCIS.Los.Angeles.S03E10.720p.HDTV.X264-DIMENSION.avi │
+└────┴──────────────────────────────────────────────────────┘
+Continue to download? [y/n] y
+Downloaded 10 subscriptions
+</del></p>
+
+<p>그래서 뭐 <code>App::Zamakist</code> 라는 모듈을 사용하면 뭐 이렇게 자막을 한꺼번에 다운받을 수 있다 뭐 이런 거죠.</p>
+
+<p><del> bash
+$ ls -la
+total 1592
+drwxr-xr-x  22 jeen  staff    748  8  9 13:46 .
+drwxr-xr-x+ 52 jeen  staff   1768  8  9 13:46 ..
+-rw-r&mdash;r&mdash;   1 jeen  staff      0  8  9 13:45 NCIS.Los.Angeles.S03E01.720p.HDTV.X264-DIMENSION.avi
+-rw-r&mdash;r&mdash;   1 jeen  staff  63779  8  9 13:46 NCIS.Los.Angeles.S03E01.720p.HDTV.X264-DIMENSION.smi
+-rw-r&mdash;r&mdash;   1 jeen  staff      0  8  9 13:45 NCIS.Los.Angeles.S03E02.720p.HDTV.X264-DIMENSION.avi
+-rw-r&mdash;r&mdash;   1 jeen  staff  75041  8  9 13:46 NCIS.Los.Angeles.S03E02.720p.HDTV.X264-DIMENSION.smi
+-rw-r&mdash;r&mdash;   1 jeen  staff      0  8  9 13:45 NCIS.Los.Angeles.S03E03.720p.HDTV.X264-DIMENSION.avi
+-rw-r&mdash;r&mdash;   1 jeen  staff  84915  8  9 13:46 NCIS.Los.Angeles.S03E03.720p.HDTV.X264-DIMENSION.smi
+-rw-r&mdash;r&mdash;   1 jeen  staff      0  8  9 13:45 NCIS.Los.Angeles.S03E04.720p.HDTV.X264-DIMENSION.avi
+-rw-r&mdash;r&mdash;   1 jeen  staff  78550  8  9 13:46 NCIS.Los.Angeles.S03E04.720p.HDTV.X264-DIMENSION.smi
+-rw-r&mdash;r&mdash;   1 jeen  staff      0  8  9 13:45 NCIS.Los.Angeles.S03E05.720p.HDTV.X264-DIMENSION.avi
+-rw-r&mdash;r&mdash;   1 jeen  staff  94809  8  9 13:46 NCIS.Los.Angeles.S03E05.720p.HDTV.X264-DIMENSION.smi
+-rw-r&mdash;r&mdash;   1 jeen  staff      0  8  9 13:45 NCIS.Los.Angeles.S03E06.720p.HDTV.X264-DIMENSION.avi
+-rw-r&mdash;r&mdash;   1 jeen  staff  98759  8  9 13:46 NCIS.Los.Angeles.S03E06.720p.HDTV.X264-DIMENSION.smi
+-rw-r&mdash;r&mdash;   1 jeen  staff      0  8  9 13:45 NCIS.Los.Angeles.S03E07.720p.HDTV.X264-DIMENSION.avi
+-rw-r&mdash;r&mdash;   1 jeen  staff  76016  8  9 13:46 NCIS.Los.Angeles.S03E07.720p.HDTV.X264-DIMENSION.smi
+-rw-r&mdash;r&mdash;   1 jeen  staff      0  8  9 13:45 NCIS.Los.Angeles.S03E08.720p.HDTV.X264-DIMENSION.avi
+-rw-r&mdash;r&mdash;   1 jeen  staff  94320  8  9 13:46 NCIS.Los.Angeles.S03E08.720p.HDTV.X264-DIMENSION.smi
+-rw-r&mdash;r&mdash;   1 jeen  staff      0  8  9 11:44 NCIS.Los.Angeles.S03E09.720p.HDTV.X264-DIMENSION.avi
+-rw-r&mdash;r&mdash;   1 jeen  staff  69537  8  9 13:46 NCIS.Los.Angeles.S03E09.720p.HDTV.X264-DIMENSION.smi
+-rw-r&mdash;r&mdash;   1 jeen  staff      0  8  9 09:29 NCIS.Los.Angeles.S03E10.720p.HDTV.X264-DIMENSION.avi
+-rw-r&mdash;r&mdash;   1 jeen  staff  55905  8  9 13:46 NCIS.Los.Angeles.S03E10.720p.HDTV.X264-DIMENSION.smi
+</del></p>
+
+<p>뭐 일단 CPAN 에 올릴 생각도 없는 토이모듈 겸 생활용품 모듈이라서…</p>
+
+<p>아 물론 자막검색은 GOM 자막을 애용하고 있습니다.</p>
+
+<p>검색방식은 뭐 파일이름에서 확장자만 떼서 검색날려서 뭐 여차저차해서 파일다운로드 하는 링크 빼서 일괄 다운로드 하는 것이죠.</p>
+
+<p>이제 시작하려는 미드가 있는데 자막이 없다면 이거 한번만 돌려주면 앞으로 자막찾는 수고없어지겠습니다. :&ndash;)</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -430,151 +560,6 @@ CREATE TABLE test1 (
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2012/07/18/export-github-issues/">Export Github Issues</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-07-18T15:44:00+09:00" pubdate data-updated="true">Jul 18<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>회사에서는 한달에 $20 인가 지불하면서 Github 을 쓰고 있습니다.</p>
-
-<p>$20 플랜에서는 한정적인 Private Repo 밖에 만들지 못합니다. 그래서 완료가 된 프로젝트에 대해서는
-Github Repo 를 닫고 사내 Git Repo 로 옮기는 방식으로 사용하고 있습니다.</p>
-
-<p>그럴거면 그냥 사내 Git Repo 를 사용할 것이지 왜 돈내가면서 Github 를 쓰느냐고 물으신다면,
-Github 에서 제공해주는 Issue 관리라든가, Wiki 라든가 여러모로 통합이 잘되어 있고 깔끔해서
-사용하기 편하다고 그냥 그렇게 말하렵니다.</p>
-
-<p>아무튼 그러면서, 프로젝트 뿐 아니라 회사내에 발생하는 다양한 이슈들은 Bugzilla 에 기록해놓습니다.</p>
-
-<p>다 끝나서 닫아야할 프로젝트들을 사내 Repo 로 옮기는 것은 좋지만, Issues 안에 적어둔 깨알같은 내용들과 코멘트들 등등을 고스란히 다 허공으로 날려버려야 된다는 것은 뼈아픈 일입니다.</p>
-
-<p>그래서 잠깐 시간을 내서 Issues 에 있는 내용(이슈타이틀,내용,코멘트, Git commit, 이슈 참조 등등)을 뽑아서 Bugzilla 에 담아놓기 좋게 코드를 써봤습니다.</p>
-
-<p>~~~ perl export-github-issues.pl
-use strict;
-use warnings;
-use Text::Xslate;
-use Data::Section::Simple;
-use Net::GitHub::V3;
-use Config::Pit;</p>
-
-<p>my $pit = pit_get(&lsquo;github.com&rsquo;, require => {</p>
-
-<pre><code>login =&gt; "Your login",
-pass  =&gt; "Your pass",
-</code></pre>
-
-<p>});</p>
-
-<p>my $github = Net::GitHub::V3->new(</p>
-
-<pre><code>login =&gt; $pit-&gt;{login},
-pass  =&gt; $pit-&gt;{pass},
-</code></pre>
-
-<p>);</p>
-
-<p>my ($user, $repo) = @ARGV;
-unless ($user &amp;&amp; $repo) {</p>
-
-<pre><code>print "Usage: perl p.pl silexkr Donnenwa\n";
-exit;
-</code></pre>
-
-<p>}</p>
-
-<p>my $tx  = Text::Xslate->new(</p>
-
-<pre><code>syntax =&gt; 'TTerse',
-module =&gt; \[ 'Text::Xslate::Bridge::TT2Like' \],
-path =&gt; \[
-    Data::Section::Simple-&gt;new()-&gt;get_data_section()
-\],
-</code></pre>
-
-<p>);</p>
-
-<p>my $issue = $github->issue;
-my @issues = $issue->repos_issues($user, $repo, { state => &lsquo;closed&rsquo; });
-while($issue->has_next_page) {</p>
-
-<pre><code>push @issues, $issue-&gt;next_page;
-</code></pre>
-
-<p>}</p>
-
-<p>for my $iss (@issues) {</p>
-
-<pre><code>my @comments = ();
-my @events   = ();
-eval { @comments = $issue-&gt;comments('silexkr', $repo, $iss-&gt;{number}) };
-eval { @events   = $issue-&gt;events('silexkr', $repo, $iss-&gt;{number}) };
-print $tx-&gt;render('text.tx', { %{ $iss }, comments =&gt; \@comments, events =&gt; \@events });
-</code></pre>
-
-<p>}</p>
-
-<p><strong>DATA</strong></p>
-
-<p>@@ text.tx</p>
-
-<p>[% number %].[% title %] [% FOREACH label IN labels %][% label.name %] [% END %]
-  &ndash; [% user.login %]
-  &ndash; [% created_at %] ~ [% closed_at %]
-[% IF body %]
- // [% body %]
-[% END %]
-[% FOREACH comment IN comments %]
-\= [% comment.user.login %] @ [% comment.updated_at %]
-&mdash; [% comment.body %]
-[% END %]
-[% FOREACH event IN events %][% NEXT UNLESS event.commit_id %]
-\= [% event.commit_id %][% END %]
-~~~</p>
-
-<p><a href="http://metacpan.org/module/Net::GitHub">Net::GitHub</a> 모듈에서 뭔가 코멘트를 뽑아내려는 데 없으면 계속 죽어버리는 문제 등등이 있어서 뭐 그냥 <code>eval {}</code> 로 묶어버렸구요.</p>
-
-<p><a href="http://metacpan.org/module/Text::Xslate">Text::Xslate</a> 에서 <code>path</code> 를</p>
-
-<p><del> perl
-Data::Section::Simple->new()&ndash;>get_data_section();
-</del></p>
-
-<p>으로 해서 쉽게 <code>-&gt;render()</code> 의 첫번째 인수를 템플릿이름으로 지정할 수 있더군요.</p>
-
-<p><code>Net::GitHub</code> 의 <code>-&gt;next_page</code> 가 최근 최근에 사용된 API 기준으로 동작을 하다보니, <code>while()</code> 안에서 <code>events</code>, <code>comments</code> 를 혼용해서 사용해버리면 의도한 대로 동작을 하지 않아서, <code>@issues</code> 안에 일단 전체 이슈를 뽑고서 시작을 했습니다.</p>
-
-<p>아무튼 뭐 얼기설기 그냥 놔두기도 그렇고 혹여나 해서 일단 올려봅니다.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/11/">&larr; Older</a>
@@ -592,6 +577,10 @@ Data::Section::Simple->new()&ndash;>get_data_section();
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2013/07/18/patching-channel-length-of-unreal-irc/">Patching Channel Length of Unreal IRC</a>
+      </li>
+    
+      <li class="post">
         <a href="/2013/07/17/solr-vs-elasticsearch-part-6-user-and-dev-communities-compared/">[번역] Solr vs. ElasticSearch: Part 6 – User &amp; Dev Communities Compared</a>
       </li>
     
@@ -605,10 +594,6 @@ Data::Section::Simple->new()&ndash;>get_data_section();
     
       <li class="post">
         <a href="/2013/07/16/solr-vs-elasticsearch-part-3-searching/">[번역] Solr vs. ElasticSearch - Part 3 : Searching</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2013/07/16/solr-vs-elasticsearch-part-2-indexing-and-language-handling/">[번역] Solr vs. ElasticSearch: Part 2 - Indexing and Language Handling</a>
       </li>
     
   </ul>

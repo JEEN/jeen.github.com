@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: patch | Jeen - Yet anothere techlog]]></title>
+  <link href="http://jeen.github.io/blog/categories/patch/atom.xml" rel="self"/>
+  <link href="http://jeen.github.io/"/>
+  <updated>2013-07-18T22:39:38+09:00</updated>
+  <id>http://jeen.github.io/</id>
+  <author>
+    <name><![CDATA[Jeen Lee]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Patching Channel length of Unreal IRC]]></title>
+    <link href="http://jeen.github.io/2013/07/18/patching-channel-length-of-unreal-irc/"/>
+    <updated>2013-07-18T22:16:00+09:00</updated>
+    <id>http://jeen.github.io/2013/07/18/patching-channel-length-of-unreal-irc</id>
+    <content type="html"><![CDATA[<p> 이런저런 실시간 메시지 전송이 필요한 부분이 있었는데, 이를 위해서 고전적이지만 IRC 를
+채용해서 진행하고 있었습니다. 그래서 IRC 서버는 언리얼IRC 로, 여기에서 이런저런 시행착오를
+거듭하고 있었습니다.</p>
+
+<p> 그러면서 채널ID 로 UUID 를 사용하기로 하고, ID 를 키로해서 KVS 에 이런저런 내용들을 넣고 빼면서
+잘 진행하고 있었습니다.</p>
+
+<p> 그러던 중에 KVS 에 들어가는 키값의 크기가 뭔가 몇자리 모자란 것 같은 느낌이 들었는데 알고보니
+채널이름 길이가 짤렸던 것이었습니다. 그럼 UUID 를 쓰면 안되는 건가&hellip; 생각하다가 RFC 문서를 찾아봤습니다.</p>
+
+<ul>
+<li><a href="http://tools.ietf.org/html/rfc2811#section-2.1">http://tools.ietf.org/html/rfc2811#section-2.1</a></li>
+</ul>
+
+
+<blockquote><p>Channels names are strings (beginning with a &lsquo;&amp;&rsquo;, &lsquo;#&rsquo;, &lsquo;+&rsquo; or &lsquo;!&rsquo;
+   character) of length up to fifty (50) characters.  Channel names are
+   case insensitive.</p></blockquote>
+
+<p> 그러니까 50자라는 건데&hellip; 이쪽 IRC 서버에서는 채널이름이 계속 32자정도에서 짤리는 것이죠.
+프리노드서버에 들어가서 확인해본 결과 사용하기로 한 채널이름으로 문제없이 전체가 나타나더랍니다.</p>
+
+<p>결론은 언리얼 IRC 서버에서 뭔가 RFC 2811 대로는 아니간듯해서&hellip; 다시 컴파일해서 깔아야되나 라는 결론에 도달했습니다.</p>
+
+<p>보나마나 헤더파일에 뭐 그런 것이 있겠거니 해서 찾아보니 딱 나왔습니다. <code>include/struct.h</code> 파일의 <code>CHANNELLEN</code> 상수를 아래처럼 고쳐서 다시 컴파일해서 정상적으로 동작하는 것을 확인했습니다.</p>
+
+<p><div><script src='https://gist.github.com/6029012.js'></script>
+<noscript><pre><code></code></pre></noscript></div>
+</p>
+
+<p>아무튼 처음에 Perl 배우면서 손대기 시작했던 IRC 를 이전에 해보지 않았던 방향으로 만지작거리고 있으니&hellip; 세상에 IRC 가 새롭게 보이다니요&hellip;</p>
+
+<blockquote class="twitter-tweet"><p>내가 Yak Shaving 을 하고 있을 줄이야....</p>&mdash; JEEN (@JEEN_LEE) <a href="https://twitter.com/JEEN_LEE/statuses/357821798965972992">July 18, 2013</a></blockquote>
+
+
+<script async src="http://jeen.github.io//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+
+
+
+<blockquote class="twitter-tweet"><p>IRC 채널이름의 최대상한은 32자인가... ㅜㅜ</p>&mdash; JEEN (@JEEN_LEE) <a href="https://twitter.com/JEEN_LEE/statuses/357835381623889920">July 18, 2013</a></blockquote>
+
+
+
+
+<blockquote class="twitter-tweet"><p>아닌데... Channels names are strings (beginning with a &#39;&amp;&#39;, &#39;#&#39;, &#39;+&#39; or &#39;!&#39;&#10; character) of length up to fifty (50) characters</p>&mdash; JEEN (@JEEN_LEE) <a href="https://twitter.com/JEEN_LEE/statuses/357840178439663618">July 18, 2013</a></blockquote>
+
+
+
+
+<blockquote class="twitter-tweet"><p>찾았다. 범인은 네 놈 이렸다. <a href="https://twitter.com/search?q=%23CHANNELLEN&amp;src=hash">#CHANNELLEN</a> <a href="https://twitter.com/search?q=%23unrealirc&amp;src=hash">#unrealirc</a> <a href="https://t.co/uGGSmW4moR">https://t.co/uGGSmW4moR</a></p>&mdash; JEEN (@JEEN_LEE) <a href="https://twitter.com/JEEN_LEE/statuses/357843714166620161">July 18, 2013</a></blockquote>
+
+]]></content>
+  </entry>
+  
+</feed>

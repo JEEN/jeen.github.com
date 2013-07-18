@@ -9,7 +9,8 @@
   <meta name="author" content="Jeen Lee">
 
   
-  <meta name="description" content="tl;dr: I hate Java and SOAP, use Perl 지난 주에 고객으로부터 요구를 받았는데, DB특정 항목에 대치되는 어떤 값을 가지고 모 API를 통해서 결과를 받아서 뿌려주는 간단한 것이었습니다. 그 API 제공회사에서 날라온 API 명세서는 뭘 &hellip;">
+  <meta name="description" content="회사에서는 한달에 $20 인가 지불하면서 Github 을 쓰고 있습니다. $20 플랜에서는 한정적인 Private Repo 밖에 만들지 못합니다. 그래서 완료가 된 프로젝트에 대해서는
+Github Repo 를 닫고 사내 Git Repo 로 옮기는 방식으로 사용하고 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -77,6 +78,151 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2012/07/18/export-github-issues/">Export Github Issues</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-07-18T15:44:00+09:00" pubdate data-updated="true">Jul 18<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>회사에서는 한달에 $20 인가 지불하면서 Github 을 쓰고 있습니다.</p>
+
+<p>$20 플랜에서는 한정적인 Private Repo 밖에 만들지 못합니다. 그래서 완료가 된 프로젝트에 대해서는
+Github Repo 를 닫고 사내 Git Repo 로 옮기는 방식으로 사용하고 있습니다.</p>
+
+<p>그럴거면 그냥 사내 Git Repo 를 사용할 것이지 왜 돈내가면서 Github 를 쓰느냐고 물으신다면,
+Github 에서 제공해주는 Issue 관리라든가, Wiki 라든가 여러모로 통합이 잘되어 있고 깔끔해서
+사용하기 편하다고 그냥 그렇게 말하렵니다.</p>
+
+<p>아무튼 그러면서, 프로젝트 뿐 아니라 회사내에 발생하는 다양한 이슈들은 Bugzilla 에 기록해놓습니다.</p>
+
+<p>다 끝나서 닫아야할 프로젝트들을 사내 Repo 로 옮기는 것은 좋지만, Issues 안에 적어둔 깨알같은 내용들과 코멘트들 등등을 고스란히 다 허공으로 날려버려야 된다는 것은 뼈아픈 일입니다.</p>
+
+<p>그래서 잠깐 시간을 내서 Issues 에 있는 내용(이슈타이틀,내용,코멘트, Git commit, 이슈 참조 등등)을 뽑아서 Bugzilla 에 담아놓기 좋게 코드를 써봤습니다.</p>
+
+<p>~~~ perl export-github-issues.pl
+use strict;
+use warnings;
+use Text::Xslate;
+use Data::Section::Simple;
+use Net::GitHub::V3;
+use Config::Pit;</p>
+
+<p>my $pit = pit_get(&lsquo;github.com&rsquo;, require => {</p>
+
+<pre><code>login =&gt; "Your login",
+pass  =&gt; "Your pass",
+</code></pre>
+
+<p>});</p>
+
+<p>my $github = Net::GitHub::V3->new(</p>
+
+<pre><code>login =&gt; $pit-&gt;{login},
+pass  =&gt; $pit-&gt;{pass},
+</code></pre>
+
+<p>);</p>
+
+<p>my ($user, $repo) = @ARGV;
+unless ($user &amp;&amp; $repo) {</p>
+
+<pre><code>print "Usage: perl p.pl silexkr Donnenwa\n";
+exit;
+</code></pre>
+
+<p>}</p>
+
+<p>my $tx  = Text::Xslate->new(</p>
+
+<pre><code>syntax =&gt; 'TTerse',
+module =&gt; \[ 'Text::Xslate::Bridge::TT2Like' \],
+path =&gt; \[
+    Data::Section::Simple-&gt;new()-&gt;get_data_section()
+\],
+</code></pre>
+
+<p>);</p>
+
+<p>my $issue = $github->issue;
+my @issues = $issue->repos_issues($user, $repo, { state => &lsquo;closed&rsquo; });
+while($issue->has_next_page) {</p>
+
+<pre><code>push @issues, $issue-&gt;next_page;
+</code></pre>
+
+<p>}</p>
+
+<p>for my $iss (@issues) {</p>
+
+<pre><code>my @comments = ();
+my @events   = ();
+eval { @comments = $issue-&gt;comments('silexkr', $repo, $iss-&gt;{number}) };
+eval { @events   = $issue-&gt;events('silexkr', $repo, $iss-&gt;{number}) };
+print $tx-&gt;render('text.tx', { %{ $iss }, comments =&gt; \@comments, events =&gt; \@events });
+</code></pre>
+
+<p>}</p>
+
+<p><strong>DATA</strong></p>
+
+<p>@@ text.tx</p>
+
+<p>[% number %].[% title %] [% FOREACH label IN labels %][% label.name %] [% END %]
+  &ndash; [% user.login %]
+  &ndash; [% created_at %] ~ [% closed_at %]
+[% IF body %]
+ // [% body %]
+[% END %]
+[% FOREACH comment IN comments %]
+\= [% comment.user.login %] @ [% comment.updated_at %]
+&mdash; [% comment.body %]
+[% END %]
+[% FOREACH event IN events %][% NEXT UNLESS event.commit_id %]
+\= [% event.commit_id %][% END %]
+~~~</p>
+
+<p><a href="http://metacpan.org/module/Net::GitHub">Net::GitHub</a> 모듈에서 뭔가 코멘트를 뽑아내려는 데 없으면 계속 죽어버리는 문제 등등이 있어서 뭐 그냥 <code>eval {}</code> 로 묶어버렸구요.</p>
+
+<p><a href="http://metacpan.org/module/Text::Xslate">Text::Xslate</a> 에서 <code>path</code> 를</p>
+
+<p><del> perl
+Data::Section::Simple->new()&ndash;>get_data_section();
+</del></p>
+
+<p>으로 해서 쉽게 <code>-&gt;render()</code> 의 첫번째 인수를 템플릿이름으로 지정할 수 있더군요.</p>
+
+<p><code>Net::GitHub</code> 의 <code>-&gt;next_page</code> 가 최근 최근에 사용된 API 기준으로 동작을 하다보니, <code>while()</code> 안에서 <code>events</code>, <code>comments</code> 를 혼용해서 사용해버리면 의도한 대로 동작을 하지 않아서, <code>@issues</code> 안에 일단 전체 이슈를 뽑고서 시작을 했습니다.</p>
+
+<p>아무튼 뭐 얼기설기 그냥 놔두기도 그렇고 혹여나 해서 일단 올려봅니다.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -378,133 +524,6 @@ unless (scalar grep { $c-&gt;action =~ $_ } map { $rw-&gt;convert($_); } @{ $ACL
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2012/06/19/dbix-class-and-replication-ii/">DBIx::Class and Replication - II</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-06-19T15:35:00+09:00" pubdate data-updated="true">Jun 19<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><ul>
-<li><a href="http://jeen.github.com/blog/2012/06/17/dbix-class-and-replication/">DBIx::Class + Replication</a></li>
-</ul>
-
-
-<p>그러니까 17일이죠.</p>
-
-<blockquote><p>이렇게 몇줄만의 설정으로 간단하게 어플리케이션단에서 Replication 설정을 수행할 수 있습니다…만, 여러가지 운용이슈가 발생할 테고 그에 맞춰서 적당하게 답을 내야할 경우가 생기겠죠. 네, 뭐 그건 그때 가서…</p></blockquote>
-
-<p>라고 지난 글의 말미에서 얘기했습니다만, 네 금방 운용이슈가 발생했습니다.</p>
-
-<p> 넘겨준대로 설정해서 돌리려고 하는 데 이런 에러가 떴다는 것입니다.</p>
-
-<p>~~~ bash</p>
-
-<pre><code>Class::MOP::Class:::around(): DBI Exception: DBD::mysql::db selectrow_hashref failed: Access denied; you need the SUPER,REPLICATION CLIENT privilege for this operation \[for Statement "show slave status"\] at /home/\*/perl5/perlbrew/perls/perl-5.14.2/lib/site_perl/5.14.2/i686-linux/Class/MOP/Method/Wrapped.pm line 162
-</code></pre>
-
-<p>~~~</p>
-
-<p> 딱 봐도 DB 접속계정의 권한문제인데, 가장 간단한 답은 접속계정에 해당 권한을 부여하면 되는 것이었는데요.
- 하지만 접속 계정을 추가해서 어떻게 하기에는 다른 운용이슈가 발생할 여지가 있다고 생각하기에(그럴리가&hellip;) 수정을 요구받았습니다.</p>
-
-<p> 결국 DBIx::Class::Storage::DBI::Replicated::* 아래의 소스를 파보도록 했습니다. 관련 동작은 <code>connect_replicants</code> 시에 <code>validate_replicants</code> 에서 각 Replicant 마다 <code>is_replicating</code> 체크를 하게 되는 것입니다.</p>
-
-<p> 일단 뭐 예, DBI::Replicated 시에는 기본적으로 그냥 뭐 자동 fail-over 까지 슥샥슥샥 해줄 수 있는데&hellip; 그냥 이런 거 다 필요없다라는 합의점에 이르러 결국은 해당부분을 회피하도록 했습니다.</p>
-
-<p>~~~ perl</p>
-
-<pre><code>BEGIN {
-    use DBIx::Class::Storage::DBI::Replicated::Pool;
-
-    no warnings 'redefine';
-    \*DBIx::Class::Storage::DBI::Replicated::Pool::validate_replicants = sub {
-        return 1;
-    };
-};
-</code></pre>
-
-<p>~~~</p>
-
-<p> 추가한 부분은 위와 같습니다. 컴파일시에 미리 <code>validate_replicants</code> 를 재정의해버리는 것이었습니다.</p>
-
-<p> 전체 소스는 아래와 같습니다.</p>
-
-<p>~~~ perl</p>
-
-<pre><code>BEGIN {
-    use DBIx::Class::Storage::DBI::Replicated::Pool;
-
-    no warnings 'redefine';
-    \*DBIx::Class::Storage::DBI::Replicated::Pool::validate_replicants = sub {
-        return 1;
-    };
-};
-
-my $schema = MyApp::Schema-&gt;clone;
-$schema-&gt;storage_type(\[
-    '::DBI::Replicated' =&gt; {
-        balancer_type =&gt; '::Random',
-        balancer_args =&gt; {
-            auto_validate_every =&gt; 10,
-            master_read_weight  =&gt; 0,
-        },
-        pool_args =&gt; {
-            maximum_lag =&gt; 2,
-        }
-    }
-\]);
-$schema-&gt;connection({
-    dsn      =&gt; "dbi:mysql:myapp:127.0.0.50",
-    user     =&gt; "user",
-    password =&gt; "whatthehell",
-    RaiseError        =&gt; 1,
-    AutoCommit        =&gt; 1,
-    mysql_enable_utf8 =&gt; 1,
-    on_connect_do     =&gt; \[ "SET NAMES utf8" \],
-    quote_char        =&gt; q{`},
-});
-$schema-&gt;storage-&gt;connect_replicants(\[
-    {
-        dsn      =&gt; "dbi:mysql:myapp:192.168.0.51",
-        user     =&gt; "user",
-        password =&gt; "whatthehell",
-    },
-    ....
-\]);
-</code></pre>
-
-<p>~~~</p>
-
-<p> 그리고 그들은 행복하게 오래오래 살았답니다~. 끝.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/12/">&larr; Older</a>
@@ -522,6 +541,10 @@ $schema-&gt;storage-&gt;connect_replicants(\[
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2013/07/18/patching-channel-length-of-unreal-irc/">Patching Channel Length of Unreal IRC</a>
+      </li>
+    
+      <li class="post">
         <a href="/2013/07/17/solr-vs-elasticsearch-part-6-user-and-dev-communities-compared/">[번역] Solr vs. ElasticSearch: Part 6 – User &amp; Dev Communities Compared</a>
       </li>
     
@@ -535,10 +558,6 @@ $schema-&gt;storage-&gt;connect_replicants(\[
     
       <li class="post">
         <a href="/2013/07/16/solr-vs-elasticsearch-part-3-searching/">[번역] Solr vs. ElasticSearch - Part 3 : Searching</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2013/07/16/solr-vs-elasticsearch-part-2-indexing-and-language-handling/">[번역] Solr vs. ElasticSearch: Part 2 - Indexing and Language Handling</a>
       </li>
     
   </ul>

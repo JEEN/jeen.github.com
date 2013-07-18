@@ -9,8 +9,7 @@
   <meta name="author" content="Jeen Lee">
 
   
-  <meta name="description" content="http://jeen.github.com/blog/2012/11/21/using-test-pretty/ 그러고보니 앞전에 쓴 글에서 bash
-$ prove -Ilib -Pretty -v -lr 요렇게 길게 쓰고 있었는데, 문서도 제대로 안보고 이래저래 옵션들을 &hellip;">
+  <meta name="description" content="최근에 모 오픈소스의 패키지 리포지트리가 조만간 닫힐 것이라는 뉴스가 있어서… 만일을 위해 거기 있는 패키지 파일들을 일단 긁어오기로 했습니다. &ndash;_&ndash;; 그래서 크롤러를 하나 만들까 하다가… 이런 류의 작업은 뭔가 만들어 놓은 툴이 있을 것이라는 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -78,6 +77,60 @@ $ prove -Ilib -Pretty -v -lr 요렇게 길게 쓰고 있었는데, 문서도 제
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2012/11/29/download-package-dir-slash-files-from-directory-index/">Download Package Dir/files From Directory Index</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-11-29T20:10:00+09:00" pubdate data-updated="true">Nov 29<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>최근에 모 오픈소스의 패키지 리포지트리가 조만간 닫힐 것이라는 뉴스가 있어서… 만일을 위해 거기 있는 패키지 파일들을 일단 긁어오기로 했습니다. &ndash;_&ndash;;</p>
+
+<p>그래서 크롤러를 하나 만들까 하다가… 이런 류의 작업은 뭔가 만들어 놓은 툴이 있을 것이라는 생각에 이리저리 뒤져보고 찾아봤지만 마땅한 키워드를 얻지 못했습니다.</p>
+
+<p>결국 지인들에게 수소문해본 결과 아래와 같은 커맨드를 통해서 Directory Index 구조를 취하는 페이지에서 파일들을 몽땅 긁어올 수 있다는 걸을 알게되었습니다.</p>
+
+<p><del> bash
+$ wget -e robots=off -k -r &mdash;no-parent &mdash;wait=5 <a href="http://download.virtualbox.org/virtualbox/debian/">http://download.virtualbox.org/virtualbox/debian/</a>
+</del></p>
+
+<p> <code>index.html</code> 등의 불필요한 파일들도 같이 다운로드 되기도 하지만… 일단 다 받고나서…</p>
+
+<p><del> bash
+$ find . | grep index.html | xargs rm
+</del></p>
+
+<p>으로 삭제…</p>
+
+<p>그리하여 조만간 끊어질지도 모르는 사태에 대비코자 미리 이렇게 준비를 끝냈습니다.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -253,144 +306,6 @@ $ prove -Ilib -Pretty -v -lr
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2012/08/28/building-a-perl-project-on-travis-ci/">Building a Perl Project on Travis CI</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-08-28T14:25:00+09:00" pubdate data-updated="true">Aug 28<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><ul>
-<li><a href="http://travis-ci.org/">Travis CI &ndash; Distributed build platform for the open source community</a></li>
-</ul>
-
-
-<p><code>Travis CI</code>은 이전에 얘기를 들었을 때는 별  관심이 없었는데(처음에는 확실히 Perl 을 지원하지 않아서), 언제부턴가 Perl 을 지원한다는 얘기를 듣고 Perl 커뮤니티에서 움직임이 조금씩 있더라구요. <code>Dist::Zilla::TravisCI</code> 같은 모듈들도 나오는 걸로 봐서…</p>
-
-<p>사용하는 방법은 아주 간단합니다. <code>Github</code> 계정에 연결되고, 그리고 Github 의 Public 상태의 프로젝트를 고르고… 그 프로젝트에 <code>.travis.yml</code> 파일을 놓아주면 됩니다.</p>
-
-<ul>
-<li><a href="http://about.travis-ci.org/docs/user/languages/perl/">Travis CI &ndash; Building a Perl Project</a></li>
-</ul>
-
-
-<p>자세한 건 위의 설명페이지를 참고해서 이전에 살짝 만들어 놓은 <code>Zamakist</code> 를 <code>Travis CI</code> 에서 돌려보게 해봤습니다.</p>
-
-<p><img src="https://lh5.googleusercontent.com/-EUnpasmILzs/UDxYWf7j2WI/AAAAAAAACBg/y1EdG7zFKoM/%2525C3%2525A1%2525C2%252584%2525C2%252589%2525C3%2525A1%2525C2%252585%2525C2%2525B3%2525C3%2525A1%2525C2%252584%2525C2%25258F%2525C3%2525A1%2525C2%252585%2525C2%2525B3%2525C3%2525A1%2525C2%252584%2525C2%252585%2525C3%2525A1%2525C2%252585%2525C2%2525B5%2525C3%2525A1%2525C2%252586%2525C2%2525AB%2525C3%2525A1%2525C2%252584%2525C2%252589%2525C3%2525A1%2525C2%252585%2525C2%2525A3%2525C3%2525A1%2525C2%252586%2525C2%2525BA%2525202012-08-28%252520%2525C3%2525A1%2525C2%252584%2525C2%25258B%2525C3%2525A1%2525C2%252585%2525C2%2525A9%2525C3%2525A1%2525C2%252584%2525C2%252592%2525C3%2525A1%2525C2%252585%2525C2%2525AE%2525202.33.19.png" alt="img-failed" /></p>
-
-<p> 처음에야 뭐 물론 <code>.travis.yml</code> 파일이 없어서 실패했다는 메일이 날라왔구요.</p>
-
-<p> <code>.travis.yml</code> 을 추가해준 결과로는 다시 이렇게 제대로 돌아간다는 메일이 옵니다.</p>
-
-<p><img src="https://lh5.googleusercontent.com/-ub5BrJZrXPw/UDxYT_Xl7JI/AAAAAAAACBY/CtHCGYNaJcY/%2525C3%2525A1%2525C2%252584%2525C2%252589%2525C3%2525A1%2525C2%252585%2525C2%2525B3%2525C3%2525A1%2525C2%252584%2525C2%25258F%2525C3%2525A1%2525C2%252585%2525C2%2525B3%2525C3%2525A1%2525C2%252584%2525C2%252585%2525C3%2525A1%2525C2%252585%2525C2%2525B5%2525C3%2525A1%2525C2%252586%2525C2%2525AB%2525C3%2525A1%2525C2%252584%2525C2%252589%2525C3%2525A1%2525C2%252585%2525C2%2525A3%2525C3%2525A1%2525C2%252586%2525C2%2525BA%2525202012-08-28%252520%2525C3%2525A1%2525C2%252584%2525C2%25258B%2525C3%2525A1%2525C2%252585%2525C2%2525A9%2525C3%2525A1%2525C2%252584%2525C2%252592%2525C3%2525A1%2525C2%252585%2525C2%2525AE%2525202.33.13.png" alt="Img1" /></p>
-
-<p><code>Travis CI</code> 에서 출력되는 빌드 내용은 아래와 같습니다.</p>
-
-<p>~~~ bash
-Using worker: ppp3.worker.travis-ci.org:php-1</p>
-
-<p>$ cd ~/builds
-$ git clone &mdash;depth=100 &mdash;quiet git://github.com/JEEN/p5-App-Zamakist.git JEEN/p5-App-Zamakist
-$ cd JEEN/p5-App-Zamakist
-$ git checkout -qf df10bdfea286c9933c345c84206eaa90b8f298a6
-$ perlbrew use 5.16
-$ perl &mdash;version</p>
-
-<p>This is perl 5, version 16, subversion 0 (v5.16.0) built for i686-linux</p>
-
-<p>Copyright 1987-2012, Larry Wall</p>
-
-<p>Perl may be copied only under the terms of either the Artistic License or the
-GNU General Public License, which may be found in the Perl 5 source kit.</p>
-
-<p>Complete documentation for Perl, including FAQ lists, should be found on
-this system using &ldquo;man perl&rdquo; or &ldquo;perldoc perl&rdquo;.  If you have access to the
-Internet, point your browser at <a href="http://www.perl.org/,">http://www.perl.org/,</a> the Perl Home Page.</p>
-
-<p>$ cpanm &mdash;version
-cpanm (App::cpanminus) version 1.5017
-$ cpanm &mdash;quiet &mdash;installdeps &mdash;notest .
-Successfully installed Text-CharWidth-0.04
-Successfully installed Text-UnicodeBox-0.03
-Successfully installed XML-XPathEngine-0.13
-Successfully installed HTML-Tree-5.02
-Successfully installed HTML-TreeBuilder-XPath-0.14
-Successfully installed HTML-Selector-XPath-0.14
-Successfully installed Web-Query-0.08
-Successfully installed Term-ReadLine-Zoid-0.07
-8 distributions installed
-$ perl Makefile.PL &amp;&amp; make test
-include /home/travis/builds/JEEN/p5-App-Zamakist/inc/Module/Install.pm
-include inc/Module/Install/Metadata.pm
-include inc/Module/Install/Base.pm
-include inc/Module/Install/Makefile.pm
-Cannot determine perl version info from lib/App/Zamakist.pm
-include inc/Module/Install/Scripts.pm
-include inc/Module/Install/Include.pm
-include inc/Test/More.pm
-include inc/Module/Install/WriteAll.pm
-include inc/Module/Install/Win32.pm
-include inc/Module/Install/Can.pm
-include inc/Module/Install/Fetch.pm
-Writing Makefile for App::Zamakist
-Writing MYMETA.yml and MYMETA.json
-Writing META.yml
-cp lib/App/Zamakist/Media.pm blib/lib/App/Zamakist/Media.pm
-cp lib/App/Zamakist.pm blib/lib/App/Zamakist.pm
-cp lib/App/Zamakist/Role/Reportable.pm blib/lib/App/Zamakist/Role/Reportable.pm
-cp lib/App/Zamakist/Handler/GOM.pm blib/lib/App/Zamakist/Handler/GOM.pm
-cp bin/zamakist blib/script/zamakist
-/home/travis/perl5/perlbrew/perls/5.16/bin/perl &ldquo;-Iinc&rdquo; -MExtUtils::MY -e &lsquo;MY->fixin(shift)&rsquo; &mdash; blib/script/zamakist
-PERL_DL_NONLAZY=1 /home/travis/perl5/perlbrew/perls/5.16/bin/perl &ldquo;-MExtUtils::Command::MM&rdquo; &ldquo;-e&rdquo; &ldquo;test_harness(0, &lsquo;inc&rsquo;, &lsquo;blib/lib&rsquo;, &lsquo;blib/arch&rsquo;)&rdquo; t/*.t
-t/00_compile.t &hellip;&hellip;&hellip; ok
-t/01_find_permalink.t .. 5/7 # <a href="http://search.gomtv.com/searchjm.gom?key=The.Mentalist.S04E01.HDTV.XviD-ASAP.%5BVTV%5D.Scarlet.Ribbons&amp;preface=0">http://search.gomtv.com/searchjm.gom?key=The.Mentalist.S04E01.HDTV.XviD-ASAP.%5BVTV%5D.Scarlet.Ribbons&amp;preface=0</a>
-# <a href="http://gom.gomtv.com/jmdb/view.html?intSeq=808364&amp;preface=0&amp;spage=1">http://gom.gomtv.com/jmdb/view.html?intSeq=808364&amp;preface=0&amp;spage=1</a>
-Wide character in print at /home/travis/perl5/perlbrew/perls/5.16/lib/5.16.0/Test/Builder.pm line 1759.
-# [통합] The.Mentalist.S04E01.HDTV.XviD-ASAP
-t/01_find_permalink.t .. ok
-All tests successful.
-Files=2, Tests=8, 10 wallclock secs ( 0.03 usr  0.01 sys +  1.79 cusr  0.10 csys =  1.93 CPU)
-Result: PASS</p>
-
-<p>Done. Build script exited with: 0
-~~~</p>
-
-<p>좀 더 뭐 욕심이 있다면 Jenkins 에서 처럼 정적분석이나 테스트 케이스에 대해서 좀 더 자세한 내용이 나와줬으면 좋겠다 싶지만… 사실 그건 뽀대의 문제라…</p>
-
-<p>위의 빌드 내용에 대한 자세한 내용은 아래의 링크를 참고하세요.</p>
-
-<ul>
-<li><a href="http://travis-ci.org/#!/JEEN/p5-App-Zamakist/builds/2257622">Travis CI : p5-App-Zamakist</a></li>
-</ul>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/9/">&larr; Older</a>
@@ -408,6 +323,10 @@ Result: PASS</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2013/07/18/patching-channel-length-of-unreal-irc/">Patching Channel Length of Unreal IRC</a>
+      </li>
+    
+      <li class="post">
         <a href="/2013/07/17/solr-vs-elasticsearch-part-6-user-and-dev-communities-compared/">[번역] Solr vs. ElasticSearch: Part 6 – User &amp; Dev Communities Compared</a>
       </li>
     
@@ -421,10 +340,6 @@ Result: PASS</p>
     
       <li class="post">
         <a href="/2013/07/16/solr-vs-elasticsearch-part-3-searching/">[번역] Solr vs. ElasticSearch - Part 3 : Searching</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2013/07/16/solr-vs-elasticsearch-part-2-indexing-and-language-handling/">[번역] Solr vs. ElasticSearch: Part 2 - Indexing and Language Handling</a>
       </li>
     
   </ul>

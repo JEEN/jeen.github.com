@@ -9,17 +9,7 @@
   <meta name="author" content="Jeen Lee">
 
   
-  <meta name="description" content="이런저런 임시데이터를 주고받고 하는 용도로 SQLite 파일을 덩어리채로 주고받는 경우가 있습니다. 매일매일 그런 일이 일어나니 파일에는 날짜 정도는 집어넣어줘야 되구요. 1
-2
-3
-4
-5
-6
-7
-8
-9
-DROP TABLE IF EXISTS item;
-CREATE &hellip;">
+  <meta name="description" content="Percona Live : MySQL Conference And Expo 2013 의 슬라이드를 다 긁어오는 스크립트 슥샥. 모두 60개정도. percona.com/live/mysql-con… gist.github.com/JEEN/5581298&mdash; JEEN &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -87,6 +77,66 @@ CREATE &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2013/05/25/download-percona-mysql-expo-2013-slides/">Download Percona MySQL Expo 2013 Slides</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-05-25T19:27:42+09:00" pubdate data-updated="true">May 25<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><blockquote class="twitter-tweet" lang="ko"><p>Percona Live : MySQL Conference And Expo 2013 의 슬라이드를 다 긁어오는 스크립트 슥샥. 모두 60개정도. <a href="http://t.co/fpmNe0leud" title="http://www.percona.com/live/mysql-conference-2013/slides">percona.com/live/mysql-con…</a> <a href="https://t.co/32IBvl2KBk" title="https://gist.github.com/JEEN/5581298">gist.github.com/JEEN/5581298</a></p>&mdash; JEEN (@JEEN_LEE) <a href="https://twitter.com/JEEN_LEE/status/334498408838598656">2013년 5월 15일</a></blockquote>
+
+
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+
+
+
+<script src="https://gist.github.com/JEEN/5581298.js"></script>
+
+
+<p><a href="http://metacpan.org/module/AnyEvent::HTTP::LWP::UserAgent">AnyEvent::HTTP::LWP::UserAgent</a> 의 SYNOPSIS 의 내용을 참고해서 그냥 한번 깨작거려 봤습니다.</p>
+
+<p> 대상이 되는 사이트는</p>
+
+<ul>
+<li><a href="http://www.percona.com/live/mysql-conference-2013/slides">http://www.percona.com/live/mysql-conference-2013/slides</a></li>
+</ul>
+
+
+<p> 입니다.</p>
+
+<p> 여기에 페이지가 3개 정도 되고, 사람 손으로 그 만한 슬라이드 파일들을 받아오는 건 시간의 낭비라는 생각인데…</p>
+
+<p> 물론 10일 전에 받아놓고 아직 제대로 슬라이드를 지긋하게 쳐다본 적은 없다는 것이 함정이라면 함정입니다.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -454,120 +504,6 @@ CREATE &hellip;">
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2013/05/02/better-than-ack/">Better Than Ack</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-05-02T23:14:14+09:00" pubdate data-updated="true">May 2<span>nd</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>계속 쓰다보니 자연스레 손에 익은 이유도 있고, 여러 서버들에 <code>ack</code> 이 기본적으로 깔려 있지 않은 이유도 있습니다. 그것이 제게 있어서 <code>ack</code> 을 사용하지 않는 핑계가 되겠네요.</p>
-
-<p>그런 현실중에 <code>ag</code> 를 소개하는 것은 조심스러울 따름입니다.</p>
-
-<ul>
-<li><a href="https://github.com/ggreer/the_silver_searcher">https://github.com/ggreer/the_silver_searcher</a></li>
-</ul>
-
-
-<p>위 github 페이지에서 확인할 수 있는 내용대로,</p>
-
-<ul>
-<li><code>ack</code> 보다 3-5배 빠르고</li>
-<li>검색시에 <code>.gitignore</code>, <code>.hgignore</code> 를 참고하여 검색대상에서 제외해줍니다.</li>
-<li>그리고 <code>ack</code> 보다 한글자 더 적은 노력으로 검색할 수 있습니다. :&ndash;)</li>
-</ul>
-
-
-<p>제 Github Pages Repo 안에 속한 1566 개의 파일을 대상으로 각각의 성능을 비교해봤습니다.</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ time ag Perl
-</span><span class='line'>……
-</span><span class='line'>……
-</span><span class='line'>source.old/_posts/2012-08-28-building-a-perl-project-on-travis-ci.markdown
-</span><span class='line'>11:`Travis CI`은 이전에 얘기를 들었을 때는 별  관심이 없었는데(처음에는 확실히 Perl 을 지원하지 않아서), 언제부턴가 Perl 을 지원한다는 얘기를 듣고 Perl 커뮤니티에서 움직임이 조금씩 있더라구요. `Dist::Zilla::TravisCI` 같은 모듈들도 나오는 걸로 봐서…
-</span><span class='line'>15: - [Travis CI - Building a Perl Project](http://about.travis-ci.org/docs/user/languages/perl/)
-</span><span class='line'>43:Perl may be copied only under the terms of either the Artistic License or the
-</span><span class='line'>44:GNU General Public License, which may be found in the Perl 5 source kit.
-</span><span class='line'>46:Complete documentation for Perl, including FAQ lists, should be found on
-</span><span class='line'>48:Internet, point your browser at http://www.perl.org/, the Perl Home Page.
-</span><span class='line'>……
-</span><span class='line'>ag Perl  0.07s user 0.14s system 128% cpu 0.164 total</span></code></pre></td></tr></table></div></figure>
-
-
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ time grep -R Perl .
-</span><span class='line'>……
-</span><span class='line'>./source.old/_posts/2012-12-26-a-usecase-of-app-fatpacker.markdown:  # ABSTRACT: Perl binding for Redis database
-</span><span class='line'>……
-</span><span class='line'>grep -R Perl .  1.13s user 0.09s system 77% cpu 1.573 total</span></code></pre></td></tr></table></div></figure>
-
-
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ time ack Perl
-</span><span class='line'>……
-</span><span class='line'>public/page/5/index.html
-</span><span class='line'>245:&lt;a href="/2012/07/26/export-facebook-event-attending-list-perl-kr-teatime/"&gt;Export Facebook Event Attending List - Perl-kr TeaTime&lt;/a&gt;
-</span><span class='line'>……
-</span><span class='line'>ack Perl  0.38s user 0.06s system 54% cpu 0.812 total</span></code></pre></td></tr></table></div></figure>
-
-
-<p>보시다시피 <code>ag</code> 의 위력은 대단합니다. 기본적으로 사용법도 <code>ack</code> 과 크게 다를 것도 없습니다.</p>
-
-<p>문제는 기본적으로 사용할 수 있냐는 것이겠는데… 요즘 세상에는 <code>Rex</code> 같은 걸로 그냥 뭐 한번만 수고해주면 뭐 사용할 서버들에 일괄적으로 설치하는 것은 일도 아니지 않냐라고 그냥 스스로 수긍해버리면 될 것 같습니다.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/6/">&larr; Older</a>
@@ -585,6 +521,10 @@ CREATE &hellip;">
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2013/07/18/patching-channel-length-of-unreal-irc/">Patching Channel Length of Unreal IRC</a>
+      </li>
+    
+      <li class="post">
         <a href="/2013/07/17/solr-vs-elasticsearch-part-6-user-and-dev-communities-compared/">[번역] Solr vs. ElasticSearch: Part 6 – User &amp; Dev Communities Compared</a>
       </li>
     
@@ -598,10 +538,6 @@ CREATE &hellip;">
     
       <li class="post">
         <a href="/2013/07/16/solr-vs-elasticsearch-part-3-searching/">[번역] Solr vs. ElasticSearch - Part 3 : Searching</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2013/07/16/solr-vs-elasticsearch-part-2-indexing-and-language-handling/">[번역] Solr vs. ElasticSearch: Part 2 - Indexing and Language Handling</a>
       </li>
     
   </ul>
